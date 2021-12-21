@@ -1,0 +1,75 @@
+#! /bin/sh
+
+# Linear Transit (PES scan) 
+
+AMS_JOBNAME=PES_Scan "$AMSBIN/ams" <<eor
+
+Task PESScan
+System
+    Atoms
+        C   0.00000000   0.00000000  -1.16013597 
+        N   0.00000000   0.00000000   0.00000000 
+        H   0.00000000   0.00000000   0.99666657 
+    End
+End
+
+PESScan
+    CalcPropertiesAtPESPoints Yes
+    ScanCoordinate
+        nPoints 10
+        Angle 3 2 1 180.0 0
+    End
+End
+
+Engine ADF 
+    Basis 
+        Type DZP
+    End
+EndEngine
+eor
+
+# Transition state search starting from highest point in PES scan (i.e. PESPoint(7))
+
+AMS_JOBNAME=TS_search "$AMSBIN/ams" <<eor
+
+Task TransitionStateSearch 
+
+LoadSystem
+  File PES_Scan.results/PESPoint(7).rkf
+End
+
+GeometryOptimization
+  InitialHessian 
+    Type Calculate
+  End
+  Convergence Gradients=0.00001
+End
+
+Properties
+  NormalModes Yes
+End
+
+Engine ADF 
+    Basis 
+        Type DZP
+    End
+EndEngine
+eor
+
+# IRC from TS
+
+AMS_JOBNAME=IRC "$AMSBIN/ams" <<eor
+
+Task IRC 
+
+LoadSystem
+  File TS_search.results/adf.rkf
+End
+
+Engine ADF 
+    Basis 
+        Type DZP
+    End
+EndEngine
+eor
+

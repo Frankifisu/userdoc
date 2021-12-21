@@ -1,0 +1,34 @@
+#! /bin/sh
+
+$AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+Properties
+  BondOrders Yes
+  Charges Yes
+  DipoleMoment Yes
+  NormalModes Yes
+End
+
+System
+  Atoms
+       O  0.0000  0.0000   0.0000  ForceField.Type=OW  ForceField.Charge=-0.8340
+       H -0.5220  0.2660  -0.7570  ForceField.Type=HW  ForceField.Charge=0.4170
+       H -0.5220  0.2660   0.7570  ForceField.Type=HW  ForceField.Charge=0.4170
+  End
+  BondOrders
+        1  2  1.0
+        1  3  1.0
+  End
+End
+
+Engine ForceField
+  Type Amber95
+  ForceFieldFile $AMSRESOURCES/ForceFields/amber95.ff
+EndEngine
+
+eor
+
+echo "MM Charges:"
+$AMSBIN/amsreport ams.results/forcefield.rkf -r "AMSResults%Charges"

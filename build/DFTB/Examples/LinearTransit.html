@@ -1,0 +1,680 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Example: Linear transit &mdash; DFTB 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="DFTB 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="../Examples.html"/>
+        <link rel="next" title="Example: PES scan and transition state search for H2 on graphene" href="PESScan_and_TS_H2_on_Graphene.html"/>
+        <link rel="prev" title="Example: Molecular dynamics" href="MD_aspirin.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search DFTB" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-DFTB" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#what-s-new-in-dftb">What’s new in DFTB?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2022-1">New in DFTB2022.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2021-1">New in DFTB2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2020">New in DFTB2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2019-3">New in DFTB2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2019-1">New in DFTB2019.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2018">New in DFTB2018</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../General.html#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General.html#ams-a-new-driver-program">AMS: a new driver program</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html">AMS driver’s tasks and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#geometry-system-definition">Geometry, System definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#tasks-exploring-the-pes">Tasks: exploring the PES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#properties-in-the-ams-driver">Properties in the AMS driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html">Model Hamiltonians</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#slater-koster-based-dftb">Slater-Koster based DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#model-hamiltonian">Model Hamiltonian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#dispersion-correction">Dispersion correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#solvation-gbsa">Solvation (GBSA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#scc-details-and-spin-polarization">SCC details and spin-polarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#k-space-integration">k-space integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#xtb-specific-keywords">xTB specific keywords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#technical-options">Technical options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Spectroscopy_and_Properties.html">Spectroscopy and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#electronic-structure-of-periodic-systems">Electronic structure of periodic systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#excited-states-with-time-dependent-dftb">Excited states with time-dependent DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#frequencies-phonons-and-elastic-tensor">Frequencies, phonons and elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#other-properties">Other properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../NEGF.html">Electronic transport (NEGF)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#transport-with-negf-in-a-nutshell">Transport with NEGF in a nutshell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#simulations-work-flow">Simulations work flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#conductance-input-options">Conductance input options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#miscellaneous-remarks-on-dftb-negf">Miscellaneous remarks on DFTB-NEGF</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FREQ_aspirin_SCC.html">Example: Normal modes (frequencies) for aspirin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MD_aspirin.html">Example: Molecular dynamics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example: Linear transit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and transition state search for H2 on graphene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FREQ_HNDT_VCD.html">Example: Vibrational circular dichroism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conductance.html">Example: Electronic transport with NEGF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Diamond_under_pressure.html">Example: Diamond under pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ElasticTensor.html">Example: Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FREQ_LR-TDDFTB_benzene.html">Example: Excited states frequencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GO_LR-TDDFTB_benzene.html">Example: Geometry optimization for an excited state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GO_LR-TDDFTB_CO_eigenfollow.html">Example: Geometry optimization following a specific excited state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SP_LR-TDDFTB_fullerene.html">Example: Fullerene excitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Li_BZPlot.html">Example: Band structure with user-defined BZ path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GO_restart.html">Example: Restarting a geometry optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Parameter_files.html">Parameterizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Parameter_files.html#parameter-meta-info">Parameter meta-info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Parameter_files.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Parameter_files.html#available-parameter-sets">Available parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#dftb-org">DFTB.org</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#quasinano">QUASINANO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#dresden">Dresden</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Parameter_files.html#files-in-the-resources-directory">Files in the resources directory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#slater-koster-files">Slater-Koster files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#additional-yaml-files">Additional .yaml files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#basis-function-information-in-rkf-files">Basis function information in .rkf files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Parameter_files.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#parameter-references">Parameter references</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#general-description">General Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#parameter-sets">Parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../References.html#quasinano2013-1">QUASINANO2013.1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#quasinano2015">QUASINANO2015</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#dresden">Dresden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#dftb-org">DFTB.org</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">DFTB</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../DFTB.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">DFTB</a>/</li>
+      
+          <li><a href="../Examples.html">Examples</a>/</li>
+      
+    <li class="orange-text">Example: Linear transit</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="example-linear-transit">
+<span id="example-lineartransit"></span><h1>Example: Linear transit<a class="headerlink" href="#example-linear-transit" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" download="" href="../_downloads/80c3779410d3ccd30148d6decd92343a/LinearTransit.run"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">LinearTransit.run</span></code></a></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+
+
+<span class="nb">echo</span> <span class="s2">&quot;=================&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;HCN isomerization&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;=================&quot;</span>
+<span class="nb">echo</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>HCN_isomerization <span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task PESScan</span>
+<span class="s">   # (Linear transit is just a PES scan with 1 scan coordinate.)</span>
+
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         C       0.00000000       0.00000000       1.04219000</span>
+<span class="s">         H       0.00000000       0.00000000      -0.03324000</span>
+<span class="s">         N       0.00000000       0.00000000       2.20064000</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   PESScan</span>
+<span class="s">      ScanCoordinate</span>
+<span class="s">         nPoints 25</span>
+<span class="s">         Angle  2 1 3  180.0 0.0</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model DFTB0</span>
+<span class="s">      ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+
+<span class="nb">echo</span>
+<span class="nb">echo</span> <span class="s2">&quot;===================&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Water angle transit&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;===================&quot;</span>
+<span class="nb">echo</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>water_angle <span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task PESScan</span>
+
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         O       0.00000000       0.00000000       0.59372000</span>
+<span class="s">         H       0.00000000       0.76544000      -0.00836000</span>
+<span class="s">         H       0.00000000      -0.76544000      -0.00836000</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   PESScan</span>
+<span class="s">      ScanCoordinate</span>
+<span class="s">         nPoints 25</span>
+<span class="s">         Angle  2 1 3  80.0 180.0</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      ! Delocalized coordinates currently have a problem with linear systems.</span>
+<span class="s">      ! So we will use cartesian coordinates here.</span>
+<span class="s">      CoordinateType Cartesian</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model DFTB0</span>
+<span class="s">      ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+
+<span class="nb">echo</span>
+<span class="nb">echo</span> <span class="s2">&quot;====================&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Hydrocarbon reaction&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;====================&quot;</span>
+<span class="nb">echo</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>hydcarb <span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task PESScan</span>
+
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         C       0.14667300      -0.21503500       0.40053800</span>
+<span class="s">         C       1.45297400      -0.07836900       0.12424400</span>
+<span class="s">         C       2.23119700       1.15868100       0.12912100</span>
+<span class="s">         C       1.78331500       2.39701500       0.38779700</span>
+<span class="s">         H      -0.48348000       0.63110600       0.67664100</span>
+<span class="s">         H      -0.33261900      -1.19332100       0.35411600</span>
+<span class="s">         H       2.01546300      -0.97840100      -0.14506700</span>
+<span class="s">         H       3.29046200       1.03872500      -0.12139700</span>
+<span class="s">         H       2.45728900       3.25301000       0.35150400</span>
+<span class="s">         H       0.74193400       2.60120700       0.64028800</span>
+<span class="s">         C      -0.75086900       1.37782400      -2.43303700</span>
+<span class="s">         C      -0.05392100       2.51281000      -2.41769100</span>
+<span class="s">         H      -1.78964800       1.33942600      -2.09651100</span>
+<span class="s">         H      -0.30849400       0.43896500      -2.76734700</span>
+<span class="s">         H      -0.49177100       3.45043100      -2.06789100</span>
+<span class="s">         H       0.98633900       2.54913500      -2.74329400</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   PESScan</span>
+<span class="s">      ScanCoordinate</span>
+<span class="s">         nPoints 25</span>
+<span class="s">         Distance  1 11   3.36  1.538</span>
+<span class="s">         Distance  4 12   3.36  1.538</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model DFTB0</span>
+<span class="s">      ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+
+<span class="nb">echo</span>
+<span class="nb">echo</span> <span class="s2">&quot;=====================================&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Retinal trans -&gt; 11-cis isomerization&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;=====================================&quot;</span>
+<span class="nb">echo</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>retinal_transcis <span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task PESScan</span>
+
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         H      -2.10968473      -1.58238733       0.78224517</span>
+<span class="s">         C      -2.10306857      -0.54058322       0.46363503</span>
+<span class="s">         C      -0.89436995       0.04807217       0.25528247</span>
+<span class="s">         H      -0.85555481       1.05432693      -0.15803658</span>
+<span class="s">         C       0.38987539      -0.58661182       0.49038464</span>
+<span class="s">         C       1.53213446       0.09657801       0.14394773</span>
+<span class="s">         H       1.40518949       1.08783970      -0.29205231</span>
+<span class="s">         H       3.05232192      -1.34477492       0.72115301</span>
+<span class="s">         C       2.88311454      -0.36358433       0.28105432</span>
+<span class="s">         C       3.96024700       0.37378345      -0.12385974</span>
+<span class="s">         H       3.77965758       1.35231793      -0.56821856</span>
+<span class="s">         C       5.34627719      -0.04025647      -0.02249097</span>
+<span class="s">         C       6.32191717       0.80135945      -0.49190463</span>
+<span class="s">         H       6.00090638       1.74979100      -0.92101391</span>
+<span class="s">         C      -4.46825064      -0.90426552      -0.39585925</span>
+<span class="s">         C      -5.87277429      -0.25303564      -0.45007491</span>
+<span class="s">         C      -3.41139545       0.06493448       0.19516310</span>
+<span class="s">         C      -3.67932839       1.38221399       0.41656971</span>
+<span class="s">         C      -5.81598497       1.19032366      -0.92660753</span>
+<span class="s">         C      -5.00049358       2.01922634       0.05561242</span>
+<span class="s">         C      -4.58391145      -2.18782901       0.46346394</span>
+<span class="s">         C      -4.01729542      -1.30039402      -1.82272212</span>
+<span class="s">         C      -2.72429960       2.32303313       1.10290124</span>
+<span class="s">         C       0.40919453      -1.96244629       1.09501374</span>
+<span class="s">         C       5.64155973      -1.38034133       0.59419110</span>
+<span class="s">         C       7.76996060       0.56699126      -0.48750226</span>
+<span class="s">         O       8.57693167       1.36615612      -0.92976322</span>
+<span class="s">         H      -6.51997817      -0.84904979      -1.10100203</span>
+<span class="s">         H      -6.32039371      -0.28079023       0.54871092</span>
+<span class="s">         H      -5.36159995       1.23817633      -1.92112092</span>
+<span class="s">         H      -6.82595442       1.60207678      -1.01946858</span>
+<span class="s">         H      -5.58216571       2.18390764       0.97424181</span>
+<span class="s">         H      -4.81292271       3.01993001      -0.35246294</span>
+<span class="s">         H      -4.74166770      -1.94289144       1.51126095</span>
+<span class="s">         H      -5.43008715      -2.78247632       0.12572479</span>
+<span class="s">         H      -3.69644845      -2.81116549       0.38705593</span>
+<span class="s">         H      -3.02900804      -1.75403268      -1.79820003</span>
+<span class="s">         H      -4.71056940      -2.01489741      -2.26202914</span>
+<span class="s">         H      -3.97070839      -0.42860260      -2.47090348</span>
+<span class="s">         H      -2.16469005       2.92261100       0.38111736</span>
+<span class="s">         H      -3.27791517       3.02297911       1.72885233</span>
+<span class="s">         H      -2.00470188       1.79865198       1.72726573</span>
+<span class="s">         H      -0.13689001      -1.97717074       2.03825359</span>
+<span class="s">         H      -0.07664772      -2.68134154       0.43362393</span>
+<span class="s">         H       1.41837401      -2.31391556       1.28591185</span>
+<span class="s">         H       5.15278730      -2.17622743       0.03222328</span>
+<span class="s">         H       6.70436647      -1.59729505       0.62729622</span>
+<span class="s">         H       5.25700064      -1.42489613       1.61313095</span>
+<span class="s">         H       8.12614442      -0.41441814      -0.04549414</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   PESScan</span>
+<span class="s">      ScanCoordinate</span>
+<span class="s">         nPoints 25</span>
+<span class="s">         Dihedral  6 9 10 12  180  0</span>
+<span class="s">         Dihedral  8 9 10 11  180  0</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model DFTB0</span>
+<span class="s">      ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="PESScan_and_TS_H2_on_Graphene.html" class="btn btn-neutral float-right" title="Example: PES scan and transition state search for H2 on graphene" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="MD_aspirin.html" class="btn btn-neutral" title="Example: Molecular dynamics" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

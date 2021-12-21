@@ -1,0 +1,1836 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Input, execution and output &mdash; AMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="AMS 2021.1 documentation" href="index.html"/>
+        <link rel="next" title="AMSPipe protocol specification" href="Pipe_protocol.html"/>
+        <link rel="prev" title="General" href="General.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="keywords.html">Keywords</a>
+           
+           
+           <a href="genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search AMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-AMS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#what-s-new-in-the-ams-driver">What’s new in the AMS driver?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-ams2022-1">New in AMS2022.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-ams2021-1">New in AMS2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-ams2020-1">New in AMS2020.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-ams2019-3">New in AMS2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-ams2019-1">New in AMS2019.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#motivation-and-progress">Motivation and progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#input-execution-and-output">Input, execution and output</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Input, execution and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tasks">Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#properties">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#units">Units</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#execution">Execution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#shell-script">Shell script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interactive-input-file">Interactive input file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-ams-on-compute-clusters">Running AMS on compute clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#output">Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#index-13">Results directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logfile-ams-log">Logfile ams.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binary-output-files">Binary output files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#standard-output">Standard output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimized-geometry-in-xyz-format">Optimized geometry in xyz format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ams-environment-variables">AMS environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#driver-level-parallelism">Driver level parallelism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-interface">Python interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Pipe_protocol.html">AMSPipe protocol specification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Pipe_protocol.html#low-level-message-encoding">Low-level message encoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Pipe_protocol.html#return-messages-and-error-handling">Return messages and error handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Pipe_protocol.html#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ams-as-a-pipe-master">AMS as a pipe master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ams-as-a-pipe-worker">AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="System.html">Geometry, System definition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="System.html#geometry-lattice">Geometry, Lattice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="System.html#modifying-the-geometry">Modifying the geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="System.html#symmetry">Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="System.html#regions">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="System.html#charge-atomic-masses-input-bond-orders">Charge, atomic masses, input bond orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="System.html#homogeneous-electric-field-and-multipole-charges">Homogeneous electric field and multipole charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="System.html#load-a-system-from-file">Load a System from file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="System.html#atom-attributes">Atom attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="System.html#force-field-related-extensions">Force field related extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="System.html#load-charges-for-a-forcefield-into-regions">Load charges for a forcefield into regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="System.html#load-forcefield-atom-types">Load forcefield atom types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Tasks/TOC.html">Structure and Reactivity, Molecular Dynamics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Single_Point.html">Single point calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Bond_Energy.html">Bond energy calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#ground-state-energy">Ground state energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#formation-energy">Formation energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#atomization-energies">Atomization energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#chemisorption-energies">Chemisorption energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#atomic-corrections">Atomic corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#open-shell-systems">Open shell systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#impurities">Impurities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Geometry_Optimization.html">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Geometry_Optimization.html#constrained-optimization">Constrained optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#restraints">Restraints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Geometry_Optimization.html#optimization-under-pressure-external-stress">Optimization under pressure / external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Geometry_Optimization.html#optimization-methods">Optimization methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#quasi-newton">Quasi-Newton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#fire">FIRE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#index-17">SCMGO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#limited-memory-bfgs">Limited-memory BFGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#conjugate-gradients">Conjugate gradients</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Geometry_Optimization.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#failure-to-converge">Failure to converge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#restarting-a-geometry-optimization">Restarting a geometry optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Transition_State_Search.html">Transition state search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/PES_Scan.html">Linear Transit, PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#distance-angle-and-dihedral-angle-coordinates">Distance, angle, and dihedral angle coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#joint-scan-coordinates">Joint scan coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#multidimensional-pes-scan">Multidimensional PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#lattice-scan-coordinates-for-periodic-systems">Lattice scan coordinates for periodic systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Scan.html#isotropic-scaling-of-the-unit-cell-volume-or-area">Isotropic scaling of the unit cell volume or area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Scan.html#scaling-of-the-lattice-vector-lengths">Scaling of the lattice vector lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Scan.html#strain-matrix-in-voigt-notation">Strain matrix in Voigt notation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Scan.html#scan-arbitrary-lattices">Scan arbitrary lattices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#calculate-properties-for-all-pes-points">Calculate properties for all PES points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/NEB.html">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/NEB.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/NEB.html#frozen-atom-constraints">Frozen atom constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/NEB.html#optimizations-and-convergence-criteria">Optimizations and convergence criteria</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/NEB.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/NEB.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/IRC.html">Intrinsic Reaction Coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/IRC.html#method-details">Method details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/IRC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/IRC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Excited_State_Optimizations.html">Excited state optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Molecular_Dynamics.html">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#constrained-molecular-dynamics">Constrained molecular dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#re-starting-a-simulation">(Re-)Starting a simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#thermostats-and-barostats">Thermostats and barostats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#temperature-and-pressure-regimes">Temperature and pressure regimes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#trajectory-sampling-and-output">Trajectory sampling and output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#lattice-deformations-volume-regimes">Lattice deformations (volume regimes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#molecule-gun-adding-molecules-during-simulation">Molecule Gun: adding molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#removing-molecules-during-simulation">Removing molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#accelerated-dynamics">Accelerated dynamics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#the-plumed-library-support-in-ams">The PLUMED library support in AMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#metadynamics-for-conformer-rotamer-ensemble-sampling-crest-mtd">Metadynamics for Conformer-Rotamer Ensemble Sampling (CREST-MTD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#collective-variable-driven-hyperdynamics-cvhd">Collective Variable-driven HyperDynamics (CVHD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#temperature-replica-exchange">Temperature Replica Exchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#bond-boost-method">Bond Boost Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#force-bias-monte-carlo-fbmc">Force bias Monte Carlo (fbMC)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#non-equilibrium-md-nemd">Non-equilibrium MD (NEMD)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#t-nemd-for-thermoconductivity-heat-exchange">T-NEMD for thermoconductivity: heat exchange</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/TrajectoryReplay.html">Trajectory replay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/GCMC.html">Grand Canonical Monte Carlo (GCMC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/GCMC.html#general-info">General info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/GCMC.html#method-details">Method Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/GCMC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/GCMC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/PES_Exploration.html">Automated PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#job-selection-and-main-options">Job selection and main options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#results-the-energy-landscape">Results: the “Energy Landscape”</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#results-on-the-text-output">Results on the text output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#continue-a-pes-exploration-from-a-previous-calculation">Continue a PES exploration from a previous calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#structure-comparison">Structure comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#process-search-job">Process Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id2">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#saddle-search-job">Saddle Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id3">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id8">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#basin-hopping-job">Basin Hopping job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id9">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id11">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#landscape-refinement">Landscape Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#optimizer">Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#binding-sites">Binding Sites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id12">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Gradients_Stress_Elasticity.html">Gradients, Hessian, Stress tensor, Elasticity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#nuclear-gradients">Nuclear gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#index-3">Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#pes-point-character">PES point character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#thermodynamics-gas-phase-gibbs-free-energy">Thermodynamics, gas phase Gibbs free energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#stress-tensor">Stress tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#elastic-tensor">Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#numerical-differentiation-options">Numerical differentiation options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Vibrational_Spectroscopy.html">Vibrational Spectroscopy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#general">General</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#where-are-the-results">Where are the results?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#ir-frequencies-and-normal-modes">IR frequencies and normal modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#all-vibrational-modes">All vibrational Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#rescanning-imaginary-modes">Rescanning Imaginary modes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#symmetric-displacements">Symmetric Displacements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#mobile-block-hessian-mbh">Mobile Block Hessian (MBH)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#mode-scanning">Mode Scanning</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#input">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#mode-refinement">Mode Refinement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id4">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id5">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#mode-tracking">Mode Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id8">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id11">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#input-tracking-methods">Input: Tracking methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#input-selecting-modes">Input: Selecting modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#input-convergence">Input: Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#selecting-modes">Selecting modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#thermodynamics-ideal-gas">Thermodynamics (ideal gas)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#gibbs-free-energy-change-for-a-gas-phase-reaction">Gibbs free energy change for a gas phase reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#moments-of-inertia">Moments of inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#partial-vibrational-spectra-pvdos">Partial Vibrational Spectra (PVDOS)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#phonons">Phonons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#resonance-raman">(Resonance) Raman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#id19">Raman</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#resonance-raman-excited-state-finite-lifetime">Resonance Raman: excited-state finite lifetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#resonance-raman-vg-fc">Resonance Raman: VG-FC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id22">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id24">Input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#vroa-resonance-vibrational-raman-optical-activity">VROA: (Resonance) vibrational Raman optical activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#engine-adf">Engine ADF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#vcd-vibrational-circular-dichroism">VCD: Vibrational Circular Dichroism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#atomic-polar-tensor-apt-model">Atomic polar tensor (APT) model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#analytical-vcd-in-adf">Analytical VCD in ADF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Vibrationally_resolved_electronic_spectra.html">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/FCF_module.html">AH-FC: Adiabatic Hessian Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/FCF_module.html#fcf-module-franck-condon-factors">FCF module: Franck-Condon Factors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/FCF_module.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/FCF_module.html#algorithm">Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/FCF_module.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/FCF_module.html#result-tape61">Result: TAPE61</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/FCF_module.html#fcf-example-absorption-and-fluorescence">FCF example absorption and fluorescence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/FCF_module.html#fcf-example-phosphorescence">FCF Example phosphorescence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html">VG-FC: Vertical Gradient Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory">Theory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-tracking">Theory: Vibronic-Structure Tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-refinement">Theory: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-adiabatic-excitation-energy">Theory: Adiabatic excitation energy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-all-modes">Input: Vibronic-Structure all modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-tracking">Input: Vibronic-Structure Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-restarting-vst">Input: Restarting VST</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-refinement">Input: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-excited-state">Input: Excited State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-producing-the-spectrum">Input: Producing the spectrum</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Properties.html">Dipole moment, Polarizability, Bond orders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#charges-dipole-moment-polarizability">Charges, Dipole Moment, Polarizability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#bond-orders-molecule-detection">Bond orders &amp; Molecule detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Engines.html">Engines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Engines.html#index-2">Available engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engines.html#summary-of-engine-capabilities">Summary of engine capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engines.html#external-programs-as-engines">External programs as engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engines.html#toy-engines">Toy engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engines.html#engine-add-ons">Engine add-ons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#dispersion-corrections">Dispersion corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#pressure">Pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#non-isotropic-external-stress">Non-isotropic external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#atom-energies">Atom energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#restraints">Restraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#wall-potential">Wall potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Utilities/TOC.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/ChemTraYzer.html">ChemTraYzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer.html#general-information">General information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer.html#graphical-user-interface">Graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer.html#command-line-execution">Command line execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer.html#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/ChemTraYzer2.html">ChemTraYzer2 (beta version)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer2.html#using-chemtrayzer2-via-the-graphical-user-interface">Using ChemTraYzer2 via the graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer2.html#minimal-input">Minimal input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer2.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer2.html#ouput">Ouput</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html">Trajectory Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#radial-distribution-function-rdf">Radial Distribution Function (RDF)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#histogram">Histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#autocorrelation-functions">Autocorrelation Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#id2">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#id3">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#diffusion-coefficient">Diffusion Coefficient</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/VCDtools.html">VCD Analysis: VCDtools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/VCDtools.html#general-theory">General Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/VCDtools.html#general-coupled-oscillator-analysis">General Coupled Oscillator Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/VCDtools.html#available-options">Available options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/OLEDWorkflows.html">OLED workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/OLEDWorkflows.html#deposition">Deposition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#basic-input">Basic input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#output">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#deposition-of-host-guest-materials">Deposition of host-guest materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#deposition-of-interfaces">Deposition of interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#restarting-a-deposition">Restarting a deposition</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/OLEDWorkflows.html#properties">Properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#oledpropertiesoutput">Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#geometry-optimization">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_formaldehyde_noSCC.html">Example: Simple geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/2StepGO.html">Example: Two-stage geometry optimization with initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Diamond_under_pressure.html">Example: Periodic lattice optimization under pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Diamond_from_pressure.html">Example: Phase Transition Due To External Nonuniform Stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/ExternalStress_BN.html">Example: Boron nitride optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/ExternalStress_graphene.html">Example: Graphene optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/constraints.html">Example: Constrained optimizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#transition-state-search">Transition state search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/COChainFreqTS.html">Example: TS search starting from initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and TS search for H2 on graphene</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#nudged-elastic-band-neb">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/NEB.html">Nudged Elastic Band (NEB) Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Examples/NEB.html#hcn-isomerization-reaction-with-neb">HCN isomerization reaction with NEB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Examples/NEB.html#h2-dissociation-on-graphene">H2 dissociation on graphene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Examples/NEB.html#running-multiple-neb-calculations-using-plams">Running multiple NEB calculations using PLAMS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#intrinsic-reaction-coordinate-irc">Intrinsic reaction coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/IRC_HCN.html">Example: IRC for HCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/TS_and_IRC_Claisen.html">Example: TS and IRC for Claisen reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#pes-scan">PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/PESScan.html">Example: 2D PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/PESScan_lattice.html">Example: PES scan for lattice degrees of freedom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#pes-exploration">PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/BasinHopping_Ar13.html">Example: Basin Hopping for Ar 13 cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/ProcessSearch_alanine.html">Example: PES Exploration, Process Search for alanine with PLAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/BindingSites_O+Pt111.html">Example: PES Exploration, Binding Sites for O on Pt 111</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#molecular-dynamics">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/MD_hydrogen_longrun.html">Example: Simple MD for H2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/H2O_nreac.html">Example: MD for a box of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/MD_Deformation.html">Example: Lattice deformations in MD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#trajectory-replay">Trajectory replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/TrajectoryReplay.html">Example: Trajectory replays for PES scans, NEB and MD calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#vibrational-analysis">Vibrational analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/VATools_dydrogesterone.html">Example: Mode Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/VATools_cyclohexanone.html">Example: Mode Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/VST_pyrene.html">Example: Vibronic-Structure Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#pes-point-properties">PES point properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Phonons_Graphene.html">Example: Phonons for graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Phonons_Isotopes.html">Example: Phonons with isotopes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Phonons_UserBZPath.html">Example: User-defined Brillouin zone for phonon dispersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/ElasticTensor.html">Example: Elastic tensor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Pipe_ASEWorker.html">Example: ASE calculator as a pipe worker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Pipe_AMSonAMS.html">Example: AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Appendices.html#extended-xyz-file-format">Extended XYZ file format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendices.html#developer-options">Developer options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendices.html#symmetry">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Appendices.html#schonfliess-symbols-and-symmetry-labels">Schönfliess symbols and symmetry labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Appendices.html#molecular-orientation-requirements">Molecular orientation requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#feature-references">Feature references</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Required_citations.html#frequencies-ir-intensities-raman-vcd">Frequencies, IR Intensities, Raman, VCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Required_citations.html#pes-exploration">PES Exploration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">AMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="AMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">AMS</a>/</li>
+      
+    <li class="orange-text">Input, execution and output</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="input-execution-and-output">
+<h1>Input, execution and output<a class="headerlink" href="#input-execution-and-output" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="inputoutput"></span><div class="section" id="input">
+<span id="index-0"></span><h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
+<p>The input for AMS has a block and keyword structure.
+See the <a class="reference internal" href="#input-syntax"><span class="std std-ref">General remarks on input structure and parsing</span></a> section for more details.</p>
+<p>The input keys <a class="reference internal" href="System.html#systemdefinition"><span class="std std-ref">System</span></a>, <a class="reference internal" href="#keytask"><span class="std std-ref">Task</span></a>, and <a class="reference internal" href="Engines.html#engines"><span class="std std-ref">Engine</span></a>, are obligatory.
+Most other input keys in AMS are optional, like <a class="reference internal" href="#keyproperties"><span class="std std-ref">Properties</span></a>.
+In the rest of this manual one can find all input keys for AMS.</p>
+<p>The Engine specific input can be found in the respective Engine Manuals, for example, the manual for
+<a class="reference external" href="../ADF/index.html">ADF</a>, <a class="reference external" href="../BAND/index.html">BAND</a>, <a class="reference external" href="../DFTB/index.html">DFTB</a>, <a class="reference external" href="../ForceField/index.html">ForceField</a>, <a class="reference external" href="../MOPAC/index.html">MOPAC</a>, and <a class="reference external" href="../ReaxFF/ReaxFFEngine.html">ReaxFF</a>.</p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>The AMS input has a special <code class="docutils literal notranslate"><span class="pre">Engine</span></code> block, that selects which engine is used for
+the simulation and also contains all the details of its configuration. This is
+probably best illustrated by an example. Let us look at the following AMS
+input, which optimizes the geometry of the methane molecule and calculates its
+normal modes of vibration at the optimized geometry:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt; EOF</span>
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      Convergence</span>
+<span class="s">         Gradients 1.0e-4</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   Properties</span>
+<span class="s">      NormalModes true</span>
+<span class="s">   End</span>
+
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         C       0.00000000       0.00000000       0.00000000</span>
+<span class="s">         H       0.63294000      -0.63294000      -0.63294000</span>
+<span class="s">         H      -0.63294000       0.63294000      -0.63294000</span>
+<span class="s">         H       0.63294000       0.63294000       0.63294000</span>
+<span class="s">         H      -0.63294000      -0.63294000       0.63294000</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">       Model DFTB3</span>
+<span class="s">       ResourcesDir DFTB.org/3ob-3-1</span>
+<span class="s">   EndEngine</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>Note how DFTB is selected as the engine in the <code class="docutils literal notranslate"><span class="pre">Engine</span> <span class="pre">DFTB</span></code> line that opens
+the <code class="docutils literal notranslate"><span class="pre">Engine</span></code> block. All DFTB specific configuration is contained within this
+engine block, which is terminated by <code class="docutils literal notranslate"><span class="pre">EndEngine</span></code>. The fact that we want to run
+a geometry optimization with normal modes for methane and things like
+convergence criteria for the optimization are of course completely independent
+from which engine is actually used to perform this calculation. Therefore they
+are all found <em>outside</em> of the <code class="docutils literal notranslate"><span class="pre">Engine</span></code> block. In this sense, the AMS input is
+split up into the driver level input (everything outside of the engine block)
+and the engine input, which is just a single <code class="docutils literal notranslate"><span class="pre">Engine</span></code> block. This separation
+makes it easy to perform the same calculation at a different level of theory, by
+simply switching out the <code class="docutils literal notranslate"><span class="pre">Engine</span></code> block in the input. We could, for example,
+repeat the same calculation at the DFT-GGA level using the Band engine:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Engine BAND
+    XC
+       GGA PBE
+    End
+EndEngine
+</pre></div>
+</div>
+<p>Engines like ADF or BAND that have many options and can calculate many properties,
+consequently also have a large number of possible keywords in their input. In
+order to have a better structured documentation we have split off the description
+of the engine inputs into separate <a class="reference internal" href="Engines.html#engines"><span class="std std-ref">engine specific manuals</span></a>,
+while this AMS manual only documents the driver level keywords outside of the
+<code class="docutils literal notranslate"><span class="pre">Engine</span></code> block. All the engine specific options are found in the respective
+engine’s manual, which documents the keywords in its <code class="docutils literal notranslate"><span class="pre">Engine</span></code> block. In
+general all engines can be used with all tasks in AMS. There are only a few
+rather obvious restrictions, for example that only engines which can handle
+periodic systems can be used for the calculation of phonons.</p>
+<span class="target" id="keytask"></span></div>
+<div class="section" id="tasks">
+<span id="index-1"></span><h3>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h3>
+<p>The key <code class="docutils literal notranslate"><span class="pre">Task</span></code> is described in more detail in the section <a class="reference internal" href="Tasks/TOC.html#tasks"><span class="std std-ref">Structure, Reactivity, and Molecular Dynamics</span></a>.
+The Task VibrationalAnalysis is described in more detail in the section <a class="reference internal" href="Vibrational_Spectroscopy.html#pesvibrations"><span class="std std-ref">Vibrational Spectroscopy</span></a>
+(Mode Scanning, Mode Refinement, Mode Tracking, VG-FC Resonance Raman)
+and in the section <a class="reference internal" href="Vibrationally_resolved_electronic_spectra.html#vibrationallyresolvedelectronicspectra"><span class="std std-ref">Vibrationally resolved electronic spectra</span></a>
+(VG-FC: Vertical Gradient Franck-Condon).</p>
+<p>Below the possible arguments for <code class="docutils literal notranslate"><span class="pre">Task</span></code> are given.</p>
+<div class="highlight-none notranslate" id="ams-key-task"><div class="highlight"><pre><span></span>Task [GCMC | GeometryOptimization | IRC | MolecularDynamics | NEB | PESExploration | PESScan | 
+      Replay | SinglePoint | TransitionStateSearch | VibrationalAnalysis]
+</pre></div>
+</div>
+<span class="target" id="keyproperties"></span></div>
+<div class="section" id="properties">
+<span id="index-2"></span><h3>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<p>The block key <code class="docutils literal notranslate"><span class="pre">Properties</span></code> is described in more detail in the section <a class="reference internal" href="Gradients_Stress_Elasticity.html#pespointproperties"><span class="std std-ref">Gradients, Hessian, Stress tensor, Elasticity</span></a>,
+in the section <a class="reference internal" href="Vibrational_Spectroscopy.html#pesvibrations"><span class="std std-ref">Vibrational Spectroscopy</span></a>,
+and in the section <a class="reference internal" href="Properties.html#pespointextraproperties"><span class="std std-ref">Dipole moment, Polarizability, Bond orders</span></a>.</p>
+<p>Below the possible <code class="docutils literal notranslate"><span class="pre">Properties</span></code> are summarized.</p>
+<div class="highlight-none notranslate" id="ams-key-properties"><div class="highlight"><pre><span></span>Properties
+   BondOrders Yes/No
+   Charges Yes/No
+   DipoleGradients Yes/No
+   DipoleMoment Yes/No
+   ElasticTensor Yes/No
+   GSES Yes/No
+   Gradients Yes/No
+   Hessian Yes/No
+   Molecules Yes/No
+   NormalModes Yes/No
+   Other Yes/No
+   PESPointCharacter Yes/No
+   Phonons Yes/No
+   Polarizability Yes/No
+   Raman Yes/No
+   SelectedRegionForHessian string
+   StressTensor Yes/No
+   VCD Yes/No
+   VROA Yes/No
+End
+</pre></div>
+</div>
+<span class="target" id="index-3"></span></div>
+<div class="section" id="general-remarks-on-input-structure-and-parsing">
+<span id="input-syntax"></span><span id="index-4"></span><h3>General remarks on input structure and parsing<a class="headerlink" href="#general-remarks-on-input-structure-and-parsing" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Most keys are optionals. Defaults values will be used for keys that are not specified in the input</p>
+</li>
+<li><p class="first">Keys/blocks can either be <em>unique</em> (<em>i.e.</em> they can appear in the input only once) or <em>non-unique</em>. (i.e. they can appear multiple times in the input)</p>
+</li>
+<li><p class="first">The order in which keys or blocks are specified in the input does not matter. Possible exceptions to this rule are a) the content of non-standard blocks b) some non-unique keys/blocks)</p>
+</li>
+<li><p class="first">Comments in the input file start with one of the following characters: <code class="docutils literal notranslate"><span class="pre">#</span></code>, <code class="docutils literal notranslate"><span class="pre">!</span></code>, <code class="docutils literal notranslate"><span class="pre">::</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># this is a comment
+! this is also a comment
+:: yet another comment
+</pre></div>
+</div>
+</li>
+<li><p class="first">Empty lines are ignored</p>
+</li>
+<li><p class="first">The input parsing is <strong>case insensitive</strong> (except for string values):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># this:</span>
+<span class="n">UseSymmetry</span> <span class="n">false</span>
+<span class="c1"># is equivalent to this:</span>
+<span class="n">USESYMMETRY</span> <span class="n">FALSE</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Indentation does not matter and multiple spaces are treaded as a single space (except for string values):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># this:</span>
+     <span class="n">UseSymmetry</span>     <span class="n">false</span>
+<span class="c1"># is equivalent to this:</span>
+<span class="n">UseSymmetry</span> <span class="n">false</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="keys">
+<h3>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h3>
+<p>Key-value pairs have the following structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="n">Value</span>
+</pre></div>
+</div>
+<p>Possible types of keys:</p>
+<dl class="docutils">
+<dt>bool key</dt>
+<dd><p class="first">The value is a single Boolean (logical) value. The value can be <code class="docutils literal notranslate"><span class="pre">True</span></code> (equivalently <code class="docutils literal notranslate"><span class="pre">Yes</span></code>) or <code class="docutils literal notranslate"><span class="pre">False</span></code> (equivalently <code class="docutils literal notranslate"><span class="pre">No</span></code>.). Not specifying any value is equivalent to specifying <code class="docutils literal notranslate"><span class="pre">True</span></code>. Example:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="n">Yes</span>
+</pre></div>
+</div>
+</dd>
+<dt>integer key</dt>
+<dd><p class="first">The value is a single integer number. Example:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</dd>
+<dt>float key</dt>
+<dd><p class="first">The value is a single float number. For scientific notation, the E-notation is used (e.g. <span class="math notranslate nohighlight">\(-2.5 \times 10^{-3}\)</span> can be expressed as <code class="docutils literal notranslate"><span class="pre">-2.5E-3</span></code>). The decimal separator should be a dot (<code class="docutils literal notranslate"><span class="pre">.</span></code>), and <strong>not</strong> a comma (<code class="docutils literal notranslate"><span class="pre">,</span></code>). Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="o">-</span><span class="mf">2.5E-3</span>
+</pre></div>
+</div>
+<p>Note that fractions (of integers) can also be used:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span>    <span class="p">(</span><span class="n">equivalent</span> <span class="n">to</span><span class="p">:</span> <span class="mf">0.33333333333</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>string key</dt>
+<dd><p class="first">The value is a string, which can include white spaces. Only ASCII characters are allowed. Example:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="n">Lorem</span> <span class="n">ipsum</span> <span class="n">dolor</span> <span class="n">sit</span> <span class="n">amet</span>
+</pre></div>
+</div>
+</dd>
+<dt>multiple_choice key</dt>
+<dd><p class="first">The value should be a single word among the list options for that key (the options are listed in the documentation of the key). Example:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="n">SomeOption</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="docutils" id="ranges-in-input">
+<dt>integer_list key</dt>
+<dd><p class="first">The value is list of integer numbers. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mi">0</span> <span class="mi">9</span> <span class="o">-</span><span class="mi">10</span>
+</pre></div>
+</div>
+<p>Note that one can also specify ranges of integers by specifying the interval and (optionally) the step size separated by colons:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="mi">1</span><span class="p">:</span><span class="mi">5</span>       <span class="p">(</span><span class="n">equivalent</span> <span class="n">to</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">KeyName</span> <span class="mi">2</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">2</span>    <span class="p">(</span><span class="n">equivalent</span> <span class="n">to</span><span class="p">:</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">6</span> <span class="mi">8</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">KeyName</span> <span class="mi">20</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span>  <span class="p">(</span><span class="n">equivalent</span> <span class="n">to</span><span class="p">:</span> <span class="mi">20</span> <span class="mi">18</span> <span class="mi">16</span> <span class="mi">14</span> <span class="mi">12</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note also that ranges can be freely combined with individual numbers:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="mi">1</span><span class="p">:</span><span class="mi">5</span> <span class="mi">10</span> <span class="mi">20</span>  <span class="p">(</span><span class="n">equivalent</span> <span class="n">to</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">10</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>float_list key</dt>
+<dd><p class="first">The value is list of float numbers. The convention for float numbers is the same as for Float keys. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="mf">0.1</span> <span class="mf">1.0E-2</span> <span class="mf">1.3</span>
+</pre></div>
+</div>
+<p>Float lists can also be specified as a range with equidistant points, by specifying the interval’s boundaries (inclusive) as well as the number of desired subintervals separated by colons:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="mf">1.0</span><span class="p">:</span><span class="mf">1.5</span><span class="p">:</span><span class="mi">5</span>  <span class="p">(</span><span class="n">equivalent</span> <span class="n">to</span><span class="p">:</span> <span class="mf">1.0</span> <span class="mf">1.1</span> <span class="mf">1.2</span> <span class="mf">1.3</span> <span class="mf">1.4</span> <span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Range specifications can be freely combined with each other and single numbers:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="mf">0.0</span> <span class="mf">1.0</span><span class="p">:</span><span class="mf">1.5</span><span class="p">:</span><span class="mi">5</span> <span class="mf">2.0</span><span class="p">:</span><span class="mf">3.0</span><span class="p">:</span><span class="mi">10</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="blocks">
+<h3>Blocks<a class="headerlink" href="#blocks" title="Permalink to this headline">¶</a></h3>
+<p>Blocks give a hierarchical structure to the input, grouping together related keys (and possibly sub-blocks).
+In the input, blocks generally span multiple lines, and have the following structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BlockName</span>
+   <span class="n">KeyName1</span> <span class="n">value1</span>
+   <span class="n">KeyName2</span> <span class="n">value2</span>
+   <span class="o">...</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p><strong>Headers</strong></p>
+<p>For some blocks it is possible (or necessary) to specify a <em>header</em> next to the block name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BlockName</span> <span class="n">someHeader</span>
+   <span class="n">KeyName1</span> <span class="n">value1</span>
+   <span class="n">KeyName2</span> <span class="n">value2</span>
+   <span class="o">...</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p><strong>Compact notation</strong></p>
+<p>It is possible to specify multiple key-value pairs of a block on a single line using the following notation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This:</span>
+<span class="n">BlockName</span> <span class="n">KeyName1</span><span class="o">=</span><span class="n">value1</span> <span class="n">KeyName2</span><span class="o">=</span><span class="n">value2</span>
+
+<span class="c1"># is equivalent to this:</span>
+<span class="n">BlockName</span>
+   <span class="n">KeyName1</span> <span class="n">value1</span>
+   <span class="n">KeyName2</span> <span class="n">value2</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>Notes on compact notation:</p>
+<ul>
+<li><p class="first">The compact notation cannot be used for blocks with headers.</p>
+</li>
+<li><p class="first">Spaces (blanks) between the key, the equal sign and the value are ignored. However, if a value itself needs to contain spaces (e.g. because it is a list, or a number followed by a unit), the entire value must be put in either single or double quotes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is OK:</span>
+<span class="n">BlockName</span> <span class="n">Key1</span><span class="o">=</span><span class="n">value</span> <span class="n">Key2</span> <span class="o">=</span> <span class="s2">&quot;5.6 [eV]&quot;</span> <span class="n">Key3</span><span class="o">=</span><span class="s1">&#39;5 7 3 2&#39;</span>
+<span class="c1"># ... and equivalent to:</span>
+<span class="n">BlockName</span>
+   <span class="n">Key1</span>  <span class="n">value</span>
+   <span class="n">Key2</span>  <span class="mf">5.6</span> <span class="p">[</span><span class="n">eV</span><span class="p">]</span>
+   <span class="n">Key3</span>  <span class="mi">5</span> <span class="mi">7</span> <span class="mi">3</span> <span class="mi">2</span>
+<span class="n">End</span>
+
+<span class="c1"># This is NOT OK:</span>
+<span class="n">BlockName</span> <span class="n">Key1</span><span class="o">=</span><span class="n">value</span> <span class="n">Key2</span> <span class="o">=</span> <span class="mf">5.6</span> <span class="p">[</span><span class="n">eV</span><span class="p">]</span> <span class="n">Key3</span><span class="o">=</span><span class="mi">5</span> <span class="mi">7</span> <span class="mi">3</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>Non-standard Blocks</strong></p>
+<p>A special type of block is the <em>non-standard block</em>. These blocks are used for parts of the input that do not follow the usual key-value paradigm.</p>
+<p>A notable example of a non-standard block is the <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> block (in which the atomic coordinates and atom types are defined).</p>
+</div>
+<div class="section" id="including-an-external-file">
+<h3>Including an external file<a class="headerlink" href="#including-an-external-file" title="Permalink to this headline">¶</a></h3>
+<p>You can include an external ASCII file in the input with the <code class="docutils literal notranslate"><span class="pre">&#64;include</span></code>
+directive:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@include</span> <span class="n">FileName</span><span class="o">.</span><span class="ow">in</span>
+<span class="nd">@include</span> <span class="s2">&quot;file name with spaces.in&quot;</span>
+</pre></div>
+</div>
+<p>The file name should include the path, either absolute or relative to the
+run-directory.  The content of the file is included in the input at the point
+where the <code class="docutils literal notranslate"><span class="pre">&#64;include</span></code> directive occurs. The <code class="docutils literal notranslate"><span class="pre">&#64;include</span></code> directive may occur
+any number of times in the input.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;include</span></code> feature makes it easy to pack your preferred settings in one
+file and use them in every run with minimum input-typing effort.</p>
+</div>
+<div class="section" id="units">
+<span id="input-units"></span><h3>Units<a class="headerlink" href="#units" title="Permalink to this headline">¶</a></h3>
+<p>Some keys have a default unit associated (not all keys have units). For such keys, the default unit is mentioned in the key documentation. One can specify a different unit within square brackets at the end of the line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KeyName</span> <span class="n">value</span> <span class="p">[</span><span class="n">unit</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For example, assuming the key <code class="docutils literal notranslate"><span class="pre">EnergyThreshold</span></code> has as default unit <code class="docutils literal notranslate"><span class="pre">Hartree</span></code>, then the following definitions are equivalent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use defaults unit:</span>
+<span class="n">EnergyThreshold</span> <span class="mf">1.0</span>
+
+<span class="c1"># use eV as unit:</span>
+<span class="n">EnergyThreshold</span> <span class="mf">27.211</span> <span class="p">[</span><span class="n">eV</span><span class="p">]</span>
+
+<span class="c1"># use kcal/mol as unit:</span>
+<span class="n">EnergyThreshold</span> <span class="mf">627.5</span> <span class="p">[</span><span class="n">kcal</span><span class="o">/</span><span class="n">mol</span><span class="p">]</span>
+
+<span class="c1"># Hartree is the atomic unit of energy:</span>
+<span class="n">EnergyThreshold</span> <span class="mf">1.0</span> <span class="p">[</span><span class="n">Hartree</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Available units:</p>
+<ul class="simple">
+<li><strong>Energy</strong>: <code class="docutils literal notranslate"><span class="pre">Hartree</span></code>, <code class="docutils literal notranslate"><span class="pre">Joule</span></code>, <code class="docutils literal notranslate"><span class="pre">eV</span></code>, <code class="docutils literal notranslate"><span class="pre">kJ/mol</span></code>, <code class="docutils literal notranslate"><span class="pre">kcal/mol</span></code>, <code class="docutils literal notranslate"><span class="pre">cm1</span></code>, <code class="docutils literal notranslate"><span class="pre">MHz</span></code></li>
+<li><strong>Length</strong>: <code class="docutils literal notranslate"><span class="pre">Bohr</span></code>, <code class="docutils literal notranslate"><span class="pre">Angstrom</span></code>, <code class="docutils literal notranslate"><span class="pre">meter</span></code></li>
+<li><strong>Angles</strong>: <code class="docutils literal notranslate"><span class="pre">radian</span></code>, <code class="docutils literal notranslate"><span class="pre">degree</span></code></li>
+<li><strong>Mass</strong>: <code class="docutils literal notranslate"><span class="pre">el</span></code>, <code class="docutils literal notranslate"><span class="pre">proton</span></code>, <code class="docutils literal notranslate"><span class="pre">atomic</span></code>, <code class="docutils literal notranslate"><span class="pre">kg</span></code></li>
+<li><strong>Pressure</strong>: <code class="docutils literal notranslate"><span class="pre">atm</span></code>, <code class="docutils literal notranslate"><span class="pre">Pascal</span></code>, <code class="docutils literal notranslate"><span class="pre">GPa</span></code>, <code class="docutils literal notranslate"><span class="pre">a.u.</span></code>, <code class="docutils literal notranslate"><span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">kbar</span></code></li>
+<li><strong>Electric field</strong>: <code class="docutils literal notranslate"><span class="pre">V/Angstrom</span></code>, <code class="docutils literal notranslate"><span class="pre">V/meter</span></code>, <code class="docutils literal notranslate"><span class="pre">a.u.</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="execution">
+<span id="index-5"></span><h2>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="shell-script">
+<h3>Shell script<a class="headerlink" href="#shell-script" title="Permalink to this headline">¶</a></h3>
+<p>The AMS driver reads its input from standard input, i.e. what is called
+<code class="docutils literal notranslate"><span class="pre">STDIN</span></code> on Unix-like systems. Technically it is possible to run AMS and type
+the input file in interactively. This is however highly impractical and most
+people run AMS from a small shell script that contains the AMS text input and
+sends it directly to the AMS executable.
+For example, the content of the file ‘example.run’ could be like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   ... AMS text input goes here:</span>
+
+<span class="s">   Block</span>
+<span class="s">      Keywork value</span>
+<span class="s">      OtherKeyword value</span>
+<span class="s">   End</span>
+
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>The shell script ‘example.run’ needs be executable, if it isn’t you will need to make it executable, e.g. <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">u+x</span> <span class="pre">example.run</span></code>.
+The ‘example.run’ file needs to be executed as a shell script, not as input to AMS.</p>
+<p><code class="docutils literal notranslate"><span class="pre">./example.run</span> <span class="pre">&gt;</span> <span class="pre">example.out</span></code></p>
+</div>
+<div class="section" id="interactive-input-file">
+<span id="id1"></span><h3>Interactive input file<a class="headerlink" href="#interactive-input-file" title="Permalink to this headline">¶</a></h3>
+<p>As of the 2021.1 version the AMS driver has the concept of an interactive input file.
+The interactive input file is a second input file, that users may create in the <a class="reference internal" href="#results-directory"><span class="std std-ref">results directory</span></a> of an already running job to interact with it.
+The name of the interactive input file is <code class="docutils literal notranslate"><span class="pre">interactive.in</span></code>.
+Note that the file does not exist by default, but has to be created by the user wanting to interact with the running AMS job.</p>
+<p>In AMS2021.1 the interactive input file may be used to request the graceful and orderly termination of a job.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;Stop&quot;</span> <span class="o">&gt;</span> <span class="n">ams</span><span class="o">.</span><span class="n">results</span><span class="o">/</span><span class="n">interactive</span><span class="o">.</span><span class="ow">in</span>
+</pre></div>
+</div>
+<dl class="docutils" id="ams-interactive-key-stop">
+<dt><code class="docutils literal notranslate"><span class="pre">Stop</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Makes the AMS driver stop execution in an ordered manner at the next opportunity. This will not interrupt the execution in the middle of the numerical calculation of a PES point property (e.g. a Hessian).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>It is generally preferably to request the termination through the interactive input file over killing a job at the operating system level.
+This makes sure that the job stops at a logical point and still has time to write intermediate results to disk, making restarting from such jobs easier and more reliable.
+From the graphical user interface, the stopping can be requested in AMSjobs by selecting the running job and clicking <strong>Job → Request Early Stop</strong> in the menu bar.</p>
+<p>As of AMS2021.1, the tasks that can be stopped through the interactive input file are:</p>
+<ul class="simple">
+<li><a class="reference internal" href="Tasks/Molecular_Dynamics.html#moleculardynamics"><span class="std std-ref">Molecular dynamics</span></a> simulations will stop at the next sampling or checkpoint as if the maximum number of steps had been reached.</li>
+<li><a class="reference internal" href="Tasks/Geometry_Optimization.html#geometryoptimization"><span class="std std-ref">Geometry optimizations</span></a> will stop after the current iteration and be considered converged. This can be used if a geometry optimization does not make progress anymore, e.g. because the convergence thresholds are set tighter than the noise level of the used engine.</li>
+<li><a class="reference internal" href="Tasks/NEB.html#neb"><span class="std std-ref">Nudged elastic band</span></a> calculations will stop after the current iteration (i.e. the calculations for all images) is complete.</li>
+<li><a class="reference internal" href="Tasks/PES_Scan.html#pesscan"><span class="std std-ref">PES scans</span></a> will interrupt the currently running geometry optimization and skip the optimization for all further PES points.</li>
+<li><a class="reference internal" href="Tasks/PES_Exploration.html#eon"><span class="std std-ref">PES explorations</span></a> will terminate after the currently running expedition. No new explorers will be dispatched, but currently active explorers will be allowed to finish.</li>
+</ul>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">Stop</span></code> keyword in the interactive input file will not interrupt the job in the middle of the numerical calculation of a <a class="reference internal" href="Properties.html#pespointextraproperties"><span class="std std-ref">PES point property</span></a>, such as a Hessian or stress tensor.
+It will also never stop a job that is currently running an engine, and will hence not stop an engine that is calculating these properties analytically.
+It is possible to interrupt the numerical calculation of <a class="reference internal" href="Properties.html#pespointextraproperties"><span class="std std-ref">PES point properties</span></a> using the <code class="docutils literal notranslate"><span class="pre">StopProperties</span></code> keyword.
+We advise users to be careful with this keyword and always combine it with the <code class="docutils literal notranslate"><span class="pre">Stop</span></code> keyword, as it is generally not possible to skip the evaluation of properties, but continue with a task as the AMS driver level.
+(After all, the driver may need the properties that we interrupt.)</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;Stop&quot;</span> <span class="o">&gt;</span> <span class="n">ams</span><span class="o">.</span><span class="n">results</span><span class="o">/</span><span class="n">interactive</span><span class="o">.</span><span class="ow">in</span>
+<span class="n">echo</span> <span class="s2">&quot;StopProperties&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">ams</span><span class="o">.</span><span class="n">results</span><span class="o">/</span><span class="n">interactive</span><span class="o">.</span><span class="ow">in</span>
+</pre></div>
+</div>
+<dl class="docutils" id="ams-interactive-key-stopproperties">
+<dt><code class="docutils literal notranslate"><span class="pre">StopProperties</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Makes the AMS driver stop execution during the evaluation of PES point properties. This may for example be used to interrupt the numerical calculation of a Hessian. Note that this just works at the level of the loops used for the **numerical** calculation of the properties, so engines which calculate a property analytically may not be interruptible using this keyword. It is recommended to use this keyword in combination with the generic <code class="docutils literal notranslate"><span class="pre">Stop</span></code> keyword.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>As of AMS2021.1 it is not possible to restart the calculation of properties that were interrupted like this. Hence the use of the <code class="docutils literal notranslate"><span class="pre">StopProperties</span></code> keyword is limited.</p>
+<span class="target" id="running-on-clusters"></span></div>
+<div class="section" id="running-ams-on-compute-clusters">
+<span id="index-6"></span><h3>Running AMS on compute clusters<a class="headerlink" href="#running-ams-on-compute-clusters" title="Permalink to this headline">¶</a></h3>
+<p>AMS is parallelized with MPI and can therefore be run in parallel on distributed
+memory machines, aka compute clusters. See the <a class="reference external" href="../Installation/Additional_Information_and_Known_Issues.html#running-mpi-jobs">installation manual</a>
+for general documentation on how to set up and run all the programs from the
+Amsterdam Modeling Suite on compute clusters. In this section we give some more
+advice that is specific to the AMS driver and its engines.</p>
+<p>Normally users use the login node to prepare their jobs and input files
+somewhere in their home directory, and also want the results of their jobs to
+end up there. Quite often, compute clusters are set up such that the user’s home
+directory is also mounted on the compute nodes, usually via NFS (Network File
+System). Before the introduction of the AMS driver it was not recommended to
+<code class="docutils literal notranslate"><span class="pre">cd</span></code> to the home directory in the submission script and have the compute nodes
+execute the job directly there. This was simply due to the fact that a lot of
+file I/O was done on temporary files in the present working directory, which in
+this case would be on a slow network-mounted file system.</p>
+<p>On the other hand, with AMS, switching to the home directory is the preferred
+way of running on a cluster where the home directory is mounted on the compute
+nodes. Running in the home directory mounted over NFS does not come with a
+performance penalty for AMS, but has many advantages. This is because AMS and
+its engines are already built under the assumption that access to this directory
+is slow. Basically there are three directories that are used by the AMS driver
+and its engines:</p>
+<ol class="arabic simple" id="index-7">
+<li>The <strong>starting directory</strong>, i.e. the present working directory at the time
+the AMS driver is started. This folder is generally read-only for AMS, except
+for creating the results directory there at the beginning of a calculation.
+Note that all relative paths in the AMS input, e.g. for loading results from
+previous calculations, are relative to the starting directory.  The starting
+directory is assumed to be on a slow filesystem, but since data is normally
+only read once from there in the beginning of a calculation, this is in
+practice not a problem.</li>
+</ol>
+<ol class="arabic simple" id="index-8" start="2">
+<li>The <strong>results directory</strong>, where the results of a calculation as well as
+important intermediate steps (e.g. restart files) are collected. It also
+contains the log file which can be used to monitor a running calculations.
+The results directory is assumed to be on a slow filesystem, so AMS and its
+engines will be very careful not to do much disk I/O there. Generally
+something is only written to the results directory when AMS is sure that it
+should remain on disk when the calculation finishes. The results directory
+can also contain some intermediate restart files, so the contents of the
+result directory should be all that is needed in case the calculation crashes
+or is killed before it finishes normally.</li>
+</ol>
+<span class="target" id="index-9"></span><span class="target" id="index-10"></span><ol class="arabic simple" id="index-11" start="3">
+<li>The <strong>scratch directory</strong>, the location of which is set with the
+<code class="docutils literal notranslate"><span class="pre">$SCM_TMPDIR</span></code> environment variable, see also the <a class="reference external" href="../Installation/Appendix_A_Environment_Variables.html#more-on-the-scm-tmpdir-variable">installation manual</a>.
+This directory should be put on a fast disk, e.g. an SSD in the compute node,
+as it will be used to store temporary results on disk. Users do not really
+need to care or know about the temporary files in the scratch directory.
+Normally, any files and directories created in the scratch directory are
+cleaned up at the end of the calculation. In case of errors, AMS tries to
+copy anything useful (e.g. the text output of all the different ranks) to the
+results directory in order to make finding the problem easier. However, for
+some kinds of crashes (or if the <code class="docutils literal notranslate"><span class="pre">SIGKILL</span></code> signal is sent to AMS), the
+cleanup of the scratch directory might not be performed, in which case users
+might want to manually check or remove the <code class="docutils literal notranslate"><span class="pre">amstmp_*</span></code> folders in the
+scratch directory.</li>
+</ol>
+<p>With this setup there is no performance penalty for running directly on a
+network mounted home directory: Results will just be put there immediately,
+instead of being copied there at the end of a calculation.</p>
+<p>Normally all batch systems provide an environment variable that is set to the
+directory from which the job was submitted, which is then where one should
+<code class="docutils literal notranslate"><span class="pre">cd</span></code> in the run script:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$PBS_O_WORKDIR</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+   <span class="c1"># PBS batch system</span>
+   <span class="nb">cd</span> <span class="s2">&quot;</span><span class="nv">$PBS_O_WORKDIR</span><span class="s2">&quot;</span>
+<span class="k">elif</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$SLURM_SUBMIT_DIR</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+   <span class="c1"># Slurm batch system</span>
+   <span class="nb">cd</span> <span class="s2">&quot;</span><span class="nv">$SLURM_SUBMIT_DIR</span><span class="s2">&quot;</span>
+<span class="k">elif</span> <span class="o">[</span> -z <span class="s2">&quot;...&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+   <span class="c1"># add other batch systems as necessary ...</span>
+   <span class="nb">cd</span> <span class="s2">&quot;...&quot;</span>
+<span class="k">fi</span>
+
+<span class="nb">export</span> <span class="nv">AMS_JOBNAME</span><span class="o">=</span>myJob
+
+<span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   # Normal AMS text input, but with all paths</span>
+<span class="s">   # relative to where the job was submitted from, e.g.:</span>
+<span class="s">   LoadSystem previousJob.results/ams.rkf</span>
+
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>With this runscript the AMS driver would make a <code class="docutils literal notranslate"><span class="pre">myJob.results</span></code> folder in the
+directory where the job was submitted from, and there is no need to copy results
+around manually in the run script. Furthermore this runscript always produces
+exactly the same files in the same locations, no matter if it is run
+interactively or submitted to a compute node through the batch system.
+Furthermore all paths in the input file can be specified relative to the
+location from where the runscript is submitted (normally the folder in which the
+runscript is located). This removes the need to copy or specify absolute paths
+to previous results, e.g. when restarting calculations. Finally, files useful
+for monitoring the running calculation are also conveniently there and not
+hidden somewhere on the compute node.</p>
+<span class="target" id="ams-output"></span></div>
+</div>
+<div class="section" id="output">
+<span id="index-12"></span><h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<p>AMS produces two ASCII files: standard output and the <code class="docutils literal notranslate"><span class="pre">ams.log</span></code> file, and produces several binary output data files.
+The <code class="docutils literal notranslate"><span class="pre">ams.log</span></code> file is a very concise summary of the calculation’s progress during the run.
+The binary output data files contain job characteristics and computational results produced by AMS and the Engine.
+Part of what is written to the binary output files is also written in a human readable form to standard output.</p>
+<span class="target" id="results-directory"></span><div class="section" id="index-13">
+<span id="id2"></span><h3>Results directory<a class="headerlink" href="#index-13" title="Permalink to this headline">¶</a></h3>
+<p>Note that AMS does not put any of its binary output files and the <code class="docutils literal notranslate"><span class="pre">ams.log</span></code> file
+into the present working directory, as virtually all of the standalone programs
+in the suite did. Instead AMS creates a <code class="docutils literal notranslate"><span class="pre">*.results</span></code> directory, which collects
+all result file associated with a job. Here <code class="docutils literal notranslate"><span class="pre">*</span></code> is replaced by the jobname,
+which is set with the <code class="docutils literal notranslate"><span class="pre">AMS_JOBNAME</span></code> environment variable:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">AMS_JOBNAME</span><span class="o">=</span>methane <span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   ... see Input example before ...</span>
+
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>This would put all results related to our geometry optimization of methane into
+the newly created folder <code class="docutils literal notranslate"><span class="pre">methane.results</span></code>. (The default name of the results
+folder is <code class="docutils literal notranslate"><span class="pre">ams.results</span></code> if <code class="docutils literal notranslate"><span class="pre">AMS_JOBNAME</span></code> is not set, see the
+<a class="reference internal" href="#environmentvariables"><span class="std std-ref">environment variables</span></a> section of this manual for
+documentation of all environment variables used by AMS.) In this way users can
+easily run multiple jobs in the same directory without danger of clashing output
+files, which was a common problem before the introduction of AMS. This new setup
+is also more consistent with the graphical user interface, which already
+collected all files associated with a specific job into a dedicated results
+directory. Note that AMS will by default <strong>not overwrite</strong> results directories if a
+job is rerun or another job is run with the same jobname.</p>
+<span class="target" id="index-14"></span></div>
+<div class="section" id="logfile-ams-log">
+<span id="index-15"></span><h3>Logfile ams.log<a class="headerlink" href="#logfile-ams-log" title="Permalink to this headline">¶</a></h3>
+<p>Inside of the results directory users will always find the logfile <code class="docutils literal notranslate"><span class="pre">ams.log</span></code>,
+which is written during a running calculation and can be used to monitor its
+progress.</p>
+<p>The logfile <code class="docutils literal notranslate"><span class="pre">ams.log</span></code> is generated during the calculation and flushed after (almost) each message that is sent to it by the program.
+Consequently, the user can inspect it and see what is going on without being delayed by potentially large system I/O buffers.
+Each message contains date and time of the message plus additional info.</p>
+<p>Be alert on error messages.  Take them seriously: inspect the standard output carefully and try to understand what has gone wrong.
+Be also alert to warnings.
+They are not necessarily fatal but you should understand what they are about before being satisfied with the results of the calculation.
+Do not ignore them just because the program has not aborted: in some cases the program may not be able to determine whether or not you really want to do what appears to be wrong or suspicious.
+If you believe that the program displays erratic behavior, then the standard output file may contain more detailed information.
+Therefore, in such case save the complete standard output file, together with the logfile <code class="docutils literal notranslate"><span class="pre">ams.log</span></code>, in case we need these files for further analysis.</p>
+<span class="target" id="index-16"></span></div>
+<div class="section" id="binary-output-files">
+<span id="index-17"></span><h3>Binary output files<a class="headerlink" href="#binary-output-files" title="Permalink to this headline">¶</a></h3>
+<p>The results directory contains binary result files in the
+KF format, which can be opened and inspected with the KFBrowser GUI component.
+KF stands for Keyed File: KF files are keyword oriented, which makes them easy to process by simple procedures.
+KF files are Direct Access binary files.</p>
+<span class="target" id="main-output-file"></span><ul class="simple" id="index-18">
+<li>The main <code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code> written by the AMS driver. It contains high level
+information about the trajectory that the AMS driver took over the potential
+energy surface. For a geometry optimization it would for example contains the
+history of how the systems geometry changed during the optimization as well as
+the final optimized geometry. For a molecular dynamics simulation it would
+contain the full trajectory. The format in which this information is written
+is independent from which engine was used for a calculation.</li>
+</ul>
+<span class="target" id="engine-output-files"></span><ul id="index-19">
+<li><p class="first">The engine specific main binary output file written by the engine (and partly by the AMS driver).
+This file is kept for only one special point, e.g. the final geometry in a geometry optimization.
+The ADF engine writes <code class="docutils literal notranslate"><span class="pre">adf.rkf</span></code> (instead of <code class="docutils literal notranslate"><span class="pre">TAPE21</span></code> in older versions). The BAND engine writes
+band.rkf (instead of <code class="docutils literal notranslate"><span class="pre">RUNKF</span></code> in older versions). The DFTB engine writes <code class="docutils literal notranslate"><span class="pre">dftb.rkf</span></code>.
+If a property, like vibrational modes, is tied to this special point on the potential energy surface,
+it is stored in this file.
+Also all engine specific properties are written to the main binary output file, like orbitals
+in case of a quantum mechanical engine.</p>
+<table border="1" class="colwidths-given docutils" id="id3">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Engine specific main binary output file</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Engine</strong></td>
+<td><strong>main file</strong></td>
+</tr>
+<tr class="row-even"><td>ADF</td>
+<td>adf.rkf</td>
+</tr>
+<tr class="row-odd"><td>BAND</td>
+<td>band.rkf</td>
+</tr>
+<tr class="row-even"><td>DFTB</td>
+<td>dftb.rkf</td>
+</tr>
+<tr class="row-odd"><td>ForceField</td>
+<td>forcefield.rkf</td>
+</tr>
+<tr class="row-even"><td>MOPAC</td>
+<td>mopac.rkf</td>
+</tr>
+<tr class="row-odd"><td>ReaxFF</td>
+<td>reaxff.rkf</td>
+</tr>
+<tr class="row-even"><td>External</td>
+<td>external.rkf</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">Additionally there might be an engine specific binary output file for every point on the
+potential energy surface that was visited during the calculation.
+Like the engine specific main binary output file they contain
+information tied to a specific point on the potential energy surface.
+These engine output files all have the extension <code class="docutils literal notranslate"><span class="pre">.rkf</span></code>, but their
+filename is usually somehow descriptive of the point on the PES that they
+correspond to. Note that one does not always get an engine output file for
+every PES point that was visited during the calculation. For most applications
+this would just be too much data.</p>
+</li>
+<li><p class="first">Other engine specific binary (and ASCII) output files written by the engine.</p>
+</li>
+</ul>
+<p>Having multiple different binary output files could be confusing for people that
+are used to the single result file that was written by the standalone programs
+in ADF&lt;=2017. After all, it brings up the question in which file the desired
+property is stored. The general rule is: If the property is tied to a particular
+point on the potential energy surface, it is stored in the engine output file
+belonging to that particular point.
+This includes the Hessian, stress tensor, elastic tensor, normal modes of vibration, phonons,
+Raman intensities and other vibrational properties.
+If the information depends on the entire trajectory over the PES, it is found in
+the main <code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code> written by the AMS driver.</p>
+</div>
+<div class="section" id="standard-output">
+<h3>Standard output<a class="headerlink" href="#standard-output" title="Permalink to this headline">¶</a></h3>
+<p>The standard ouput file contains in a human readable form
+part of the job characteristics and computational results produced by AMS and the Engine.</p>
+</div>
+<div class="section" id="optimized-geometry-in-xyz-format">
+<h3>Optimized geometry in xyz format<a class="headerlink" href="#optimized-geometry-in-xyz-format" title="Permalink to this headline">¶</a></h3>
+<p>In case of <a class="reference internal" href="Tasks/Geometry_Optimization.html#geometryoptimization"><span class="std std-ref">Geometry Optimizations</span></a>, the optimized geometry is saved as an <a class="reference internal" href="Appendices.html#extendedxyz"><span class="std std-ref">extended XYZ file</span></a> in the results directory with the name <code class="docutils literal notranslate"><span class="pre">output.xyz</span></code>.</p>
+<p>Note that the optimized geometry is also stored in the binary file <code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code> and is printed to the standard output.</p>
+<span class="target" id="environmentvariables"></span></div>
+<div class="section" id="ams-environment-variables">
+<span id="index-20"></span><h3>AMS environment variables<a class="headerlink" href="#ams-environment-variables" title="Permalink to this headline">¶</a></h3>
+<p>The behavior of AMS related to the output can be modified through a number of environment variables.</p>
+<span class="target" id="index-21"></span><dl class="docutils" id="index-22">
+<dt><code class="docutils literal notranslate"><span class="pre">AMS_JOBNAME</span></code></dt>
+<dd>Sets the name of a job. This name is used to determine the name of the
+results folder AMS creates, which is <code class="docutils literal notranslate"><span class="pre">$AMS_JOBNAME.results</span></code> or
+<code class="docutils literal notranslate"><span class="pre">ams.results</span></code> if this environment variable is not set.</dd>
+</dl>
+<dl class="docutils" id="index-23">
+<dt><code class="docutils literal notranslate"><span class="pre">AMS_RESULTSDIR</span></code></dt>
+<dd>If this environment variable is set, instead of creating a new results
+folder, AMS will use the set directory as the results folder. Not that the
+directory set here will <em>not</em> be created by AMS and therefore has to exist
+before starting AMS. Note that this environment variable can be used to
+prevent AMS from creating result folders, by setting <code class="docutils literal notranslate"><span class="pre">AMS_RESULTSDIR=.</span></code>.
+This reproduces the pre-AMS behavior of putting all result files into the
+directory from which a job is started.</dd>
+</dl>
+<dl class="docutils" id="index-24">
+<dt><code class="docutils literal notranslate"><span class="pre">AMS_SWITCH_LOGFILE_AND_STDOUT</span></code></dt>
+<dd>If this environment variable is set, AMS will redirect what is normally
+printed on standard output to a file (<code class="docutils literal notranslate"><span class="pre">ams.out</span></code>) in the results directory.
+Instead the contents of the log file (<code class="docutils literal notranslate"><span class="pre">ams.log</span></code>) will be printed to
+standard output while a job is running, allowing users to easily monitor the
+jobs progress. Note that the log file will still be created normally as if
+this environment variable was not set. This environment variable is just a
+convenience feature for users that would always redirect their output into a
+file and then use <code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-f</span></code> on the log file to monitor the running
+calculation.</dd>
+</dl>
+<p>This is an example run-script using the <code class="docutils literal notranslate"><span class="pre">AMS_SWITCH_LOGFILE_AND_STDOUT</span></code> and <code class="docutils literal notranslate"><span class="pre">AMS_JOBNAME</span></code> environment variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># By setting AMS_SWITCH_LOGFILE_AND_STDOUT, the (more compact)</span>
+<span class="c1"># logfile will be printed to standard output while the full</span>
+<span class="c1"># text output of the calculation is redirected to the file</span>
+<span class="c1"># ams.out in the ams results folder</span>
+
+<span class="nb">export</span> <span class="nv">AMS_SWITCH_LOGFILE_AND_STDOUT</span><span class="o">=</span><span class="nb">true</span>
+
+<span class="c1"># By default ams creates a folder &#39;ams.results&#39; and puts the</span>
+<span class="c1"># results of the calculation there. If we set AMS_JOBNAME, the</span>
+<span class="c1"># results folder will instead be called $AMS_JOBNAME.results</span>
+<span class="c1"># (in this case, &#39;H2_optimization.results&#39;)</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>H2_optimization <span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt;eor</span>
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         H 0 0 0</span>
+<span class="s">         H 0 0 1</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+<span class="s">   Task GeometryOptimization</span>
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model GFN1-xTB</span>
+<span class="s">   EndEngine</span>
+<span class="s">eor</span>
+</pre></div>
+</div>
+<span class="target" id="index-25"></span><span class="target" id="index-26"></span><span class="target" id="index-27"></span></div>
+</div>
+<div class="section" id="driver-level-parallelism">
+<span id="driverlevelparallelism"></span><span id="index-28"></span><h2>Driver level parallelism<a class="headerlink" href="#driver-level-parallelism" title="Permalink to this headline">¶</a></h2>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See also the <a class="reference external" href="../Tutorials/OptimizingPerformance/ParallelElasticTensor.html">GUI tutorial</a> on the parallel scalability of the calculation of elastic tensors.</p>
+</div>
+<p>AMS is a parallel program using MPI for efficient execution on distributed
+memory machines, aka compute clusters. For most jobs, the AMS driver part of a
+calculation is computationally not particularly costly and most of the execution
+time is spent inside of the <a class="reference internal" href="Engines.html#engines"><span class="std std-ref">compute engines</span></a>. Therefore the main
+parallelization of AMS is inside of the engines, making sure that a good
+performance is obtained for <a class="reference internal" href="Tasks/TOC.html#tasks"><span class="std std-ref">tasks</span></a> such as <a class="reference internal" href="Tasks/Molecular_Dynamics.html#moleculardynamics"><span class="std std-ref">molecular
+dynamics</span></a> or <a class="reference internal" href="Tasks/Geometry_Optimization.html#geometryoptimization"><span class="std std-ref">geometry
+optimizations</span></a>, which consist of a series of
+interdependent engine invocations: We need to have completed step <span class="math notranslate nohighlight">\(n\)</span>
+before we can continue with step <span class="math notranslate nohighlight">\(n+1\)</span>.</p>
+<p>However, not all workloads are of this sequentially dependent type. Some jobs
+have a lot of independent work, that can be done in parallel. This kind of
+trivial parallelizability can be exploited at the AMS driver level: Instead of
+having all cores collaborate on a single PES point and then doing all needed
+PES points sequentially, we can just distribute the available PES points over
+the all the available cores. Normally this leads to a better parallel scaling
+than the default parallelization inside of the engines: Parallelizing the
+engines is relatively complicated and often requires a lot of communication
+between cores.  Parallelizing on the driver level on the other hand is very
+easy, and often the only communication required is at the very end of the
+calculation, when results are collected.</p>
+<p>Note that it is perfectly possible to combine both the in-engine
+parallelization and the driver level parallelism: At the driver level we could
+split our e.g. in total 32 cores into 4 groups of 8 cores, and then have each
+group of 8 use the in-engine parallelization to collaborate on a specific
+calculation. This is especially useful if the total number of cores is larger
+than then number of independent calculations we have to do. It might also be
+that we have a very large number of calculations to do, but not enough memory
+to let every core work alone on its own calculation, as would be ideal from a
+parallel scaling point of view.</p>
+<p>Because of the two levels of parallelism – both at the driver and the engine
+level – we call this setup <strong>double parallelization</strong>.</p>
+<p><strong>Starting with the AMS2019.3 release, driver level parallelism is used and
+configured automatically. That means that the AMS driver will automatically
+parallelize at the driver level when it is possible and considered
+advantageous. As such it should normally not be necessary for users to
+explicitly configure the driver level parallelism.</strong></p>
+<p>Driver level parallelism can be used for the calculation of the <a class="reference internal" href="Gradients_Stress_Elasticity.html#pespointproperties"><span class="std std-ref">PES point
+properties</span></a> which are derivatives, if these need to be done
+numerically:</p>
+<ul class="simple">
+<li>Numerical calculation of <a class="reference internal" href="Gradients_Stress_Elasticity.html#nucleargradients"><span class="std std-ref">forces / nuclear gradients</span></a>.
+With a double sided derivative this requires <span class="math notranslate nohighlight">\(6 \times n_\text{atoms}\)</span>
+independent calculations on geometries with one atom displaced along a
+cartesian coordinate.</li>
+<li>Numerical calculation of the <a class="reference internal" href="Gradients_Stress_Elasticity.html#stresstensor"><span class="std std-ref">stress tensor</span></a> for periodic
+systems. This requires up to 12 calculations for a double sided derivative
+along the 6 strain directions, but might require less in case some of the
+strains are symmetry equivalent.</li>
+<li>Numerical calculation of the <a class="reference internal" href="Gradients_Stress_Elasticity.html#hessian"><span class="std std-ref">Hessian</span></a> and normal modes of
+vibration. This is currently only supported for engines that calculate nuclear
+gradients analytically and done by numerically differentiating this first
+(analytic) derivative. As such it requires <span class="math notranslate nohighlight">\(6 \times n_\text{atoms}\)</span>
+independent calculations on geometries with one atom displaced along a
+cartesian coordinate.</li>
+<li>Numerical calculation of the <a class="reference internal" href="Gradients_Stress_Elasticity.html#elastictensor"><span class="std std-ref">elastic tensor</span></a>. This
+requires 84 independent geometry optimizations on systems with differently
+strained lattices, with each optimization having a variable number of steps.</li>
+<li>Numerical calculation of <a class="reference internal" href="Vibrational_Spectroscopy.html#phonons"><span class="std std-ref">phonons</span></a>. This requires at most
+<span class="math notranslate nohighlight">\(6 \times n_\text{atoms}\)</span> displacements, but might require less in case
+some of the displacements are symmetry equivalent. Note that the displacements
+are done in a super cell system, which for many engines will increase the
+memory requirements, but also improve the in-engine parallel scalability.</li>
+<li>The forward and backward displacements along normal modes for the
+<a class="reference internal" href="Vibrational_Spectroscopy.html#modescanning"><span class="std std-ref">Mode Scanning</span></a>, <a class="reference internal" href="Vibrational_Spectroscopy.html#moderefinement"><span class="std std-ref">Mode Refinement</span></a>,
+and <a class="reference internal" href="Vibrational_Spectroscopy.html#modetracking"><span class="std std-ref">Mode Tracking</span></a>.</li>
+</ul>
+<p>There are also tasks using driver level parallelism, e.g. <a class="reference internal" href="Tasks/NEB.html#neb"><span class="std std-ref">Nudged Elastic
+Band</span></a>, for which the calculations of all the images is trivially parallel.</p>
+<p>Details of the driver level parallelism, i.e. how much to parallelize at the
+driver level, are generally configured for the above mentioned cases on an
+individual basis, because one might want a different grouping strategy for each
+case. For each case there is a separate <code class="docutils literal notranslate"><span class="pre">Parallel</span></code> block somewhere in the
+input (e.g. <code class="docutils literal notranslate"><span class="pre">ElasticTensor%Parallel</span></code> for the calculation of the elastic
+tensor), which has the following keywords:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Parallel</span>
+   <span class="n">nGroups</span> <span class="n">integer</span>
+   <span class="n">nCoresPerGroup</span> <span class="n">integer</span>
+   <span class="n">nNodesPerGroup</span> <span class="n">integer</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>Note that only one of them should be specified in the input, depending of course
+on what is the desired strategy for parallelization.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">nGroups</span> <span class="pre">n</span></code></dt>
+<dd>Splits all cores evenly into <code class="docutils literal notranslate"><span class="pre">n</span></code> groups. We recommend choosing <code class="docutils literal notranslate"><span class="pre">n</span></code> such
+that it divides the total number of cores without a remainder.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nCoresPerGroup</span> <span class="pre">n</span></code></dt>
+<dd>Each group consists of <code class="docutils literal notranslate"><span class="pre">n</span></code> cores. As such <code class="docutils literal notranslate"><span class="pre">nCoresPerGroup</span> <span class="pre">1</span></code> results in
+the maximum possible parallelism at the driver level. We recommend choosing
+<code class="docutils literal notranslate"><span class="pre">n</span></code> such that it divides the total number of cores without a remainder.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nNodesPerGroup</span> <span class="pre">n</span></code></dt>
+<dd>Makes groups from all cores within <code class="docutils literal notranslate"><span class="pre">n</span></code> nodes, e.g. <code class="docutils literal notranslate"><span class="pre">nNodesPerGroup</span> <span class="pre">1</span></code>
+would make every cluster node into a separate group. Note that this option
+should <em>only be used on homogeneous compute clusters</em>, where all used nodes
+have the same number of cores. Otherwise cores from different nodes will be
+grouped together in very surprising and unintended ways, probably resulting
+in suboptimal performance.</dd>
+</dl>
+<p>The optimal grouping strategy and number of groups depends on the total number
+of cores used in the calculation, the amount of independent tasks to be done in
+parallel, as well as the parallel scalability of the engine itself. In practice
+it can be a bit tricky, which is why the grouping strategy is determined
+automatically since AMS2019.3.</p>
+<p>However, sometimes it can be useful to configure the groups manually. Suppose,
+as an example, that we want to calculate the elastic properties of a bulk
+material on a 32 core machine. The calculation of the <a class="reference internal" href="Gradients_Stress_Elasticity.html#elastictensor"><span class="std std-ref">elastic
+tensor</span></a> should be done on a relaxed geometry, including relaxed
+lattice degrees of freedom. We therefore first perform a geometry optimization,
+before calculating the elastic tensor. In AMS this can easily be done with the
+following input:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">GeometryOptimization</span>
+
+<span class="n">GeometryOptimization</span>
+   <span class="n">OptimizeLattice</span> <span class="kc">True</span>
+<span class="n">End</span>
+
+<span class="n">Properties</span>
+   <span class="n">ElasticTensor</span> <span class="kc">True</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>But what is the most optimal parallel setup for this calculation? First we
+recognize that performing a lattice optimization requires the calculation of the
+<a class="reference internal" href="Gradients_Stress_Elasticity.html#stresstensor"><span class="std std-ref">stress tensor</span></a> at every step of the optimization. Assuming
+that our bulk system does not have any symmetries AMS can exploit, the numerical
+calculation of the stress tensor (assuming the engine can not calculate it
+analytically) would require 12 independent strained calculations for every step
+in the geometry optimization. Once the geometry optimization is converged, we
+have to perform 84 independent geometry optimizations to determine the elements
+of the elastic tensor. In summary, the graph of dependencies between all these
+tasks looks like this:</p>
+<a class="reference internal image-reference" href="_images/double_parallelism.png"><img alt="_images/double_parallelism.png" class="align-center" src="_images/double_parallelism.png" style="width: 80%;" /></a>
+<p>How do we best parallelize this? For the main steps, e.g. <code class="docutils literal notranslate"><span class="pre">GOStep1</span></code> there is
+no question: We have nothing to do in parallel and all 32 cores work on it
+together to finish it as quickly as possible. For the numerical calculation of
+the stress tensor we have 12 tasks that can be done in parallel by the 32 cores
+in our machine. Now 12 obviously does not divide 32 without a remainder, so
+there is no way to split into equally sized groups and do all 12 strains in
+parallel. The greatest common divisor of 12 and 32 is 4, so it’s probably best
+to split into 4 groups of 8 cores each. This is done with <code class="docutils literal notranslate"><span class="pre">nGroups</span> <span class="pre">4</span></code>. Each
+group would then do 3 of the 12 strained calculations sequentially, using the
+in-engine parallelization to speed up the individual calculations. Once the
+stress tensor is computed in this way all groups merge and all 32 cores work
+together on <code class="docutils literal notranslate"><span class="pre">GOStep2</span></code>. This splitting and merging now continues until the
+geometry optimization is converged. For the elastic tensor we now have 84 tasks
+to perform in parallel, where each task is a completely separate geometry
+optimization (without optimizing the lattice) of a strained system. 84 tasks is
+more than double the number of cores we have. In this case it is probably not
+too bad to just run as parallel as possible at the driver level and make 32
+“groups” of just one core to throw the 84 tasks at. This is easily done by
+setting <code class="docutils literal notranslate"><span class="pre">nCoresPerGroup</span> <span class="pre">1</span></code> in the <code class="docutils literal notranslate"><span class="pre">ElasticTensor</span></code> block. Putting everything
+together we should add the following to our input file in order to optimally
+utilize our machine for this example calculation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NumericalDifferentiation</span>
+   <span class="n">Parallel</span>
+      <span class="n">nGroups</span> <span class="mi">4</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+
+<span class="n">ElasticTensor</span>
+   <span class="n">Parallel</span>
+      <span class="n">nCoresPerGroup</span> <span class="mi">1</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<span class="target" id="index-29"></span><span class="target" id="index-30"></span></div>
+<div class="section" id="python-interface">
+<span id="amsscripting"></span><span id="index-31"></span><h2>Python interface<a class="headerlink" href="#python-interface" title="Permalink to this headline">¶</a></h2>
+<p>There is a complete Python interface to AMS, which allows users to set up and
+run arbitrary AMS jobs, and to conveniently analyze the calculation results
+directly from Python. In this way AMS jobs can be automatized and complex
+multi-stage workflows implemented.</p>
+<p>The scripting framework is called <a class="reference external" href="../plams/index.html">PLAMS</a> as in “Python
+Library for Automating Molecular Simulation”, which conveniently can also be
+read as “Python Layer for AMS”. It is documented in a separate manual:</p>
+<ul class="simple">
+<li><a class="reference external" href="../plams/intro.html">PLAMS introduction</a></li>
+<li><a class="reference external" href="../plams/interfaces/amssuite.html">Running AMS through PLAMS</a></li>
+</ul>
+<span class="target" id="index-32"></span></div>
+<div class="section" id="pipe-interface">
+<span id="amspipe"></span><span id="index-33"></span><h2>Pipe interface<a class="headerlink" href="#pipe-interface" title="Permalink to this headline">¶</a></h2>
+<p>AMS can interact with other programs using a <a class="reference internal" href="Pipe_protocol.html#pipeprotocol"><span class="std std-ref">custom communication protocol</span></a>.
+This enables two independent processes to communicate over a pair of data pipes (FIFOs), exchanging data in a highly efficient manner.
+One of the processes is the “pipe master”, driving the calculation and sending the atoms, coordinates etc. to the other process to perform calculations.
+The other process is the “pipe worker”, receiving requests from the master, performing the requested calculations and returning the results such as energies and gradients.</p>
+<p>For technical details on the AMSPipe protocol see:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Pipe_protocol.html">AMSPipe protocol specification</a></li>
+</ul>
+</div>
+<div class="section" id="ams-as-a-pipe-master">
+<h3>AMS as a pipe master<a class="headerlink" href="#ams-as-a-pipe-master" title="Permalink to this headline">¶</a></h3>
+<p>The AMS driver can play the role of a pipe master, allowing users to combine the features of the AMS driver with potentials implemented in external programs.
+Unlike a <a class="reference internal" href="Engines.html#externalengines"><span class="std std-ref">traditional external engine</span></a>, the overhead introduced by the pipe interface is entirely negligible, because the external program is only started once at the beginning of the run and all communication is handled by an efficient binary protocol instead of text files.
+This mode is enabled by using <code class="docutils literal notranslate"><span class="pre">Engine</span> <span class="pre">Pipe</span></code> in the input for the master.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Engine Pipe
+   WorkerCommand /path/to/pipe/worker
+EndEngine
+</pre></div>
+</div>
+<dl class="docutils" id="pipe-key-workercommand">
+<dt><code class="docutils literal notranslate"><span class="pre">WorkerCommand</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The command to execute to run the external worker. The command is executed in a subdirectory of the results directory.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>All calculations requested by the driver will then be forwarded over the pipe to the worker for processing.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">AMS currently must be run in serial (<code class="docutils literal notranslate"><span class="pre">NSCM=1</span></code>) when serving as a pipe master.</p>
+</div>
+<p>A Python module implementing the worker side of the AMSPipe protocol is available in <code class="docutils literal notranslate"><span class="pre">scm.amspipe</span></code>.
+To facilitate interfacing with various existing computational engines, this module provides the <code class="docutils literal notranslate"><span class="pre">ASEPipeWorker</span></code> class.
+This class can wrap any ASE calculator object and make it serve as a pipe worker.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">calculator</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">calculators</span><span class="o">.</span><span class="n">lj</span><span class="o">.</span><span class="n">LennardJones</span><span class="p">()</span>
+<span class="c1"># calculator.parameters = …</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">scm</span><span class="o">.</span><span class="n">amspipe</span><span class="o">.</span><span class="n">ASEPipeWorker</span><span class="p">(</span><span class="n">calculator</span><span class="o">=</span><span class="n">calculator</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="Examples/Pipe_ASEWorker.html#example-pipe-aseworker"><span class="std std-ref">Example: ASE calculator as a pipe worker</span></a></p>
+</div>
+</div>
+<div class="section" id="ams-as-a-pipe-worker">
+<h3>AMS as a pipe worker<a class="headerlink" href="#ams-as-a-pipe-worker" title="Permalink to this headline">¶</a></h3>
+<p>AMS can also serve as a pipe worker, allowing external drivers to take advantage of its <a class="reference internal" href="Engines.html#engines"><span class="std std-ref">engines</span></a>.
+This mode is enabled by using <code class="docutils literal notranslate"><span class="pre">Task</span> <span class="pre">Pipe</span></code>.
+No <a class="reference internal" href="System.html#systemdefinition"><span class="std std-ref">Geometry, System definition</span></a> is required on the input because the system will be supplied by the pipe master.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">For most users it will easiest to use this functionality through the new <a class="reference external" href="../plams/interfaces/amsworker.html">AMSWorker class</a> in the <a class="reference external" href="../plams/index.html">PLAMS</a> library. This class hides all the details of the underlying AMSPipe protocol and provides users an easy way to get very fast access to energies, gradients and other properties from any of the engines in the AMS driver. See the <a class="reference external" href="../plams/interfaces/amsworker.html">respective page</a> in the PLAMS manual for details.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="Examples/Pipe_AMSonAMS.html#example-pipe-amsonams"><span class="std std-ref">Example: AMS as a pipe worker</span></a></p>
+</div>
+<p>Additionally AMS can also be driven through the <a class="reference external" href="../Scripting/FlexMD/FlexMD.html">FlexMD</a> library using <code class="docutils literal notranslate"><span class="pre">AMSPipeForceJob</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">forcejob</span> <span class="o">=</span> <span class="n">AMSPipeForceJob</span><span class="p">(</span><span class="n">mdmol</span><span class="p">)</span>
+<span class="n">forcejob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="s1">&#39;ReaxFF&#39;</span>
+<span class="n">forcejob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">engineSettings</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;ForceField&#39;</span><span class="p">:</span> <span class="s1">&#39;Glycine.ff&#39;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Pipe_protocol.html" class="btn btn-neutral float-right" title="AMSPipe protocol specification" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="General.html" class="btn btn-neutral" title="General" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

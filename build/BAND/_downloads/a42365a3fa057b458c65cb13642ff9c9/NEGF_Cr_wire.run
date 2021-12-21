@@ -1,0 +1,364 @@
+#! /bin/sh
+
+# This example shows how to use the NEGF functionality.
+# Note: Setting up a NEGF calculation is quite hard without the GUI.
+
+# It starts of with Method 1: the non-self consistent approach. Here, BAND
+# merely serves to provide matrix elements, being unaware of the electrodes.
+
+# Then follows Method 2: here the NEGF density is really used to calculate the
+# matrix elements.
+
+# Method 3 is a variation on Method 2, and includes an extra alignment run.
+
+# ==============================================================================
+#  Method #1: non-self consistent NEGF (uses the conductance program, like DFTB)
+# ==============================================================================
+
+
+# =========================   Method #1. Run #1   ==============================
+
+AMS_JOBNAME=lead_1 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  ATOMS
+     Cr.1 0.0 0.0 0.0
+     Cr.2 2.5 0.0 0.0
+  END
+
+  Lattice
+     5.0 0.0 0.0
+  End
+End
+
+Engine Band 
+  Title method_1_run_1
+
+  KSpace
+      Quality Good
+  End
+
+  NumericalQuality Basic
+
+  Basis
+     Type DZ
+     Core Large
+  End
+
+  Unrestricted
+
+  StoreHamiltonian2
+EndEngine
+eor
+
+# ========================   Method #1. Run #2   ===============================
+
+AMS_JOBNAME=scattering_1 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  ATOMS
+      Cr.1L -10.0 0.0 0.0
+      Cr.2L  -7.5 0.0 0.0
+      Cr.C   -5.0 0.0 0.0
+      Cr.C   -2.5 0.0 0.0
+      Cr.C    0.0 0.0 0.0
+      Cr.C    2.5 0.0 0.0
+      Cr.C    5.0 0.0 0.0
+      Cr.1R   7.5 0.0 0.0
+      Cr.2R  10.0 0.0 0.0
+  END
+
+  Lattice
+     22.5 0.0 0.0
+  End
+End
+
+Engine Band 
+  Title method_1_run_2
+
+  NumericalQuality Basic
+
+  Basis
+     Type DZ
+     Core Large
+  End
+
+  Unrestricted
+
+  StoreHamiltonian2
+  StoreHamAsMol
+EndEngine
+
+eor
+
+# ==========================   Method #1. Run #3   =============================
+
+$AMSBIN/conductance <<EOF
+EnergyGrid min=-5 max=5 num=200
+Files
+   Leads      lead_1.results/band.rkf
+   Scattering scattering_1.results/band.rkf
+End
+
+EOF
+
+# Compy the content of the "reseults" section from ConductanceResults.kf to band.rkf and rename the section to NEGF
+$AMSBIN/cpkf "ConductanceResults.kf" "scattering_1.results/band.rkf" "results --rename NEGF"
+
+
+echo "Extract transmisstion from rkf file (Method 1)"
+$AMSBIN/amsreport scattering_1.results/band.rkf -r "NEGF%transmission#12.5f##1"
+
+# ==============================================================================
+#               Method #2: self consistent NEGF without alignment
+# ==============================================================================
+
+
+# =========================   Method #2. Run #1   ==============================
+
+AMS_JOBNAME=lead_2 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  ATOMS
+      Cr.1 0.0 0.0 0.0
+      Cr.2 2.5 0.0 0.0
+  END
+
+  Lattice
+   5.0 0.0 0.0
+  End
+End
+
+Engine Band 
+  Title method_2_run_1
+
+  KSpace
+      Quality Good
+  End
+
+  NumericalQuality Basic
+
+  Basis
+    Type DZ
+    Core Large
+  End
+
+  Unrestricted
+  StoreHamiltonian2
+EndEngine 
+
+eor
+
+# =============================   Method #2. Run #2   ==========================
+
+
+$AMSBIN/sgf   <<eor
+TITLE Test for NEGF inputs
+SAVE SIGMA
+SURFACEGF
+   RKFFileName lead_2.results/band.rkf
+   SCMCode
+   KT 0.001
+   ContourQuality normal
+END
+eor
+
+mv SigmaSCM Sigma.kf
+
+# =============================   Method #2. Run #3   ==========================
+
+AMS_JOBNAME=scattering_2 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  ATOMS
+      Cr.1L -10.0 0.0 0.0
+      Cr.2L -7.5 0.0 0.0
+      Cr.C -5.0 0.0 0.0
+      Cr.C -2.5 0.0 0.0
+      Cr.C 0.0 0.0 0.0
+      Cr.C 2.5 0.0 0.0
+      Cr.C 5.0 0.0 0.0
+      Cr.1R 7.5 0.0 0.0
+      Cr.2R 10.0 0.0 0.0
+  END
+End
+
+Engine Band 
+  Title method_2_run_3
+
+  NumericalQuality Basic
+
+  Basis
+    Type DZ
+    Core Large
+  End
+
+  Unrestricted
+  NEGF
+    LeadFile        lead_2.results/band.rkf
+    SGFFile         Sigma.kf
+    ApplyShift2     False
+    ContourQuality  normal
+    EMin           -5
+    EMax            5
+    NE 200
+  End
+EndEngine
+eor
+
+echo "Extract transmisstion from rkf file (Method 2)"
+$AMSBIN/amsreport scattering_2.results/band.rkf -r "NEGF%transmission#12.5f##1"
+
+# ==============================================================================
+#                Method #3: self consistent NEGF wit alignment run
+# ==============================================================================
+
+# =======================   Method #3. Run #1   ================================
+
+
+AMS_JOBNAME=lead_3 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  ATOMS
+      Cr.1 0.0 0.0 0.0
+      Cr.2 2.5 0.0 0.0
+  END
+  Lattice
+   5.0 0.0 0.0
+  End
+End
+
+Engine Band 
+  Title method_3_run_1
+
+  KSpace
+      Quality Good
+  End
+
+  NumericalQuality Basic
+
+  Basis
+    Type DZ
+    Core Large
+  End
+
+  Unrestricted
+  StoreHamiltonian2
+EndEngine
+eor
+
+# ============================   Method #3. Run #2   ===========================
+
+
+$AMSBIN/sgf   <<eor
+TITLE Test for NEGF inputs
+SAVE SIGMA
+SURFACEGF
+   RKFFileName lead_3.results/band.rkf
+   SCMCode
+   KT 0.001
+   ContourQuality normal
+END
+eor
+
+mv SigmaSCM Sigma.kf
+
+# ============================   Method #3. Run #3   ===========================
+
+AMS_JOBNAME=align $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  ATOMS
+      Cr.1L 0.0 0.0 0.0
+      Cr.2L 2.5 0.0 0.0
+      Cr.C 5.0 0.0 0.0
+      Cr.C 7.5 0.0 0.0
+      Cr.C 10.0 0.0 0.0
+      Cr.C 12.5 0.0 0.0
+      Cr.1R 15.0 0.0 0.0
+      Cr.2R 17.5 0.0 0.0
+  END
+End
+
+Engine Band 
+  Title method_3_run_3
+
+  NumericalQuality Basic
+
+  Basis
+    Type DZ
+    Core Large
+  End
+
+  Unrestricted
+  NEGF
+    DoAlignment True
+    LeadFile lead_3.results/band.rkf
+    SGFFile Sigma.kf
+    ContourQuality normal
+    EMin -5.0
+    EMax 5.0
+    NE 200
+    AlignChargeTol 0.0001
+  End
+EndEngine 
+eor
+
+# =============================   Method #3. Run #4  ===========================
+
+AMS_JOBNAME=scattering_3 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  ATOMS
+      Cr.1L -10.0 0.0 0.0
+      Cr.2L -7.5 0.0 0.0
+      Cr.C -5.0 0.0 0.0
+      Cr.C -2.5 0.0 0.0
+      Cr.C 0.0 0.0 0.0
+      Cr.C 2.5 0.0 0.0
+      Cr.C 5.0 0.0 0.0
+      Cr.1R 7.5 0.0 0.0
+      Cr.2R 10.0 0.0 0.0
+  END
+End
+
+engine Band 
+  Title method_3_run_4
+
+  NumericalQuality Basic
+
+  Basis
+    Type DZ
+    Core Large
+  End
+
+  Unrestricted
+
+  NEGF
+     LeadFile lead_3.results/band.rkf
+     SGFFile Sigma.kf
+     AlignmentFile align.results/band.rkf
+     ContourQuality normal
+     EMin -5.0
+     EMax 5.0
+     NE 200
+  End
+EndEngine
+eor
+
+echo "Extract transmisstion from rkf file (Method 2)"
+$AMSBIN/amsreport scattering_3.results/band.rkf -r "NEGF%transmission#12.5f##1"

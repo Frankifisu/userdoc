@@ -1,0 +1,730 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Example: Restarting a geometry optimization &mdash; DFTB 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="DFTB 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="../Examples.html"/>
+        <link rel="next" title="Parameterizations" href="../Parameter_files.html"/>
+        <link rel="prev" title="Example: Band structure with user-defined BZ path" href="Li_BZPlot.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search DFTB" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-DFTB" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#what-s-new-in-dftb">What’s new in DFTB?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2022-1">New in DFTB2022.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2021-1">New in DFTB2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2020">New in DFTB2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2019-3">New in DFTB2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2019-1">New in DFTB2019.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2018">New in DFTB2018</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../General.html#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General.html#ams-a-new-driver-program">AMS: a new driver program</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html">AMS driver’s tasks and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#geometry-system-definition">Geometry, System definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#tasks-exploring-the-pes">Tasks: exploring the PES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#properties-in-the-ams-driver">Properties in the AMS driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html">Model Hamiltonians</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#slater-koster-based-dftb">Slater-Koster based DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#model-hamiltonian">Model Hamiltonian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#dispersion-correction">Dispersion correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#solvation-gbsa">Solvation (GBSA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#scc-details-and-spin-polarization">SCC details and spin-polarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#k-space-integration">k-space integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#xtb-specific-keywords">xTB specific keywords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#technical-options">Technical options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Spectroscopy_and_Properties.html">Spectroscopy and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#electronic-structure-of-periodic-systems">Electronic structure of periodic systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#excited-states-with-time-dependent-dftb">Excited states with time-dependent DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#frequencies-phonons-and-elastic-tensor">Frequencies, phonons and elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#other-properties">Other properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../NEGF.html">Electronic transport (NEGF)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#transport-with-negf-in-a-nutshell">Transport with NEGF in a nutshell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#simulations-work-flow">Simulations work flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#conductance-input-options">Conductance input options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#miscellaneous-remarks-on-dftb-negf">Miscellaneous remarks on DFTB-NEGF</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FREQ_aspirin_SCC.html">Example: Normal modes (frequencies) for aspirin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MD_aspirin.html">Example: Molecular dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and transition state search for H2 on graphene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FREQ_HNDT_VCD.html">Example: Vibrational circular dichroism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conductance.html">Example: Electronic transport with NEGF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Diamond_under_pressure.html">Example: Diamond under pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ElasticTensor.html">Example: Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FREQ_LR-TDDFTB_benzene.html">Example: Excited states frequencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GO_LR-TDDFTB_benzene.html">Example: Geometry optimization for an excited state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GO_LR-TDDFTB_CO_eigenfollow.html">Example: Geometry optimization following a specific excited state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SP_LR-TDDFTB_fullerene.html">Example: Fullerene excitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Li_BZPlot.html">Example: Band structure with user-defined BZ path</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example: Restarting a geometry optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Parameter_files.html">Parameterizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Parameter_files.html#parameter-meta-info">Parameter meta-info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Parameter_files.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Parameter_files.html#available-parameter-sets">Available parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#dftb-org">DFTB.org</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#quasinano">QUASINANO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#dresden">Dresden</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Parameter_files.html#files-in-the-resources-directory">Files in the resources directory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#slater-koster-files">Slater-Koster files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#additional-yaml-files">Additional .yaml files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#basis-function-information-in-rkf-files">Basis function information in .rkf files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Parameter_files.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#parameter-references">Parameter references</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#general-description">General Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#parameter-sets">Parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../References.html#quasinano2013-1">QUASINANO2013.1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#quasinano2015">QUASINANO2015</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#dresden">Dresden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#dftb-org">DFTB.org</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">DFTB</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../DFTB.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">DFTB</a>/</li>
+      
+          <li><a href="../Examples.html">Examples</a>/</li>
+      
+    <li class="orange-text">Example: Restarting a geometry optimization</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="example-restarting-a-geometry-optimization">
+<span id="example-go-restart"></span><h1>Example: Restarting a geometry optimization<a class="headerlink" href="#example-restarting-a-geometry-optimization" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" download="" href="../_downloads/00558cb490367c3fb3d724388c0a4dc2/GO_restart.run"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">GO_restart.run</span></code></a></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># Step 1: Run the entire optimization in one go to get the reference result.</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>reference <span class="nv">$AMSBIN</span>/ams <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">Task GeometryOptimization</span>
+
+<span class="s">System</span>
+<span class="s">    Atoms</span>
+<span class="s">        Mg      0.00000000       0.00000000       0.00000000</span>
+<span class="s">        H      -1.27917000       4.11016000       4.72389000</span>
+<span class="s">        O       2.16655000      -0.38813000      -7.10271000</span>
+<span class="s">        H      -1.42939000       1.48933000      -2.39439000</span>
+<span class="s">        H       1.09521000       1.50513000     -11.11199000</span>
+<span class="s">        C      -1.73924000      -3.56815000      -7.25491000</span>
+<span class="s">        O       1.13468000       2.30574000      -6.31297000</span>
+<span class="s">        H      -1.00635000      -3.89600000       0.57440000</span>
+<span class="s">        C       2.39949000       1.96079000      -8.76280000</span>
+<span class="s">        H      -0.50312000      -2.26723000       5.55260000</span>
+<span class="s">        H       0.50312000       2.26723000      -5.55260000</span>
+<span class="s">        C      -1.58070000       0.43033000       8.37317000</span>
+<span class="s">        C       1.68553000       0.69328000      -9.20655000</span>
+<span class="s">        H       3.10514000       2.27128000      -9.54815000</span>
+<span class="s">        C      -2.12273000       1.75783000       3.90134000</span>
+<span class="s">        C      -1.41195000      -3.08564000       8.52014000</span>
+<span class="s">        C      -0.80701000       1.55547000       8.71125000</span>
+<span class="s">        H       2.96787000       1.75892000      -7.84715000</span>
+<span class="s">        H      -3.10514000      -2.27128000       9.54815000</span>
+<span class="s">        H       1.41484000      -2.74396000      -7.00335000</span>
+<span class="s">        H       1.12426000      -3.20203000       2.78552000</span>
+<span class="s">        C      -0.17468000       1.56294000       9.95926000</span>
+<span class="s">        C      -0.72719000      -2.63659000      -6.99325000</span>
+<span class="s">        C      -1.09765000      -3.99973000       9.52904000</span>
+<span class="s">        H      -0.25814000      -8.23193000      -3.30969000</span>
+<span class="s">        C       1.14520000      -2.61556000      -3.22986000</span>
+<span class="s">        O       0.72583000      -0.95806000      -1.56717000</span>
+<span class="s">        H      -2.36816000      -5.34341000      -4.50996000</span>
+<span class="s">        H      -2.96787000      -1.75892000       7.84715000</span>
+<span class="s">        H      -2.25336000       0.75053000       3.46787000</span>
+<span class="s">        N       2.80755000      -2.14965000      -4.91471000</span>
+<span class="s">        C      -0.30154000       0.48014000      10.82965000</span>
+<span class="s">        C       0.54101000      -2.17341000      -2.01004000</span>
+<span class="s">        C       2.39908000       0.51189000       4.29012000</span>
+<span class="s">        H      -1.63623000      -3.94265000      10.47839000</span>
+<span class="s">        H       0.19490000       0.50042000      11.80153000</span>
+<span class="s">        N       0.47889000       1.91215000      -0.81627000</span>
+<span class="s">        C      -0.66060000      -2.05093000       2.26021000</span>
+<span class="s">        H      -0.20633000      -7.24015000      -5.59602000</span>
+<span class="s">        H       1.49008000       0.40226000       3.68367000</span>
+<span class="s">        H      -0.39995000       4.15871000      -4.93170000</span>
+<span class="s">        H      -1.12426000       3.20203000      -2.78552000</span>
+<span class="s">        C      -1.03828000      -0.64018000      10.44800000</span>
+<span class="s">        H       1.56169000       4.33269000       8.01583000</span>
+<span class="s">        C      -0.11223000      -4.97150000       9.34588000</span>
+<span class="s">        C      -0.03554000       7.26375000       2.87602000</span>
+<span class="s">        H      -1.09521000      -1.50513000      11.11199000</span>
+<span class="s">        H       3.22983000       0.79151000       3.62424000</span>
+<span class="s">        C       3.45382000      -1.03521000      -6.98441000</span>
+<span class="s">        O      -0.72583000       0.95806000       1.56717000</span>
+<span class="s">        H       2.36816000       5.34341000       4.50996000</span>
+<span class="s">        C      -1.68553000      -0.69328000       9.20655000</span>
+<span class="s">        H       4.21952000      -0.40168000      -7.46345000</span>
+<span class="s">        H      -1.28611000      -2.92413000       2.51305000</span>
+<span class="s">        C       1.07673000      -4.19100000       5.79908000</span>
+<span class="s">        C       0.46002000       6.10723000       3.76764000</span>
+<span class="s">        H       0.19942000       5.47949000       5.84797000</span>
+<span class="s">        H      -0.11989000       5.68080000     -10.14146000</span>
+<span class="s">        N      -2.80755000       2.14965000       4.91471000</span>
+<span class="s">        H       1.23144000      -6.29513000      -5.15638000</span>
+<span class="s">        C       3.74078000      -1.20712000      -5.50076000</span>
+<span class="s">        N      -0.47889000      -1.91215000       0.81627000</span>
+<span class="s">        C      -0.57607000       5.02038000      -8.13428000</span>
+<span class="s">        H       1.60192000      -5.15615000       5.75895000</span>
+<span class="s">        H      -1.13094000      -1.13799000       2.64965000</span>
+<span class="s">        C      -0.23845000      -3.15299000      -1.28978000</span>
+<span class="s">        C      -0.05550000      -4.76579000      -3.14405000</span>
+<span class="s">        H      -1.35753000       5.76910000      -7.98196000</span>
+<span class="s">        H       3.72395000      -0.21480000      -5.00525000</span>
+<span class="s">        H      -1.13142000       7.24453000       2.78458000</span>
+<span class="s">        H      -4.76310000       1.61527000       5.41439000</span>
+<span class="s">        H       4.76310000      -1.61527000      -5.41439000</span>
+<span class="s">        C       2.12273000      -1.75783000      -3.90134000</span>
+<span class="s">        C      -0.28104000       4.13616000      -7.08959000</span>
+<span class="s">        C       0.73514000       3.17615000      -7.28394000</span>
+<span class="s">        C       0.81335000      -3.86199000      -3.77035000</span>
+<span class="s">        C      -2.39908000      -0.51189000      -4.29012000</span>
+<span class="s">        H       2.25336000      -0.75053000      -3.46787000</span>
+<span class="s">        C       1.41195000       3.08564000      -8.52014000</span>
+<span class="s">        C      -0.52384000      -4.40125000      -1.88411000</span>
+<span class="s">        C      -1.84973000       1.90289000      -4.97333000</span>
+<span class="s">        H       0.20633000       7.24015000       5.59602000</span>
+<span class="s">        C       1.09765000       3.99973000      -9.52904000</span>
+<span class="s">        H       0.11989000      -5.68080000      10.14146000</span>
+<span class="s">        H       0.25814000       8.23193000       3.30969000</span>
+<span class="s">        H      -1.49008000      -0.40226000      -3.68367000</span>
+<span class="s">        H       1.63623000       3.94265000     -10.47839000</span>
+<span class="s">        C      -2.10065000       3.07251000      -5.70877000</span>
+<span class="s">        C       0.57607000      -5.02038000       8.13428000</span>
+<span class="s">        H      -1.56169000      -4.33269000      -8.01583000</span>
+<span class="s">        C       0.11223000       4.97150000      -9.34588000</span>
+<span class="s">        H      -1.13449000      -5.10187000      -1.30711000</span>
+<span class="s">        H       0.39995000      -4.15871000       4.93170000</span>
+<span class="s">        H       1.35753000      -5.76910000       7.98196000</span>
+<span class="s">        C      -3.29750000       3.15241000      -6.42939000</span>
+<span class="s">        C       0.23845000       3.15299000       1.28978000</span>
+<span class="s">        H      -3.22983000      -0.79151000      -3.62424000</span>
+<span class="s">        C      -0.59486000       2.70197000       7.73655000</span>
+<span class="s">        C       0.28104000      -4.13616000       7.08959000</span>
+<span class="s">        C       0.52384000       4.40125000       1.88411000</span>
+<span class="s">        H       0.43755000       2.42353000      10.23864000</span>
+<span class="s">        H      -3.50575000       4.04950000      -7.01656000</span>
+<span class="s">        H       0.38971000       7.20647000       1.86361000</span>
+<span class="s">        H       1.13449000       5.10187000       1.30711000</span>
+<span class="s">        C       1.84973000      -1.90289000       4.97333000</span>
+<span class="s">        C      -1.07673000       4.19100000      -5.79908000</span>
+<span class="s">        H       0.62192000      -3.64814000      -8.29677000</span>
+<span class="s">        C      -4.20635000       2.09524000      -6.41695000</span>
+<span class="s">        C       2.10065000      -3.07251000       5.70877000</span>
+<span class="s">        O      -0.62968000       1.82005000      -4.28278000</span>
+<span class="s">        C       0.03554000      -7.26375000      -2.87602000</span>
+<span class="s">        C       1.99778000       6.16492000       3.88117000</span>
+<span class="s">        C       3.29750000      -3.15241000       6.42939000</span>
+<span class="s">        H      -1.41484000       2.74396000       7.00335000</span>
+<span class="s">        O      -0.07653000      -0.68618000      -5.67912000</span>
+<span class="s">        H      -5.13801000       2.17027000      -6.98038000</span>
+<span class="s">        H       3.50575000      -4.04950000       7.01656000</span>
+<span class="s">        C      -3.45382000       1.03521000       6.98441000</span>
+<span class="s">        C      -1.14520000       2.61556000       3.22986000</span>
+<span class="s">        H      -2.30900000      -7.11968000      -4.33255000</span>
+<span class="s">        C       4.20635000      -2.09524000       6.41695000</span>
+<span class="s">        H       0.78141000      -0.75072000      -6.17605000</span>
+<span class="s">        H       1.13142000      -7.24453000      -2.78458000</span>
+<span class="s">        C      -0.54101000       2.17341000       2.01004000</span>
+<span class="s">        H       5.13801000      -2.17027000       6.98038000</span>
+<span class="s">        C      -3.91320000       0.93142000      -5.70744000</span>
+<span class="s">        H      -1.60192000       5.15615000      -5.75895000</span>
+<span class="s">        H      -0.43755000      -2.42353000     -10.23864000</span>
+<span class="s">        C       3.91320000      -0.93142000       5.70744000</span>
+<span class="s">        C       0.72575000      -2.17732000       2.89574000</span>
+<span class="s">        H      -4.21952000       0.40168000       7.46345000</span>
+<span class="s">        H      -4.60197000       0.08443000      -5.74068000</span>
+<span class="s">        H       4.60197000      -0.08443000       5.74068000</span>
+<span class="s">        H      -0.62192000       3.64814000       8.29677000</span>
+<span class="s">        H       2.30900000       7.11968000       4.33255000</span>
+<span class="s">        H       1.27917000      -4.11016000      -4.72389000</span>
+<span class="s">        C       2.72586000      -0.80591000       4.97465000</span>
+<span class="s">        C      -2.72586000       0.80591000      -4.97465000</span>
+<span class="s">        H      -0.19942000      -5.47949000      -5.84797000</span>
+<span class="s">        H       1.42939000      -1.48933000       2.39439000</span>
+<span class="s">        C       0.96682000       1.65125000       6.01252000</span>
+<span class="s">        C      -1.99778000      -6.16492000      -3.88117000</span>
+<span class="s">        C       0.59486000      -2.70197000      -7.73655000</span>
+<span class="s">        C      -0.96682000      -1.65125000      -6.01252000</span>
+<span class="s">        C       2.18562000       1.61836000       5.30149000</span>
+<span class="s">        C       0.05550000       4.76579000       3.14405000</span>
+<span class="s">        H       3.43079000      -2.01409000      -7.48984000</span>
+<span class="s">        C       1.58070000      -0.43033000      -8.37317000</span>
+<span class="s">        C       3.16089000       2.57613000       5.58075000</span>
+<span class="s">        C      -3.74078000       1.20712000       5.50076000</span>
+<span class="s">        C      -0.81335000       3.86199000       3.77035000</span>
+<span class="s">        H      -3.43079000       2.01409000       7.48984000</span>
+<span class="s">        H       4.09911000       2.55793000       5.02051000</span>
+<span class="s">        C      -2.18562000      -1.61836000      -5.30149000</span>
+<span class="s">        C       0.80701000      -1.55547000      -8.71125000</span>
+<span class="s">        H      -2.47896000      -6.08599000      -2.89560000</span>
+<span class="s">        C       2.94890000       3.55128000       6.55908000</span>
+<span class="s">        C      -0.13167000       6.28247000       5.17426000</span>
+<span class="s">        C       0.13167000      -6.28247000      -5.17426000</span>
+<span class="s">        C       0.17468000      -1.56294000      -9.95926000</span>
+<span class="s">        H       3.71667000       4.29632000       6.77231000</span>
+<span class="s">        C      -3.16089000      -2.57613000      -5.58075000</span>
+<span class="s">        C      -0.46002000      -6.10723000      -3.76764000</span>
+<span class="s">        C      -0.61444000      -2.98553000       0.08587000</span>
+<span class="s">        C       1.73924000       3.56815000       7.25491000</span>
+<span class="s">        O       0.62968000      -1.82005000       4.28278000</span>
+<span class="s">        H      -0.38971000      -7.20647000      -1.86361000</span>
+<span class="s">        H       2.47896000       6.08599000       2.89560000</span>
+<span class="s">        H      -4.09911000      -2.55793000      -5.02051000</span>
+<span class="s">        C      -0.72575000       2.17732000      -2.89574000</span>
+<span class="s">        O       0.07653000       0.68618000       5.67912000</span>
+<span class="s">        C       0.61444000       2.98553000      -0.08587000</span>
+<span class="s">        O      -2.16655000       0.38813000       7.10271000</span>
+<span class="s">        C       0.30154000      -0.48014000     -10.82965000</span>
+<span class="s">        H      -3.72395000       0.21480000       5.00525000</span>
+<span class="s">        H       1.00635000       3.89600000      -0.57440000</span>
+<span class="s">        H      -0.78141000       0.75072000       6.17605000</span>
+<span class="s">        C      -2.94890000      -3.55128000      -6.55908000</span>
+<span class="s">        C       0.72719000       2.63659000       6.99325000</span>
+<span class="s">        C       0.66060000       2.05093000      -2.26021000</span>
+<span class="s">        H      -1.23144000       6.29513000       5.15638000</span>
+<span class="s">        H      -0.19490000      -0.50042000     -11.80153000</span>
+<span class="s">        C      -2.39949000      -1.96079000       8.76280000</span>
+<span class="s">        H       1.28611000       2.92413000      -2.51305000</span>
+<span class="s">        O      -1.13468000      -2.30574000       6.31297000</span>
+<span class="s">        H      -3.71667000      -4.29632000      -6.77231000</span>
+<span class="s">        C       1.03828000       0.64018000     -10.44800000</span>
+<span class="s">        H       1.13094000       1.13799000      -2.64965000</span>
+<span class="s">        C      -0.73514000      -3.17615000       7.28394000</span>
+<span class="s">    End</span>
+<span class="s">End</span>
+
+<span class="s">GeometryOptimization</span>
+<span class="s">   CoordinateType Cartesian</span>
+<span class="s">End</span>
+
+<span class="s">Engine DFTB</span>
+<span class="s">   ResourcesDir DFTB.org/3ob-3-1</span>
+<span class="s">   Model DFTB3</span>
+<span class="s">   DispersionCorrection D3-BJ</span>
+<span class="s">EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># Step 2: Start the optimization but abort after 5 steps.</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>aborted <span class="nv">$AMSBIN</span>/ams <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">Task GeometryOptimization</span>
+
+<span class="s">GeometryOptimization</span>
+<span class="s">    MaxIterations 5</span>
+<span class="s">    CoordinateType Cartesian</span>
+<span class="s">End</span>
+
+<span class="s">LoadSystem</span>
+<span class="s">   File reference.results/ams.rkf</span>
+<span class="s">   Section InputMolecule</span>
+<span class="s">End</span>
+
+<span class="s">LoadEngine reference.results/dftb.rkf</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># Step 3: Restart the aborted optimization and finish it.</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>resume <span class="nv">$AMSBIN</span>/ams <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">Task GeometryOptimization</span>
+
+<span class="s">GeometryOptimization</span>
+<span class="s">   CoordinateType Cartesian</span>
+<span class="s">End</span>
+
+<span class="s">LoadSystem</span>
+<span class="s">   File aborted.results/ams.rkf</span>
+<span class="s">End</span>
+
+<span class="s">LoadEngine aborted.results/dftb.rkf</span>
+<span class="s">EngineRestart aborted.results/dftb.rkf</span>
+
+<span class="s">EOF</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Parameter_files.html" class="btn btn-neutral float-right" title="Parameterizations" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Li_BZPlot.html" class="btn btn-neutral" title="Example: Band structure with user-defined BZ path" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# This example demonstrates the use of the Nudged Elastic Band method in AMS for
+# finding a transition state of the HCN isomerisation reaction. A shell script
+# used to run the example calculation is shown below.
+
+
+$AMSBIN/ams <<eor
+
+Task NEB
+
+System
+    Atoms
+        C         0.000000    0.000000    0.000000
+        N         1.180000    0.000000    0.000000
+        H         2.196000    0.000000    0.000000
+    End
+End
+System final
+    Atoms
+        C         0.000000    0.000000    0.000000
+        N         1.163000    0.000000    0.000000
+        H        -1.078000    0.000000    0.000000
+    End
+End
+
+NEB
+    Images 9
+    Iterations 100
+End
+
+Engine DFTB
+    Model DFTB3
+    ResourcesDir DFTB.org/3ob-3-1
+    DispersionCorrection D3-BJ
+EndEngine
+eor
+

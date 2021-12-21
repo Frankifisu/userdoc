@@ -1,0 +1,284 @@
+#!/bin/sh
+
+# This example consists of three MD runs exercising the Deformation feature in MD:
+#   1. Simple deformations of a 2D slab
+#   2. Complex sequence of deformations of a 3D box including multiple simultaneous deformations
+#   3. Combination of a uniaxial strain with barostatting the remaining directions
+
+# This run first oscillates the lengths of the lattice vectors of the original non-orthogonal
+# lattice of an argon slab to 20 and 12 Angstrom respectively and back to the original values,
+# with a period of 125 fs. Afterwards, it linearly morphs the lattice to a 5 by 5 Angstrom square.
+AMS_JOBNAME=Ar-2D "$AMSBIN/ams" <<EOR
+# Set the random number seed to ensure reproducible results for testing. Omit this in normal runs.
+RNGSeed -2056449389 -1942239902 -422783941 -563204803 439708673 85320298 1328648683 -688288369
+
+Task MolecularDynamics
+
+MolecularDynamics
+    nSteps 1000
+    TimeStep 0.25
+    CalcPressure True
+    InitialVelocities Type=Zero
+    Trajectory SamplingFreq=10
+    Deformation
+        StopStep 500
+        Type Cosine
+        TargetLength 20 12
+        Period 125
+    End
+    Deformation
+        StartStep 500
+        Type Linear
+        TargetLattice
+            5 0 0
+            0 5 0
+        End
+    End
+End
+
+System
+    Atoms
+        Ar 0.5 0.6 0.7
+        Ar 3.0 3.2 3.4
+    End
+    Lattice
+        10.0 2.0 0.0
+        1.0 10.0 0.0
+    End
+End
+
+Engine LennardJones
+    Rmin 3.753962043231411
+    Eps 3.98e-4
+    Cutoff 12.0
+EndEngine
+EOR
+
+# Print the evolution of the lattice parameters in the "fort.59" format
+# of old standalone reaxff for testing purposes.
+echo "BEGIN fort59 nobarostat"
+"$AMSBIN/amspython" "$AMSHOME/scripting/standalone/reaxff-ams/fort59.py" Ar-2D.results
+echo "END fort59"
+
+
+# This run applies a sequence of deformations to a box of Lennard-Jones argon atoms.
+AMS_JOBNAME=Ar-box "$AMSBIN/ams" <<EOR
+# Set the random number seed to ensure reproducible results for testing. Omit this in normal runs.
+RNGSeed 1450250278 2029462689 827312839 1518230169 1408825437 1769469410 -406759494 -1006638501
+
+Task MolecularDynamics
+
+MolecularDynamics
+    nSteps 10000
+    InitialVelocities Type=Random Temperature=300
+    Thermostat Type=NHC Temperature=300 Tau=100
+    Timestep 1
+    Trajectory SamplingFreq=100
+    CalcPressure True
+    # Compress the a and b vectors to 20 Angstrom and stretch the c vector to 40 Angstrom over 2000 steps.
+    Deformation
+        StartStep 0
+        StopStep 2000
+        Type Linear
+        TargetLength 20 20 40
+    End
+    # Oscillate the c vector (z axis) from 40 to 30 Angstroms and back again with a period of 1000 fs.
+    Deformation
+        StartStep 2000
+        StopStep 3500
+        Type Cosine
+        TargetLattice
+            20.0  0.0  0.0
+            0.0  20.0  0.0
+            0.0   0.0 30.0
+        End
+        Period 1000
+    End
+    # Shear the box by tilting the c vector 10 A away from the z axis in the xz plane.
+    Deformation
+        StartStep 3500
+        StopStep 4000
+        Type Linear
+        TargetLattice
+            20.0  0.0  0.0
+            0.0  20.0  0.0
+            10.0  0.0 30.0
+        End
+    End
+    # The following two blocks apply simultaneous cosine and sine oscillations to the
+    # x and y components of the c vector. The amplitude of both oscillations is the same,
+    # indirectly defined by the maximum velocity (velocity at the inflection point).
+    # The c vector thus traces out a cone around the z axis over 2000 fs.
+    Deformation
+        StartStep 4000
+        StopStep 8000
+        Type Cosine
+        LatticeVelocity
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+           -3e-2 0.0  0.0
+        End
+        Period 2000
+    End
+    Deformation
+        StartStep 4000
+        StopStep 8000
+        Type Sine
+        LatticeVelocity
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0 3e-2  0.0
+        End
+        Period 2000
+    End
+    # This un-shears the box again, returning the c vector to the z axis.
+    Deformation
+        StartStep 8000
+        StopStep 8500
+        Type Linear
+        TargetLattice
+            20.0  0.0  0.0
+            0.0  20.0  0.0
+            0.0  0.0  30.0
+        End
+    End
+    # Finally, apply an exponential ("true") strain by compressing the c vector by 1/1000th every step.
+    Deformation
+        StartStep 8500
+        Type Exponential
+        LengthRate 0.0 0.0 -1e-3
+    End
+End
+
+System
+    Atoms
+        Ar  22.97333  5.533091  19.78068
+        Ar  5.255777  10.75370  3.164254
+        Ar  8.594419  0.957110  14.00514
+        Ar  8.407438  7.306515  2.762099
+        Ar  5.335001  18.10475  11.25000
+        Ar  13.84870  24.00523  1.485310
+        Ar  18.65495  8.812906  24.08580
+        Ar  23.50126  5.372569  24.77962
+        Ar  20.32336  23.84153  3.669808
+        Ar  7.692337  5.389691  10.57909
+        Ar  2.407753  7.779618  0.755645
+        Ar  1.520220  15.74803  13.75000
+        Ar  2.921397  15.34413  20.41981
+        Ar  1.660913  18.10666  3.895263
+        Ar  19.54458  18.76246  20.66279
+        Ar  3.853819  4.537228  14.15265
+        Ar  17.57174  15.47554  17.14501
+        Ar  8.601399  2.836638  1.872337
+        Ar  2.786004  3.601185  22.17957
+        Ar  0.047572  18.11282  24.78959
+        Ar  0.172965  0.035326  0.223982
+        Ar  6.604983  7.254174  21.83257
+        Ar  16.63254  15.02432  7.992034
+        Ar  7.941898  9.130224  17.89523
+        Ar  18.26063  20.70600  5.643385
+        Ar  22.63932  15.20789  23.33429
+        Ar  1.138343  21.37810  13.97294
+        Ar  0.461841  18.99572  6.401096
+        Ar  22.67542  22.89935  9.344785
+        Ar  7.215648  18.28717  3.411308
+    End
+    Lattice
+        25.0  0.0  0.0
+        0.0  25.0  0.0
+        0.0   0.0 25.0
+  end
+end
+
+Engine LennardJones
+  Eps 3.67e-4
+  RMin 3.4
+  Cutoff 12.0
+EndEngine
+EOR
+
+# Print the evolution of the lattice parameters in the "fort.59" format
+# of old standalone reaxff for testing purposes.
+echo "BEGIN fort59 nobarostat"
+"$AMSBIN/amspython" "$AMSHOME/scripting/standalone/reaxff-ams/fort59.py" Ar-box.results | cut -c 1-86
+echo "END fort59"
+
+
+# This run simulates an experiment to measure the mechanical properties of an argon box
+# by stretching the lattice in the z direction by 100 ppm per timestep (1 fs) while simultaneously
+# keeping the x and y axes relaxed using a barostat.
+AMS_JOBNAME=Ar-box-barostat "$AMSBIN/ams" <<EOR
+# Set the random number seed to ensure reproducible results for testing. Omit this in normal runs.
+RNGSeed 877404503 1621112889 -559440914 -1857103174 -1082101960 -1842609385 -845245172 -279655974
+
+Task MolecularDynamics
+
+MolecularDynamics
+    nSteps 8000
+    InitialVelocities Type=Random Temperature=300
+    Thermostat Type=NHC Temperature=300 Tau=100
+    Barostat Type=MTK Pressure=1e7 Tau=1000 Scale=XY Equal=XY
+    Timestep 1
+    Trajectory SamplingFreq=100
+    Deformation
+        Type Exponential
+        StrainRate
+            0.0 0.0 0.0
+            0.0 0.0 0.0
+            0.0 0.0 1e-4
+        End
+    End
+End
+
+System
+    Atoms
+        Ar  22.97333  5.533091  19.78068
+        Ar  5.255777  10.75370  3.164254
+        Ar  8.594419  0.957110  14.00514
+        Ar  8.407438  7.306515  2.762099
+        Ar  5.335001  18.10475  11.25000
+        Ar  13.84870  24.00523  1.485310
+        Ar  18.65495  8.812906  24.08580
+        Ar  23.50126  5.372569  24.77962
+        Ar  20.32336  23.84153  3.669808
+        Ar  7.692337  5.389691  10.57909
+        Ar  2.407753  7.779618  0.755645
+        Ar  1.520220  15.74803  13.75000
+        Ar  2.921397  15.34413  20.41981
+        Ar  1.660913  18.10666  3.895263
+        Ar  19.54458  18.76246  20.66279
+        Ar  3.853819  4.537228  14.15265
+        Ar  17.57174  15.47554  17.14501
+        Ar  8.601399  2.836638  1.872337
+        Ar  2.786004  3.601185  22.17957
+        Ar  0.047572  18.11282  24.78959
+        Ar  0.172965  0.035326  0.223982
+        Ar  6.604983  7.254174  21.83257
+        Ar  16.63254  15.02432  7.992034
+        Ar  7.941898  9.130224  17.89523
+        Ar  18.26063  20.70600  5.643385
+        Ar  22.63932  15.20789  23.33429
+        Ar  1.138343  21.37810  13.97294
+        Ar  0.461841  18.99572  6.401096
+        Ar  22.67542  22.89935  9.344785
+        Ar  7.215648  18.28717  3.411308
+    End
+    Lattice
+        25.0  0.0  0.0
+        0.0  25.0  0.0
+        0.0   0.0 25.0
+  end
+end
+
+Engine LennardJones
+  Eps 3.67e-4
+  RMin 3.4
+  Cutoff 12.0
+EndEngine
+EOR
+
+# Print the evolution of the lattice parameters in the "fort.59" format
+# of old standalone reaxff for testing purposes.
+echo "BEGIN fort59 barostat"
+"$AMSBIN/amspython" "$AMSHOME/scripting/standalone/reaxff-ams/fort59.py" Ar-box-barostat.results | cut -c 1-86
+echo "END fort59"

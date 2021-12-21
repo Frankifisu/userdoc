@@ -1,0 +1,185 @@
+#! /bin/sh
+
+echo "DFTB3 + UFF"
+
+AMS_JOBNAME=UFF $AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients True
+   StressTensor True
+End
+
+System
+    Atoms
+       C  0.0 0.0 0.0
+       C  0.0 0.0 -3.355
+       C  1.23 0.7101408312 0.0
+       C -1.23 -0.7101408311 -3.355
+    End
+    Lattice
+       2.46 0.000000 0
+       1.23 2.130422493 0
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   DispersionCorrection UFF
+   KSpace
+     Type Symmetric
+     Symmetric KInteg=5
+   End
+EndEngine
+
+eor
+
+
+echo "DFTB3 + ULG"
+
+AMS_JOBNAME=ULG $AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients True
+   StressTensor True
+End
+
+System
+    Atoms
+       C  0.0 0.0 0.0
+       C  0.0 0.0 -3.355
+       C  1.23 0.7101408312 0.0
+       C -1.23 -0.7101408311 -3.355
+    End
+    Lattice
+       2.46 0.000000 0
+       1.23 2.130422493 0
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   DispersionCorrection ULG
+   KSpace
+     Type Symmetric
+     Symmetric KInteg=5
+   End
+EndEngine
+
+eor
+
+
+echo "DFTB3 + D2"
+
+AMS_JOBNAME=D2 $AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients True
+   StressTensor True
+End
+
+System
+    Atoms
+       C  0.0 0.0 0.0
+       C  0.0 0.0 -3.355
+       C  1.23 0.7101408312 0.0
+       C -1.23 -0.7101408311 -3.355
+    End
+    Lattice
+       2.46 0.000000 0
+       1.23 2.130422493 0
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   DispersionCorrection D2
+   KSpace
+     Type Symmetric
+     Symmetric KInteg=5
+   End
+EndEngine
+
+eor
+
+
+echo "DFTB3 + D3-BJ"
+
+AMS_JOBNAME=D3 $AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients True
+   StressTensor True
+End
+
+System
+    Atoms
+       C  0.0 0.0 0.0
+       C  0.0 0.0 -3.355
+       C  1.23 0.7101408312 0.0
+       C -1.23 -0.7101408311 -3.355
+    End
+    Lattice
+       2.46 0.000000 0
+       1.23 2.130422493 0
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   DispersionCorrection D3-BJ
+   KSpace
+     Type Symmetric
+     Symmetric KInteg=5
+   End
+EndEngine
+
+eor
+
+
+echo "DFTB3 + D4"
+
+AMS_JOBNAME=D4 $AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients True
+   StressTensor True
+End
+
+System
+    Atoms
+       C  0.0 0.0 0.0
+       C  0.0 0.0 -3.355
+       C  1.23 0.7101408312 0.0
+       C -1.23 -0.7101408311 -3.355
+    End
+    Lattice
+       2.46 0.000000 0
+       1.23 2.130422493 0
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   DispersionCorrection D4
+   KSpace
+     Type Symmetric
+     Symmetric KInteg=5
+   End
+EndEngine
+
+eor

@@ -1,0 +1,44 @@
+#!/bin/sh
+
+"$AMSBIN/ams" << eor
+
+Task SinglePoint
+System
+    Atoms
+        P       0.827189969    -0.410348997     3.864289420
+        P      -0.827189969    -1.904843222     3.864289420
+        P      -0.827189969     0.410348997    -3.864289420
+        P       0.827189969     1.904843222    -3.864289420
+        P       0.827189969     0.408508898     1.735674409
+        P      -0.827189969     1.906683321     1.735674409
+        P      -0.827189969    -0.408508898    -1.735674409
+        P       0.827189969    -1.906683321    -1.735674409
+    End
+    Lattice
+                3.308759879     0.000000000     0.000000000
+                0.000000000     4.630384440     0.000000000
+    End
+End
+
+Engine BAND
+    Basis
+        Type TZP
+        Core None
+    End
+    BandStructure
+        Enabled Yes
+        DeltaK 0.01
+    End
+    EffectiveMass
+        Enabled Yes
+    End
+    KSpace
+        Type Symmetric
+        Quality Good
+    End
+    NumericalQuality Good
+    XC
+        libxc hse06
+    End
+EndEngine
+eor

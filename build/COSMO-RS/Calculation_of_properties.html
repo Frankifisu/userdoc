@@ -1,0 +1,870 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Calculation of properties &mdash; COSMO-RS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="COSMO-RS 2021.1 documentation" href="index.html"/>
+        <link rel="up" title="COSMO-RS, COSMO-SAC, UNIFAC" href="COSMO-RS_and_COSMO-SAC.html"/>
+        <link rel="next" title="COSMO result files" href="COSMO_result_files.html"/>
+        <link rel="prev" title="UNIFAC theory" href="UNIFAC_theory.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="keywords.html">Keywords</a>
+           
+           
+           <a href="genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search COSMO-RS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-COSMO-RS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#release-2021-1">Release 2021.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#release-2020-1">Release 2020.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC.html">COSMO-RS, COSMO-SAC, UNIFAC</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_theory.html">COSMO-RS theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_theory.html#cosmo-rs-combinatorial-term">COSMO-RS combinatorial term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_theory.html#fast-approximation-for-cosmo-rs-calculations">Fast approximation for COSMO-RS calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_theory.html#temperature-dependent-hydrogen-bond-interaction">Temperature dependent hydrogen bond interaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-SAC_2013-ADF.html">COSMO-SAC 2013-ADF, 2016-ADF, DHB-ADF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_theory.html">UNIFAC theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_theory.html#residual-term">Residual term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_theory.html#combinatorial-term">Combinatorial term</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Calculation of properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="COSMO_result_files.html">COSMO result files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ADF_COSMO_calculation.html">ADF COSMO calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#adf-cosmo-settings">ADF COSMO settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#atomic-cation-or-anion">Atomic cation or anion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#accuracy">Accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#cavity-construction">Cavity construction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_Databases.html">ADFCRS-2018 Database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_Databases.html#adfcrs-2010">ADFCRS-2010</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_Databases.html#adfcrs-il-2014">ADFCRS-IL-2014</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_Databases.html#adfcrs-polymers-2019-database">ADFCRS-POLYMERS-2019 Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html">Fast Sigma: a QSPR method to estimate COSMO sigma-profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#gui-input">GUI Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MOPAC_COSMO_calculation.html">MOPAC COSMO calculation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="The_COSMO-RS_program.html">The COSMO-RS program</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Running_the_COSMO-RS_program.html">Running the COSMO-RS program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html">COSMO-RS and COSMO-SAC parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-rs-general-parameters">COSMO-RS general parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-rs-element-specific-parameters">COSMO-RS element specific parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-sac-general-parameters">COSMO-SAC general parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-sac-element-specific-parameters">COSMO-SAC element specific parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#technical-and-accuracy-parameters">Technical and accuracy parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Compounds.html">Compounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Temperature.html">Temperature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pressure.html">Pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Molar_fractions_and_mass_fraction.html">Molar fractions and mass fraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html">Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#vapor-pressure">Vapor pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#boiling-point">Boiling point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#solvent-flash-point">Solvent flash point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#partition-coefficients-logp">Partition coefficients (LogP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#activity-coefficients-solvent-and-solute">Activity coefficients solvent and solute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#solubility">Solubility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#binary-mixture-vle-lle">Binary mixture (VLE/LLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#ternary-mixture-vle-lle">Ternary mixture (VLE/LLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#solvents-s1-s2-composition-line">Solvents s1 - s2 Composition Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Analysis.html">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Analysis.html#sigma-profile">Sigma profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Analysis.html#sigma-potential">Sigma potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Polymers_With_COSMO-RS.html">Polymers with COSMO-RS(-SAC)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#additional-properties-units-for-polymer-systems">Additional properties/units for polymer systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#average-molecular-weight">Average molecular weight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#mole-fractions-of-the-monomers-and-polymers">Mole fractions of the monomers and polymers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polymers_With_COSMO-RS.html#x-monomer">x(monomer)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polymers_With_COSMO-RS.html#x-polymer">x(polymer)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#weight-and-volume-fraction-activity-coefficients">Weight- and volume-fraction activity coefficients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#flory-huggins-parameter">Flory-Huggins parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#modified-combinatorial-term">Modified combinatorial term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#general-application-guidelines-warnings">General application guidelines/warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#downloading-the-adfcrs-polymer-2019-database">Downloading the ADFCRS-POLYMER-2019 database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#tutorial-on-polymer-calculations">Tutorial on polymer calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="The_UNIFAC_program.html">The UNIFAC program</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_program/Input_formatting.html">Compound Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Input_formatting.html#basic-input">Basic Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Input_formatting.html#physical-property-input">Physical Property Input</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_program/General_options.html">Program Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/General_options.html#list-of-possible-input-flags">List of possible input flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/General_options.html#examples-of-general-program-flags">Examples of general program flags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#t">-t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#temperature">-temperature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#n">-n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#preset">-preset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_program/Templates.html">Templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#activitycoef">ACTIVITYCOEF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#logp">LOGP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#puresolubility">PURESOLUBILITY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#solubility">SOLUBILITY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#purevaporpressure">PUREVAPORPRESSURE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#vaporpressure">VAPORPRESSURE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#binmixcoef">BINMIXCOEF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#ternarymix">TERNARYMIX</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Property_Prediction.html">Pure compound property prediction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#available-properties">Available properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#running-the-property-prediction-program">Running the Property Prediction program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#index-of-property-keys">Index of property keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#general-warnings">General warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#equations-for-temperature-dependent-properties">Equations for temperature-dependent properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Property_Prediction.html#vpm1-liquid-vapor-pressure"><strong>VPM1</strong>: liquid vapor pressure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Solvent_Optimization.html">Solvent Optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#problem-types">Problem types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#running-the-solvent-optimization-program">Running the Solvent Optimization program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Solvent_Optimization.html#solubility">Solubility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Solvent_Optimization.html#liquid-liquid-extraction">Liquid-liquid extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#guidelines-for-difficult-problems">Guidelines for difficult problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#differences-from-standard-implementations">Differences from standard implementations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Scripting_with_COSMO-RS.html">Scripting with COSMO-RS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html">Python scripting for COSMO-RS with PLAMS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#general-information">General Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#executing-the-code-from-the-command-line">Executing the code from the command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#specifying-a-problem-type">Specifying a problem type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#inputting-compounds">Inputting Compounds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#specifying-mole-fractions-temperatures-and-pressures">Specifying mole fractions, temperatures, and pressures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#running-jobs">Running jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#reading-the-results-of-a-job">Reading the results of a job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#plotting-results">Plotting results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#partition-coefficient">Partition coefficient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#binary-mixture">Binary mixture</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AMSprep.html">AMSprep: construct an ADF COSMO results file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CRSprep.html">CRSprep: generate (multiple) COSMO-RS jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMSreport.html">AMSreport: generate report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html">KF utilities for COSMO-RS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html#kf-browser">KF browser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html#kf2cosmo-and-cosmo2kf">kf2cosmo and cosmo2kf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html#pkf-cpkf-dmpkf-udmpkf">pkf, cpkf, dmpkf, udmpkf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Scripting_Examples.html">Scripting Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-cosmo-result-files">Example: COSMO result files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-cosmo-rs-parameters-and-analysis">Example: COSMO-RS parameters and analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-cosmo-rs-properties">Example: COSMO-RS properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-the-cosmo-rs-compound-database">Example: The COSMO-RS compound database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-pka-values">Example: pKa values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-polymers">Example: Polymers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced_scripting.html">Advanced scripting examples with PLAMS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Changing_parameters.html">Changing the default parameters or re-parameterizing the COSMO-RS/-SAC methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Changing_parameters.html#python-code-cosmo-rs-parameters">Python code (COSMO-RS parameters)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Changing_parameters.html#python-code-cosmo-sac-parameters">Python code (COSMO-SAC parameters)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Sigma_profiles.html">Calculating and estimating sigma profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Sigma_profiles.html#python-code">Python code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Sigma_moments.html">Sigma Moments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Sigma_moments.html#python-code">Python code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Sigma_moments.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Cocrystal_screening.html">Screening for cocrystals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Cocrystal_screening.html#python-code">Python code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Cocrystal_screening.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Eutectics.html">Eutectic systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Eutectics.html#python-code">Python code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Eutectics.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/BinodalSpinodal.html">Binodal and Spinodal Curves</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/BinodalSpinodal.html#python-code-binary-mixture">Python code (Binary mixture)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/BinodalSpinodal.html#python-code-ternary-mixture">Python code (Ternary mixture)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Multispecies_distribution.html">Distribution of species in multispecies calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Multispecies_distribution.html#python-code-binary-mixture">Python code (Binary mixture)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#general-references">General References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#solvent-optimizations">Solvent Optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Keywords</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">COSMO-RS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="COSMO-RS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">COSMO-RS</a>/</li>
+      
+          <li><a href="COSMO-RS_and_COSMO-SAC.html">COSMO-RS, COSMO-SAC, UNIFAC</a>/</li>
+      
+    <li class="orange-text">Calculation of properties</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="metatag-calculation-of-properties"></span><div class="section" id="calculation-of-properties">
+<span id="index-0"></span><h1>Calculation of properties<a class="headerlink" href="#calculation-of-properties" title="Permalink to this headline">¶</a></h1>
+<p>The COSMO-RS method allows to calculate the (pseudo-)chemical potential of a compound in the liquid phase, as well as in the gas phase, see the the COSMO-RS theory that was discussed before and Ref. <a class="footnote-reference" href="#ref1" id="id1">[1]</a>. In the ADF COSMO-RS implementation the following equations were used to calculate properties using these chemical potentials.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\sum_i x_i     &amp; = \sum_i y_i^{vapor} = \sum_i w_i = 1 \\
+w_i            &amp; = x_i M_i^{pure}/M^{ave} \\
+M^{ave}        &amp; = \sum_i x_i M_i^{pure} \\
+p_i^{pure}     &amp; = exp \{ (\mu_i^{pure}-\mu_i^{gas})/RT \} \\
+p_i^{vapor}    &amp; = x_i exp \{ (\mu_i^{solv}-\mu_i^{gas})/RT \} \\
+p^{vapor}      &amp; = \sum_i p_i^{vapor} \\
+y_i^{vapor}    &amp; = p_i^{vapor}/p^{vapor} \\
+\gamma_i       &amp; = exp \{ (\mu_i^{solv}-\mu_i^{pure})/RT \} \\
+a_i            &amp; = \gamma_i x_i \\
+G^E            &amp; = H^E - T S^E = \sum_i x_i (\mu_i^{solv}-\mu_i^{pure}) \\
+H^E            &amp; = -RT^2 \partial \{ G^E/RT \}/ \partial T \\
+G^{mix}        &amp; = G^E + RT \sum_i x_i \ln(x_i) \\
+\Delta_{vap} H &amp; = RT^2/p^{vapor} \partial \{ p^{vapor} \}/ \partial T \\
+k_H            &amp; = 1/V_{solvent} exp \{ (\mu_i^{gas}-\mu_i^{solv})/RT \} \\
+k_H^{cc}       &amp; = 1/(k_H V_{solvent}) = \gamma_i p_i^{pure} \\
+x_i^{SOL}      &amp; = 1/{\gamma_i} (T &gt; T_m) \\
+x_i^{SOL}      &amp; = 1/{\gamma_i} exp \{ \Delta H_{fus}(1/T_m-1/T)/R - \Delta C_p (ln(T_m/T) -T_m/T + 1)/R \} (T &lt; T_m) \\
+\Delta G_{solv}^{liq-solv} &amp; = \mu_i^{solv}-\mu_i^{pure} \\
+\Delta G_{solv}^{gas-solv} &amp; = \mu_i^{solv}-\mu_i^{gas} + RT ln(V_{solvent}/V_{gas}) \\
+log_{10} P_{solv1/solv2}   &amp; = 1/ln(10) (\mu_i^{solv2}-\mu_i^{solv1})/RT + log_{10} (V_{solv1}/V_{solv2}) \\
+1/LFL_{mix}                &amp; = \sum_i (y_i^{vapor}/LFL_i)\end{split}\]</div>
+<p>The above equations are not always exact, some assume perfect gas behavior, for example.</p>
+<p>The molar fraction <span class="math notranslate nohighlight">\(x_i\)</span>  of each compound i of the solvent should add up to 1.</p>
+<p>With the COSMO-RS method it is possible to predict vapor pressures. In the COSMO-RS model the free energy difference between the chemical potential in the gas phase (perfect gas with a reference state of 1 bar) and the chemical potential of the liquid phase has been defined in such a way that the equation: <span class="math notranslate nohighlight">\(p_i = exp {(\mu_i^{pure} - \mu_i^{gas} )/RT}\)</span>, will give the pressure in units of bar. It is also possible to use experimental vapor pressures of pure compounds as input data for the calculation. This may increase the accuracy of the calculated vapor pressures in a mixture, for example.</p>
+<p>In the COSMO-RS method the volume of 1 molecule in the liquid phase is approximated with the volume of the molecule shaped cavity, that is used in the COSMO calculations. In this way it is possible to calculate the volume of 1 mole of solvent molecules in the liquid phase. However, for properties that depend on such volumes, one can also use (related) experimental data as input data for the calculation.</p>
+<p>The calculation of the boiling temperature of a solvent is performed with an iterative method. The temperature is varied until the calculated vapor pressure is within a certain threshold of the desired pressure.</p>
+<p>Also the calculation of solubility of compound i is performed with an iterative method, since the activity coefficient <span class="math notranslate nohighlight">\(\gamma_i\)</span> depends on the molar fraction of this compound. The COSMO-RS method does not predict <span class="math notranslate nohighlight">\(\Delta H_{fus}\)</span>, <span class="math notranslate nohighlight">\(\Delta C_p\)</span> , or <span class="math notranslate nohighlight">\(T_m\)</span> . These can be given as input data for the calculation of solubility calculations of solid compounds.</p>
+<p>Starting from ADF2012 the Gibbs-Helmholtz equation is used to calculate the excess enthalpy of a mixture. Previously it was estimated using the misfit and hydrogen bonding energy of the mixture and its pure compounds.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Quantity</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(R\)</span></td>
+<td>Gas constant</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(T\)</span></td>
+<td>Temperature</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(x_i\)</span></td>
+<td>The molar fraction of compound i in a liquid solution</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(y_i\)</span> <sup>vapor</sup></td>
+<td>The molar fraction of compound i in the gas phase</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(w_i\)</span></td>
+<td>The mass fraction of compound i in a liquid solution</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(M_i\)</span> <sup>pure</sup></td>
+<td>The molar mass of the pure compound i</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(M^{ave}\)</span></td>
+<td>The average molar mass of the mixture</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\gamma_i\)</span></td>
+<td>Activity coefficient of compound i in a liquid solution</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(a_i\)</span></td>
+<td>Activity of compound i in a liquid solution</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(p_i^{pure}\)</span></td>
+<td>The vapor pressure of the pure compound i</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(p_i^{vapor}\)</span></td>
+<td>The partial vapor pressure of compound i</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(p^{vapor}\)</span></td>
+<td>The total vapor pressure</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\mu\)</span><sub>i</sub> <sup>gas</sup></td>
+<td>The pseudochemical potential of the pure compound i in the gas phase</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\mu\)</span><sub>i</sub> <sup>pure</sup></td>
+<td>The pseudochemical potential of the pure compound i in the liquid phase</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\mu\)</span><sub>i</sub> <sup>solv</sup></td>
+<td>The pseudochemical potential of compound i in a liquid solution</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(G^E\)</span></td>
+<td>The excess Gibbs free energy</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(H^E\)</span></td>
+<td>The excess enthalpy, Gibbs-Helmholtz equation</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(G^{mix}\)</span></td>
+<td>The Gibbs energy of mixing</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\Delta_{vap} H\)</span></td>
+<td>The enthalpy of vaporization, Clausius-Clapeyron equation</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(E_i^{HB~pure}\)</span></td>
+<td>The hydrogen bond energy of the pure compound i in the liquid phase, see Ref. <a class="footnote-reference" href="#ref1" id="id2">[1]</a></td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(E_i^{HB}\)</span></td>
+<td>The partial hydrogen bond energy of compound i in a liquid solution</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(E_i^{misfit~pure}\)</span></td>
+<td>The misfit energy of the pure compound i in the liquid phase, see Ref. <a class="footnote-reference" href="#ref1" id="id3">[1]</a></td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(E_i^{misfit}\)</span></td>
+<td>The partial misfit energy of compound i in a liquid solution</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\Delta G_{solv}^{liq-solv}\)</span></td>
+<td>The solvation Gibbs free energy from the pure compound liquid phase</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>to the solvated phase</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\Delta G_{solv}^{gas-solv}\)</span></td>
+<td>The solvation Gibbs free energy from the pure compound gas phase</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>to the solvated phase, with a reference state of 1 mol/L in both phases</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(k_H\)</span></td>
+<td>Henry’s law constant: ratio between the liquid phase concentration of a compound</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>and its partial vapor pressure in the gas phase</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(k_H^{cc}\)</span></td>
+<td>dimensionless Henry’s law constant: ratio between the liquid phase concentration</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>of a compound and its gas phase concentration</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(k_{H~inv}^{px}\)</span></td>
+<td>Henry’s law constant, representing the volatility instead of the solubility,</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>ratio between the partial vapor pressure of a compound in the gas phas</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>and the molar fraction in the liquid phase”</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(V_{solvent}\)</span></td>
+<td>Volume of 1 mole of solvent molecules in the liquid phase</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(V_{gas}\)</span></td>
+<td>Volume of 1 mole of molecules in the gas phase (at 1 atm, perfect gas)</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(x_i^{SOL}\)</span></td>
+<td>Solubility of compound i in a solvent (molar fraction)</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\Delta H_{fus}\)</span></td>
+<td>The enthalpy of fusion of compound i</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\Delta C_p\)</span></td>
+<td>The <span class="math notranslate nohighlight">\(\Delta\)</span> heat capacity of fusion of compound i</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(T_m\)</span></td>
+<td>The melting temperature of compound i</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(log_{10} P_{solv1/solv2}\)</span></td>
+<td>The logarithm of the partition coefficient P, which is the ratio of the concentrations</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>of a compound in two immiscible solvents, solvent 1 and solvent 2</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(LFL_i\)</span></td>
+<td>The flash point (lower flammable limit, LFL) of compound i</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(LFL_{mix}\)</span></td>
+<td>The flash point (lower flammable limit, LFL) of a mixture, Le Chatelier’s mixing rule</td>
+</tr>
+</tbody>
+</table>
+<p>See also the COSMO-RS GUI tutorial for the calculation of the following properties:</p>
+<ul class="simple">
+<li>solvent vapor pressure [<a class="reference external" href="../Tutorials/COSMO-RS/COSMO-RS_overview_properties.html#step-2-vapor-pressure">1</a>, <a class="reference external" href="../Tutorials/COSMO-RS/The_COSMO-RS_compound_database.html#parametrization-of-adf-cosmo-rs-ghydr-vapor-pressures-partition-coefficients">2</a>]</li>
+<li>boiling point of a solvent [<a class="reference external" href="../Tutorials/COSMO-RS/COSMO-RS_overview_properties.html#step-3-boiling-point">1</a>]</li>
+<li>partition coefficients (log P) [<a class="reference external" href="../Tutorials/COSMO-RS/COSMO-RS_overview_properties.html#step-6-partition-coefficients-log-p">1</a>, <a class="reference external" href="../Tutorials/COSMO-RS/The_COSMO-RS_compound_database.html#parametrization-of-adf-cosmo-rs-ghydr-vapor-pressures-partition-coefficients">2</a>], Octanol-Water partition coefficients (log P<sub>OW</sub> ) [<a class="reference external" href="../Tutorials/COSMO-RS/The_COSMO-RS_compound_database.html#octanol-water-partition-coefficients-log-pow">1</a>]</li>
+<li>activity coefficients [<a class="reference external" href="../Tutorials/COSMO-RS/COSMO-RS_overview_properties.html#step-5-activity-coefficients-henry-coefficients-solvation-free-energies">1</a>, <a class="reference external" href="../Tutorials/COSMO-RS/The_COSMO-RS_compound_database.html#large-infinite-dilution-activity-coefficients-in-water">2</a>], solvation free energies [<a class="reference external" href="../Tutorials/COSMO-RS/The_COSMO-RS_compound_database.html#parametrization-of-adf-cosmo-rs-ghydr-vapor-pressures-partition-coefficients">1</a>], Henry’s law constants [<a class="reference external" href="../Tutorials/COSMO-RS/The_COSMO-RS_compound_database.html#henry-s-law-constants">1</a>], <span class="math notranslate nohighlight">\(pK_a\)</span> values [<a class="reference external" href="../Tutorials/COSMO-RS/pKa_values.html">1</a>]</li>
+<li>solubility [<a class="reference external" href="../Tutorials/COSMO-RS/COSMO-RS_overview_properties.html#step-7-solubility">1</a>, <a class="reference external" href="../Tutorials/COSMO-RS/The_COSMO-RS_compound_database.html#solubility-of-vanillin-in-organic-solvents">2</a>]</li>
+<li>vapor-liquid diagram binary mixture (VLE/LLE) [<a class="reference external" href="../Tutorials/COSMO-RS/COSMO-RS_overview_properties.html#step-8-binary-mixtures-vle-lle">1</a>, <a class="reference external" href="../Tutorials/COSMO-RS/The_COSMO-RS_compound_database.html#binary-mixture-of-methanol-and-hexane">2</a>]</li>
+</ul>
+<p><strong>Ionic liquids in COSMO-RS 2020</strong></p>
+<p>The activity coefficient of a compound i solvated in an ionic liquid is an important thermodynamic property.
+In COSMO-RS 2020 one can treat the ionic liquid as one compound, which means
+that the value of the activity coefficient is calculated in the standard way most applications report them.
+In particular, in COSMO-RS 2020 one can treat the ionic liquid as one compound, which only has the dissociated form.</p>
+<ul class="simple">
+<li><a class="reference external" href="../Tutorials/COSMO-RS/Ionic_Liquids.html">ionic liquids tutorial</a></li>
+</ul>
+<p><strong>Ionic liquids in COSMO-RS &lt;=2019</strong></p>
+<p>The activity coefficient of a compound i solvated in an ionic liquid is an important thermodynamic property.
+The cation and anion, which have been treated separately, will be used in equal amounts to ensure an electroneutral mixture in the COSMO-RS calculation.</p>
+<p>In other applications cation-anion pair have been treated as one
+molecule, however, below we will
+treat the cation and anion as two separate molecules, which is needed in older versions of COSMO-RS &lt;=2019. This has
+consequences for the value of the activity coefficient.</p>
+<p>For example, for a 1:1 IL (i.e., [A]<sup>+</sup> [B]<sup>-</sup> ), the activity coefficient at a finite concentration of solute i in the binary mixture (IL + solute) can be calculated by</p>
+<dl class="docutils">
+<dt></dt>
+<dd><div class="first last line-block">
+<div class="line">γ<sub>i</sub> <sup>bin</sup>  = (γ<sub>i</sub> <sup>tern</sup>    x<sub>i</sub> <sup>tern</sup> )/x<sub>i</sub> <sup>bin</sup>  =   γ<sub>i</sub> <sup>tern</sup> /(1+x<sub>IL</sub> <sup>bin</sup> )</div>
+</div>
+</dd>
+</dl>
+<p>where the superscript “tern” represents the hypothetical ternary system comprising cation, anion and solute i, with</p>
+<dl class="docutils">
+<dt></dt>
+<dd><div class="first last line-block">
+<div class="line">x<sub>cation</sub> <sup>tern</sup>  =   x<sub>anion</sub> <sup>tern</sup></div>
+</div>
+</dd>
+</dl>
+<dl class="docutils">
+<dt></dt>
+<dd><div class="first last line-block">
+<div class="line">x<sub>cation</sub> <sup>tern</sup>  +  x<sub>anion</sub> <sup>tern</sup>  + x<sub>i</sub> <sup>tern</sup>  = 1</div>
+</div>
+</dd>
+</dl>
+<p>and the superscript “bin” represents the binary mixture   comprising solute and IL, with</p>
+<dl class="docutils">
+<dt></dt>
+<dd><div class="first last line-block">
+<div class="line">x<sub>IL</sub> <sup>bin</sup>  + x<sub>i</sub> <sup>bin</sup>  = 1</div>
+</div>
+</dd>
+</dl>
+<p>Accordingly, the activity coefficient of a solute i in the binary mixture (IL + solute) at infinite dilution is simplified as</p>
+<dl class="docutils">
+<dt></dt>
+<dd><div class="first last line-block">
+<div class="line">γ<sub>i</sub> <sup>bin</sup>  = 0.5 γ<sub>i</sub> <sup>tern</sup>    &nbsp;&nbsp;&nbsp; (at infinite dilution)</div>
+</div>
+</dd>
+</dl>
+<p>Thus in this case we should scale the activity coefficient at infinite dilution γ<sub>i</sub> <sup>tern</sup> , which is directly obtained from the COSMO-RS calculation, with a factor of 0.5.</p>
+<p>Similarly, for a ternary system comprising component i, component j and an ionic liquid, the activity coefficient at finite concentration of component i can be calculated by</p>
+<dl class="docutils">
+<dt></dt>
+<dd><div class="first last line-block">
+<div class="line">γ<sub>i</sub> <sup>tern</sup>  =   γ<sub>i</sub> <sup>quart</sup> /(1+x<sub>IL</sub> <sup>tern</sup> )</div>
+</div>
+</dd>
+</dl>
+<p>where the superscript “quart” represents the hypothetical quaternary system comprised of cation, anion, solute i and solute j, with:</p>
+<dl class="docutils">
+<dt></dt>
+<dd><div class="first last line-block">
+<div class="line">x<sub>cation</sub> <sup>quart</sup>  =   x<sub>anion</sub> <sup>quart</sup></div>
+</div>
+</dd>
+</dl>
+<dl class="docutils">
+<dt></dt>
+<dd><div class="first last line-block">
+<div class="line">x<sub>cation</sub> <sup>quart</sup>  +  x<sub>anion</sub> <sup>quart</sup>  + x<sub>i</sub> <sup>quart</sup>   + x<sub>j</sub> <sup>quart</sup>  = 1</div>
+</div>
+</dd>
+</dl>
+<p>and the superscript “tern” represents the ternary mixture comprising solute i, j, and IL, with</p>
+<dl class="docutils">
+<dt></dt>
+<dd><div class="first last line-block">
+<div class="line">x<sub>IL</sub> <sup>tern</sup>  + x<sub>i</sub> <sup>tern</sup>  +   x<sub>j</sub> <sup>tern</sup>  = 1</div>
+</div>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="ref1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>, <a class="fn-backref" href="#id3">3</a>)</em> A. Klamt, V. Jonas, T. Bürger and J.C. Lohrenz,  <em>Refinement and Parametrization of COSMO-RS.</em>  <a class="reference external" href="https://doi.org/10.1021/jp980017s">J. Phys. Chem. A 102, 5074 (1998)</a></td></tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="COSMO_result_files.html" class="btn btn-neutral float-right" title="COSMO result files" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="UNIFAC_theory.html" class="btn btn-neutral" title="UNIFAC theory" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

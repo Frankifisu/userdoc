@@ -1,0 +1,26 @@
+from tools.plams_test_utils import validate_energy_landscape
+
+config.log.stdout = 0
+
+alanine = from_smiles("CC(C(=O)O)N")
+
+# Let's run a process search job on Alanine:
+
+engine_sett = Settings()
+engine_sett.input.ForceField = Settings()
+
+sett = Settings()
+sett.input.ams.Task = "PESExploration"
+sett.input.ams.PESExploration.Job = "ProcessSearch"
+sett.input.ams.PESExploration.NumExpeditions = 32
+sett.input.ams.PESExploration.NumExplorers = 16
+
+job = AMSJob(name='alanine_process_search', molecule=alanine, settings=sett + engine_sett)
+results = job.run()
+energy_landscape = results.get_energy_landscape()
+print(energy_landscape)
+
+# Let's run single point calculations on the found states to verify the
+# correctness of the results:
+
+validate_energy_landscape(energy_landscape, engine_sett)

@@ -1,0 +1,112 @@
+#!/bin/sh
+
+# This example demonstrates how to perform a geometry optimization of an active
+# subsystem (a lithium atom) in the presence of a frozen FDE fragment (the water
+# molecule).
+
+# Notes: 
+# 
+# a) Only the geometry of the active fragment will be relaxed (in this case, the
+#    Li atom). The geometry of the FDE fragment (the water molecule) will not
+#    change during the optimization.
+#
+# b) When performing geometry optimization ICW FDE one must:
+#    - Disable symmetry ('Symmetry NoSym')
+#    - It is advised to use the FullGrid option ('FDE => FullGrid')
+
+
+
+# Prepare the water molecule fragment:
+# ====================================
+
+AMS_JOBNAME=Iso2 $AMSBIN/ams <<eor
+System
+  atoms
+     O        0.0000000    0.0000000   -1.53403200
+     H       -0.7782160    0.0000000   -2.13596600
+     H        0.7782160    0.0000000   -2.13596600
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type DZP
+  end
+  numericalquality Good
+  symmetry NOSYM
+  totalenergy
+  xc
+    lda
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+mv Iso2.results/adf.rkf t21.iso.rho2
+
+
+# H2O-Li(+) Geometry optimization 
+# (Li optimization in the presence of a 'frozen' water molecule)
+# ==============================================================
+
+AMS_JOBNAME=GO_FDE $AMSBIN/ams <<eor
+System
+  atoms
+     LI        0.0000000    0.0000000    0.4529560
+     O         0.0000000    0.0000000   -1.5340320  adf.f=rho2 region=frozen
+     H        -0.7782160    0.0000000   -2.1359660  adf.f=rho2 region=frozen
+     H         0.7782160    0.0000000   -2.1359660  adf.f=rho2 region=frozen
+  end
+  charge 1
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+   Convergence Step=1.0e-3
+End
+
+Properties
+  Gradients Yes
+End
+
+Constraints
+  Block frozen
+End
+
+Engine ADF
+  fde
+    fullgrid
+    sdftenergy
+    thomasfermi
+  end
+  fragments
+     rho2 t21.iso.rho2 type=fde &
+     SubEnd
+  end
+  basis
+    core None
+    type DZP
+  end
+  numericalquality Good
+  symmetry NOSYM
+  totalenergy
+  xc
+    lda
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+echo "Final Geometry"
+echo ""
+echo "Final Geometry after FDE optimization"
+
+$AMSBIN/amsreport GO_FDE.results/adf.rkf 'distances#labels'

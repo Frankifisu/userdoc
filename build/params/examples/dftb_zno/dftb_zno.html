@@ -1,0 +1,1084 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.13. SCC-DFTB repulsive potential for ZnO &mdash; ParAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ParAMS 2021.1 documentation" href="../../index.html"/>
+        <link rel="up" title="3. Tutorials" href="../examples.html"/>
+        <link rel="next" title="4. ParAMS Main Script" href="../../mainscript/mainscript.html"/>
+        <link rel="prev" title="3.12. Convert old ReaxFF training sets to ParAMS" href="../convert_old_reaxff_format.html"/> 
+
+  
+  <script src="../../_static/js/jquery.min.js"></script>
+  <script src="../../_static/js/bootstrap.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/params_logo_compact.svg" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search ParAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-ParAMS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro.html#parameter-fitting-a-lennard-jones-example">1.1. Parameter Fitting: A Lennard-Jones Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro.html#general-application">1.2. General Application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">2. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#first-steps-with-params">2.1. First Steps with ParAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#unit-tests">2.2. Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">3. Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro_to_params.html">3.1. Introduction to parametrization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../intro_to_params.html#training-data">3.1.1. Training data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../lj_ar/lj_ar.html">3.2. Lennard-Jones Potential for Argon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar.html#lennard-jones-parameters-engine-and-interface">3.2.1. Lennard-Jones Parameters, Engine, and Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar.html#files">3.2.2. Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar.html#run-the-example">3.2.3. Run the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar.html#the-best-parameter-values">3.2.4. The best parameter values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar.html#input-files">3.2.5. Input files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar.html#the-parameter-interface-yaml-file">3.2.5.1. The parameter_interface.yaml file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar.html#the-job-collection-yaml-file">3.2.5.2. The job_collection.yaml file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar.html#the-training-set-yaml-file">3.2.5.3. The training_set.yaml file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar.html#the-params-conf-py-file">3.2.5.4. The params.conf.py file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar.html#creation-of-the-input-files">3.2.5.5. Creation of the input files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar.html#output-files">3.2.6. Output files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar.html#summary-txt">3.2.6.1. summary.txt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar.html#detailed-results-correlation-plots-summary-statistics">3.2.6.2. Detailed results: correlation plots, summary statistics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../lj_ar/lj_ar_no_reference_data.html">3.3. Calculate reference values in training_set.yaml</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar_no_reference_data.html#prerequisites">3.3.1. Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar_no_reference_data.html#the-input-files">3.3.2. The input files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar_no_reference_data.html#training-set-yaml">3.3.2.1. training_set.yaml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar_no_reference_data.html#reference-engines-yaml">3.3.2.2. reference_engines.yaml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar_no_reference_data.html#job-collection-yaml">3.3.2.3. job_collection.yaml</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar_no_reference_data.html#calculate-reference-values-with-params-genref">3.3.3. Calculate reference values with <code class="docutils literal notranslate"><span class="pre">params</span> <span class="pre">genref</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar_no_reference_data.html#the-reference-cache-folder">3.3.3.1. The reference.cache folder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar_no_reference_data.html#the-training-set-ref-yaml-file">3.3.3.2. The training_set.ref.yaml file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../lj_ar/lj_ar_validation_set.html">3.4. Training and validation sets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar_validation_set.html#an-explicit-validation-set-validation-set-yaml">3.4.1. An explicit validation set: <code class="docutils literal notranslate"><span class="pre">validation_set.yaml</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar_validation_set.html#run-the-optimization">3.4.1.1. Run the optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar_validation_set.html#training-and-validation-set-results">3.4.1.2. Training and validation set results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar_validation_set.html#random-split-of-a-data-set-into-training-and-validation-sets">3.4.2. Random split of a data_set into training and validation sets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../lj_ar/lj_ar_restart.html">3.5. Restarting (continuing) an optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar_restart.html#restarting-with-the-cmaoptimizer">3.5.1. Restarting with the CMAOptimizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar_restart.html#run-the-first-100-iterations">3.5.1.1. Run the first 100 iterations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lj_ar/lj_ar_restart.html#continue-for-another-100-iterations-with-a-restart-file">3.5.1.2. Continue for another 100 iterations with a restart file</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar_restart.html#restart-with-other-optimizers-e-g-nelder-mead-from-scipy">3.5.2. Restart with other optimizers (e.g. Nelder-Mead from Scipy)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../lj_ar/lj_ar_python.html">3.6. The params Python library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar_python.html#run-an-optimization-with-the-python-library">3.6.1. Run an optimization with the Python library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar_python.html#calculate-reference-values">3.6.2. Calculate reference values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lj_ar/lj_ar_python.html#training-and-validation-sets-with-the-python-library">3.6.3. Training and validation sets with the Python library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../results_importer/results_importer.html">3.7. Create training sets with a ResultsImporter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#run-a-reference-job">3.7.1. Run a reference job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#water-molecule-reference-data">3.7.2. Water molecule reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#initialize-the-resultsimporter">3.7.3. Initialize the ResultsImporter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#add-a-singlepoint-calculation-on-the-optimized-geometry">3.7.4. Add a singlepoint calculation on the optimized geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#add-a-geometry-optimization-job-extracting-the-bond-length-and-bond-angle">3.7.5. Add a geometry optimization job extracting the bond length and bond angle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#add-a-trajectory">3.7.6. Add a trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#add-a-reaction-energy">3.7.7. Add a reaction energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#training-set-validation-set-and-other-data-sets">3.7.8. Training set, validation set, and other data sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#exit-plams">3.7.9. Exit PLAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#save-to-disk">3.7.10. Save to disk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/results_importer.html#more-resultsimporters">3.7.11. More ResultsImporters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reaxff_water/reaxff_water.html">3.8. ReaxFF: gasphase H<sub>2</sub>O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reaxff_water/reaxff_water.html#calculate-the-reference-data">3.8.1. Calculate the reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reaxff_water/reaxff_water.html#import-the-reference-data-into-params">3.8.2. Import the reference data into ParAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reaxff_water/reaxff_water.html#set-the-parameters-to-optimize">3.8.3. Set the parameters to optimize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reaxff_water/reaxff_water.html#run-the-reaxff-parametrization">3.8.4. Run the ReaxFF parametrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reaxff_water/reaxff_water.html#visualize-the-results">3.8.5. Visualize the results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reaxff_water/reaxff_water_lowlevel_scripting.html">3.9. ReaxFF: gasphase H<sub>2</sub>O (low-level scripting version)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reaxff_water/reaxff_water_lowlevel_scripting.html#complete-example-script">3.9.1. Complete Example Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reaxff_water/reaxff_water_lowlevel_scripting.html#changing-the-example-script">3.9.2. Changing the Example Script</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reaxff_zns/reaxff_zns.html">3.10. ReaxFF: ZnS crystal and adsorption on ZnS(110) surface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reaxff_zns/reaxff_zns.html#mix-force-fields-from-the-ams-reaxff-library">3.10.1. Mix force fields from the AMS ReaxFF library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../hf_acks2.html">3.11. Refitting HF Charges with the ACKS2 Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hf_acks2.html#the-config-file">3.11.1. The Config File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hf_acks2.html#preparing-the-yaml-files-from-input">3.11.2. Preparing the YAML Files from Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hf_acks2.html#running-the-optimization">3.11.3. Running the Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hf_acks2.html#comparing-the-new-parameters">3.11.4. Comparing the new parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hf_acks2.html#playing-with-the-example">3.11.5. Playing with the example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../convert_old_reaxff_format.html">3.12. Convert old ReaxFF training sets to ParAMS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../convert_old_reaxff_format.html#convert-geo-to-job-collection-yaml">3.12.1. Convert <code class="docutils literal notranslate"><span class="pre">geo</span></code> to <code class="docutils literal notranslate"><span class="pre">job_collection.yaml</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../convert_old_reaxff_format.html#convert-trainset-in">3.12.2. Convert <code class="docutils literal notranslate"><span class="pre">trainset.in</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../convert_old_reaxff_format.html#convert-the-old-params-file">3.12.3. Convert the old <code class="docutils literal notranslate"><span class="pre">params</span></code> file</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.13. SCC-DFTB repulsive potential for ZnO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#job-collection-yaml-and-training-set-yaml">3.13.1. job_collection.yaml and training_set.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#background-znorg-0-1">3.13.2. Background: znorg-0-1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameter-interface">3.13.3. Parameter interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-parametrization">3.13.4. Run the parametrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">3.13.5. Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modify-the-analytical-repulsive-potential">3.13.6. Modify the analytical repulsive potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mainscript/mainscript.html">4. ParAMS Main Script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mainscript/mainscript.html#the-configuration-file">4.1. The Configuration File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../mainscript/mainscript.html#generate-a-template-config-file">4.1.1. Generate a template config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mainscript/mainscript.html#list-of-variables-in-params-conf-py">4.1.2. List of variables in <code class="docutils literal notranslate"><span class="pre">params.conf.py</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../components/components.html">5. Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../components/architecture/architecture.html">5.1. Architecture Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/collections/collections.html">5.2. Job and Engine Collections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/collections/collections.html#job-collection">5.2.1. Job Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#adding-jobs">5.2.1.1. Adding Jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#lookup">5.2.1.2. Lookup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#removing-entries">5.2.1.3. Removing Entries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#renaming-entries">5.2.1.4. Renaming Entries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#comparison">5.2.1.5. Comparison</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#saving-and-loading">5.2.1.6. Saving and loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#generating-amsjobs">5.2.1.7. Generating AMSJobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#running-collection-jobs">5.2.1.8. Running Collection Jobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/collections/collections.html#engine-collection">5.2.2. Engine Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/collections/collections.html#collections-api">5.2.3. Collections API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#jcentry">5.2.3.1. JCEntry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#jobcollection">5.2.3.2. JobCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#engine">5.2.3.3. Engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#enginecollection">5.2.3.4. EngineCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/collections/collections.html#collection-base-class">5.2.3.5. Collection Base Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/data_set/data_set.html">5.3. Data Set</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set.html#an-example-dataset">5.3.1. An example DataSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set.html#load-or-store-dataset">5.3.2. Load or store DataSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set.html#adding-entries">5.3.3. Adding entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set.html#demonstration-working-with-a-dataset">5.3.4. Demonstration: Working with a DataSet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/data_set.html#add-an-entry">5.3.4.1. Add an entry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/data_set.html#datasetentry-attributes">5.3.4.2. DataSetEntry attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/data_set.html#accessing-the-dataset-entries">5.3.4.3. Accessing the DataSet entries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/data_set.html#delete-a-dataset-entry">5.3.4.4. Delete a DataSet entry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/data_set.html#split-a-dataset-into-subsets">5.3.4.5. Split a DataSet into subsets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/data_set.html#dataset-header">5.3.4.6. DataSet header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/data_set.html#save-the-data-set">5.3.4.7. Save the data set</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set.html#calculating-and-adding-reference-data-with-ams">5.3.5. Calculating and Adding Reference Data with AMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set.html#calculating-the-loss-function-value">5.3.6. Calculating the Loss Function Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set.html#checking-for-consistency-with-a-given-job-collection">5.3.7. Checking for Consistency with a given Job Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set.html#sigma-vs-weight-what-is-the-difference">5.3.8. Sigma vs. weight: What is the difference?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set.html#data-set-entry-api">5.3.9. Data Set Entry API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set.html#data-set-api">5.3.10. Data Set API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/data_set/extractors.html">5.4. Extractors and Comparators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/extractors.html#available-extractors">5.4.1. Available Extractors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#angle">5.4.1.1. Angle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#average-distance">5.4.1.2. Average distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#bulk-modulus">5.4.1.3. Bulk modulus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#cell-angles">5.4.1.4. Cell angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#cell-lengths">5.4.1.5. Cell lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#cell-volume">5.4.1.6. Cell volume</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#charges">5.4.1.7. Charges</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#dihedral">5.4.1.8. Dihedral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#distance">5.4.1.9. Distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#distance-vector">5.4.1.10. Distance vector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#energy">5.4.1.11. Energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#forces">5.4.1.12. Forces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#hessian">5.4.1.13. Hessian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#pes">5.4.1.14. PES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#pes-compared">5.4.1.15. PES compared</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#pesscan-angle">5.4.1.16. PESScan angle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#pesscan-dihedral">5.4.1.17. PESScan dihedral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#pesscan-distance">5.4.1.18. PESScan distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#rmsd">5.4.1.19. RMSD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#shear-modulus">5.4.1.20. Shear modulus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#stress-tensor">5.4.1.21. Stress tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#stress-tensor-1d">5.4.1.22. Stress tensor 1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#stress-tensor-2d">5.4.1.23. Stress tensor 2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#stress-tensor-3d">5.4.1.24. Stress tensor 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#stress-tensor-diagonal-2d">5.4.1.25. Stress tensor diagonal 2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#stress-tensor-diagonal-3d">5.4.1.26. Stress tensor diagonal 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#stress-tensor-off-diagonal-2d">5.4.1.27. Stress tensor off-diagonal 2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#stress-tensor-off-diagonal-3d">5.4.1.28. Stress tensor off-diagonal 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#vibrational-frequencies">5.4.1.29. Vibrational frequencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/extractors.html#young-modulus">5.4.1.30. Young modulus</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/extractors.html#custom-extractors">5.4.2. Custom Extractors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/extractors.html#supported-data-structures">5.4.3. Supported Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/extractors.html#custom-comparators">5.4.4. Custom Comparators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/data_set/data_set_evaluator.html">5.5. Data Set Evaluator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set_evaluator.html#datasetevaluator-class">5.5.1. DataSetEvaluator class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/data_set_evaluator.html#example-datasetevaluator-calculate-reference">5.5.1.1. Example: DataSetEvaluator.calculate_reference()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/data_set_evaluator.html#example-datasetevaluator-run">5.5.1.2. Example: DataSetEvaluator.run()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/data_set/data_set_evaluator.html#example-load-a-saved-datasetevaluator">5.5.1.3. Example: Load a saved DataSetEvaluator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/data_set/data_set_evaluator.html#datasetevaluator-api">5.5.2. DataSetEvaluator API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/results_importer/results_importer.html">5.6. Results Importer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/results_importer/overview.html">5.6.1. ResultsImporter overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/overview.html#resultsimporter-summary">5.6.1.1. ResultsImporter summary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/overview.html#resultsimporter-settings">5.6.1.2. ResultsImporter settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/overview.html#training-set-validation-set-etc">5.6.1.3. Training set, validation set, etc.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/overview.html#save-and-load-from-disk">5.6.1.4. Save and load from disk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/overview.html#add-singlejob">5.6.1.5. add_singlejob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/overview.html#add-trajectory-singlepoints">5.6.1.6. add_trajectory_singlepoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/overview.html#add-reaction-energy">5.6.1.7. add_reaction_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/overview.html#add-pesscan-singlepoints">5.6.1.8. add_pesscan_singlepoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/overview.html#add-neb-singlepoints">5.6.1.9. add_neb_singlepoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/overview.html#add-pesexploration-singlepoints">5.6.1.10. add_pesexploration_singlepoints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/results_importer/reference_codes.html">5.6.2. AMS, VASP and Quantum ESPRESSO reference data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/reference_codes.html#ams">5.6.2.1. AMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/reference_codes.html#vasp">5.6.2.2. VASP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/results_importer/reference_codes.html#quantum-espresso">5.6.2.3. Quantum ESPRESSO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/results_importer/api.html">5.6.3. ResultsImporters API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/interfaces/interfaces.html">5.7. Parameter Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/interfaces/interfaces.html#available-parameter-interfaces">5.7.1. Available Parameter Interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/interfaces/xtb.html">5.7.1.1. xTB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/interfaces/reaxff.html">5.7.1.2. ReaxFF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/interfaces/dftbsplinerep.html">5.7.1.3. SCC-DFTB repulsive potential</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/interfaces/lennardjones.html">5.7.1.4. Lennard Jones</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/interfaces/interfaces.html#parameter-interface-basics">5.7.2. Parameter Interface Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/interfaces/interfaces.html#working-with-parameters">5.7.3. Working with Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/interfaces/interfaces.html#the-active-parameters-subset">5.7.4. The Active Parameters Subset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/interfaces/interfaces.html#storage">5.7.5. Storage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/interfaces/interfaces.html#lossless-storage">5.7.5.1. Lossless Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/interfaces/interfaces.html#relation-to-plams-settings">5.7.6. Relation to PLAMS Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/interfaces/interfaces.html#parameter-api">5.7.7. Parameter API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/interfaces/interfaces.html#interface-base-class-api">5.7.8. Interface Base Class API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/optimizers/optimizers.html">5.8. Optimizers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/optimizers/cmaes.html">5.8.1. CMA-ES</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/optimizers/cmaes.html#list-of-valid-cmasettings">5.8.1.1. List of valid <cite>cmasettings</cite></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/optimizers/cmaes.html#references">5.8.1.2. References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/optimizers/scipy.html">5.8.2. Scipy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/optimizers/nevergrad.html">5.8.3. Nevergrad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/optimizers/armc.html">5.8.4. Adaptive Rate MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/optimizers/grid.html">5.8.5. Simple Grid Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/optimizers/base.html">5.8.6. Optimizer Base Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/optimizers/base.html#baseoptimizer-api">5.8.6.1. BaseOptimizer API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/optimizers/base.html#minimizeresult-api">5.8.6.2. MinimizeResult API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/runner/runner.html">5.9. Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/runner/runner.html#optimization-setup">5.9.1. Optimization Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/runner/runner.html#optimization-api">5.9.2. Optimization API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/runner/parallellevels.html">5.10. Parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/constraints/constraints.html">5.11. Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/callbacks/callbacks.html">5.12. Callbacks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#default-callbacks">5.12.1. Default callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#logger">5.12.2. Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#timeout">5.12.3. Timeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#target-value">5.12.4. Target Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#maximum-iterations">5.12.5. Maximum Iterations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#early-stopping">5.12.6. Early Stopping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#stopfile">5.12.7. Stopfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#time-per-evaluation">5.12.8. Time per Evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#load-average">5.12.9. Load Average</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#user-defined-callbacks">5.12.10. User-Defined Callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/callbacks/callbacks.html#callback-api">5.12.11. Callback API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/lossfunctions/lossfunctions.html">5.13. Loss Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/lossfunctions/lossfunctions.html#specifying-the-loss-function">5.13.1. Specifying the loss function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/lossfunctions/lossfunctions.html#technical-information">5.13.2. Technical information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/lossfunctions/lossfunctions.html#sum-of-squares-error">5.13.3. Sum of Squares Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/lossfunctions/lossfunctions.html#sum-of-absolute-errors">5.13.4. Sum of Absolute Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/lossfunctions/lossfunctions.html#mean-absolute-error">5.13.5. Mean Absolute Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/lossfunctions/lossfunctions.html#root-mean-square-error">5.13.6. Root-Mean-Square Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/lossfunctions/lossfunctions.html#loss-function-api">5.13.7. Loss Function API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/utilities/utilities.html">5.14. Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/utilities/converters.html">5.14.1. ParAMS Converters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/utilities/converters.html#ams-job-to-settings">5.14.1.1. AMS Job to Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/utilities/converters.html#ams-job-to-engine">5.14.1.2. AMS Job to Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/utilities/history.html">5.14.2. Optimization History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/utilities/plotting.html">5.14.3. Plotting Funcitons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/utilities/public_helpers.html">5.14.4. Helper functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/utilities/weights_schemes.html">5.14.5. Weights schemes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/utilities/weights_schemes.html#types-of-weights-schemes">5.14.5.1. Types of weights schemes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/utilities/weights_schemes.html#examples-of-weight-schemes">5.14.5.2. Examples of weight schemes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/utilities/weights_schemes.html#weights-schemes-api">5.14.5.3. Weights schemes API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/experimental/experimental.html">5.15. Experimental Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../components/experimental/parameter_interfaces.html">5.15.1. Working with Parameter Interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/experimental/parameter_interfaces.html#active-parameter-search">5.15.1.1. Active Parameter Search</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../components/experimental/data_set.html">5.15.2. Working with Data Sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../components/experimental/data_set.html#data-set-sensitivity">5.15.2.1. Data Set Sensitivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../components/experimental/data_set.html#normalization-of-data-set-weights">5.15.2.2. Normalization of Data Set Weights</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cite.html">6. Required Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">7. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">8. Frequently Asked Questions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">ParAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../ParAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../../index.html">ParAMS</a>/</li>
+      
+          <li><a href="../examples.html">3. Tutorials</a>/</li>
+      
+    <li class="orange-text">3.13. SCC-DFTB repulsive potential for ZnO</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="scc-dftb-repulsive-potential-for-zno">
+<span id="dftb-zno-tutorial"></span><h1>3.13. SCC-DFTB repulsive potential for ZnO<a class="headerlink" href="#scc-dftb-repulsive-potential-for-zno" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">First go through the <a class="reference internal" href="../lj_ar/lj_ar.html#lj-ar-tutorial"><span class="std std-ref">Lennard-Jones Potential for Argon</span></a> and <a class="reference internal" href="../lj_ar/lj_ar_python.html#lj-ar-python"><span class="std std-ref">The params Python library</span></a> tutorials.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The ParAMS graphical user interface does not support SCC-DFTB repulsive
+potentials, but it does support <span class="xref std std-ref">xTB parametrizations</span>.
+This tutorial only covers running via the command-line.</p>
+</div>
+<p>This example illustrates how to fit an <strong>SCC-DFTB repulsive potential</strong>.  It is
+based on the work published in Komissarov et al., <em>J. Chem. Inf. Model.</em> <a class="reference external" href="https://doi.org/10.1021/acs.jcim.1c00333">DOI:
+10.1021/acs.jcim.1c00333</a>.</p>
+<p><strong>Jobs</strong>: Lattice optimizations of the <strong>wurtzite</strong> and <strong>rocksalt</strong> polymorphs of ZnO</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="../../_images/DFTB_ZnO_polymorphs.png"><img alt="../../_images/DFTB_ZnO_polymorphs.png" src="../../_images/DFTB_ZnO_polymorphs.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.6 </span><span class="caption-text">Adapted from <a class="reference external" href="https://doi.org/10.1021/acs.jcim.1c00333">Komissarov et al.</a></span></p>
+</div>
+<p><strong>Training set</strong>: The relative energy between the
+two polymorphs, and the bulk modulus and optimized lattice parameters of wurtzite. The <strong>reference data</strong> were
+calculated with BAND (DFT), using a TZP basis set.</p>
+<p><strong>Parameter interface</strong>: <a class="reference internal" href="../../components/interfaces/dftbsplinerep.html#dftbsplinerep"><span class="std std-ref">DFTBSplineRepulsivePotentialParameters</span></a></p>
+<div class="section" id="job-collection-yaml-and-training-set-yaml">
+<h2>3.13.1. job_collection.yaml and training_set.yaml<a class="headerlink" href="#job-collection-yaml-and-training-set-yaml" title="Permalink to this headline">¶</a></h2>
+<p>All the files needed for this example can be found in <code class="docutils literal notranslate"><span class="pre">$AMSHOME/scripting/scm/params/examples/DFTB_ZnO</span></code>.</p>
+<p><strong>job_collection.yaml</strong>: Note that for wurtzite the <em>elastic tensor</em> is calculated, which will also calculate the bulk modulus.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">ID</span><span class="p">:</span> <span class="n">rocksalt_lattopt</span>
+<span class="n">ReferenceEngineID</span><span class="p">:</span> <span class="kc">None</span>
+<span class="n">AMSInput</span><span class="p">:</span> <span class="o">|</span>
+   <span class="n">Task</span> <span class="n">GeometryOptimization</span>
+   <span class="n">geometryoptimization</span>
+     <span class="n">OptimizeLattice</span> <span class="n">Yes</span>
+   <span class="n">End</span>
+   <span class="n">system</span>
+     <span class="n">Atoms</span>
+                <span class="n">Zn</span>      <span class="mf">2.1700000000</span>      <span class="mf">2.1700000000</span>      <span class="mf">2.1700000000</span> 
+                 <span class="n">O</span>      <span class="mf">0.0000000000</span>      <span class="mf">0.0000000000</span>      <span class="mf">0.0000000000</span> 
+     <span class="n">End</span>
+     <span class="n">Lattice</span>
+            <span class="mf">0.0000000000</span>     <span class="mf">2.1700000000</span>     <span class="mf">2.1700000000</span>
+            <span class="mf">2.1700000000</span>     <span class="mf">0.0000000000</span>     <span class="mf">2.1700000000</span>
+            <span class="mf">2.1700000000</span>     <span class="mf">2.1700000000</span>     <span class="mf">0.0000000000</span>
+     <span class="n">End</span>
+   <span class="n">End</span>
+<span class="o">---</span>
+<span class="n">ID</span><span class="p">:</span> <span class="n">wurtzite_lattopt</span>
+<span class="n">ReferenceEngineID</span><span class="p">:</span> <span class="kc">None</span>
+<span class="n">AMSInput</span><span class="p">:</span> <span class="o">|</span>
+   <span class="n">Task</span> <span class="n">GeometryOptimization</span>
+   <span class="n">geometryoptimization</span>
+     <span class="n">OptimizeLattice</span> <span class="n">Yes</span>
+     <span class="n">convergence</span>
+       <span class="n">Gradients</span> <span class="mf">8e-05</span>
+     <span class="n">End</span>
+   <span class="n">End</span>
+   <span class="n">properties</span>
+     <span class="n">ElasticTensor</span> <span class="n">Yes</span>
+   <span class="n">End</span>
+   <span class="n">system</span>
+     <span class="n">Atoms</span>
+                <span class="n">Zn</span>      <span class="mf">1.6450000000</span>      <span class="mf">0.9497411900</span>      <span class="mf">0.0233750800</span> 
+                <span class="n">Zn</span>      <span class="mf">0.0000000000</span>      <span class="mf">1.8994823900</span>      <span class="mf">2.6783750800</span> 
+                 <span class="n">O</span>      <span class="mf">1.6450000000</span>      <span class="mf">0.9497411900</span>      <span class="mf">3.2953749200</span> 
+                 <span class="n">O</span>      <span class="mf">0.0000000000</span>      <span class="mf">1.8994823900</span>      <span class="mf">0.6403749200</span> 
+     <span class="n">End</span>
+     <span class="n">Lattice</span>
+            <span class="mf">3.2900000000</span>     <span class="mf">0.0000000000</span>     <span class="mf">0.0000000000</span>
+           <span class="o">-</span><span class="mf">1.6450000000</span>     <span class="mf">2.8492235800</span>     <span class="mf">0.0000000000</span>
+            <span class="mf">0.0000000000</span>     <span class="mf">0.0000000000</span>     <span class="mf">5.3100000000</span>
+     <span class="n">End</span>
+   <span class="n">End</span>
+<span class="o">...</span>
+<span class="c1"># 0.5.0</span>
+</pre></div>
+</div>
+<p><strong>training_set.yaml</strong>: The <code class="docutils literal notranslate"><span class="pre">cell_lengths</span></code> <a class="reference internal" href="../../components/data_set/extractors.html#availableextractors"><span class="std std-ref">extractor</span></a> accepts an additional argument: 0 for the first lattice vector (<em>a</em>), and 2 for the third lattice vector (<em>c</em>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">Expression</span><span class="p">:</span> <span class="n">bulkmodulus</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">)</span>
+<span class="n">Weight</span><span class="p">:</span> <span class="mf">0.5</span>
+<span class="n">Sigma</span><span class="p">:</span> <span class="mf">10.0</span>
+<span class="n">ReferenceValue</span><span class="p">:</span> <span class="mf">126.193</span>
+<span class="n">Unit</span><span class="p">:</span> <span class="n">GPa</span><span class="p">,</span> <span class="mf">29421.0152092444</span>
+<span class="o">---</span>
+<span class="n">Expression</span><span class="p">:</span> <span class="n">cell_lengths</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">Weight</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">ReferenceValue</span><span class="p">:</span> <span class="mf">3.3029</span>
+<span class="o">---</span>
+<span class="n">Expression</span><span class="p">:</span> <span class="n">cell_lengths</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Weight</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">ReferenceValue</span><span class="p">:</span> <span class="mf">5.3208</span>
+<span class="o">---</span>
+<span class="n">Expression</span><span class="p">:</span> <span class="n">energy</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="o">-</span><span class="n">energy</span><span class="p">(</span><span class="s2">&quot;rocksalt_lattopt&quot;</span><span class="p">)</span>
+<span class="n">Weight</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">ReferenceValue</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.0088641</span>
+<span class="o">...</span>
+<span class="c1"># 0.5.1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="background-znorg-0-1">
+<h2>3.13.2. Background: znorg-0-1<a class="headerlink" href="#background-znorg-0-1" title="Permalink to this headline">¶</a></h2>
+<p>AMS includes the <code class="docutils literal notranslate"><span class="pre">DFTB.org/znorg-0-1</span></code> SCC-DFTB parameters for ZnO. Although
+those parameters give good values for the lattice parameters and bulk modulus,
+they give the <em>incorrect</em> relative stability of the wurtzite and rocksalt
+polymorphs (the “Prediction” numbers were calculated with znorg-0-1):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Reference     Prediction     Unit           Sigma    Weight    WSE*      Row*  Col*  Expression</span>
+<span class="c1">#------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">+</span><span class="mf">126.19</span>        <span class="o">+</span><span class="mf">160.88</span>        <span class="n">GPa</span>            <span class="mf">10.000</span>   <span class="mf">0.5000</span>    <span class="mf">6.016</span>     <span class="mi">0</span>     <span class="mi">0</span>     <span class="n">bulkmodulus</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">)</span>
+<span class="o">+</span><span class="mf">3.303</span>         <span class="o">+</span><span class="mf">3.290</span>         <span class="n">angstrom</span>       <span class="mf">0.050</span>    <span class="mf">1.0000</span>    <span class="mf">0.065</span>     <span class="mi">0</span>     <span class="mi">0</span>     <span class="n">cell_lengths</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="o">+</span><span class="mf">5.321</span>         <span class="o">+</span><span class="mf">5.376</span>         <span class="n">angstrom</span>       <span class="mf">0.050</span>    <span class="mf">1.0000</span>    <span class="mf">1.237</span>     <span class="mi">0</span>     <span class="mi">0</span>     <span class="n">cell_lengths</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">0.00886</span>       <span class="o">+</span><span class="mf">0.00501</span>       <span class="n">Ha</span>             <span class="mf">0.002</span>    <span class="mf">1.0000</span>    <span class="mf">48.157</span>    <span class="mi">0</span>     <span class="mi">0</span>     <span class="n">energy</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="o">-</span><span class="n">energy</span><span class="p">(</span><span class="s2">&quot;rocksalt_lattopt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In experiment and DFT, wurtzite is more stable than rocksalt (-0.009 Ha per ZnO formula unit), but with znorg-0-1, the
+opposite is true (+0.005 Ha per ZnO formula unit). This motivates the reparametrization. <strong>The goal of the
+parametrization is to have wurtzite more stable than rocksalt with the new parameters</strong>.</p>
+<p>The above table was generated with the following script using a <a class="reference internal" href="../../components/data_set/data_set_evaluator.html#datasetevaluator"><span class="std std-ref">Data Set Evaluator</span></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scm.plams</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">scm.params</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">num_processes</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+
+    <span class="n">dftb_s</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+    <span class="n">dftb_s</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">dftb</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="s1">&#39;SCC-DFTB&#39;</span>
+    <span class="n">dftb_s</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">dftb</span><span class="o">.</span><span class="n">kspace</span><span class="o">.</span><span class="n">quality</span> <span class="o">=</span> <span class="s1">&#39;Good&#39;</span>
+    <span class="n">dftb_s</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">dftb</span><span class="o">.</span><span class="n">resourcesdir</span> <span class="o">=</span> <span class="s1">&#39;DFTB.org/znorg-0-1&#39;</span>
+
+    <span class="n">parallel</span> <span class="o">=</span> <span class="n">ParallelLevels</span><span class="p">(</span><span class="n">parametervectors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">processes</span><span class="o">=</span><span class="n">num_processes</span><span class="p">)</span>
+
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="s1">&#39;training_set.yaml&#39;</span><span class="p">)</span>
+    <span class="n">jc</span> <span class="o">=</span> <span class="n">JobCollection</span><span class="p">(</span><span class="s1">&#39;job_collection.yaml&#39;</span><span class="p">)</span>
+
+    <span class="n">dse</span> <span class="o">=</span> <span class="n">DataSetEvaluator</span><span class="p">()</span>
+    <span class="n">dse</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jc</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">dftb_s</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;saved_results&#39;</span><span class="p">,</span> <span class="n">use_pipe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;predictions.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dse</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">detailed_string</span><span class="p">())</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To run the above script (save it with the name <code class="docutils literal notranslate"><span class="pre">evaluate_with_znorg.py</span></code>):</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;$AMSBIN/amspython&quot;</span> <span class="n">evaluate_with_znorg</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parameter-interface">
+<h2>3.13.3. Parameter interface<a class="headerlink" href="#parameter-interface" title="Permalink to this headline">¶</a></h2>
+<p>SCC-DFTB parameters are stored in <a class="reference external" href="../../../DFTB/Parameter_files.html#slater-koster-based-dftb">Slater-Koster files</a>.</p>
+<p>There are two types of parameters: electronic (first part of the file) and
+repulsive (second part). <strong>The SCC-DFTB interface in ParAMS can only
+reparametrize the repulsive part</strong>. The electronic part will be left unchanged.</p>
+<p id="cubicsplines">The repulsive potential is often stored as a set of cubic splines. For example,
+the <code class="docutils literal notranslate"><span class="pre">O-Zn.skf</span></code> file from znorg-0-1
+(<code class="docutils literal notranslate"><span class="pre">$AMSHOME/atomicdata/DFTB/DFTB.org/znorg-0-1/O-Zn.skf</span></code>) contains a section starting like this:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">Spline</span>
+<span class="mi">50</span> <span class="mf">4.4</span>
+<span class="mf">0.9208107239531658</span> <span class="mf">0.04427199498760486</span> <span class="o">-</span><span class="mf">0.02471259209174629</span>
+<span class="mf">3.314</span> <span class="mf">3.33572</span>    <span class="mf">0.0247126138</span> <span class="o">-</span><span class="mf">0.04551125961871317</span> <span class="mf">0.02095362795876388</span> <span class="mf">8.70378473121888e-07</span>
+<span class="mf">3.33572</span> <span class="mf">3.35744</span>    <span class="mf">0.0237339943</span> <span class="o">-</span><span class="mf">0.04460103278835941</span> <span class="mf">0.02095368467262518</span> <span class="o">-</span><span class="mf">4.351894310757234e-06</span>
+<span class="mf">3.35744</span> <span class="mf">3.37916</span>    <span class="mf">0.0227751449</span> <span class="o">-</span><span class="mf">0.04369081088530866</span> <span class="mf">0.0209534011031919</span> <span class="mf">6.777854668536314e-06</span>
+<span class="mf">3.37916</span> <span class="mf">3.40088</span>    <span class="mf">0.0218360655</span> <span class="o">-</span><span class="mf">0.04278058554885637</span> <span class="mf">0.0209538427482021</span> <span class="o">-</span><span class="mf">3.240842931978331e-06</span>
+<span class="mf">3.40088</span> <span class="mf">3.4226</span>    <span class="mf">0.0209167563</span> <span class="o">-</span><span class="mf">0.04187035520655911</span> <span class="mf">0.02095363157487665</span> <span class="o">-</span><span class="mf">3.573820388493532e-06</span>
+<span class="mf">3.4226</span> <span class="mf">3.44432</span>    <span class="mf">0.0200172172</span> <span class="o">-</span><span class="mf">0.04096013450888582</span> <span class="mf">0.02095339870474014</span> <span class="mf">7.776778418881326e-06</span>
+<span class="mf">3.44432</span> <span class="mf">3.46604</span>    <span class="mf">0.0191374481</span> <span class="o">-</span><span class="mf">0.04004990786287029</span> <span class="mf">0.02095390543962191</span> <span class="o">-</span><span class="mf">8.014605506416323e-06</span>
+<span class="mf">3.46604</span> <span class="mf">3.48776</span>    <span class="mf">0.0182774492</span> <span class="o">-</span><span class="mf">0.03913968155344552</span> <span class="mf">0.02095338320792711</span> <span class="mf">4.762957571541797e-06</span>
+<span class="mf">3.48776</span> <span class="mf">3.50948</span>    <span class="mf">0.0174372203</span> <span class="o">-</span><span class="mf">0.03822945984599743</span> <span class="mf">0.02095369356224247</span> <span class="o">-</span><span class="mf">1.277884267468699e-06</span>
+<span class="mf">3.50948</span> <span class="mf">3.5312</span>    <span class="mf">0.0166167615</span> <span class="o">-</span><span class="mf">0.03731923320621154</span> <span class="mf">0.02095361029530361</span> <span class="mf">3.485827781742504e-07</span>
+<span class="mf">3.5312</span> <span class="mf">3.55292</span>    <span class="mf">0.0158160728</span> <span class="o">-</span><span class="mf">0.03640900788164298</span> <span class="mf">0.02095363300895743</span> <span class="o">-</span><span class="mf">1.164502135629478e-07</span>
+<span class="mf">3.55292</span> <span class="mf">3.57464</span>    <span class="mf">0.0150351542</span> <span class="o">-</span><span class="mf">0.03549878222854298</span> <span class="mf">0.02095362542106152</span> <span class="mf">1.172215182097767e-07</span>
+<span class="mf">3.57464</span> <span class="mf">3.59636</span>    <span class="mf">0.0142740057</span> <span class="o">-</span><span class="mf">0.03458855657435135</span> <span class="mf">0.02095363305921564</span> <span class="o">-</span><span class="mf">3.524390511567152e-07</span>
+<span class="mf">3.59636</span> <span class="mf">3.61808</span>    <span class="mf">0.0135326273</span> <span class="o">-</span><span class="mf">0.03367833125305728</span> <span class="mf">0.02095361009428707</span> <span class="mf">1.292537466393956e-06</span>
+<span class="mf">3.61808</span> <span class="mf">3.6398</span>    <span class="mf">0.012811019</span> <span class="o">-</span><span class="mf">0.03276810460126522</span> <span class="mf">0.02095369431602838</span> <span class="o">-</span><span class="mf">4.817712128666492e-06</span>
+</pre></div>
+</td></tr></table></div>
+<p>The third column (from line 606) contains the O-Zn repulsive potential (in Ha)
+at the distance defined by the first column (in bohr). Columns 4-6 contain the
+parameters of the cubic splines.</p>
+<p>With the <a class="reference internal" href="../../components/interfaces/dftbsplinerep.html#dftbsplinerep"><span class="std std-ref">DFTBSplineRepulsivePotentialParameters</span></a> interface,
+the parameters of the cubic splines are <strong>not directly fitted</strong>. Instead,
+a Python class represents some analytical repulsive potential. The interface automatically
+makes the conversion to cubic splines.</p>
+<p>Here, we will use the <a class="reference internal" href="../../components/interfaces/dftbsplinerep.html#scm.params.parameterinterfaces.dftbsplinerep.TaperedDoubleExponential" title="scm.params.parameterinterfaces.dftbsplinerep.TaperedDoubleExponential"><code class="xref py py-class docutils literal notranslate"><span class="pre">TaperedDoubleExponential</span></code></a>,
+which has the analytical form</p>
+<div class="math notranslate nohighlight" id="eqtapereddoubleexponential">
+\[V^{\text{rep}}(r) = \frac{1}{2}\left(\cos\left(\frac{\pi r}{r_{\text{cut}}}\right)+1\right)\cdot[A_0\exp(-A_1 r) + A_2\exp(-A_2 r)]\]</div>
+<p>where <span class="math notranslate nohighlight">\(r_{\text{cut}}\)</span> is a <strong>non-fitted parameter</strong> (constant), and
+<span class="math notranslate nohighlight">\(A_0\)</span>, <span class="math notranslate nohighlight">\(A_1\)</span>, <span class="math notranslate nohighlight">\(A_2\)</span>, and <span class="math notranslate nohighlight">\(A_3\)</span>, are <strong>parameters
+changed during the optimization</strong>.</p>
+<p>The <strong>names</strong> of the fitted parameters in the
+<code class="docutils literal notranslate"><span class="pre">DFTBSplineRepulsivePotentialParameters</span></code> class are <code class="docutils literal notranslate"><span class="pre">O-Zn:p0</span></code>, <code class="docutils literal notranslate"><span class="pre">O-Zn:p1</span></code>, etc.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The DFTB repulsive potential <strong>cannot</strong> be stored in/loaded from a .yaml file. Instead, you must specify the parameters in <code class="docutils literal notranslate"><span class="pre">params.conf.py</span></code> (see below).</p>
+</div>
+</div>
+<div class="section" id="run-the-parametrization">
+<h2>3.13.4. Run the parametrization<a class="headerlink" href="#run-the-parametrization" title="Permalink to this headline">¶</a></h2>
+<p>To run the parametrization, run</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;$AMSBIN/params&quot;</span> <span class="n">optimize</span>
+</pre></div>
+</div>
+<p>This processes the <strong>params.conf.py</strong> file, which contains:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">multiprocessing</span>
+<span class="n">num_processes</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+
+<span class="c1">#### NOTE: To get scientifically meaningful results, set the kspace quality to &#39;Good&#39; !</span>
+<span class="c1">#### It is only set to &#39;Normal&#39; here for demonstration purposes, so that the calculation is faster.</span>
+<span class="n">dftb_s</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">dftb_s</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">dftb</span><span class="o">.</span><span class="n">kspace</span><span class="o">.</span><span class="n">quality</span> <span class="o">=</span> <span class="s1">&#39;Normal&#39;</span>
+
+<span class="c1">#### The znorg-0-1 parameters are located in $AMSHOME/atomicdata/DFTB/DFTB.org/znorg-0-1</span>
+<span class="n">interface</span> <span class="o">=</span> <span class="n">DFTBSplineRepulsivePotentialParameters</span><span class="p">(</span>
+    <span class="n">folder</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;AMSHOME&#39;</span><span class="p">],</span><span class="s1">&#39;atomicdata&#39;</span><span class="p">,</span> <span class="s1">&#39;DFTB&#39;</span><span class="p">,</span> <span class="s1">&#39;DFTB.org&#39;</span><span class="p">,</span> <span class="s1">&#39;znorg-0-1&#39;</span><span class="p">),</span> 
+    <span class="n">repulsive_function</span><span class="o">=</span><span class="n">TaperedDoubleExponential</span><span class="p">(</span><span class="n">cutoff</span><span class="o">=</span><span class="mf">5.67</span><span class="p">),</span> 
+    <span class="n">r_range</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">5.87</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> 
+    <span class="n">other_settings</span><span class="o">=</span><span class="n">dftb_s</span>
+<span class="p">)</span>
+<span class="c1"># only optimize the O-Zn and Zn-O repulsive potential</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">interface</span><span class="p">:</span>    
+    <span class="n">p</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;O-Zn:&#39;</span><span class="p">)</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;### Active parameters ###&quot;</span><span class="p">)</span>
+<span class="n">interface</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span> <span class="c1"># initial values</span>
+<span class="n">interface</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">range</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">4.</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">10.</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">4.</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="p">]</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">interface</span><span class="o">.</span><span class="n">active</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">Scipy</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;Nelder-Mead&#39;</span><span class="p">)</span>
+
+<span class="c1"># There are only two jobs in the job collection, one is much more expensive than</span>
+<span class="c1"># the other, and DFTB parallelizes well over several cores. Therefore run only</span>
+<span class="c1"># one job at a time, and let that job use as many processes as possible.</span>
+<span class="n">parallel</span> <span class="o">=</span> <span class="n">ParallelLevels</span><span class="p">(</span><span class="n">parametervectors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">processes</span><span class="o">=</span><span class="n">num_processes</span><span class="p">)</span>
+
+<span class="c1"># Save information often to disk.</span>
+<span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">Logger</span><span class="p">(</span><span class="n">every_n_iter</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+<span class="c1"># Set skip_x0 = True, because with Scipy iteration 0 would duplicate iteration 1</span>
+<span class="n">optimization_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;skip_x0&#39;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../components/interfaces/dftbsplinerep.html#scm.params.parameterinterfaces.dftbsplinerep.DFTBSplineRepulsivePotentialParameters" title="scm.params.parameterinterfaces.dftbsplinerep.DFTBSplineRepulsivePotentialParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">DFTBSplineRepulsivePotentialParameters</span></code></a> constructor receives four arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">folder</span></code>: Folder containing .skf files. The electronic parameters, and repulsive potentials that are not changed (e.g. in C-C.skf), are taken from this directory.</li>
+<li><code class="docutils literal notranslate"><span class="pre">repulsive_function</span></code>: An analytical repulsive function. Here a TaperedDoubleExponential with <span class="math notranslate nohighlight">\(r_{\text{cut}} = 5.67\)</span> bohr.</li>
+<li><code class="docutils literal notranslate"><span class="pre">r_range</span></code>: The distance range (in bohr) for which to print the <a class="reference internal" href="#cubicsplines"><span class="std std-ref">cubic splines</span></a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">other_settings</span></code>: Settings for the DFTB engine during parametrization. Here, it sets the k-space sampling.</li>
+</ul>
+<p>Only the parameters with names starting with <code class="docutils literal notranslate"><span class="pre">O-Zn</span></code> are activated. This leaves all other repulsive potentials (e.g. in C-C.skf, C-O.skf, …) left intact.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">The O-Zn and Zn-O repulsive potentials are necessarily identical.
+<a class="reference internal" href="../../components/interfaces/dftbsplinerep.html#scm.params.parameterinterfaces.dftbsplinerep.DFTBSplineRepulsivePotentialParameters" title="scm.params.parameterinterfaces.dftbsplinerep.DFTBSplineRepulsivePotentialParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">DFTBSplineRepulsivePotentialParameters</span></code></a>
+uses only the alphabetically sorted version (O-Zn), and will write the same
+repulsive potential to Zn-O.skf.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The initial repulsive potential is <strong>not</strong> the znorg-0-1 repulsive
+potential, but instead the <code class="docutils literal notranslate"><span class="pre">TaperedDoubleExponential</span></code> with the parameters
+given on the line <code class="docutils literal notranslate"><span class="pre">interface.active.x</span></code>.</p>
+<p class="last">To evaluate the data_set with the znorg-0-1 repulsive potential (for comparison purposes),
+see <a class="reference internal" href="#background-znorg-0-1"><span class="std std-ref">Background: znorg-0-1</span></a>.</p>
+</div>
+<p>For more details, see the <a class="reference internal" href="../../components/interfaces/dftbsplinerep.html#dftbsplinerep"><span class="std std-ref">SCC-DFTB repulsive potential</span></a> documentation.</p>
+</div>
+<div class="section" id="results">
+<h2>3.13.5. Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>Go to the directory <code class="docutils literal notranslate"><span class="pre">optimization/training_set_results/best</span></code></p>
+<ul class="simple">
+<li>The new Slater-Koster files are stored in the directory <code class="docutils literal notranslate"><span class="pre">parameters_ams</span></code></li>
+<li>The values of <span class="math notranslate nohighlight">\(A_0\)</span>, <span class="math notranslate nohighlight">\(A_1\)</span> etc. are stored in <code class="docutils literal notranslate"><span class="pre">active_parameters.txt</span></code></li>
+<li>The new predictions can be found in the <code class="docutils literal notranslate"><span class="pre">predictions_*.txt</span></code> files:</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Reference     Prediction     Unit           Sigma    Weight    WSE*      Row*  Col*  Expression</span>
+<span class="c1">#------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">+</span><span class="mf">126.19</span>        <span class="o">+</span><span class="mf">140.37</span>        <span class="n">GPa</span>            <span class="mf">10.000</span>   <span class="mf">0.5000</span>    <span class="mf">1.004</span>     <span class="mi">0</span>     <span class="mi">0</span>     <span class="n">bulkmodulus</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">)</span>
+<span class="o">+</span><span class="mf">3.303</span>         <span class="o">+</span><span class="mf">3.283</span>         <span class="n">angstrom</span>       <span class="mf">0.050</span>    <span class="mf">1.0000</span>    <span class="mf">0.162</span>     <span class="mi">0</span>     <span class="mi">0</span>     <span class="n">cell_lengths</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="o">+</span><span class="mf">5.321</span>         <span class="o">+</span><span class="mf">5.366</span>         <span class="n">angstrom</span>       <span class="mf">0.050</span>    <span class="mf">1.0000</span>    <span class="mf">0.800</span>     <span class="mi">0</span>     <span class="mi">0</span>     <span class="n">cell_lengths</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">0.00886</span>       <span class="o">-</span><span class="mf">0.00957</span>       <span class="n">Ha</span>             <span class="mf">0.002</span>    <span class="mf">1.0000</span>    <span class="mf">0.124</span>     <span class="mi">0</span>     <span class="mi">0</span>     <span class="n">energy</span><span class="p">(</span><span class="s2">&quot;wurtzite_lattopt&quot;</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="o">-</span><span class="n">energy</span><span class="p">(</span><span class="s2">&quot;rocksalt_lattopt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>With the new repulsive potential, the wurtzite polymorph is 0.00957 Ha per ZnO
+formula unit more stable than rocksalt</strong>, which compares well with the reference
+value of 0.00866 Ha.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The above results were obtained with KSpace Quality ‘Good’. Your results may differ somewhat.</p>
+</div>
+</div>
+<div class="section" id="modify-the-analytical-repulsive-potential">
+<h2>3.13.6. Modify the analytical repulsive potential<a class="headerlink" href="#modify-the-analytical-repulsive-potential" title="Permalink to this headline">¶</a></h2>
+<p>To use a different functional form of the repulsive potential, create a new class deriving from <code class="docutils literal notranslate"><span class="pre">RepulsiveFunction</span></code>, similar to <code class="docutils literal notranslate"><span class="pre">TaperedDoubleExponential</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TaperedDoubleExponential</span><span class="p">(</span><span class="n">RepulsiveFunction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Tapered double exponential function of the form</span>
+
+<span class="sd">    0.5*[cos(pi*r/cutoff)+1]*[A*exp(-B*r)+C*exp(-D*r)]</span>
+
+<span class="sd">    where A, B, C, D are the parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">7.0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span> <span class="o">=</span> <span class="n">cutoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">npar</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># number of parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_values</span> <span class="o">=</span> <span class="p">[</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_ranges</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">10.</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">5.</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">10.</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">10.</span><span class="p">)</span> <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        x : a numpy array containing the values for which to evaluate the function</span>
+<span class="sd">        params : a list or 1D numpy array with self.npar (=4) elements</span>
+
+<span class="sd">        Returns a numpy array with the same shape as ``x`` containing the function value for each evaluated point</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">npar</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">,</span> <span class="n">ret</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">npar</span></code> must contain the number of parameters (in this case 4),</li>
+<li><code class="docutils literal notranslate"><span class="pre">default_values</span></code> contains some default values of the parameters,</li>
+<li><code class="docutils literal notranslate"><span class="pre">default_ranges</span></code> contains some default ranges of the parameters, and</li>
+<li>the <code class="docutils literal notranslate"><span class="pre">__call__()</span></code> method returns the calculated value (cf <a class="reference internal" href="#eqtapereddoubleexponential"><span class="std std-ref">the equation</span></a>).</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../mainscript/mainscript.html" class="btn btn-neutral float-right" title="4. ParAMS Main Script" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../convert_old_reaxff_format.html" class="btn btn-neutral" title="3.12. Convert old ReaxFF training sets to ParAMS" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+<!-- https://stackoverflow.com/questions/2454577/sphinx-restructuredtext-show-hide-code-snippets/25543713 -->
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(200);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

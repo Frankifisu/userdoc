@@ -1,0 +1,176 @@
+#! /bin/sh
+
+
+# By default in ADF the electron density at the nuclei is calculated, no input
+# key is required. The electron density at the nuclei could be used for the
+# interpretation of isomer shifts in Mossbauer spectroscopy. The absolute
+# electron density at a nucleus heavily depends on the accuracy of the basis set
+# in the core region of this nucleus, especially if relativistic effects are
+# included. Important is to use the same basis set, same exchange correlation
+# functional, same numerical accuracy, if electron densities at nuclei in
+# different molecules are compared. For the calculation of Mossbauer quadrupole
+# splittings the key QTENS is required For 57 Fe quadrupole splittings will be
+# written in units of mm/s, used in Mossbauer spectroscopy Example shows a
+# calculation on ferrocene with anon-relativistic, and two with a scalar
+# relativistic ZORA Hamiltonian using a different all electron basis set.
+
+# First a non-relativistic calculation.
+
+AMS_JOBNAME=NR $AMSBIN/ams <<eor
+System
+  symmetrize Yes
+  atoms
+     Fe        0.000000    0.000000    0.000000
+     C         1.215650    0.000000    1.600813
+     C         0.375656   -1.156152    1.600813
+     C        -0.983481   -0.714541    1.600813
+     C        -0.983481    0.714541    1.600813
+     C         0.375656    1.156152    1.600813
+     C         1.215650    0.000000   -1.600813
+     C         0.375656    1.156152   -1.600813
+     C        -0.983481    0.714541   -1.600813
+     C        -0.983481   -0.714541   -1.600813
+     C         0.375656   -1.156152   -1.600813
+     H         2.310827    0.000000    1.629796
+     H         0.714085   -2.197727    1.629796
+     H        -1.869498   -1.358270    1.629796
+     H        -1.869498    1.358270    1.629796
+     H         0.714085    2.197727    1.629796
+     H         2.310827    0.000000   -1.629796
+     H         0.714085    2.197727   -1.629796
+     H        -1.869498    1.358270   -1.629796
+     H        -1.869498   -1.358270   -1.629796
+     H         0.714085   -2.197727   -1.629796
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title ferrocene
+  exactdensity
+  basis
+    core none
+    type TZP
+  end
+  numericalquality Good
+  qtens
+  xc
+    gga blyp
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+
+# Next the scalar relativistic ZORA calculations. ADF will also calculate the
+# quadrupole splittings including the small component density, also called SR
+# ZORA-4.
+
+
+AMS_JOBNAME=SR $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     FE        0.000000    0.000000    0.000000
+     C         1.215650    0.000000    1.600813
+     C         0.375656   -1.156152    1.600813
+     C        -0.983481   -0.714541    1.600813
+     C        -0.983481    0.714541    1.600813
+     C         0.375656    1.156152    1.600813
+     C         1.215650    0.000000   -1.600813
+     C         0.375656    1.156152   -1.600813
+     C        -0.983481    0.714541   -1.600813
+     C        -0.983481   -0.714541   -1.600813
+     C         0.375656   -1.156152   -1.600813
+     H         2.310827    0.000000    1.629796
+     H         0.714085   -2.197727    1.629796
+     H        -1.869498   -1.358270    1.629796
+     H        -1.869498    1.358270    1.629796
+     H         0.714085    2.197727    1.629796
+     H         2.310827    0.000000   -1.629796
+     H         0.714085    2.197727   -1.629796
+     H        -1.869498    1.358270   -1.629796
+     H        -1.869498   -1.358270   -1.629796
+     H         0.714085   -2.197727   -1.629796
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title ferrocene
+  exactdensity
+  basis
+    core none
+    type TZP
+  end
+  numericalquality Good
+  qtens
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga blyp
+  end
+EndEngine
+eor
+
+
+# Next a scalar relativistic calculation is performed with a much larger basis
+# set (QZ4P) in the core region. Changing the basis set will have a large effect
+# on the electron density at the nucleus and a noticeable effect on the
+# calculated quadrupole splittings.
+
+
+AMS_JOBNAME=SR_QZ4P $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     FE        0.000000    0.000000    0.000000
+     C         1.215650    0.000000    1.600813
+     C         0.375656   -1.156152    1.600813
+     C        -0.983481   -0.714541    1.600813
+     C        -0.983481    0.714541    1.600813
+     C         0.375656    1.156152    1.600813
+     C         1.215650    0.000000   -1.600813
+     C         0.375656    1.156152   -1.600813
+     C        -0.983481    0.714541   -1.600813
+     C        -0.983481   -0.714541   -1.600813
+     C         0.375656   -1.156152   -1.600813
+     H         2.310827    0.000000    1.629796
+     H         0.714085   -2.197727    1.629796
+     H        -1.869498   -1.358270    1.629796
+     H        -1.869498    1.358270    1.629796
+     H         0.714085    2.197727    1.629796
+     H         2.310827    0.000000   -1.629796
+     H         0.714085    2.197727   -1.629796
+     H        -1.869498    1.358270   -1.629796
+     H        -1.869498   -1.358270   -1.629796
+     H         0.714085   -2.197727   -1.629796
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title ferrocene
+  exactdensity
+  basis
+    core none
+    type QZ4P
+  end
+  numericalquality Good
+  qtens
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga blyp
+  end
+EndEngine
+eor

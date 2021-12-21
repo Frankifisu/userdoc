@@ -1,0 +1,198 @@
+#! /bin/sh
+
+# The key Constraints can only be used to enforce constraint in a geometry
+# optimization. The Constraints do not have to be satisfied at the start
+# of the geometry optimization.
+
+
+# == Example for angle constraint for water ==
+
+
+AMS_JOBNAME=angle $AMSBIN/ams <<eor
+
+System
+    Atoms
+        O         0.001356    0.000999    0.000000
+        H         0.994442   -0.037855    0.000000
+        H        -0.298554    0.948531    0.000000
+    End
+End
+
+Task GeometryOptimization
+
+GeometryOptimization
+   Convergence Step=1.0e-3
+End
+
+Constraints
+  Angle 3 1 2 125.0
+End
+
+Engine ADF
+    Basis
+        Type DZP
+    End
+EndEngine
+eor
+
+echo "Angle after optimization:"
+$AMSBIN/amsreport angle.results/adf.rkf -r angle#3#1#2
+
+
+# == Example for fixed-coodinates constraint for water ==
+
+
+AMS_JOBNAME=fixed_coordinates $AMSBIN/ams <<eor
+
+System
+    Atoms
+        O         0.001356    0.000999    0.000000
+        H         0.994442   -0.037855    0.000000
+        H        -0.298554    0.948531    0.000000
+    End
+End
+
+Task GeometryOptimization
+
+GeometryOptimization
+   Convergence Step=1.0e-3
+End
+
+Constraints
+  Coordinate 1 x 0.0
+  Coordinate 1 y 0.0
+  Coordinate 2 x 1.0
+  Coordinate 2 y 0.0
+End
+
+Engine ADF
+    symmetry NoSym
+    Basis
+     Type DZP
+    End
+EndEngine
+eor
+
+echo "Angle after optimization:"
+$AMSBIN/amsreport fixed_coordinates.results/adf.rkf -r angle#3#1#2
+
+
+# == Example for bond length constraint for water ==
+
+
+AMS_JOBNAME=bond_length $AMSBIN/ams <<eor
+System
+    Atoms
+        O         0.001356    0.000999    0.000000
+        H         0.994442   -0.037855    0.000000
+        H        -0.298554    0.948531    0.000000
+    End
+End
+
+Task GeometryOptimization
+
+GeometryOptimization
+   Convergence Step=1.0e-3
+End
+
+Constraints
+  Distance  1 2 1.03
+  Distance  1 3 1.03
+End
+
+Engine ADF
+    Symmetry NoSym
+    Basis
+     Type DZP
+    End
+EndEngine
+eor
+
+echo "Bonds distance after optimization:"
+$AMSBIN/amsreport bond_length.results/adf.rkf -r distance#1#2
+$AMSBIN/amsreport bond_length.results/adf.rkf -r distance#1#3
+
+
+# == Example for dihedral angle constraint for ethane ==
+
+
+AMS_JOBNAME=dihedral $AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+GeometryOptimization
+   Convergence Step=1.0e-3
+End
+
+System
+    Atoms
+      C        -0.004115   -0.000021    0.000023
+      C         1.535711    0.000022    0.000008
+      H        -0.399693    1.027812   -0.000082
+      H        -0.399745   -0.513934    0.890139
+      H        -0.399612   -0.513952   -0.890156
+      H         1.931188    0.514066    0.890140
+      H         1.931432    0.513819   -0.890121
+      H         1.931281   -1.027824    0.000244
+    End
+End
+
+Constraints
+  Dihedral 6 2 1 3  20.00
+End
+
+Engine ADF
+    Symmetry NoSym
+    Basis
+      type DZP
+    End
+EndEngine
+eor
+
+echo "Dihedral after optimization:"
+$AMSBIN/amsreport dihedral.results/adf.rkf -r dihedral#6#2#1#3
+
+
+# == Example for Block constraint (with a dihedral constraint) for ethane ==
+
+
+AMS_JOBNAME=block_and_dihedral $AMSBIN/ams <<eor
+System
+    Atoms
+        C   -0.004115   -0.000021    0.000023 region=b1
+        C    1.535711    0.000022    0.000008 region=b2
+        H   -0.399693    1.027812   -0.000082 region=b1
+        H   -0.399745   -0.513934    0.890139 region=b1
+        H   -0.399612   -0.513952   -0.890156 region=b1
+        H    1.931188    0.514066    0.890140 region=b2
+        H    1.931432    0.513819   -0.890121 region=b2
+        H    1.931281   -1.027824    0.000244 region=b2
+    End
+End
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=1.0e-4 Step=1.0e-3
+End
+
+Constraints
+  Dihedral  6 2 1 3  20.00
+  Block b1
+  Block b2
+End
+
+Engine ADF
+    Symmetry NoSym
+    Basis
+      type DZP
+    End
+EndEngine
+eor
+
+
+echo "Dihedral after optimization:"
+$AMSBIN/amsreport block_and_dihedral.results/adf.rkf -r dihedral#6#2#1#3
+echo "Bonds distance after optimization:"
+$AMSBIN/amsreport block_and_dihedral.results/adf.rkf -r distance#1#3
+$AMSBIN/amsreport block_and_dihedral.results/adf.rkf -r distance#2#6

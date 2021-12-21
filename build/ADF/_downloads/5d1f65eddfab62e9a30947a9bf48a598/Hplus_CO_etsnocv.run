@@ -1,0 +1,124 @@
+#! /bin/sh
+
+
+AMS_JOBNAME=Hplus $AMSBIN/ams <<eor
+System
+  atoms
+     H        -0.010992    0.000002    0.148581
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  title [H]+-----[CO] run from H+ and CO fragments, FULL electron calc.!
+  Basis Type=SZ Core=None
+  numericalquality Good
+  scf
+    converge 1E-6
+    iterations 2500
+  end
+  symmetry NOSYM
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=CO $AMSBIN/ams <<eor
+System
+  atoms
+     C         0.005191    0.000001    1.248610
+     O         0.021536    0.000000    2.359675
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title [CO] run
+  Basis Type=SZ Core=None
+  numericalquality Good
+  scf
+    converge 1E-6
+    iterations 2500
+  end
+  symmetry NOSYM
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=HCO $AMSBIN/ams <<eor
+System
+  atoms
+     H        -0.010992    0.000002    0.148581 adf.f=f1
+     C         0.005191    0.000001    1.248610 adf.f=f2
+     O         0.021536    0.000000    2.359675 adf.f=f2
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  title [H]+--[CO], etsnocv acitivated by etsnocv and print etslowdin
+  etsnocv
+    ekmin 1.5
+    enocv 0.05
+    rhokmin 1.e-3
+  end
+  fragments
+     f1 Hplus.results/adf.rkf
+     f2 CO.results/adf.rkf
+  end
+  numericalquality Good
+  print etslowdin
+  scf
+    converge 1E-6
+    iterations 800
+  end
+  symmetry NOSYM
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+$AMSBIN/densf <<eor
+adffile HCO.results/adf.rkf
+Grid Medium
+End
+NOCV
+  1
+  11
+  2
+  3
+  9
+  10
+END
+eor
+mv TAPE41 nocv1.t41
+
+$AMSBIN/densf <<eor
+adffile HCO.results/adf.rkf
+Grid Medium
+End
+NOCV
+  THRESH 0.01
+END
+eor
+mv TAPE41 nocv2.t41
+
+$AMSBIN/densf <<eor
+adffile HCO.results/adf.rkf
+Grid Medium
+End
+NOCV
+  ALL
+END
+eor
+mv TAPE41 nocv3.t41

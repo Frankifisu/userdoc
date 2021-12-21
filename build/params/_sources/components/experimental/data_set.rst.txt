@@ -1,0 +1,119 @@
+Working with Data Sets
+======================
+
+The following features mainly work with the :ref:`Data Set`.
+
+Data Set Sensitivity
+--------------------
+.. currentmodule:: scm.params.experimental.subsetscan
+
+
+Data Sets that require a large number of jobs for the evaluation
+will usually be the bottleneck of every parameter optimization.
+This class provides the possibility to estimate the diversity of a set prior
+to the fitting process.
+This is done by evaluating multiple smaller, randomly drawn subsets
+from the original set and reporting their loss function value.
+The values can then be compared to the full data set's loss.
+
+One example where this can be useful is when data sets are somewhat homogeneous.
+In such cases it can be useful to search for
+a smaller subset before training, thus reducing the optimization time.
+A smaller subset is a compromise of the size and error in loss
+function value as compared to the original set.
+The :class:`SubsetScan` class can be used as an aide in such cases.
+
+Assuming a :ref:`Data Set` instance `ds` with reference, a :ref:`Job Collection` `jc` that can be used
+to generate the results needed for the evaluation of our data set, and a
+:ref:`parameter interface <Parameter Interfaces>` `x` is defined:
+
+.. code-block:: Python
+
+  len(ds)
+  # 45600
+  len(ds.jobids)
+  # 45975
+  # Our data set is huge, lets see if it can be reduced without sacrificing much accuracy
+
+  # Initialize with DataSet, JobCollection and ParameterInterface
+  scan = SubsetScan(ds, jc, x, loss='rmse')
+
+  # This attribute stores the loss function value of the initial DataSet `ds`
+  fx0 = scan.fx0
+
+  # Decide on the number of jobs we would like to consider for a subset:
+  steps = [100, 500, 1000, 2500, 10000, 25000, 35000, 40000]
+
+  # At each step, evaluate n randomly created subsets:
+  reps_per_step = 20
+
+  # Now start the scan:
+  fx = scan.scan(steps, reps_per_step)
+
+  # The result is an array of (len(steps), reps_per_steps)
+  assert fx.shape == (8,20)
+
+  # Lets visualize the results:
+  import matplotlib.pyplot as plt
+  plt.rcParams.update({'font.size':20})
+  dim = fx.shape[-1]
+  for i in range(dim):
+    plt.plot(steps, fx[:,i]/fx0)
+  plt.ylabel('fx/fx0')
+  plt.xlabel('Number of jobs in subset')
+  plt.xscale('log')
+  plt.tight_layout()
+
+
+.. note::
+
+  If a results dictionary from :meth:`JobCollection.run <scm.params.core.jobcollection.JobCollection.run>`
+  has previously been calculated and is available, `MinJobSearch` can also be instantiated without
+  a job collection and parameter interface:
+
+  .. code-block:: Python
+
+    # Initialize with a results dictionary `results`
+    scan = MinJobSearch(ds, resultsdict=results, loss='rmse')
+
+
+
+The resulting figure could look similar to the following,
+
+.. image:: /_static/minjobsearch_results.png
+  :height: 300px
+  :align: center
+
+
+in this case highlighting that the reduction to a subset of 10000 jobs
+would lead to a relative error of under 5% when compared to the
+evaluation of the full data set.
+
+.. note::
+  Note that this example was created on a data set with
+  only one property and equal weights for each entry.
+  Real applications might not result in such homogeneous
+  behavior.
+
+
+-------------------------
+
+
+.. rubric:: API
+
+.. autoclass:: SubsetScan
+  :exclude-members: __weakref__
+
+
+
+
+
+
+
+
+Normalization of Data Set Weights
+---------------------------------
+.. currentmodule:: scm.params.experimental.norm_weights
+
+
+.. autofunction:: normalize_weights

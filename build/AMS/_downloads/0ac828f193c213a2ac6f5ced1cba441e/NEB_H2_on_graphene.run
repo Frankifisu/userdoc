@@ -1,0 +1,77 @@
+#!/bin/sh
+
+for map1 in no yes
+do
+
+for map2 in no yes
+do
+
+AMS_JOBNAME=test.map1=$map1.map2=$map2 $AMSBIN/ams << eor
+
+Task NEB
+System
+    Atoms
+        C -1.23079526  1.45426666 -0.60065817 
+        C  1.25628125  1.47378921 -0.00438520 
+        C -2.44885253 -2.15934252 -0.51047194 
+        C -0.01262403 -2.15933012 -0.51045137 
+        C -1.23076689 -0.05455308 -0.60068696 
+        C  1.25630128 -0.07404160 -0.00441877 
+        C -2.44887495 -0.74178904 -0.51048970 
+        C -0.01264534 -0.74177652 -0.51049375 
+        H  1.25629472 -0.34738650  1.07475852
+        H  1.25630533  1.74708724  1.07481086
+    End
+    Lattice
+        4.97414302 0.0 0.0
+        0.0 4.30083513 0.0
+    End
+    MapAtomsToUnitCell $map1
+End
+
+System final
+    Atoms
+        C -1.24330284  1.42711444 -0.25240444 
+        C  1.23494804  1.42739453 -0.25493930 
+        C -2.48233069 -2.12769513 -0.25358631 
+        C -0.00426996 -2.12770161 -0.25349945 
+        C -1.24330266  0.00893844 -0.25240978 
+        C  1.23494831  0.00864800 -0.25496555 
+        C -2.48233386 -0.70957077 -0.25358531 
+        C -0.00426696 -0.70956458 -0.25349840 
+        H  1.27176634  0.72925445  2.26688554 
+        H  1.28137254  0.73053214  3.01215519 
+    End
+    Lattice
+        4.95651766 0.0		  0.0
+        0.0        4.27331845 0.0
+    End
+    MapAtomsToUnitCell $map2
+End
+
+Properties
+    NormalModes Yes
+End
+
+GeometryOptimization
+    Convergence Gradients=3.0e-3
+    HessianFree
+        Step TrustRadius=0.5
+    End
+End
+
+NEB
+    ClimbingThreshold 0.01
+    OptimizeLattice Yes
+End
+
+Engine DFTB
+    Model DFTB3
+    ResourcesDir DFTB.org/3ob-3-1
+    DispersionCorrection D3-BJ
+    KSpace Quality=Basic
+EndEngine
+
+eor
+done
+done

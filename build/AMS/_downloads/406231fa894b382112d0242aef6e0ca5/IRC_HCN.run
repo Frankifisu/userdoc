@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# == IRC scan of the reaction path ==
+
+
+# The IRC calculation is split in two steps to illustrate the Restart feature.
+
+# In the first calculation only a few points are computed along the so-called 
+# 'forward' path. The definition of which is 'forward' and which is
+# 'backward' depends on the sign of the largest component of the normal mode
+# corresponding to the reaction coordinate. 
+
+# The RKF file from this partial IRC scan serves as restart file
+# for the next calculations that will continue the IRC scan.
+
+# The 'MaxPoints' key in the IRC block is used to limit the number of IRC 
+# points to compute.
+
+
+AMS_JOBNAME=irc1 $AMSBIN/ams << eor
+
+Task IRC
+System
+    Atoms
+        C       0.000000000000       0.000000000000       0.000000000000    
+        N       0.000000000000       0.000000000000      -1.182644220000    
+        H      -1.103250760411       0.000000000000      -0.322462130000    
+    End
+End
+
+IRC
+    MaxPoints 5
+    Direction Forward
+    CoordinateType Cartesian
+    InitialHessian
+        Type Calculate
+    End
+End
+
+Engine DFTB
+    Model DFTB3
+    ResourcesDir DFTB.org/3ob-3-1
+EndEngine
+
+eor
+
+# In the second IRC run, the IRC scan is finished. We start with the RKF file
+# from the previous run and omit the MaxPoints from the settings, which means 
+# that the default 100 will be used. Note that the 100 also includes any points 
+# computed in the previous calculation. The program starts on
+# the forward path, continuing where the first calculation had stopped,
+# and completes it. Since we set the Direction to Both
+# then AMS proceeds to the backward path. After both paths are finished a summary 
+# of the path characteristics is printed at the end of the output file.
+
+
+AMS_JOBNAME=irc2 $AMSBIN/ams << eor
+
+Task IRC
+System
+    Atoms
+        C       0.000000000000       0.000000000000       0.000000000000    
+        N       0.000000000000       0.000000000000      -1.182644220000    
+        H      -1.103250760411       0.000000000000      -0.322462130000    
+    End
+End
+
+IRC
+    Restart
+        File irc1.results/ams.rkf
+    End
+    ! Change options from the ones found in the restart file 
+    ! (MaxIRCPoints and MaxPoints will be reset to defaults automatically)
+    Direction Both
+End
+
+Engine DFTB
+    Model DFTB3
+    ResourcesDir DFTB.org/3ob-3-1
+EndEngine
+
+eor
+

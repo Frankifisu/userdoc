@@ -1,0 +1,310 @@
+#! /bin/sh
+
+# This example shall illustrate the use of the Fragment keywords in combination
+# with the PEDA and PEDANOCV keywords to perform the PEDANOCV calculation. For
+# this example two fragment calculations are necessary to calculate the
+# unperturbed eigensystems of the MgO slab and CO fragment. Here, the sampling
+# of the reciprocal space is restricted to gamma point
+
+# == Fragment calculations ==
+
+# ------------------------------ MgO slab ------------------------
+
+AMS_JOBNAME=MgO $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   Atoms 
+      Mg  0.00000000       0.00000000       0.00000000
+      Mg  1.50260191      -1.50260191      -2.12400000
+      Mg  0.00000000       0.00000000      -4.24800000
+      Mg  3.00520382       0.00000000       0.00000000
+      Mg  1.50260191       1.50260191      -2.12400000
+      Mg  3.00520382       0.00000000      -4.24800000
+      O   1.50260191      -1.50260191       0.00200000
+      O   0.00000000       0.00000000      -2.12400000
+      O   1.50260191      -1.50260191      -4.25000000
+      O   1.50260191       1.50260191       0.00200000
+      O   3.00520382       0.00000000      -2.12400000
+      O   1.50260191       1.50260191      -4.25000000
+   End
+
+   Lattice
+          3.00520382      -3.00520382       0.00000000
+          3.00520382       3.00520382       0.00000000
+   End
+End
+
+Engine Band 
+   Title MgO fragment
+
+   skip dos
+
+    KSpace
+      Regular 
+        NumberOfPoints 1 1
+      End
+    End
+
+   BeckeGrid
+      quality basic
+   End
+
+   Relativity
+      Level Scalar
+   End
+
+   XC
+      GGA PBE
+   End
+
+   Basis
+      Type TZP
+      Core none
+   End
+EndEngine 
+eor
+
+#------------------------------ CO fragment ------------------------
+
+AMS_JOBNAME=CO $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   Atoms
+      C   0.00000000       0.00000000       2.61000000
+      O   0.00000000       0.00000000       3.737000000
+   End
+
+   Lattice
+          3.00520382      -3.00520382       0.00000000
+          3.00520382       3.00520382       0.00000000
+   End
+End
+
+Engine Band 
+   Title CO fragment
+
+   KSpace
+      Regular 
+         NumberOfPoints 1 1
+      End
+   End
+
+   BeckeGrid
+      quality basic
+   End
+
+   Relativity
+      Level Scalar
+   End
+
+   XC
+      GGA PBE
+   End
+    
+   Basis
+      Type TZP
+      Core none
+   End
+EndEngine
+eor
+
+# == PEDANOCV calculation ==
+
+# The two result files, MgO.kf and CO.kf, can now be used to perform the
+# PEDANOCV. Here, the mapping of the atoms of the PEDA calculation and the
+# fragment calculations is necessary. And the used grid points in reciprocal
+# space have to be identical in all three calculations - in this case the gamma
+# point for all calculations.
+
+#------------------------------ PEDANOCV calculation ------------------------
+
+
+AMS_JOBNAME=decomp $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   Atoms 
+      Mg.frag_MgO  0.00000000       0.00000000       0.00000000
+      Mg.frag_MgO  1.50260191      -1.50260191      -2.12400000
+      Mg.frag_MgO  0.00000000       0.00000000      -4.24800000
+      Mg.frag_MgO  3.00520382       0.00000000       0.00000000
+      Mg.frag_MgO  1.50260191       1.50260191      -2.12400000
+      Mg.frag_MgO  3.00520382       0.00000000      -4.24800000
+      O.frag_MgO   1.50260191      -1.50260191       0.00200000
+      O.frag_MgO   0.00000000       0.00000000      -2.12400000
+      O.frag_MgO   1.50260191      -1.50260191      -4.25000000
+      O.frag_MgO   1.50260191       1.50260191       0.00200000
+      O.frag_MgO   3.00520382       0.00000000      -2.12400000
+      O.frag_MgO   1.50260191       1.50260191      -4.25000000 
+      C.frag_CO    0.00000000       0.00000000       2.61000000
+      O.frag_CO    0.00000000       0.00000000       3.737000000
+   End
+
+   Lattice
+          3.00520382      -3.00520382       0.00000000
+          3.00520382       3.00520382       0.00000000
+   End
+End
+
+Engine Band 
+   Title Mg+CO
+
+   KSpace 
+      Regular 
+         NumberOfPoints 1 1
+      End
+   End
+
+   BeckeGrid
+      quality basic
+   End
+
+   Relativity
+      Level Scalar
+   End
+
+   XC
+      GGA PBE
+   End
+    
+   fragment 
+      filename MgO.results/band.rkf
+      AtomMapping
+         1  1
+         2  2
+         3  3
+         4  4
+         5  5
+         6  6
+         7  7
+         8  8
+         9  9
+         10 10
+         11 11
+         12 12
+      End
+   end
+
+   fragment 
+      filename CO.results/band.rkf
+      AtomMapping
+         1  13
+         2  14
+      End
+   end
+
+   PEDA
+
+   PEDANOCV
+      Enabled True
+      EigvalThresh 0.001
+   End
+
+   Basis
+      Type TZP
+      Core none
+   End
+EndEngine
+eor
+
+# In the output file the results can be found in the PEDANOCV block after the
+# Energy Analysis and PEDA block.
+
+# The NOCV orbitals and NOCV deformation densities can be visualized using
+# AMSview or by a restart calculation. In the latter case, one adds the Restart
+# block key with the options File decomp.kf and the NOCVdRhoPlot and
+# NOCVOrbitalPlot keys. These will trigger the calculation of the plot
+# properties. To specify which NOCV deformation densities and NOCV orbitals are
+# plotted, one adds the NOCVdRhoPlot and NOCVOrbitalPlot block key. In both
+# blocks the line 1 Band 1 5 means, that for k-point 1 the densities/orbitals 1
+# to 5 are calculated.
+
+
+
+export NSCM=1
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   Atoms 
+      Mg  0.00000000       0.00000000       0.00000000
+      Mg  1.50260191      -1.50260191      -2.12400000
+      Mg  0.00000000       0.00000000      -4.24800000
+      Mg  3.00520382       0.00000000       0.00000000
+      Mg  1.50260191       1.50260191      -2.12400000
+      Mg  3.00520382       0.00000000      -4.24800000
+      O   1.50260191      -1.50260191       0.00200000
+      O   0.00000000       0.00000000      -2.12400000
+      O   1.50260191      -1.50260191      -4.25000000
+      O   1.50260191       1.50260191       0.00200000
+      O   3.00520382       0.00000000      -2.12400000
+      O   1.50260191       1.50260191      -4.25000000
+      C   0.00000000       0.00000000       2.61000000
+      O   0.00000000       0.00000000       3.737000000
+   End
+
+   Lattice
+          3.00520382      -3.00520382       0.00000000
+          3.00520382       3.00520382       0.00000000
+   End
+End
+
+Engine Band 
+   Title Restart Calculation
+
+   Restart 
+      File decomp.results/band.rkf
+      NOCVdRhoPlot
+   End
+
+   NOCVdRhoPlot
+      1 Band 1
+   End
+
+   Grid
+      Type coarse
+   End
+
+   KSpace
+      Regular 
+         NumberOfPoints 1 1
+      End
+   End
+
+   BeckeGrid
+      quality basic
+   End
+
+   Relativity
+      Level Scalar
+   End
+
+   XC
+      GGA PBE
+   End
+
+   Basis
+      Type TZP
+      Core none
+   End
+
+   debug BlockPropertyModule
+EndEngine
+eor
+
+echo ""
+echo "Begin TOC of tape41"
+export NSCM=1
+$AMSBIN/pkf -n 1 ams.results/FILE_BLOCKPROPERTIES
+
+echo "End TOC of tape41"
+
+# The important output of this calculation is the TAPE41 file. Renaming it to
+# foobar.t41 will allow AMSview to read and interpret the data stored on this
+# file.

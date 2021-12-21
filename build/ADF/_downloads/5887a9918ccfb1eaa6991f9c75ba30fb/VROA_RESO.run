@@ -1,0 +1,58 @@
+#! /bin/sh
+
+# Example shows a calculation of resonance vibrational Raman optical activity
+# (resonance VROA).
+
+# For accuracy reasons 'NumericalQuality Good' and EXACTDENSITY are used. 
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     O        -0.750254   -0.034490    0.015133
+     O         0.750254    0.034490    0.015133
+     H        -0.943532    0.744006    0.580040
+     H         0.943532   -0.744006    0.580040
+  End
+End
+
+UseSymmetry NO
+
+Task SinglePoint
+
+Properties
+  VROA True
+End
+
+Raman
+  IncidentFrequency 5.15462 [eV]
+  Lifetime 0.0037
+End
+
+Engine ADF
+  Title VROA-RESO TEST H2O2
+
+  NumericalQuality Good
+
+  ExactDensity
+
+  Basis
+    Core None
+    Type TZP
+  End
+
+  SCF
+    Converge 1.0e-10
+  End
+
+  XC
+    GGA BLYP
+  End
+EndEngine
+
+eor
+
+# Note that used basis set is too small to get accurate results. Better is to
+# use larger basis sets for such a small molecule, like one of the even
+# tempered basis sets (for example Type ET/ET-QZ3P-1DIFFUSE), or use augmented
+# basis sets (for example Type AUG/ATZ2P).

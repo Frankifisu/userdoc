@@ -1,0 +1,371 @@
+#! /bin/sh
+
+
+# This example illustrates advanced usage of the bond energy decomposition
+# scheme used in ADF.
+
+# This example shows the energy decomposition analysis of NaCl with
+# neutral fragments: Na and Cl, both open shell atoms
+# See also the example with ionic fragments: Na+ and Cl-.
+
+# A proper decomposition of an electron-pair bond energy requires specifying
+# opposite spins for the unpaired electrons of the respective radical fragments,
+# which can be done with the input key FragOccupations. The specified alpha- and
+# beta-spin configurations of the radical fragments are shown in the output
+# section B U I L D.
+
+# Please note that if one neglects explicitly specifying opposite spins for the
+# unpaired electrons of the fragments, each of them is treated as being half an
+# alpha and half a beta electron and consequently, they enter into a spurious
+# Pauli repulsive interaction. This results, among others, into the Pauli
+# repulsion term being too repulsive and the orbital interaction term being too
+# much stabilizing.
+
+# The example consists of an analysis of the Na-Cl single bond between two
+# open shell atoms. Two methods are described here.
+# The first method uses spin-restricted fragments but simulates unrestricted fragments
+# with the use of the FRAGOCCUPATIONS key.
+# The second method uses real unrestricted atoms.
+
+# Unrestricted fragments with fragoccuaptions
+# -------------------------------------------
+
+# The proper spins in this method are specified in the calculation of the overall
+# molecule using the FragOccupations key. Note that this implies a slight
+# approximation because the bond energy computed in this way refers to the
+# energy difference between closed-shell NaCl and two open shell atoms that are
+# described by orbitals from a spin-restricted SCF calculation, which have been
+# given an unrestricted occupation. In other words, the set of alpha- and beta-
+# spin orbitals are identical and the effect of spin polarization is missing. In
+# practice, this leads to minor energy differences with respect to the correct
+# bond energy, that is, the energy difference between closed-shell NaCl and the two
+# open shell atoms treated in the unrestricted mode, i.e., for which the set of
+# alpha- and beta-spin orbitals are allowed to relax toward different solutions
+# in the SCF procedure. This correction term can be computed directly by
+# carrying out an unrestricted computation of the Na and Cl atom using the spin
+# restricted atoms as a fragment.
+
+# Real unrestricted fragments
+# ---------------------------
+
+# The unrestricted calculated Na and Cl atom are used as fragments.
+
+# Prepared for bonding
+# --------------------
+
+# Note that the Cl atom that is used as fragment is given an electron
+# configuration that is so called 'prepared for bonding' in order to minimize
+# the Pauli repulsion in the electron pair bond.
+# In this case it means that there is a hole in the valence Cl p_z orbital,
+# that will later form an electron pair bond with the valence s orbital of Na.
+
+# Pair bonding
+# ------------
+
+# The pure orbital interaction effect of forming the electron bonding combination
+# of the two radicals can be isolated from the full orbital interaction by carrying out a
+# separate calculation. In this calculation the bond energy analysis is performed in
+# the absence of (almost) all virtual fragment orbitals, using the key REMOVEALLFRAGVIRTUALS.
+# Note that in the calculation there is a slight orbital relaxation term in addition to the 
+# pure orbital interaction, because not only the bonding combination of the singly occupied
+# orbitals of the fragments are included, but also the anti-bonding combination.
+
+AMS_JOBNAME=Na_r $AMSBIN/ams <<eor
+System
+  atoms
+     Na 0.0 0.0 0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=Cl_r $AMSBIN/ams <<eor
+System
+  atoms
+     Cl  0.0 0.0 0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  irrepoccupations
+     SIGMA.g 6
+     SIGMA.u 2 1
+     PI.u    8
+  end
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  symmetry D(LIN)
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=Na_u $AMSBIN/ams <<eor
+System
+  atoms
+     Na 0.0 0.0 0.0 adf.f=Na
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  fragments
+     Na  Na_r.results/adf.rkf
+  end
+  fragoccupations
+     Na
+     S 3 // 2
+     P 3 // 3
+     SubEnd
+  end
+  irrepoccupations
+     S 3 // 2
+     P 3 // 3
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 1
+  title unrestricted Na
+  unrestricted
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=Cl_u $AMSBIN/ams <<eor
+System
+  atoms
+     Cl  0.0 0.0 0.0 adf.f=Cl
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  fragments
+     Cl   Cl_r.results/adf.rkf
+  end
+  fragoccupations
+     Cl
+     SIGMA.g 3 // 3
+     SIGMA.u 1 // 2
+     PI.u    4 // 4
+     SubEnd
+  end
+  irrepoccupations
+     SIGMA.g 3 // 3
+     SIGMA.u 1 // 2
+     PI.u    4 // 4
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization -1
+  symmetry D(LIN)
+  title unrestricted Cl
+  unrestricted
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=NaCl_pb $AMSBIN/ams <<eor
+System
+  atoms
+     Na 0.0 0.0 0.0   adf.f=Na
+     Cl 0.0 0.0 2.361 adf.f=Cl
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    orbpop 20  20
+    end
+    sfo eig ovl
+  end
+  fragments
+     Na  Na_r.results/adf.rkf
+     Cl  Cl_r.results/adf.rkf
+  end
+  fragoccupations
+     Na
+     S 3 // 2
+     P 3 // 3
+     SubEnd
+     Cl
+     SIGMA.g 3 // 3
+     SIGMA.u 1 // 2
+     PI.u    4 // 4
+     SubEnd
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  removeallfragvirtuals
+  title fragoccupations pair bonding
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=NaCl $AMSBIN/ams <<eor
+System
+  atoms
+     Na 0.0 0.0 0.0   adf.f=Na
+     Cl 0.0 0.0 2.361 adf.f=Cl
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    orbpop 20  20
+    end
+    sfo eig ovl
+  end
+  fragments
+     Na  Na_r.results/adf.rkf
+     Cl  Cl_r.results/adf.rkf
+  end
+  fragoccupations
+     Na
+     S 3 // 2
+     P 3 // 3
+     SubEnd
+     Cl
+     SIGMA.g 3 // 3
+     SIGMA.u 1 // 2
+     PI.u    4 // 4
+     SubEnd
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  title fragoccupations
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=NaCl_unrfrag_pb $AMSBIN/ams <<eor
+System
+  atoms
+     Na 0.0 0.0 0.0   adf.f=Na
+     Cl 0.0 0.0 2.361 adf.f=Cl
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    orbpop 20  20
+    end
+    sfo eig ovl
+  end
+  fragments
+     Na  Na_u.results/adf.rkf
+     Cl  Cl_u.results/adf.rkf
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  removeallfragvirtuals
+  spinpolarization 0
+  title unrestricted fragments pair bonding
+  unrestricted
+  unrestrictedfragments
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=NaCl_unrfrag $AMSBIN/ams <<eor
+System
+  atoms
+     Na 0.0 0.0 0.0   adf.f=Na
+     Cl 0.0 0.0 2.361 adf.f=Cl
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    orbpop 20  20
+    end
+    sfo eig ovl
+  end
+  fragments
+     Na  Na_u.results/adf.rkf
+     Cl  Cl_u.results/adf.rkf
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 0
+  title unrestricted fragments
+  unrestricted
+  unrestrictedfragments
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor

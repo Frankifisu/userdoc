@@ -1,0 +1,57 @@
+#! /bin/sh
+
+# Calculate the phonon dispersion curves for diamond under pressure.
+
+# Loop over pressure values (in GPa):
+for P in -40 0 40 160 ; do
+AMS_JOBNAME=pressure_$P $AMSBIN/ams << EOF
+
+   Task GeometryOptimization
+
+   System
+       Atoms
+           C -0.44625 -0.44625 -0.44625
+           C  0.44625  0.44625  0.44625
+       End
+       Lattice
+           0.0    1.785  1.785
+           1.785  0.0    1.785
+           1.785  1.785  0.0
+       End
+   End
+
+   GeometryOptimization
+       OptimizeLattice Yes
+       Convergence Gradients=1e-5 StressEnergyPerAtom=1E-5
+       Method Quasi-Newton
+   End
+
+   EngineAddons
+       Pressure $P
+   End
+
+   Properties
+       # Request the calculation of phonons at the optimized geometry.
+       Phonons Yes
+   End
+
+   NumericalPhonons
+       SuperCell
+           2 0 0
+           0 2 0
+           0 0 2
+       End
+   End
+
+   Engine DFTB
+       Model SCC-DFTB
+       ResourcesDir DFTB.org/mio-1-1
+       KSpace
+           Type Symmetric
+           Symmetric KInteg=5
+       End
+       Technical AnalyticalStressTensor=False
+   EndEngine
+
+EOF
+done

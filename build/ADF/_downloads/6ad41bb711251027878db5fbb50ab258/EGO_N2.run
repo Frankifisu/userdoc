@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# Example for a singlet excited state geometry optimization for N_2.
+
+# Needed for such excited state optimizations are the key EXCITATIONS (to
+# calculate excitation energies), and the key EXCITEDGO (to select for which 
+# excitation a geometry optimization should be performed). 
+# In this case a hybrid functional B3LYP is used.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     N          0.0         0.0       -0.7
+     N          0.0         0.0        0.7
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence
+    gradients 0.0001
+  End
+End
+
+Engine ADF
+  title N2 Excited state geometry
+  allpoints
+  beckegrid
+    quality good
+  end
+  excitations
+    lowest 10
+    onlysing
+  end
+  excitedgo
+    output 2
+    state S-.u 1
+  end
+  basis
+    type DZ
+    core NONE
+    CreateOutput Yes
+  end
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor

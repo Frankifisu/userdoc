@@ -1,0 +1,43 @@
+#! /bin/sh
+
+# By setting 'Unrestricted Yes' we do a spin polarized calculation. Normally
+# this would converge to the ferromagnetic solution.
+
+# With the SpinFlipRegion keyword we make sure that we start with an antiferromagnetic
+# density.
+
+# For antiferromagnetic iron we need a larger unit cell of two atoms. Since
+# these atoms appear to the program as symmetry equivalent we have to specify
+# them as separate types.
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  Atoms 
+    Fe   0.0    0.0    0.0
+    Fe  -1.435 -1.435  1.435 region=flip
+  end
+
+  Lattice
+     -1.435  1.435  1.435
+      1.435 -1.435  1.435
+      2.87   2.87  -2.87
+  End
+End
+
+Engine Band
+  Title Beta iron
+
+  Convergence
+     Criterion 1.0e-4
+     SpinFlipRegion flip # Flip (startup) spin density at second atom
+  End
+
+  Unrestricted Yes
+
+  Print AtomicChargesDetails
+EndEngine
+eor
+

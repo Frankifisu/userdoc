@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Appendix C. Debugging MPI Problems &mdash; Installation 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Installation 2021.1 documentation" href="index.html"/>
+        <link rel="next" title="Compiling AMS from Sources" href="Compiling_ADF_from_Sources.html"/>
+        <link rel="prev" title="Appendix B. Directory Structure of the AMS Package" href="Appendix_B_Directory_Structure_of_the_ADF_Package.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search Installation" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-Installation" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Windows_Quickstart_Guide.html">Windows Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Linux_Quickstart_Guide.html">Linux Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MacOS_Quickstart_Guide.html">MacOS Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html#requirements">Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Introduction.html#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Introduction.html#detailed-hardware-requirements">Detailed Hardware requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Introduction.html#software-requirements">Software requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html#important-changes-since-ams2021">Important changes since AMS2021</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html#important-changes-since-ams2020">Important changes since AMS2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html#important-changes-since-ams2018">Important changes since AMS2018</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html#important-changes-since-adf2017">Important changes since ADF2017</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#decide-which-version-to-install">Decide which version to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#download-and-install-the-software">Download and install the software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#set-up-the-environment">Set up the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#set-up-the-license">Set up the license</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Installation.html#floating-license">Floating license</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#set-up-the-scratch-space">Set up the scratch space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#test-your-installation">Test your installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Installation.html#check-the-license-file">Check the license file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Installation.html#run-some-basic-tests">Run some basic tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Installation.html#test-the-gui">Test the GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Installation.html#test-parallel-execution">Test parallel execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Installation.html#test-parallel-performance">Test parallel performance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#configure-amsjobs-queues-and-3rd-party-software-optional">Configure AMSjobs queues and 3rd party software (optional)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Installation.html#amsjobs-queues">AMSjobs queues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Installation.html#managing-remote-jobs">Managing remote jobs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Optional_Components.html">Installing Optional Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Optional_Components.html#introducing-amspackages">Introducing AMSpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Optional_Components.html#managing-packages-from-the-command-line">Managing packages from the command line</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#finding-available-packages">Finding available packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#installing-a-package">Installing a package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#check-if-a-package-is-installed">Check if a package is installed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#removing-a-package">Removing a package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#updating-a-package">Updating a package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#reinstalling-packages-from-a-previous-version-of-ams">Reinstalling packages from a previous version of AMS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Optional_Components.html#using-the-package-manager-offline">Using the package manager offline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#macos-and-linux">MacOS and Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Optional_Components.html#method-1-wget">Method 1: wget</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Optional_Components.html#method-2-python">Method 2: python</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#using-the-downloaded-copy">Using the downloaded copy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Optional_Components.html#instructions-for-administrators">Instructions for administrators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Optional_Components.html#persistent-configurations">Persistent configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Optional_Components.html#f-a-q-troubleshooting">F.A.Q. &amp; Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#where-are-packages-are-installed">Where are packages are installed ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#the-package-manager-exits-saying-unhandled-exception">The package manager exits saying “Unhandled exception…”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#i-want-to-use-my-own-version-of-package-x">I want to use my own version of package ‘X’</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Optional_Components.html#cosmo-rs-database-2018">COSMO-RS Database 2018</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Optional_Components.html#quantumespresso">QuantumESPRESSO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Optional_Components.html#machine-learning-potentials">Machine Learning potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#i-am-having-trouble-downloading-packages">I am having trouble downloading packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Optional_Components.html#my-problem-isn-t-listed-here">My problem isn’t listed here</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Additional_Information_and_Known_Issues.html">Additional Information and Known Issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#windows-subsystem-for-linux-wsl-and-docker">Windows Subsystem for Linux (WSL) and Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#shared-memory-and-batch-systems-slurm">Shared memory and batch systems (SLURM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#gpfs-file-system">GPFS file system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#running-mpi-jobs">Running MPI jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#technical-explanation">Technical explanation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#more-on-running-mpi-jobs">More on running MPI jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#intelmpi-and-core-binding">IntelMPI and core-binding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#intelmpi-and-slurm">IntelMPI and SLURM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#intelmpi-and-sge">IntelMPI and SGE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#intelmpi-and-abi-compatibility">IntelMPI and ABI compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#multi-node-issues">Multi-node issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#openmpi-on-linux">OpenMPI on Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#corrupted-license-file">Corrupted License File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Additional_Information_and_Known_Issues.html#windows-running-jobs-from-the-command-line">Windows: running jobs from the command line</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Remote_GUI.html">Using the GUI on a remote machine</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Remote_GUI.html#x11-over-ssh">X11 over SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Remote_GUI.html#x11-with-opengl-over-ssh-3d-graphics">X11 with OpenGL over SSH (3D graphics)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Remote_GUI.html#intel-graphics-mesa">Intel Graphics (mesa)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Remote_GUI.html#nvidia-graphics">NVidia Graphics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Remote_GUI.html#libgl-so-examples">libGL.so examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Remote_GUI.html#amd-graphics">AMD Graphics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Remote_GUI.html#id1">libGL.so examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Remote_GUI.html#opengl-direct-or-indirect-rendering">OpenGL direct or indirect rendering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Remote_GUI.html#enabling-indirect-rendering-on-xorg-1-17-and-newer">enabling indirect rendering on Xorg 1.17 and newer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Remote_GUI.html#centos-6">CentOS 6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Remote_GUI.html#ubuntu-16-04">Ubuntu 16.04</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Remote_GUI.html#osx-macos">OSX / MacOS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Remote_GUI.html#opengl2-with-x11-over-ssh">OpenGL2+ with X11 over SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Remote_GUI.html#adf2017-and-vtk7">ADF2017 and VTK7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Remote_GUI.html#ams2019-ams2018-and-vtk7">AMS2019/AMS2018 and VTK7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Remote_GUI.html#ams2020-ams2021-and-vtk7">AMS2020/AMS2021 and VTK7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Remote_GUI.html#sources">Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_A_Environment_Variables.html">Appendix A. Environment Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Appendix_A_Environment_Variables.html#more-on-the-scm-tmpdir-variable">More on the SCM_TMPDIR variable</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_B_Directory_Structure_of_the_ADF_Package.html">Appendix B. Directory Structure of the AMS Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Appendix_B_Directory_Structure_of_the_ADF_Package.html#the-bin-directory">The bin directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendix_B_Directory_Structure_of_the_ADF_Package.html#the-atomicdata-directory">The atomicdata directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendix_B_Directory_Structure_of_the_ADF_Package.html#the-data-directory">The data directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendix_B_Directory_Structure_of_the_ADF_Package.html#the-examples-directory">The examples directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendix_B_Directory_Structure_of_the_ADF_Package.html#the-src-directory">The src directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendix_B_Directory_Structure_of_the_ADF_Package.html#the-utils-directory">The Utils directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendix_B_Directory_Structure_of_the_ADF_Package.html#the-doc-directory">The Doc directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendix_B_Directory_Structure_of_the_ADF_Package.html#the-scripting-directory">The scripting directory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Appendix C. Debugging MPI Problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#technical-introduction-into-ams">Technical introduction into AMS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#execution-order">Execution order</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-amsbin-start-script">The $AMSBIN/start script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-amsbin-setenv-sh-script">The $AMSBIN/setenv.sh script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mpi-runtimes">MPI runtimes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-mpi-issues">Debugging MPI issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Compiling_ADF_from_Sources.html">Compiling AMS from Sources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Compiling_ADF_from_Sources.html#unpacking-the-distribution">Unpacking the distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Compiling_ADF_from_Sources.html#setting-up-environment">Setting up environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Compiling_ADF_from_Sources.html#running-install-configure">Running Install/configure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Compiling_ADF_from_Sources.html#compiling-ams">Compiling AMS</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Installation</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="Installation.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">Installation</a>/</li>
+      
+    <li class="orange-text">Appendix C. Debugging MPI Problems</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="appendix-c-debugging-mpi-problems">
+<h1>Appendix C. Debugging MPI Problems<a class="headerlink" href="#appendix-c-debugging-mpi-problems" title="Permalink to this headline">¶</a></h1>
+<p>The Amsterdam Modelling Suite (AMS) is designed to work out of the box on as many platforms as possible, but it could be that you are experiencing problems with running our programs in parallel. This mostly happens on linux cluster environments, but the information below could also be useful for Windows or MacOS users. However, anything that mentions cluster environment or batch system is linux specific!</p>
+<div class="section" id="technical-introduction-into-ams">
+<h2>Technical introduction into AMS<a class="headerlink" href="#technical-introduction-into-ams" title="Permalink to this headline">¶</a></h2>
+<p>Most of our compute programs use Message Passing Interface (MPI) communication for parallel operation. To make AMS as easy to use as possible we ship the MPI runtime libraries within the AMS package, and take care of launching of the MPI programs in parallel in our start script. Because of this setup it is not needed to “mpirun” our programs yourself, so <strong>never do something like “mpirun $AMSBIN/ams”</strong> !</p>
+<div class="section" id="execution-order">
+<h3>Execution order<a class="headerlink" href="#execution-order" title="Permalink to this headline">¶</a></h3>
+<p>When starting one of our programs, for example <em>$AMSBIN/ams</em>, you actually call our start script via a symbolic link. This start script then:</p>
+<ul class="simple">
+<li>checks which program it should launch, based on the name it was called from or the value of the -x flag</li>
+<li>detects how many cores should be used: -n or the NSCM environment variable are read, when both are empty we detect the cpu core count (see below for cluster environments!)</li>
+<li>sources the <em>$AMSBIN/setenv.sh</em> script to set up environment variables</li>
+<li>Write the given input to a temporary file</li>
+<li>detect if and which batch system it is running on</li>
+<li>do the correct parallel MPI launch of the program</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Old</span> <span class="pre">pre-AMS2020</span> <span class="pre">info:</span></code> When running <em>$AMSBIN/adf</em>, this sequence is preceded by a program that first sets up and runs the “atomic create runs” in serial.</p>
+</div>
+<div class="section" id="the-amsbin-start-script">
+<h3>The $AMSBIN/start script<a class="headerlink" href="#the-amsbin-start-script" title="Permalink to this headline">¶</a></h3>
+<p>As described above, the start script takes care of selecting the number of cores to use for the calculation, sourcing the setenv.sh script, and launching the selected program in parallel. You might need to edit it if your AMS program fails to start, or does not run on the correct number of cores.</p>
+<p>The start script tries to detect if it is running on a cluster environment with a batch system such as PBS/Torque, SLURM, SGE or LSB. If it detects one of the environment variables associated with these batch systems, it will leave figuring out the MPI job configuration (cores and nodes) to the MPI library. The MPI library should get the number of cores to run on, and which compute nodes to use (in case of a multi-node calculation) from the batch system. the <strong>NSCM</strong> environment variable and the <strong>-n</strong> flag are ignored in this case!</p>
+<p>If no batch system is detected, and both <strong>NSCM</strong> and <strong>-n</strong> are not used to explicitly set the number of cores to use for running the AMS program, then the start script attempts to detect the number of cores on the machine, and uses all available cores. We only count real CPU cores (no hyperthreading or modules with shared FPUs such as AMD Bulldozer), because the AMS programs do not benefit from hyperthreading.</p>
+<p>Finally the start script launches the AMS program using the correct mpi commands for the situation.</p>
+</div>
+<div class="section" id="the-amsbin-setenv-sh-script">
+<h3>The $AMSBIN/setenv.sh script<a class="headerlink" href="#the-amsbin-setenv-sh-script" title="Permalink to this headline">¶</a></h3>
+<p>The <em>$AMSBIN/setenv.sh</em> script takes care of setting up environment variables needed for running the AMS programs. This includes among others:</p>
+<ul class="simple">
+<li>the LD_LIBRARY_PATH variable with locations to the required libraries (and DYLD_LIBRARY_PATH)</li>
+<li>the PYTHONPATH variable</li>
+</ul>
+<p>The setenv script also responds to a couple of environment variables, such as <strong>SCM_USE_LOCAL_IMPI</strong>, <strong>SCM_USE_IMPI_2021</strong>, and <strong>SCM_USE_LOCAL_OMPI</strong>. See <a class="reference external" href="Appendix_A_Environment_Variables.html">Appendix A on Environment Variables</a> for details.</p>
+</div>
+<div class="section" id="mpi-runtimes">
+<h3>MPI runtimes<a class="headerlink" href="#mpi-runtimes" title="Permalink to this headline">¶</a></h3>
+<p>The Amsterdam Modelling Suite ships with the required MPI runtime inside the package. For MacOS this is OpenMPI, for Windows this is IntelMPI, and for Linux both IntelMPI and OpenMPI flavors exist. When working on Linux we advise to use the IntelMPI library, as this provides the best out-of-the-box experience. The OpenMPI runtime has no batch system integration build into it, so it will most likely not work under a batch system. The runtimes can be found in <em>$AMSBIN/IntelMPI</em> or <em>$AMSBIN/openmpi</em>, and are loaded into the environment by the setenv.sh script. See the <a class="reference external" href="Additional_Information_and_Known_Issues.html#running-mpi-jobs">Additional information section</a> for more details.</p>
+</div>
+</div>
+<div class="section" id="debugging-mpi-issues">
+<h2>Debugging MPI issues<a class="headerlink" href="#debugging-mpi-issues" title="Permalink to this headline">¶</a></h2>
+<p>For non-batch system (desktop/laptop usage) related MPI issues, please contact <a class="reference external" href="mailto:support&#37;&#52;&#48;scm&#46;com">support<span>&#64;</span>scm<span>&#46;</span>com</a> as these should almost never happen. However, linux users might want to try using a newer IntelMPI runtime by setting <strong>export SCM_USE_IMPI_2021=1</strong> in their environment.</p>
+<p>For cluster usage we always advise to use the IntelMPI version. AMS ships with the IntelMPI runtime inside the package, you do not need to install this separately. IntelMPI can be used on Cray systems as well via the ABI compatibility, see the <a class="reference external" href="Additional_Information_and_Known_Issues.html#running-mpi-jobs">Additional information section</a> for more details. If you for whatever reason need to use OpenMPI instead, make sure to compile and use your own OpenMPI version that matches the version used to build AMS (currently 2.1.2), and set SCM_USE_LOCAL_OMPI=true in the environment.
+Make sure to to read the <a class="reference external" href="Additional_Information_and_Known_Issues.html">Additional information and known issues document</a> before you dive into debugging MPI!</p>
+<p>The generic scheme for debugging IntelMPI / batch system issues consists of the following steps:</p>
+<ol class="arabic simple">
+<li>Start by setting up the IntelMPI runtime libaries in the environment: load it from a module, or load your AMS environment and execute “. $AMSBIN/setenv.sh” without the quotes. Keep in mind that in order to test the IntelMPI 2021 runtime shipped with AMS2021, you will need to execute “export SCM_USE_IMPI_2021=1” before sourcing the setenv.sh script.</li>
+<li>get the intel mpirun to work. Environment variables that are useful for this are I_MPI_DEBUG=100 (or higher), I_MPI_OFI_PROVIDER_DUMP=1 (for information about the interconnects detected by IntelMPI), the I_MPI_FABRICS (for selecting a specific fabric, options depend on the IntelMPI runtime version) and I_MPI_HYDRA_TOPOLIB. See the <a class="reference external" href="https://software.intel.com/en-us/download/intel-mpi-library-for-linux-os-developer-reference-2018-update-3">IntelMPI 2018u3 developer reference manual</a> for details on these variables for the default IntelMPI runtime. If you are using the IntelMPI 2021 runtime, see <a class="reference external" href="https://software.intel.com/content/www/us/en/develop/documentation/mpi-developer-reference-linux/top/environment-variable-reference.html">IntelMPI current developer reference manual</a></li>
+<li>get a small mpi test program that’s compiled with IntelMPI and a Fortran compiler. To make things a bit easier you can download an example with <a class="reference external" href="https://downloads.scm.com/distr/MPItest.tgz">both binary and source code here</a>.</li>
+<li>try to mpirun the test program (mpirun ./mpitest) on a single node via the batch system. This usually respects the batch system reservation. In case it doesn’t you will need to dive into the manuals to see what kind of environment variables you need to set, or arguments you need to give to get it to integrate with the batch system. <a class="reference external" href="https://software.intel.com/en-us/articles/intel-mpi-library-documentation-overview">IntelMPI developer references and guides</a> help out with this, but make sure to get the manual matching your IntelMPI version! The manual of your batch system might also hold some clues.</li>
+<li>once single node jobs work, then it is time to see what needs to be done for multi-node jobs. Usually this can be set up via integration with the batch system, but if that fails you could always write a bit of code that generates a “machine file”, and tell IntelMPI to use this file with the -machinefile flag (see <a class="reference external" href="https://software.intel.com/en-us/mpi-developer-guide-linux-controlling-process-placement">this</a> for how a machine file should look)</li>
+</ol>
+<p>It might be that the default IntelMPI runtime shipped with AMS (currently 2018 update 3) needs to be updated for a better integration with your batch system. In such a case you can try the IntelMPI 2021 runtime (also shipped with AMS) by setting “export SCM_USE_IMPI_2021=1” in your environment. Or you can download and install a newer IntelMPI runtime package (those are free to use), and repeat the previous steps. If the downloaded IntelMPI works better than the 2018 or 2021 runtime shipped with AMS, then you can set the “export SCM_USE_LOCAL_IMPI=true” environment variable. This tells AMS not to load the distributed IntelMPI into the environment, but instead use the one already available. (You do not need to recompile AMS for this!)</p>
+<p>Finally: when requesting support for MPI issues via <a class="reference external" href="mailto:support&#37;&#52;&#48;scm&#46;com">support<span>&#64;</span>scm<span>&#46;</span>com</a>, make sure to include as much information as possible. For example: which batch system are you using, what version is it, do you have a special interconnect such as Infiniband, and of course always send us all the input and output files produced by the failed job, including the sdtout and stderr of the batch system. From our experience the fastest way to resolve such issues is if somebody from SCM can work directly on the machine. Therefore you might want to consider setting up a form of temporary remote access for an SCM employee to help you out.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Compiling_ADF_from_Sources.html" class="btn btn-neutral float-right" title="Compiling AMS from Sources" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Appendix_B_Directory_Structure_of_the_ADF_Package.html" class="btn btn-neutral" title="Appendix B. Directory Structure of the AMS Package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

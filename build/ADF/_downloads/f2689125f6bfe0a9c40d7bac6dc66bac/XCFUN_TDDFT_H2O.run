@@ -1,0 +1,38 @@
+#! /bin/sh
+
+# Example for the use of the xcfun library for a calculation of excitation
+# energies, in this case for the BP86 functional. Note that for closed shell
+# molecules only singlet-singlet can be calculated with xcfun, therefore the
+# key 'onlysing' in the 'excitations' block the  is used.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     O         0.000000    0.000000    0.000631
+     H         0.000000    0.771769   -0.605006
+     H         0.000000   -0.771769   -0.605006
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2O TDDFT with XCFUN
+  beckegrid
+    quality good
+  end
+  excitations
+    lowest 5
+    onlysing
+  end
+  basis
+    type DZP
+  end
+  noprint BAS FIT FUNCTIONS SFO
+  xc
+    gga Becke Perdew
+    xcfun
+  end
+EndEngine
+
+eor

@@ -1,0 +1,51 @@
+We optimize the lattice and test several distances
+
+The system can be cut in several variations into a a QM and an MM part breaking a B-N bond
+
+      variation             QM atoms
+           var1            B(1),H(2)
+           var2            B(5),H(6)
+           var3            N(3),H(4)
+           var4            N(7),H(8)
+           var5  B(1),H(2),N(3),H(4)
+           var6  B(5),H(6),N(7),H(8)
+
+Variation one is equivalent to variation two, and variation 3 should be equivalent with variation 4
+
+Variation five is equivalent to variation six
+
+Here are the distances (Angstrom) as obtained with a QM and an MM method
+  distance         qm         mm
+ B(1)-H(2)      1.182      1.185
+ B(5)-H(6)      1.182      1.185
+ N(3)-H(4)      1.007      1.045
+ N(7)-H(8)      1.007      1.045
+ B(1)-N(3)      1.431      1.508
+ B(5)-N(7)      1.431      1.508
+
+Now we try the hybrid engine with several variations for the QM region
+
+Two capping methods are tried as well.
+
+      variation         capping          energy       B(1)-H(2)       B(5)-H(6)       N(3)-H(4)       N(7)-H(8)       B(1)-N(3)       B(5)-N(7)
+           var1           fixed       -2.901499           1.184           1.185           1.045           1.045           1.508           1.508
+           var1      fractional       -2.787165           1.198           1.182           1.044           1.044           1.673           1.505
+           var2           fixed       -2.901499           1.185           1.184           1.045           1.045           1.508           1.508
+           var2      fractional       -2.787165           1.182           1.198           1.044           1.044           1.505           1.673
+           var3           fixed       -4.791110           1.184           1.184           0.993           1.044           1.508           1.507
+           var3      fractional       -4.733046           1.184           1.184           0.997           1.045           1.657           1.506
+           var4           fixed       -4.791110           1.184           1.184           1.044           0.993           1.507           1.508
+           var4      fractional       -4.733046           1.184           1.184           1.045           0.997           1.506           1.657
+           var5           fixed       -6.741093           1.189           1.187           1.003           1.045           1.390           1.489
+           var5      fractional       -6.648313           1.198           1.183           1.003           1.045           1.405           1.505
+           var6           fixed       -6.741093           1.187           1.189           1.045           1.003           1.489           1.390
+           var6      fractional       -6.648313           1.183           1.198           1.045           1.003           1.505           1.405
+
+Here are some observations
+     * generally the fixed capping seems a bit better
+
+Here are some remarks
+     * Starting from the initial very bad structure the fixed capping fails completely for variant 5 and 6
+       (not if you use as qm engine band and as mm engine dftb)
+     * A reasonable starting geometry can avoid strange collapses
+     * The more the two engines disagree about the capped QM region, the stronger the capping forces

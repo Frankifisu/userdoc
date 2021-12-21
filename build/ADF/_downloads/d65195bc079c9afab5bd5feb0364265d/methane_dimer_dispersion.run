@@ -1,0 +1,52 @@
+#! /bin/sh
+
+
+# The density-dependent dispersion energy correction, dDsC, by S.N. Steinmann
+# and C. Corminboeuf, is used to calculate interactions between non-overlapping
+# densities, which standard density functional approximations cannot accurately
+# describe. The example is for the methane dimer.
+
+# The 'debug dispersion' is included such that in the output one can find more
+# details on the exact parameters that are used.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C  -0.000959    0.000775    1.853082
+     H  -0.747186    0.712608    1.489389
+     H   0.987865    0.294742    1.490258
+     H  -0.241511   -0.998876    1.480724
+     H  -0.002970   -0.005330    2.946903
+     C   0.000962   -0.000776   -1.853082
+     H   0.004264    0.004684   -2.946903
+     H  -0.989749   -0.289559   -1.491241
+     H   0.743184   -0.716138   -1.488107
+     H   0.246099    0.997870   -1.481022
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence 
+    Gradients 1E-3
+    Energy    0.1
+    Step      0.1
+  End
+End
+
+Engine ADF
+  title methane-dimer
+  debug dispersion
+  basis
+    type TZP
+  end
+  numericalquality good
+  symmetry nosym
+  xc
+    dispersion DDsC
+    gga Becke LYP
+  end
+EndEngine
+eor

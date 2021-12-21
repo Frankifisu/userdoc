@@ -1,0 +1,134 @@
+#!/bin/sh
+
+
+# In this example we use the hybrid engine in a molecular gun MD application, shooting HF molecules at a BN surface
+
+# The BN slab represents the MM region and the "bullets" are the QM region
+# The regions are defined in the xyz files using end of line strings (atom attributes)
+
+# First we do two dftb calculations to get a guess of the charges to be used by the force field.
+
+STRUCTDIR=$AMSHOME/examples/Hybrid/HybridGun/molecules
+
+export AMS_JOBNAME=BNSlab.dftb
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+   GeometryFile $STRUCTDIR/BNSlab.xyz
+End
+
+Engine DFTB
+EndEngine
+
+eor
+
+
+export AMS_JOBNAME=HF.dftb
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+   GeometryFile $STRUCTDIR/HF.xyz
+End
+
+Engine DFTB
+EndEngine
+
+eor
+
+# now we can run our MD simulation using both mechanical and electrostatic embedding
+
+for embedding in mechanical electrostatic
+do
+
+# because electrostatic embedding is more expensive we limit here the number of steps
+
+steps=1400
+
+if [ $embedding = electrostatic ]
+then
+  steps=300
+fi
+
+export AMS_JOBNAME=SinkBox.embedding=$embedding
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+
+Task MolecularDynamics
+
+System
+    GeometryFile $STRUCTDIR/BNSlab.xyz
+    GuessBonds true
+    LoadForceFieldCharges file=BNSlab.dftb.results
+End
+
+System H2
+   GeometryFile $STRUCTDIR/HF.xyz
+   GuessBonds true
+   LoadForceFieldCharges file=HF.dftb.results
+End
+
+RNGSeed -1341016088 83513668 1764626453 -87803069 -1149690266 1963370818 -1393571175 1985130742
+
+MolecularDynamics
+    NSteps $steps
+
+    Trajectory
+        SamplingFreq 20
+    End
+
+    InitialVelocities
+        Temperature 300
+    End
+
+    AddMolecules
+        System H2
+        Frequency 159
+        CoordsBox 0 3 0 8.57 6 7
+        VelocityDirection 0.45752820 0 -0.5540656
+        Velocity 0.07
+        Rotate Yes
+        MinDistance 3.0
+    End
+
+    Preserve
+        Momentum No
+        AngularMomentum No
+    End
+
+    RemoveMolecules
+      Formula *
+      Frequency 101
+      SinkBox FractionalCoordsBox="0 1 0 1 8 1000"
+   End
+End
+
+Constraints
+  Atom 1
+End
+
+Engine Hybrid
+   QMMM  qmRegion=qm mmEngineID=ForceField qmEngineID=dftb embedding=$embedding
+
+   Engine dftb
+   EndEngine
+
+   Engine ForceField
+      NonBondedCutoff 50 [Bohr]
+   EndEngine
+EndEngine
+
+
+eor
+done

@@ -1,0 +1,47 @@
+#!/bin/sh 
+
+
+# Example for time-dependent magnetizability with GIAOs (Gauge including atomic
+# orbitals).
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     O           0.000000    0.134692    0.000000
+     H           0.869763   -0.538741    0.000000
+     H          -0.869763   -0.538794    0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2O, TD magnetizability
+  allpoints
+  aoresponse
+    alda
+    fitaoderiv
+    frequencies 2.103923139 [eV]
+    giao
+    magneticpert
+    scf conv 1d-6 iter 25
+  end
+  comment
+     purpose of this job is to calculate time-dependent magnetizability
+     with GIAOs
+  end
+  linearscaling 100
+  end
+  basis
+    core None
+    type TZP
+  end
+  numericalquality good
+  symmetry nosym
+  xc
+    gga revPBE
+    lda vwn
+  end
+EndEngine
+eor

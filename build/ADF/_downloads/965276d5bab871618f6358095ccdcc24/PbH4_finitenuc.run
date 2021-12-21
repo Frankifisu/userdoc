@@ -1,0 +1,76 @@
+#!/bin/sh
+
+
+# Example for a finite nucleus calculation and the calculation of NMR spin-spin
+# coupling constants.
+
+# One of the quality-determining factors for the calculation of NMR coupling
+# constants is the chosen basis set, especially one needs enough tight s
+# functions. If one has a large enough basis set in the core region one can see
+# an effect of using a finite size of the nucleus instead of a point nucleus,
+# especially for heavy nuclei. Such large basis sets can be found for some
+# elements in $AMSRESOURCES/ADF/ZORA/jcpl, which are basis sets especially designed
+# for NMR spin-spin coupling calculations. In this example first a basis set for
+# Pb is made which has many tight s functions. The file can be found in the 
+# example directory
+
+
+
+# The large basis set for Pb is used in ADF calculations on PbH4 and the
+# calculation of the NMR spin-spin coupling constants.
+
+
+AMS_JOBNAME=PbH4 $AMSBIN/ams <<eor
+System
+  atoms
+     Pb      0.000000      0.000000      0.000000
+     H     -1.023703      1.023703      1.023703
+     H      1.023703     -1.023703      1.023703
+     H     -1.023703     -1.023703     -1.023703
+     H      1.023703      1.023703     -1.023703
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality verygood
+  end
+  basis
+    Core None
+    Type DZP
+    PerAtomType Symbol=Pb File=$AMSHOME/examples/adf/PbH4_finitenuc/Pb
+    CreateOutput Yes
+  end
+  nuclearmodel Gaussian
+  print Nuclei
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  save TAPE10
+  scf
+    converge 1.0e-8 1.0e-6
+    iterations 100
+  end
+  usespcode
+  xc
+    gga PBE
+  end
+EndEngine
+eor
+
+## end scalar run, now do the coupling constant
+
+$AMSBIN/cpl <<eor
+adffile PbH4.results/adf.rkf
+tape10file PbH4.results/TAPE10
+gga
+Print Nuclei
+nmrcoupling
+ scf converge=1e-5 iterations=25
+ nuclei 1 2
+end
+eor
+

@@ -1,0 +1,78 @@
+Changelog
+=========
+
+.. _v0.6:
+
+`pre v0.6`
+  * :ref:`CMA-ES` instances are now restartable
+  * Added additional plotting mode: ``params plot -x`` to plot parameter values vs iteration number
+  * Added the ``params clips`` command
+  * The methods
+    :meth:`DataSet.store() <scm.params.core.dataset.DataSet.store>`,
+    :meth:`DataSet.pickle_dump() <scm.params.core.dataset.DataSet.pickle_dump>`,
+    :meth:`JobCollection.store() <scm.params.core.jobcollection.JobCollection.store>`,
+    :meth:`JobCollection.pickle_dump() <scm.params.core.jobcollection.JobCollection.pickle_dump>` and
+    :meth:`EngineCollection.store() <scm.params.core.engines.EngineCollection.store>`
+    (as well as their respective :meth:`load` methods) now support storage in the compressed gzip format.
+    Compression will be enabled automatically when the file name ends with the
+    `.gz` extension (`r94660`, bump to `v0.5.1`)
+  * Added :meth:`ReaxFFParameters.add_blocks() <scm.params.parameterinterfaces.reaxff.ReaxFFParameters.add_blocks>` (_r94918_)
+  * The :ref:`ReaxFF` parameter interface now supports addition of new parameters as well as suggestions
+    of parameter values from a database of force fields (_r95197_)
+
+
+
+
+----------------
+
+
+.. _v0.5:
+
+`v0.5` -- 2020/10/27, r88962
+  * This version was released with AMS2020.1
+  * Changes to the :ref:`BaseOptimizer API` (bump to `v0.4.1`)
+  * Extending callbacks
+  * More extractors & documentation
+  * Added a :attr:`header` attribute to DataSet, JobCollection and EngineCollection classes.
+    The header string will be printed to file whenever any of the instances is stored to disk.
+
+
+
+----------------
+
+
+.. _v0.4:
+
+`v0.4` -- 2020/06/17, r85342
+  * Introducing :ref:`constraints <Constraints>`: Aside from limiting
+    the parameter ranges, parameter-dependent constraints can now be provided
+    through logical operators ``c = [p[0] >= 2*p[1]]`` to the :ref:`Optimization` class
+    `(r83291)`
+  * Added :ref:`Scipy` and :ref:`Nevergrad` support
+  * :ref:`CMA-ES` now supports parallel execution
+  * Reworked :ref:`parallelism <ParallelLevels>`
+  * Reworked Extractors and loss functions to work with residuals
+  * Reworked Data Set units
+
+
+----------------
+
+
+.. _v0.3:
+
+`v0.3` -- 2020/04/01, r83193
+  * Reworked :ref:`Extractors and Comparators`: ``compare()`` is not not
+    mandatory in the the `extracor.py`, instead, it can be provided in the
+    :ref:`Data Set Entry <Data Set Entry API>`. Any of the existing :ref:`Loss Functions`
+    can be used as a comparator.
+  * Brought the :ref:`Active Parameter Search` back to life `(r83109)`
+
+
+----------------
+
+
+.. _v0.2:
+
+`v0.2` -- 2020/02/24, r81977
+  * Reworked Optimization and Callbacks, can now work in parallel
+    `(finalized in r82996)`

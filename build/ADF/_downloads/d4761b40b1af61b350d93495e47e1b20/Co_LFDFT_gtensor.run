@@ -1,0 +1,117 @@
+#!/bin/sh
+
+# Application of the Ligand Field DFT approach for the calculation
+# of the g-tensor. The g-tensor is only calculated for Kramer doublet states.
+# This example calculates the g-tensor of the ground and excited doublet states
+# of Co(acacen) with a Co d^7 electron configuration.
+
+# First an average of configuration calculation (AOC) is performed, where 7
+# electrons are equally distributed over the 5 orbitals that have the most
+# dominant Co 3d character. Depending on the electron configuration this might
+# be a non-trivial task. Here the Keeporbitals=0 and Freeze functionality is used,
+# such that ADF will on successive SCF cycles assign electrons to the MOs
+# that maximally resemble - in spatial form - those that were occupied in 0th
+# (in fact 1st) cycle. Note that the orbitals that have the most
+# dominant Co 3d character in the 1st cycle are orbitals 71, 72, 73, 74, and 75,
+# whereas at the end of the SCF they are 71, 72, 73, 74, and 77.
+# 
+# Symmetry NOSYM should be specified.
+
+
+SCM_LFDFT="$AMSHOME/examples/adf/Co_LFDFT/LFDFT"
+export SCM_LFDFT
+
+$AMSBIN/ams <<eor
+System
+  Atoms
+   Co     0.000000    0.000000    0.000000
+   N      1.327385    1.278147    0.000000
+   N      1.327385   -1.278147    0.000000
+   O     -1.395357    1.224920    0.000000
+   O     -1.395357   -1.224920    0.000000
+   C      2.704031    0.764453    0.000000
+   C      2.704031   -0.764453    0.000000
+   C     -1.309408    2.515386    0.000000
+   C     -1.309408   -2.515386    0.000000
+   C      1.166666    2.611094    0.000000
+   C      1.166666   -2.611094    0.000000
+   C     -0.103243   -3.216502    0.000000
+   C     -0.103243    3.216502    0.000000
+   H      3.246281   -1.139682    0.884137
+   H      3.246281    1.139682    0.884137
+   H      3.246281    1.139682   -0.884137
+   H      3.246281   -1.139682   -0.884137
+   C     -2.626185    3.259046    0.000000
+   C     -2.626185   -3.259046    0.000000
+   C      2.374732    3.518898    0.000000
+   C      2.374732   -3.518898    0.000000
+   H     -3.453721   -2.540862    0.000000
+   H     -3.453721    2.540862    0.000000
+   H     -0.145492    4.305797    0.000000
+   H     -0.145492   -4.305797    0.000000
+   H      3.008094    3.350507    0.884680
+   H      3.008094   -3.350507    0.884680
+   H      3.008094    3.350507   -0.884680
+   H      3.008094   -3.350507   -0.884680
+   H     -2.710536    3.904463    0.886944
+   H     -2.710536   -3.904463    0.886944
+   H     -2.710536    3.904463   -0.886944
+   H     -2.710536   -3.904463   -0.886944
+   H      2.061821   -4.568536    0.000000
+   H      2.061821    4.568536    0.000000
+  End
+  Charge 0
+End
+
+task SinglePoint
+
+Engine adf
+  Symmetry NOSYM
+  IrrepOccupations
+   A 140 1.4 1.4 1.4 1.4 1.4 
+  End
+  Occupations Keeporbitals=0 Freeze
+  basis
+     Core None
+     Type DZ
+     PerAtomType Symbol=Co File=ZORA/TZP/Co
+  End
+  XC
+    GGA PBE
+  End
+EndEngine
+eor
+
+# When the AOC calculation is ready, you need to make sure that indeed the
+# partially occupied orbitals are dominantly d orbitals. In the ADF output you
+# can find the character of the MOs in the list of all MOs, ordered by energy,
+# with the most significant SFO gross populations.
+
+# First the LFDFT calculation is performed without spin-orbit coupling (soc 0),
+# in which pure spin states are calculated, doublets and quartest in this case.
+# Next the LFDFT calculation is performed including spin-orbit coupling (soc 1),
+# which is needed for the g-tensor calculation. In this case there is 1
+# shell, and the nlval for 3d is '3 2'. The MO indices should be the
+# fractionally occupied levels of the AOC calculation (in this case 71 72 73 74 77).
+
+# One should be careful when interpreting the g-tensor for 2 Kramer doublets
+# that are close in energy. In the effective Hamiltonian used to interpret ESR
+# experiments, an effective spin=3/2 might be used.
+
+$AMSBIN/lfdft << eor
+ adffile ams.results/adf.rkf
+ nshel 1
+ nlval 3 2
+ MOind 71 72 73 74 77
+ soc 0.0
+ DegeneracyThreshold 1.0E-5
+eor
+
+$AMSBIN/lfdft << eor
+ adffile ams.results/adf.rkf
+ nshel 1
+ nlval 3 2
+ MOind 71 72 73 74 77
+ soc 1.0
+ DegeneracyThreshold 1.0E-5
+eor

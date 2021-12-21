@@ -1,0 +1,51 @@
+#! /bin/sh
+
+
+# In this example you will find how to use amsprep to test convergence of the
+# bonding energy with respect to basis set and integration accuracy. amsreport
+# is used to collect the resulting bonding energies.
+
+rm -f runset
+for b in SZ DZ DZP TZP TZ2P QZ4P
+do
+    "$AMSBIN/amsprep" -t "$AMSHOME/examples/adf/ConvergenceTestCH4/methane.ams" -b $b -j methane.$b>> runset
+done
+
+chmod +x runset
+./runset
+
+echo Results
+echo Basis set convergence of Bonding Energy, SZ DZ DZP TZP TZ2P QZ4P
+for b in SZ DZ DZP TZP TZ2P QZ4P
+do
+    "$AMSBIN/amsreport" "methane.$b.results/adf.rkf" BondingEnergy
+done
+
+rm -f runset
+for i in 2 3 4 5
+do
+    "$AMSBIN/amsprep" -t "$AMSHOME/examples/adf/ConvergenceTestCH4/methane.ams" -b DZP -i $i -j methane.$i>> runset
+done
+"$AMSBIN/amsprep" -t "$AMSHOME/examples/adf/ConvergenceTestCH4/methane.ams" -b DZP -i Basic -j methane.bb>> runset
+"$AMSBIN/amsprep" -t "$AMSHOME/examples/adf/ConvergenceTestCH4/methane.ams" -b DZP -i Normal -j methane.bn>> runset
+"$AMSBIN/amsprep" -t "$AMSHOME/examples/adf/ConvergenceTestCH4/methane.ams" -b DZP -i Good -j methane.bg>> runset
+"$AMSBIN/amsprep" -t "$AMSHOME/examples/adf/ConvergenceTestCH4/methane.ams" -b DZP -i VeryGood -j methane.bv>> runset
+"$AMSBIN/amsprep" -t "$AMSHOME/examples/adf/ConvergenceTestCH4/methane.ams" -b DZP -i Excellent -j methane.be>> runset
+
+chmod +x runset
+./runset
+
+echo Integration convergence of Bonding Energy, 2 3 4 5
+for i in 2 3 4 5
+do
+    "$AMSBIN/amsreport" "methane.$i.results/adf.rkf" BondingEnergy
+done
+
+echo Integration Becke convergence of Bonding Energy, Basic, Normal, Good, VeryGood, Excellent
+"$AMSBIN/amsreport" "methane.bb.results/adf.rkf" BondingEnergy
+"$AMSBIN/amsreport" "methane.bn.results/adf.rkf" BondingEnergy
+"$AMSBIN/amsreport" "methane.bg.results/adf.rkf" BondingEnergy
+"$AMSBIN/amsreport" "methane.bv.results/adf.rkf" BondingEnergy
+"$AMSBIN/amsreport" "methane.be.results/adf.rkf" BondingEnergy
+
+echo Ready

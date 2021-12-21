@@ -1,0 +1,25 @@
+#! /bin/sh
+
+# unrestricted MP2 calculation for Li
+
+$AMSBIN/ams << eor
+System
+  Atoms
+     Li      0.0000000000      0.0000000000      0.0000000000 
+  End
+End
+
+task SinglePoint
+
+Engine adf
+  SpinPolarization 1
+  Unrestricted Yes
+  basis
+     Core None
+     Type DZP
+  End
+  xc
+    mp2
+  End
+EndEngine
+eor

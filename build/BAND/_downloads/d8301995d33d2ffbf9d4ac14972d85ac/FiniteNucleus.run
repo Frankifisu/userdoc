@@ -1,0 +1,121 @@
+#! /bin/sh
+
+# Normally the nucleus is approximated as a point charge. However we can change
+# this to a finite size. Properties that might be affected are EFG, and the
+# A-tensor. For such calculations one needs to crank up the precision and also
+# use a relativistic Hamiltonian.
+
+# == First run: NuclarModel PointCharge ==
+
+AMS_JOBNAME=PointCharge $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  lattice
+     30.0 0.0 0.0
+  End
+
+  Atoms
+     Au  0.000000      0.000000      0.000000
+  End
+End
+
+Engine Band 
+  NuclearModel PointCharge
+
+  Efg
+    Enabled True
+  End
+
+  Atensor
+    Enabled True
+  End
+
+  Unrestricted 
+  Relativity
+    Level Scalar
+  End
+
+  PropertiesAtNuclei
+    rho
+    rho(deformation/scf)
+    vxc[rho(fit)]
+    rho(fit)
+    v(coulomb)
+  End
+
+  RadialDefaults
+     nr 10000
+  End
+
+  NumericalQuality Good
+
+  Basis
+     Type TZ2P
+     Core None
+  End
+
+  XC
+     gga PBE
+  END
+EndEngine 
+eor
+
+# == Second run: NuclearModel Gaussian ==
+
+AMS_JOBNAME=Gaussian $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  lattice
+     30.0 0.0 0.0
+  End
+
+  Atoms
+     Au  0.000000      0.000000      0.000000
+  End
+End
+
+Engine Band 
+  NuclearModel Gaussian
+
+  Efg
+    Enabled True
+  End
+
+  Atensor
+    Enabled True
+  End
+
+  Unrestricted 
+  Relativity
+    Level Scalar
+  End
+
+  PropertiesAtNuclei
+    rho
+    rho(deformation/scf)
+    vxc[rho(fit)]
+    rho(fit)
+    v(coulomb)
+  End
+
+  RadialDefaults
+     nr 10000
+  End
+
+  NumericalQuality Good
+
+  Basis
+     Type TZ2P
+     Core None
+  End
+
+  XC
+     gga PBE
+  END
+EndEngine
+
+eor

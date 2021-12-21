@@ -1,0 +1,39 @@
+#!/bin/sh 
+
+# Example for an ESR A-tensor calculation.
+
+# Be aware that the calculation must be spin unrestricted and the ATENSOR
+# keyword must be present, too.
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Atoms
+      Ti  0.0     0.0               0.0 
+      F   1.78    0.0               0.0
+      F  -0.89    1.541525218736    0.0
+      F  -0.89   -1.541525218736    0.0
+   end 
+End
+
+Engine Band 
+   Title TiF3
+
+   Unrestricted True
+
+   EFG
+      Enabled True
+   End
+
+   ATensor
+      Enabled True
+   End
+
+   Basis
+      Type TZP
+      Core None
+   End
+EndEngine
+eor

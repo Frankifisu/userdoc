@@ -1,0 +1,117 @@
+#!/bin/sh
+
+# First we calculate the charges for a system
+
+# Here we use the dftb engine, but any engine can be used for this purpose
+
+
+export AMS_JOBNAME=CalculateCharges
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+Task SinglePoint
+
+Properties Charges=yes
+
+System
+   Atoms
+      C 0.0 0.0 0.0
+      O 1.13 0.0 0.0
+      C 0.0 0.0 2.0
+      O 1.13 0.0 2.0
+   End
+End
+
+Engine DFTB
+EndEngine
+
+eor
+
+# let us first optimize without charges
+
+export AMS_JOBNAME=DoNotUseCharges
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+Task GeometryOptimization
+
+GeometryOptimization
+   Convergence Step=1.0e-3
+End
+
+System
+   Atoms
+      C 0.0 0.0 0.0
+      O 1.13 0.0 0.0
+      C 0.0 0.0 2.1
+      O 1.13 0.0 1.9
+   End
+End
+
+Engine ForceField
+EndEngine
+
+eor
+
+
+# Now that we have charges from our previous fancy calculation, let us use them for a UFF geometry optimization
+# * The name of the file depends on the engine used (in this case dftb.rkf)
+# * The geometry does not need to be the same
+
+export AMS_JOBNAME=LoadCharges
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+Task GeometryOptimization
+
+GeometryOptimization
+   Convergence Step=1.0e-3
+End
+
+System
+   Atoms
+      C 0.0 0.0 0.0
+      O 1.13 0.0 0.0
+      C 0.0 0.0 2.1
+      O 1.13 0.0 1.9
+   End
+End
+
+Engine ForceField
+   Verbosity Verbose
+   LoadCharges File=CalculateCharges.results/dftb.rkf
+EndEngine
+
+eor
+
+# Finally let us use the charge guessing, by default dftb is used for charge guessing
+
+export AMS_JOBNAME=GuessCharges
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+Task GeometryOptimization
+
+GeometryOptimization
+   Convergence Step=1.0e-3
+End
+
+System
+   Atoms
+      C 0.0 0.0 0.0
+      O 1.13 0.0 0.0
+      C 0.0 0.0 2.1
+      O 1.13 0.0 1.9
+   End
+End
+
+Engine ForceField
+   Verbosity Verbose
+   GuessCharges True
+EndEngine
+
+eor

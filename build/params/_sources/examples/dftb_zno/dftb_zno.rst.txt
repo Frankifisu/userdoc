@@ -1,0 +1,204 @@
+.. _DFTB_ZnO_Tutorial:
+
+SCC-DFTB repulsive potential for ZnO
+====================================================
+
+.. note::
+
+    First go through the :ref:`LJ_Ar_Tutorial` and :ref:`LJ_Ar_Python` tutorials.
+
+.. note::
+
+    The ParAMS graphical user interface does not support SCC-DFTB repulsive
+    potentials, but it does support :ref:`xTB parametrizations <xTB_Tutorial>`.
+    This tutorial only covers running via the command-line.
+
+This example illustrates how to fit an **SCC-DFTB repulsive potential**.  It is
+based on the work published in Komissarov et al., *J. Chem. Inf. Model.* `DOI:
+10.1021/acs.jcim.1c00333 <https://doi.org/10.1021/acs.jcim.1c00333>`__.
+
+**Jobs**: Lattice optimizations of the **wurtzite** and **rocksalt** polymorphs of ZnO
+
+.. figure:: /_static/DFTB_ZnO_polymorphs.png
+    :width: 60%
+    :align: center
+
+    Adapted from `Komissarov et al. <https://doi.org/10.1021/acs.jcim.1c00333>`__
+
+**Training set**: The relative energy between the
+two polymorphs, and the bulk modulus and optimized lattice parameters of wurtzite. The **reference data** were
+calculated with BAND (DFT), using a TZP basis set.
+
+**Parameter interface**: :ref:`DFTBSplineRepulsivePotentialParameters <DFTBSplineRep>` 
+
+
+job_collection.yaml and training_set.yaml
+-------------------------------------------
+
+All the files needed for this example can be found in ``$AMSHOME/scripting/scm/params/examples/DFTB_ZnO``.
+
+**job_collection.yaml**: Note that for wurtzite the *elastic tensor* is calculated, which will also calculate the bulk modulus.
+
+.. literalinclude:: ../../../../examples/DFTB_ZnO/job_collection.yaml
+
+**training_set.yaml**: The ``cell_lengths`` :ref:`extractor <AvailableExtractors>` accepts an additional argument: 0 for the first lattice vector (*a*), and 2 for the third lattice vector (*c*).
+
+.. literalinclude:: ../../../../examples/DFTB_ZnO/training_set.yaml
+
+Background: znorg-0-1
+----------------------------
+
+AMS includes the ``DFTB.org/znorg-0-1`` SCC-DFTB parameters for ZnO. Although
+those parameters give good values for the lattice parameters and bulk modulus,
+they give the *incorrect* relative stability of the wurtzite and rocksalt
+polymorphs (the "Prediction" numbers were calculated with znorg-0-1):
+
+.. literalinclude:: ../../../../examples/DFTB_ZnO/output/znorg_predictions.txt
+    :lines: 1-6
+
+In experiment and DFT, wurtzite is more stable than rocksalt (-0.009 Ha per ZnO formula unit), but with znorg-0-1, the
+opposite is true (+0.005 Ha per ZnO formula unit). This motivates the reparametrization. **The goal of the 
+parametrization is to have wurtzite more stable than rocksalt with the new parameters**.
+
+The above table was generated with the following script using a :ref:`DataSetEvaluator`:
+
+.. literalinclude:: ../../../../examples/DFTB_ZnO/evaluate_with_znorg.py
+
+To run the above script (save it with the name ``evaluate_with_znorg.py``):
+
+.. code:: ipython3
+    
+    "$AMSBIN/amspython" evaluate_with_znorg.py
+
+Parameter interface
+--------------------------------------------------------------
+
+SCC-DFTB parameters are stored in `Slater-Koster files <../../../DFTB/Parameter_files.html#slater-koster-based-dftb>`__.
+
+There are two types of parameters: electronic (first part of the file) and
+repulsive (second part). **The SCC-DFTB interface in ParAMS can only
+reparametrize the repulsive part**. The electronic part will be left unchanged.
+
+.. _CubicSplines:
+
+The repulsive potential is often stored as a set of cubic splines. For example,
+the ``O-Zn.skf`` file from znorg-0-1
+(``$AMSHOME/atomicdata/DFTB/DFTB.org/znorg-0-1/O-Zn.skf``) contains a section starting like this:
+
+.. literalinclude:: O-Zn.skf
+    :lines: 603-620
+    :linenos:
+    :lineno-start: 603
+
+The third column (from line 606) contains the O-Zn repulsive potential (in Ha)
+at the distance defined by the first column (in bohr). Columns 4-6 contain the
+parameters of the cubic splines.
+
+With the :ref:`DFTBSplineRepulsivePotentialParameters <DFTBSplineRep>` interface,
+the parameters of the cubic splines are **not directly fitted**. Instead,
+a Python class represents some analytical repulsive potential. The interface automatically
+makes the conversion to cubic splines.
+
+Here, we will use the :class:`TaperedDoubleExponential <scm.params.parameterinterfaces.dftbsplinerep.TaperedDoubleExponential>`,
+which has the analytical form
+
+.. _EqTaperedDoubleExponential:
+
+.. math::
+
+    V^{\text{rep}}(r) = \frac{1}{2}\left(\cos\left(\frac{\pi r}{r_{\text{cut}}}\right)+1\right)\cdot[A_0\exp(-A_1 r) + A_2\exp(-A_2 r)]
+
+where :math:`r_{\text{cut}}` is a **non-fitted parameter** (constant), and
+:math:`A_0`, :math:`A_1`, :math:`A_2`, and :math:`A_3`, are **parameters
+changed during the optimization**.
+
+The **names** of the fitted parameters in the
+``DFTBSplineRepulsivePotentialParameters`` class are ``O-Zn:p0``, ``O-Zn:p1``, etc.
+
+.. note::
+
+    The DFTB repulsive potential **cannot** be stored in/loaded from a .yaml file. Instead, you must specify the parameters in ``params.conf.py`` (see below).
+
+Run the parametrization
+-----------------------------
+
+To run the parametrization, run
+
+.. code:: ipython3
+
+    "$AMSBIN/params" optimize
+
+This processes the **params.conf.py** file, which contains:
+
+.. literalinclude:: ../../../../examples/DFTB_ZnO/params.conf.py
+
+The :class:`DFTBSplineRepulsivePotentialParameters <scm.params.parameterinterfaces.dftbsplinerep.DFTBSplineRepulsivePotentialParameters>` constructor receives four arguments:
+
+* ``folder``: Folder containing .skf files. The electronic parameters, and repulsive potentials that are not changed (e.g. in C-C.skf), are taken from this directory.
+
+* ``repulsive_function``: An analytical repulsive function. Here a TaperedDoubleExponential with :math:`r_{\text{cut}} = 5.67` bohr.
+
+* ``r_range``: The distance range (in bohr) for which to print the :ref:`cubic splines <CubicSplines>`.
+
+* ``other_settings``: Settings for the DFTB engine during parametrization. Here, it sets the k-space sampling.
+
+Only the parameters with names starting with ``O-Zn`` are activated. This leaves all other repulsive potentials (e.g. in C-C.skf, C-O.skf, ...) left intact.
+
+.. important::
+
+    The O-Zn and Zn-O repulsive potentials are necessarily identical.
+    :class:`DFTBSplineRepulsivePotentialParameters
+    <scm.params.parameterinterfaces.dftbsplinerep.DFTBSplineRepulsivePotentialParameters>`
+    uses only the alphabetically sorted version (O-Zn), and will write the same
+    repulsive potential to Zn-O.skf.
+
+.. note::
+
+    The initial repulsive potential is **not** the znorg-0-1 repulsive
+    potential, but instead the ``TaperedDoubleExponential`` with the parameters
+    given on the line ``interface.active.x``. 
+    
+    To evaluate the data_set with the znorg-0-1 repulsive potential (for comparison purposes),
+    see :ref:`Background: znorg-0-1`.
+
+For more details, see the :ref:`DFTBSplineRep` documentation.
+
+
+Results
+----------------
+
+Go to the directory ``optimization/training_set_results/best``
+
+* The new Slater-Koster files are stored in the directory ``parameters_ams`` 
+
+* The values of :math:`A_0`, :math:`A_1` etc. are stored in ``active_parameters.txt``
+
+* The new predictions can be found in the ``predictions_*.txt`` files:
+
+.. literalinclude:: ../../../../examples/DFTB_ZnO/output/best_predictions.txt
+    :lines: 1-6
+
+**With the new repulsive potential, the wurtzite polymorph is 0.00957 Ha per ZnO
+formula unit more stable than rocksalt**, which compares well with the reference
+value of 0.00866 Ha.
+
+.. note::
+
+    The above results were obtained with KSpace Quality 'Good'. Your results may differ somewhat.
+
+Modify the analytical repulsive potential
+--------------------------------------------
+
+To use a different functional form of the repulsive potential, create a new class deriving from ``RepulsiveFunction``, similar to ``TaperedDoubleExponential``:
+
+.. literalinclude:: ../../../../parameterinterfaces/dftbsplinerep.py
+    :pyobject: TaperedDoubleExponential
+
+* ``npar`` must contain the number of parameters (in this case 4), 
+
+* ``default_values`` contains some default values of the parameters,
+
+* ``default_ranges`` contains some default ranges of the parameters, and 
+
+* the ``__call__()`` method returns the calculated value (cf :ref:`the equation <EqTaperedDoubleExponential>`).
+

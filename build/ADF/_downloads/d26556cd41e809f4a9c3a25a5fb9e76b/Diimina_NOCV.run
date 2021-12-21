@@ -1,0 +1,130 @@
+#!/bin/sh
+
+
+# Example for calculation of ETS-NOCV for spin-restricted fragments. ETS-NOCV:
+# energy analysis using the Natural Orbitals for Chemical Valence. The ethylene
+# molecule and a Ni-diimina form a complex together. This example will be
+# discussed first. The other example is H+ and CO form together HCO+ , this
+# example is similar to the discussed example. All electron basis sets are
+# required.
+
+# First the two fragments are calculated.
+
+
+AMS_JOBNAME=etfrag $AMSBIN/ams <<eor
+System
+  atoms
+     C   -0.430177075 -1.815433265  0.860288229
+     C   -0.363705637 -1.910722338 -0.515633302
+     H    0.533109934 -2.284970854 -1.016904201
+     H   -1.279922499 -1.884673940 -1.115144723
+     H   -1.389295819 -1.753589602  1.377541080
+     H    0.440296224 -2.041861443  1.484489314
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title et-----Ni-diimina: ethylene run
+  basis
+    core Small
+    type DZP
+  end
+  symmetry NOSYM
+  xc
+    gga becke perdew
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=Nifrag $AMSBIN/ams <<eor
+System
+  atoms
+     Ni   0.022615419  0.037783871  0.025751533
+     N    0.386170317  1.871072585  0.306265538
+     C    1.612863056  2.248007643  0.148716016
+     C    2.540686607  1.163409862 -0.183603690
+     N    1.976290003  0.008161589 -0.301176178
+     H   -0.288333328  2.609667211  0.546869047
+     H    1.942601454  3.283060847  0.269249237
+     H    3.613259273  1.338293482 -0.302134814
+     H    2.621707427 -0.766258151 -0.517479818
+     H   -1.351756655  0.253389698  0.386197419
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  title et-----Ni-diimina: Ni-diimina run
+  basis
+    core Small
+    type DZP
+  end
+  symmetry NOSYM
+  xc
+    gga scf becke perdew
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+
+eor
+
+# Next these fragments are used in the calculation of the full complex. The block
+# ETSNOCV is used to analyze the bonding in the molecule with respect to the fragments.
+# The symmetry must be NOSYM.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     Ni   0.022615419  0.037783871  0.025751533 adf.f=k
+     N    0.386170317  1.871072585  0.306265538 adf.f=k
+     C    1.612863056  2.248007643  0.148716016 adf.f=k
+     C    2.540686607  1.163409862 -0.183603690 adf.f=k
+     N    1.976290003  0.008161589 -0.301176178 adf.f=k
+     H   -0.288333328  2.609667211  0.546869047 adf.f=k
+     H    1.942601454  3.283060847  0.269249237 adf.f=k
+     H    3.613259273  1.338293482 -0.302134814 adf.f=k
+     H    2.621707427 -0.766258151 -0.517479818 adf.f=k
+     H   -1.351756655  0.253389698  0.386197419 adf.f=k
+     C   -0.430177075 -1.815433265  0.860288229 adf.f=m
+     C   -0.363705637 -1.910722338 -0.515633302 adf.f=m
+     H    0.533109934 -2.284970854 -1.016904201 adf.f=m
+     H   -1.279922499 -1.884673940 -1.115144723 adf.f=m
+     H   -1.389295819 -1.753589602  1.377541080 adf.f=m
+     H    0.440296224 -2.041861443  1.484489314 adf.f=m
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  title et-----Ni-diimina run
+
+  ETSNOCV
+  End
+  
+  fragments
+     m etfrag.results/adf.rkf
+     k Nifrag.results/adf.rkf
+  end
+  symmetry NOSYM
+  xc
+    gga scf becke perdew
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+
+eor

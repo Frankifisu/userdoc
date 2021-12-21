@@ -1,0 +1,81 @@
+#! /bin/sh
+
+# For N2, three calculations are provided: 1) a normal N2 run as a reference
+# 2) with a homogeneous electric field, 3) with a point charge.
+
+AMS_JOBNAME=reference $AMSBIN/ams <<eor
+System
+  atoms
+     N  0 0 -0.55
+     N  0 0  0.55
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title N2 reference for comparison with E-Field runs
+  basis
+    type DZP
+    core Small
+    CreateOutput Yes
+  end
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=efield $AMSBIN/ams <<eor
+System
+  atoms
+     N  0 0 -0.55
+     N  0 0  0.55
+  end
+    ElectrostaticEmbedding
+        ElectricField 0.0 0.0 0.01 [a.u.]
+    End
+end
+
+Task SinglePoint
+
+Engine ADF
+  title N2 in a homogeneous electric field
+  Symmetry NoSym
+  basis
+    type DZP
+    core Small
+  end
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=point_charge $AMSBIN/ams <<eor
+System
+  atoms
+     N 0 0 -0.55
+     N 0 0  0.55
+  end
+    ElectrostaticEmbedding
+        MultipolePotential
+            # Format of each entry in the Coordinates block: x y z q (lenght units: angstrom)
+            Coordinates
+                0 0 3.0 1.0
+            End
+        End
+    End
+end
+
+Task SinglePoint
+
+Engine ADF
+  title N2 polarized by a point charge on the axis
+  Symmetry NoSym
+  basis
+    type DZP
+    core Small
+  end
+EndEngine
+
+eor
+

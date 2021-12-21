@@ -1,0 +1,144 @@
+#! /bin/sh
+
+# This is example for a calculation of FDE interaction energies in ADF for an
+# open-shell frozen fragment.
+
+# It performs single point runs for H2O and Ne, the latter unrestricted
+# with LDA/DZ (all-electron) and uses these fragments in an FDE energy
+# embedding calculation in which the energy of water in presence of a frozen
+# (open-shell) neon atom is computed
+# This is a bit of an artificial test but it serves its purpose
+#
+# No freeze-thaw is done, this is at present not possible with unrestricted
+# (open shell) fragments, but has to be done manually, see the example in 
+# $AMSHOME/examples/Test/FDE_Spin.run
+#
+# NumericalQuality is good which should give total energies for the
+# fragments accurate at least up to 10**(-4) atomic units
+#
+# This test has been checked to yield the same energy as a run with a closed-
+# shell (restricted) Ne atom (just comment UNRESTRICTED in the input below)
+#
+
+# Ne LDA/DZ (unrestricted)
+
+AMS_JOBNAME=Ne $AMSBIN/ams <<eor
+System
+  atoms
+     Ne      -1.51248       -0.03714       -0.00081
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    core None
+    type DZ
+  end
+  noprint BAS FUNCTIONS
+  nosymfit
+  numericalquality Good
+  scf
+    converge 1.0e-06 1.0e-06
+    iterations 100
+  end
+  spinpolarization 0
+  symmetrytolerance 1e-2
+  title Ne LDA/DZ single point, unrestricted
+  unrestricted
+  xc
+    lda
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Ne.results/adf.rkf t21.ne
+
+
+# H2O LDA/DZ
+
+
+AMS_JOBNAME=H2O $AMSBIN/ams <<eor
+System
+  atoms
+     O        1.45838        0.10183        0.00276
+     H        0.48989       -0.04206        0.00012
+     H        1.84938       -0.78409       -0.00279
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    core None
+    type DZ
+  end
+  noprint BAS FUNCTIONS
+  nosymfit
+  numericalquality Good
+  spinpolarization 0
+  symmetrytolerance 1e-2
+  title H2O LDA/DZ single point
+  xc
+    lda
+  end
+  Relativity Level=None
+EndEngine
+eor
+mv H2O.results/adf.rkf t21.water
+
+
+# NH3-H2O: FDE energy of H2O in presence of frozen (unrestricted) Ne
+
+
+AMS_JOBNAME=FDE $AMSBIN/ams <<eor
+System
+  atoms
+     O        1.45838        0.10183        0.00276    adf.f=frag1
+     H        0.48989       -0.04206        0.00012    adf.f=frag1
+     H        1.84938       -0.78409       -0.00279    adf.f=frag1
+     Ne      -1.51248       -0.03714       -0.00081    adf.f=frag2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  fde
+    energy
+    fullgrid
+    thomasfermi
+  end
+  fragments
+     frag1  t21.water
+     frag2  t21.ne type=FDE
+  end
+  noprint BAS FUNCTIONS
+  numericalquality Good
+  spinpolarization 0
+  symmetrytolerance 1e-2
+  title Ne-H2O LDA/Thomas-Fermi/DZ FDE single point with interaction energy
+  xc
+    lda
+  end
+  Relativity Level=None
+EndEngine
+eor

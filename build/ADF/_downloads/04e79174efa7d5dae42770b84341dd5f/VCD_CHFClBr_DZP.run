@@ -1,0 +1,39 @@
+#! /bin/sh
+
+# Analytical frequencies with subsequent calculation of unrestricted 
+# vibrational circular dichroism (VCD)
+
+# This test is using a small basis set; use of a large basis set for 
+# chemical application is recommended
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   Atoms
+       C        -1.194957    0.619864    0.018398
+       Br        0.712857    0.534545    0.755317
+       Cl       -0.705615   -0.120328   -1.557332
+       F        -1.636918    1.848290   -0.093005
+       H        -1.832068   -0.042181    0.608806
+   End
+   Charge 1
+End
+
+Properties
+   VCD Yes
+End
+
+Engine ADF
+   Basis
+       Type DZP
+       Core None
+   End
+   XC
+     GGA BLYP
+   end
+   Unrestricted Yes
+   SpinPolarization 1
+EndEngine
+eor

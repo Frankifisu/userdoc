@@ -1,0 +1,85 @@
+#! /bin/sh
+
+# Spin-orbit coupled relativistic ZORA, X2C, and RA-X2C
+# are compared in this example for the calculation of 
+# Core Electron Binding Energies (CEBEs).
+# In this case the CEBE of the 1s of Iodine in the molecule HI.
+# For such calculations X2C or RA-X2C is recommended.
+# Note, for more accurate calculations one should increase the basis set.
+# In this example the LDA functional is used.
+
+# Results of this example will show that for X2C the CEBE is around 33.211 keV
+# and for RA-X2C the CEBE is around 33.202 keV.
+# If one increases the basis set (especially in the core region), for example, with a QZ4P basis set,
+# the results obtained with X2C and RA-X2C will be much closer.
+
+# In case of ZORA, without the scaled ZORA energy correction
+# the CEBE in this case is around 34.515 keV, much larger than the results with X2C or RA-X2C.
+# If one includes the scaled ZORA energy correction (can be found in the output)
+# the CEBE in case of ZORA is around 33.238 keV.
+
+# NOTE: The scaled ZORA energy correction should only be used to compare two calculations
+# in which the only difference in the calculation is the electron configuration.
+# Then the difference in energy of this term should be added to the difference in energy of
+# the two electron configurations.
+# This term should not be used otherwise.
+# In practice it is useful only for core excitation energy calculations.
+
+for f in "ZORA" "X2C" "RA-X2C"
+do
+
+AMS_JOBNAME=HI_$f $AMSBIN/ams <<eor
+System
+  atoms
+     H 0.0 0.0 0.000
+     I 0.0 0.0 1.609 
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type DZ
+  end
+  numericalquality good
+  relativity
+    level spin-orbit
+    formalism $f
+  end
+  nuclearmodel gaussian
+EndEngine
+eor
+
+AMS_JOBNAME=HI_core_$f $AMSBIN/ams <<eor
+System
+  atoms
+     H 0.0 0.0 0.000
+     I 0.0 0.0 1.609 
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type DZ
+  end
+  numericalquality good
+  relativity
+    level spin-orbit
+    formalism $f
+    SpinOrbitMagnetization NonCollinear
+  end
+  unrestricted
+  symmetry nosym
+  irrepoccupations
+    A1/2 1 0 52
+  end
+  nuclearmodel gaussian
+EndEngine
+eor
+done

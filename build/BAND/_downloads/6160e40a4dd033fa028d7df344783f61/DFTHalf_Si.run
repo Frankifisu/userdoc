@@ -1,0 +1,38 @@
+#! /bin/sh
+
+"$AMSBIN/ams" <<eor
+
+Task SinglePoint
+System
+   Atoms
+      Si -0.67875 -0.67875 -0.67875
+      Si  0.67875  0.67875  0.67875
+   End
+   Lattice
+      0.0 2.715 2.715
+      2.715 0.0 2.715
+      2.715 2.715 0.0
+   End
+End
+
+Engine BAND
+
+   # To get better results one should use a larger basis set and
+   # a better k-space quality (e.g. 'Basis Type=TZ2P' and 'KSpace Quality=Good')
+
+   Basis Type=DZP
+
+   XC
+      LDA SCF VWN
+      DFTHalf
+         Enabled Yes
+         ActiveAtomtype 
+            AtomType Si
+            IonicCharge 0.1
+            ScreeningCutOffs 2.0 4.0 6.0 
+         End
+      End
+   End
+EndEngine
+eor
+

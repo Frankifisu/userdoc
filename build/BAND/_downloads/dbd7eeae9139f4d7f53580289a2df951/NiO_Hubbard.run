@@ -1,0 +1,56 @@
+#! /bin/sh
+
+# With the UNRESTRICTED keyword we do a spin polarized calculation.
+
+# With the HubbardU key block we set up the GGA+U calculation. You need to
+# specify per atom type (only two here, Ni, and O) the U and the l-value to
+# which it should be applied.
+
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   Atoms
+      Ni 0.0   0.0   0.0
+      O  2.085 2.085 2.085
+   End
+
+   Lattice
+      0.000 2.085 2.085
+      2.085 0.000 2.085
+      2.085 2.085 0.000
+   End
+End
+
+Engine Band 
+   Title NiO GGA+U (Hubbard)
+
+   Unrestricted Yes
+
+   HubbardU
+      Enabled True
+      PrintOccupations True
+      uvalue 0.3 0.0
+      lvalue 2 -1
+   End
+
+   KSpace 
+      Symmetric KInteg=3
+      Type Symmetric
+   End
+
+   Basis
+      Type TZP
+      Core Large
+   End
+
+   XC
+      GGA Becke Perdew
+   End
+   
+   Print AtomicChargesDetails
+EndEngine
+
+eor

@@ -1,0 +1,2214 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Geometry optimization &mdash; AMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="AMS 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Structure and Reactivity, Molecular Dynamics" href="TOC.html"/>
+        <link rel="next" title="Transition state search" href="Transition_State_Search.html"/>
+        <link rel="prev" title="Bond energy calculations" href="Bond_Energy.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search AMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-AMS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#what-s-new-in-the-ams-driver">What’s new in the AMS driver?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2022-1">New in AMS2022.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2021-1">New in AMS2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2020-1">New in AMS2020.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2019-3">New in AMS2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2019-1">New in AMS2019.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#motivation-and-progress">Motivation and progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#input-execution-and-output">Input, execution and output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input_Output.html">Input, execution and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#tasks">Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#properties">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#units">Units</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#execution">Execution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#shell-script">Shell script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#interactive-input-file">Interactive input file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#running-ams-on-compute-clusters">Running AMS on compute clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#output">Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#index-13">Results directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#logfile-ams-log">Logfile ams.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#binary-output-files">Binary output files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#standard-output">Standard output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#optimized-geometry-in-xyz-format">Optimized geometry in xyz format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-environment-variables">AMS environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#driver-level-parallelism">Driver level parallelism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#python-interface">Python interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Pipe_protocol.html">AMSPipe protocol specification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#low-level-message-encoding">Low-level message encoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#return-messages-and-error-handling">Return messages and error handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-as-a-pipe-master">AMS as a pipe master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-as-a-pipe-worker">AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../System.html">Geometry, System definition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#geometry-lattice">Geometry, Lattice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#modifying-the-geometry">Modifying the geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#symmetry">Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#regions">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#charge-atomic-masses-input-bond-orders">Charge, atomic masses, input bond orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#homogeneous-electric-field-and-multipole-charges">Homogeneous electric field and multipole charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#load-a-system-from-file">Load a System from file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#atom-attributes">Atom attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#force-field-related-extensions">Force field related extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#load-charges-for-a-forcefield-into-regions">Load charges for a forcefield into regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#load-forcefield-atom-types">Load forcefield atom types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="TOC.html">Structure and Reactivity, Molecular Dynamics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Single_Point.html">Single point calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bond_Energy.html">Bond energy calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#ground-state-energy">Ground state energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#formation-energy">Formation energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#atomization-energies">Atomization energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#chemisorption-energies">Chemisorption energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#atomic-corrections">Atomic corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#open-shell-systems">Open shell systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#impurities">Impurities</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#constrained-optimization">Constrained optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#restraints">Restraints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#optimization-under-pressure-external-stress">Optimization under pressure / external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimization-methods">Optimization methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#quasi-newton">Quasi-Newton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fire">FIRE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#index-17">SCMGO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limited-memory-bfgs">Limited-memory BFGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conjugate-gradients">Conjugate gradients</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#failure-to-converge">Failure to converge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restarting-a-geometry-optimization">Restarting a geometry optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Transition_State_Search.html">Transition state search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PES_Scan.html">Linear Transit, PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#distance-angle-and-dihedral-angle-coordinates">Distance, angle, and dihedral angle coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#joint-scan-coordinates">Joint scan coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#multidimensional-pes-scan">Multidimensional PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#lattice-scan-coordinates-for-periodic-systems">Lattice scan coordinates for periodic systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#isotropic-scaling-of-the-unit-cell-volume-or-area">Isotropic scaling of the unit cell volume or area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#scaling-of-the-lattice-vector-lengths">Scaling of the lattice vector lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#strain-matrix-in-voigt-notation">Strain matrix in Voigt notation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#scan-arbitrary-lattices">Scan arbitrary lattices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#calculate-properties-for-all-pes-points">Calculate properties for all PES points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="NEB.html">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html#frozen-atom-constraints">Frozen atom constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html#optimizations-and-convergence-criteria">Optimizations and convergence criteria</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="IRC.html">Intrinsic Reaction Coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="IRC.html#method-details">Method details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IRC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IRC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Excited_State_Optimizations.html">Excited state optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Molecular_Dynamics.html">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#constrained-molecular-dynamics">Constrained molecular dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#re-starting-a-simulation">(Re-)Starting a simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#thermostats-and-barostats">Thermostats and barostats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#temperature-and-pressure-regimes">Temperature and pressure regimes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#trajectory-sampling-and-output">Trajectory sampling and output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#lattice-deformations-volume-regimes">Lattice deformations (volume regimes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#molecule-gun-adding-molecules-during-simulation">Molecule Gun: adding molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#removing-molecules-during-simulation">Removing molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#accelerated-dynamics">Accelerated dynamics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#the-plumed-library-support-in-ams">The PLUMED library support in AMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#metadynamics-for-conformer-rotamer-ensemble-sampling-crest-mtd">Metadynamics for Conformer-Rotamer Ensemble Sampling (CREST-MTD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#collective-variable-driven-hyperdynamics-cvhd">Collective Variable-driven HyperDynamics (CVHD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#temperature-replica-exchange">Temperature Replica Exchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#bond-boost-method">Bond Boost Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#force-bias-monte-carlo-fbmc">Force bias Monte Carlo (fbMC)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#non-equilibrium-md-nemd">Non-equilibrium MD (NEMD)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#t-nemd-for-thermoconductivity-heat-exchange">T-NEMD for thermoconductivity: heat exchange</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TrajectoryReplay.html">Trajectory replay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GCMC.html">Grand Canonical Monte Carlo (GCMC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#general-info">General info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#method-details">Method Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PES_Exploration.html">Automated PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#job-selection-and-main-options">Job selection and main options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#results-the-energy-landscape">Results: the “Energy Landscape”</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#results-on-the-text-output">Results on the text output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#continue-a-pes-exploration-from-a-previous-calculation">Continue a PES exploration from a previous calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#structure-comparison">Structure comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#process-search-job">Process Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id2">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#saddle-search-job">Saddle Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id3">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id8">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#basin-hopping-job">Basin Hopping job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id9">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id11">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#landscape-refinement">Landscape Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#optimizer">Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#binding-sites">Binding Sites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id12">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Gradients_Stress_Elasticity.html">Gradients, Hessian, Stress tensor, Elasticity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#nuclear-gradients">Nuclear gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#index-3">Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#pes-point-character">PES point character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#thermodynamics-gas-phase-gibbs-free-energy">Thermodynamics, gas phase Gibbs free energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#stress-tensor">Stress tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#elastic-tensor">Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#numerical-differentiation-options">Numerical differentiation options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Vibrational_Spectroscopy.html">Vibrational Spectroscopy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#general">General</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#where-are-the-results">Where are the results?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#ir-frequencies-and-normal-modes">IR frequencies and normal modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#all-vibrational-modes">All vibrational Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#rescanning-imaginary-modes">Rescanning Imaginary modes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#symmetric-displacements">Symmetric Displacements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mobile-block-hessian-mbh">Mobile Block Hessian (MBH)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-scanning">Mode Scanning</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-refinement">Mode Refinement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id4">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id5">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-tracking">Mode Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id8">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id11">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-tracking-methods">Input: Tracking methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-selecting-modes">Input: Selecting modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-convergence">Input: Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#selecting-modes">Selecting modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#thermodynamics-ideal-gas">Thermodynamics (ideal gas)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#gibbs-free-energy-change-for-a-gas-phase-reaction">Gibbs free energy change for a gas phase reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#moments-of-inertia">Moments of inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#partial-vibrational-spectra-pvdos">Partial Vibrational Spectra (PVDOS)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#phonons">Phonons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman">(Resonance) Raman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id19">Raman</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman-excited-state-finite-lifetime">Resonance Raman: excited-state finite lifetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman-vg-fc">Resonance Raman: VG-FC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id22">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id24">Input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#vroa-resonance-vibrational-raman-optical-activity">VROA: (Resonance) vibrational Raman optical activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#engine-adf">Engine ADF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#vcd-vibrational-circular-dichroism">VCD: Vibrational Circular Dichroism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#atomic-polar-tensor-apt-model">Atomic polar tensor (APT) model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#analytical-vcd-in-adf">Analytical VCD in ADF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Vibrationally_resolved_electronic_spectra.html">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/FCF_module.html">AH-FC: Adiabatic Hessian Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-module-franck-condon-factors">FCF module: Franck-Condon Factors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#algorithm">Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#result-tape61">Result: TAPE61</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-example-absorption-and-fluorescence">FCF example absorption and fluorescence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-example-phosphorescence">FCF Example phosphorescence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html">VG-FC: Vertical Gradient Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory">Theory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-tracking">Theory: Vibronic-Structure Tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-refinement">Theory: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-adiabatic-excitation-energy">Theory: Adiabatic excitation energy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-all-modes">Input: Vibronic-Structure all modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-tracking">Input: Vibronic-Structure Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-restarting-vst">Input: Restarting VST</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-refinement">Input: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-excited-state">Input: Excited State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-producing-the-spectrum">Input: Producing the spectrum</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Properties.html">Dipole moment, Polarizability, Bond orders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Properties.html#charges-dipole-moment-polarizability">Charges, Dipole Moment, Polarizability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Properties.html#bond-orders-molecule-detection">Bond orders &amp; Molecule detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Engines.html">Engines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#index-2">Available engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#summary-of-engine-capabilities">Summary of engine capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#external-programs-as-engines">External programs as engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#toy-engines">Toy engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#engine-add-ons">Engine add-ons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#dispersion-corrections">Dispersion corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#pressure">Pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#non-isotropic-external-stress">Non-isotropic external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#atom-energies">Atom energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#restraints">Restraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#wall-potential">Wall potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Utilities/TOC.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/ChemTraYzer.html">ChemTraYzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#general-information">General information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#graphical-user-interface">Graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#command-line-execution">Command line execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/ChemTraYzer2.html">ChemTraYzer2 (beta version)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#using-chemtrayzer2-via-the-graphical-user-interface">Using ChemTraYzer2 via the graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#minimal-input">Minimal input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#ouput">Ouput</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html">Trajectory Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#radial-distribution-function-rdf">Radial Distribution Function (RDF)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#histogram">Histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#autocorrelation-functions">Autocorrelation Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#id2">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#id3">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#diffusion-coefficient">Diffusion Coefficient</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/VCDtools.html">VCD Analysis: VCDtools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#general-theory">General Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#general-coupled-oscillator-analysis">General Coupled Oscillator Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#available-options">Available options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#geometry-optimization">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/GO_formaldehyde_noSCC.html">Example: Simple geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/2StepGO.html">Example: Two-stage geometry optimization with initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Diamond_under_pressure.html">Example: Periodic lattice optimization under pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Diamond_from_pressure.html">Example: Phase Transition Due To External Nonuniform Stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ExternalStress_BN.html">Example: Boron nitride optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ExternalStress_graphene.html">Example: Graphene optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/constraints.html">Example: Constrained optimizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#transition-state-search">Transition state search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/COChainFreqTS.html">Example: TS search starting from initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and TS search for H2 on graphene</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#nudged-elastic-band-neb">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NEB.html">Nudged Elastic Band (NEB) Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NEB.html#hcn-isomerization-reaction-with-neb">HCN isomerization reaction with NEB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NEB.html#h2-dissociation-on-graphene">H2 dissociation on graphene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NEB.html#running-multiple-neb-calculations-using-plams">Running multiple NEB calculations using PLAMS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#intrinsic-reaction-coordinate-irc">Intrinsic reaction coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/IRC_HCN.html">Example: IRC for HCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/TS_and_IRC_Claisen.html">Example: TS and IRC for Claisen reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-scan">PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PESScan.html">Example: 2D PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PESScan_lattice.html">Example: PES scan for lattice degrees of freedom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-exploration">PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BasinHopping_Ar13.html">Example: Basin Hopping for Ar 13 cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ProcessSearch_alanine.html">Example: PES Exploration, Process Search for alanine with PLAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BindingSites_O+Pt111.html">Example: PES Exploration, Binding Sites for O on Pt 111</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#molecular-dynamics">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/MD_hydrogen_longrun.html">Example: Simple MD for H2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/H2O_nreac.html">Example: MD for a box of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/MD_Deformation.html">Example: Lattice deformations in MD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#trajectory-replay">Trajectory replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/TrajectoryReplay.html">Example: Trajectory replays for PES scans, NEB and MD calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#vibrational-analysis">Vibrational analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/VATools_dydrogesterone.html">Example: Mode Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/VATools_cyclohexanone.html">Example: Mode Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/VST_pyrene.html">Example: Vibronic-Structure Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-point-properties">PES point properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Phonons_Graphene.html">Example: Phonons for graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Phonons_Isotopes.html">Example: Phonons with isotopes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Phonons_UserBZPath.html">Example: User-defined Brillouin zone for phonon dispersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ElasticTensor.html">Example: Elastic tensor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Pipe_ASEWorker.html">Example: ASE calculator as a pipe worker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Pipe_AMSonAMS.html">Example: AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#extended-xyz-file-format">Extended XYZ file format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#developer-options">Developer options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#symmetry">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices.html#schonfliess-symbols-and-symmetry-labels">Schönfliess symbols and symmetry labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices.html#molecular-orientation-requirements">Molecular orientation requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#feature-references">Feature references</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#frequencies-ir-intensities-raman-vcd">Frequencies, IR Intensities, Raman, VCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#pes-exploration">PES Exploration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">AMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../AMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">AMS</a>/</li>
+      
+          <li><a href="TOC.html">Structure and Reactivity, Molecular Dynamics</a>/</li>
+      
+    <li class="orange-text">Geometry optimization</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="index-0"></span><span class="target" id="index-1"></span><div class="section" id="geometry-optimization">
+<span id="geometryoptimization"></span><span id="index-2"></span><h1>Geometry optimization<a class="headerlink" href="#geometry-optimization" title="Permalink to this headline">¶</a></h1>
+<p>A geometry optimization is the process of changing the system’s geometry (the
+nuclear coordinates and potentially the lattice vectors) to minimize the total
+energy of the systems. This is typically a local optimization, i.e. the
+optimization converges to the next local minimum on the potential energy surface
+(PES), given the initial system geometry specified in the <code class="docutils literal notranslate"><span class="pre">System</span></code> block. In
+other words: The geometry optimizer moves “downhill” on the PES into the local
+minimum.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../Examples.html#examples"><span class="std std-ref">Examples</span></a> and <a class="reference external" href="../../Tutorials/StructureAndReactivity/DiamondOptimizationAndPhonons.html">diamond lattice optimization and phonons tutorial</a></p>
+</div>
+<p>Geometry optimizations are performed by selecting them as the <code class="docutils literal notranslate"><span class="pre">Task</span></code>. The
+details of the optimization can be configured in the corresponding block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">GeometryOptimization</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate" id="ams-key-geometryoptimization"><div class="highlight"><pre><span></span>GeometryOptimization
+   Convergence
+      Energy float
+      Gradients float
+      Step float
+      StressEnergyPerAtom float
+   End
+   MaxIterations integer
+   CalcPropertiesOnlyIfConverged Yes/No
+   OptimizeLattice Yes/No
+   KeepIntermediateResults Yes/No
+   PretendConverged Yes/No
+   MaxRestarts integer
+   RestartDisplacement float
+End
+</pre></div>
+</div>
+<dl class="docutils" id="go-convergence">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures details of the geometry optimization and transition state searches.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Convergence</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Convergence is monitored for up to 4 quantities: the energy change, the Cartesian gradients, the Cartesian step size, and for lattice optimizations the stress energy per atom. Convergence criteria can be specified separately for each of these items.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Energy</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1e-05</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Energy convergence</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The criterion for changes in the energy. The energy is considered converged when the change in energy is smaller than this threshold times the number of atoms.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.001</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Hartree/Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Gradient convergence</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Threshold for nuclear gradients.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Step</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.01</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Step convergence</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The maximum Cartesian step allowed for a converged geometry.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">StressEnergyPerAtom</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.0005</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Threshold used when optimizing the lattice vectors. The stress is considered ‘converged’ when the maximum value of stress_tensor * cell_volume / number_of_atoms is smaller than this threshold (for 2D and 1D systems, the cell_volume is replaced by the cell_area and cell_length respectively).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p id="index-3">A geometry optimization is considered converged when all the following criteria
+are met:</p>
+<ol class="arabic simple">
+<li>The difference between the bond energy at the current geometry and at the
+previous geometry step is smaller than <code class="docutils literal notranslate"><span class="pre">Convergence%Energy</span></code> times the
+number of atoms in the system.</li>
+<li>The maximum Cartesian nuclear gradient is smaller than
+<code class="docutils literal notranslate"><span class="pre">Convergence%Gradient</span></code>.</li>
+<li>The root mean square (RMS) of the Cartesian nuclear gradients is smaller than
+2/3 <code class="docutils literal notranslate"><span class="pre">Convergence%Gradient</span></code>.</li>
+<li>The maximum Cartesian step is smaller than <code class="docutils literal notranslate"><span class="pre">Convergence%Step</span></code>.</li>
+<li>The root mean square (RMS) of the Cartesian steps is smaller than 2/3
+<code class="docutils literal notranslate"><span class="pre">Convergence%Step</span></code>.</li>
+</ol>
+<p><strong>Note</strong>: If the maximum and RMS gradients are 10 times smaller than the
+convergence criterion, then criteria 4 and 5 are ignored.</p>
+<p>Some remarks on the choice of the convergence thresholds:</p>
+<ul class="simple">
+<li>Molecules may differ very much in the stiffness around the energy minimum.
+Using the standard convergence thresholds without second thought is therefore
+not recommended. Strict criteria may require a large number of steps, while a
+loose threshold may yield geometries that are far from the minimum (with
+respect to atom-atom distances, bond-angles etc…) even when the total
+energy of the molecule might be very close to the value at the minimum. It is
+good practice to consider first what the objectives of the calculation are.
+The default settings in AMS are intended to be reasonable for most
+applications, but inevitably situations may arise where they are inadequate.</li>
+<li>The convergence threshold for the coordinates (<code class="docutils literal notranslate"><span class="pre">Convergence%Step</span></code>) is not a
+reliable measure for the precision of the final coordinates. Usually it yields
+a reasonable estimate (order of magnitude), but to get accurate results one
+should tighten the criterion on the gradients, rather than on the steps
+(coordinates). (The reason for this is that with the Quasi-Newton based
+optimizers the estimated uncertainty in the coordinates is related to the used
+Hessian, which is updated during the optimization. Quite often it stays rather
+far from an accurate representation of the true Hessian. This does usually
+not prevent the program from converging nicely, but it does imply a possibly
+incorrect calculation of the uncertainty in the coordinates.)</li>
+<li>Note that tight convergence criteria for the geometry optimization require
+accurate and noise-free gradients from the engine. For some engines this might
+mean that their numerical accuracy has to be increased for geometry
+optimization with tight convergence criteria, see e.g. the
+<code class="docutils literal notranslate"><span class="pre">NumericalQuality</span></code> keyword in the BAND manual.</li>
+</ul>
+<p>The maximum number of geometry iterations allowed to locate the desired
+structure is specified with the <code class="docutils literal notranslate"><span class="pre">MaxIterations</span></code> keyword:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">MaxIterations</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Maximum number of iterations</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The maximum number of geometry iterations allowed to converge to the desired structure.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CalcPropertiesOnlyIfConverged</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Compute the properties requested in the ‘Properties’ block, e.g. Frequencies or Phonons, only if the optimization (or transition state search) converged. If False, the properties will be computed even if the optimization did not converge.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PretendConverged</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Normally a non-converged geometry optimization is considered an error. If this keyword is set to True, the optimizer will only produce a warning and still claim that the optimization is converged. (This is mostly useful for scripting applications, where one might want to consider non-converged optimizations still successful jobs.)</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>If the geometry optimization does not converge within this many steps it is
+considered failed and the iteration aborted, i.e. <a class="reference internal" href="../Gradients_Stress_Elasticity.html#pespointproperties"><span class="std std-ref">PES point
+properties</span></a> block will not be calculated at the last
+geometry. The default maximum number of steps is chosen automatically based on
+the used optimizer and the number of degrees of freedom to be optimized. The
+default is a fairly large number already, so if the geometry has not converged
+(at least to a reasonable extent) within that many iterations you should step
+back and consider the underlying cause rather than simply increase the allowed
+number of iterations and try again.</p>
+<span class="target" id="index-4"></span><p id="go-restartfromts"><span id="index-5"></span>While a geometry optimization aims to find a (local) PES minimum, it may occur
+that it ends up finding a saddle point instead. The <code class="docutils literal notranslate"><span class="pre">PESPointCharacter</span></code>
+property keyword can be used to quickly calculate the lowest few Hessian
+eigenvalues to determine what kind of stationary PES point the optimization
+found. More information on this feature can be found on its <a class="reference internal" href="../Gradients_Stress_Elasticity.html#pespointcharacterization"><span class="std std-ref">Documentation
+Page</span></a>. Since AMS2022.1, geometry optimizations with
+enabled PES point characterization can automatically restart when a transition
+state (or higher order saddle point) is found: the geometry is distorted along
+the lowest frequency mode and the optimizer run again. The applied distortion
+is often symmetry breaking in this case, so this automatic restarting is only
+enabled if the system does not have any symmetry operators or the use of
+symmetry is explicitly disabled using the <code class="docutils literal notranslate"><span class="pre">UseSymmetry</span></code> keyword. Furthermore
+the automatic restarting must be explicitly enabled by setting the
+<code class="docutils literal notranslate"><span class="pre">MaxRestarts</span></code> option to a value &gt;0. Of course the PES point characterization
+needs to be enabled too:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GeometryOptimization</span>
+   <span class="n">MaxRestarts</span> <span class="mi">5</span>
+<span class="n">End</span>
+
+<span class="n">UseSymmetry</span> <span class="kc">False</span>
+
+<span class="n">Properties</span>
+   <span class="n">PESPointCharacter</span> <span class="kc">True</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>Details of the automatic restarting can configured with the following keywords:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">MaxRestarts</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">If a geometry optimization of a system with no symmetry operators (or with explicitly disabled symmetry: <code class="docutils literal notranslate"><span class="pre">UseSymmetry</span> <span class="pre">False</span></code>) and enabled PES point characterization converges to a transition state (or higher order saddle point), it can be restarted automatically after a small displacement along the imaginary vibrational mode. In case the restarted optimization again does not find a minimum, this can happen multiple times in succession. This keyword sets the maximum number of restarts. The default value is 0, so the automatic restarting is disabled by default.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">RestartDisplacement</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.05</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">If a geometry optimization of a system with no symmetry operators (or with explicitly disabled symmetry: <code class="docutils literal notranslate"><span class="pre">UseSymmetry</span> <span class="pre">False</span></code>) and enabled PES point characterization converges to a transition state (or higher order saddle point), it can be restarted automatically after a small displacement along the imaginary vibrational mode. This keywords sets the size of the displacement for the furthest moving atom.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>For periodic systems the lattice degrees of freedom can be optimized in addition
+to the nuclear positions.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">OptimizeLattice</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether to also optimize the lattice for periodic structures. This is currently only supported with the Quasi-Newton, FIRE, L-BFGS and SCMGO optimizers.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Finally the <code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code> block also contains some technical options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">KeepIntermediateResults</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether the full engine result files of all intermediate steps are stored on disk. By default only the last step is kept, and only if the geometry optimization converged. This can easily lead to huge amounts of data being stored on disk, but it can sometimes be convenient to closely monitor a tricky optimization, e.g. excited state optimizations going through conical intersections, etc. …</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<span class="target" id="constraints"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><div class="section" id="constrained-optimization">
+<span id="index-8"></span><h2>Constrained optimization<a class="headerlink" href="#constrained-optimization" title="Permalink to this headline">¶</a></h2>
+<p>The AMS driver also allows to perform constrained optimizations, where a number
+of specified degrees of freedom are fixed to particular values.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../Examples/constraints.html#example-constraints"><span class="std std-ref">Example demonstrating all supported constraints</span></a></p>
+</div>
+<p>The desired constraints are specified in the <code class="docutils literal notranslate"><span class="pre">Constraints</span></code> block at the root
+level of the AMS input file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Constraints
+   Atom integer
+   AtomList integer_list
+   FixedRegion string
+   Coordinate integer [x|y|z] float?
+   Distance (integer){2} float
+   Angle (integer){3} float
+   Dihedral (integer){4} float
+   SumDist (integer){4} float
+   DifDist (integer){4} float
+   BlockAtoms integer_list
+   Block string
+   FreezeStrain [xx] [xy] [xz] [yy] [yz] [zz]
+   EqualStrain  [xx] [xy] [xz] [yy] [yz] [zz]
+End
+</pre></div>
+</div>
+<dl class="docutils" id="ams-key-constraints">
+<dt><code class="docutils literal notranslate"><span class="pre">Constraints</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The Constraints block allows geometry optimizations and potential energy surface scans with constraints. The constraints do not have to be satisfied at the start of the calculation.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<span class="target" id="fixedatomconstraint"></span><dl class="docutils" id="index-9">
+<dt><code class="docutils literal notranslate"><span class="pre">Atom</span> <span class="pre">atomIdx</span></code></dt>
+<dd>Fix the atom with index <code class="docutils literal notranslate"><span class="pre">atomIdx</span></code> at the initial position, as given in the
+<code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code> block.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">AtomList</span> <span class="pre">[atomIdx1</span> <span class="pre">..</span> <span class="pre">atomIdxN]</span></code></dt>
+<dd>Fix all atoms in the list at the initial position, as given in the
+<code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code> block.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FixedRegion</span> <span class="pre">regionName</span></code></dt>
+<dd>Fix all atoms in a <a class="reference internal" href="../System.html#regions"><span class="std std-ref">region</span></a> to their initial positions.</dd>
+</dl>
+<dl class="docutils" id="coordinateconstraint">
+<dt><code class="docutils literal notranslate"><span class="pre">Coordinate</span> <span class="pre">atomIdx</span> <span class="pre">[x|y|z]</span> <span class="pre">coordValue?</span></code></dt>
+<dd>Constrain the atom with index <code class="docutils literal notranslate"><span class="pre">atomIdx</span></code> (following the order in the
+<code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code> block) to have a cartesian coordinate (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> or
+<code class="docutils literal notranslate"><span class="pre">z</span></code>) of <code class="docutils literal notranslate"><span class="pre">coordValue</span></code> (given in Angstrom). If the <code class="docutils literal notranslate"><span class="pre">coordValue</span></code> is
+missing, the coordinate will be fixed to its initial value.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Distance</span> <span class="pre">atomIdx1</span> <span class="pre">atomIdx2</span> <span class="pre">distValue</span></code></dt>
+<dd>Constrain the distance between the atoms with index <code class="docutils literal notranslate"><span class="pre">atomIdx1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">atomIdx2</span></code> (following the order in the <code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code> block) to
+<code class="docutils literal notranslate"><span class="pre">distValue</span></code>, given in Angstrom.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Angle</span> <span class="pre">atomIdx1</span> <span class="pre">atomIdx2</span> <span class="pre">atomIdx3</span> <span class="pre">angleValue</span></code></dt>
+<dd>Constrain the angle (1)–(2)–(3) between the atoms with indices
+<code class="docutils literal notranslate"><span class="pre">atomIdx1-3</span></code> (as given by their order in the <code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code> block) to
+<code class="docutils literal notranslate"><span class="pre">angleValue</span></code>, given in degrees.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Dihedral</span> <span class="pre">atomIdx1</span> <span class="pre">atomIdx2</span> <span class="pre">atomIdx3</span> <span class="pre">atomIdx4</span> <span class="pre">dihedValue</span></code></dt>
+<dd>Constrain the dihedral angle (1)–(2)–(3)–(4) between the atoms with
+indices <code class="docutils literal notranslate"><span class="pre">atomIdx1-4</span></code> (as given by their order in the <code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code>
+block) to <code class="docutils literal notranslate"><span class="pre">dihedValue</span></code>, given in degrees.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SumDist</span> <span class="pre">atomIdx1</span> <span class="pre">atomIdx2</span> <span class="pre">atomIdx3</span> <span class="pre">atomIdx4</span> <span class="pre">sumDistValue</span></code></dt>
+<dd>Constrain the sum of the distances R(1,2)+R(3,4) between the atoms with
+indices <code class="docutils literal notranslate"><span class="pre">atomIdx1-4</span></code> (as given by their order in the <code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code>
+block) to <code class="docutils literal notranslate"><span class="pre">sumDistValue</span></code>, given in Angstrom.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DifDist</span> <span class="pre">atomIdx1</span> <span class="pre">atomIdx2</span> <span class="pre">atomIdx3</span> <span class="pre">atomIdx4</span> <span class="pre">difDistValue</span></code></dt>
+<dd>Constrain the difference between the distances R(1,2)-R(3,4) of the atoms
+with indices <code class="docutils literal notranslate"><span class="pre">atomIdx1-4</span></code> (as given by their order in the <code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code>
+block) to <code class="docutils literal notranslate"><span class="pre">difDistValue</span></code>, given in Angstrom.</dd>
+</dl>
+<p>Note that the above constraints do <strong>not</strong> need to be satisfied at the
+beginning of the optimization.</p>
+<dl class="docutils" id="index-10">
+<dt><code class="docutils literal notranslate"><span class="pre">BlockAtoms</span> <span class="pre">[atomIdx1</span> <span class="pre">...</span> <span class="pre">atomIdxN]</span></code></dt>
+<dd>Creates a block constraint (freezes all internal degrees of freedom) for a
+set of atoms identified by the list of integers <code class="docutils literal notranslate"><span class="pre">[atomIdx1</span> <span class="pre">...</span>&#160; <span class="pre">atomIdxN]</span></code>.
+These atom indices refer to the order of the atoms in the <code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code>
+block.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Block</span> <span class="pre">regionName</span></code></dt>
+<dd><p class="first">Creates a block constraint (freezes all internal degrees of freedom) for a
+all atoms in a <a class="reference internal" href="../System.html#regions"><span class="std std-ref">region</span></a> defined in the <code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code> block.
+Example:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Atoms</span>
+      <span class="n">C</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>    <span class="n">region</span><span class="o">=</span><span class="n">myblock</span>
+      <span class="n">C</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>    <span class="n">region</span><span class="o">=</span><span class="n">myblock</span>
+      <span class="n">C</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">0.0</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+<span class="n">Constraints</span>
+   <span class="n">Block</span> <span class="n">myblock</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<span class="target" id="latticeconstraints"></span><span class="target" id="index-11"></span><p id="index-12">For lattice optimizations, the following constraints can be used on the lattice
+degrees of freedom:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">FreezeStrain</span> <span class="pre">[xx]</span> <span class="pre">[xy]</span> <span class="pre">[xz]</span> <span class="pre">[yy]</span> <span class="pre">[yz]</span> <span class="pre">[zz]</span></code></dt>
+<dd>Exclusively for lattice optimizations: Freezes any lattice deformation
+corresponding to a particular component of the strain tensor. Accepts a set
+of strain components [xx, xy, xz, yy, yz, zz] to be frozen.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EqualStrain</span>&#160; <span class="pre">[xx]</span> <span class="pre">[xy]</span> <span class="pre">[xz]</span> <span class="pre">[yy]</span> <span class="pre">[yz]</span> <span class="pre">[zz]</span></code></dt>
+<dd>Exclusively for lattice optimizations: Accepts a set of strain components
+[xx, xy, xz, yy, yz, zz] which are to be kept equal. The applied strain will
+be determined by the average of the corresponding stress tensors
+components.</dd>
+</dl>
+<p>Note that in principle an arbitrary number of constraints can be specified and
+thus combined. However, it is the user’s responsibility to ensure that the
+specified constraints are actually <em>compatible with each other</em>, meaning that it
+is theoretically possible to satisfy all of them at the same time. The AMS
+driver does <strong>not</strong> detect this kind of problems, but the optimization will
+show very unexpected results. Furthermore, for calculations involving block
+constraints the following restrictions apply:</p>
+<ul class="simple">
+<li>There should be no other constrained coordinates used together with block
+constraints although this may work in many situation.</li>
+<li>The user should absolutely avoid specifying other constraints that include
+atoms of a frozen block.</li>
+</ul>
+<div class="section" id="restraints">
+<h3>Restraints<a class="headerlink" href="#restraints" title="Permalink to this headline">¶</a></h3>
+<p>Not all optimizers support constraints. An alternative is to use so-called restraints. These are not exact constraints, but rather a number of springs that pull the system towards the preferred constraints, see <a class="reference internal" href="../Engines.html#restraints-addon"><span class="std std-ref">Restraints</span></a>.</p>
+</div>
+</div>
+<div class="section" id="optimization-under-pressure-external-stress">
+<h2>Optimization under pressure / external stress<a class="headerlink" href="#optimization-under-pressure-external-stress" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../Engines.html#pressure-addon"><span class="std std-ref">Pressure</span></a> or <a class="reference internal" href="../Engines.html#external-stress-addon"><span class="std std-ref">non-isotropic external stress</span></a> can be included in your simulation via the corresponding <a class="reference internal" href="../Engines.html#engineaddons"><span class="std std-ref">engine addons</span></a>.</p>
+<span class="target" id="geometryoptimizationmethods"></span></div>
+<div class="section" id="optimization-methods">
+<span id="index-13"></span><h2>Optimization methods<a class="headerlink" href="#optimization-methods" title="Permalink to this headline">¶</a></h2>
+<p>The AMS driver implements a few different geometry optimization algorithms. It
+also allows to choose the coordinate space in which the optimization is
+performed:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GeometryOptimization
+   Method [Auto | Quasi-Newton | SCMGO | FIRE | L-BFGS | ConjugateGradients]
+   CoordinateType [Auto | Delocalized | Cartesian]
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Method</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Auto</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[Auto, Quasi-Newton, SCMGO, FIRE, L-BFGS, ConjugateGradients]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Optimization method</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Select the optimization algorithm employed for the geometry relaxation. Currently supported are: 
+
+the Hessian-based Quasi-Newton-type BFGS algorithm, 
+
+the experimental SCMGO optimizer, 
+
+the fast inertial relaxation method (FIRE), 
+
+the limited-memory BFGS method, 
+
+and the conjugate gradients method. The default is to choose an appropriate method automatically based on the engine’s speed, the system size and the supported optimization options.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CoordinateType</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Auto</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[Auto, Delocalized, Cartesian]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Optimization space</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Select the type of coordinates in which to perform the optimization. ‘Auto’ automatically selects the most appropriate CoordinateType for a given Method. 
+
+ If ‘Auto’ is selected, Delocalized coordinates will be used for the Quasi-Newton and SCMGO methods, while Cartesian coordinates will be used for all other methods.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>We <strong>strongly</strong> advise leaving both the <code class="docutils literal notranslate"><span class="pre">Method</span></code> as well as the <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code>
+type on the <code class="docutils literal notranslate"><span class="pre">Auto</span></code> setting. There are many restrictions as to which optimizer
+and coordinate type can be used together with which kind of optimization. The
+following (roughly) sketches the compatibility of the different optimizers and
+options:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="41%" />
+<col width="15%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Optimizer</th>
+<th class="head">Constraints</th>
+<th class="head">Lattice opt.</th>
+<th class="head">Coordinate types</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Quasi-Newton</td>
+<td>All, except strain constraints</td>
+<td>Yes</td>
+<td>All</td>
+</tr>
+<tr class="row-odd"><td>FIRE</td>
+<td>Fixed coordinates, strain constraints</td>
+<td>Yes</td>
+<td>Cartesian</td>
+</tr>
+<tr class="row-even"><td>SCMGO</td>
+<td>No</td>
+<td>Yes</td>
+<td>Delocalized</td>
+</tr>
+<tr class="row-odd"><td>L-BFGS</td>
+<td>No</td>
+<td>Yes</td>
+<td>Cartesian</td>
+</tr>
+<tr class="row-even"><td>Conjugate gradients</td>
+<td>No</td>
+<td>No</td>
+<td>Cartesian</td>
+</tr>
+</tbody>
+</table>
+<p>Furthermore for optimal performance the optimizer should be chosen with the
+speed of the engine: a faster engine in combination should use an optimizer with little
+overhead (FIRE), while slower engines should use optimizers that strictly
+minimize the number of steps (Quasi-Newton, SCMGO). This is all handled
+automatically by default, and we recommend changing <code class="docutils literal notranslate"><span class="pre">Method</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> only in case there are problems with the automatic choice.</p>
+<p>The following subsections list the strengths and weaknesses of the individual
+optimizers in some more detail, motivating why which optimizer is chosen
+automatically under which circumstances.</p>
+<span class="target" id="quasinewton"></span><div class="section" id="quasi-newton">
+<span id="index-14"></span><h3>Quasi-Newton<a class="headerlink" href="#quasi-newton" title="Permalink to this headline">¶</a></h3>
+<p>This optimizer implements a quasi Newton approach <a class="footnote-reference" href="#ref1" id="id1">[1]</a> <a class="footnote-reference" href="#ref2" id="id2">[2]</a> <a class="footnote-reference" href="#ref3" id="id3">[3]</a>,
+using the Hessian for computing changes in the geometry so as to reach a local
+minimum. The Hessian itself is typically <a class="reference internal" href="#initialhessian"><span class="std std-ref">approximated</span></a> in
+the beginning and updated in the process of optimization. It uses delocalized
+coordinates by default both for molecules and periodic systems. The molecular
+part is based mainly on the work by Marcel Swart <a class="footnote-reference" href="#ref4" id="id4">[4]</a>. Cartesian coordinates
+are used in the presence of an external electric field and/or frozen atom constraints.</p>
+<p>The Quasi-Newton (QN) optimizer supports all types of constraints and can be
+used for both molecular and periodic systems, including lattice optimizations.
+For cases where the optimization can be performed in delocalized coordinates,
+the number of steps taken to reach the local minimum is usually smaller than
+when optimizing in Cartesian ones.  For fast compute <a class="reference internal" href="../Engines.html#engines"><span class="std std-ref">engines</span></a>,
+the overhead of the QN optimizer can become a bottleneck of the calculation,
+thus a more light-weight optimizer such as <a class="reference internal" href="#fire"><span class="std std-ref">FIRE</span></a> may give an better
+overall performance. In principle, a QN optimization in delocalized coordinates
+may run out of memory for a very large system (say over 1000 atoms) because of
+the SVD step. However, since it is going to be used for a moderate-to-slow
+engine we still recommend sticking to it for the benefit of fewer steps.
+Because of these properties the QN optimizer is the default in AMS for all
+kinds of optimizations with moderate and slow engines, such DFTB and ADF.  It
+is also used as the optimizer back-end for the <a class="reference internal" href="PES_Scan.html#pesscan"><span class="std std-ref">PES scan task</span></a>,
+the <a class="reference internal" href="Transition_State_Search.html#transitionstatesearch"><span class="std std-ref">transition state search</span></a> as well as the
+calculation of the <a class="reference internal" href="../Gradients_Stress_Elasticity.html#elastictensor"><span class="std std-ref">elastic tensor</span></a>.</p>
+<p>Details of the Quasi-Newton optimizer are configured in a dedicated block:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GeometryOptimization
+   Quasi-Newton
+      MaxGDIISVectors integer
+      Step
+         TrustRadius float
+         VaryTrustRadius Yes/No
+      End
+      UpdateTSVectorEveryStep Yes/No
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Quasi-Newton</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures details of the Quasi-Newton geometry optimizer.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">MaxGDIISVectors</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Sets the maximum number of GDIIS vectors. Setting this to a number &gt;0 enables the GDIIS method.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Step</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">TrustRadius</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Initial value of the trust radius.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">VaryTrustRadius</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Whether to allow the trust radius to change during optimization. By default True during energy minimization and False during transition state search.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">UpdateTSVectorEveryStep</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Update TSRC vector every step</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Whether to update the TS reaction coordinate at each step with the current eigenvector.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<span class="target" id="initialhessian"></span><p id="index-15">The Quasi-Newton optimizer uses the Hessian to compute the step of the
+geometry optimization. The Hessian is typically approximated in the beginning
+and then updated during the optimization. A very good initial Hessian can
+therefore increase the performance of the optimizer and lead to faster and more
+stable convergence. The choice of the initial Hessian can be configured in a
+dedicated block:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GeometryOptimization
+   InitialHessian
+      File string
+      Type [Auto | UnitMatrix | Swart | FromFile | Calculate | CalculateWithFastEngine]
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">InitialHessian</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options for initial model Hessian when optimizing systems with either the Quasi-Newton or the SCMGO method.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">File</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Initial Hessian from</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">KF file containing the initial Hessian (or the results dir. containing it). This can be used to load a Hessian calculated in a previously with the [Properties%Hessian] keyword.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Type</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Auto</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[Auto, UnitMatrix, Swart, FromFile, Calculate, CalculateWithFastEngine]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Initial Hessian</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Select the type of initial Hessian. Auto: let the program pick an initial model Hessian. UnitMatrix: simplest initial model Hessian, just a unit matrix in the optimization coordinates. Swart: model Hessian from M. Swart. FromFile: load the Hessian from the results of a previous calculation (see InitialHessian%File). Calculate: compute the initial Hessian (this may be computationally expensive and it is mostly recommended for TransitionStateSearch calculations). CalculateWithFastEngine: compute the initial Hessian with a faster engine.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>While there are some options for the construction of approximate model
+Hessians, the best initial Hessians are often those calculated explicitly at a
+lower level of theory, e.g. the real DFTB Hessian can be used the initial
+Hessian for an optimization with the more accurate BAND engine. Using the
+<code class="docutils literal notranslate"><span class="pre">CalculateWithFasterEngine</span></code> keyword can be used to automatically chose a fast
+engine at a lower level of theory.  What the lower level of theory is depends
+on the main engine used in the calculation: DFTB with the GFN1-xTB model is
+used as the lower level of theory for relatively slow engines, e.g. DFT based
+engines. For semi-empirical engines like DFTB or MOPAC, the lower level of
+theory is currently UFF. If more control over the lower level engine is needed,
+the initial Hessian can be calculated with a user defined engine and then
+loaded from file, see <a class="reference internal" href="../Examples/2StepGO.html#example-2stepgo"><span class="std std-ref">this example</span></a>.</p>
+</div>
+<div class="section" id="fire">
+<span id="index-16"></span><span id="id5"></span><h3>FIRE<a class="headerlink" href="#fire" title="Permalink to this headline">¶</a></h3>
+<p>The Fast Inertial Relaxation Engine <a class="footnote-reference" href="#ref5" id="id6">[5]</a> based optimizer has
+basically no overhead per step, so that the speed of the optimization purely
+depends on the performance of the used compute <a class="reference internal" href="../Engines.html#engines"><span class="std std-ref">engine</span></a>. As such
+it is a good option for large systems or fast compute engines, where the
+overhead of the Quasi-Newton optimizer would be significant. Note that is also
+supports <a class="reference internal" href="#fixedatomconstraint"><span class="std std-ref">fixed atom constraints</span></a> and <a class="reference internal" href="#coordinateconstraint"><span class="std std-ref">coordinate
+constraints</span></a> (as long as the value of the constrained
+coordinate is already satisfied in the input geometry), as well as lattice
+optimizations (with strain constraints).</p>
+<p>FIRE is selected as the default optimizer for fast compute engines if it is
+compatible with all other settings of the optimization (i.e. no unsupported
+constraints or coordinate types).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">FIRE is a very robust optimizer. In case of convergence problems with the
+other methods, it is a good idea to see if the optimization converges with
+FIRE. If it does not, it is very likely that the problem is not the optimizer
+but the shape of the potential energy surface …</p>
+</div>
+<p>The details of the FIRE optimizer are configured in a dedicated block. It is
+quite easy to make the optimization numerically unstable when tweaking these
+settings, so we strongly recommend leaving everything at the default values.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GeometryOptimization
+   FIRE
+      AllowOverallRotation Yes/No
+      AllowOverallTranslation Yes/No
+      MapAtomsToUnitCell Yes/No
+      NMin integer
+      alphaStart float
+      dtMax float
+      dtStart float
+      fAlpha float
+      fDec float
+      fInc float
+      strainMass float
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">FIRE</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This block configures the details of the FIRE optimizer. The keywords name correspond the the symbols used in the article describing the method, see PRL 97, 170201 (2006).</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">AllowOverallRotation</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether or not the system is allowed to freely rotate during the optimization. This is relevant when optimizing structures in the presence of external fields.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">AllowOverallTranslation</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether or not the system is allowed to translate during the optimization. This is relevant when optimizing structures in the presence of external fields.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MapAtomsToUnitCell</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Map the atoms to the central cell at each geometry step.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NMin</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">5</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Number of steps after stopping before increasing the time step again.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alphaStart</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Steering coefficient.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dtMax</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Femtoseconds</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Maximum time step used for the integration.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dtStart</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.25</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Femtoseconds</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Initial time step for the integration.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fAlpha</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.99</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Reduction factor for the steering coefficient.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fDec</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.5</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Reduction factor for reducing the time step in case of uphill movement.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fInc</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1.1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Growth factor for the integration time step.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">strainMass</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.5</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Fictitious relative mass of the lattice degrees of freedom. This controls the stiffness of the lattice degrees of freedom relative to the atomic degrees of freedom, with smaller values resulting in a more aggressive optimization of the lattice.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<span class="target" id="scmgo"></span></div>
+<div class="section" id="index-17">
+<span id="id7"></span><h3>SCMGO<a class="headerlink" href="#index-17" title="Permalink to this headline">¶</a></h3>
+<p>The SCMGO optimizer is a new implementation of a Quasi-Newton style optimizer
+working in delocalized coordinates. In the 2020 release of the Amsterdam
+Modeling Suite it is still considered experimental and therefore never selected
+automatically. However, for molecules and fully connected periodic systems it
+already shows a quite good performance, and could be a reasonable alternative to
+the classic <a class="reference internal" href="#quasinewton"><span class="std std-ref">Quasi-Newton</span></a> optimizer.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GeometryOptimization
+   SCMGO
+      ContractPrimitives Yes/No
+      NumericalBMatrix Yes/No
+      Step
+         TrustRadius float
+         VariableTrustRadius Yes/No
+      End
+      logSCMGO Yes/No
+      testSCMGO Yes/No
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">SCMGO</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures details SCMGO.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ContractPrimitives</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Form non-redundant linear combinations of primitive coordinates sharing the same central atom</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NumericalBMatrix</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Calculation of the B-matrix, i.e. Jacobian of internal coordinates in terms of numerical differentiations</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Step</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">TrustRadius</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.2</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Initial value of the trust radius.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">VariableTrustRadius</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether or not the trust radius can be updated during the optimization.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">logSCMGO</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Verbose output of SCMGO internal data</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">testSCMGO</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Run SCMGO in test mode.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Note that SCMGO also supports different initial Hessians, and uses the same
+options for the initial Hessian as the Quasi-Newton optimizer, see
+<a class="reference internal" href="#initialhessian"><span class="std std-ref">above</span></a>.</p>
+</div>
+<div class="section" id="limited-memory-bfgs">
+<span id="l-bfgs"></span><span id="index-18"></span><h3>Limited-memory BFGS<a class="headerlink" href="#limited-memory-bfgs" title="Permalink to this headline">¶</a></h3>
+<p>AMS also offers an L-BFGS based geometry optimizer. It usually converges faster
+than <a class="reference internal" href="#fire"><span class="std std-ref">FIRE</span></a>, but does not support constrained optimizations.
+For periodic systems it can be quite good for lattice optimizations.
+The new implementation has not been thoroughly tested yet, therefore never
+selected automatically. For large systems and fast engines you may want to disable symmetry:
+simply the detection of (non-existing) symmetry may be a huge overhead.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GeometryOptimization
+   HessianFree
+      Step
+         MaxCartesianStep float
+         MinRadius float
+         TrialStep float
+         TrustRadius float
+      End
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">HessianFree</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures details of the Hessian-free (conjugate gradients or L-BFGS) geometry optimizer.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Step</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">MaxCartesianStep</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Limit on a single Cartesian component of the step.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MinRadius</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Minimum value for the trust radius.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TrialStep</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.0005</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Length of the finite-difference step when determining curvature. Should be smaller than the step convergence criterion.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TrustRadius</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.2</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Initial value of the trust radius.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="conjugate-gradients">
+<span id="index-19"></span><h3>Conjugate gradients<a class="headerlink" href="#conjugate-gradients" title="Permalink to this headline">¶</a></h3>
+<p>AMS also offers a conjugate gradients based geometry optimizer, as it was also
+implemented in the pre-2018 releases of the DFTB program. However, it is
+usually slightly slower than <a class="reference internal" href="#fire"><span class="std std-ref">FIRE</span></a>, and supports neither lattice nor
+constrained optimizations. It is therefore never selected automatically, and we
+do not recommend using it. Like L-BFGS, the conjugate gradients optimizer is
+also configured in the <code class="docutils literal notranslate"><span class="pre">HessianFree</span></code> block, see L-BFGS section above for
+details.</p>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="failure-to-converge">
+<h3>Failure to converge<a class="headerlink" href="#failure-to-converge" title="Permalink to this headline">¶</a></h3>
+<p>First of all one should look how the energy changed during the latest ten or so
+iterations. If the energy is decreasing more or less consistently, possibly
+with occasional jumps, then there is probably nothing wrong with the
+optimization. This behavior is typical in the cases when the starting geometry
+was far away from the minimum and the optimization has a long way to go. Just
+increase the allowed number of iterations, restart from the latest geometry and
+see if the optimization converges.</p>
+<p>If the energy oscillates around some value and the energy gradient hardly
+changes then you may need to look at the calculation setup.</p>
+<p>The success of geometry optimization depends on the accuracy of the calculated
+forces. The default accuracy settings are sufficient in most cases. There are,
+however, cases when one has to increase the accuracy in order to get geometry
+optimization converged. First of all, this may be necessary if you tighten the
+optimization convergence criteria. In some cases it may be necessary to increase
+the accuracy also for the default criteria. Please refer to the <a class="reference internal" href="../Engines.html#engines"><span class="std std-ref">engine
+manuals</span></a> for instructions on how to increase the accuracy of an
+engine’s energies and gradients. Often this is done with the
+<code class="docutils literal notranslate"><span class="pre">NumericalQuality</span></code> keyword in the engine input.</p>
+<p>A geometry optimization can also fail to converge because the underlying
+potential energy surface is problematic, e.g. it might be discontinuous or not
+have a minimum at which the gradients vanish. This often indicates real problems
+in the calculation setup, e.g. an electronic structure that changes
+fundamentally between subsequent steps in the optimization. In these cases it is
+advisable to run a single point calculation at the problematic geometries and
+carefully check if the results are physically actually sensible.</p>
+<p>Finally it can also be a technical problem with the specific <a class="reference internal" href="#geometryoptimizationmethods"><span class="std std-ref">optimization
+method</span></a> used. In these cases switching to another
+method could help with convergence problems. We recommend first trying the
+<a class="reference internal" href="#fire"><span class="std std-ref">FIRE</span></a> optimizer, as it is internally relatively simple and stable.</p>
+</div>
+<div class="section" id="restarting-a-geometry-optimization">
+<h3>Restarting a geometry optimization<a class="headerlink" href="#restarting-a-geometry-optimization" title="Permalink to this headline">¶</a></h3>
+<p>During a running optimization the system’s geometry is written out to the AMS
+driver’s output file <code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code> after every step (in the <code class="docutils literal notranslate"><span class="pre">Molecule</span></code> section).
+This means that crashed or otherwise canceled geometry optimizations can be
+restarted by simply loading the last frame from there using the <code class="docutils literal notranslate"><span class="pre">LoadSystem</span></code>
+keyword, see <a class="reference internal" href="../System.html#loadsystem"><span class="std std-ref">its documentation</span></a> in the system definition
+section of this manual:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LoadSystem</span> <span class="n">File</span><span class="o">=</span><span class="n">my_crashed_GO</span><span class="o">.</span><span class="n">results</span><span class="o">/</span><span class="n">ams</span><span class="o">.</span><span class="n">rkf</span>
+</pre></div>
+</div>
+<p>This can of course also be used to continue an optimization but e.g. with
+tighter convergence criteria or a different optimizer, as it essentially starts
+a new geometry optimization from the previous geometry, and does not propagate
+any information internal to the optimizer (e.g.  the approximate Hessian for the
+Quasi-Newton optimizer or the FIRE velocities) to the new job. As such it might
+take a few more steps to convergence than if the original job had continued, but
+allows for additional flexibility.</p>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="ref1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>L. Versluis and T. Ziegler, <em>The determination of Molecular Structure by Density Functional Theory</em>, <a class="reference external" href="https://doi.org/10.1063/1.454603">Journal of Chemical Physics 88, 322 (1988)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>L. Versluis, The determination of molecular structures by the HFS method, PhD thesis, University of Calgary, 1989</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>L. Fan and T. Ziegler, <em>Optimization of molecular structures by self consistent and non-local density functional theory</em>, <a class="reference external" href="https://doi.org/10.1063/1.461366">Journal of Chemical Physics 95, 7401 (1991)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>M. Swart and F.M. Bickelhaupt, <em>Optimization of strong and weak coordinates</em>, <a class="reference external" href="https://doi.org/10.1002/qua.21049">International Journal of Quantum Chemistry 106, 2536 (2006)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[5]</a></td><td>E. Bitzek, P. Koskinen, F. Gähler, M. Moseler and P. Gumbsch, <em>Structural Relaxation Made Simple</em>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.97.170201">Physical Review Letters 97, 170201 (2006)</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Transition_State_Search.html" class="btn btn-neutral float-right" title="Transition state search" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Bond_Energy.html" class="btn btn-neutral" title="Bond energy calculations" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+#! /bin/sh
+
+
+# Calculation of the excitation energies of Adenine using the simplified Tamm-
+# Dancoff (sTDA) method by Grimme. This method is meant for hybrid functionals
+# or range-separated functionals during the SCF. In this example the hybrid PBE0
+# is used during the SCF. In the the calculation of the excitation energies the
+# sTDA method is used in which the required integrals are approximated. For
+# hybrid functionals ADF will automatically set the parameters that are needed
+# in this method. For range-separated functional one needs to set the parameters
+# manually. Symmetry NOSYM is required. A TZP or TZ2P basis set is recommended
+# for this method.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     N         1.966533   -0.556678    0.000000
+     C         1.351210   -1.750556    0.000000
+     N         0.039008   -2.019043    0.000000
+     C        -0.679938   -0.889685    0.000000
+     C        -0.192782    0.421840    0.000000
+     C         1.210298    0.557343    0.000000
+     N        -2.051805   -0.746568    0.000000
+     C        -2.311388    0.608600    0.000000
+     N        -1.225604    1.347025    0.000000
+     N         1.828584    1.760602    0.000000
+     H         2.012099   -2.612788    0.000000
+     H        -2.725918   -1.499744    0.000000
+     H        -3.323166    0.988113    0.000000
+     H         1.288936    2.610953    0.000000
+     H         2.835883    1.795025    0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  excitations
+    onlysing
+    stda
+  end
+  basis
+    type DZ
+  end
+  symmetry nosym
+  xc
+    hybrid PBE0
+  end
+EndEngine
+
+eor

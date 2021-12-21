@@ -1,0 +1,126 @@
+.. currentmodule:: scm.params.common.dataset_evaluator
+
+.. _DataSetEvaluator:
+
+Data Set Evaluator
+=====================
+
+DataSetEvaluator class
+-------------------------
+
+:class:`DataSetEvaluator` is class with two main functions:
+
+* :meth:`DataSetEvaluator.calculate_reference` will evaluate a data_set with any engine settings and **set** the reference values
+
+* :meth:`DataSetEvaluator.run` will evaluate the data_set with any engine settings, and provide many function to compare the predicted values with the reference values. You can only use ``run()`` if all data_set entries already have reference values.
+
+After calling ``run()``, you will be able to get
+
+* **summary statistics** like mean absolute error (MAE) and root-mean-squared error (RMSE)
+
+* **partial contributions** to the loss function value
+
+* **tables** with reference and predicted values in columns next to each other, that can be plotted with `params plot`
+
+* **grouped** summary statistics, partial contributions, reference-vs-prediction based on the extractor, expression, or any metadata key-value pairs.
+
+
+Example: DataSetEvaluator.calculate_reference()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+   The below examples use the :class:`plams.Settings` class to define a computational engine.
+   See the `PLAMS documentation <../../../plams/interfaces/ams.html>`_ for more information about it.
+
+.. code:: ipython3
+
+   from scm.params import *
+   from scm.plams import Settings
+
+   dse = DataSetEvaluator()
+
+   # any engine settings are possible
+   engine_settings = Settings()
+   engine_settings.input.ForceField.Type = 'UFF'
+
+   # a job collection is needed, can for example be loaded from disk
+   job_collection = JobCollection('job_collection.yaml')
+
+   # the data_set to be evaluated, can for example be loaded from disk
+   data_set = DataSet('data_set.yaml')
+
+   # print the original expression : reference value
+   print("Original reference values:")
+   for ds_entry in data_set:
+      print("{}: {}".format(ds_entry.expression, ds_entry.reference))
+
+   # calculate reference. Set folder=None to not store the finished jobs on disk (can be faster)
+   # set overwrite=True to overwrite existing reference values
+   dse.calculate_reference(job_collection, data_set, engine_settings, overwrite=False, folder='saved_results')
+
+   # print the new expression : reference value
+   print("New reference values:")
+   for ds_entry in data_set:
+      print("{}: {}".format(ds_entry.expression, ds_entry.reference))
+
+
+Example: DataSetEvaluator.run()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: ipython3
+
+   from scm.params import *
+   from scm.plams import Settings
+
+   dse = DataSetEvaluator()
+
+   # any engine settings are possible
+   engine_settings = Settings()
+   engine_settings.input.ForceField.Type = 'UFF'
+
+   # a job collection is needed, can for example be loaded from disk
+   job_collection = JobCollection('job_collection.yaml')
+
+   # the data_set to be evaluated, can for example be loaded from disk
+   data_set = DataSet('data_set.yaml')
+
+   # run. Set folder=None to not store the finished jobs on disk (can be faster)
+   dse.run(job_collection, data_set, engine_settings, folder='saved_results')
+
+   # group the results by Extractor and then by Expression
+   dse.group_by(('Extractor', 'Expression'))
+
+   print(dse.str(stats=True, details=True))
+
+   # store the calculated results in a format that can later be
+   # used to initialize another DataSetEvaluator
+   dse.store('data_set_predictions.yaml')
+   dse.pickle_dump('data_set_evaluator.pkl')
+
+Example: Load a saved DataSetEvaluator
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The previous example used the store() and pickle_dump() methods to store the calculated results in text (.yaml) and binary (.pkl) format. They can be loaded as follows:
+
+.. code:: ipython3
+
+   from scm.params import *
+   from scm.plams import Settings
+
+   dse = DataSetEvaluator('data_set_predictions.yaml')
+   print(dse)
+
+   # to load from binary .pkl one needs to call the .pickle_load() method
+   # and provide a path to the original data_set
+   dse2 = DataSetEvaluator()
+   dse2.pickle_load('data_set_evaluator.pkl', data_set='data_set.yaml')
+   print(dse2)
+
+
+DataSetEvaluator API
+----------------------------
+
+.. autoclass:: DataSetEvaluator
+  :no-private-members:
+  :exclude-members: __weakref__,

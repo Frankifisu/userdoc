@@ -1,0 +1,52 @@
+#! /bin/sh
+
+# This example tries to part of the COSMO-RS GUI Tutorial: parameters and analysis using scripts.
+#
+# First some .coskf files are copied to the location where the scripts are running.
+
+cp $AMSHOME/examples/COSMO-RS/Parameters_and_Analysis/benzene.coskf .
+cp $AMSHOME/examples/COSMO-RS/Parameters_and_Analysis/ethanol.coskf .
+cp $AMSHOME/examples/COSMO-RS/Parameters_and_Analysis/methanol.coskf .
+cp $AMSHOME/examples/COSMO-RS/Parameters_and_Analysis/water.coskf .
+
+# Set pure compound parameters
+# ----------------------------
+
+# In the first part of the example you will find how to use crsprep to set pure compound parameters,
+# in this case to set the number of ring atoms for the benzene molecule, which has 6 ring atoms.
+# The file benzene.coskf is changed, such that it contains the value "6" for the number of ring compounds.
+
+"$AMSBIN/crsprep" -c benzene.coskf -nring 6 -savecompound
+
+# The sigma profile and the sigma potential
+# -----------------------------------------
+# 
+# Next for convenience a file tutorial2.compoundlist is made that consists of 4 coskf files.
+
+
+rm -f tutorial2.compoundlist
+rm -f job
+cat << eor > tutorial2.compoundlist
+benzene.coskf
+ethanol.coskf
+methanol.coskf
+water.coskf
+eor
+
+# In the second part of the example sigma profiles are calculated for the four compounds
+# (result file step6.crskf), and next the sigma potentials of the four pure compounds
+# (result file step7.crskf).
+# With *amsreport* one can get the calculated sigma profile or sigma potential from
+# the .crskf file on standard output.
+
+
+"$AMSBIN/crsprep" -t PURESIGMAPROFILE -c tutorial2.compoundlist -j step6 > job.sh
+"$AMSBIN/crsprep" -t PURESIGMAPOTENTIAL -c tutorial2.compoundlist -j step7 >> job.sh
+chmod +x job.sh
+./job.sh
+echo "Results"
+"$AMSBIN/amsreport" step6.crskf sigma
+"$AMSBIN/amsreport" step6.crskf sigma-profile
+"$AMSBIN/amsreport" step6.crskf sigma-profile-hb
+"$AMSBIN/amsreport" step7.crskf sigma-potential
+echo "Ready"

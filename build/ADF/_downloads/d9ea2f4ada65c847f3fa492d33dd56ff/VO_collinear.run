@@ -1,0 +1,126 @@
+#!/bin/sh
+
+
+# The ESR parameters of VO are calculated with the collinear approximation for
+# unrestricted Spin-Orbit coupled calculations. In this example the VO-molecule
+# has three unpaired electrons.
+
+# You calculate Electron Spin Resonance properties with the keywords ESR and
+# QTENS. ESR is a block-type key and is used to compute the G-tensor or the
+# Nuclear Magnetic Dipole Hyperfine interaction. QTENS is a simple key and
+# invokes the computation of the Nuclear Electric Quadrupole Hyperfine
+# interaction.
+
+# Proper usage of the key ESR requires that you do one of the following:
+
+# A Spin-Orbit calculation, spin-restricted, with exactly one unpaired electron,
+# or (b) A Spin-Orbit calculation, spin-unrestricted in the collinear
+# approximation, or (c) No Spin-Orbit terms and spin-unrestricted. In case (a)
+# and (b) you obtain the G-tensor. In case (b) and (c) you get the Magnetic
+# Dipole Hyperfine interaction.
+
+# Note: in case (a) the program also prints a Magnetic Dipole Hyperfine
+# interaction data, but these have then been computed without the terms from the
+# spin-density at the nucleus. Note: in case (b) and (c) one can have more than
+# one unpaired electron. Note: in case (b) one has to use symmetry NOSYM.
+
+# Two calculations are performed:
+
+# Scalar relativistic spin-unrestricted (case c) 
+# Spin-Orbit relativistic spin-unrestricted collinear (case b) 
+
+# We first calculate the Dipole Hyperfine interaction: 
+# a spin- unrestricted calculation without Spin-Orbit coupling.
+
+# Note that one has to use ALLPOINTS in the calculation for a linear molecule to
+# get results for the nuclear magnetic dipole hyperfine interaction. For an
+# accurate calculation of the hyperfine interaction the numerical quality is set
+# to VeryGood.
+
+AMS_JOBNAME=scalar $AMSBIN/ams <<eor
+System
+  atoms
+     V 0 0 0
+     O 0 0 1.589
+  End
+End
+
+Task SinglePoint
+
+Engine ADF
+  AllPoints
+  
+  ESR
+  End
+  
+  QTens
+
+  ZFS
+
+  basis
+    core None
+    type TZ2P
+  End
+  
+  numericalquality verygood
+  
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  
+  Unrestricted
+  SpinPolarization 3
+  XC
+    GGA Becke Perdew
+  End
+EndEngine
+
+eor
+
+# Then a spin-orbit coupled spin-unrestricted calculation is performed using the
+# collinear approximation. Note that symmetry NOSYM is used.
+
+AMS_JOBNAME=so $AMSBIN/ams <<eor
+System
+  atoms
+     V 0 0 0
+     O 0 0 1.589
+  End
+End
+
+Task SinglePoint
+
+Engine ADF
+  ESR
+  End
+  
+  QTens
+  
+  basis
+    core None
+    type TZ2P
+  End
+  
+  numericalquality verygood
+  
+  relativity
+    level spin-orbit
+    formalism ZORA
+    spinorbitmagnetization collinear
+  end
+  
+  SCF
+    AccelerationMethod LISTf
+  End
+  
+  symmetry nosym
+
+  Unrestricted
+  
+  XC
+    GGA Becke Perdew
+  End
+EndEngine
+
+eor

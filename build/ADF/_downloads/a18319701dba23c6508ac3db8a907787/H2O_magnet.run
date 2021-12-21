@@ -1,0 +1,72 @@
+#! /bin/sh
+
+
+# Basic example for a magnetizability calculation.
+
+# One should set iterations=0 for STATIC magnetizability. If one does not use
+# SYMMETRY NOSYM, one should set use ALLPOINTS for correct results in
+# AORESPONSE. 
+
+
+AMS_JOBNAME=Static $AMSBIN/ams <<eor
+System
+  atoms
+     O 0.0  0.0                 0.0
+     H 0.0 -0.7569504380226135 -0.5858823657035828
+     H 0.0  0.7569504380226135 -0.5858823657035828
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allpoints
+  aoresponse
+    alda
+    magneticpert
+    scf iterations 0  converge 1e-3
+  end
+  linearscaling 100
+  end
+  basis
+    core None
+    type DZP
+  end
+  xc
+    gga revPBE
+    lda
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=Frequency $AMSBIN/ams <<eor
+System
+  atoms
+     O 0.0  0.0                 0.0
+     H 0.0 -0.7569504380226135 -0.5858823657035828
+     H 0.0  0.7569504380226135 -0.5858823657035828
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allpoints
+  aoresponse
+    alda
+    frequencies 0.182253 0.197012 [Hartree]
+    magneticpert
+    scf iterations 30  converge 1e-3
+  end
+  basis
+    core None
+    type DZP
+  end
+  linearscaling 100
+  end
+  xc
+    gga revPBE
+    lda
+  end
+EndEngine
+eor

@@ -1,0 +1,103 @@
+#!/bin/sh
+
+# In this example we use the amber forcefield that cannot guess atom types
+
+# First we "calculate" the types
+
+# We do this by specifying them as atom attributes (ForceField.Type)
+
+export AMS_JOBNAME=CalculateTypes
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+Task GeometryOptimization
+
+Properties Charges=yes
+
+System
+   Atoms
+     C       1.94807   3.58290  -0.58162       ForceField.Charge=0.0       ForceField.Type=CT
+     H       1.69949   4.49893  -1.05273       ForceField.Charge=0.0       ForceField.Type=HC
+     H       2.99455   3.17964  -0.86304       ForceField.Charge=0.0       ForceField.Type=HC
+     C       0.94659   2.40054  -0.92364       ForceField.Charge=0.0       ForceField.Type=CT
+     C       1.94191   3.61595   1.09448       ForceField.Charge=0.0       ForceField.Type=CT
+     N      -1.74397  -3.46417   0.31178       ForceField.Charge=-0.9530   ForceField.Type=N2
+     C      -1.00720  -2.20758   0.33536       ForceField.Charge=0.8185    ForceField.Type=CA
+     C      -1.66928  -1.00652   0.31001       ForceField.Charge=-0.5215   ForceField.Type=CM
+     C      -0.92847   0.25653   0.34895       ForceField.Charge=0.0053    ForceField.Type=CM
+     N       0.43971   0.26735   0.38232       ForceField.Charge=-0.0484   ForceField.Type=N*
+     N       0.36409  -2.20477   0.28992       ForceField.Charge=-0.7584   ForceField.Type=NC
+     C       1.09714  -0.95413   0.22469       ForceField.Charge=0.7538    ForceField.Type=C
+     H      -2.89781  -3.50815   0.31746       ForceField.Charge=0.4234    ForceField.Type=H
+     H      -1.21484  -4.49217   0.31721       ForceField.Charge=0.4234    ForceField.Type=H
+     H      -2.80940  -0.93497   0.30550       ForceField.Charge=0.1928    ForceField.Type=HA
+     H      -1.55324   1.21497   0.33885       ForceField.Charge=0.1958    ForceField.Type=H4
+     C       1.23309   1.44017   0.30994       ForceField.Charge=0.0066    ForceField.Type=CT
+     O       2.58277  -1.01636   0.23914       ForceField.Charge=-0.6252   ForceField.Type=O
+     H       2.37276   1.25557   0.29984       ForceField.Charge=0.2902    ForceField.Type=H2
+     O       1.02358   2.43085   1.50880       ForceField.Charge=-0.2033   ForceField.Type=OS
+     H       1.17136   1.95097  -1.87367       ForceField.Charge=0.0       ForceField.Type=HC
+     H      -0.10600   2.77333  -0.80348       ForceField.Charge=0.0       ForceField.Type=HC
+     H       1.62170   4.54039   1.51392       ForceField.Charge=0.0       ForceField.Type=H1
+     H       2.99608   3.28749   1.41345       ForceField.Charge=0.0       ForceField.Type=H1
+   End
+End
+
+Engine ForceField
+   Type Amber95
+EndEngine
+
+eor
+
+
+# Now we load the types from the previous result
+
+# The result should be identical to the first calculation
+
+export AMS_JOBNAME=LoadTypes
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+Task GeometryOptimization
+
+System
+   Atoms
+     C       1.94807   3.58290  -0.58162
+     H       1.69949   4.49893  -1.05273
+     H       2.99455   3.17964  -0.86304
+     C       0.94659   2.40054  -0.92364
+     C       1.94191   3.61595   1.09448
+     N      -1.74397  -3.46417   0.31178
+     C      -1.00720  -2.20758   0.33536
+     C      -1.66928  -1.00652   0.31001
+     C      -0.92847   0.25653   0.34895
+     N       0.43971   0.26735   0.38232
+     N       0.36409  -2.20477   0.28992
+     C       1.09714  -0.95413   0.22469
+     H      -2.89781  -3.50815   0.31746
+     H      -1.21484  -4.49217   0.31721
+     H      -2.80940  -0.93497   0.30550
+     H      -1.55324   1.21497   0.33885
+     C       1.23309   1.44017   0.30994
+     O       2.58277  -1.01636   0.23914
+     H       2.37276   1.25557   0.29984
+     O       1.02358   2.43085   1.50880
+     H       1.17136   1.95097  -1.87367
+     H      -0.10600   2.77333  -0.80348
+     H       1.62170   4.54039   1.51392
+     H       2.99608   3.28749   1.41345
+   End
+   LoadForceFieldCharges    file=CalculateTypes.results
+   LoadForceFieldAtomTypes  file=CalculateTypes.results
+End
+
+Engine ForceField
+   Type Amber95
+   Verbosity Verbose
+
+EndEngine
+
+eor
+

@@ -1,0 +1,160 @@
+#! /bin/sh
+
+
+# Example shows an NBO analysis of an NMR shielding calculation for CH4.
+
+# Some keywords are necessary because of the NBO analysis afterwards. A 'Good'
+# integration grid is used. First the scalar relativistic calculation is
+# performed and the scalar relativistic localized orbitals are made. Next the
+# spin-orbit coupled ADF calculation is done, and a calculation of NMR shielding
+# constants is performed with an analysis in scalar relativistic localized
+# orbitals.
+
+
+AMS_JOBNAME=Scalar $AMSBIN/ams <<eor
+System
+  atoms
+     C  0.0000  0.0000  0.0000
+     H  0.6316  0.6316  0.6316
+     H  0.6316 -0.6316 -0.6316
+     H -0.6316  0.6316 -0.6316
+     H -0.6316 -0.6316  0.6316
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  aomat2file
+  beckegrid
+    quality good
+  end
+  fullfock
+  basis
+    core None
+    type DZP
+  end
+  save TAPE15
+EndEngine
+eor
+
+###### end scalar, run gennbo ##########
+
+$AMSBIN/adfnbo <<eor
+  ADFfile Scalar.results/adf.rkf
+  TAPE15file Scalar.results/TAPE15
+  write
+  spherical
+  :: read
+  fock
+eor
+
+rm -f adfnbo.37 adfnbo.39 adfnbo.49 adfnbo.48
+$AMSBIN/gennbo6 FILE47
+
+# run adfnbo in COPY mode
+
+$AMSBIN/adfnbo <<eor
+  ADFfile Scalar.results/adf.rkf
+  TAPE15file Scalar.results/TAPE15
+  spherical
+  fock
+  copy
+eor
+
+rm -f adfnbo.37 adfnbo.39 adfnbo.49 adfnbo.48
+
+##### end gennbo
+
+AMS_JOBNAME=NOSYM $AMSBIN/ams <<eor
+System
+  atoms
+     C  0.0000  0.0000  0.0000
+     H  0.6316  0.6316  0.6316
+     H  0.6316 -0.6316 -0.6316
+     H -0.6316  0.6316 -0.6316
+     H -0.6316 -0.6316  0.6316
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type DZP
+  end
+  noprint sfo
+  save TAPE10
+  symmetry nosym
+EndEngine
+eor
+
+$AMSBIN/nmr <<eor
+  adffile NOSYM.results/adf.rkf
+  tape10file NOSYM.results/TAPE10
+  fakeso
+  nmr
+   atoms 2 1 
+   u1k best 
+   out iso tens
+  end
+  analysis
+   print 0.01
+   canonical
+   nbo
+   components
+  end
+eor
+
+### scalar done, redo computation with spin-orbit coupling
+
+AMS_JOBNAME=Spinorbit $AMSBIN/ams <<eor
+System
+  atoms
+     C  0.0000  0.0000  0.0000
+     H  0.6316  0.6316  0.6316
+     H  0.6316 -0.6316 -0.6316
+     H -0.6316  0.6316 -0.6316
+     H -0.6316 -0.6316  0.6316
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type DZP
+  end
+  noprint sfo
+  relativity
+    level spin-orbit
+  end
+  save TAPE10
+  symmetry nosym
+EndEngine
+eor
+
+
+$AMSBIN/nmr <<eor
+  adffile Spinorbit.results/adf.rkf
+  tape10file Spinorbit.results/TAPE10
+  nmr
+   atoms 2 1 
+   u1k best 
+   out iso tens
+  end
+  analysis
+   print 0.01
+   canonical
+   nbo
+   components
+  end
+eor

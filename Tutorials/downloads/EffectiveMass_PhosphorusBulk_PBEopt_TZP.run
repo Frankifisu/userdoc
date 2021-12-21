@@ -1,0 +1,48 @@
+#!/bin/sh
+
+"$AMSBIN/ams" << eor
+
+Task GeometryOptimization
+GeometryOptimization
+    OptimizeLattice Yes
+End
+System
+    Atoms
+        P      -0.828485912    -1.897764639     1.066807332
+        P      -0.828485912     1.897764639    -1.066807332
+        P       0.828485912     0.400761525    -1.066807332
+        P       0.828485912    -0.400761525     1.066807332
+        P       0.828485912    -1.897764639    -4.461185869
+        P       0.828485912     1.897764639     4.461185869
+        P      -0.828485912     0.400761525     4.461185869
+        P      -0.828485912    -0.400761525    -4.461185869
+    End
+    Lattice
+ VEC1     3.313943647     0.000000000     0.000000000
+ VEC2     0.000000000     4.597052328     0.000000000
+ VEC3     0.000000000     0.000000000    11.055986401
+    End
+End
+
+Engine BAND
+    Basis
+        Type TZP
+        Core None
+    End
+    BandStructure
+        Enabled Yes
+        DeltaK 0.01
+    End
+    EffectiveMass
+        Enabled Yes
+    End
+    KSpace
+        Type Symmetric
+        Quality Good
+    End
+    NumericalQuality Good
+    XC
+        libxc pbe
+    End
+EndEngine
+eor

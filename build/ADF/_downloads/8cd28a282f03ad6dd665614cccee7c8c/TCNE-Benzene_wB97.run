@@ -1,0 +1,77 @@
+#! /bin/sh
+
+
+# Calculation of the excitation energies of the complex TCNE-Benzene using the
+# simplified Tamm-Dancoff (sTDA) method by Grimme, for a range-separated
+# function. This method is meant for hybrid functionals or range-separated
+# functionals during the SCF. In this example the range-separated functional 
+# wB97 is used during the SCF. In the the calculation of the excitation
+# energies the sTDA method is used in which the required integrals are
+# approximated. For range-separated functional one needs to set the parameters
+# manually. Note that the alpha and beta parameters for sTDA for range separated
+# functionals in the Risthaus paper (dx.doi.org/10.1039/C3CP54517B) are mixed
+# up. A TZP or TZ2P basis set is recommended for this method.
+
+# For the excitation energies of the complex TCNE-Benzene, charge 
+# transfer (CT) states are important. Symmetry NOSYM is required.
+# The subkey DESCRIPTORS is added to the key EXCITATIONS such that CT descriptors 
+# are calculated. The the atomic distance criterion used for the calculation of 
+# CT_AT was set to 3.0 Angstrom.
+# The sTDA parameters should be set with the subkeys GRIMMEAEX, GRIMMEALPHA, and
+# GRIMMEBETA of the key MODIFYEXCITATION.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C     -2.274205   -1.398789   -0.000000
+     C     -2.274206    1.398791   -0.000000
+     C     -2.274506   -0.699551    1.213150
+     C     -2.274505   -0.699551   -1.213150
+     C     -2.274506    0.699551    1.213150
+     C     -2.274505    0.699551   -1.213150
+     H     -2.278385   -2.491323   -0.000000
+     H     -2.278386    2.491321   -0.000000
+     C      1.368996   -0.686302    0.000000
+     C      1.368996    0.686301    0.000000
+     C      1.379968   -1.434052   -1.220900
+     C      1.379968   -1.434052    1.220895
+     C      1.379968    1.434051   -1.220900
+     C      1.379967    1.434051    1.220895
+     N      1.400955   -2.054479   -2.204820
+     N      1.400955   -2.054479    2.204824
+     N      1.400955    2.054481   -2.204820
+     N      1.400954    2.054481    2.204824
+     H     -2.276046   -1.246672    2.158733
+     H     -2.276045   -1.246672   -2.158730
+     H     -2.276045    1.246671   -2.158730
+     H     -2.276046    1.246671    2.158733
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  excitations
+    descriptors
+    descriptors_ct_at_rab 3.0
+    onlysing
+    stda
+  end
+  Basis
+    Type DZ
+    Core None
+    CreateOutput yes
+  End
+  modifyexcitation
+    grimmeaex 0.61
+    grimmealpha 4.41
+    grimmebeta 8.00
+    grimmepertc
+  end
+  symmetry nosym
+  xc
+    libxc wB97
+  end
+EndEngine
+
+eor

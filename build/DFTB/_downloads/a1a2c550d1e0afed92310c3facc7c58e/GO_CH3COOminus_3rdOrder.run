@@ -1,0 +1,26 @@
+#!/bin/sh
+
+$AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+System
+    Atoms
+      C    0.00000 0.21555 0.00000
+      O    1.10974 0.79418 0.00000
+      O    -1.15239 0.70584 0.00000
+      C    0.04178 -1.35041 0.00000
+      H    -0.48762 -1.73081 0.87864
+      H    -0.48762 -1.73081 -0.87864
+      H    1.06573 -1.72936 0.00000
+    End
+    Charge -1
+End
+
+Engine DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   Model DFTB3
+   DispersionCorrection UFF
+EndEngine
+
+eor

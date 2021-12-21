@@ -1,0 +1,879 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>KF files &mdash; PLAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PLAMS 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Amsterdam Modeling Suite" href="amssuite.html"/>
+        <link rel="next" title="COSMO-RS" href="crs.html"/>
+        <link rel="prev" title="Analysis tools: Densf, FCF, analysis" href="postadf.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/plams_logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search PLAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-scripting" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-plams">What is PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-can-be-done-with-plams">What can be done with PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#simple-example">Simple example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-plams-is-not">What PLAMS is <em>not</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#library-contents">Library contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#installing-plams">Installing PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#updating-plams">Updating PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#running-plams">Running PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#defaults-file">Defaults file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#the-launch-script">The launch script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#working-folder-location">Working folder location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#passing-variables">Passing variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#importing-past-jobs">Importing past jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#restarting-failed-script">Restarting failed script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#multiple-input-scripts">Multiple input scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../components/components.html">Components overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../components/settings.html">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#tree-like-structure">Tree-like structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#dot-notation">Dot notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#case-sensitivity">Case sensitivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#global-settings">Global settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/jobs.html">Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#preparing-a-job">Preparing a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#contents-of-job-settings">Contents of job settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#default-settings">Default settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#running-a-job">Running a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#name-conflicts">Name conflicts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#prerun-and-postrun-methods">Prerun and postrun methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#preview-mode">Preview mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#job-api">Job API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#single-jobs">Single jobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#subclassing-singlejob">Subclassing SingleJob</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#multijobs">Multijobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#using-multijob">Using MultiJob</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/results.html">Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#files-in-the-job-folder">Files in the job folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#synchronization-of-parallel-job-executions">Synchronization of parallel job executions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/results.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#cleaning-job-folder">Cleaning job folder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/results.html#cleaning-for-multijobs">Cleaning for multijobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/runners.html">Job runners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/runners.html#local-job-runner">Local job runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/runners.html#remote-job-runner">Remote job runner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/jobmanager.html">Job manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#rerun-prevention">Rerun prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#pickling">Pickling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#restarting-scripts">Restarting scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/functions.html">Public functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/functions.html#logging">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/functions.html#binding-decorators">Binding decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/molecule.html">Molecule</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_api.html">Molecule</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/mol_api.html#atom-labeling">Atom labeling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/atombond.html">Atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/atombond.html#bond">Bond</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_rdkit.html">RDKit interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_ase.html">ASE interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/utils.html">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#periodic-table">Periodic Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#geometry-tools">Geometry tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#file-format-conversion-tools">File format conversion tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/trajectories.html">Trajectories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/xyz.html">XYZ trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/xyz.html#xyz-history-files">XYZ history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/rkf.html">RKF trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/rkf.html#rkf-history-files">RKF history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/dcd.html">DCD trajectory files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="interfaces.html">Interfaces</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="amssuite.html">Amsterdam Modeling Suite</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ams.html">AMS driver and engines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#molecule-handling">Molecule handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#amsjob-api">AMSJob API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#amsresults-api">AMSResults API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="amsworker.html">AMS worker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="amsworker.html#amsworker-api">AMSWorker API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="amsworker.html#amsworkerresults-api">AMSWorkerResults API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="amsworker.html#amsworkerpool-api">AMSWorkerPool API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="postadf.html">Analysis tools: Densf, FCF, analysis</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">KF files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crs.html">COSMO-RS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#settings-with-multiple-compound">Settings with multiple compound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#adf-and-crsjob">ADF and CRSJob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#cosmo-rs-parameters">COSMO-RS Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#data-analyses-and-plotting">Data analyses and plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="adf.html">ADF (pre-2020 version)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="adf.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="adf.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="adf.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reaxff.html">ReaxFF (pre-2019 version)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="thirdparty.html">Other programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cp2k.html">CP2K</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#molecule-loading">Molecule loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="crystal.html">Crystal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus.html">DFTB+</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dirac.html">Dirac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mopac.html">MOPAC (standalone program)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mopac.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mopac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orca.html">ORCA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orca.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="raspa.html">RASPA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#id1">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/He2DissociationCurve.html">Helium dimer dissociation curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/WaterOptimization.html">Geometry optimization of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ManyJobsInParallel.html">Many jobs in parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/BasisSetBenchmark.html">Benchmark accuracy of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ExcitationsWorkflow.html">Workflow: filtering molecules based on excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ChargeTransferIntegralsADF.html">Charge transfer integrals with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/gammascan.html">Tuning the range separation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#pre-made-recipes">Pre-made recipes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ams_crs.html">ADF and COSMO-RS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adffragment.html">ADF fragment job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ReorganizationEnergy.html">Reorganization Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adfnbo.html">NBO with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numgrad.html">Numerical gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numhess.html">Numerical Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/molecule_gun.html">ReaxFF molecule gun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/global_minimum.html">Global Minimum Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vibrationASE.html">Vibrational analysis with ASE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook/cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#settings-and-input">Settings and input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#create-an-input-block-with-an-header">Create an input block with an header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#create-an-empty-input-block">Create an empty input block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-text-input-into-an-ams-job">Convert an AMS text input into an AMS job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-text-input-into-settings-object">Convert an AMS text input into settings object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-run-file-into-an-amsjob">Convert an AMS .run file into an AMSJob</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#specify-paths-to-files-in-the-input">Specify paths to files in the input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#restart-from-a-previous-job">Restart from a previous job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#molecules">Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#generate-a-molecule-from-a-smiles-string">Generate a molecule from a SMILES string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#counting-rings">Counting rings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#extracting-results">Extracting Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#directly-from-functions">Directly from Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#examples-total-energy-and-final-structure">Examples: Total Energy and Final Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#amsresults-api-functions">AMSResults API Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#from-the-rkf-interface">From the RKF Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#finding-section-variable-pairs">Finding Section/Variable Pairs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#from-python-directories">From Python Directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#kfbrowser">KFBrowser</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#from-molecular-dynamics-trajectories">From molecular dynamics trajectories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#general-md-properties">General MD properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#molecules-from-trajectories">Molecules from trajectories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#accessing-old-jobs">Accessing Old Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#binding-native-plams-jobs">Binding Native PLAMS Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#binding-old-rkf-files">Binding old RKF Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citations.html">Citations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PLAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../PLAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">PLAMS</a>/</li>
+      
+          <li><a href="interfaces.html">Interfaces</a>/</li>
+      
+          <li><a href="amssuite.html">Amsterdam Modeling Suite</a>/</li>
+      
+    <li class="orange-text">KF files</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kf-files">
+<span id="id1"></span><h1>KF files<a class="headerlink" href="#kf-files" title="Permalink to this headline">¶</a></h1>
+<p>KF is the main format for storing binary data used in all Amsterdam Modeling Suite programs.
+All <code class="docutils literal notranslate"><span class="pre">TAPEXX</span></code> and <code class="docutils literal notranslate"><span class="pre">.rkf</span></code> files are KF files.
+PLAMS offers a dictionary-like interface to KF format which allows for reading, writing, modifying and creating KF files efficiently.</p>
+<dl class="class">
+<dt id="scm.plams.tools.kftools.KFFile">
+<em class="property">class </em><code class="descname">KFFile</code><span class="sig-paren">(</span><em>path</em>, <em>autosave=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for reading and writing binary files in KF format.</p>
+<p>This class acts as a wrapper around <a class="reference internal" href="#scm.plams.tools.kftools.KFReader" title="scm.plams.tools.kftools.KFReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFReader</span></code></a> collecting all the data written by user in some “temporary zone” and using Fortran binaries <code class="docutils literal notranslate"><span class="pre">udmpkf</span></code> and <code class="docutils literal notranslate"><span class="pre">cpkf</span></code> to write this data to the physical file when needed.</p>
+<p>The constructor argument <em>path</em> should be a string with a path to an existing KF file or a new KF file that you wish to create. If a path to existing file is passed, new <a class="reference internal" href="#scm.plams.tools.kftools.KFReader" title="scm.plams.tools.kftools.KFReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFReader</span></code></a> instance is created allowing to read all the data from this file.</p>
+<p>When <a class="reference internal" href="#scm.plams.tools.kftools.KFFile.write" title="scm.plams.tools.kftools.KFFile.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method is used, the new data is not immediately written to a disk. Instead of that, it is temporarily stored in <code class="docutils literal notranslate"><span class="pre">tmpdata</span></code> dictionary. When method <a class="reference internal" href="#scm.plams.tools.kftools.KFFile.save" title="scm.plams.tools.kftools.KFFile.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code></a> is invoked, contents of that dictionary are written to a physical file and <code class="docutils literal notranslate"><span class="pre">tmpdata</span></code> is emptied.</p>
+<p>Other methods like <a class="reference internal" href="#scm.plams.tools.kftools.KFFile.read" title="scm.plams.tools.kftools.KFFile.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> or <a class="reference internal" href="#scm.plams.tools.kftools.KFFile.delete_section" title="scm.plams.tools.kftools.KFFile.delete_section"><code class="xref py py-meth docutils literal notranslate"><span class="pre">delete_section()</span></code></a> are aware of <code class="docutils literal notranslate"><span class="pre">tmpdata</span></code> and work flawlessly, regardless if <a class="reference internal" href="#scm.plams.tools.kftools.KFFile.save" title="scm.plams.tools.kftools.KFFile.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code></a> was called or not.</p>
+<p>By default, <a class="reference internal" href="#scm.plams.tools.kftools.KFFile.save" title="scm.plams.tools.kftools.KFFile.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code></a> is automatically invoked after each <a class="reference internal" href="#scm.plams.tools.kftools.KFFile.write" title="scm.plams.tools.kftools.KFFile.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a>, so physical file on a disk is always “actual”. This behavior can be adjusted with <em>autosave</em> constructor parameter. Having autosave enabled is usually a good idea, however, if you need to write a lot of small pieces of data to your file, the overhead of calling <code class="docutils literal notranslate"><span class="pre">udmpkf</span></code> and <code class="docutils literal notranslate"><span class="pre">cpkf</span></code> after <em>every</em> <a class="reference internal" href="#scm.plams.tools.kftools.KFFile.write" title="scm.plams.tools.kftools.KFFile.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> can lead to significant delays. In such a case it is advised to disable autosave and call <a class="reference internal" href="#scm.plams.tools.kftools.KFFile.save" title="scm.plams.tools.kftools.KFFile.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code></a> manually, when needed.</p>
+<p>Dictionary-like bracket notation can be used as a shortcut to read and write variables:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mykf</span> <span class="o">=</span> <span class="n">KFFile</span><span class="p">(</span><span class="s1">&#39;someexistingkffile.kf&#39;</span><span class="p">)</span>
+<span class="c1">#all three below are equivalent</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">mykf</span><span class="p">[</span><span class="s1">&#39;General%Termination Status&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">mykf</span><span class="p">[(</span><span class="s1">&#39;General&#39;</span><span class="p">,</span><span class="s1">&#39;Termination Status&#39;</span><span class="p">)]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">mykf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;General&#39;</span><span class="p">,</span><span class="s1">&#39;Termination Status&#39;</span><span class="p">)</span>
+
+<span class="c1">#all three below are equivalent</span>
+<span class="n">mykf</span><span class="p">[</span><span class="s1">&#39;Geometry</span><span class="si">%x</span><span class="s1">yz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">somevariable</span>
+<span class="n">mykf</span><span class="p">[(</span><span class="s1">&#39;Geometry&#39;</span><span class="p">,</span><span class="s1">&#39;xyz&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">somevariable</span>
+<span class="n">mykf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Geometry&#39;</span><span class="p">,</span><span class="s1">&#39;xyz&#39;</span><span class="p">,</span> <span class="n">somevariable</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>path</em>, <em>autosave=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>section</em>, <em>variable</em>, <em>return_as_list=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract and return data for a <em>variable</em> located in a <em>section</em>.</p>
+<p>By default, for single-value numerical or boolean variables returned value is a single number or bool. For longer variables this method returns a list of values. For string variables a single string is returned. This behavior can be changed by setting <em>return_as_list</em> parameter to <code class="docutils literal notranslate"><span class="pre">True</span></code>. In that case the returned value is always a list of numbers (possibly of length 1) or a single string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>section</em>, <em>variable</em>, <em>value</em>, <em>value_type=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a <em>variable</em> with a <em>value</em> in a <em>section</em> . If such a variable already exists in this section, the old value is overwritten.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.save">
+<code class="descname">save</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save all changes stored in <code class="docutils literal notranslate"><span class="pre">tmpdata</span></code> to physical file on a disk.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.delete_section">
+<code class="descname">delete_section</code><span class="sig-paren">(</span><em>section</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.delete_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.delete_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the entire <em>section</em> from this KF file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.sections">
+<code class="descname">sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list with all section names, ordered alphabetically.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.read_section">
+<code class="descname">read_section</code><span class="sig-paren">(</span><em>section</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.read_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.read_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary with all variables from a given <em>section</em>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some sections can contain very large amount of data. Turning them into dictionaries can cause memory shortage or performance issues. Use this method carefully.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; set<a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all sections in the current instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.get_skeleton">
+<code class="descname">get_skeleton</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.get_skeleton"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.get_skeleton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary reflecting the structure of this KF file. Each key in that dictionary corresponds to a section name of the KF file with the value being a set of variable names.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow to use <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">mykf['section%variable']</span></code> or <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">mykf[('section','variable')]</span></code> instead of <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">kf.read('section',</span> <span class="pre">'variable')</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.__setitem__">
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><em>name</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow to use <code class="docutils literal notranslate"><span class="pre">mykf['section%variable']</span> <span class="pre">=</span> <span class="pre">value</span></code> or <code class="docutils literal notranslate"><span class="pre">mykf[('section','variable')]</span> <span class="pre">=</span> <span class="pre">value</span></code> instead of <code class="docutils literal notranslate"><span class="pre">kf.write('section',</span> <span class="pre">'variable',</span> <span class="pre">value)</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.__iter__">
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteration yields pairs of section name and variable name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFFile.__contains__">
+<code class="descname">__contains__</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements Python <code class="docutils literal notranslate"><span class="pre">in</span></code> operator for KFFiles. <em>arg</em> can be a single string with a section name or a pair of strings (section, variable).</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="scm.plams.tools.kftools.KFFile._split">
+<em class="property">static </em><code class="descname">_split</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile._split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile._split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that a key used in bracket notation is of the form <code class="docutils literal notranslate"><span class="pre">'section%variable'</span></code> or <code class="docutils literal notranslate"><span class="pre">('section','variable')</span></code>. If so, return a tuple <code class="docutils literal notranslate"><span class="pre">('section','variable')</span></code>.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="scm.plams.tools.kftools.KFFile._str">
+<em class="property">static </em><code class="descname">_str</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFFile._str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFFile._str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string representation of <em>val</em> in the form that can be understood by <code class="docutils literal notranslate"><span class="pre">udmpkf</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="scm.plams.tools.kftools.KFReader">
+<em class="property">class </em><code class="descname">KFReader</code><span class="sig-paren">(</span><em>path</em>, <em>blocksize=4096</em>, <em>autodetect=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for efficient Python-native reader of binary files in KF format.</p>
+<p>This class offers read-only access to any fragment of data from a KF file. Unlike other Python KF readers, this one does not use the Fortran binary <code class="docutils literal notranslate"><span class="pre">dmpkf</span></code> to process KF files, but instead reads and interprets raw binary data straight from the file, on Python level. That approach results in significant speedup (by a factor of few hundreds for large files extracted variable by variable).</p>
+<p>The constructor argument <em>path</em> should be a string with a path (relative or absolute) to an existing KF file.</p>
+<p><em>blocksize</em> indicates the length of basic KF file block. So far, all KF files produced by any of Amsterdam Modeling Suite programs have the same block size of 4096 bytes. Unless you’re doing something <em>very</em> special, you should not touch this value.</p>
+<p>Organization of data inside KF file can depend on a machine on which this file was produced. Two parameters can vary: the length of integer (32 or 64 bit) and endian (little or big). These parameters have to be determined before any reading can take place, otherwise the results will have no sense. If the constructor argument <em>autodetect</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the constructor attempts to automatically detect the format of a given KF file, allowing to read files created on a machine with different endian or integer length. This automatic detection is enabled by default and it is advised to leave it that way. If you wish to disable it, you should set <code class="docutils literal notranslate"><span class="pre">endian</span></code> and <code class="docutils literal notranslate"><span class="pre">word</span></code> attributes manually before reading anything (see the code for details).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class consists of quite technical, low level code. If you don’t need to modify or extend <a class="reference internal" href="#scm.plams.tools.kftools.KFReader" title="scm.plams.tools.kftools.KFReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFReader</span></code></a>, you can safely ignore all private methods, all you need is <a class="reference internal" href="#scm.plams.tools.kftools.KFReader.read" title="scm.plams.tools.kftools.KFReader.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> and occasionally <a class="reference internal" href="#scm.plams.tools.kftools.KFReader.__iter__" title="scm.plams.tools.kftools.KFReader.__iter__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code></a></p>
+</div>
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFReader.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>path</em>, <em>blocksize=4096</em>, <em>autodetect=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFReader.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>section</em>, <em>variable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract and return data for a <em>variable</em> located in a <em>section</em>.</p>
+<p>For single-value numerical or boolean variables returned value is a single number or bool. For longer variables this method returns a list of values. For string variables a single string is returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFReader.variable_type">
+<code class="descname">variable_type</code><span class="sig-paren">(</span><em>section</em>, <em>variable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader.variable_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader.variable_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the integer code of the variable’s type (int:1, float:2, string:3, bool:4)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFReader.__iter__">
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteration yields pairs of section name and variable name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFReader._autodetect">
+<code class="descname">_autodetect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader._autodetect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader._autodetect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to automatically detect the format (int size and endian) of this KF file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFReader._read_block">
+<code class="descname">_read_block</code><span class="sig-paren">(</span><em>f</em>, <em>pos</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader._read_block"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader._read_block" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a single block of binary data from posistion <em>pos</em> in file <em>f</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFReader._parse">
+<code class="descname">_parse</code><span class="sig-paren">(</span><em>block</em>, <em>format</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader._parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader._parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a <em>block</em> of binary data into list of values in specified <em>format</em>.</p>
+<p><em>format</em> should be a list of pairs <em>(a,t)</em> where <em>t</em> is one of the following characters: <code class="docutils literal notranslate"><span class="pre">'s'</span></code> for string (bytes), <code class="docutils literal notranslate"><span class="pre">'i'</span></code> for 32-bit integer, <code class="docutils literal notranslate"><span class="pre">'q'</span></code> for 64-bit integer and <em>a</em> is the number of occurrences (or length of a string).</p>
+<p>For example, if <em>format</em> is equal to <code class="docutils literal notranslate"><span class="pre">[(32,'s'),(4,'i'),(2,'d'),(2,'i')]</span></code>, the contents of <em>block</em> are divided into 72 bytes (32*1 + 4*4 + 2*8 + 2*4 = 72) chunks (possibly droping the last one, if it’s shorter than 72 bytes). Then each chunk is translated to a 9-tuple of bytes, 4 ints, 2 floats and 2 ints. List of such tuples is the returned value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFReader._get_data">
+<code class="descname">_get_data</code><span class="sig-paren">(</span><em>datablock</em>, <em>vtype</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader._get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader._get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract all data of a given type from a single data block. Returned value is a list of values (int, float, or bool) or a single “bytes” object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFReader._create_index">
+<code class="descname">_create_index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader._create_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader._create_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find and parse relevant index blocks of KFFile to extract the information about location of all sections and variables.</p>
+<p>Two dictionaries are populated during this process. <code class="docutils literal notranslate"><span class="pre">_data</span></code> contains, for each section, a list of triples describing how logical blocks of data are mapped into physical ones. For example, <code class="docutils literal notranslate"><span class="pre">_data['General']</span> <span class="pre">=</span> <span class="pre">[(3,6,12),</span> <span class="pre">(9,40,45)]</span></code> means that logical blocks 3-8 of section <code class="docutils literal notranslate"><span class="pre">General</span></code> are located in physical blocks 6-11 and logical blocks 9-13 in physical blocks 40-44. This list is always sorted via first tuple elements allowing efficient access to arbitrary logical block of each section.</p>
+<p>The second dictionary, <code class="docutils literal notranslate"><span class="pre">_sections</span></code>, is used to locate each variable within its section. For each section, it contains another dictionary of each variable of this section. So <code class="docutils literal notranslate"><span class="pre">_section[sec][var]</span></code> contains all information needed to extract variable <code class="docutils literal notranslate"><span class="pre">var</span></code> from section <code class="docutils literal notranslate"><span class="pre">sec</span></code>. This is a 4-tuple containing the following information: variable type, logic block in which the variable first occurs, position within this block where its data start and the length of the variable. Combining this information with mapping stored in <code class="docutils literal notranslate"><span class="pre">_data</span></code> allows to extract each single variable.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="scm.plams.tools.kftools.KFReader._datablocks">
+<em class="property">static </em><code class="descname">_datablocks</code><span class="sig-paren">(</span><em>lst</em>, <em>n=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFReader._datablocks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFReader._datablocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform a tuple of lists <code class="docutils literal notranslate"><span class="pre">([x1,x2,...],</span> <span class="pre">[(a1,b1),(a2,b2),...])</span></code> into an iterator over <code class="docutils literal notranslate"><span class="pre">range(a1,b1)+range(a2,b2)+...</span></code> Iteration starts from nth element of this list.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="scm.plams.tools.kftools.KFHistory">
+<em class="property">class </em><code class="descname">KFHistory</code><span class="sig-paren">(</span><em>kf</em>, <em>section</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFHistory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFHistory" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for reading “History” sections of files in the KF format.</p>
+<p>This class acts as a wrapper around <a class="reference internal" href="#scm.plams.tools.kftools.KFReader" title="scm.plams.tools.kftools.KFReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFReader</span></code></a> enabling convenient iteration over entries (frames) of History sections.</p>
+<p>The constructor argument <em>kf</em> should be a <a class="reference internal" href="#scm.plams.tools.kftools.KFReader" title="scm.plams.tools.kftools.KFReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFReader</span></code></a> instance attached to an existing KF file. The <em>section</em> argument then holds a name of the desired History-like section, such as “History” or “MDHistory”.</p>
+<p>The <a class="reference internal" href="#scm.plams.tools.kftools.KFHistory.read_all" title="scm.plams.tools.kftools.KFHistory.read_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_all()</span></code></a> method can be used used to easily read all values of a particular history item into a single numpy array.</p>
+<p>To iterate over the frames in a history section, use <a class="reference internal" href="#scm.plams.tools.kftools.KFHistory.iter" title="scm.plams.tools.kftools.KFHistory.iter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iter()</span></code></a> or <a class="reference internal" href="#scm.plams.tools.kftools.KFHistory.iter_optional" title="scm.plams.tools.kftools.KFHistory.iter_optional"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iter_optional()</span></code></a>. The former raises an exception if the selected variable is not present in the history, while the latter returns a given default value instead.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kf</span> <span class="o">=</span> <span class="n">KFReader</span><span class="p">(</span><span class="s1">&#39;somefile.rkf&#39;</span><span class="p">)</span>
+<span class="n">mdhistory</span> <span class="o">=</span> <span class="n">KFHistory</span><span class="p">(</span><span class="n">kf</span><span class="p">,</span> <span class="s1">&#39;MDHistory&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mdhistory</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s1">&#39;Temperature&#39;</span><span class="p">),</span> <span class="n">mdhistory</span><span class="o">.</span><span class="n">iter_optional</span><span class="p">(</span><span class="s1">&#39;Pressure&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFHistory.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>kf</em>, <em>section</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFHistory.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFHistory.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFHistory.read_all">
+<code class="descname">read_all</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFHistory.read_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFHistory.read_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a numpy array containing the values of history item <em>name</em> from all frames.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFHistory.iter">
+<code class="descname">iter</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFHistory.iter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFHistory.iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over the values of history item <em>name</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.tools.kftools.KFHistory.iter_optional">
+<code class="descname">iter_optional</code><span class="sig-paren">(</span><em>name</em>, <em>default=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/tools/kftools.html#KFHistory.iter_optional"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.tools.kftools.KFHistory.iter_optional" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over the values of history item <em>name</em>, returning <em>default</em> if the item is not present.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="crs.html" class="btn btn-neutral float-right" title="COSMO-RS" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="postadf.html" class="btn btn-neutral" title="Analysis tools: Densf, FCF, analysis" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+#! /bin/sh
+
+
+# Specify the subkey MAGOPTROT in the AORESPONSE key to calculate the Verdet
+# constant.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     O           0.000000    0.134692    0.000000
+     H           0.869763   -0.538741    0.000000
+     H          -0.869763   -0.538794    0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allpoints
+  aoresponse
+    alda
+    frequencies 0.088558 [Hartree]
+    giao
+    magoptrot
+    scf converge 1d-6 iterations 25
+  end
+  basis
+    core None
+    type TZP
+  end
+  numericalquality Good
+  symmetry nosym
+  xc
+    gga revPBE
+    lda vwn
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+

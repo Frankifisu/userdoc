@@ -1,0 +1,180 @@
+#! /bin/sh
+
+# This is example for a calculation of FDE interaction energies in ADF in case
+# of closed shell fragments#
+
+# It performs single point runs for H2O and NH3
+# with LDA/DZ (all-electron) and uses these fragments in 
+# A) an FDE energy embedding calculation calculation in which the energy of
+#    water in presence of a frozen ammonia is computed
+#    This requires a supermolecular integration grid
+# B) a fully variational FDE energy calculation (with freeze-and-thaw)
+#
+# NumericalQuality is good which should give total energies for the
+# fragments accurate at least up to 10**(-4) atomic units
+
+
+# NH3 LDA/DZ
+
+
+AMS_JOBNAME=NH3 $AMSBIN/ams <<eor
+System
+  atoms
+     N       -1.51248       -0.03714       -0.00081
+     H       -1.71021        0.95994       -0.11003
+     H       -1.96356       -0.53831       -0.76844
+     H       -1.92899       -0.35123        0.87792
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2O LDA/DZ single point
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    core None
+    type DZ
+  end
+  noprint BAS FUNCTIONS
+  nosymfit
+  numericalquality Good
+  symmetrytolerance 1e-2
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+mv NH3.results/adf.rkf t21.ammonia
+
+
+# H2O LDA/DZ
+
+
+AMS_JOBNAME=H2O $AMSBIN/ams <<eor
+System
+  atoms
+     O        1.45838        0.10183        0.00276
+     H        0.48989       -0.04206        0.00012
+     H        1.84938       -0.78409       -0.00279
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2O LDA/DZ single point
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    core None
+    type DZ
+  end
+  noprint BAS FUNCTIONS
+  nosymfit
+  numericalquality Good
+  symmetrytolerance 1e-2
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+mv H2O.results/adf.rkf t21.water
+
+
+# NH3-H2O: FDE energy of H2O in presence of frozen NH3
+
+
+AMS_JOBNAME=FDE $AMSBIN/ams <<eor
+System
+  atoms
+     O        1.45838        0.10183        0.00276    adf.f=frag1
+     H        0.48989       -0.04206        0.00012    adf.f=frag1
+     H        1.84938       -0.78409       -0.00279    adf.f=frag1
+     N       -1.51248       -0.03714       -0.00081    adf.f=frag2
+     H       -1.71021        0.95994       -0.11003    adf.f=frag2
+     H       -1.96356       -0.53831       -0.76844    adf.f=frag2
+     H       -1.92899       -0.35123        0.87792    adf.f=frag2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title NH3-H2O LDA/Thomas-Fermi/DZ FDE single point with interaction energy
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  fde
+    energy
+    fullgrid
+    thomasfermi
+  end
+  fragments
+     frag1  t21.water
+     frag2  t21.ammonia type=FDE
+  end
+  noprint BAS FUNCTIONS
+  numericalquality Good
+  symmetrytolerance 1e-2
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+
+# NH3-H2O FDE interaction energy
+
+
+AMS_JOBNAME=FDE1 $AMSBIN/ams <<eor
+System
+  atoms
+     O        1.45838        0.10183        0.00276    adf.f=frag1
+     H        0.48989       -0.04206        0.00012    adf.f=frag1
+     H        1.84938       -0.78409       -0.00279    adf.f=frag1
+     N       -1.51248       -0.03714       -0.00081    adf.f=frag2
+     H       -1.71021        0.95994       -0.11003    adf.f=frag2
+     H       -1.96356       -0.53831       -0.76844    adf.f=frag2
+     H       -1.92899       -0.35123        0.87792    adf.f=frag2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title NH3-H2O LDA/Thomas-Fermi/DZ FDE single point with interaction energy
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  fde
+    energy
+    relaxcycles 3
+    thomasfermi
+  end
+  fragments
+     frag1  t21.water
+     frag2  t21.ammonia type=FDE  &
+     fdeoptions RELAX
+     SubEnd
+  end
+  noprint BAS FUNCTIONS
+  numericalquality Good
+  symmetrytolerance 1e-2
+  Relativity
+    Level None
+  End
+EndEngine
+eor

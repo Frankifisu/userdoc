@@ -1,0 +1,62 @@
+AMSConformers
+==============
+
+Python library for conformer generation
+---------------------------------------
+
+The conformers package holds a collection of tools for the generation of conformer sets for a molecule. 
+It makes heavy use of the AMS Python library PLAMS. 
+The main tools for conformer generation in the package are:
+
+* CREST conformer generation [#ref00]_
+* RDKit ETKDG conformer generation [#ref01]_
+
+The top level classes in the conformers package are the UniqueConformers classes:
+
+* UniqueConformersCrest
+* UniqueConformersAMS
+* UniqueConformersTFD
+
+The main task of the conformer class is to hold the conformers of a molecule and prune/filter out duplicates. 
+There are several ways duplicates can be defined :
+
+* CREST duplicate recognition (UniqueConformersCrest) [#ref00]_
+* Duplicate recognition based on interatomic distances and torsion angles (UniqueConformersAMS)
+* Duplicate recognition based on the Torsion Fingerprint Difference (UniqueConformersTFD) [#ref02]_
+
+In addition to duplicate pruning, the UniqueConformers classes are also linked to a default conformer generation method 
+(which can be changed by the user) and to a geometry optimization method (also changeable by the user).
+
+To create a conformer set, an empty instance of the conformers object is created, 
+and then conformers can be added to it, read from file, or generated. 
+The conformers in the set can then be manipulated and compared.
+
+Simple example
+--------------
+
+In this example, conformers are generated using the RDKit ETKDG routines, and duplicates are filtered out using the AMS approach.
+
+.. literalinclude:: ../../examples/generate_rdkit.py
+   :language: python
+
+Comparing conformer sets
+-------------------------
+
+In this example, two conformer sets are read in from file and evaluated based on three criteria:
+
+1. The energy of the most stable conformer in the set
+2. The number of unique conformers in the set
+3. The number of conformer-clusters (similar conformers) in the set
+
+.. literalinclude:: ../../examples/compare_conformers/compare_conformers.py
+      :language: python
+
+.. only:: html
+
+  .. rubric:: References
+
+.. [#ref00] DOI: 10.1039/c9cp06869d
+.. [#ref01] DOI: 10.1021/acs.jcim.5b00654
+.. [#ref02] DOI: 10.1021/ci2002318]
+
+

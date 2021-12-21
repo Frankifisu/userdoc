@@ -1,0 +1,261 @@
+#! /bin/sh
+
+# This example shows how you can continue with an unfinished calculation. It
+# consists of two runs. After the first run the RUNKF file is saved, and the
+# renamed file is used in the second run. The second run is almost a copy for
+# the first, except for the Restart key. It is also possible to restart from a
+# smaller basis set (provided that the functions are contained in the bigger
+# basis set). Finally you can also restart from a density matrix, but this
+# should be explicitly saved (unlike the orbitals).
+
+# ----------------------------- first run --------------------------
+
+AMS_JOBNAME=BChain $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Lattice [Bohr]
+      4.0 0.0 0.0
+   End
+   Atoms [Bohr]
+      B 0.0 0.0 0.0 
+   End
+End
+
+Engine Band 
+   Title B chain
+
+   NumericalQuality Good
+
+   skip dos
+
+   XC
+      GGA Becke Perdew
+   END
+
+   UNRESTRICTED
+   Relativity Level=None
+
+   DIIS
+      NCycleDamp 0
+      DiMix 0.5
+      Adaptable false ! Otherwise it converges to a spin-restricted solution
+   End
+
+   Basis
+      Type TZ2P
+      Core Large
+   End
+EndEngine
+
+eor
+
+# ----------------------------- second run --------------------------
+
+AMS_JOBNAME=restart_1 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Lattice [Bohr]
+      4.0 0.0 0.0
+   End
+   Atoms [Bohr]
+      B 0.0 0.0 0.0 
+   End
+End
+
+Engine Band 
+   Title B chain restart
+
+   NumericalQuality Good
+
+   XC
+      GGA Becke Perdew
+   END
+
+   UNRESTRICTED
+   Relativity Level=None
+
+   Restart
+      File BChain.results/band.rkf
+      scf
+   end
+
+   Basis
+      Type TZ2P
+      Core Large
+   End
+EndEngine
+
+eor
+
+# ----------------------------- third run --------------------------
+
+AMS_JOBNAME=BChain_SZ $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Lattice [Bohr]
+      4.0 0.0 0.0
+   End
+   Atoms [Bohr]
+      B 0.0 0.0 0.0 
+   End
+End
+
+Engine Band 
+   Title B chain bas_SZ
+
+   NumericalQuality Good
+
+   Save DensityMatrix
+
+   skip dos
+
+   XC
+      GGA Becke Perdew
+   END
+
+   UNRESTRICTED
+   Relativity Level=None
+
+   DIIS
+      NCycleDamp 0
+      DiMix 0.3
+      Adaptable false ! Otherwise it converges to a spin-restricted solution
+   End
+
+   Basis
+      Type SZ
+      Core Large
+   End
+EndEngine 
+
+eor
+
+# ----------------------------- fourth run --------------------------
+
+
+AMS_JOBNAME=restart_2 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Lattice [Bohr]
+      4.0 0.0 0.0
+   End
+   Atoms [Bohr]
+      B 0.0 0.0 0.0 
+   End
+End
+
+Engine Band 
+   Title B chain restart bas_SZ from density matrix
+
+   NumericalQuality Good
+
+   XC
+      GGA Becke Perdew
+   END
+
+   UNRESTRICTED
+   Relativity Level=None
+
+   Restart
+      File BChain_SZ.results/band.rkf
+      scf
+      useDensityMatrix true
+   end
+
+   Basis
+      Type SZ
+      Core Large
+   End
+EndEngine
+eor
+
+
+# ----------------------------- fifth run --------------------------
+
+AMS_JOBNAME=BChain_TZ2P $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Lattice [Bohr]
+      4.0 0.0 0.0
+   End
+   Atoms [Bohr]
+      B 0.0 0.0 0.0 
+   End
+End
+
+Engine Band 
+   Title B chain restart bas=TZ2P from orbitals
+
+   NumericalQuality Good
+
+   XC
+      GGA Becke Perdew
+   END
+
+   UNRESTRICTED
+   Relativity Level=None
+
+   Restart
+      File BChain_SZ.results/band.rkf
+      scf
+      useDensityMatrix false
+   end
+
+   Basis
+      Type TZ2P
+      Core Large
+   End
+EndEngine
+
+eor
+
+# ----------------------------- sixth run --------------------------
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Lattice [Bohr]
+      4.0 0.0 0.0
+   End
+   Atoms [Bohr]
+      B 0.0 0.0 0.0 
+   End
+End
+
+Engine Band 
+   Title B chain restart bas=TZ2P from density matrix (bas_SZ)
+
+   NumericalQuality Good
+
+   XC
+      GGA Becke Perdew
+   END
+
+   UNRESTRICTED
+   Relativity Level=None
+
+   Restart
+      File BChain_SZ.results/band.rkf
+      scf
+      useDensityMatrix true
+   end
+
+   Basis
+      Type TZ2P
+      Core Large
+   End
+EndEngine
+eor
+

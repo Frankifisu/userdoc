@@ -1,0 +1,50 @@
+#!/bin/sh
+# This example runs two separate AMS processes communicating over AMSPipe. One of them is the PipeWorker
+# calculating Lennard-Jones energies and the other as the PipeMaster drives the MD simulation.
+
+export NSCM=1
+export NSCM_AMSEXTERNAL=1
+
+cat - > worker.in << eor
+Task Pipe
+
+Engine LennardJones
+    Rmin 3.81637
+    Eps 3.785e-4
+    Cutoff 12.0
+EndEngine
+eor
+
+"$AMSBIN/ams" << eor
+RNGSeed -538839488 972444872 -468448621 535232319 -953628259 777353319 -1036072 387155213
+
+Task MolecularDynamics
+
+MolecularDynamics
+    nSteps 200
+    TimeStep 5.0
+    Thermostat Type=NHC Temperature=298.15 Tau=100
+    Trajectory SamplingFreq=20
+    InitialVelocities Type=random Temperature=200
+End
+
+System
+    Atoms
+        Ar 0.0 0.0 0.0
+        Ar 1.605 0.9266471820493496 2.605
+    End
+    Lattice
+        3.21 0.0 0.0
+        1.605 2.779941546148048 0.0
+        0.0 0.0 5.21
+    End
+    SuperCell 4 4 4
+End
+
+Engine Pipe
+    WorkerCommand "$AMSBIN/ams" < ../../worker.in > worker.out 2>&1
+EndEngine
+eor
+
+echo "Worker output:"
+cat ams.results/*/worker.out

@@ -1,0 +1,103 @@
+#! /bin/sh
+
+# The restraint does not have to be satisfied at the start of the geometry
+# optimization. An extra force is added to restrain the bond length, angle, or
+# dihedral angle to a certain value.
+
+#  == angle restraint ==
+
+AMS_JOBNAME=Angle $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.001356    0.000999    0.000000
+     H         0.994442   -0.037855    0.000000
+     H        -0.298554    0.948531    0.000000
+  end
+  Symmetrize Yes
+end
+
+Task GeometryOptimization
+
+Restraints 
+  Angle 3 1 2 125.0 10.0
+End
+
+Engine ADF
+  title WATER geometry optimization with angle restraint
+  basis
+    type DZP
+  end
+EndEngine
+eor
+
+echo "Angle after optimization:"
+$AMSBIN/amsreport Angle.results/adf.rkf -r angle#3#1#2
+
+
+# == bond length restraint ==
+
+
+AMS_JOBNAME=Bond $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.001356    0.000999    0.000000
+     H         0.994442   -0.037855    0.000000
+     H        -0.298554    0.948531    0.000000
+  end
+  Symmetrize Yes
+end
+
+Task GeometryOptimization
+
+Restraints
+   Distance  1 2 1.03 10.0
+   Distance  1 3 1.03 10.0
+end
+
+Engine ADF
+  title WATER Geometry Optimization with bond length restraint
+  basis
+    type DZP
+  end
+EndEngine
+eor
+
+echo "Bond-dinstances after optimization:"
+$AMSBIN/amsreport Bond.results/adf.rkf -r distance#1#2
+$AMSBIN/amsreport Bond.results/adf.rkf -r distance#1#3
+
+
+# == Restraining dihedral ==
+
+
+AMS_JOBNAME=Dihedral $AMSBIN/ams <<eor
+System
+  atoms
+     C        -0.004115   -0.000021    0.000023
+     C         1.535711    0.000022    0.000008
+     H        -0.399693    1.027812   -0.000082
+     H        -0.399745   -0.513934    0.890139
+     H        -0.399612   -0.513952   -0.890156
+     H         1.931188    0.514066    0.890140
+     H         1.931432    0.513819   -0.890121
+     H         1.931281   -1.027824    0.000244
+  end
+end
+
+Task GeometryOptimization
+
+Restraints
+   Dihedral 6 2 1 3 20.00 10.0
+end
+
+Engine ADF
+  title Restraining dihedral of ethane
+  basis
+    type DZP
+  end
+  Symmetry NoSym
+EndEngine
+eor
+
+echo "Dihedral after optimization:"
+$AMSBIN/amsreport Dihedral.results/adf.rkf -r dihedral#6#2#1#3

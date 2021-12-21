@@ -1,0 +1,81 @@
+#!/bin/sh
+
+
+# A calculation of NMR nuclear spin-spin coupling constants (NSCCs) for the
+# hybrid PBE0.
+
+# The hybrid PBE0 is chosen as exchange-correlation potential in the ADF
+# calculation. The key 'usespcode' is required for consistency reasons of the
+# PBE0 implementation in ADF and the kernel that is used in the 'CPL' program,
+# that calculates NMR spin-spin coupling constants. Symmetry should be NOSYM.
+# The basis sets used are specially optimized all-electron basis sets for NMR
+# spin-spin coupling calculations (in the directory
+# $AMSHOME/atomicdata/ZORA/jcpl), which have extra tight functions, compared to
+# a default ADF basis set. The integration accuracy is extra high (Quality
+# VeryGood).
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     F 0.0000 0.0000 0.0000
+     H 0.0000 0.0000 0.9170
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type ZORA/jcpl
+  end
+  beckegrid
+    quality verygood
+  end
+  scf
+    converge 1e-8 1e-7
+  end
+  symmetry nosym
+  usespcode
+  xc
+    hybrid PBE0
+  end
+EndEngine
+eor
+
+
+# The first call to cpl is as follows.
+# The key 'gga' is included to use the first-order GGA potential instead of the
+# first-order VWN potential. The Hartree-Fock part of the kernel is included
+# automatically if a hybrid potential is used in the ADF calculation.
+
+
+$AMSBIN/cpl <<eor
+   adffile ams.results/adf.rkf
+   gga
+   nmrcoupling
+   dso
+   pso
+   scf converge=1e-6 iterations=20 
+      nuclei 1 2 
+   End
+eor
+
+
+# The second CPL run also includes the spin-dipole (SD) term, through the SD
+# subkey, which is much more time-consuming.
+
+
+$AMSBIN/cpl <<eor
+   adffile ams.results/adf.rkf
+   gga
+   nmrcoupling
+   dso
+   pso
+   sd
+   scf converge=1e-6 iterations=20
+      nuclei 1 2
+   End
+eor
+

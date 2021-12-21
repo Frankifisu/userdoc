@@ -1,0 +1,260 @@
+#! /bin/sh
+
+# This example consists of several atomic energy calculations:
+
+# - Formation energy of the H-atom w.r.t. spherical atom
+# - Formation energy of the H-atom w.r.t. spherical atom
+# - Spin polarization energy of the H-atom w.r.t. spherical atom
+# - Spin polarization (relativistic) energy of the H-atom w.r.t. spherical atom
+# - Spin polarization energy of the H-atom w.r.t. spin unrestricted atom
+# - Spin polarization (relativistic) energy of the H-atom w.r.t. spin
+#   unrestricted atom
+
+# XYZ file of H atom with large 2 lattice
+cat << eor > H.xyz
+1
+
+H 0.0 0.0 0.0
+VEC1 10.583544212 0.0          0.0
+VEC2 0.0          10.583544212 0.0
+eor
+
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   GeometryFile H.xyz
+End
+
+Engine Band 
+   Title Formation energy of the H-atom w.r.t. spherical atom
+
+   Print AtomicChargesDetails
+
+   Kspace 
+      Symmetric KInteg=5
+   End
+   Integration
+      Accint 5.0
+   End
+
+   Convergence
+      Criterion 1E-6
+   End
+
+   AtomType H
+      Dirac H
+        1  0
+      VALENCE
+         1S 1
+      End
+      
+      BasisFunctions
+         1S   1.58
+         2P   1.0
+      End
+      
+      FitFunctions
+      End
+   End
+EndEngine
+eor
+
+rm -r ams.results
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   GeometryFile H.xyz
+End
+
+Engine Band 
+   Title Spin polarization energy of the H-atom w.r.t. spherical atom
+
+   Print AtomicChargesDetails
+
+   Kspace 
+      Symmetric KInteg=5
+   End
+   Integration
+      Accint 5.0
+   End
+
+   Convergence
+      Criterion 1E-6
+   End
+
+   Unrestricted
+
+   AtomType H
+      Dirac H
+        1  0
+      VALENCE
+         1S 1
+      End
+      
+      BasisFunctions
+         1S   1.58
+         2P   1.0
+      End
+      
+      FitFunctions
+      End
+   End
+EndEngine
+eor
+
+rm -r ams.results
+
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   GeometryFile H.xyz
+End
+
+Engine Band 
+   Title Spin polarization (relativistic) energy of the H-atom w.r.t. spherical atom
+
+   Print AtomicChargesDetails
+
+   Kspace 
+      Symmetric KInteg=5
+   End
+   Integration
+      Accint 5.0
+   End
+
+   Convergence
+      Criterion 1E-6
+   End
+
+   Unrestricted
+
+   Relativity
+      Level Scalar
+   End 
+
+   AtomType H
+      Dirac H
+        1  0
+      VALENCE
+         1S 1
+      End
+      
+      BasisFunctions
+         1S   1.58
+         2P   1.0
+      End
+      
+      FitFunctions
+      End
+   End
+EndEngine
+eor
+
+rm -r ams.results
+
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   GeometryFile H.xyz
+End
+
+Engine Band
+   Title Spin polarization energy of the H-atom w.r.t. spin unrestricted atom
+
+   Print AtomicChargesDetails
+
+   Kspace 
+      Symmetric KInteg=5
+   End
+   Integration
+      Accint 5.0
+   End
+
+   Convergence
+      Criterion 1E-6
+   End
+
+   Unrestricted
+   UnrestrictedReference
+
+   AtomType H
+      Dirac H
+        1  0
+      VALENCE
+         1S 1
+      End
+      
+      BasisFunctions
+         1S   1.58
+         2P   1.0
+      End
+      
+      FitFunctions
+      End
+   End
+EndEngine
+eor
+
+rm -r ams.results
+
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   GeometryFile H.xyz
+End
+
+Engine Band
+   Title Spin polarization (relativistic) energy of the H-atom w.r.t. spin unrestricted atom
+
+   Print AtomicChargesDetails
+
+   Kspace 
+      Symmetric KInteg=5
+   End
+   Integration
+      Accint 5.0
+   End
+
+   Convergence
+      Criterion 1E-6
+   End
+
+   UnrestrictedReference
+   Unrestricted
+
+   Relativity
+      Level Scalar
+   End
+
+   AtomType H
+      Dirac H
+        1  0
+      VALENCE
+         1S 1
+      End
+      
+      BasisFunctions
+         1S   1.58
+         2P   1.0
+      End
+      
+      FitFunctions
+      End
+   End
+EndEngine
+eor

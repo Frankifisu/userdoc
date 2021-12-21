@@ -1,0 +1,66 @@
+Generators
+~~~~~~~~~~
+
+The Generator classes are not meant to be directly accessed by the user.
+Instead, they are used as components of the UniqueConformer classes.
+
+There are two main generator classes, |RDKitGenerator| and |CrestGenerator|, which have roughly the same interface,
+but different settings.
+All generators accept an instance of one of the UniqueConformers classes upon initiation.
+This conformer set is generally expected to be empty, but is not required to be so.
+
+The CREST method combines three separate methods to generate conformers:
+1. CREST metadynamics
+2. High temperature MD
+3. A genetic combinatorial method that extends an existing conformer set.
+Each of these methods can be used separately, via their additional expert generator classes.
+
+RDKitGenerator
+++++++++++++++
+
+This generator fills the conformer set of a molecule, using RDKit to call the ETKDG conformer generation approach,
+followed by geometry optimization with a specified AMS engine.
+
+.. autoclass :: scm.conformers.generators.simple_generators.rdkit_generator.RDKitGenerator
+    :inherited-members:
+    :exclude-members: __class__, __delattr__, __dict__, __dir__, __doc__, __eq__, __format__, __ge__, __getattribute__, __gt__, __hash__, __init_subclass__, __le__, __lt__, __module__, __ne__, __new__, __reduce__, __reduce_ex__, __repr__, __setattr__, __sizeof__, __str__, __subclasshook__, __weakref__, _estimate_nconformers, _optimize_molecule, _generate_geometries, _prepare_state
+
+CRESTGenerator
+++++++++++++++
+
+This generator fills the conformer set of a molecule using the CREST method.
+
+.. autoclass :: scm.conformers.generators.crest_generators.crest_generator.CRESTGenerator
+    :inherited-members:
+    :exclude-members: __class__, __delattr__, __dict__, __dir__, __doc__, __eq__, __format__, __ge__, __getattribute__, __gt__, __hash__, __init_subclass__, __le__, __lt__, __module__, __ne__, __new__, __reduce__, __reduce_ex__, __repr__, __setattr__, __sizeof__, __str__, __subclasshook__, __weakref__, _optimize_molecule, _prepare_state
+
+MetadynamicsGenerator
++++++++++++++++++++++
+
+This generator fills the conformer set of a molecule using only CREST metadynanics, 
+followed by geometry optimization of the stored shapshots (step 1 of the CREST approach).
+
+.. autoclass :: scm.conformers.generators.crest_generators.metadynamics_generator.MetadynamicsGenerator
+    :inherited-members:
+    :exclude-members: __class__, __delattr__, __dict__, __dir__, __doc__, __eq__, __format__, __ge__, __getattribute__, __gt__, __hash__, __init_subclass__, __le__, __lt__, __module__, __ne__, __new__, __reduce__, __reduce_ex__, __repr__, __setattr__, __sizeof__, __str__, __subclasshook__, __weakref__, _create_ams_jobs, _create_mdsettings_object, _create_settings_list, _estimate_walltime_mtdstep, _generate_random_velocities, _get_extraction_blocksize, _get_number_of_steps, _get_updated_settings_list, _hydrogen_to_deuterium, _metadynamics_time_from_flexibility, _optimize_molecule, _prepare_state, _set_random_velocities, _runMTDcycle, _load_MTDjob_results, _get_simulation_time, _get_Gaussian_heights, _get_Gaussian_widths, _run_jobs, _extract_frames_from_mdresults, set_number_of_identical_mdruns, set_number_of_starting_geometries
+
+MDGenerator
++++++++++++
+
+This generator fills the conformer set of a molecule using only regular molecular dynamics,
+followed by geometry optimization of the stored shapshots (step 2 of the CREST approach).
+
+.. autoclass :: scm.conformers.generators.crest_generators.md_generator.MDGenerator
+    :inherited-members:
+    :exclude-members: __class__, __delattr__, __dict__, __dir__, __doc__, __eq__, __format__, __ge__, __getattribute__, __gt__, __hash__, __init_subclass__, __le__, __lt__, __module__, __ne__, __new__, __reduce__, __reduce_ex__, __repr__, __setattr__, __sizeof__, __str__, __subclasshook__, __weakref__, _create_ams_jobs, _create_mdsettings_object, _create_settings_list, _extract_frames_from_mdresults, _generate_random_velocities, _get_extraction_blocksize, _get_number_of_steps, _hydrogen_to_deuterium, _metadynamics_time_from_flexibility, _optimize_molecule, _prepare_state, _set_random_velocities, _run_jobs, _extract_frames_from_mdresults
+
+GCGenerator
++++++++++++
+
+This generator extends a conformer set of a molecule using only the CREST genetic combinatorial method (GC),
+followed by geometry optimization of the stored shapshots (step 3 of the CREST approach).
+
+.. autoclass :: scm.conformers.generators.crest_generators.gc_generator.GCGenerator
+    :inherited-members:
+    :exclude-members: __class__, __delattr__, __dict__, __dir__, __doc__, __eq__, __format__, __ge__, __getattribute__, __gt__, __hash__, __init_subclass__, __le__, __lt__, __module__, __ne__, __new__, __reduce__, __reduce_ex__, __repr__, __setattr__, __sizeof__, __str__, __subclasshook__, __weakref__, _create_combinatorial_geometries, _get_geometries, _optimize_molecule, _prepare_state
+

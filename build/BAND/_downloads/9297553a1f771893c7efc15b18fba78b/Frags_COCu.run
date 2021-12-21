@@ -1,0 +1,335 @@
+#! /bin/sh
+
+# This example illustrates the usage of fragments in a BAND calculation for
+# analysis purposes. It takes two runs to do the DOS analysis in a fragment
+# basis, and an extra two runs to get the deformation density with respect to
+# the fragment densities.
+
+# The setup involves first the computation of the free CO overlayer, which is to
+# be adsorbed on a Cu surface. To suppress (most of the) interactions between
+# the CO molecules, i.e. to effectively get the molecular CO, the KSpace
+# parameter is set to 1 (= no dispersion), and the lattice parameters are set so
+# large that the CO molecules are far apart. The standard result file RUNKF is
+# saved under the name 'CO.results/band.rkf'.
+
+
+# ----------------------------- CO molecule --------------------------
+
+AMS_JOBNAME=CO $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  ! CO molecules far apart
+
+  Atoms [Bohr]
+    C   0 0 0
+    O   0 0 2.18
+  End
+  
+  Lattice [Bohr]
+    25.0  0.0   0.0
+    0.0   25.0  0.0
+  End
+End
+
+Engine Band
+  Title The CO fragment
+
+  Print AtomicChargesDetails
+
+  Comment
+   Technical  
+     Zero order k space integration
+   Features
+     Lattice   : 2D, large lattice vectors
+     Unit cell : 2 atoms, 1x1, quasi molecular
+     Basis     : NO+STO w/ core
+  End
+
+  Print Eigens
+
+  Kspace 
+    Quality GammaOnly  ! neglect dispersion
+  End 
+
+  Basis
+    Type DZ
+    Core Large
+  End
+
+  DOS
+     CalcPDOS True
+     Energies 300 
+  End
+EndEngine
+eor
+
+
+# Now we can use the result file to do a DOS analysis for CO on a copper surface
+# treating the molecule as a fragment. With Fragment%Labels we assign names to
+# the different symmetry orbitals. The Density-of-States analysis details are
+# given with the keys DOS (energy grid, result file with DOS data) and,
+# optionally, GrossPopulations and OverlapPopulations.
+
+# ----------------------------- CO + Cu slab --------------------------
+
+AMS_JOBNAME=COCu $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  Lattice [Bohr]
+    4.822 0.0   0.0
+    0.0   4.822 0.0
+  End
+  Atoms [Bohr]
+    C   0     0     3.44
+    O   0     0     5.62
+    Cu  0.0   0.0   0.0
+  End
+End
+
+Engine Band
+  Title Cu slab with CO adsorbed
+
+  Print AtomicChargesDetails
+
+  Comment
+   Technical  
+     Quadratic K space integration (low)
+   Features
+     Lattice   : 2D
+     Unit cell : 3 atoms, 1x1
+     Basis     : NO+STO w/ core
+     Options   : Molecular fragment
+                 Analysis: DOS, PDOS, COOP
+  End        
+
+  KSpace 
+    Symmetric KInteg=3
+  End
+
+  ! fragment specification
+
+  Fragment 
+    filename CO.results/band.rkf
+    atommapping
+      1 1
+      2 2
+    End
+    Labels ! let us give them some labels
+      2Sigma
+      2Sigma*
+      1Pi_x
+      1Pi_y
+      3Sigma
+      1Pi_x*
+      1Pi_y*
+      3Sigma*
+    End
+  End
+
+  ! use fragment basis in dos
+  DosBas
+    Fragment 1
+  End
+
+  DOS   ! Analysis
+    CalcPDOS   True
+    File      pdos.CO_Cu
+    Energies  500
+    Min      -0.750
+    Max       0.300
+  End
+
+  GrossPopulations
+    3 2    ! All metal d states
+    Sum     ! ALl metal sp states
+      3 0
+      3 1
+    EndSum
+
+    Frag 1   ! All CO states
+    Sum   ! CO 1pi
+      FragFun 1 5
+      FragFun 1 6
+    EndSum
+    FragFun 1 7  ! CO 5-sigma
+  End
+
+  OverlapPopulations
+    Left   ! Metal d with CO
+      3 2
+    Right
+      Frag 1
+  End
+
+  Basis
+    Type DZ
+    Core Large
+  End
+EndEngine
+eor
+
+# After this run we copy the computed DOS data from the DOS result file to
+# standard output. We also save the restart file for later use.
+
+echo ""
+echo "Contents of DOS file"
+cat pdos.CO_Cu
+
+# Next we want to know the deformation density with respect to the two
+# fragments: 1) The CO molecule and 2) the bare Cu surface. We haven't done the
+# bare Cu surface yet, so that is what happens next.
+
+# ----------------------------- Cu slab --------------------------
+
+AMS_JOBNAME=Cu $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  Lattice [Bohr]
+    4.822 0.0 0.0
+    0.0   4.822 0.0
+  End
+  Atoms [Bohr]
+    Cu  0.0   0.0   0.0
+  End
+End
+
+
+Engine Band 
+  Title Cu slab
+
+  Print AtomicChargesDetails
+
+  Comment
+   Technical  
+     Quadratic K space integration (low)
+   Features
+     Lattice   : 2D
+     Unit cell : 3 atoms, 1x1
+     Basis     : NO+STO w/ core
+     Options   : 
+  End
+
+  Kspace 
+    Symmetric KInteg=3
+  End
+
+  Basis
+    Type DZ
+    Core Large
+  End
+
+  DOS
+     CalcPDOS True
+     Energies 300 
+  End
+EndEngine
+eor
+
+# Now we are all set to do our final calculation. We have the two fragment files
+# CO.results/band.rkf and Cu.results/band.rkf, and the restart file COCu.results/band.rkf. Next we want to know
+# the deformation density with respect to the two fragments: 1) The CO molecule
+# and 2) the bare Cu surface. The visualization options like OrbitalPlot and
+# Densityplot require a regular set of points (a grid). Here is how it works
+
+# ----------------------------- CO + Cu slab restart --------------------------
+
+NSCM=1
+export NSCM
+
+AMS_JOBNAME=Final $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  Lattice [Bohr]
+    4.822 0.0 0.0
+    0.0   4.822 0.0
+  End
+
+  Atoms [Bohr]
+    C   0     0     3.44
+    O   0     0     5.62
+    Cu  0.0   0.0   0.0
+  End
+End
+
+Engine Band
+  Title Cu slab with CO adsorbed (restart density plot)
+
+  Print AtomicChargesDetails
+
+  debug BlockPropertyModule
+
+  Kspace 
+    Symmetric KInteg=3
+  End
+
+  Restart
+    File COCu.results/band.rkf
+    DensityPlot
+  End
+
+  Grid
+    Type Coarse
+  End
+
+  DensityPlot
+    rho(deformation/fit) !FITDENSITY_deformation_scf
+  End
+
+  ! fragment specification
+
+  Fragment 
+    filename CO.results/band.rkf
+    atommapping
+    1 1
+    2 2
+    End
+  End
+
+  Fragment 
+    filename Cu.results/band.rkf
+    atommapping
+      1 3
+    End
+  End
+
+  Basis
+    Type DZ
+    Core Large
+  End
+
+  DOS
+     CalcPDOS True
+     Energies 300 
+  End
+EndEngine
+eor
+
+# This particular restart options does not work in parallel, hence the '-n 1' on
+# the first line.The result of the last run is a file named TAPE41. Normally you
+# would save that to COCu.t41
+
+# mv TAPE41 COCu.t41 and view it with AMSview. On the TAPE41 file are now three
+# fields shown in AMSview as
+
+# FITDENSITY_deformation_scf FITDENSITY_deformation_scf_frag1
+# FITDENSITY_deformation_scf_frag2 being the deformation density of CO+Cu with
+# respect to the atoms, and the same for the two fragments CO and the Cu slab.
+# In AMSview you can add the fields of the two fragments, and then create
+# another field that holds the difference.
+
+NSCM=1
+export NSCM
+echo ""
+echo "Begin TOC of tape41"
+
+$AMSBIN/dmpkf -n 1 Final.results/FILE_BLOCKPROPERTIES --toc
+
+echo "End TOC of tape41"

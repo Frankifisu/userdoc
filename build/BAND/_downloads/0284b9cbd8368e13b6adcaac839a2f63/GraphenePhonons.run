@@ -1,0 +1,100 @@
+#!/bin/sh
+
+# A phonon calculation should be performed at the equilibrium geometry.
+
+# In the first calculation we optimize the geometry, including the lattice
+# vectors. We also set the criteria a bit more strict.
+
+echo "Geometry optimization"
+
+AMS_JOBNAME=GO $AMSBIN/ams <<eor
+
+System
+  Atoms
+    C   0.0 0.0 0.0
+    C   1.23 0.7101408312 0.0
+  END
+  Lattice
+    2.46 0.000000 0
+    1.23 2.130422493 0
+  End
+End
+
+Task GeometryOptimization
+
+GeometryOptimization
+  OptimizeLattice true
+  Convergence Gradients=1e-5
+  Method Quasi-Newton
+End
+
+Engine Band
+  Title Graphene geometry optimization
+
+  ! For Graphene we need to use a symmetric grid
+  KSpace
+    Symmetric KInteg=5
+    Type Symmetric
+  End
+
+  StrainDerivatives
+    Analytical false
+  End
+
+  Basis
+    Type DZ
+  end
+EndEngine
+eor
+
+# In the second calculation we use the pre-optimized geometry. (See details of
+# the Restart key block) Then we define a supercell and perform a phonon run by
+# using Task and Phonons keys. Note that KSpace can be chosen
+# a bit lower, since we now have a bigger unit cell.
+
+echo "Phonon calculation"
+
+AMS_JOBNAME=Phonons $AMSBIN/ams <<eor
+
+LoadSystem
+  File GO.results/ams.rkf
+End
+
+Task SinglePoint
+
+Properties
+  Phonons True
+End
+
+NumericalPhonons
+  stepSize 0.0913
+  SuperCell
+    2 0
+    0 2
+  End
+end
+
+Engine Band
+  Title Graphene phonon calc
+
+  KSpace
+    Symmetric KInteg=3
+    Type Symmetric
+  End
+
+  Basis
+    Type DZ
+  end
+EndEngine
+
+eor
+
+NSCM=1
+export NSCM
+echo ""
+echo "Begin TOC"
+
+$AMSBIN/dmpkf -n 1 Phonons.results/band.rkf --toc
+
+echo "End TOC"
+

@@ -1,0 +1,1197 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>scm.plams.trajectories.rkfhistoryfile &mdash; PLAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/sphinx_tabs/tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="PLAMS 2021.1 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Module code" href="../../../index.html"/> 
+
+  
+  <script src="../../../../_static/js/jquery.min.js"></script>
+  <script src="../../../../_static/js/bootstrap.min.js"></script>
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/plams_logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search PLAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-scripting" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../intro.html#what-is-plams">What is PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../intro.html#what-can-be-done-with-plams">What can be done with PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../intro.html#simple-example">Simple example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../intro.html#what-plams-is-not">What PLAMS is <em>not</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../intro.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#library-contents">Library contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#installing-plams">Installing PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#updating-plams">Updating PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#running-plams">Running PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#defaults-file">Defaults file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#the-launch-script">The launch script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../started.html#working-folder-location">Working folder location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../started.html#passing-variables">Passing variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../started.html#importing-past-jobs">Importing past jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../started.html#restarting-failed-script">Restarting failed script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../started.html#multiple-input-scripts">Multiple input scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/components.html">Components overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/settings.html">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/settings.html#tree-like-structure">Tree-like structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/settings.html#dot-notation">Dot notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/settings.html#case-sensitivity">Case sensitivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/settings.html#global-settings">Global settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/settings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/jobs.html">Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobs.html#preparing-a-job">Preparing a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#contents-of-job-settings">Contents of job settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#default-settings">Default settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobs.html#running-a-job">Running a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#name-conflicts">Name conflicts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#prerun-and-postrun-methods">Prerun and postrun methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#preview-mode">Preview mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobs.html#job-api">Job API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobs.html#single-jobs">Single jobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#subclassing-singlejob">Subclassing SingleJob</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobs.html#multijobs">Multijobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#using-multijob">Using MultiJob</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/results.html">Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/results.html#files-in-the-job-folder">Files in the job folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/results.html#synchronization-of-parallel-job-executions">Synchronization of parallel job executions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/results.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/results.html#cleaning-job-folder">Cleaning job folder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/results.html#cleaning-for-multijobs">Cleaning for multijobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/results.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/runners.html">Job runners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/runners.html#local-job-runner">Local job runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/runners.html#remote-job-runner">Remote job runner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/jobmanager.html">Job manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobmanager.html#rerun-prevention">Rerun prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobmanager.html#pickling">Pickling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobmanager.html#restarting-scripts">Restarting scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobmanager.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/functions.html">Public functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/functions.html#logging">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/functions.html#binding-decorators">Binding decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/molecule.html">Molecule</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/mol_api.html">Molecule</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/mol_api.html#atom-labeling">Atom labeling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/atombond.html">Atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/atombond.html#bond">Bond</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/mol_rdkit.html">RDKit interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/mol_ase.html">ASE interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/utils.html">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/utils.html#periodic-table">Periodic Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/utils.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/utils.html#geometry-tools">Geometry tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/utils.html#file-format-conversion-tools">File format conversion tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/trajectories.html">Trajectories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/xyz.html">XYZ trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/xyz.html#xyz-history-files">XYZ history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/rkf.html">RKF trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/rkf.html#rkf-history-files">RKF history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/dcd.html">DCD trajectory files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../interfaces/interfaces.html">Interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../interfaces/amssuite.html">Amsterdam Modeling Suite</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/ams.html">AMS driver and engines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/ams.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/ams.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/ams.html#molecule-handling">Molecule handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/ams.html#amsjob-api">AMSJob API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/ams.html#amsresults-api">AMSResults API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/amsworker.html">AMS worker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/amsworker.html#amsworker-api">AMSWorker API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/amsworker.html#amsworkerresults-api">AMSWorkerResults API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/amsworker.html#amsworkerpool-api">AMSWorkerPool API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/postadf.html">Analysis tools: Densf, FCF, analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/kffiles.html">KF files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/crs.html">COSMO-RS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#settings-with-multiple-compound">Settings with multiple compound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#adf-and-crsjob">ADF and CRSJob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#cosmo-rs-parameters">COSMO-RS Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#data-analyses-and-plotting">Data analyses and plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/adf.html">ADF (pre-2020 version)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/adf.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/adf.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/adf.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/reaxff.html">ReaxFF (pre-2019 version)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../interfaces/thirdparty.html">Other programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/cp2k.html">CP2K</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/cp2k.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/cp2k.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/cp2k.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/cp2k.html#molecule-loading">Molecule loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/cp2k.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/crystal.html">Crystal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crystal.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crystal.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crystal.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crystal.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crystal.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/dftbplus.html">DFTB+</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dftbplus.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dftbplus.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dftbplus.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dftbplus.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/dirac.html">Dirac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dirac.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dirac.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dirac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/mopac.html">MOPAC (standalone program)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/mopac.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/mopac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/orca.html">ORCA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/orca.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/raspa.html">RASPA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/raspa.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/raspa.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/raspa.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/raspa.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/examples.html#id1">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/He2DissociationCurve.html">Helium dimer dissociation curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/WaterOptimization.html">Geometry optimization of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/ManyJobsInParallel.html">Many jobs in parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/BasisSetBenchmark.html">Benchmark accuracy of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/ExcitationsWorkflow.html">Workflow: filtering molecules based on excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/ChargeTransferIntegralsADF.html">Charge transfer integrals with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/gammascan.html">Tuning the range separation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/examples.html#pre-made-recipes">Pre-made recipes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/ams_crs.html">ADF and COSMO-RS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/adffragment.html">ADF fragment job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/ReorganizationEnergy.html">Reorganization Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/adfnbo.html">NBO with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/numgrad.html">Numerical gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/numhess.html">Numerical Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/molecule_gun.html">ReaxFF molecule gun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/global_minimum.html">Global Minimum Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/vibrationASE.html">Vibrational analysis with ASE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/vibrationASE.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/vibrationASE.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cookbook/cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cookbook/cookbook.html#settings-and-input">Settings and input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#create-an-input-block-with-an-header">Create an input block with an header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#create-an-empty-input-block">Create an empty input block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#convert-an-ams-text-input-into-an-ams-job">Convert an AMS text input into an AMS job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#convert-an-ams-text-input-into-settings-object">Convert an AMS text input into settings object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#convert-an-ams-run-file-into-an-amsjob">Convert an AMS .run file into an AMSJob</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#specify-paths-to-files-in-the-input">Specify paths to files in the input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#restart-from-a-previous-job">Restart from a previous job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cookbook/cookbook.html#molecules">Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#generate-a-molecule-from-a-smiles-string">Generate a molecule from a SMILES string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#counting-rings">Counting rings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cookbook/cookbook.html#extracting-results">Extracting Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#directly-from-functions">Directly from Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#examples-total-energy-and-final-structure">Examples: Total Energy and Final Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#amsresults-api-functions">AMSResults API Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#from-the-rkf-interface">From the RKF Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#finding-section-variable-pairs">Finding Section/Variable Pairs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#from-python-directories">From Python Directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#kfbrowser">KFBrowser</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#from-molecular-dynamics-trajectories">From molecular dynamics trajectories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#general-md-properties">General MD properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#molecules-from-trajectories">Molecules from trajectories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cookbook/cookbook.html#accessing-old-jobs">Accessing Old Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#binding-native-plams-jobs">Binding Native PLAMS Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#binding-old-rkf-files">Binding old RKF Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../citations.html">Citations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">PLAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../PLAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../../../../index.html">PLAMS</a>/</li>
+      
+          <li><a href="../../../index.html">Module code</a>/</li>
+      
+    <li class="orange-text">scm.plams.trajectories.rkfhistoryfile</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for scm.plams.trajectories.rkfhistoryfile</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">..tools.periodic_table</span> <span class="k">import</span> <span class="n">PT</span>
+<span class="kn">from</span> <span class="nn">..mol.molecule</span> <span class="k">import</span> <span class="n">Molecule</span>
+<span class="kn">from</span> <span class="nn">..mol.atom</span> <span class="k">import</span> <span class="n">Atom</span>
+<span class="kn">from</span> <span class="nn">..core.settings</span> <span class="k">import</span> <span class="n">Settings</span>
+<span class="kn">from</span> <span class="nn">..core.errors</span> <span class="k">import</span> <span class="n">PlamsError</span>
+<span class="kn">from</span> <span class="nn">.rkffile</span> <span class="k">import</span> <span class="n">RKFTrajectoryFile</span>
+<span class="kn">from</span> <span class="nn">.rkffile</span> <span class="k">import</span> <span class="n">bohr_to_angstrom</span>
+<span class="kn">from</span> <span class="nn">.rkffile</span> <span class="k">import</span> <span class="n">write_general_section</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;RKFHistoryFile&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="RKFHistoryFile"><a class="viewcode-back" href="../../../../components/rkf.html#scm.plams.trajectories.rkfhistoryfile.RKFHistoryFile">[docs]</a><span class="k">class</span> <span class="nc">RKFHistoryFile</span> <span class="p">(</span><span class="n">RKFTrajectoryFile</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Class representing an RKF file containing a molecular simulation history with varying numbers of atoms</span>
+
+<span class="sd">        An instance of this class has the following attributes:</span>
+
+<span class="sd">        *   ``file_object`` -- A PLAMS |KFFile| object, referring to the actual RKF file</span>
+<span class="sd">        *   ``position``    -- The frame to which the cursor is currently pointing in the RKF file</span>
+<span class="sd">        *   ``mode``        -- Designates whether the file is in read or write mode (&#39;rb&#39; or &#39;wb&#39;)</span>
+<span class="sd">        *   ``elements``    -- The elements of the atoms in the system at the current frame</span>
+<span class="sd">        *   ``conect``      -- The connectivity information of the current frame</span>
+<span class="sd">        *   ``mddata``      -- Read mode only: A dictionary containing data from the MDHistory section in the RKF file</span>
+<span class="sd">        *   ``read_lattice``-- Read mode only: Wether the lattice vectors will be read from the file</span>
+<span class="sd">        *   ``read_bonds``  -- Wether the connectivity information will be read from the file</span>
+
+<span class="sd">        An |RKFHistoryFile| object behaves very similar to a regular file object.</span>
+<span class="sd">        It has read and write methods (:meth:`read_next` and :meth:`write_next`) </span>
+<span class="sd">        that read and write from/to the position of the cursor in the ``file_object`` attribute. </span>
+<span class="sd">        If the file is in read mode, an additional method :meth:`read_frame` can be used that moves</span>
+<span class="sd">        the cursor to any frame in the file and reads from there.</span>
+<span class="sd">        The amount of information stored in memory is kept to a minimum, as only information from the latest frame</span>
+<span class="sd">        is ever stored.</span>
+
+<span class="sd">        Reading and writing to and from the files can be done as follows::</span>
+
+<span class="sd">            &gt;&gt;&gt; from scm.plams import RKFHistoryFile</span>
+
+<span class="sd">            &gt;&gt;&gt; rkf = RKFHistoryFile(&#39;ams.rkf&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; mol = rkf.get_plamsmol()</span>
+
+<span class="sd">            &gt;&gt;&gt; rkfout = RKFHistoryFile(&#39;new.rkf&#39;,mode=&#39;wb&#39;)</span>
+
+<span class="sd">            &gt;&gt;&gt; for i in range(rkf.get_length()) :</span>
+<span class="sd">            &gt;&gt;&gt;     crd,cell = rkf.read_frame(i,molecule=mol)</span>
+<span class="sd">            &gt;&gt;&gt;     rkfout.write_next(molecule=mol)</span>
+<span class="sd">            &gt;&gt;&gt; rkfout.close()</span>
+
+<span class="sd">        The above script reads information from the RKF file ``ams.rkf`` into the |Molecule| object ``mol``</span>
+<span class="sd">        in a step-by-step manner..</span>
+<span class="sd">        The |Molecule| object is then passed to the :meth:`write_next` method of the new |RKFHistoryFile|</span>
+<span class="sd">        object corresponding to the new rkf file ``new.rkf``.</span>
+
+<span class="sd">        The exact same result can also be achieved by iterating over the instance as a callable</span>
+
+<span class="sd">            &gt;&gt;&gt; rkf = RKFHistoryFile(&#39;ams.rkf&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; mol = rkf.get_plamsmol()</span>
+
+<span class="sd">            &gt;&gt;&gt; rkfout = RKFHistoryFile(&#39;new.rkf&#39;,mode=&#39;wb&#39;)</span>
+
+<span class="sd">            &gt;&gt;&gt; for crd,cell in rkf(mol) :</span>
+<span class="sd">            &gt;&gt;&gt;     rkfout.write_next(molecule=mol)</span>
+<span class="sd">            &gt;&gt;&gt; rkfout.close()</span>
+
+<span class="sd">        This procedure requires all coordinate information to be passed to and from the |Molecule| object</span>
+<span class="sd">        for each frame, which can be time-consuming.</span>
+<span class="sd">        Some time can be saved by bypassing the |Molecule| object::</span>
+
+<span class="sd">            &gt;&gt;&gt; rkf = RKFHistoryFile(&#39;ams.rkf&#39;)</span>
+
+<span class="sd">            &gt;&gt;&gt; rkfout = RKFHistoryFile(&#39;new.rkf&#39;,mode=&#39;wb&#39;)</span>
+
+<span class="sd">            &gt;&gt;&gt; for crd,cell in rkf :</span>
+<span class="sd">            &gt;&gt;&gt;     rkfout.write_next(coords=crd,cell=cell,elements=rkf.elements,conect=rkf.conect)</span>
+<span class="sd">            &gt;&gt;&gt; rkfout.close()</span>
+
+<span class="sd">        The only mandatory argument to the :meth:`write_next` method is ``coords``.</span>
+<span class="sd">        Further time can be saved by setting the ``read_lattice`` and ``read_bonds`` variables to False.</span>
+
+<span class="sd">        By default the write mode will create a minimal version of the RKF file, containing only elements,</span>
+<span class="sd">        coordinates, lattice, and connectivity information.</span>
+<span class="sd">        This minimal file format can be read by AMSMovie.</span>
+
+<span class="sd">        If the original RKF file contains an MDHistory section (if it resulted from a MolecularGun simulation)</span>
+<span class="sd">        it is possible to store the information from that section and write it to another file.</span>
+<span class="sd">        To enable this, the method :meth:`store_mddata` needs to be called after creation,</span>
+<span class="sd">        and a dictionary of mddata needs to be passed to the :meth:`write_next` method.</span>
+<span class="sd">        When that is done, the AMS trajectory analysis tools can be used on the file.</span>
+<span class="sd">        Restarting an MD run with such a file is however currently not possible::</span>
+
+<span class="sd">            &gt;&gt;&gt; rkf = RKFHistoryFile(&#39;ams.rkf&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; rkf.store_mddata()</span>
+<span class="sd">            &gt;&gt;&gt; mol = rkf.get_plamsmol()</span>
+
+<span class="sd">            &gt;&gt;&gt; rkf_out = RKFHistoryFile(&#39;new.rkf&#39;,mode=&#39;wb&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; rkf_out.store_mddata(rkf)</span>
+
+<span class="sd">            &gt;&gt;&gt; for i in range(rkf.get_length()) :</span>
+<span class="sd">            &gt;&gt;&gt;         crd,cell = rkf.read_frame(i,molecule=mol)</span>
+<span class="sd">            &gt;&gt;&gt;         rkf_out.write_next(molecule=mol,mddata=rkf.mddata)</span>
+<span class="sd">            &gt;&gt;&gt; rkf_out.close()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RKFHistoryFile.__init__"><a class="viewcode-back" href="../../../../components/rkf.html#scm.plams.trajectories.rkfhistoryfile.RKFHistoryFile.__init__">[docs]</a>        <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">,</span> <span class="n">fileobject</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ntap</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Initializes the RKFHistoryFile object</span>
+
+<span class="sd">                * ``filename``   -- The path to the RKF file</span>
+<span class="sd">                * ``mode``       -- The mode in which to open the RKF file (&#39;rb&#39; or &#39;wb&#39;)</span>
+<span class="sd">                * ``fileobject`` -- Optionally, a file object can be passed instead (filename needs to be set to None)</span>
+<span class="sd">                * ``ntap``       -- If the file is in write mode, the number of atoms can be passed here</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">added_atoms</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">removed_atoms</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">chemical_systems</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">RKFTrajectoryFile</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">mode</span><span class="p">,</span><span class="n">fileobject</span><span class="p">,</span><span class="n">ntap</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">input_elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[:]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">versionhistory_length</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">props</span> <span class="o">=</span> <span class="kc">None</span>
+
+                <span class="c1"># This is for writing only</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">system_version_props</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">version_history_items</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+        <span class="k">def</span> <span class="nf">set_elements</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Sets the elements attribute (needed in write mode).</span>
+
+<span class="sd">                *   ``elements`` -- A list containing the element name of each atom</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">PLAMSError</span><span class="p">(</span><span class="s1">&#39;Elements should not be changed while reading/writing is already in progress&#39;</span><span class="p">)</span>
+                <span class="n">RKFTrajectoryFile</span><span class="o">.</span><span class="n">set_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">input_elements</span> <span class="o">=</span> <span class="n">elements</span>
+
+<div class="viewcode-block" id="RKFHistoryFile.get_plamsmol"><a class="viewcode-back" href="../../../../components/rkf.html#scm.plams.trajectories.rkfhistoryfile.RKFHistoryFile.get_plamsmol">[docs]</a>        <span class="k">def</span> <span class="nf">get_plamsmol</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Extracts a PLAMS molecule object from the RKF file</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">section_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read_section</span><span class="p">(</span><span class="s1">&#39;ChemicalSystem(1)&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">section_dict</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span>
+                        <span class="n">section_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read_section</span><span class="p">(</span><span class="s1">&#39;InputMolecule&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">section_dict</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span>
+                        <span class="n">section_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read_section</span><span class="p">(</span><span class="s1">&#39;Molecule&#39;</span><span class="p">)</span>
+                <span class="n">plamsmol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">_mol_from_rkf_section</span><span class="p">(</span><span class="n">section_dict</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">plamsmol</span></div>
+
+<div class="viewcode-block" id="RKFHistoryFile._rewrite_molecule"><a class="viewcode-back" href="../../../../components/rkf.html#scm.plams.trajectories.rkfhistoryfile.RKFHistoryFile._rewrite_molecule">[docs]</a>        <span class="k">def</span> <span class="nf">_rewrite_molecule</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Overwrite the molecule section with the latest frame (called in close())</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_plamsmol</span><span class="p">()</span>
+                <span class="n">crd</span><span class="p">,</span><span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_last_frame</span><span class="p">(</span><span class="n">molecule</span><span class="o">=</span><span class="n">mol</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_molecule_section</span><span class="p">(</span><span class="n">crd</span><span class="p">,</span><span class="n">cell</span><span class="p">,</span><span class="n">molecule</span><span class="o">=</span><span class="n">mol</span><span class="p">)</span></div>
+
+        <span class="k">def</span> <span class="nf">_read_header</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Read the start molecule data from the InputMolecule section (not the Molecule section)</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">added_atoms</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">removed_atoms</span> <span class="o">=</span> <span class="p">{}</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">chemical_systems</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span> 
+                <span class="n">secname</span> <span class="o">=</span> <span class="s1">&#39;ChemicalSystem(1)&#39;</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">_sections</span> <span class="ow">is</span> <span class="kc">None</span> <span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">_create_index</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;SystemVersionHistory&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">_sections</span> <span class="p">:</span>
+                        <span class="n">secname</span> <span class="o">=</span> <span class="s1">&#39;InputMolecule&#39;</span>
+                <span class="n">RKFTrajectoryFile</span><span class="o">.</span><span class="n">_read_header</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">molecule_section</span><span class="o">=</span><span class="n">secname</span><span class="p">)</span>
+
+                <span class="c1"># Now store the added and removed atoms along the trajectory</span>
+                <span class="c1"># (This might be slow?)</span>
+                <span class="c1"># I could also do it on the fly, but that may be messy when we move back and forth through the file</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;SystemVersionHistory&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">_sections</span> <span class="p">:</span>
+                        <span class="k">return</span>
+                <span class="c1">#version = 0</span>
+                <span class="n">version</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_system_version_elements</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_length</span><span class="p">())</span> <span class="p">:</span>
+                        <span class="n">new_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;History&#39;</span><span class="p">,</span><span class="s1">&#39;SystemVersion(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="n">new_version</span> <span class="o">==</span> <span class="n">version</span> <span class="p">:</span>
+                                <span class="k">continue</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">added_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">removed_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                        <span class="c1"># Now look for the added and removed atoms</span>
+                        <span class="n">removed_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">if</span> <span class="s1">&#39;RemovedAtoms(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">new_version</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="s1">&#39;SystemVersionHistory&#39;</span><span class="p">]</span> <span class="p">:</span>
+                                <span class="n">removed_atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;SystemVersionHistory&#39;</span><span class="p">,</span><span class="s1">&#39;RemovedAtoms(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">new_version</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">removed_atoms</span><span class="p">,</span><span class="nb">list</span><span class="p">)</span> <span class="p">:</span>
+                                <span class="n">removed_atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">removed_atoms</span><span class="p">]</span>
+                        <span class="n">added_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">if</span> <span class="s1">&#39;AddedAtoms(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">new_version</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="s1">&#39;SystemVersionHistory&#39;</span><span class="p">]</span> <span class="p">:</span>
+                                <span class="n">added_atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;SystemVersionHistory&#39;</span><span class="p">,</span><span class="s1">&#39;AddedAtoms(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">new_version</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">added_atoms</span><span class="p">,</span><span class="nb">list</span><span class="p">)</span> <span class="p">:</span>
+                                <span class="n">added_atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">added_atoms</span><span class="p">]</span>
+                        <span class="c1"># Now find the corresponding elements</span>
+                        <span class="n">chemSysNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;SystemVersionHistory&#39;</span><span class="p">,</span><span class="s1">&#39;SectionNum(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">new_version</span><span class="p">))</span>
+                        <span class="c1"># Compare to the previous chemical system</span>
+                        <span class="c1">#prev_version = new_version - 1</span>
+                        <span class="c1">#prevChemSysNum = self.file_object.read(&#39;SystemVersionHistory&#39;,&#39;SectionNum(%i)&#39;%(prev_version))</span>
+                        <span class="n">prevChemSysNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemical_systems</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chemical_systems</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+                        <span class="n">sectionname</span> <span class="o">=</span> <span class="s1">&#39;ChemicalSystem(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">prevChemSysNum</span><span class="p">)</span>
+                        <span class="n">prev_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">PT</span><span class="o">.</span><span class="n">get_symbol</span><span class="p">(</span><span class="n">atnum</span><span class="p">)</span> <span class="k">for</span> <span class="n">atnum</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">sectionname</span><span class="p">,</span><span class="s1">&#39;AtomicNumbers&#39;</span><span class="p">)]</span>
+                        <span class="n">sectionname</span> <span class="o">=</span> <span class="s1">&#39;ChemicalSystem(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">chemSysNum</span><span class="p">)</span>
+                        <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">PT</span><span class="o">.</span><span class="n">get_symbol</span><span class="p">(</span><span class="n">atnum</span><span class="p">)</span> <span class="k">for</span> <span class="n">atnum</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">sectionname</span><span class="p">,</span><span class="s1">&#39;AtomicNumbers&#39;</span><span class="p">)]</span>
+                        <span class="c1">################</span>
+                        <span class="c1"># Read badly written files</span>
+                        <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">added_atoms</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">removed_atoms</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">prev_elements</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="n">diff</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">:</span>
+                                <span class="n">chemSysNum</span><span class="p">,</span> <span class="n">elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_correct_chemical_system</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span><span class="n">prev_elements</span><span class="p">,</span><span class="n">added_atoms</span><span class="p">,</span><span class="n">removed_atoms</span><span class="p">)</span>
+                        <span class="c1">#print (&#39;chemSysNum: &#39;,i,chemSysNum, len(elements),added_atoms,removed_atoms)</span>
+                        <span class="c1">####################</span>
+                        <span class="n">removed_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">prev_elements</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">removed_atoms</span><span class="p">]</span>
+                        <span class="n">added_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">elements</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">added_atoms</span><span class="p">]</span>
+                        <span class="c1"># Now store the elements</span>
+                        <span class="k">for</span> <span class="n">iat</span><span class="p">,</span><span class="n">el</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">removed_atoms</span><span class="p">,</span><span class="n">removed_elements</span><span class="p">)</span> <span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">removed_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">iat</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span> 
+                        <span class="k">for</span> <span class="n">iat</span><span class="p">,</span><span class="n">el</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">added_atoms</span><span class="p">,</span><span class="n">added_elements</span><span class="p">)</span> <span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">added_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">iat</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">chemical_systems</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">chemSysNum</span>
+                        <span class="n">version</span> <span class="o">=</span> <span class="n">new_version</span>
+
+<div class="viewcode-block" id="RKFHistoryFile._correct_chemical_system"><a class="viewcode-back" href="../../../../components/rkf.html#scm.plams.trajectories.rkfhistoryfile.RKFHistoryFile._correct_chemical_system">[docs]</a>        <span class="k">def</span> <span class="nf">_correct_chemical_system</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">prev_elements</span><span class="p">,</span> <span class="n">added_atoms</span><span class="p">,</span> <span class="n">removed_atoms</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Check if the referenced chemical system is correct, and if not, find one matching added/removed atoms</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="c1">#print (&#39;Searching for chemical system elsewhere&#39;)</span>
+                <span class="n">new_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">prev_elements</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">ra</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">removed_atoms</span><span class="p">)</span> <span class="p">:</span>
+                        <span class="n">new_elements</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">ra</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">added_atoms</span> <span class="p">:</span>
+                        <span class="n">new_elements</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">aa</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="c1"># Add a wildcard</span>
+                <span class="n">chemSysNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_chemical_system</span><span class="p">(</span><span class="n">new_elements</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">chemSysNum</span> <span class="ow">is</span> <span class="kc">None</span> <span class="p">:</span>
+                        <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Chemical system does not exist&#39;</span><span class="p">)</span>
+                        <span class="n">chemSysNum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_chemical_system</span><span class="p">(</span><span class="n">new_elements</span><span class="p">,</span><span class="n">compare_elements</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">chemSysNum</span> <span class="ow">is</span> <span class="kc">None</span> <span class="p">:</span>
+                                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Chemical system with this number of atoms does not exist&#39;</span><span class="p">)</span>
+                <span class="n">sectionname</span> <span class="o">=</span> <span class="s1">&#39;ChemicalSystem(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">chemSysNum</span><span class="p">)</span>
+                <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">PT</span><span class="o">.</span><span class="n">get_symbol</span><span class="p">(</span><span class="n">atnum</span><span class="p">)</span> <span class="k">for</span> <span class="n">atnum</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">sectionname</span><span class="p">,</span><span class="s1">&#39;AtomicNumbers&#39;</span><span class="p">)]</span>
+                <span class="c1">###################</span>
+                <span class="c1"># Check the regions</span>
+                <span class="n">section_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read_section</span><span class="p">(</span><span class="n">sectionname</span><span class="p">)</span>
+                <span class="n">plamsmol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">_mol_from_rkf_section</span><span class="p">(</span><span class="n">section_dict</span><span class="p">)</span>
+                <span class="nb">print</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">plamsmol</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">suffix</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">added_atoms</span> <span class="p">:</span>
+                        <span class="nb">print</span> <span class="p">(</span><span class="n">aa</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">plamsmol</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">aa</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">suffix</span><span class="p">)</span>
+                <span class="c1">###################</span>
+                <span class="k">return</span> <span class="n">chemSysNum</span><span class="p">,</span> <span class="n">elements</span></div>
+
+        <span class="c1"># FIXME: The _write_header section writes the starting molecule to the Molecule section, </span>
+        <span class="c1">#        not the final molecule (like the Fortran code does)</span>
+        <span class="k">def</span> <span class="nf">_write_header</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Write Molecule info to file (elements, periodicity)</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="c1"># First write the general section</span>
+                <span class="n">write_general_section</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="p">)</span>
+                
+                <span class="c1"># Then write the input molecule</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_update_celldata</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_molecule_section</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span><span class="p">)</span>
+                <span class="c1"># I think the InputMolecule is mandatory in this case</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_molecule_section</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="s1">&#39;InputMolecule&#39;</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">chemical_systems</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_mddata</span> <span class="p">:</span>
+                        <span class="c1"># Start setting up the MDHistory section as well</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MDHistory&#39;</span><span class="p">,</span><span class="s1">&#39;blockSize&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">added_atoms</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">removed_atoms</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">def</span> <span class="nf">_read_coordinates</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">molecule</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">bonds</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Read the coordinates at step i</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+
+                <span class="n">update_molecule</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_elements_for_frame</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">elements</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="p">:</span>
+                        <span class="n">update_molecule</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">molecule</span><span class="p">,</span><span class="n">Molecule</span><span class="p">)</span> <span class="p">:</span>
+                        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">mol_elements</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_plamsmol</span><span class="p">(</span><span class="n">molecule</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">mol_elements</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="ow">or</span> <span class="n">props</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span> <span class="p">:</span> <span class="c1"># This molecule has nothing to do with the previously read one</span>
+                                <span class="n">update_molecule</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="n">prev_frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">iframe</span> <span class="k">for</span> <span class="n">iframe</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemical_systems</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">iframe</span><span class="o">&lt;=</span><span class="n">i</span><span class="p">]</span>
+                        <span class="n">ifr</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prev_frames</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+                                <span class="n">ifr</span> <span class="o">=</span> <span class="n">prev_frames</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="n">next_frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">iframe</span> <span class="k">for</span> <span class="n">iframe</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemical_systems</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">iframe</span><span class="o">&gt;</span><span class="n">i</span><span class="p">]</span>
+                        <span class="n">jfr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">next_frames</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+                                <span class="n">jfr</span> <span class="o">=</span> <span class="n">next_frames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="c1"># If the previous frame falls before the last chemical system or after the next one, update</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">&lt;</span> <span class="n">ifr</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">&gt;=</span> <span class="n">jfr</span> <span class="p">:</span>
+                                <span class="n">update_molecule</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="k">if</span> <span class="n">update_molecule</span> <span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="o">=</span> <span class="n">elements</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">i</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">coords</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">),</span><span class="mi">3</span><span class="p">))</span>
+                        <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">))</span>
+                        <span class="c1"># Rebuild the molecule (bonds will disappear for now)</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">molecule</span><span class="p">,</span><span class="n">Molecule</span><span class="p">)</span> <span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">props</span> <span class="o">=</span> <span class="n">props</span>
+                                <span class="n">secname</span> <span class="o">=</span> <span class="s1">&#39;ChemicalSystem(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chemical_systems</span><span class="p">[</span><span class="n">ifr</span><span class="p">])</span>
+                                <span class="n">section_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read_section</span><span class="p">(</span><span class="n">secname</span><span class="p">)</span>
+                                <span class="n">new_mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">_mol_from_rkf_section</span><span class="p">(</span><span class="n">section_dict</span><span class="p">)</span>
+                                <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">molecule</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span> <span class="p">:</span>
+                                        <span class="n">molecule</span><span class="o">.</span><span class="n">delete_atom</span><span class="p">(</span><span class="n">at</span><span class="p">)</span>
+                                <span class="n">molecule</span><span class="o">.</span><span class="n">properties</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+                                <span class="k">for</span> <span class="n">iel</span><span class="p">,</span><span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="p">:</span>
+                                        <span class="n">atom</span> <span class="o">=</span> <span class="n">new_mol</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">iel</span><span class="p">]</span>
+                                        <span class="c1">#atom = Atom(PT.get_atomic_number(el))</span>
+                                        <span class="n">molecule</span><span class="o">.</span><span class="n">add_atom</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span>
+                                <span class="c1"># Now what if the elements found in this ChemicalSystem section</span>
+                                <span class="c1"># do not match the expected elements (self.elements)?</span>
+                                <span class="n">new_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">at</span><span class="o">.</span><span class="n">symbol</span> <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">molecule</span><span class="o">.</span><span class="n">atoms</span><span class="p">]</span>
+                                <span class="k">if</span> <span class="n">new_elements</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="p">:</span>
+                                        <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Chemical section does not match&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+                                        <span class="n">atnums</span> <span class="o">=</span> <span class="p">[</span><span class="n">PT</span><span class="o">.</span><span class="n">get_atomic_number</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
+                                        <span class="k">for</span> <span class="n">iat</span><span class="p">,</span><span class="n">atnum</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">atnums</span><span class="p">)</span> <span class="p">:</span>
+                                                <span class="n">molecule</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">iat</span><span class="p">]</span><span class="o">.</span><span class="n">atnum</span> <span class="o">=</span> <span class="n">atnum</span>
+
+                <span class="n">coords</span><span class="p">[:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;History&#39;</span><span class="p">,</span> <span class="s1">&#39;Coords(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">coords</span> <span class="o">*=</span> <span class="n">bohr_to_angstrom</span>
+                <span class="c1"># This changes self.coords behind the scenes</span>
+
+                <span class="c1"># Assign the data to the molecule object</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">molecule</span><span class="p">,</span><span class="n">Molecule</span><span class="p">)</span> <span class="p">:</span>
+                        <span class="n">cell_reduced</span> <span class="o">=</span> <span class="kc">None</span>
+                        <span class="k">if</span> <span class="n">cell</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+                                <span class="n">cell_reduced</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">nvecs</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_set_plamsmol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">,</span><span class="n">cell_reduced</span><span class="p">,</span><span class="n">molecule</span><span class="p">,</span><span class="n">bonds</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">_read_elements_for_frame</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Use the added and removed atoms to read the elements at each frame</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_elements</span><span class="p">[:]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">frame</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">:</span>
+                        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">removed_atoms</span> <span class="p">:</span>
+                                <span class="c1"># Insert them into the elements list, in the correct place</span>
+                                <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">iat</span><span class="p">,</span><span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">iat</span><span class="o">+</span><span class="mi">1</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">removed_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+                        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">added_atoms</span> <span class="p">:</span>
+                                <span class="k">for</span> <span class="n">iat</span><span class="p">,</span><span class="n">el</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">added_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">:</span>
+                                        <span class="n">elements</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">iat</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">el</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">elements</span>
+
+<div class="viewcode-block" id="RKFHistoryFile.write_next"><a class="viewcode-back" href="../../../../components/rkf.html#scm.plams.trajectories.rkfhistoryfile.RKFHistoryFile.write_next">[docs]</a>        <span class="k">def</span> <span class="nf">write_next</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cell</span><span class="o">=</span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span> <span class="n">conect</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">historydata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mddata</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Write frame to next position in trajectory file</span>
+
+<span class="sd">                * ``coords``   -- A list or numpy array of (``ntap``,3) containing the system coordinates</span>
+<span class="sd">                * ``molecule`` -- A molecule object to read the molecular data from</span>
+<span class="sd">                * ``elements`` -- The element symbols of the atoms in the system</span>
+<span class="sd">                * ``cell``     -- A set of lattice vectors (or cell diameters for an orthorhombic system)</span>
+<span class="sd">                * ``conect``   -- A dictionary containing the connectivity info (e.g. {1:[2],2:[1]})</span>
+<span class="sd">                * ``historydata`` -- A dictionary containing additional variables to be written to the History section</span>
+<span class="sd">                * ``mddata``   -- A dictionary containing the variables to be written to the MDHistory section</span>
+
+<span class="sd">                The ``mddata`` dictionary can contain the following keys:</span>
+<span class="sd">                (&#39;TotalEnergy&#39;, &#39;PotentialEnergy&#39;, &#39;Step&#39;, &#39;Velocities&#39;, &#39;KineticEnergy&#39;, </span>
+<span class="sd">                &#39;Charges&#39;, &#39;ConservedEnergy&#39;, &#39;Time&#39;, &#39;Temperature&#39;)</span>
+
+<span class="sd">                The ``historydata`` dictionary can contain for example:</span>
+<span class="sd">                (&#39;Energy&#39;,&#39;Gradients&#39;,&#39;StressTensor&#39;)</span>
+<span class="sd">                All values must be in atomic units</span>
+<span class="sd">                Numpy arrays or lists of lists will be flattened before they are written to the file</span>
+
+<span class="sd">                .. note::</span>
+
+<span class="sd">                        Either ``coords`` and ``elements`` or ``molecule`` are mandatory arguments</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="c1"># Check for common error in the arguments</span>
+                <span class="k">if</span> <span class="n">coords</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span><span class="n">Molecule</span><span class="p">)</span> <span class="p">:</span>
+                                <span class="k">raise</span> <span class="n">PlamsError</span><span class="p">(</span><span class="s1">&#39;The PLAMS molecule needs to be passed as the second argument (molecule)&#39;</span><span class="p">)</span>
+
+                <span class="n">props</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">molecule</span><span class="p">,</span><span class="n">Molecule</span><span class="p">)</span> <span class="p">:</span>
+                        <span class="n">coords</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">conect</span><span class="p">,</span> <span class="n">props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_plamsmol</span><span class="p">(</span><span class="n">molecule</span><span class="p">)</span>
+                <span class="c1"># Make sure that the cell consists of three vectors</span>
+                <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_cell</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">conect</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">conect</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span> <span class="n">conect</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">conect</span> <span class="o">=</span> <span class="n">conect</span>
+
+                <span class="c1"># If this is the first step, write the header</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="o">=</span> <span class="n">elements</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">props</span> <span class="o">=</span> <span class="n">props</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_write_header</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span><span class="n">cell</span><span class="p">,</span><span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span><span class="p">)</span>
+                        <span class="c1"># This is specific for the history-file object</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">input_elements</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[:]</span>
+
+                <span class="c1"># Define some local variables</span>
+                <span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span>
+                <span class="k">if</span> <span class="n">mddata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+                        <span class="k">if</span> <span class="s1">&#39;Step&#39;</span> <span class="ow">in</span> <span class="n">mddata</span> <span class="p">:</span>
+                                <span class="n">step</span> <span class="o">=</span> <span class="n">mddata</span><span class="p">[</span><span class="s1">&#39;Step&#39;</span><span class="p">]</span>
+                <span class="c1"># Energy should be read from mddata first, otherwise from historydata, otherwise set to zero</span>
+                <span class="n">energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_energy</span><span class="p">(</span><span class="n">mddata</span><span class="p">,</span> <span class="n">historydata</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_historydata</span> <span class="p">:</span>
+                        <span class="n">historydata</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">historydata</span><span class="p">[</span><span class="s1">&#39;Energy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">energy</span>
+
+                <span class="c1"># Write the history section</span>
+                <span class="n">counter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_history_entry</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">conect</span><span class="p">,</span> <span class="n">historydata</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_mddata</span> <span class="ow">and</span> <span class="n">mddata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_write_mdhistory_entry</span><span class="p">(</span><span class="n">mddata</span><span class="p">)</span>
+                
+                <span class="c1"># If a change took place, write it.</span>
+                <span class="c1"># Note: The chemical system is only written if the elements change. Changes in the atom properties are not checked</span>
+                <span class="k">if</span> <span class="n">elements</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="ow">or</span> <span class="n">props</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="o">==</span><span class="mi">0</span> <span class="p">:</span>
+                        <span class="c1"># version history has to be checked before the elements can be updated</span>
+                        <span class="n">chemsysversion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_chemical_system</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="n">props</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_write_version_history</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span>
+                        <span class="c1"># Now update the elements and props</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="o">=</span> <span class="n">elements</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">props</span> <span class="o">=</span> <span class="n">props</span>
+                        <span class="c1"># Write the molecule sections</span>
+                        <span class="k">if</span> <span class="n">chemsysversion</span> <span class="ow">is</span> <span class="kc">None</span> <span class="p">:</span>
+                                <span class="n">chemsysversion</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span><span class="p">)</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_write_molecule_section</span> <span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="s1">&#39;ChemicalSystem(</span><span class="si">%i</span><span class="s1">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">chemsysversion</span><span class="p">),</span> <span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">chemical_systems</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">chemsysversion</span>
+                <span class="n">counter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_system_version_history_entry</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">saving_freq</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">saving_freq</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+        <span class="k">def</span> <span class="nf">_write_version_history</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Write the version history</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="c1"># Enter the correct SystemVersionHistory entry into the History section</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">versionhistory_length</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">versionhistory_length</span>
+
+                <span class="c1"># Find the corresponding ChemicalSystem and write it</span>
+                <span class="n">chemsysversion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_chemical_system</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="n">props</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">chemsysversion</span> <span class="ow">is</span> <span class="kc">None</span> <span class="p">:</span>
+                        <span class="c1">#self.system_version_elements.append(elements[:])</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">:</span>
+                                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;self.system_version_elements is not consecutively numbered&#39;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span><span class="p">)]</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[:]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">system_version_props</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span><span class="p">)]</span> <span class="o">=</span> <span class="n">props</span>
+                        <span class="n">chemsysversion</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span><span class="p">)</span>
+
+                <span class="c1"># Now add an entry to SystemVersionHistory</span>
+                <span class="n">added_atoms</span><span class="p">,</span> <span class="n">removed_atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_system_change</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SystemVersionHistory&#39;</span><span class="p">,</span><span class="s1">&#39;nEntries&#39;</span><span class="p">,</span><span class="n">version</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SystemVersionHistory&#39;</span><span class="p">,</span><span class="s1">&#39;currentEntryOpen&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;SectionNum&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">version_history_items</span> <span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">version_history_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;SectionNum&#39;</span><span class="p">)</span>
+                <span class="n">svh_counter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">version_history_items</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;SectionNum&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_keydata_in_history</span><span class="p">(</span><span class="s1">&#39;SectionNum&#39;</span><span class="p">,</span><span class="n">svh_counter</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">version</span><span class="p">,</span><span class="n">chemsysversion</span><span class="p">,</span><span class="s1">&#39;SystemVersionHistory&#39;</span><span class="p">)</span>
+                <span class="c1"># Avoid writing empty data into this section by storing the items.</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">added_atoms</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+                        <span class="k">if</span> <span class="s1">&#39;AddedAtoms&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">version_history_items</span> <span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">version_history_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;AddedAtoms&#39;</span><span class="p">)</span>
+                        <span class="n">svh_counter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">version_history_items</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;AddedAtoms&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">iat</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">iat</span> <span class="ow">in</span> <span class="n">added_atoms</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_write_keydata_in_history</span><span class="p">(</span><span class="s1">&#39;AddedAtoms&#39;</span><span class="p">,</span><span class="n">svh_counter</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="n">version</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="s1">&#39;SystemVersionHistory&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">removed_atoms</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+                        <span class="k">if</span> <span class="s1">&#39;RemovedAtoms&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">version_history_items</span> <span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">version_history_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;RemovedAtoms&#39;</span><span class="p">)</span>
+                        <span class="n">svh_counter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">version_history_items</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;RemovedAtoms&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">iat</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">iat</span> <span class="ow">in</span> <span class="n">removed_atoms</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_write_keydata_in_history</span><span class="p">(</span><span class="s1">&#39;RemovedAtoms&#39;</span><span class="p">,</span><span class="n">svh_counter</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="n">version</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="s1">&#39;SystemVersionHistory&#39;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">_write_system_version_history_entry</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Write the entry for the SystemVersionHistory into the History section</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">versionhistory_length</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_keydata_in_history</span><span class="p">(</span><span class="s1">&#39;SystemVersion&#39;</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">version</span><span class="p">)</span>
+                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">return</span> <span class="n">counter</span>
+
+        <span class="k">def</span> <span class="nf">_find_system_change</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Find out which atoms were added and/or deleted</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="c1"># First find out which elements were removed</span>
+                <span class="n">removed_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span> <span class="p">:</span>
+                        <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="p">:</span> 
+                                <span class="n">removed_atoms</span> <span class="o">+=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">))]</span>
+                                <span class="k">break</span>
+                        <span class="c1"># Get the props, if relevant</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span> <span class="ow">is</span> <span class="kc">None</span> <span class="p">:</span> 
+                                <span class="n">op</span> <span class="o">=</span> <span class="kc">None</span>
+                        <span class="k">else</span> <span class="p">:</span>
+                                <span class="n">op</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">props</span> <span class="ow">is</span> <span class="kc">None</span> <span class="p">:</span> 
+                                <span class="n">p</span> <span class="o">=</span> <span class="kc">None</span>
+                        <span class="k">else</span> <span class="p">:</span>
+                                <span class="n">p</span> <span class="o">=</span> <span class="n">props</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+                        <span class="c1"># Find the changes</span>
+                        <span class="k">if</span> <span class="n">el</span> <span class="o">==</span> <span class="n">elements</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="ow">and</span> <span class="n">op</span><span class="o">==</span><span class="n">p</span> <span class="p">:</span>
+                                <span class="n">position</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">else</span> <span class="p">:</span>
+                                <span class="n">removed_atoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+                <span class="c1"># Then find out which elements were added</span>
+                <span class="n">added_atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">position</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">))]</span>
+                
+                <span class="c1"># Now store them (this is actually not really necessary)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">removed_atoms</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">removed_atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">added_atoms</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">added_atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">iat</span> <span class="ow">in</span> <span class="n">removed_atoms</span> <span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">removed_atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">][</span><span class="n">iat</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="n">iat</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">iat</span> <span class="ow">in</span> <span class="n">added_atoms</span> <span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">added_atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">][</span><span class="n">iat</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="n">iat</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">added_atoms</span><span class="p">,</span> <span class="n">removed_atoms</span>
+
+        <span class="k">def</span> <span class="nf">_check_for_chemical_system</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">compare_elements</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Check if the new chemical system was encountered before</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">iterator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+                <span class="n">version</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">for</span> <span class="n">ind</span><span class="p">,(</span><span class="n">i</span><span class="p">,</span><span class="n">prev_elements</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span> <span class="p">:</span>
+                        <span class="n">equal</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prev_elements</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="p">:</span>
+                                <span class="k">continue</span>
+                        <span class="k">if</span> <span class="n">compare_elements</span> <span class="p">:</span>
+                                <span class="k">for</span> <span class="n">el</span><span class="p">,</span><span class="n">pel</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span><span class="n">prev_elements</span><span class="p">)</span> <span class="p">:</span>
+                                        <span class="k">if</span> <span class="n">el</span> <span class="o">!=</span> <span class="n">pel</span> <span class="p">:</span>
+                                                <span class="k">if</span> <span class="n">el</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span> <span class="p">:</span> <span class="k">continue</span>
+                                                <span class="n">equal</span> <span class="o">=</span> <span class="kc">False</span>
+                                                <span class="k">break</span>
+                        <span class="k">if</span> <span class="n">props</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">equal</span> <span class="p">:</span>
+                                <span class="c1"># This only occurs when writing, otherwise system_version_props is empty</span>
+                                <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_version_props</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">:</span>
+                                        <span class="k">if</span> <span class="n">props</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_version_props</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span>
+                                                <span class="n">equal</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">if</span> <span class="n">equal</span> <span class="p">:</span>
+                                <span class="n">version</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+                <span class="k">return</span> <span class="n">version</span>
+
+<div class="viewcode-block" id="RKFHistoryFile._set_system_version_elements"><a class="viewcode-back" href="../../../../components/rkf.html#scm.plams.trajectories.rkfhistoryfile.RKFHistoryFile._set_system_version_elements">[docs]</a>        <span class="k">def</span> <span class="nf">_set_system_version_elements</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Store all chemical systems from the file</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;ChemicalSystem&#39;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]</span>
+                <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">num</span><span class="p">,</span><span class="n">key</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">keys</span><span class="p">)</span> <span class="p">:</span>
+                        <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">PT</span><span class="o">.</span><span class="n">get_symbol</span><span class="p">(</span><span class="n">atnum</span><span class="p">)</span> <span class="k">for</span> <span class="n">atnum</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="s1">&#39;AtomicNumbers&#39;</span><span class="p">)]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">system_version_elements</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="n">elements</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+      <script type="text/javascript" src="../../../../_static/sphinx_tabs/tabs.js"></script>
+      <script type="text/javascript" src="../../../../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

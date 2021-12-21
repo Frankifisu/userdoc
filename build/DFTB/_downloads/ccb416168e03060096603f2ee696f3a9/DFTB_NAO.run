@@ -1,0 +1,421 @@
+#! /bin/sh
+
+# just to make sure that the properties are non zero at the first integration point
+extend="-4.0"
+
+export AMS_JOBNAME=Methane 
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      C       0.000000000000       0.000000000000       0.000000000000
+      H       0.863426938600       0.544775641100       0.352297349600
+      H      -0.335313871500       0.422758012300      -0.935542767900
+      H       0.264056533600      -1.036774276000      -0.147557605600
+      H      -0.792169600700       0.069240623010       0.730803023900
+    End
+End
+
+Engine DFTB
+    ResourcesDir Demo
+    Model DFTB0
+EndEngine
+
+eor
+
+# cd Methane.results
+
+$AMSBIN/nao << eor
+
+Filename $AMS_JOBNAME.results/dftb.rkf
+
+Grid
+  Type Coarse
+  ExtendX $extend
+  ExtendY $extend
+  ExtendZ $extend
+end
+
+Fields
+  rho
+  rho(deformation)
+  tau(valence)
+  rho(deformation/fit)
+  v(coulomb/atoms)
+  v(coulomb/deformation)
+  v(coulomb)
+End
+
+eor
+
+echo ""
+echo "Begin TOC of tape41 (Methane/props)"
+$AMSBIN/pkf TAPE41
+echo "End TOC of tape41 (Methane/props)"
+
+rm TAPE41
+
+# orbital plotting
+
+$AMSBIN/nao << eor
+
+Filename $AMS_JOBNAME.results/dftb.rkf
+
+Grid
+  Type Coarse
+  ExtendX $extend
+  ExtendY $extend
+  ExtendZ $extend
+end
+
+Fields
+  Orbitals 1
+End
+
+eor
+
+echo ""
+echo "Begin TOC of tape41 (Methane/orbitals)"
+$AMSBIN/pkf TAPE41
+echo "End TOC of tape41 (Methane/orbitals)"
+
+rm TAPE41
+
+# export to cube format
+
+$AMSBIN/nao << eor
+
+Filename $AMS_JOBNAME.results/dftb.rkf
+ResultFilename CUBE
+
+Grid
+  Type Coarse
+  ExtendX $extend
+  ExtendY $extend
+  ExtendZ $extend
+end
+
+Fields
+  rho
+  rho(deformation)
+  tau(valence)
+  rho(deformation/fit)
+  v(coulomb/atoms)
+  v(coulomb/deformation)
+  v(coulomb)
+End
+
+eor
+
+echo ""
+echo "Begin of cube file v(coulomb)"
+head -n 12 v\(coulomb\).cube
+echo "End of cube file v(coulomb)"
+
+rm *.cube
+
+
+
+# export single field on a .cube file
+
+$AMSBIN/nao << eor
+
+Filename $AMS_JOBNAME.results/dftb.rkf
+ResultFilename foo.cube
+
+Grid
+  Type Coarse
+  ExtendX $extend
+  ExtendY $extend
+  ExtendZ $extend
+end
+
+Fields
+  rho
+End
+
+eor
+
+echo ""
+echo "Begin of cube file"
+head -n 12 foo.cube
+echo "End of cube file"
+
+rm foo.cube
+
+# the order appears to be random
+export NSCM=1
+
+$AMSBIN/nao << eor
+
+Filename $AMS_JOBNAME.results/dftb.rkf
+
+Grid
+  Type Coarse
+end
+
+AIMCriticalPoints
+  gridSpacing 0.2
+End
+
+eor
+
+echo "kf file with QTAIM"
+
+$AMSBIN/pkf $AMS_JOBNAME.results/dftb.rkf
+
+
+# cd ..
+
+
+echo "same test on periodic chain"
+
+export AMS_JOBNAME=MethaneChain
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms [Angstrom]
+        C 0.0 0.0 0.0
+        H 1.079999998  0 0
+        H -0.35604780   0                 1.019622459440336
+        H -0.35604780   0.8830189521445  -0.50981122972017
+        H -0.35604780  -0.8830189521445  -0.50981122972017
+    End
+    Lattice
+        2.5 0.0 0.0
+    End
+End
+
+Engine DFTB
+   ResourcesDir Demo
+   Model DFTB0
+   UseSymmetry yes
+   KSpace
+     Type Symmetric
+     Symmetric KInteg=3
+   End
+   Periodic
+       BandStructure enabled=yes automatic=yes
+   End
+EndEngine
+
+eor
+
+# cd MethaneChain.results
+
+$AMSBIN/nao << eor
+
+Filename $AMS_JOBNAME.results/dftb.rkf
+
+Grid
+  Type Coarse
+  ExtendX $extend
+  ExtendY $extend
+  ExtendZ $extend
+end
+
+Fields
+  rho
+  rho(deformation)
+  tau(valence)
+  rho(deformation/fit)
+  v(coulomb/atoms)
+  v(coulomb/deformation)
+  v(coulomb)
+End
+
+eor
+
+echo "Begin TOC of tape41 (MethaneChain/props)"
+$AMSBIN/pkf TAPE41
+echo "End TOC of tape41 (MethaneChain/props)"
+
+rm TAPE41
+
+$AMSBIN/nao << eor
+
+Filename $AMS_JOBNAME.results/dftb.rkf
+
+Grid
+  Type Coarse
+  ExtendX $extend
+  ExtendY $extend
+  ExtendZ $extend
+end
+
+Fields
+ Orbital band=1 kun=3
+End
+
+eor
+
+echo "Begin TOC of tape41 (MethaneChain/orbitals)"
+$AMSBIN/pkf TAPE41
+echo "End TOC of tape41 (MethaneChain/orbitals)"
+
+rm TAPE41
+
+# the order appears to be random
+export NSCM=1
+
+$AMSBIN/nao << eor
+
+Filename $AMS_JOBNAME.results/dftb.rkf
+
+Grid
+  Type Coarse
+end
+
+AIMCriticalPoints
+End
+
+eor
+
+echo "kf file with periodic QTAIM"
+$AMSBIN/pkf $AMS_JOBNAME.results/dftb.rkf
+
+
+cat << eor > coords.txt
+1.0 0.0 0.0
+0.2 0.4 0.0
+eor
+
+$AMSBIN/nao << eor
+
+Filename $AMS_JOBNAME.results/dftb.rkf
+ResultFilename result.txt
+
+Grid
+  Filename coords.txt
+end
+
+Fields
+  v(coulomb)
+End
+
+eor
+
+echo "Begin of result"
+cat result.txt
+echo "End of result"
+
+echo "test on periodic chain with the gamma only method"
+
+export AMS_JOBNAME=MethaneChainGamma
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms [Angstrom]
+        C 0.0 0.0 0.0
+        H 1.079999998  0 0
+        H -0.35604780   0                 1.019622459440336
+        H -0.35604780   0.8830189521445  -0.50981122972017
+        H -0.35604780  -0.8830189521445  -0.50981122972017
+    End
+
+    Lattice
+        2.5 0.0 0.0
+    End
+End
+
+Engine DFTB
+   ResourcesDir Demo
+   Model DFTB0
+   KSpace Quality=GammaOnly
+EndEngine
+
+eor
+
+# cd MethaneChainGamma.results
+
+$AMSBIN/nao << eor
+
+Filename $AMS_JOBNAME.results/dftb.rkf
+
+Grid
+  Type Coarse
+  ExtendX $extend
+  ExtendY $extend
+  ExtendZ $extend
+end
+
+Fields
+  rho
+  rho(deformation)
+  tau(valence)
+  rho(deformation/fit)
+  v(coulomb/atoms)
+  v(coulomb/deformation)
+  v(coulomb)
+End
+
+eor
+
+echo ""
+echo "Begin TOC of tape41 (MethaneChainGamma/props)"
+$AMSBIN/pkf TAPE41
+echo "End TOC of tape41 (MethaneChainGamma/props)"
+
+rm TAPE41
+
+# ------------- test with absolute path for AIM, which writes to the file ------------------------
+
+export AMS_JOBNAME=Methane.again
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      C       0.000000000000       0.000000000000       0.000000000000
+      H       0.863426938600       0.544775641100       0.352297349600
+      H      -0.335313871500       0.422758012300      -0.935542767900
+      H       0.264056533600      -1.036774276000      -0.147557605600
+      H      -0.792169600700       0.069240623010       0.730803023900
+    End
+End
+
+Engine DFTB
+    ResourcesDir Demo
+    Model DFTB0
+EndEngine
+
+eor
+
+# the order appears to be random
+export NSCM=1
+
+base=$PWD
+if test "$OS" = "Windows_NT"; then 
+ # ignore Windows line endings
+ base=`pwd -W`
+fi
+
+
+$AMSBIN/nao << eor
+
+Filename $base/$AMS_JOBNAME.results/dftb.rkf
+
+Grid
+  Type Coarse
+end
+
+AIMCriticalPoints
+  gridSpacing 0.2
+End
+
+eor
+
+echo "kf file with QTAIM"
+
+$AMSBIN/pkf $AMS_JOBNAME.results/dftb.rkf

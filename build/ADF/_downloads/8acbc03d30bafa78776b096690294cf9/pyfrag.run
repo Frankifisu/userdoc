@@ -1,0 +1,64 @@
+#!/bin/bash
+
+
+# The trajectory is a concatenated xyz-file:
+
+cat << eor > coords.xyz
+C        -1.741968   -2.220880    0.000000
+Pd       -2.137509   -0.237843    0.000000
+H        -2.809570   -2.499547    0.000000
+H        -1.265288   -2.629932    0.895677
+H        -1.265288   -2.629932   -0.895677
+H        -0.755099   -0.885698    0.00000
+
+C        -1.741968   -2.220880    0.000000
+Pd       -2.137509   -0.250000    0.000000
+H        -2.809570   -2.499547    0.000000
+H        -1.265288   -2.629932    0.895677
+H        -1.265288   -2.629932   -0.895677
+H        -0.755099   -0.885698    0.00000
+eor
+
+# Input options for ADF:
+
+# One should generally symmetrize the coordinates by setting AMS.System.Symmetrize=Yes 
+
+cat << eor > adfinputfile
+AMS.Task=SinglePoint
+AMS.System.Charge=0
+AMS.System.Symmetrize=Yes
+ADF.NumericalQuality=VeryGood
+ADF.XC.GGA=OPBE
+ADF.basis.core=None
+ADF.Symmetry=AUTO
+ADF.Relativity.Level=Scalar
+ADF.Relativity.Formalism=ZORA
+ADF.eprint.sfo=eig ovl
+eor
+
+# Here we call the PyFrag script.
+
+# PyFrag conducts a total of six single point calculations, one for each fragment and the 
+# whole system for each of the two geometries in the trajectory, respectively. 
+# The intermediate results for each geometry are printed during the calculation. 
+# At the end of its run PyFrag summarizes all results in a table which is also written 
+# to an output file PyFrag<SystemName>.txt
+
+$AMSBIN/amspython $AMSHOME/scripting/standalone/pyfrag/PyFrag.py  \
+--xyzpath coords.xyz \
+--fragment 2 --fragment 1 3 4 5 6 --strain 0 --strain -554.1 \
+--bondlength 1 6 1.093 \
+--angle 2 1 6 180 \
+--VDD 2 1 6 \
+--hirshfeld frag1 \
+--irrepOI AA \
+--irrepOI AAA \
+--orbitalenergy frag1 HOMO \
+--orbitalenergy frag2 LUMO \
+--orbitalenergy AA frag2 5 \
+--population frag1 HOMO \
+--population AA frag2 5 \
+--overlap frag1 HOMO frag2 LUMO \
+--overlap S frag1 5 AA frag2 4 \
+--adfinput ADF.basis.type=DZP \
+--adfinputfile adfinputfile

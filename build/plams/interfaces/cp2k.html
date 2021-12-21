@@ -1,0 +1,959 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CP2K &mdash; PLAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PLAMS 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Other programs" href="thirdparty.html"/>
+        <link rel="next" title="Crystal" href="crystal.html"/>
+        <link rel="prev" title="Other programs" href="thirdparty.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/plams_logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search PLAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-scripting" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-plams">What is PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-can-be-done-with-plams">What can be done with PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#simple-example">Simple example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-plams-is-not">What PLAMS is <em>not</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#library-contents">Library contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#installing-plams">Installing PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#updating-plams">Updating PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#running-plams">Running PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#defaults-file">Defaults file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#the-launch-script">The launch script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#working-folder-location">Working folder location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#passing-variables">Passing variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#importing-past-jobs">Importing past jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#restarting-failed-script">Restarting failed script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#multiple-input-scripts">Multiple input scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../components/components.html">Components overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../components/settings.html">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#tree-like-structure">Tree-like structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#dot-notation">Dot notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#case-sensitivity">Case sensitivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#global-settings">Global settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/jobs.html">Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#preparing-a-job">Preparing a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#contents-of-job-settings">Contents of job settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#default-settings">Default settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#running-a-job">Running a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#name-conflicts">Name conflicts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#prerun-and-postrun-methods">Prerun and postrun methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#preview-mode">Preview mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#job-api">Job API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#single-jobs">Single jobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#subclassing-singlejob">Subclassing SingleJob</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#multijobs">Multijobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#using-multijob">Using MultiJob</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/results.html">Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#files-in-the-job-folder">Files in the job folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#synchronization-of-parallel-job-executions">Synchronization of parallel job executions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/results.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#cleaning-job-folder">Cleaning job folder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/results.html#cleaning-for-multijobs">Cleaning for multijobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/runners.html">Job runners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/runners.html#local-job-runner">Local job runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/runners.html#remote-job-runner">Remote job runner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/jobmanager.html">Job manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#rerun-prevention">Rerun prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#pickling">Pickling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#restarting-scripts">Restarting scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/functions.html">Public functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/functions.html#logging">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/functions.html#binding-decorators">Binding decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/molecule.html">Molecule</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_api.html">Molecule</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/mol_api.html#atom-labeling">Atom labeling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/atombond.html">Atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/atombond.html#bond">Bond</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_rdkit.html">RDKit interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_ase.html">ASE interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/utils.html">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#periodic-table">Periodic Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#geometry-tools">Geometry tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#file-format-conversion-tools">File format conversion tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/trajectories.html">Trajectories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/xyz.html">XYZ trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/xyz.html#xyz-history-files">XYZ history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/rkf.html">RKF trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/rkf.html#rkf-history-files">RKF history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/dcd.html">DCD trajectory files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="interfaces.html">Interfaces</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="amssuite.html">Amsterdam Modeling Suite</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ams.html">AMS driver and engines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#molecule-handling">Molecule handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#amsjob-api">AMSJob API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#amsresults-api">AMSResults API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="amsworker.html">AMS worker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="amsworker.html#amsworker-api">AMSWorker API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="amsworker.html#amsworkerresults-api">AMSWorkerResults API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="amsworker.html#amsworkerpool-api">AMSWorkerPool API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="postadf.html">Analysis tools: Densf, FCF, analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kffiles.html">KF files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crs.html">COSMO-RS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#settings-with-multiple-compound">Settings with multiple compound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#adf-and-crsjob">ADF and CRSJob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#cosmo-rs-parameters">COSMO-RS Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#data-analyses-and-plotting">Data analyses and plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="adf.html">ADF (pre-2020 version)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="adf.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="adf.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="adf.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reaxff.html">ReaxFF (pre-2019 version)</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="thirdparty.html">Other programs</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CP2K</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#molecule-loading">Molecule loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="crystal.html">Crystal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus.html">DFTB+</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dirac.html">Dirac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mopac.html">MOPAC (standalone program)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mopac.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mopac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orca.html">ORCA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orca.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="raspa.html">RASPA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#id1">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/He2DissociationCurve.html">Helium dimer dissociation curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/WaterOptimization.html">Geometry optimization of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ManyJobsInParallel.html">Many jobs in parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/BasisSetBenchmark.html">Benchmark accuracy of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ExcitationsWorkflow.html">Workflow: filtering molecules based on excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ChargeTransferIntegralsADF.html">Charge transfer integrals with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/gammascan.html">Tuning the range separation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#pre-made-recipes">Pre-made recipes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ams_crs.html">ADF and COSMO-RS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adffragment.html">ADF fragment job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ReorganizationEnergy.html">Reorganization Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adfnbo.html">NBO with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numgrad.html">Numerical gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numhess.html">Numerical Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/molecule_gun.html">ReaxFF molecule gun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/global_minimum.html">Global Minimum Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vibrationASE.html">Vibrational analysis with ASE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook/cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#settings-and-input">Settings and input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#create-an-input-block-with-an-header">Create an input block with an header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#create-an-empty-input-block">Create an empty input block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-text-input-into-an-ams-job">Convert an AMS text input into an AMS job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-text-input-into-settings-object">Convert an AMS text input into settings object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-run-file-into-an-amsjob">Convert an AMS .run file into an AMSJob</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#molecules">Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#generate-a-molecule-from-a-smiles-string">Generate a molecule from a SMILES string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#counting-rings">Counting rings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#extracting-results">Extracting Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#directly-from-functions">Directly from Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#examples-total-energy-and-final-structure">Examples: Total Energy and Final Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#amsresults-api-functions">AMSResults API Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#from-the-rkf-interface">From the RKF Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#finding-section-variable-pairs">Finding Section/Variable Pairs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#from-python-directories">From Python Directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#kfbrowser">KFBrowser</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#from-md-trajectories">From MD trajectories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#general-md-properties">General MD properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#molecules-from-trajectories">Molecules from trajectories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#accessing-old-jobs">Accessing Old Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#binding-native-plams-jobs">Binding Native PLAMS Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#binding-old-rkf-files">Binding old RKF Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citations.html">Citations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PLAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../PLAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">PLAMS</a>/</li>
+      
+          <li><a href="interfaces.html">Interfaces</a>/</li>
+      
+          <li><a href="thirdparty.html">Other programs</a>/</li>
+      
+    <li class="orange-text">CP2K</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cp2k">
+<h1>CP2K<a class="headerlink" href="#cp2k" title="Permalink to this headline">¶</a></h1>
+<p>(<em>contributed by</em> <a class="reference external" href="https://www.researchgate.net/profile/Felipe_Zapata">Felipe Zapata</a>, extended by <a class="reference external" href="https://www.researchgate.net/profile/Patrick_Melix">Patrick Melix</a>)</p>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://www.cp2k.org/">cp2k</a> input is rather complex one compared to other computational codes, but its input is structured as a set of nested block and sub-blocks that can be easily represented by the <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> class.
+Like the other interfaces, the <em>CP2K</em> input file is generated using the <em>input</em> branch of the job settings.
+For instance, a single point calculation for pentacene:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">penta</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">dft</span><span class="o">.</span><span class="n">basis_set_file_name</span> <span class="o">=</span> <span class="s2">&quot;/path/to/basis&quot;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">dft</span><span class="o">.</span><span class="n">potential_set_file_name</span> <span class="o">=</span> <span class="s2">&quot;/path/to/potential&quot;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">dft</span><span class="o">.</span><span class="n">mgrid</span><span class="o">.</span><span class="n">cutoff</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">dft</span><span class="o">.</span><span class="n">mgrid</span><span class="o">.</span><span class="n">ngrids</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">dft</span><span class="o">.</span><span class="n">poisson</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">dft</span><span class="o">.</span><span class="n">localize</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="s2">&quot;T&quot;</span>
+
+
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">qs</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;GPW&quot;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">scf</span><span class="o">.</span><span class="n">eps_scf</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">scf</span><span class="o">.</span><span class="n">max_scf</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">xc</span><span class="o">.</span><span class="n">xc_functional</span> <span class="o">=</span> <span class="s2">&quot;PBE&quot;</span>
+
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mf">16.11886919</span><span class="p">,</span> <span class="mf">0.07814137</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.697284243</span><span class="p">]</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.215317662</span><span class="p">,</span> <span class="mf">4.389405268</span><span class="p">,</span> <span class="mf">1.408951791</span><span class="p">]</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.216126961</span><span class="p">,</span> <span class="mf">1.732808365</span><span class="p">,</span> <span class="mf">9.74896108</span><span class="p">]</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">periodic</span> <span class="o">=</span> <span class="s1">&#39;XYZ&#39;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">kind</span><span class="o">.</span><span class="n">C</span><span class="o">.</span><span class="n">basis_set</span> <span class="o">=</span> <span class="s2">&quot;DZVP-MOLOPT-SR-GTH-Q4&quot;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">kind</span><span class="o">.</span><span class="n">C</span><span class="o">.</span><span class="n">basis_set</span> <span class="o">=</span> <span class="s2">&quot;GTH-PBE-Q4&quot;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">kind</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">basis_set</span> <span class="o">=</span> <span class="s2">&quot;DZVP-MOLOPT-SR-GTH-Q1&quot;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">kind</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">basis_set</span> <span class="o">=</span> <span class="s2">&quot;GTH-PBE-q1&quot;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">coord_file_name</span> <span class="o">=</span> <span class="s2">&quot;./penta.xyz&quot;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">coordinate</span> <span class="o">=</span> <span class="s2">&quot;xyz&quot;</span>
+
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="p">[</span><span class="s1">&#39;global&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">print_level</span> <span class="o">=</span> <span class="s2">&quot;low&quot;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="p">[</span><span class="s1">&#39;global&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">project</span>  <span class="o">=</span> <span class="s2">&quot;example&quot;</span>
+<span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="p">[</span><span class="s1">&#39;global&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">run_type</span> <span class="o">=</span> <span class="s2">&quot;energy_force&quot;</span>
+</pre></div>
+</div>
+<p>The input generated during the execution of the <a class="reference external" href="https://www.cp2k.org/">cp2k</a> job is similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">FORCE_EVAL</span>
+  <span class="o">&amp;</span><span class="n">DFT</span>
+    <span class="n">BASIS_SET_FILE_NAME</span>  <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">basis</span>
+    <span class="o">&amp;</span><span class="n">MGRID</span>
+      <span class="n">CUTOFF</span>  <span class="mi">400</span>
+      <span class="n">NGRIDS</span>  <span class="mi">4</span>
+    <span class="o">&amp;</span><span class="n">END</span>
+    <span class="o">&amp;</span><span class="n">POISSON</span>
+    <span class="o">&amp;</span><span class="n">END</span>
+    <span class="o">&amp;</span><span class="n">LOCALIZE</span> <span class="n">T</span>
+    <span class="o">&amp;</span><span class="n">END</span>
+    <span class="n">POTENTIAL_FILE_NAME</span>  <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">potential</span>
+    <span class="o">&amp;</span><span class="n">QS</span>
+      <span class="n">METHOD</span>  <span class="n">GPW</span>
+    <span class="o">&amp;</span><span class="n">END</span>
+    <span class="o">&amp;</span><span class="n">SCF</span>
+      <span class="n">EPS_SCF</span>  <span class="mf">1e-06</span>
+      <span class="n">MAX_SCF</span>  <span class="mi">200</span>
+    <span class="o">&amp;</span><span class="n">END</span>
+    <span class="o">&amp;</span><span class="n">XC</span>
+      <span class="o">&amp;</span><span class="n">XC_FUNCTIONAL</span> <span class="n">PBE</span>
+      <span class="o">&amp;</span><span class="n">END</span>
+    <span class="o">&amp;</span><span class="n">END</span>
+  <span class="o">&amp;</span><span class="n">END</span>
+  <span class="o">&amp;</span><span class="n">SUBSYS</span>
+    <span class="o">&amp;</span><span class="n">CELL</span>
+      <span class="n">A</span>  <span class="mf">16.11886919</span> <span class="mf">0.07814137</span> <span class="o">-</span><span class="mf">0.697284243</span>
+      <span class="n">B</span>  <span class="o">-</span><span class="mf">0.215317662</span> <span class="mf">4.389405268</span> <span class="mf">1.408951791</span>
+      <span class="n">C</span>  <span class="o">-</span><span class="mf">0.216126961</span> <span class="mf">1.732808365</span> <span class="mf">9.748961085</span>
+      <span class="n">PERIODIC</span>  <span class="n">XYZ</span>
+    <span class="o">&amp;</span><span class="n">END</span>
+    <span class="o">&amp;</span><span class="n">KIND</span>  <span class="n">C</span>
+      <span class="n">BASIS_SET</span>  <span class="n">DZVP</span><span class="o">-</span><span class="n">MOLOPT</span><span class="o">-</span><span class="n">SR</span><span class="o">-</span><span class="n">GTH</span><span class="o">-</span><span class="n">q4</span>
+      <span class="n">POTENTIAL</span>  <span class="n">GTH</span><span class="o">-</span><span class="n">PBE</span><span class="o">-</span><span class="n">q4</span>
+    <span class="o">&amp;</span><span class="n">END</span>
+    <span class="o">&amp;</span><span class="n">KIND</span>  <span class="n">H</span>
+      <span class="n">BASIS_SET</span>  <span class="n">DZVP</span><span class="o">-</span><span class="n">MOLOPT</span><span class="o">-</span><span class="n">SR</span><span class="o">-</span><span class="n">GTH</span><span class="o">-</span><span class="n">q1</span>
+      <span class="n">POTENTIAL</span>  <span class="n">GTH</span><span class="o">-</span><span class="n">PBE</span><span class="o">-</span><span class="n">q1</span>
+    <span class="o">&amp;</span><span class="n">END</span>
+    <span class="o">&amp;</span><span class="n">TOPOLOGY</span>
+      <span class="n">COORD_FILE_NAME</span>  <span class="o">./</span><span class="n">geometry</span><span class="o">.</span><span class="n">xyz</span>
+      <span class="n">COORDINATE</span>  <span class="n">XYZ</span>
+    <span class="o">&amp;</span><span class="n">END</span>
+  <span class="o">&amp;</span><span class="n">END</span>
+<span class="o">&amp;</span><span class="n">END</span>
+
+<span class="o">&amp;</span><span class="n">GLOBAL</span>
+  <span class="n">PRINT_LEVEL</span>  <span class="n">LOW</span>
+  <span class="n">PROJECT</span>  <span class="n">example</span>
+  <span class="n">RUN_TYPE</span>  <span class="n">ENERGY_FORCE</span>
+<span class="o">&amp;</span><span class="n">END</span>
+</pre></div>
+</div>
+<p>PLAMS automatically creates the indented structure of the previous example together with the special character <em>&amp;</em> at the beginning and end of each section, and finally the keyword <em>END</em> at the end of each section.</p>
+<p>Notice that <em>CP2K</em> requires the explicit declaration of the basis set together with the charge and the name of the potential used for each one of the atoms.
+In the previous example the basis for the carbon is <em>DZVP-MOLOPT-SR-GTH</em>, while the potential is <em>GTH-PBE</em> and the charge <em>q4</em>.</p>
+<p>The input parser also allows for header values like in this example <em>&amp;LOCALIZE T  &amp;END</em> by using the <code class="docutils literal notranslate"><span class="pre">&lt;some_section&gt;._h</span></code> (for header) notation in the <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance (just like in <code class="xref py py-class docutils literal notranslate"><span class="pre">ADFJob</span></code>).</p>
+<p>Inclusion of external files by using the <em>&#64;INCLUDE</em> notation of Cp2k is supported. Also the <em>&#64;SET</em> and <em>&#64;IF</em> keys can be used, just replace the <em>&#64;</em> sign by <code class="docutils literal notranslate"><span class="pre">at_</span></code> in the definition of your <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a>.
+If you need some files to be copied to the actual execution directory, pass them to the constructor using the <code class="docutils literal notranslate"><span class="pre">copy=</span></code> option. See the API below.</p>
+</div>
+<div class="section" id="molecule-parsing">
+<h2>Molecule parsing<a class="headerlink" href="#molecule-parsing" title="Permalink to this headline">¶</a></h2>
+<p>Molecules can be parsed into the input automatically by passing them to the <a class="reference internal" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kJob" title="scm.plams.interfaces.thirdparty.cp2k.Cp2kJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cp2kJob</span></code></a> constructor.
+Leaving the molecule unset is supported, make sure you then set your molecule by hand (e.g. using the <em>TOPOLOGY</em> section).
+Parsing of the molecule can be avoided by setting <code class="docutils literal notranslate"><span class="pre">job.settings.ignore_molecule</span> <span class="pre">=</span> <span class="pre">True</span></code> in the <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> of the job.</p>
+<p>Also, the simulation cell can be specified using the x, y, z vectors like in the previous example.
+A cubic box can be easily specified by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">penta</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">force_eval</span><span class="o">.</span><span class="n">subsys</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">ABC</span> <span class="o">=</span> <span class="s2">&quot;[angstrom] 50 50 50&quot;</span>
+</pre></div>
+</div>
+<p>That results in a simulation cube of 50 cubic angstroms.
+For a more detailed description of the <em>cp2k</em> input see <a class="reference external" href="https://manual.cp2k.org/#gsc.tab=0">manual</a>.</p>
+</div>
+<div class="section" id="loading-jobs">
+<h2>Loading jobs<a class="headerlink" href="#loading-jobs" title="Permalink to this headline">¶</a></h2>
+<p>Calculations done without PLAMS can be loaded using the <a class="reference internal" href="../components/jobs.html#scm.plams.core.basejob.SingleJob.load_external" title="scm.plams.core.basejob.SingleJob.load_external"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load_external()</span></code></a> functionality. The <a class="reference internal" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults" title="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cp2kResults</span></code></a> class supports reading input files into <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> objects.</p>
+<p>Just do <code class="docutils literal notranslate"><span class="pre">Cp2kJob.load_external(path)</span></code> to get the settings from the file.</p>
+</div>
+<div class="section" id="molecule-loading">
+<h2>Molecule loading<a class="headerlink" href="#molecule-loading" title="Permalink to this headline">¶</a></h2>
+<p>A <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> can be recreated from a <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance using the <a class="reference internal" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kSettings2Mol" title="scm.plams.interfaces.thirdparty.cp2k.Cp2kSettings2Mol"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cp2kSettings2Mol</span></code></a> function.</p>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kJob">
+<em class="property">class </em><code class="descname">Cp2kJob</code><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kJob" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class representing a single computational job with <a class="reference external" href="https://www.cp2k.org/">CP2K</a>.</p>
+<p>In addition to the arguments of <a class="reference internal" href="../components/jobs.html#scm.plams.core.basejob.SingleJob" title="scm.plams.core.basejob.SingleJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleJob</span></code></a>, <a class="reference internal" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kJob" title="scm.plams.interfaces.thirdparty.cp2k.Cp2kJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cp2kJob</span></code></a> takes a <code class="docutils literal notranslate"><span class="pre">copy</span></code> argument.
+<code class="docutils literal notranslate"><span class="pre">copy</span></code> can be a list or string, containing paths to files to be copied to the jobs directory.
+This might e.g. be a molecule, further input files etc.</p>
+<dl class="attribute">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kJob._result_type">
+<code class="descname">_result_type</code><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kJob._result_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults" title="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cp2kResults</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kJob.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>copy=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kJob.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kJob.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kJob._get_ready">
+<code class="descname">_get_ready</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kJob._get_ready"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kJob._get_ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy files to execution dir if self.copy_files is set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kJob.get_input">
+<code class="descname">get_input</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kJob.get_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kJob.get_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform all contents of <code class="docutils literal notranslate"><span class="pre">input</span></code> branch of <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> into string
+with blocks, subblocks, keys and values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kJob.get_runscript">
+<code class="descname">get_runscript</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kJob.get_runscript"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kJob.get_runscript" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a parallel version of CP2K.</p>
+<p>The exact CP2K executable, and whether or not one wants to use <code class="docutils literal notranslate"><span class="pre">srun</span></code> or <code class="docutils literal notranslate"><span class="pre">mpirun</span></code>
+can be specified under <code class="code docutils literal notranslate"><span class="pre">self.settings.executable</span></code>.
+Currently supported executables are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&quot;sdbg&quot;</span></code>: Serial single core testing and debugging</li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;sopt&quot;</span></code>: Serial general single core usage</li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;ssmp&quot;</span></code>: Parallel (only OpenMP), single node, multi core</li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;pdbg&quot;</span></code>: Parallel (only MPI) multi-node testing and debugging</li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;popt&quot;</span></code>: Parallel (only MPI) general usage, no threads</li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;psmp&quot;</span></code>: parallel (MPI + OpenMP) general usage, threading might improve scalability and memory usage</li>
+</ul>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scm.plams</span> <span class="k">import</span> <span class="n">Cp2kJob</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">job</span> <span class="o">=</span> <span class="n">Cp2kJob</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">job</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">executable</span> <span class="o">=</span> <span class="s2">&quot;cp2k.popt&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">job</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">executable</span> <span class="o">=</span> <span class="s2">&quot;c2pk.ssmp&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">job</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">executable</span> <span class="o">=</span> <span class="s2">&quot;mpirun -np 24 cp2k.psmp&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kJob.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kJob.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kJob.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look for the normal termination signal in Cp2k output.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults">
+<em class="property">class </em><code class="descname">Cp2kResults</code><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for CP2K results.</p>
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.recreate_settings">
+<code class="descname">recreate_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.recreate_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.recreate_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate job for <a class="reference internal" href="../components/jobs.html#scm.plams.core.basejob.SingleJob.load_external" title="scm.plams.core.basejob.SingleJob.load_external"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load_external()</span></code></a>.</p>
+<p>If a keyword and a section with the same name appear, only the keyword is used.
+This happens e.g. when reading restart files where <code class="docutils literal notranslate"><span class="pre">kind.symbol.potential</span></code> is given
+as <em>Potential ABCD</em> and <em>&amp;POTENTIAL …. &amp;END POTENTIAL</em>.</p>
+<p>Limited support of sections that have different formatting like <em>KIND</em> and <em>COORD</em>.
+Check the resulting <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance if the information you want is there.
+Be careful with reading restart files, since they are automatically generated
+and not every case is handled well here.
+You should get all the information but not sure if I know about all special cases of input.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_runtime">
+<code class="descname">get_runtime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_runtime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_runtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return runtime in seconds from output.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_timings">
+<code class="descname">get_timings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_timings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_timings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Timings from the End of the Output File</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_energy">
+<code class="descname">get_energy</code><span class="sig-paren">(</span><em>index=-1</em>, <em>unit='a.u.'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_energy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns ‘Total energy:’ from the output file.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">index</span></code> to choose the n-th occurence of the total energy in the output, <em>e.g.</em> to choose an optimization step.
+Also supports slices.
+Defaults to the last occurence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_dispersion">
+<code class="descname">get_dispersion</code><span class="sig-paren">(</span><em>index=-1</em>, <em>unit='a.u.'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_dispersion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_dispersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns ‘Dispersion energy:’ from the output file.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">index</span></code> to choose the n-th occurence of the dispersion energy in the output, <em>e.g.</em> to choose an optimization step.
+Also supports slices.
+Defaults to the last occurence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_forces">
+<code class="descname">get_forces</code><span class="sig-paren">(</span><em>file=None</em>, <em>index=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_forces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_forces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list of ndarrays with forces for each atom.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">file</span></code> to use other than the main output file.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">index</span></code> to choose the n-th occurence of the forces in the output, <em>e.g.</em> to choose an optimization step.
+Set to <em>None</em> to return all as a list.
+Defaults to the last occurence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_mulliken_charges">
+<code class="descname">get_mulliken_charges</code><span class="sig-paren">(</span><em>return_spin=False</em>, <em>index=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_mulliken_charges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_mulliken_charges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Mulliken charges (and spin moments).</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">index</span></code> to choose the n-th occurence of the Charges in the output, e.g. to choose an optimization step.
+Set to <em>None</em> to return all as a list.
+Defaults to the last occurence.</p>
+<p>Returns list of charges. If <code class="docutils literal notranslate"><span class="pre">return_spin</span></code> is <cite>True</cite> returns tuple of charges and spins.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_hirshfeld_charges">
+<code class="descname">get_hirshfeld_charges</code><span class="sig-paren">(</span><em>return_spin=False</em>, <em>index=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_hirshfeld_charges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_hirshfeld_charges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Hirshfeld charges (and spin moments).</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">index</span></code> to choose the n-th occurence of the Charges in the output, e.g. to choose an optimization step.
+Set to <em>None</em> to return all as a list.
+Defaults to the last occurence.</p>
+<p>Returns list of charges. If <code class="docutils literal notranslate"><span class="pre">return_spin</span></code> is <cite>True</cite> returns tuple of charges and spins.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_multigrid_info">
+<code class="descname">get_multigrid_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_multigrid_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_multigrid_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Information on multigrids.</p>
+<p>Usefull for converging cutoffs.
+Needs ‘Medium’ global print level.</p>
+<p>Returns a dict with keys ‘counts’ and ‘cutoffs’.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_md_infos">
+<code class="descname">get_md_infos</code><span class="sig-paren">(</span><em>file=None</em>, <em>cache=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_md_infos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_md_infos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the MD-info sections.</p>
+<p>Returns a list with descriptors and a nested list containing the values for each timestep.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">cache</span></code> to save the results in <code class="docutils literal notranslate"><span class="pre">self.md_infos</span></code> to speed up analysis by avoiding I/O.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_md_cell_volumes">
+<code class="descname">get_md_cell_volumes</code><span class="sig-paren">(</span><em>file=None</em>, <em>unit='angstrom'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_md_cell_volumes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_md_cell_volumes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get cell Volumes using the <a class="reference internal" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_md_infos" title="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_md_infos"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_md_infos()</span></code></a> function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_md_pressure">
+<code class="descname">get_md_pressure</code><span class="sig-paren">(</span><em>file=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.get_md_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_md_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get pressures using the <a class="reference internal" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_md_infos" title="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.get_md_infos"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_md_infos()</span></code></a> function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.check_scf">
+<code class="descname">check_scf</code><span class="sig-paren">(</span><em>file=None</em>, <em>return_n=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.check_scf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.check_scf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns False if the string ‘SCF run NOT converged’ appears in <em>file</em>, otherwise True.</p>
+<p><em>file</em> defaults to <code class="docutils literal notranslate"><span class="pre">self.job._filename('out')</span></code>.</p>
+<p>Set <em>return_n</em> to recieve the number of occurences instead of a bool.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.check_go">
+<code class="descname">check_go</code><span class="sig-paren">(</span><em>file=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kResults.check_go"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kResults.check_go" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns False if the string ‘GEOMETRY OPTIMIZATION COMPLETED’ does not appear in <em>file</em></p>
+<p><em>file</em> defaults to <code class="docutils literal notranslate"><span class="pre">self.job._filename('out')</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="scm.plams.interfaces.thirdparty.cp2k.Cp2kSettings2Mol">
+<code class="descname">Cp2kSettings2Mol</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/thirdparty/cp2k.html#Cp2kSettings2Mol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kSettings2Mol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a molecule from a <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance used for a <a class="reference internal" href="#scm.plams.interfaces.thirdparty.cp2k.Cp2kJob" title="scm.plams.interfaces.thirdparty.cp2k.Cp2kJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cp2kJob</span></code></a>.</p>
+<p>Loads coordinates from <code class="docutils literal notranslate"><span class="pre">settings.input.force_eval.subsys.coord._h</span></code> and
+cell information from <code class="docutils literal notranslate"><span class="pre">settings.input.force_eval.subsys.cell</span></code>.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="crystal.html" class="btn btn-neutral float-right" title="Crystal" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="thirdparty.html" class="btn btn-neutral" title="Other programs" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

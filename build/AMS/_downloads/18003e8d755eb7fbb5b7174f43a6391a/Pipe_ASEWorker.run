@@ -1,0 +1,72 @@
+#!/bin/sh
+# This example uses a Python pipe worker based on ASE to evaluate the Lennard-Jones potential.
+# First we do a single-point calculation including the gradients and the stress tensor and then
+# a short MD run similar to the Pipe_AMSonAMS example.
+
+export NSCM=1
+
+AMS_JOBNAME=SP "$AMSBIN/ams" << eor
+RNGSeed -538839488 972444872 -468448621 535232319 -953628259 777353319 -1036072 387155213
+
+Task SinglePoint
+
+Properties
+    Gradients True
+    StressTensor True
+End
+
+System
+    Atoms
+        Ar     0.03374714    -0.02579634    -0.03864485
+        Ar    -2.47202773    -2.57754100    -0.02505375
+        Ar    -2.54465030    -0.00587811    -2.49637860
+        Ar    -4.98237672    -2.60930954    -2.49495517
+        Ar    -0.03221746    -2.51967081    -2.47883073
+        Ar    -2.52675554    -5.12905072    -2.48152312
+        Ar    -2.54445364    -2.45619404    -5.02601013
+        Ar    -4.95645981    -5.14903666    -4.95752059
+    End
+    Lattice
+           0.00000000     5.00000000     5.00000000
+           5.00000000     0.00000000     5.00000000
+           5.00000000     5.20000000     0.00000000
+    End
+End
+
+Engine Pipe
+    WorkerCommand "$AMSBIN/amspython" "$TEST_DIRECTORY/ASE-LJ-worker.py"
+EndEngine
+
+eor
+
+AMS_JOBNAME=MD "$AMSBIN/ams" << eor
+RNGSeed -538839488 972444872 -468448621 535232319 -953628259 777353319 -1036072 387155213
+
+Task MolecularDynamics
+
+MolecularDynamics
+    nSteps 200
+    TimeStep 5.0
+    Thermostat Type=NHC Temperature=298.15 Tau=100
+    Trajectory SamplingFreq=20
+    InitialVelocities Type=random Temperature=200
+End
+
+System
+    Atoms
+        Ar 0.0 0.0 0.0
+        Ar 1.605 0.9266471820493496 2.605
+    End
+    Lattice
+        3.21 0.0 0.0
+        1.605 2.779941546148048 0.0
+        0.0 0.0 5.21
+    End
+    SuperCell 4 4 4
+End
+
+Engine Pipe
+    WorkerCommand "$AMSBIN/amspython" "$TEST_DIRECTORY/ASE-LJ-worker.py"
+EndEngine
+
+eor

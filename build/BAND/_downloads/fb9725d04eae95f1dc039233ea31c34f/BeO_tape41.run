@@ -1,0 +1,119 @@
+#!/bin/sh
+
+# Saving the RUNKF file of a calculation gives rise to the opportunity to
+# restart from it to calculate properties on a grid, like densities, potentials,
+# or crystal orbitals. Find more details in the user documentation (Restarts).
+
+# Regarding the following example, in the first run we perform a single-point
+# calculation for a bulk BeO system. After the calculation finished the RUNKF
+# file shall be renamed to BeO.kf. In the second run we restart from this
+# file. We specify to use a regular grid and ask the program to calculate a
+# bunch of properties on that grid.
+
+# == First Job: ==
+
+AMS_JOBNAME=First $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  FractionalCoords True
+
+  Atoms
+   Be  0.             0.             0.
+   Be  0.333333333333 0.333333333333 0.5
+   O   0.             0.             0.375
+   O   0.333333333333 0.333333333333 0.875
+  END
+
+  Lattice [Bohr]
+    5.10 0              0
+    2.55 4.416729559300 0
+    0    0              8.328265125462
+  End
+End
+
+Engine Band
+  Title BeO
+
+  NumericalQuality Basic
+
+  xc
+    GGA BP86
+  end
+
+  Basis
+    Type DZ
+    Core large
+  end
+EndEngine
+eor
+
+# == Second Job: ==
+
+AMS_JOBNAME=Second $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  FractionalCoords True
+
+  Atoms
+   Be  0.             0.             0.
+   Be  0.333333333333 0.333333333333 0.5
+   O   0.             0.             0.375
+   O   0.333333333333 0.333333333333 0.875
+  END
+
+  Lattice [Bohr]
+    5.10 0              0
+    2.55 4.416729559300 0
+    0    0              8.328265125462
+  End
+End
+
+Engine Band
+  Title BeO_restart
+
+  Restart
+    File First.results/band.rkf
+    DensityPlot
+  End
+
+  Grid
+     Type Coarse
+  End
+
+  DensityPlot
+     rho(deformation/fit) ! FITDENSITY_deformation_scf
+     rho(fit)             ! FITDENSITY_total_scf
+     rho(atoms)           ! ATOMIC_density
+     v(coulomb/atoms)     ! ATOMIC_coulombPot
+     v(coulomb)           ! COULOMBPOTENTIAL_scf
+     vxc[rho(fit)]        ! XCPOTENTIAL_scf
+     X                    ! Electron Energy Density
+     X(fit)               ! Electron Energy Density, using the fit
+  End
+
+  NumericalQuality Basic
+
+  xc
+    GGA BP86
+  end
+
+  Basis
+    Type DZ
+    Core large
+  end
+EndEngine
+eor
+
+
+NSCM=1
+export NSCM
+echo ""
+echo "Begin TOC of tape41"
+
+$AMSBIN/dmpkf -n 1 Second.results/TAPE41 --toc
+
+echo "End TOC of tape41"

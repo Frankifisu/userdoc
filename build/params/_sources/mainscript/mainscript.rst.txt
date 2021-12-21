@@ -1,0 +1,187 @@
+.. _ParAMSMainScript:
+
+ParAMS Main Script
+==================
+
+The ParAMS main script allows command-line execution of most common steps during an optimization with
+no to minimal coding effort with the help of the ``params`` command.
+
+.. note::
+  For any of the main params commands to work, at least the following files need to present in the working directory: |br|
+
+  * *params.conf.py*: The configuration file that will be used by the main script. |br|
+    Contains definitions of the :ref:`parameter interface <Parameter Interfaces>`, :ref:`optimizer <Optimizers>` and possibly
+    other user-defined options like file locations or :ref:`callbacks <Callbacks>`.
+  * *training_set.yaml*: Path to the :ref:`Data Set` to be used as a training set during optimization.
+  * *job_collection.yaml*: Path to the :ref:`Job Collection` to be used during optimization.
+
+
+Below is an overview of ``params`` commands:
+
+.. list-table:: Main Script Commands Overview
+  :widths: 5 5 25
+  :header-rows: 1
+
+  * - Command
+    - Description
+    - Comments
+
+  * - ``-h`` / ``--help``
+    - Print an overview of all commands and their descriptions.
+    - Can be used in combination with any other command.
+
+  * - ``check``
+    - Check the current working directory for consistency. |br|
+      Load all files and report any possible issues.
+    -
+
+  * - ``clips``
+    - Checks whether any of the active parameters |br|
+      are hitting the lower (LR) or upper (UR) bounds |br|
+      by checking the last `window` iterations from |br|
+      `running_active_parameters.txt`. |br|
+      The clipping criterium is determined by |br|
+      `mu - a*sigma < 0` and `mu + a*sigma > 1` respectively. |br|
+    - Has to be called in the optimization directory. |br|
+      Does not require any of the files mentioned above to be present.
+
+
+  * - ``export``
+    - Exports the parameterization project into a compressed archive |br|
+      suitable for publication.
+    -
+
+  * - ``genref``
+    - Generate reference data given a `training_set.yaml` and `reference_engines.yaml`. |br|
+      Store the reference results in the `training_set.yaml` when done.
+    -
+
+  * - ``makeconf``
+    - Create a `params.conf.py` template in the current working directory.
+    - See :ref:`below <The Configuration File>` for more details.
+
+  * - ``optimize``
+    - Starts an optimization given the files in the current directory.
+    - Will report an error if no reference data is present |br|
+      in the `training_set.yaml`.
+
+  * - ``plot DATFILE``
+    - Plot any `*.txt` file produced by the :ref:`Logger` callback.
+    - Does not require any of the files mentioned above to be present. |br|
+      For optional arguments, see ``params plot -h``.
+
+  * - ``printfx [DIRS]``
+    - Prints the results from multiple optimization directories.
+    - Works only with optimizations that used the :ref:`Logger` callback. |br|
+      Does not require any of the files mentioned above to be present.
+
+  * - ``run``
+    - Same as ``optimize``, but will try to calculate the reference results |br|
+      if none are present.
+    -
+
+
+In addition to the above commands, the following optional arguments are available:
+
+.. list-table:: Main Script Optional Arguments
+  :widths: 5 5 25
+  :header-rows: 1
+
+  * - Command
+    - Description
+    - Default value
+
+  * - ``-c`` / ``--config``
+    - Path to the params configuration file to use
+    - `./params.conf.py`
+
+  * - ``--ignore-cache``
+    - When calculating reference values, ignore the already existing |br|
+      results from the reference directory and re-run all reference jobs instead
+    - *False*
+
+  * - ``-o`` / ``--optdir``
+    - Path to the optimization working directory
+    - `./optimization`
+
+  * - ``--replace``
+    - By default, if an optimization working directory already exists, |br|
+      a suffix will be appended to the new directory. Use this argument to |br|
+      override this behavior and replace the existing directory
+    - *False*
+
+  * - ``-r`` / ``--ref-cache``
+    - When calculating reference values, can be used to load previously |br|
+      calculated results from this directory
+    - `./reference_cache`
+
+
+
+.. seealso::
+
+    :ref:`LJ_Ar_Tutorial`
+
+
+
+
+The Configuration File
+----------------------
+
+When using the main script, a configuration file (default name `params.conf.py`) containing all definitions of relevant variables
+needs to be present in the working directory.
+
+Generate a template config file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A template of the config file can always be generated with one of the following commands:
+
+.. code:: bash
+
+    params makeconf 
+    params makeconf -i reaxff
+    params makeconf -i xtb
+    params makeconf -i lennardjones
+
+The config file is meant to encourage users to experiment with different settings based on the extensive comments provided.
+The bare `minimum` that needs to be set is a single ``parameter_interface`` variable. All other settings are optional
+(with the exception mentioned :ref:`above <params main script>`).
+
+The config file is executed as a Python script whenever ``params`` is called,
+meaning that it can also contain more advanced workflows that need execution before an optimization.
+
+.. warning::
+
+    Be cautious when using configuration files from a party that you do not trust:
+    The config file is executed as a Python script and could possibly contain malicious code.
+
+List of variables in ``params.conf.py``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. csv-table::
+    :header: Variable, Description, Default
+
+    batch_size, see :class:`Optimization <scm.params.core.parameteroptimization.Optimization>`
+    callbacks, list of Callback, None
+    constraints, list of Constraint, None
+    data_set_names, see :class:`Optimization <scm.params.core.parameteroptimization.Optimization>`
+    eval_every, integer how frequently to evaluate validation set, 1
+    job_collection, path to job_collection file, 'job_collection.yaml'
+    logger_every, integer how often to log output, 10
+    loss, string describing a Loss, 'sse'
+    max_evaluations, integer, None
+    maxjobs, see :class:`Optimization <scm.params.core.parameteroptimization.Optimization>`
+    maxjobs_shuffle, see :class:`Optimization <scm.params.core.parameteroptimization.Optimization>`
+    more_extractors, path to directory with extractors, 'extractors/' if it exists
+    optimizer, Optimizer, CMAOptimizer()
+    parallel, ParallelLevels, None (good default)
+    plams_workdir_path, path, None
+    reference_engines, list to engine collection file, 'reference_engines.yaml' if it exists
+    reference_jobrunner, JobRunner, None
+    skip_x0, boolean whether to skip the initial evaluation, False,
+    timeout, integer in seconds, None
+    training_set, path to training set file, 'training_set.yaml' (or .pkl or .pkl.gz)
+    use_pipe, see :class:`Optimization <scm.params.core.parameteroptimization.Optimization>`
+    validation, fraction to use for validation set, None
+    validation_set, path to validation set file, 'validation_set.yaml' if it exists (or .pkl or pkl.gz)
+
+    

@@ -1,0 +1,1317 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Nudged Elastic Band (NEB) &mdash; AMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="AMS 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Structure and Reactivity, Molecular Dynamics" href="TOC.html"/>
+        <link rel="next" title="Intrinsic Reaction Coordinate (IRC)" href="IRC.html"/>
+        <link rel="prev" title="Linear Transit, PES scan" href="PES_Scan.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search AMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-AMS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#what-s-new-in-the-ams-driver">What’s new in the AMS driver?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2021-3">New in AMS2021.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2021-1">New in AMS2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2020-1">New in AMS2020.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2019-3">New in AMS2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2019-1">New in AMS2019.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#motivation-and-progress">Motivation and progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#input-execution-and-output">Input, execution and output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input_Output.html">Input, execution and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#tasks">Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#properties">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#units">Units</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#execution">Execution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#shell-script">Shell script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#interactive-input-file">Interactive input file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#running-ams-on-compute-clusters">Running AMS on compute clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#output">Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#index-13">Results directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#logfile-ams-log">Logfile ams.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#binary-output-files">Binary output files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#standard-output">Standard output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#optimized-geometry-in-xyz-format">Optimized geometry in xyz format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-environment-variables">AMS environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#driver-level-parallelism">Driver level parallelism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#python-interface">Python interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Pipe_protocol.html">AMSPipe protocol specification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#low-level-message-encoding">Low-level message encoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#return-messages-and-error-handling">Return messages and error handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-as-a-pipe-master">AMS as a pipe master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-as-a-pipe-worker">AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../System.html">Geometry, System definition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#geometry-lattice">Geometry, Lattice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#modifying-the-geometry">Modifying the geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#symmetry">Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#regions">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#charge-atomic-masses-input-bond-orders">Charge, atomic masses, input bond orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#homogeneous-electric-field-and-multipole-charges">Homogeneous electric field and multipole charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#load-a-system-from-file">Load a System from file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#atom-attributes">Atom attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#force-field-related-extensions">Force field related extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#load-charges-for-a-forcefield-into-regions">Load charges for a forcefield into regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#load-forcefield-atom-types">Load forcefield atom types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="TOC.html">Structure and Reactivity, Molecular Dynamics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Single_Point.html">Single point calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bond_Energy.html">Bond energy calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#ground-state-energy">Ground state energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#formation-energy">Formation energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#atomization-energies">Atomization energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#chemisorption-energies">Chemisorption energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#atomic-corrections">Atomic corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#open-shell-systems">Open shell systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#impurities">Impurities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry_Optimization.html">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Geometry_Optimization.html#constrained-optimization">Constrained optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#restraints">Restraints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry_Optimization.html#optimization-under-pressure-external-stress">Optimization under pressure / external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry_Optimization.html#optimization-methods">Optimization methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#quasi-newton">Quasi-Newton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#fire">FIRE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#index-17">SCMGO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#limited-memory-bfgs">Limited-memory BFGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#conjugate-gradients">Conjugate gradients</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry_Optimization.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#failure-to-converge">Failure to converge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#restarting-a-geometry-optimization">Restarting a geometry optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Transition_State_Search.html">Transition state search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PES_Scan.html">Linear Transit, PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#distance-angle-and-dihedral-angle-coordinates">Distance, angle, and dihedral angle coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#joint-scan-coordinates">Joint scan coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#multidimensional-pes-scan">Multidimensional PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#lattice-scan-coordinates-for-periodic-systems">Lattice scan coordinates for periodic systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#isotropic-scaling-of-the-unit-cell-volume-or-area">Isotropic scaling of the unit cell volume or area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#scaling-of-the-lattice-vector-lengths">Scaling of the lattice vector lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#strain-matrix-in-voigt-notation">Strain matrix in Voigt notation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#scan-arbitrary-lattices">Scan arbitrary lattices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#calculate-properties-for-all-pes-points">Calculate properties for all PES points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frozen-atom-constraints">Frozen atom constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimizations-and-convergence-criteria">Optimizations and convergence criteria</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="IRC.html">Intrinsic Reaction Coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="IRC.html#method-details">Method details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IRC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IRC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Excited_State_Optimizations.html">Excited state optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Molecular_Dynamics.html">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#constrained-molecular-dynamics">Constrained molecular dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#re-starting-a-simulation">(Re-)Starting a simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#thermostats-and-barostats">Thermostats and barostats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#temperature-and-pressure-regimes">Temperature and pressure regimes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#trajectory-sampling-and-output">Trajectory sampling and output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#lattice-deformations-volume-regimes">Lattice deformations (volume regimes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#molecule-gun-adding-molecules-during-simulation">Molecule Gun: adding molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#removing-molecules-during-simulation">Removing molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#accelerated-dynamics">Accelerated dynamics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#the-plumed-library-support-in-ams">The PLUMED library support in AMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#metadynamics-for-conformer-rotamer-ensemble-sampling-crest-mtd">Metadynamics for Conformer-Rotamer Ensemble Sampling (CREST-MTD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#collective-variable-driven-hyperdynamics-cvhd">Collective Variable-driven HyperDynamics (CVHD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#temperature-replica-exchange">Temperature Replica Exchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#bond-boost-method">Bond Boost Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#force-bias-monte-carlo-fbmc">Force bias Monte Carlo (fbMC)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#non-equilibrium-md-nemd">Non-equilibrium MD (NEMD)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#t-nemd-for-thermoconductivity-heat-exchange">T-NEMD for thermoconductivity: heat exchange</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TrajectoryReplay.html">Trajectory replay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GCMC.html">Grand Canonical Monte Carlo (GCMC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#general-info">General info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#method-details">Method Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PES_Exploration.html">Automated PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#job-selection-and-main-options">Job selection and main options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#results-the-energy-landscape">Results: the “Energy Landscape”</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#results-on-the-text-output">Results on the text output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#continue-a-pes-exploration-from-a-previous-calculation">Continue a PES exploration from a previous calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#structure-comparison">Structure comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#process-search-job">Process Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id2">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#saddle-search-job">Saddle Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id3">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id8">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#basin-hopping-job">Basin Hopping job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id9">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id11">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#landscape-refinement">Landscape Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#optimizer">Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#binding-sites">Binding Sites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Exploration.html#id12">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Exploration.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Gradients_Stress_Elasticity.html">Gradients, Hessian, Stress tensor, Elasticity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#nuclear-gradients">Nuclear gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#index-3">Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#pes-point-character">PES point character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#thermodynamics-gas-phase-gibbs-free-energy">Thermodynamics, gas phase Gibbs free energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#stress-tensor">Stress tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#elastic-tensor">Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#numerical-differentiation-options">Numerical differentiation options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Vibrational_Spectroscopy.html">Vibrational Spectroscopy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#general">General</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#where-are-the-results">Where are the results?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#ir-frequencies-and-normal-modes">IR frequencies and normal modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#all-vibrational-modes">All vibrational Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#rescanning-imaginary-modes">Rescanning Imaginary modes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#symmetric-displacements">Symmetric Displacements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mobile-block-hessian-mbh">Mobile Block Hessian (MBH)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-scanning">Mode Scanning</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-refinement">Mode Refinement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id4">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id5">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-tracking">Mode Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id8">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id11">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-tracking-methods">Input: Tracking methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-selecting-modes">Input: Selecting modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-convergence">Input: Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#selecting-modes">Selecting modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#thermodynamics-ideal-gas">Thermodynamics (ideal gas)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#gibbs-free-energy-change-for-a-gas-phase-reaction">Gibbs free energy change for a gas phase reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#moments-of-inertia">Moments of inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#partial-vibrational-spectra-pvdos">Partial Vibrational Spectra (PVDOS)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#phonons">Phonons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman">(Resonance) Raman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id19">Raman</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman-excited-state-finite-lifetime">Resonance Raman: excited-state finite lifetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman-vg-fc">Resonance Raman: VG-FC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id22">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id24">Input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#vroa-resonance-vibrational-raman-optical-activity">VROA: (Resonance) vibrational Raman optical activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#engine-adf">Engine ADF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#vcd-vibrational-circular-dichroism">VCD: Vibrational Circular Dichroism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#atomic-polar-tensor-apt-model">Atomic polar tensor (APT) model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#analytical-vcd-in-adf">Analytical VCD in ADF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Vibrationally_resolved_electronic_spectra.html">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/FCF_module.html">AH-FC: Adiabatic Hessian Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-module-franck-condon-factors">FCF module: Franck-Condon Factors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#algorithm">Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#result-tape61">Result: TAPE61</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-example-absorption-and-fluorescence">FCF example absorption and fluorescence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-example-phosphorescence">FCF Example phosphorescence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html">VG-FC: Vertical Gradient Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory">Theory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-tracking">Theory: Vibronic-Structure Tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-refinement">Theory: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-adiabatic-excitation-energy">Theory: Adiabatic excitation energy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-all-modes">Input: Vibronic-Structure all modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-tracking">Input: Vibronic-Structure Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-restarting-vst">Input: Restarting VST</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-refinement">Input: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-excited-state">Input: Excited State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-producing-the-spectrum">Input: Producing the spectrum</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Properties.html">Dipole moment, Polarizability, Bond orders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Properties.html#charges-dipole-moment-polarizability">Charges, Dipole Moment, Polarizability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Properties.html#bond-orders-molecule-detection">Bond orders &amp; Molecule detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Engines.html">Engines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#index-2">Available engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#summary-of-engine-capabilities">Summary of engine capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#external-programs-as-engines">External programs as engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#toy-engines">Toy engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#engine-add-ons">Engine add-ons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#dispersion-corrections">Dispersion corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#pressure">Pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#non-isotropic-external-stress">Non-isotropic external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#atom-energies">Atom energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#restraints">Restraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#wall-potential">Wall potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Utilities/TOC.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/ChemTraYzer.html">ChemTraYzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#general-information">General information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#graphical-user-interface">Graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#command-line-execution">Command line execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/ChemTraYzer2.html">ChemTraYzer2 (beta version)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#using-chemtrayzer2-via-the-graphical-user-interface">Using ChemTraYzer2 via the graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#minimal-input">Minimal input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#ouput">Ouput</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html">Trajectory Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#radial-distribution-function-rdf">Radial Distribution Function (RDF)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#histogram">Histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#autocorrelation-functions">Autocorrelation Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#id2">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#id3">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#diffusion-coefficient">Diffusion Coefficient</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/VCDtools.html">VCD Analysis: VCDtools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#general-theory">General Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#general-coupled-oscillator-analysis">General Coupled Oscillator Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#available-options">Available options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#geometry-optimization">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/GO_formaldehyde_noSCC.html">Example: Simple geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/2StepGO.html">Example: Two-stage geometry optimization with initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Diamond_under_pressure.html">Example: Periodic lattice optimization under pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Diamond_from_pressure.html">Example: Phase Transition Due To External Nonuniform Stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ExternalStress_BN.html">Example: Boron nitride optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ExternalStress_graphene.html">Example: Graphene optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/constraints.html">Example: Constrained optimizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#transition-state-search">Transition state search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/COChainFreqTS.html">Example: TS search starting from initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and TS search for H2 on graphene</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#nudged-elastic-band-neb">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NEB.html">Nudged Elastic Band (NEB) Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NEB.html#hcn-isomerization-reaction-with-neb">HCN isomerization reaction with NEB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NEB.html#h2-dissociation-on-graphene">H2 dissociation on graphene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NEB.html#running-multiple-neb-calculations-using-plams">Running multiple NEB calculations using PLAMS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#intrinsic-reaction-coordinate-irc">Intrinsic reaction coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/IRC_HCN.html">Example: IRC for HCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/TS_and_IRC_Claisen.html">Example: TS and IRC for Claisen reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-scan">PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PESScan.html">Example: 2D PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PESScan_lattice.html">Example: PES scan for lattice degrees of freedom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-exploration">PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BasinHopping_Ar13.html">Example: Basin Hopping for Ar 13 cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ProcessSearch_alanine.html">Example: PES Exploration, Process Search for alanine with PLAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BindingSites_O+Pt111.html">Example: PES Exploration, Binding Sites for O on Pt 111</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#molecular-dynamics">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/MD_hydrogen_longrun.html">Example: Simple MD for H2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/H2O_nreac.html">Example: MD for a box of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/MD_Deformation.html">Example: Lattice deformations in MD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#trajectory-replay">Trajectory replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/TrajectoryReplay.html">Example: Trajectory replays for PES scans, NEB and MD calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#vibrational-analysis">Vibrational analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/VATools_dydrogesterone.html">Example: Mode Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/VATools_cyclohexanone.html">Example: Mode Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/VST_pyrene.html">Example: Vibronic-Structure Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-point-properties">PES point properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Phonons_Graphene.html">Example: Phonons for graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Phonons_Isotopes.html">Example: Phonons with isotopes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Phonons_UserBZPath.html">Example: User-defined Brillouin zone for phonon dispersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ElasticTensor.html">Example: Elastic tensor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Pipe_ASEWorker.html">Example: ASE calculator as a pipe worker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Pipe_AMSonAMS.html">Example: AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#extended-xyz-file-format">Extended XYZ file format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#developer-options">Developer options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#symmetry">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices.html#schonfliess-symbols-and-symmetry-labels">Schönfliess symbols and symmetry labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices.html#molecular-orientation-requirements">Molecular orientation requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#feature-references">Feature references</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#frequencies-ir-intensities-raman-vcd">Frequencies, IR Intensities, Raman, VCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#pes-exploration">PES Exploration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">AMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../AMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">AMS</a>/</li>
+      
+          <li><a href="TOC.html">Structure and Reactivity, Molecular Dynamics</a>/</li>
+      
+    <li class="orange-text">Nudged Elastic Band (NEB)</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="index-0"></span><div class="section" id="nudged-elastic-band-neb">
+<span id="neb"></span><span id="index-1"></span><h1>Nudged Elastic Band (NEB)<a class="headerlink" href="#nudged-elastic-band-neb" title="Permalink to this headline">¶</a></h1>
+<p>The Nudged Elastic Band (NEB) method <a class="footnote-reference" href="#ref1" id="id1">[1]</a> can be used to find a reaction path and the transition state between a reactant and a product state.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/NEB.png"><img alt="../_images/NEB.png" src="../_images/NEB.png" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Pictorial representation of a reaction path computed with NEB</span></p>
+</div>
+<p>At the beginning of a NEB calculation, the geometry of the initial and final systems are optimized to minimize their energy (unless the <a class="reference internal" href="#ams-key-neb"><span class="std std-ref">OptimizeEnds</span></a> option is set to False).</p>
+<p>Then, a rough approximation of the reaction path is build: a set of <em>images</em> is created by performing a linear interpolation between the <strong>initial</strong> and <strong>final</strong> systems. Optionally, an <strong>intermediate</strong> system can be provided, in which case the interpolation is performed between the initial and intermediate systems, and then between the intermediate and final systems.</p>
+<p>Finally, a reaction path is found by performing a simultaneous optimization of all the images. In the NEB method the images are not independent from each other. The force on each image depend on its neighboring images: at each step the forces parallel to the reaction path are eliminated and a so-called spring force is added that tries to keep each image in the middle between its neighbors. This does not let images slide to the initial or final reaction state and ensures that they are evenly distributed along the reaction path.</p>
+<p>During the NEB path optimization, a climbing image algorithm is used to drive the highest-energy image in the path to the transition state (unless the <a class="reference internal" href="#ams-key-neb"><span class="std std-ref">Climbing</span></a> option is set to False).</p>
+<p>Be aware that NEB is a computationally expensive method, typically involving hundreds if not thousands of energy and gradients evaluations.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><a class="reference internal" href="../Examples/NEB.html#examples-neb"><span class="std std-ref">Nudged Elastic Band (NEB) Examples</span></a></li>
+<li><a class="reference external" href="../../Tutorials/StructureAndReactivity/NEB.html">GUI Nudged Elastic Band tutorial</a></li>
+</ul>
+</div>
+<div class="section" id="input">
+<span id="neb-input"></span><h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
+<p>A NEB calculation in AMS is triggered by setting the <code class="docutils literal notranslate"><span class="pre">Task</span></code> to <code class="docutils literal notranslate"><span class="pre">NEB</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">NEB</span>
+</pre></div>
+</div>
+<p>The NEB method requires two or three input systems. The first, unnamed system is used as the <strong>initial system</strong> and the system called <code class="docutils literal notranslate"><span class="pre">final</span></code> is used as a <strong>final system</strong>. These two systems are mandatory. This is an example of system-definitions for a HCN isomerization reaction:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Task NEB
+
+# This is the initial system:
+System
+   Atoms
+      C   0.0000   0.0000   0.0000
+      N   1.1800   0.0000   0.0000
+      H   2.1960   0.0000   0.0000
+   End
+End
+
+# This is the final system (note the header &#39;final&#39; in the next line):
+System final
+   Atoms
+      C   0.0000   0.0000   0.0000
+      N   1.1630   0.0000   0.0000
+      H  -1.0780   0.0000   0.0000
+   End
+End
+</pre></div>
+</div>
+<p>Optionally, a third system, called <code class="docutils literal notranslate"><span class="pre">intermediate</span></code>, can be used to provide a better approximation for the transition state. The intermediate system will be placed in the middle of the chain. When providing three input systems it may be a good idea to optimize the ends in advance and set <a class="reference internal" href="#ams-key-neb"><span class="std std-ref">OptimizeEnds</span></a> to False to prevent creating an unbalanced reaction path.</p>
+<p>Note that not only the atomic coordinates, but also the lattice parameters and the charge (if non-zero) must be set for all input systems.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">The order in which atoms are specified in the <code class="docutils literal notranslate"><span class="pre">System%Atoms</span></code> blocks <strong>must be the same for the initial and final systems</strong> (if you provide an intermediate system, you must use a consistent atom-ordering for that too). The order of the atoms must be consistent because the images-interpolation algorithm maps the n-th atom of the initial system to the n-th atom of the final system.</p>
+</div>
+<p>All NEB-specific options are specified in the NEB input block:</p>
+<div class="highlight-none notranslate" id="ams-key-neb"><div class="highlight"><pre><span></span>NEB
+   Climbing Yes/No
+   ClimbingThreshold float
+   Images integer
+   InterpolateInternal Yes/No
+   InterpolateShortest Yes/No
+   Iterations integer
+   Jacobian float
+   MapAtomsToCell Yes/No
+   OldTangent Yes/No
+   OptimizeEnds Yes/No
+   OptimizeLattice Yes/No
+   Parallel
+      nCoresPerGroup integer
+      nGroups integer
+      nNodesPerGroup integer
+   End
+   ReOptimizeEnds Yes/No
+   Restart string
+   Skewness float
+   Spring float
+End
+</pre></div>
+</div>
+<p>All keys of the NEB block have reasonable defaults or are optional. Thus, in principle, the NEB block can be omitted altogether. These are the main options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">NEB</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Images</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">8</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Number of images</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Number of NEB images (not counting the chain ends). Using more images will result in a smoother reaction path and can help with convergence problems, but it will also increase the computation time.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Iterations</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Maximum number of iterations</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Maximum number of NEB iterations. The default value depends on the number of degrees of freedom (number of images, atoms, periodic dimensions).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Spring</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Hartree/Bohr^2</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Spring value</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Spring force constant in atomic units.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Skewness</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Skewness</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Degree of how much images are shifted towards or away from the TS, which may help tackle problems with a long reaction path (for example involving a loose adsorption complex) without needing too many images. A value greater than 1 will make sure that images are concentrated near the transition state. The optimal value depends on the path length, the number of images (larger [Skewness] may be needed for a longer path and fewer images). Technically [Skewness] is equal to the ratio between the optimized distances to the lower and the higher neighbor image on the path.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Climbing</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Climb highest image to TS</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Use the climbing image algorithm to drive the highest image to the transition state.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ClimbingThreshold</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Hartree/Bohr</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">CI force threshold</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Climbing image force threshold. If ClimbingThreshold &gt; 0 and the max perpendicular force component is above the threshold then no climbing is performed at this step. This entry can be used to get a better approximation for the reaction path before starting the search for the transition state. A typical value is 0.01 Hartree/Bohr.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">InterpolateInternal</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Interpolate in Internal coordinates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The initial NEB image geometries are calculated by interpolating between the initial and the final state. By default, for non-periodic systems the interpolation is performed in Internal coordinates but the user can choose to do it in the Cartesian ones. For periodic systems the interpolation is always done in Cartesian coordinates.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">InterpolateShortest</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Interpolate across cell boundary</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Allow interpolation across periodic cell boundaries. Set to false if an atom is intended to move more than half across the simulation box during reaction.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">OptimizeEnds</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Optimize reactants/products</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Start the NEB with optimization of the reactant and product geometries.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Restart</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Restart from</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Provide an ams.rkf file from a previous NEB calculation to restart from. It can be an unfinished NEB calculation or one performed with different engine parameters.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ReOptimizeEnds</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Re-optimize reactants/products</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Re-optimize reactant and product geometries upon restart.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The following keys are related to solid-state NEB (SS-NEB):</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">NEB</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">OptimizeLattice</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Optimize lattice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Turn on the solid-state NEB (SS-NEB).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Jacobian</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Jacobian value</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Scaling factor used to convert the lattice strain to a NEB coordinate value. Default value: sqrt(N)*(V/N)^(1/d), where V - lattice volume (area for 2D, length for 1D), N - number of atoms, and d - number of periodic dimensions.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MapAtomsToCell</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Map atoms to cell</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Translate atoms to the [-0.5,0.5] cell before every step. This option cannot be disabled for SS-NEB.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>At each iteration, the images may be computed in parallel. The parallel execution is normally configured completely automatically, but users can override the automatic parallelization using the keys in the <code class="docutils literal notranslate"><span class="pre">Parallel</span></code> block.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">NEB</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Parallel</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options for double parallelization, which allows to split the available processor cores into groups working through all the available tasks in parallel, resulting in a better parallel performance. The keys in this block determine how to split the available processor cores into groups working in parallel.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">nCoresPerGroup</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Cores per group</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Number of cores in each working group.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nGroups</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Number of groups</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Total number of processor groups. This is the number of tasks that will be executed in parallel.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nNodesPerGroup</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Nodes per group</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Number of nodes in each group. This option should only be used on homogeneous compute clusters, where all used compute nodes have the same number of processor cores.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The following keys modify other aspects of the NEB and should, in principle, be left to their defaults:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">NEB</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">OldTangent</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Use old tangent</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Turn on the old central difference tangent.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="frozen-atom-constraints">
+<h2>Frozen atom constraints<a class="headerlink" href="#frozen-atom-constraints" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to perform NEB with part of the system frozen, using any of the following keys of the Constraints block or a combination thereof:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Constraints</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Atom</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Recurring:</th><td class="field-body">True</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Fix the position of an atom. Just one integer referring to the index of the atom in the [System%Atoms] block.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">AtomList</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Recurring:</th><td class="field-body">True</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Fix positions of the specified atoms. A list of integers referring to indices of atoms in the [System%Atoms] block.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FixedRegion</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Recurring:</th><td class="field-body">True</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Fix positions of all atoms in a region.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Note: the frozen atom constraints will be enforced both during the geometry optimizations of the initial and final systems and during the NEB optimization.</p>
+</div>
+<div class="section" id="optimizations-and-convergence-criteria">
+<h2>Optimizations and convergence criteria<a class="headerlink" href="#optimizations-and-convergence-criteria" title="Permalink to this headline">¶</a></h2>
+<p>The NEB path is optimized using a limited-memory BFGS (l-BFGS) method where the system being optimized is a union of all NEB images with their respective molecular and spring forces.</p>
+<p>The NEB convergence thresholds are defined in the <a class="reference internal" href="Geometry_Optimization.html#go-convergence"><span class="std std-ref">GeometryOptimization%Convergence block</span></a>. NEB is considered converged when the following criteria are satisfied:</p>
+<ul class="simple">
+<li>the change in the highest image energy must be less than [GeometryOptimization%Convergence%Energy]</li>
+<li>the max atomic force component for the highest image must be less than [GeometryOptimization%Convergence%Gradients]</li>
+<li>the max atomic force component for all other images must be less than ten times the [GeometryOptimization%Convergence%Gradients] value.</li>
+</ul>
+<p>If the optimization of the initial NEB end point fails to converge, you can try using the <a class="reference internal" href="Geometry_Optimization.html#geometryoptimizationmethods"><span class="std std-ref">FIRE optimization method</span></a>.</p>
+</div>
+<div class="section" id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<p>Results are printed to the text output and stored in the binary result file ‘ams.rkf’. In the ‘ams.rkf’ file, NEB calculation results are stored in the History section just like in a normal geometry optimization. The NEB section of the RKF file contains additional, NEB-specific, information.</p>
+<p>The NEB reaction path can be visualized using the <strong>AMSmovie GUI module</strong>.</p>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>In case the geometry optimization of the initial and final systems fails: try using the <a class="reference internal" href="Geometry_Optimization.html#geometryoptimizationmethods"><span class="std std-ref">FIRE optimization method</span></a></li>
+<li>In case the optimization of the NEB path does not converge:<ul>
+<li>make sure that the order in which the atoms are defined is consistent between the initial and final systems (see the <em>important</em> note in the <a class="reference internal" href="#neb-input"><span class="std std-ref">NEB input section</span></a>)</li>
+<li>try increasing the number of <a class="reference internal" href="#ams-key-neb"><span class="std std-ref">NEB images</span></a></li>
+<li>try tweaking the <a class="reference internal" href="Geometry_Optimization.html#l-bfgs"><span class="std std-ref">TrustRadius</span></a> or <a class="reference internal" href="Geometry_Optimization.html#l-bfgs"><span class="std std-ref">TrialStep</span></a> options (see <a class="reference internal" href="Geometry_Optimization.html#l-bfgs"><span class="std std-ref">Limited-memory BFGS</span></a>)</li>
+<li>try specifying an <strong>intermediate</strong> system</li>
+</ul>
+</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="ref1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>G. Henkelman, B.P. Uberuaga and H. Jonsson, <em>A climbing image nudged elastic band method for finding saddle points and minimum energy paths</em>, <a class="reference external" href="https://doi.org/10.1063/1.1329672">Journal of Chemical Physics 113, 9901 (2000)</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="IRC.html" class="btn btn-neutral float-right" title="Intrinsic Reaction Coordinate (IRC)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="PES_Scan.html" class="btn btn-neutral" title="Linear Transit, PES scan" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,1740 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Geometry, System definition &mdash; AMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="AMS 2021.1 documentation" href="index.html"/>
+        <link rel="next" title="Structure and Reactivity, Molecular Dynamics" href="Tasks/TOC.html"/>
+        <link rel="prev" title="AMSPipe protocol specification" href="Pipe_protocol.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="keywords.html">Keywords</a>
+           
+           
+           <a href="genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search AMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-AMS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#what-s-new-in-the-ams-driver">What’s new in the AMS driver?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-ams2022-1">New in AMS2022.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-ams2021-1">New in AMS2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-ams2020-1">New in AMS2020.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-ams2019-3">New in AMS2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-ams2019-1">New in AMS2019.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#motivation-and-progress">Motivation and progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#input-execution-and-output">Input, execution and output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Input_Output.html">Input, execution and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Input_Output.html#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#tasks">Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#properties">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#units">Units</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Input_Output.html#execution">Execution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#shell-script">Shell script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#interactive-input-file">Interactive input file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#running-ams-on-compute-clusters">Running AMS on compute clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Input_Output.html#output">Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#index-13">Results directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#logfile-ams-log">Logfile ams.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#binary-output-files">Binary output files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#standard-output">Standard output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#optimized-geometry-in-xyz-format">Optimized geometry in xyz format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#ams-environment-variables">AMS environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Input_Output.html#driver-level-parallelism">Driver level parallelism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_Output.html#python-interface">Python interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_Output.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Pipe_protocol.html">AMSPipe protocol specification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Pipe_protocol.html#low-level-message-encoding">Low-level message encoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Pipe_protocol.html#return-messages-and-error-handling">Return messages and error handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Pipe_protocol.html#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#ams-as-a-pipe-master">AMS as a pipe master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Input_Output.html#ams-as-a-pipe-worker">AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Geometry, System definition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#geometry-lattice">Geometry, Lattice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modifying-the-geometry">Modifying the geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#symmetry">Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#regions">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#charge-atomic-masses-input-bond-orders">Charge, atomic masses, input bond orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#homogeneous-electric-field-and-multipole-charges">Homogeneous electric field and multipole charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#load-a-system-from-file">Load a System from file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#atom-attributes">Atom attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#force-field-related-extensions">Force field related extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#load-charges-for-a-forcefield-into-regions">Load charges for a forcefield into regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-forcefield-atom-types">Load forcefield atom types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Tasks/TOC.html">Structure and Reactivity, Molecular Dynamics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Single_Point.html">Single point calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Bond_Energy.html">Bond energy calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#ground-state-energy">Ground state energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#formation-energy">Formation energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#atomization-energies">Atomization energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#chemisorption-energies">Chemisorption energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#atomic-corrections">Atomic corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#open-shell-systems">Open shell systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Bond_Energy.html#impurities">Impurities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Geometry_Optimization.html">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Geometry_Optimization.html#constrained-optimization">Constrained optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#restraints">Restraints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Geometry_Optimization.html#optimization-under-pressure-external-stress">Optimization under pressure / external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Geometry_Optimization.html#optimization-methods">Optimization methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#quasi-newton">Quasi-Newton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#fire">FIRE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#index-17">SCMGO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#limited-memory-bfgs">Limited-memory BFGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#conjugate-gradients">Conjugate gradients</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Geometry_Optimization.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#failure-to-converge">Failure to converge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Geometry_Optimization.html#restarting-a-geometry-optimization">Restarting a geometry optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Transition_State_Search.html">Transition state search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/PES_Scan.html">Linear Transit, PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#distance-angle-and-dihedral-angle-coordinates">Distance, angle, and dihedral angle coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#joint-scan-coordinates">Joint scan coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#multidimensional-pes-scan">Multidimensional PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#lattice-scan-coordinates-for-periodic-systems">Lattice scan coordinates for periodic systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Scan.html#isotropic-scaling-of-the-unit-cell-volume-or-area">Isotropic scaling of the unit cell volume or area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Scan.html#scaling-of-the-lattice-vector-lengths">Scaling of the lattice vector lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Scan.html#strain-matrix-in-voigt-notation">Strain matrix in Voigt notation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Scan.html#scan-arbitrary-lattices">Scan arbitrary lattices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#calculate-properties-for-all-pes-points">Calculate properties for all PES points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Scan.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/NEB.html">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/NEB.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/NEB.html#frozen-atom-constraints">Frozen atom constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/NEB.html#optimizations-and-convergence-criteria">Optimizations and convergence criteria</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/NEB.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/NEB.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/IRC.html">Intrinsic Reaction Coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/IRC.html#method-details">Method details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/IRC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/IRC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Excited_State_Optimizations.html">Excited state optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/Molecular_Dynamics.html">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#constrained-molecular-dynamics">Constrained molecular dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#re-starting-a-simulation">(Re-)Starting a simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#thermostats-and-barostats">Thermostats and barostats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#temperature-and-pressure-regimes">Temperature and pressure regimes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#trajectory-sampling-and-output">Trajectory sampling and output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#lattice-deformations-volume-regimes">Lattice deformations (volume regimes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#molecule-gun-adding-molecules-during-simulation">Molecule Gun: adding molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#removing-molecules-during-simulation">Removing molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#accelerated-dynamics">Accelerated dynamics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#the-plumed-library-support-in-ams">The PLUMED library support in AMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#metadynamics-for-conformer-rotamer-ensemble-sampling-crest-mtd">Metadynamics for Conformer-Rotamer Ensemble Sampling (CREST-MTD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#collective-variable-driven-hyperdynamics-cvhd">Collective Variable-driven HyperDynamics (CVHD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#temperature-replica-exchange">Temperature Replica Exchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#bond-boost-method">Bond Boost Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#force-bias-monte-carlo-fbmc">Force bias Monte Carlo (fbMC)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#non-equilibrium-md-nemd">Non-equilibrium MD (NEMD)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/Molecular_Dynamics.html#t-nemd-for-thermoconductivity-heat-exchange">T-NEMD for thermoconductivity: heat exchange</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/TrajectoryReplay.html">Trajectory replay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/GCMC.html">Grand Canonical Monte Carlo (GCMC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/GCMC.html#general-info">General info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/GCMC.html#method-details">Method Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/GCMC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/GCMC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/PES_Exploration.html">Automated PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#job-selection-and-main-options">Job selection and main options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#results-the-energy-landscape">Results: the “Energy Landscape”</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#results-on-the-text-output">Results on the text output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#continue-a-pes-exploration-from-a-previous-calculation">Continue a PES exploration from a previous calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#structure-comparison">Structure comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#process-search-job">Process Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id2">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#saddle-search-job">Saddle Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id3">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id8">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#basin-hopping-job">Basin Hopping job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id9">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id11">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#landscape-refinement">Landscape Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#optimizer">Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#binding-sites">Binding Sites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/PES_Exploration.html#id12">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/PES_Exploration.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Gradients_Stress_Elasticity.html">Gradients, Hessian, Stress tensor, Elasticity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#nuclear-gradients">Nuclear gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#index-3">Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#pes-point-character">PES point character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#thermodynamics-gas-phase-gibbs-free-energy">Thermodynamics, gas phase Gibbs free energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#stress-tensor">Stress tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#elastic-tensor">Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradients_Stress_Elasticity.html#numerical-differentiation-options">Numerical differentiation options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Vibrational_Spectroscopy.html">Vibrational Spectroscopy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#general">General</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#where-are-the-results">Where are the results?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#ir-frequencies-and-normal-modes">IR frequencies and normal modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#all-vibrational-modes">All vibrational Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#rescanning-imaginary-modes">Rescanning Imaginary modes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#symmetric-displacements">Symmetric Displacements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#mobile-block-hessian-mbh">Mobile Block Hessian (MBH)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#mode-scanning">Mode Scanning</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#input">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#mode-refinement">Mode Refinement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id4">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id5">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#mode-tracking">Mode Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id8">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id11">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#input-tracking-methods">Input: Tracking methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#input-selecting-modes">Input: Selecting modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#input-convergence">Input: Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#selecting-modes">Selecting modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#thermodynamics-ideal-gas">Thermodynamics (ideal gas)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#gibbs-free-energy-change-for-a-gas-phase-reaction">Gibbs free energy change for a gas phase reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#moments-of-inertia">Moments of inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#partial-vibrational-spectra-pvdos">Partial Vibrational Spectra (PVDOS)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#phonons">Phonons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#resonance-raman">(Resonance) Raman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#id19">Raman</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#resonance-raman-excited-state-finite-lifetime">Resonance Raman: excited-state finite lifetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#resonance-raman-vg-fc">Resonance Raman: VG-FC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id22">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#id24">Input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#vroa-resonance-vibrational-raman-optical-activity">VROA: (Resonance) vibrational Raman optical activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#engine-adf">Engine ADF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html#vcd-vibrational-circular-dichroism">VCD: Vibrational Circular Dichroism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#atomic-polar-tensor-apt-model">Atomic polar tensor (APT) model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#analytical-vcd-in-adf">Analytical VCD in ADF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Vibrationally_resolved_electronic_spectra.html">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/FCF_module.html">AH-FC: Adiabatic Hessian Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/FCF_module.html#fcf-module-franck-condon-factors">FCF module: Franck-Condon Factors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/FCF_module.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/FCF_module.html#algorithm">Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/FCF_module.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/FCF_module.html#result-tape61">Result: TAPE61</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/FCF_module.html#fcf-example-absorption-and-fluorescence">FCF example absorption and fluorescence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/FCF_module.html#fcf-example-phosphorescence">FCF Example phosphorescence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html">VG-FC: Vertical Gradient Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory">Theory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-tracking">Theory: Vibronic-Structure Tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-refinement">Theory: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-adiabatic-excitation-energy">Theory: Adiabatic excitation energy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-all-modes">Input: Vibronic-Structure all modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-tracking">Input: Vibronic-Structure Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-restarting-vst">Input: Restarting VST</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-refinement">Input: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-excited-state">Input: Excited State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-producing-the-spectrum">Input: Producing the spectrum</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Properties.html">Dipole moment, Polarizability, Bond orders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#charges-dipole-moment-polarizability">Charges, Dipole Moment, Polarizability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#bond-orders-molecule-detection">Bond orders &amp; Molecule detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Engines.html">Engines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Engines.html#index-2">Available engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engines.html#summary-of-engine-capabilities">Summary of engine capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engines.html#external-programs-as-engines">External programs as engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engines.html#toy-engines">Toy engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engines.html#engine-add-ons">Engine add-ons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#dispersion-corrections">Dispersion corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#pressure">Pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#non-isotropic-external-stress">Non-isotropic external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#atom-energies">Atom energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#restraints">Restraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Engines.html#wall-potential">Wall potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Utilities/TOC.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/ChemTraYzer.html">ChemTraYzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer.html#general-information">General information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer.html#graphical-user-interface">Graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer.html#command-line-execution">Command line execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer.html#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/ChemTraYzer2.html">ChemTraYzer2 (beta version)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer2.html#using-chemtrayzer2-via-the-graphical-user-interface">Using ChemTraYzer2 via the graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer2.html#minimal-input">Minimal input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer2.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/ChemTraYzer2.html#ouput">Ouput</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html">Trajectory Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#radial-distribution-function-rdf">Radial Distribution Function (RDF)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#histogram">Histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#autocorrelation-functions">Autocorrelation Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#id2">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#id3">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/TrajectoryAnalysis.html#diffusion-coefficient">Diffusion Coefficient</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/VCDtools.html">VCD Analysis: VCDtools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/VCDtools.html#general-theory">General Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/VCDtools.html#general-coupled-oscillator-analysis">General Coupled Oscillator Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/VCDtools.html#available-options">Available options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Utilities/OLEDWorkflows.html">OLED workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/OLEDWorkflows.html#deposition">Deposition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#basic-input">Basic input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#output">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#deposition-of-host-guest-materials">Deposition of host-guest materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#deposition-of-interfaces">Deposition of interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#restarting-a-deposition">Restarting a deposition</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Utilities/OLEDWorkflows.html#properties">Properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Utilities/OLEDWorkflows.html#oledpropertiesoutput">Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#geometry-optimization">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_formaldehyde_noSCC.html">Example: Simple geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/2StepGO.html">Example: Two-stage geometry optimization with initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Diamond_under_pressure.html">Example: Periodic lattice optimization under pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Diamond_from_pressure.html">Example: Phase Transition Due To External Nonuniform Stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/ExternalStress_BN.html">Example: Boron nitride optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/ExternalStress_graphene.html">Example: Graphene optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/constraints.html">Example: Constrained optimizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#transition-state-search">Transition state search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/COChainFreqTS.html">Example: TS search starting from initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and TS search for H2 on graphene</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#nudged-elastic-band-neb">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/NEB.html">Nudged Elastic Band (NEB) Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Examples/NEB.html#hcn-isomerization-reaction-with-neb">HCN isomerization reaction with NEB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Examples/NEB.html#h2-dissociation-on-graphene">H2 dissociation on graphene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Examples/NEB.html#running-multiple-neb-calculations-using-plams">Running multiple NEB calculations using PLAMS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#intrinsic-reaction-coordinate-irc">Intrinsic reaction coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/IRC_HCN.html">Example: IRC for HCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/TS_and_IRC_Claisen.html">Example: TS and IRC for Claisen reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#pes-scan">PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/PESScan.html">Example: 2D PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/PESScan_lattice.html">Example: PES scan for lattice degrees of freedom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#pes-exploration">PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/BasinHopping_Ar13.html">Example: Basin Hopping for Ar 13 cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/ProcessSearch_alanine.html">Example: PES Exploration, Process Search for alanine with PLAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/BindingSites_O+Pt111.html">Example: PES Exploration, Binding Sites for O on Pt 111</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#molecular-dynamics">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/MD_hydrogen_longrun.html">Example: Simple MD for H2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/H2O_nreac.html">Example: MD for a box of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/MD_Deformation.html">Example: Lattice deformations in MD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#trajectory-replay">Trajectory replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/TrajectoryReplay.html">Example: Trajectory replays for PES scans, NEB and MD calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#vibrational-analysis">Vibrational analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/VATools_dydrogesterone.html">Example: Mode Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/VATools_cyclohexanone.html">Example: Mode Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/VST_pyrene.html">Example: Vibronic-Structure Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#pes-point-properties">PES point properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Phonons_Graphene.html">Example: Phonons for graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Phonons_Isotopes.html">Example: Phonons with isotopes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Phonons_UserBZPath.html">Example: User-defined Brillouin zone for phonon dispersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/ElasticTensor.html">Example: Elastic tensor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Pipe_ASEWorker.html">Example: ASE calculator as a pipe worker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Pipe_AMSonAMS.html">Example: AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Appendices.html#extended-xyz-file-format">Extended XYZ file format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendices.html#developer-options">Developer options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Appendices.html#symmetry">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Appendices.html#schonfliess-symbols-and-symmetry-labels">Schönfliess symbols and symmetry labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Appendices.html#molecular-orientation-requirements">Molecular orientation requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#feature-references">Feature references</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Required_citations.html#frequencies-ir-intensities-raman-vcd">Frequencies, IR Intensities, Raman, VCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Required_citations.html#pes-exploration">PES Exploration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">AMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="AMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">AMS</a>/</li>
+      
+    <li class="orange-text">Geometry, System definition</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="geometry-system-definition">
+<span id="systemdefinition"></span><h1>Geometry, System definition<a class="headerlink" href="#geometry-system-definition" title="Permalink to this headline">¶</a></h1>
+<p>The definition of the system to simulate, i.e. the positions and types of the
+nuclei, the total charge, and potentially lattice vectors, is enclosed in the
+<code class="docutils literal notranslate"><span class="pre">System</span></code> block:</p>
+<div class="highlight-none notranslate" id="ams-key-system"><div class="highlight"><pre><span></span>System header
+   Atoms header # Non-standard block. See details.
+      ...
+   End
+   Lattice header # Non-standard block. See details.
+      ...
+   End
+   FractionalCoords Yes/No
+   AllowCloseAtoms Yes/No
+   GeometryFile string
+   Symmetrize Yes/No
+   LatticeStrain float_list
+   SuperCell integer_list
+   Charge float
+   BondOrders # Non-standard block. See details.
+      ...
+   End
+End
+</pre></div>
+</div>
+<span class="target" id="index-0"></span><div class="section" id="geometry-lattice">
+<span id="index-1"></span><h2>Geometry, Lattice<a class="headerlink" href="#geometry-lattice" title="Permalink to this headline">¶</a></h2>
+<p>The geometry of the system is specified with the <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> and <code class="docutils literal notranslate"><span class="pre">Lattice</span></code>
+blocks.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">System</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Recurring:</th><td class="field-body">True</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Specification of the chemical system. For some applications more than one system may be present in the input. In this case, all systems except one must have a non-empty string ID specified after the System keyword. The system without an ID is considered the main one.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Atoms</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Non-standard block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The atom types and coordinates. Unit can be specified in the header. Default unit is Angstrom.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Lattice</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Non-standard block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Up to three lattice vectors. Unit can be specified in the header. Default unit is Angstrom.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FractionalCoords</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether the atomic coordinates in the Atoms block are given in fractional coordinates of the lattice vectors. Requires the presence of the Lattice block.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> block contains one line per atoms, similar to the lines found in
+an <code class="docutils literal notranslate"><span class="pre">.xyz</span></code> file: First the name of the element, then three real numbers
+representing the coordinates of that atom in Angstrom. The following <code class="docutils literal notranslate"><span class="pre">Atoms</span></code>
+block shows how one would define a water molecule:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Atoms</span>
+      <span class="n">O</span>   <span class="mf">0.0</span>   <span class="mf">0.0</span>       <span class="mf">0.59372</span>
+      <span class="n">H</span>   <span class="mf">0.0</span>   <span class="mf">0.76544</span>  <span class="o">-</span><span class="mf">0.00836</span>
+      <span class="n">H</span>   <span class="mf">0.0</span>  <span class="o">-</span><span class="mf">0.76544</span>  <span class="o">-</span><span class="mf">0.00836</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>Note that it is possible to specify a different unit of length in the header of
+the block (that is in the line after the keyword opening the block) by putting
+the name of the unit in <code class="docutils literal notranslate"><span class="pre">[</span></code> and <code class="docutils literal notranslate"><span class="pre">]</span></code> brackets. So the same water molecule
+could also be specified as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Atoms</span> <span class="p">[</span><span class="n">Bohr</span><span class="p">]</span>
+      <span class="n">O</span>   <span class="mf">0.0</span>   <span class="mf">0.0</span>       <span class="mf">1.12197</span>
+      <span class="n">H</span>   <span class="mf">0.0</span>   <span class="mf">1.44647</span>  <span class="o">-</span><span class="mf">0.01580</span>
+      <span class="n">H</span>   <span class="mf">0.0</span>  <span class="o">-</span><span class="mf">1.44647</span>  <span class="o">-</span><span class="mf">0.01580</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p id="index-2">It is also possible to specify the input geometry as a Z-Matrix, by putting the
+string <code class="docutils literal notranslate"><span class="pre">Z-Matrix</span></code> in the header of the block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Atoms</span> <span class="n">Z</span><span class="o">-</span><span class="n">Matrix</span>
+      <span class="n">C</span>
+      <span class="n">H</span>   <span class="mi">1</span> <span class="mf">1.089000</span>
+      <span class="n">H</span>   <span class="mi">1</span> <span class="mf">1.089000</span>  <span class="mi">2</span>  <span class="mf">109.4710</span>
+      <span class="n">H</span>   <span class="mi">1</span> <span class="mf">1.089000</span>  <span class="mi">2</span>  <span class="mf">109.4710</span>  <span class="mi">3</span>  <span class="mf">120.0000</span>
+      <span class="n">H</span>   <span class="mi">1</span> <span class="mf">1.089000</span>  <span class="mi">2</span>  <span class="mf">109.4710</span>  <span class="mi">3</span> <span class="o">-</span><span class="mf">120.0000</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<span class="target" id="lattice-vectors"></span><p id="index-3">Periodic systems require the specification of 1 (for chains), 2 (for slabs) or 3
+(for bulk) lattice vectors in addition to the nuclear coordinates. Every lattice
+vector is specified on a separate line of three numbers, representing the
+vectors x,y and z-component. Note that for chain systems, the single lattice
+vector <strong>must</strong> point along the x-axis, while for slab systems the two lattice
+vectors <strong>must</strong> be in the xy-plane. Consider the following input for graphene:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Atoms</span>
+      <span class="n">C</span>   <span class="mf">0.0</span>   <span class="mf">0.0</span>      <span class="mf">0.0</span>
+      <span class="n">C</span>   <span class="mf">1.23</span>  <span class="mf">0.71014</span>  <span class="mf">0.0</span>
+   <span class="n">End</span>
+   <span class="n">Lattice</span>
+      <span class="mf">2.46</span>  <span class="mf">0.0</span>      <span class="mf">0.0</span>
+      <span class="mf">1.23</span>  <span class="mf">2.13042</span>  <span class="mf">0.0</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p id="index-4">As with the <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> block, the length unit in which the lattice vectors are
+given can be changed by specifying the desired unit in the header of the block
+(enclosed in <code class="docutils literal notranslate"><span class="pre">[</span></code> and <code class="docutils literal notranslate"><span class="pre">]</span></code>). It is also possible to define a system given the
+fractional coordinates of the atoms using the <code class="docutils literal notranslate"><span class="pre">FractionalCoords</span></code> keyword.
+The numbers in the <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> block are then interpreted as fractional
+coordinates according to the lattice vectors in the <code class="docutils literal notranslate"><span class="pre">Lattice</span></code> block. Note
+that for chain and slab systems, the coordinates perpendicular to the periodic
+direction (z and y for chains, z for slabs) are of course still in Angstrom (or
+alternatively the unit set in the header of the <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> block).  Using the
+<code class="docutils literal notranslate"><span class="pre">FractionalCoords</span></code> keyword we could specify the geometry of table salt
+(NaCl) as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Lattice</span>
+      <span class="mf">0.0</span>   <span class="mf">2.75</span>  <span class="mf">2.75</span>
+      <span class="mf">2.75</span>  <span class="mf">0.0</span>   <span class="mf">2.75</span>
+      <span class="mf">2.75</span>  <span class="mf">2.75</span>  <span class="mf">0.0</span>
+   <span class="n">End</span>
+   <span class="n">FractionalCoords</span> <span class="kc">True</span>
+   <span class="n">Atoms</span>
+      <span class="n">Na</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+      <span class="n">Cl</span>  <span class="mf">0.5</span>  <span class="mf">0.5</span>  <span class="mf">0.5</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>Instead of specifying the geometry of the system directly in the input file it
+can also be read from an external file.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">System</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GeometryFile</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Read the geometry from a file (instead of from Atoms and Lattice blocks). Supported formats: .xyz</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">GeometryFile</span></code> key replaces both the <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">Lattice</span></code> blocks in the input. So if you specify the <code class="docutils literal notranslate"><span class="pre">GeometryFile</span></code> keyword
+in the input, the <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> and <code class="docutils literal notranslate"><span class="pre">Lattice</span></code> blocks must not appear there. At the
+moment only the <a class="reference internal" href="Appendices.html#extendedxyz"><span class="std std-ref">extended XYZ file format</span></a> is supported.</p>
+<div class="section" id="modifying-the-geometry">
+<h3>Modifying the geometry<a class="headerlink" href="#modifying-the-geometry" title="Permalink to this headline">¶</a></h3>
+<p>Finally there are a number of keywords that <em>modify</em> the system geometry:</p>
+<dl class="docutils" id="index-5">
+<dt><code class="docutils literal notranslate"><span class="pre">System</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Symmetrize</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether to symmetrize the input structure. This might also rototranslate the structure into a standard orientation. This will symmetrize the atomic coordinates to machine precision. Useful if the system is almost symmetric or to rototranslate a symmetric molecule into a standard orientation.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LatticeStrain</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Deform the input system by the specified strain. The strain elements are in Voigt notation, so one should specify 6 numbers for 3D periodic system (order: xx,yy,zz,yz,xz,xy), 3 numbers for 2D periodic systems (order: xx,yy,xy) or 1 number for 1D periodic systems.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SuperCell</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Create a supercell of the input system (only possible for periodic systems). The integer numbers represent the diagonal elements of the supercell transformation; you should specify as many numbers as lattice vectors (i.e. 1 number for 1D, 2 numbers for 2D and 3 numbers for 3D periodic systems).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SuperCellTrafo</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Create a supercell of the input system (only possible for periodic systems) <span class="math notranslate nohighlight">\(\vec{a}_i' = \sum_j T_{ij} \vec{a}_j\)</span>. The integer numbers represent the supercell transformation <span class="math notranslate nohighlight">\(T_{ij}\)</span>: 1 number for 1D PBC, 4 numbers for 2D PBC corresponding to a 2x2 matrix (order: (1,1),(1,2),(2,1),(2,2)) and 9 numbers for 3D PBC corresponding to a 3x3 matrix (order: (1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PerturbCoordinates</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Perturb the atomic coordinates by adding random numbers between [-PerturbCoordinates,PerturbCoordinates] to each Cartesian component. This can be useful if you want to break the symmetry of your system (e.g. for a geometry optimization).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PerturbLattice</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Perturb the lattice vectors by applying random strain with matrix elements between [-PerturbLattice,PerturbLattice]. This can be useful if you want to deviate from an ideal symmetric geometry, for example if you look for a phase change due to high pressure.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MapAtomsToUnitCell</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">For periodic systems the atoms will be moved to the central cell.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>These modifications are applied immediately after the system block is read. To
+the rest of AMS (and the input) it looks exactly as if the modified system was
+specified explicitly in the <code class="docutils literal notranslate"><span class="pre">System</span></code> block input. That means that the
+<code class="docutils literal notranslate"><span class="pre">SuperCell</span></code> keyword is not easily usable with input options that require the
+specification of atom indices, e.g. the <a class="reference internal" href="Tasks/Geometry_Optimization.html#constraints"><span class="std std-ref">constraints</span></a> block.
+Note that the randomization of the coordinates is applied after a potential
+supercell creation.</p>
+<span class="target" id="index-6"></span></div>
+</div>
+<div class="section" id="symmetry">
+<span id="index-7"></span><span id="id1"></span><h2>Symmetry<a class="headerlink" href="#symmetry" title="Permalink to this headline">¶</a></h2>
+<p>Symmetry can be used in AMS optimizations of molecules and of periodic structures.</p>
+<p>In case of molecules at the start of an AMS calculation one can symmetrize an almost symmetric structure.
+In the <a class="reference internal" href="Appendices.html#orientation-requirements"><span class="std std-ref">Appendix Symmetry</span></a> one can find molecular orientation requirements that AMS needs such that AMS can use the (sub)symmetry of a molecule.
+If the system is symmetrized (and no symmetry is given in the System block key) the molecular structure is rotranslated into this standard orientation.
+In the <a class="reference internal" href="Appendices.html#schoenflies"><span class="std std-ref">Appendix Symmetry</span></a> one can also find Schönfliess symbols for molecular point groups and symmetry labels that are used in AMS for molecules to label normal modes.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>System header
+   Symmetrize Yes/No
+   Symmetry [...]
+End
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Symmetry
+   SymmetrizeTolerance float
+   Tolerance float
+End
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>UseSymmetry Yes/No
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">System</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Symmetrize</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether to symmetrize the input structure. This might also rototranslate the structure into a standard orientation. This will symmetrize the atomic coordinates to machine precision. Useful if the system is almost symmetric or to rototranslate a symmetric molecule into a standard orientation.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Symmetry</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">AUTO</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[AUTO, NOSYM, C(LIN), D(LIN), C(I), C(S), C(2), C(3), C(4), C(5), C(6), C(7), C(8), C(2V), C(3V), C(4V), C(5V), C(6V), C(7V), C(8V), C(2H), C(3H), C(4H), C(5H), C(6H), C(7H), C(8H), D(2), D(3), D(4), D(5), D(6), D(7), D(8), D(2D), D(3D), D(4D), D(5D), D(6D), D(7D), D(8D), D(2H), D(3H), D(4H), D(5H), D(6H), D(7H), D(8H), I, I(H), O, O(H), T, T(D), T(H), S(4), S(6), S(8)]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Use (sub)symmetry with this Schoenflies symbol. Can only be used for molecules. Orientation should be correct for the (sub)symmetry. If used icw Symmetrize, the symmetrization will not reorient the molecule.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="docutils" id="ams-key-symmetry">
+<dt><code class="docutils literal notranslate"><span class="pre">Symmetry</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">SymmetrizeTolerance</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.05</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Tolerance used to detect symmetry in case symmetrize is requested.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1e-07</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Tolerance used to detect symmetry in the system.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="docutils" id="ams-key-usesymmetry">
+<dt><code class="docutils literal notranslate"><span class="pre">UseSymmetry</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether to use the system’s symmetry in AMS. Symmetry is recognized within a tolerance as given in the Symmetry key.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+<div class="section" id="regions">
+<span id="id2"></span><h2>Regions<a class="headerlink" href="#regions" title="Permalink to this headline">¶</a></h2>
+<p id="index-8">Some options of the AMS driver and its engines require specifying a subset of a
+system’s atoms. For example one might want to freeze part of the system in a
+molecular dynamics calculation. We refer to these subsets of atoms as
+“regions”. Atoms are assigned to regions by specifying the region names behind
+the atomic coordinates in the <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> block of the input:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Atoms</span>
+      <span class="n">C</span>       <span class="mf">1.22110608</span>      <span class="o">-</span><span class="mf">0.00000000</span>       <span class="mf">1.65928963</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_1</span>
+      <span class="n">C</span>       <span class="mf">0.37734253</span>      <span class="o">-</span><span class="mf">1.16134090</span>       <span class="mf">1.65928963</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_1</span>
+      <span class="n">C</span>       <span class="mf">0.37734253</span>       <span class="mf">1.16134090</span>       <span class="mf">1.65928963</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_1</span>
+      <span class="n">C</span>      <span class="o">-</span><span class="mf">0.98789557</span>      <span class="o">-</span><span class="mf">0.71774815</span>       <span class="mf">1.65928963</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_1</span>
+      <span class="n">C</span>      <span class="o">-</span><span class="mf">0.98789557</span>       <span class="mf">0.71774815</span>       <span class="mf">1.65928963</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_1</span>
+      <span class="n">H</span>       <span class="mf">2.30849293</span>      <span class="o">-</span><span class="mf">0.00000000</span>       <span class="mf">1.64874914</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_1</span>
+      <span class="n">H</span>       <span class="mf">0.71336355</span>      <span class="o">-</span><span class="mf">2.19550724</span>       <span class="mf">1.64874914</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_1</span>
+      <span class="n">H</span>       <span class="mf">0.71336355</span>       <span class="mf">2.19550724</span>       <span class="mf">1.64874914</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_1</span>
+      <span class="n">H</span>      <span class="o">-</span><span class="mf">1.86761001</span>      <span class="o">-</span><span class="mf">1.35689810</span>       <span class="mf">1.64874914</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_1</span>
+      <span class="n">H</span>      <span class="o">-</span><span class="mf">1.86761001</span>       <span class="mf">1.35689810</span>       <span class="mf">1.64874914</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_1</span>
+      <span class="n">Fe</span>      <span class="mf">0.00000000</span>       <span class="mf">0.00000000</span>       <span class="mf">0.00000000</span>
+      <span class="n">H</span>       <span class="mf">0.71336355</span>       <span class="mf">2.19550724</span>      <span class="o">-</span><span class="mf">1.64874914</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_2</span>
+      <span class="n">H</span>       <span class="mf">0.71336355</span>      <span class="o">-</span><span class="mf">2.19550724</span>      <span class="o">-</span><span class="mf">1.64874914</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_2</span>
+      <span class="n">C</span>       <span class="mf">1.22110608</span>      <span class="o">-</span><span class="mf">0.00000000</span>      <span class="o">-</span><span class="mf">1.65928963</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_2</span>
+      <span class="n">C</span>       <span class="mf">0.37734253</span>       <span class="mf">1.16134090</span>      <span class="o">-</span><span class="mf">1.65928963</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_2</span>
+      <span class="n">C</span>       <span class="mf">0.37734253</span>      <span class="o">-</span><span class="mf">1.16134090</span>      <span class="o">-</span><span class="mf">1.65928963</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_2</span>
+      <span class="n">C</span>      <span class="o">-</span><span class="mf">0.98789557</span>       <span class="mf">0.71774815</span>      <span class="o">-</span><span class="mf">1.65928963</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_2</span>
+      <span class="n">C</span>      <span class="o">-</span><span class="mf">0.98789557</span>      <span class="o">-</span><span class="mf">0.71774815</span>      <span class="o">-</span><span class="mf">1.65928963</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_2</span>
+      <span class="n">H</span>       <span class="mf">2.30849293</span>      <span class="o">-</span><span class="mf">0.00000000</span>      <span class="o">-</span><span class="mf">1.64874914</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_2</span>
+      <span class="n">H</span>      <span class="o">-</span><span class="mf">1.86761001</span>       <span class="mf">1.35689810</span>      <span class="o">-</span><span class="mf">1.64874914</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_2</span>
+      <span class="n">H</span>      <span class="o">-</span><span class="mf">1.86761001</span>      <span class="o">-</span><span class="mf">1.35689810</span>      <span class="o">-</span><span class="mf">1.64874914</span>     <span class="n">region</span><span class="o">=</span><span class="n">ring_2</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>In the above example of a ferrocene molecule, we have created two separate
+regions for the two cyclopentadienyl rings. The region names (<code class="docutils literal notranslate"><span class="pre">ring_1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ring_2</span></code> in the example above) can be freely chosen by the user. Note that an
+atom can be in more than one region, in which case the region names should be
+separated by commas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Atoms</span>
+      <span class="o">...</span>
+      <span class="n">Mg</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>    <span class="n">region</span><span class="o">=</span><span class="n">metal_centers</span><span class="p">,</span><span class="n">mol_1</span>
+      <span class="o">...</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>The region names given by the user can then be referred to for input keywords
+requiring the specification of a region.</p>
+<p>Technically the region is handled as an <a class="reference internal" href="#atomattributes"><span class="std std-ref">atomic attribute</span></a>.</p>
+</div>
+<div class="section" id="charge-atomic-masses-input-bond-orders">
+<h2>Charge, atomic masses, input bond orders<a class="headerlink" href="#charge-atomic-masses-input-bond-orders" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-9"></span><p id="index-10">AMS allows to set user-defined masses for particular atoms. This can be used to
+simulate isotopes of different atoms. Masses are specified by adding the
+desired mass (in Dalton) at the end of the atom’s line.  The following input
+shows the system specification for a heavy water molecule:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Atoms</span>
+      <span class="n">O</span>   <span class="mf">0.0</span>   <span class="mf">0.0</span>       <span class="mf">0.59372</span>
+      <span class="n">H</span>   <span class="mf">0.0</span>   <span class="mf">0.76544</span>  <span class="o">-</span><span class="mf">0.00836</span>    <span class="n">mass</span><span class="o">=</span><span class="mf">2.014</span>
+      <span class="n">H</span>   <span class="mf">0.0</span>  <span class="o">-</span><span class="mf">0.76544</span>  <span class="o">-</span><span class="mf">0.00836</span>    <span class="n">mass</span><span class="o">=</span><span class="mf">2.014</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>(Observe that the mass specified this way is an example of the <a class="reference internal" href="#atomattributes"><span class="std std-ref">atomic attributes</span></a> system.)</p>
+<p>Finally the <code class="docutils literal notranslate"><span class="pre">System</span></code> block also contains the specification of the system’s
+total charge as well as optionally defined bond orders, which might be needed by
+engines implementing force fields.</p>
+<dl class="docutils" id="index-11">
+<dt><code class="docutils literal notranslate"><span class="pre">System</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Charge</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Total charge</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The system’s total charge in atomic units.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">BondOrders</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Non-standard block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Defined bond orders. May by used by MM engines.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Note that the specified bond orders are currently only used by the ForceField engine.</p>
+<span class="target" id="externalfields"></span><span class="target" id="index-12"></span></div>
+<div class="section" id="homogeneous-electric-field-and-multipole-charges">
+<span id="index-13"></span><h2>Homogeneous electric field and multipole charges<a class="headerlink" href="#homogeneous-electric-field-and-multipole-charges" title="Permalink to this headline">¶</a></h2>
+<p>A homogeneous electric field and multipole charges can be requested at the AMS level. Currently this option is supported by the engines ADF, BAND, DFTB, and MOPAC.</p>
+<p><strong>Homogeneous electric field:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">ElectrostaticEmbedding</span>
+      <span class="n">ElectricField</span> <span class="n">ex</span> <span class="n">ey</span> <span class="n">ez</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<dl class="docutils" id="ams-key-system-electrostaticembedding">
+<dt><code class="docutils literal notranslate"><span class="pre">ElectrostaticEmbedding</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ElectricField</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">V/Angstrom</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">External homogeneous electric field with three Cartesian components: ex, ey, ez, the default unit being V/Å.
+
+In atomic units: Hartree/(e bohr) = 27.211 V/bohr; the relation to SI units is: 1 Hartree/(e bohr) = 5.14 … e11 V/m.
+
+Supported by the engines adf, band, dftb and mopac.
+
+For periodic systems the field may only have nonzero components orthogonal to the direction(s) of periodicity (i.e. for 1D periodic system the x-component of the electric field should be zero, while for 2D periodic systems both the x and y components should be zero. This options cannot be used for 3D periodic systems.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Point and multipole charges:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">ElectrostaticEmbedding</span>
+      <span class="n">MultipolePotential</span>
+         <span class="n">Coordinates</span>
+            <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>   <span class="n">q</span>   <span class="n">py</span> <span class="n">pz</span> <span class="n">px</span>
+            <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>   <span class="n">q</span>   <span class="n">py</span> <span class="n">pz</span> <span class="n">px</span>
+            <span class="o">...</span>
+         <span class="n">End</span>
+      <span class="n">End</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ElectrostaticEmbedding</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">MultipolePotential</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">External point charges (and dipoles).</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ChargeModel</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Point</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[Point, Gaussian]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The charges may represented as simple points (with a singular potential at the charge location) or may represented by a spherical Gaussian distribution.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ChargeWidth</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">-1.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">A width parameter in a.u. in case a Gaussian charge model is chosen. A negative value means that the width will be chosen automatically.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Coordinates</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Non-standard block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Positions (in Å) and values of multipole charges, one per line. Each line describes a singe point charge like:
+
+x y z q, or
+x y z q py pz px.
+
+Here x, y, z are the coordinates, q is the charge (in atomic units of charge) and py, pz, px are the (optional) dipole components (in atomic units, i.e. e/Bohr). 
+
+Periodic systems are not supported.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When running geometry optimizations (or other similar tasks) in combination with point charges, you should be aware that the system might end up on top of the point charge(s), resulting in non-physical situations. You should consider using <a class="reference internal" href="Tasks/Geometry_Optimization.html#constraints"><span class="std std-ref">constraints</span></a>, <a class="reference internal" href="Engines.html#restraints-addon"><span class="std std-ref">restraints</span></a> or explicitly setting <a class="reference internal" href="keywords.html#scmautodoclist-ams-rigidmotions"><span class="std std-ref">rigid motions</span></a> options.</p>
+</div>
+</div>
+<div class="section" id="load-a-system-from-file">
+<span id="loadsystem"></span><h2>Load a System from file<a class="headerlink" href="#load-a-system-from-file" title="Permalink to this headline">¶</a></h2>
+<p id="index-14">Instead of specifying the system to simulate in the <code class="docutils literal notranslate"><span class="pre">System</span></code> block of the
+input, it is also possible to read the system used in a previous calculation
+from the binary <code class="docutils literal notranslate"><span class="pre">.rkf</span></code> result files of AMS. This is done with the
+<code class="docutils literal notranslate"><span class="pre">LoadSystem</span></code> block in the input:</p>
+<div class="highlight-none notranslate" id="ams-key-loadsystem"><div class="highlight"><pre><span></span>LoadSystem header
+   File string
+   Section string
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">LoadSystem</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Recurring:</th><td class="field-body">True</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Block that controls reading the chemical system from a KF file instead of the [System] block.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">File</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The path of the KF file from which to load the system. It may also be the results directory containing it.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Section</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Molecule</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The section on the KF file from which to load the system.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">LoadSystem</span></code> block is mutually exclusive with the <code class="docutils literal notranslate"><span class="pre">System</span></code>
+block: The system <em>either</em> needs to be specified in the input, <em>or</em> loaded from
+a previous results file.</p>
+<p>Any <code class="docutils literal notranslate"><span class="pre">.rkf</span></code> file written by AMS should be suitable to load a system from. For
+<a class="reference internal" href="Input_Output.html#engine-output-files"><span class="std std-ref">engine output files</span></a> the loaded geometry is just the
+one for which the engine was invoked when it wrote this file. For the <a class="reference internal" href="Input_Output.html#main-output-file"><span class="std std-ref">main
+result file</span></a> <code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code> written by the AMS driver, which
+geometry is loaded depends on the <a class="reference internal" href="Tasks/TOC.html#tasks"><span class="std std-ref">task</span></a> that AMS was performing
+when this file was written. Generally the <code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code> file contains two systems:</p>
+<ul class="simple">
+<li>The input system corresponding just to the <code class="docutils literal notranslate"><span class="pre">System</span></code> block that was read in
+by AMS. This system is written to the <code class="docutils literal notranslate"><span class="pre">InputMolecule</span></code> section on the
+<code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code>, and can be loaded from there using the <code class="docutils literal notranslate"><span class="pre">LoadSystem%Section</span></code>
+keyword. This can be useful in order to repeat a previous AMS calculation
+for the same system, but with different settings, e.g. a different engine.</li>
+<li>The system which was the result of a previous AMS calculation, e.g. a geometry
+optimization or transition state search. This system is written to the
+<code class="docutils literal notranslate"><span class="pre">Molecule</span></code> section on the <code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code>. What exactly is considered the
+resulting geometry of a calculation depends in the <a class="reference internal" href="Tasks/TOC.html#tasks"><span class="std std-ref">task</span></a> of the
+previous calculation. (For tasks that do not change the geometry (like a single
+point calculation) or where no configuration is particularly special (e.g. a
+PES scan), the result system is normally just the same as the input system.)</li>
+</ul>
+</div>
+<div class="section" id="atom-attributes">
+<h2>Atom attributes<a class="headerlink" href="#atom-attributes" title="Permalink to this headline">¶</a></h2>
+<p id="atomattributes">There is in general the possibility to add text after the coordinates of an atom, we call these atomic attributes. The text should be of the form key=value, separated by spaces:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Atoms</span>
+      <span class="n">O</span>   <span class="mf">0.0</span>   <span class="mf">0.0</span>       <span class="mf">0.59372</span>   <span class="n">key1</span><span class="o">=</span><span class="mi">1</span> <span class="n">key2</span><span class="o">=</span><span class="n">y</span>
+      <span class="n">H</span>   <span class="mf">0.0</span>   <span class="mf">0.76544</span>  <span class="o">-</span><span class="mf">0.00836</span>   <span class="n">file</span><span class="o">=</span><span class="n">ams</span><span class="o">.</span><span class="n">rkf</span>
+      <span class="n">H</span>   <span class="mf">0.0</span>  <span class="o">-</span><span class="mf">0.76544</span>  <span class="o">-</span><span class="mf">0.00836</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>You can enter any arbitrary key/value list, but that will have no effect in general. Although there is one important effect that atoms with different atomic attributes (even unrecognized ones) are considered different elements during the symmetry detection.</p>
+<p>The order in which keys are specified has no effect.</p>
+<p>Examples of atomic attributes are the region, and mass.</p>
+</div>
+<div class="section" id="force-field-related-extensions">
+<h2>Force field related extensions<a class="headerlink" href="#force-field-related-extensions" title="Permalink to this headline">¶</a></h2>
+<p>For forcefield there are two dedicated <a class="reference internal" href="#atomattributes"><span class="std std-ref">atomic attributes</span></a>, the ForceField.Type and ForceField.Charge. Obviously these attributes are ignored by all other engines, although it can reduce the symmetry of the system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
+   <span class="n">Atoms</span>
+      <span class="n">O</span>   <span class="mf">0.0</span>   <span class="mf">0.0</span>       <span class="mf">0.59372</span>   <span class="n">ForceField</span><span class="o">.</span><span class="n">Type</span><span class="o">=</span><span class="n">O</span> <span class="n">ForceField</span><span class="o">.</span><span class="n">Charge</span><span class="o">=-</span><span class="mf">0.1</span>
+      <span class="n">H</span>   <span class="mf">0.0</span>   <span class="mf">0.76544</span>  <span class="o">-</span><span class="mf">0.00836</span>   <span class="n">ForceField</span><span class="o">.</span><span class="n">Type</span><span class="o">=</span><span class="n">H</span> <span class="n">ForceField</span><span class="o">.</span><span class="n">Charge</span><span class="o">=+</span><span class="mf">0.05</span>
+      <span class="n">H</span>   <span class="mf">0.0</span>  <span class="o">-</span><span class="mf">0.76544</span>  <span class="o">-</span><span class="mf">0.00836</span>   <span class="n">ForceField</span><span class="o">.</span><span class="n">Type</span><span class="o">=</span><span class="n">H</span> <span class="n">ForceField</span><span class="o">.</span><span class="n">Charge</span><span class="o">=+</span><span class="mf">0.05</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<div class="section" id="load-charges-for-a-forcefield-into-regions">
+<h3>Load charges for a forcefield into regions<a class="headerlink" href="#load-charges-for-a-forcefield-into-regions" title="Permalink to this headline">¶</a></h3>
+<p>When you want to use a forcefield, the charges obtained by a previous calculation can be loaded into a specific region (with the same molecule). Currently the order of the atoms has to be the same for this to work.</p>
+<p>Once loaded, it is as if the user had typed in the ForceField.Charge attributes.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">System</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">LoadForceFieldCharges</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Recurring:</th><td class="field-body">True</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">This is a mechanism to set the ForceField.Charge attribute in the input. This information is currently only used by the ForceField engine.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">CheckGeometryRMSD</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether the geometry RMSD test should be performed, see MaxGeometryRMSD. Otherwise only basic tests are performed, such as number and atom types. Not doing the RMSD test allows you to load molecular charges in a periodic system.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">File</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Name of the (kf) file</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MaxGeometryRMSD</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The geometry of the charge producing calculation is compared to the one of the region, and need to be the same within this tolerance.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Region</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">*</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Region for which the charges should be loaded</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Section</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">AMSResults</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Section name of the kf file</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Variable</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Charges</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Variable name of the kf file</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="load-forcefield-atom-types">
+<h3>Load forcefield atom types<a class="headerlink" href="#load-forcefield-atom-types" title="Permalink to this headline">¶</a></h3>
+<p>After you have done a forcefield calculation the atom types are stored. You can load those for a next calculation.</p>
+<p>Once loaded, it is as if the user had typed in the ForceField.Type atom attributes.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">System</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">LoadForceFieldAtomTypes</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This is a mechanism to set the ForceField.Type attribute in the input. This information is currently only used by the ForceField engine.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">File</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Name of the (kf) file. It needs to be the result of a forcefield calculation.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Tasks/TOC.html" class="btn btn-neutral float-right" title="Structure and Reactivity, Molecular Dynamics" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Pipe_protocol.html" class="btn btn-neutral" title="AMSPipe protocol specification" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

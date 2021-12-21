@@ -1,0 +1,117 @@
+.. _LJ_Ar_Restart:
+
+Restarting (continuing) an optimization
+====================================================
+
+You can continue an optimization from where a previous one stopped. This works best with the **CMAOptimizer**.
+
+.. figure:: /_static/LJ_Ar_restart_losses.png
+    :width: 80%
+    :align: center
+
+    Illustration of the loss function for a restarted run (blue, restarted from green) compared to an uninterrupted run (purple, shifted down for clarity) using a parallel CMA optimizer.
+    The blue and green lines do not always perfectly overlap the purple line, because of the way the loss function is logged when running in parallel.
+
+.. _LJ_Ar_CMARestart:
+
+Restarting with the CMAOptimizer
+-------------------------------------
+
+**Download** :download:`LJ_Ar_restart.zip`, or make a copy of the
+directory ``$AMSHOME/scripting/scm/params/examples/LJ_Ar_restart``.
+
+There are three different ``.conf.py`` files:
+
+* ``100.conf.py``, which will run an optimization for 100 iterations.
+
+* ``restart_100.conf.py``, which specifies to restart from where the previous optimization left off for another 100 iterations
+
+* ``200.conf.py``, which runs an optimization for 200 iterations uninterrupted (for comparison purposes)
+
+Run the first 100 iterations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The file ``100.conf.py`` contains:
+
+.. literalinclude:: complete_example/LJ_Ar_restart/100.conf.py
+
+Unlike the :ref:`first tutorial <LJ_Ar_Tutorial>`, this file sets the
+``max_evaluations`` to 100, and specifies to use a :ref:`CMA-ES optimizer
+<CMA-ES>`. CMA-ES is a derivative-free optimizer, and has many options. The three most
+important options are 
+
+* ``sigma``, describing how wide a distribution to initially sample,
+* ``popsize``, giving the population size (how many evaluations are performed at each CMA iteration)
+* ``minsigma``, giving a converge criterion for sigma. During the optimization, sigma will decrease, and if it reaches this value the optimization will stop.
+
+The ``seed`` option gives a seed for the random number generator. **You should
+normally not set it**, it is set here only so that your numbers will match the
+ones in the tutorial.
+
+Run the optimization with this command::
+
+    "$AMSBIN/params" -c 100.conf.py run -o 100
+
+Here, ``-c 100.conf.py`` specifies the file to use, and ``-o 100`` will place the results in a directory called ``100``.
+
+In the output, you will see that the loss value fluctuates quite wildly in the beginning.
+
+.. image:: /_static/LJ_Ar_restart_running_loss_100.png
+    :width: 80%
+    :align: center
+
+.. note::
+
+    The CMAOptimizer works in parallel. In the output you may see the results
+    seemingly printed "out of order", for example the results for evaluation 61
+    might be printed before evaluation 60. **That is completely normal** for the
+    CMAOptimizer in params.
+
+Continue for another 100 iterations with a restart file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``restart_100.conf.py`` file contains:
+
+.. literalinclude:: complete_example/LJ_Ar_restart/restart_100.conf.py
+
+Here, the CMAOptimizer is initialized with
+``restartfile='100/cmadata/restart.pkl'``. Verify that the file ``restart.pkl``
+exists in the directory ``100/cmadata`` before running the optimization.
+The ``exact_restart=True`` option means that the optimization will continue in the same way as if it hadn't stopped. Set ``exact_restart=False`` to instead get a random continuation.
+
+The ``restart.pkl`` file contains all the details about the previous optimization, including the last parameters. The ``skip_x0 = True``
+line means that the initial evaluation that is normally performed using the parameters defined in ``parameter_interface.yaml`` will be skipped.
+
+Run the optimization with this command::
+
+    "$AMSBIN/params" -c restart_100.conf.py run -o restart_100
+
+This optimization continues from where the previous one left off. This has the following consequences for the logged loss values: 
+
+* The logged loss values are smaller than in the previous optimization
+
+* The logged loss values fluctuate less wildly than in the previous optimization
+
+.. image:: /_static/LJ_Ar_restart_running_loss_restart_100.png
+    :width: 80%
+    :align: center
+
+.. tip::
+
+    Also run ``"$AMSBIN/params" -c 200.conf.py run -o 200``, and compare the
+    results from 200 uninterrupted evaluations with the results from running
+    100 followed by another 100. The logged loss functions are almost, but not
+    perfectly identical. This is because the of the way loss function values
+    are logged with the parallel CMA optimizer. See the figure at the top.
+
+Restart with other optimizers (e.g. Nelder-Mead from Scipy)
+-------------------------------------------------------------
+
+For other optimizers, like the **Nelder-Mead** optimizer that was used in the
+:ref:`first tutorial <LJ_Ar_Tutorial>`, there is no particular restart
+functionality in ParAMS. If you use these optimizers, simply continue by
+specifying (in ``params.conf.py``)::
+
+    parameter_interface = 'path/to/previous/optimization/training_set_results/latest/parameter_interface.yaml'
+
+That will then load the parameter values from the previous optimization.

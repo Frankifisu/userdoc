@@ -1,0 +1,1834 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DIM/QM: Discrete Interaction Model/Quantum Mechanics &mdash; ADF 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ADF 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Solvents and other environments" href="Solvents_and_other_environments.html"/>
+        <link rel="next" title="QM/FQ: Quantum Mechanics/Fluctuating Charges" href="FQ-QM.html"/>
+        <link rel="prev" title="Quild" href="Quild.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search ADF" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-ADF" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General/General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General/Introduction.html">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#adf-is-an-ams-engine">ADF is an AMS Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#functionality">Functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#applicability">Applicability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#model-hamiltonian">Model Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#technical">Technical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#index-0">Fragments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../General/Introduction.html#basic-atoms">Basic atoms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Introduction.html#automatic-mode">Automatic mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#slater-type-basis-sets">Slater-type basis sets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Release.html">What’s new in ADF 2022.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#new-features">New features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Release.html#what-s-new-in-adf-2021-1">What’s new in ADF 2021.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#id1">New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#new-defaults">New Defaults</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Release.html#what-s-new-in-adf-2020-1">What’s new in ADF 2020.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#adf-is-an-ams-engine">ADF is an AMS Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#bug-adf2006-adf2020">Bug ADF2006 - ADF2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#id2">New Defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#id3">New features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/AMSification_of_ADF.html">AMSification of ADF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#restructuring-of-the-input">Restructuring of the input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#restructuring-of-input-keys">Restructuring of input keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#example-shell-script-changes">Example shell script changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#automatic-tool-for-conversion-of-adf2019-shell-scripts">Automatic tool for conversion of ADF2019 shell scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/AMSification_of_ADF.html#input-execution-and-output">Input, execution and output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#adf-specific-files">ADF specific files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Feature_list.html">Feature List</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#model-hamiltonians">Model Hamiltonians</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#structure-and-reactivity">Structure and Reactivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#spectroscopic-properties">Spectroscopic properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#charge-transport-properties">Charge transport properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#accuracy-and-efficiency">Accuracy and Efficiency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Remarks_terminology.html">Technical remarks, Terminology</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#density-functional-theory">Density functional theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#the-kohn-sham-mo-model">The Kohn-Sham MO model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#basis-functions-and-orbitals">Basis functions and orbitals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#cartesian-function-sets-spurious-components">Cartesian function sets, spurious components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#frozen-core-core-orbitals-and-core-functions">Frozen core: Core Orbitals and Core Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#index-6">Symmetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#orthonormal-basis">Orthonormal basis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#fragments">Fragments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#summary-of-functions-and-orbitals">Summary of functions and orbitals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#coulomb-potential-evaluation-density-fitting">Coulomb potential evaluation, density fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#three-step-build-up-of-the-bonding">Three-step build-up of the bonding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#transition-state-procedure">Transition State procedure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Input.html">Input, execution, and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Structure_of_the_input.html">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#title-comment">Title, comment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#amsification-of-adf-in-adf2020">Amsification of ADF in ADF2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#input-parsing-changes-in-adf2018-and-later">Input parsing changes in ADF2018 and later</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Structure_of_the_input.html#new-syntax-for-a-few-keywords">New syntax for a few keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Structure_of_the_input.html#strict-parsing-of-input-file">Strict parsing of input file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_of_the_input.html#execution">Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_of_the_output.html">Structure of the Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_output.html#job-characteristics-on-standard-output">Job Characteristics on standard Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_output.html#log-file-adf-rkf-tape13">Log file, adf.rkf, TAPE13</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Coordinates_basis_fragments.html">Coordinates, Basis sets, Fragments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Atomic_coordinates.html">Atomic coordinates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Atomic_coordinates.html#cartesian">Cartesian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Atomic_coordinates.html#z-matrix">Z-Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Atomic_coordinates.html#orientation-of-local-atomic-coordinates">Orientation of Local Atomic Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Atomic_coordinates.html#symmetry-key">Symmetry Key</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html">Basis sets and atomic fragments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#sto-basis-sets">STO basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#available-basis-sets">Available basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#the-basis-key">The Basis Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#automatic-mode">Automatic mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#create-mode">Create mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#ghost-atoms-non-standard-chemical-elements">Ghost Atoms, Non-standard Chemical Elements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#id9">Automatic mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#nuclear-model">Nuclear Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Molecular_fragments.html">Molecular fragments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_fragments.html#fragment-mode">Fragment mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_fragments.html#fragment-files">Fragment files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="Model_Hamiltonians.html">Model Hamiltonians</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Electronic_Configuration.html">Electronic Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#charge-and-spin">Charge and Spin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#spin-restricted-vs-unrestricted">Spin: restricted vs. unrestricted</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#unrestricted-and-spin-orbit-coupling">Unrestricted and Spin-Orbit Coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#net-charge">Net Charge</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#orbital-occupations-electronic-configuration-excited-states">Orbital occupations: electronic configuration, excited states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#aufbau-smearing-freezing">Aufbau, smearing, freezing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#explicit-occupation-numbers">Explicit occupation numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#charge-and-spinpolarization-vs-irrepoccupations">CHARGE and SPINPOLARIZATION vs. IRREPOCCUPATIONS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#create-mode">Create mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#frozen-core-approximation">Frozen core approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#spin-polarized-start-up-potential">Spin-polarized start-up potential</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#spin-flip-method-for-broken-symmetries">Spin-flip method for broken symmetries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#modify-the-starting-potential">Modify the starting potential</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#unrestricted-fragments">Unrestricted fragments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#prepared-for-bonding">Prepared for bonding</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#simulated-unrestricted-fragments-with-key-fragoccupations">Simulated unrestricted fragments with key FRAGOCCUPATIONS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#id8">Prepared for bonding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#fragoccupations">FRAGOCCUPATIONS</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#remove-fragment-orbitals">Remove Fragment Orbitals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#cdft-constrained-density-functional-theory">CDFT: Constrained Density Functional Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Density_Functional.html">Density Functionals (XC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#lda">LDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#gga">GGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#metagga">MetaGGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#hartree-fock">Hartree-Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#hybrid">Hybrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#meta-hybrid">Meta-Hybrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#range-separated-hybrids">Range separated hybrids</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#rangesep-xcfun-yukawa-range-separated-hybrids">RangeSep + XCFun: Yukawa-range separated hybrids</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#range-separated-hybrids-with-libxc">Range-separated hybrids with LibXC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#notes-on-hartree-fock-and-meta-hybrid-functionals">Notes on Hartree-Fock and (meta-)hybrid functionals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#post-scf-correlation-methods">Post-SCF correlation methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#double-hybrid">Double-Hybrid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#mp2-methods">MP2-methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#rpa-and-rpa-sossx">RPA and RPA + SOSSX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#notes-on-mp2-double-hybrid-functionals-and-rpa">Notes on MP2, double-hybrid functionals and RPA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#model-potentials">Model Potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#optimized-effective-potentials">Optimized effective potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#xcfun">XCFun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#libxc">LibXC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#dispersion-corrections">Dispersion corrections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#dft-d4-functionals">DFT-D4 functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#dft-d3-functionals">DFT-D3 functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#dft-d-functionals">DFT-D functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#ddsc-density-dependent-dispersion-correction">dDsC: density dependent dispersion correction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#dft-ulg">DFT-ulg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#dft-mbd-functionals">DFT-MBD functionals</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#post-scf-energy-functionals">Post-SCF energy functionals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#gga-energy-functionals">GGA energy functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#meta-gga-and-hybrid-energy-functionals">Meta-GGA and hybrid energy functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#post-hartree-fock-energy-functionals">Post Hartree-Fock energy functionals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Relativistic_effects.html">Relativistic effects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Relativistic_effects.html#pauli">Pauli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Relativistic_effects.html#zora">ZORA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Relativistic_effects.html#x2c-and-ra-x2c">X2C and RA-X2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Relativistic_effects.html#index-7">Spin-Orbit coupling</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="Solvents_and_other_environments.html">Solvents and other environments</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="COSMO.html">COSMO: Conductor like Screening Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SM12.html">SM12: Solvation Model 12</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Quild.html">Quild</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">DIM/QM: Discrete Interaction Model/Quantum Mechanics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#index-4">DRF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#surface-enhanced-response-properties">Surface-enhanced response properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#input-options">Input options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#drf-atomic-parameters">DRF atomic parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dim-atomic-parameters">DIM atomic parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FQ-QM.html">QM/FQ: Quantum Mechanics/Fluctuating Charges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FQ-QM.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FDE.html">FDE: Frozen Density Embedding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FDE.html#fragment-specific-fde-options">Fragment-specific FDE options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE.html#kinetic-energy-approximants">Kinetic energy approximants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE.html#general-fde-options">General FDE options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE.html#frozen-density-embedding-with-external-orthogonality">Frozen Density Embedding with External Orthogonality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE.html#fde-and-localized-cosmo">FDE and (localized) COSMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE.html#subsystem-tddft-coupled-fde">Subsystem TDDFT, coupled FDE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE.html#restrictions-and-pitfalls">Restrictions and pitfalls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="SCRF.html">SCRF: Self-Consistent Reaction Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VSCRF.html">VSCRF: Vertical Excitation Self-Consistent Reaction Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3D-RISM.html">3D-RISM: 3D reference Interaction Site Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Electric_field.html">Electric Field: Homogeneous, Point Charges, Polarizability</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Structure_and_reactivity.html">Structure and Reactivity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#single-point-calculations">Single point calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#id1">Geometry optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#transition-state-search">Transition state search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#linear-transit-pes-scan">Linear Transit, PES scan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#nudged-elastic-band-neb">Nudged Elastic Band (NEB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#intrinsic-reaction-coordinate-irc">Intrinsic Reaction Coordinate (IRC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#excited-state-optimizations">Excited state optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#molecular-dynamics">Molecular dynamics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Structure_and_reactivity.html#gradients-hessian-thermodynamics">Gradients, Hessian, Thermodynamics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#gradients">Gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#hessian">Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#pes-point-character">PES point character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#thermodynamics-gas-phase-gibbs-free-energy">Thermodynamics, gas phase Gibbs free energy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Spectroscopic_properties.html">Spectroscopic properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html">Vibrational Spectroscopy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#ir-frequencies-and-normal-modes">IR frequencies and normal modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#analytical-hessian">Analytical Hessian</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#resonance-raman">(Resonance) Raman</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#vroa-resonance-vibrational-raman-optical-activity">VROA: (Resonance) vibrational Raman optical activity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#vcd-vibrational-circular-dichroism">VCD: Vibrational Circular Dichroism</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Time-dependent_DFT.html">Time-dependent DFT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Time-dependent_DFT.html#general-remarks-on-the-response-and-excitation-functionality">General remarks on the Response and Excitation functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Time-dependent_DFT.html#analysis-options-for-tddft-excitation-energies-and-polarizabilities">Analysis options for TDDFT (excitation energies and polarizabilities)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Time-dependent_DFT.html#time-dependent-current-dft">Time-dependent Current DFT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Time-dependent_DFT.html#magnetic-properties-within-tdcdft">Magnetic properties within TDCDFT</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Excitation_energies.html">Excitation energies: UV/Vis, X-ray, CD, MCD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#excitation-energies-uv-vis-spectra">Excitation energies, UV/Vis spectra</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#tamm-dancoff-approximation">Tamm-Dancoff approximation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#full-xc-kernel">Full XC kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#plasmons-in-molecules">Plasmons in Molecules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#transition-dipole-moments-between-excited-states">Transition dipole moments between excited states</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#accuracy-and-other-technical-parameters">Accuracy and other technical parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#excitation-energies-for-open-shell-systems">Excitation energies for open-shell systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#spin-flip-excitation-energies">Spin-flip excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#select-core-excitation-energies-x-ray-absorption">Select (core) excitation energies, X-ray absorption</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#state-selective-optimization-excitation-energies">State selective optimization excitation energies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#modify-range-of-excitation-energies">Modify range of excitation energies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#excitations-as-orbital-energy-differences">Excitations as orbital energy differences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#quadrupole-intensities-in-x-ray-spectroscopy">Quadrupole intensities in X-ray spectroscopy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#xes-x-ray-emission-spectroscopy">XES: X-ray emission spectroscopy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#excitation-energies-and-spin-orbit-coupling">Excitation energies and Spin-Orbit coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#perturbative-inclusion-of-spin-orbit-coupling">Perturbative inclusion of spin-orbit coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#self-consistent-spin-orbit-coupling">Self-consistent spin-orbit coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#highly-approximate-spin-orbit-coupled-excitation-energies-open-shell-molecule">Highly approximate spin-orbit coupled excitation energies open shell molecule</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#cv-n-dft-constricted-variational-dft">CV(n)-DFT: Constricted Variational DFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#hda-hybrid-diagonal-approximation">HDA: Hybrid Diagonal Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#td-dft-tb">TD-DFT+TB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#stda-stddft">sTDA, sTDDFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#cd-spectra">CD spectra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#mcd">MCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#analysis">Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#nto-natural-transition-orbitals">NTO: Natural Transition Orbitals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#sfo-analysis">SFO analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#charge-transfer-descriptors">Charge-transfer descriptors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Excited_state_optimizations.html">Excited state (geometry) optimizations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Excited_state_optimizations.html#nuclear-gradients-only">Nuclear gradients only</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrationally_resolved_el_spectra.html">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrationally_resolved_el_spectra.html#ah-fc-adiabatic-hessian-franck-condon">AH-FC: Adiabatic Hessian Franck-Condon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrationally_resolved_el_spectra.html#vg-fc-vertical-gradient-franck-condon">VG-FC: Vertical Gradient Franck-Condon</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Polarizabilities.html">(Hyper-)Polarizabilities, ORD, magnetizabilities, Verdet constants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Polarizabilities.html#response-hyper-polarizabilities-ord">RESPONSE: (Hyper-)Polarizabilities, ORD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#response-polarizabilities">RESPONSE: Polarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#response-accuracy-and-convergence">RESPONSE: Accuracy and convergence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#response-hyperpolarizabilities">RESPONSE: Hyperpolarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#response-optical-rotation-dispersion-ord">RESPONSE: Optical rotation dispersion (ORD)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Polarizabilities.html#aoresponse-lifetime-effects-hyper-polarizabilities-ord-magnetizabilities-verdet-constants">AORESPONSE: Lifetime effects, (Hyper-)polarizabilities, ORD, magnetizabilities, Verdet constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-polarizabilities">AORESPONSE: Polarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-technical-parameters-and-expert-options">AORESPONSE: Technical parameters and expert options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-damped-first-hyperpolarizabilities">AORESPONSE: Damped First Hyperpolarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-damped-second-hyperpolarizabilities">AORESPONSE: Damped Second Hyperpolarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-ord">AORESPONSE: ORD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-magnetizabilities-verdet-constants-faraday-b-term">AORESPONSE: magnetizabilities, Verdet constants, Faraday B term</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-raman">AORESPONSE: Raman</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#applications-of-aoresponse">Applications of AORESPONSE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Polarizabilities.html#poltddft-damped-complex-polarizabilities">POLTDDFT: Damped Complex Polarizabilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#uv-vis-spectra-cd-spectra">UV/Vis spectra, CD spectra</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#reduced-fit-set">Reduced fit set</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Polarizabilities.html#van-der-waals-dispersion-coefficients">Van der Waals dispersion coefficients</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#disper-program-dispersion-coefficients">DISPER program: Dispersion Coefficients</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="LFDFT.html">Ligand Field and Density Functional Theory (LFDFT)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LFDFT.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LFDFT.html#input-description">Input description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#average-of-configuration-run">Average of Configuration run</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#lfdft-atomic-database">LFDFT atomic database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#lfdft-run">LFDFT run</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#epr-esr-g-tensor">EPR (ESR) g-tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#lfdft-intensities">LFDFT intensities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#mcd">MCD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="NMR.html">NMR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="NMR_chemical_shifts.html">NMR Chemical Shifts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="NMR_chemical_shifts.html#important-notes">Important notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NMR_chemical_shifts.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="NMR_chemical_shifts.html#paramagnetic-nmr-chemical-shifts">Paramagnetic NMR Chemical Shifts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NMR_spin-spin_coupling.html">NMR spin-spin coupling constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="NMR_spin-spin_coupling.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NMR_spin-spin_coupling.html#input-file-for-cpl-adf-rkf">Input file for CPL: adf.rkf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NMR_spin-spin_coupling.html#running-cpl">Running CPL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NMR_spin-spin_coupling.html#practical-aspects">Practical Aspects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ESREPR.html">ESR/EPR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ESREPR.html#esr-epr-g-tensor-and-a-tensor">ESR/EPR g-tensor and A-tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ESREPR.html#esr-epr-q-tensor">ESR/EPR Q-tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ESREPR.html#esr-epr-zero-field-splitting-d-tensor">ESR/EPR Zero-field splitting (D-tensor)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="EFG.html">Nuclear Quadrupole Interaction (EFG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Mossbauer_spectroscopy.html">Mössbauer spectroscopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GW.html">GW</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GW.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GW.html#levels-of-self-consistency">Levels of self-consistency</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#eigenvalue-only-self-consistent-gw">Eigenvalue-only self-consistent GW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#quasiparticle-self-consistent-gw">quasiparticle self-consistent GW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#convergence">Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="GW.html#second-order-self-energy">Second-order self-energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GW.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#basis-sets">Basis sets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#numerical-aspects">Numerical aspects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#choosing-the-ks-reference">Choosing the KS reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="GW.html#gw-key">GW key</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Transport.html">Transport properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Charge_transfer_integrals.html">Charge transfer integrals (transport properties)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Charge_transfer_integrals.html#charge-transfer-integrals-with-the-transferintegrals-key">Charge transfer integrals with the TRANSFERINTEGRALS key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Charge_transfer_integrals.html#charge-transfer-integrals-with-fde">Charge transfer integrals with FDE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN.html">GREEN: Non-self-consistent Green’s function calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GREEN.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN.html#wide-band-limit">Wide-band-limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN.html#green-with-adf-gui">GREEN with ADF-GUI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Analysis.html">Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Molecules_from_fragments.html">Molecules built from fragments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bond_energy_analysis.html">Bond energy analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Bond_energy_analysis.html#bond-energy-details">Bond energy details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_energy_analysis.html#notes-on-double-hybrid-functionals-and-mp2">Notes on double-hybrid functionals and MP2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_energy_analysis.html#total-energy-evaluation">Total energy evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_energy_analysis.html#interacting-quantum-atoms-iqa">Interacting Quantum Atoms (IQA)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Localized_Molecular_Orbitals.html">Localized Molecular Orbitals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Localized_Molecular_Orbitals.html#perturbed-localized-molecular-orbitals">Perturbed Localized Molecular Orbitals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Advanced_analysis.html">Advanced charge density and bond order analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#charges-populations">Charges, Populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#bond-orders">Bond orders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#ets-nocv-natural-orbitals-for-chemical-valence">ETS-NOCV: Natural Orbitals for Chemical Valence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#adfnbo-gennbo-nbo-analysis">Adfnbo, gennbo: NBO analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#nbo-analysis-of-efg-nmr-chemical-shifts-nmr-spin-spin-coupling">NBO analysis of EFG, NMR chemical shifts, NMR spin-spin coupling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#qtaim-atoms-in-molecules">QTAIM: Atoms in Molecules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#local-atomic-and-non-local-properties">Local, atomic, and non-local properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#index-16">ADF2AIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#aromaticity-index-with-qtaim">Aromaticity index with QTAIM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#conceptual-dft">Conceptual DFT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#global-atomic-and-non-local-descriptors">Global, atomic, and non-local descriptors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#domains-of-the-dual-descriptor">Domains of the dual descriptor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#adf2damqt-damqt-interface">adf2damqt: DAMQT interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#fod-fractional-orbital-density">FOD: fractional orbital density</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Printed_Output.html">Controlling printed Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#print-noprint">Print / NoPrint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#debug">Debug</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#eprint">Eprint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#eprint-subkeys-vs-print-switches">Eprint subkeys vs. Print switches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#other-eprint-subkeys">Other Eprint subkeys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#reduction-of-output">Reduction of output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Results_Output.html">Results on Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#electronic-configuration">Electronic Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#mulliken-populations">Mulliken populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#hirshfeld-charges-voronoi-deformation-density">Hirshfeld charges, Voronoi deformation density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#multipole-derived-charges">Multipole derived charges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#charge-model-5">Charge model 5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#bond-order-analysis">Bond order analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#dipole-moment-quadrupole-moment-electrostatic-potential">Dipole moment, Quadrupole moment, Electrostatic potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#fragments-and-basis-functions">Fragments and Basis Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#mo-analysis">MO analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#bond-energy-analysis">Bond energy analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Densf.html">Densf: Volume Maps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Densf.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Densf.html#result-tape41">Result: TAPE41</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DOS.html">Dos: Density of States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DOS.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DOS.html#mulliken-population-analysis">Mulliken population analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DOS.html#density-of-states-analyses-based-on-mulliken-population-analysis">Density of states analyses based on Mulliken population analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DOS.html#generalizations-of-opdos-gpdos-pdos">Generalizations of OPDOS, GPDOS, PDOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DOS.html#input">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="VCDtools.html">VCD Analysis: VCDtools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PyFrag.html">PyFrag: Activation Strain Model Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#running-pyfrag">Running PyFrag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#specifying-the-trajectory">Specifying the Trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#molecular-fragments">Molecular Fragments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#adf-options">ADF Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#analysis-options">Analysis Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Accuracy_and_efficiency.html">Accuracy and Efficiency</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Precision_and_Self-Consistency.html">Precision and Self-Consistency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SCF.html">SCF</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SCF.html#main-options">Main options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SCF.html#energy-diis">Energy-DIIS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SCF.html#augmented-roothaan-hall-arh">Augmented Roothaan-Hall (ARH)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Numerical_integration.html">Numerical Integration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Numerical_integration.html#becke-grid">Becke Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Numerical_integration.html#voronoi-grid-deprecated">Voronoi grid (deprecated)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Numerical_integration.html#atomic-radial-grid">Atomic radial grid</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Density_fitting.html">Density fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Hartree-Fock_RI.html">Hartree-Fock RI scheme</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Hartree-Fock_RI.html#old-hartree-fock-ri-scheme">Old Hartree-Fock RI scheme</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="MBPT.html">MBPT scheme</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="MBPT.html#recommended-numerical-settings">Recommended numerical settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Dependency.html">Dependency (basis set, fit set)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="BSSE.html">Basis Set Superposition Error (BSSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Control_of_Program_Flow.html">Control of Program Flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Control_of_Program_Flow.html#limited-execution">Limited execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Control_of_Program_Flow.html#skipping">Skipping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Control_of_Program_Flow.html#ignore-checks">Ignore checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Technical_Settings.html">Technical Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#memory-usage">Memory usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#direct-scf-recalculation-of-data">Direct SCF: recalculation of data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#vector-length">Vector length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#tails-and-old-gradients">Tails and old gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#index-2">Linearscaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#all-points">All Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#full-fock">Full Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#save-info">Save info</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Restarts.html">Restarts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Restart_files.html">ADF Restart files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Restart_files.html#ams-restart-file">AMS restart file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="The_restart_key.html">The restart key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_of_the_restart_file.html">Structure of the restart file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Rec_problems_questions/Rec_problems_questions.html">Recommendations and Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Rec_problems_questions/Recommendations.html">Recommendations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Precision.html">Precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Electronic_Configuration.html">Electronic Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Electronic_Configuration.html#spin-unrestricted-versus-spin-restricted-spin-states">Spin-unrestricted versus spin-restricted, Spin states</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html">What basis set should I use in ADF?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#zora-or-non-relativistic-calculation">ZORA or non-relativistic calculation?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#large-or-small-molecule">Large or small molecule?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#frozen-core-or-all-electron">Frozen core or all-electron?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#diffuse-functions-needed">Diffuse functions needed?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#normal-or-even-tempered-basis">Normal or even-tempered basis?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#recommendations-for-double-hybrids-and-mp2">Recommendations for Double-hybrids and MP2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#what-accuracy-do-the-basis-sets-give">What accuracy do the basis sets give?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Relativistic_methods.html">Relativistic methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Rec_problems_questions/Trouble_shooting.html">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/License_file_corrupt.html">License file corrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Recover_from_Crash.html">Recover from Crash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Memory_Management.html">Memory Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/SCF.html">SCF Convergence Guidelines for ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Geometry_Optimization.html">Geometry Optimization troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Geometry_Optimization.html#very-short-bonds">Very short bonds</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Frequencies.html">Frequencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Frequencies.html#imaginary-frequencies">Imaginary Frequencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Frequencies.html#geometry-displacement-numbers-in-the-logfile-are-not-contiguous">Geometry-displacement numbers in the logfile are not contiguous</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Input_ignored.html">Input ignored</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/SFO_Populations.html">SFO Populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Error_Aborts.html">Error Aborts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Warnings.html">Warnings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendices/Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Basis_set_file_format.html">Basis set file format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Basis_set_file_format.html#sections">Sections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Basis_set_file_format.html#example-of-a-basis-set-file-calcium">Example of a basis set file: Calcium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Basis_set_file_format.html#extending-a-basis-set">Extending a basis set</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Elements_of_the_Periodic_Table.html">Elements of the Periodic Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Multiplet_states.html">Multiplet States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Multiplet_states.html#multiplet-energies">Multiplet energies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Dirac_program.html">Dirac program: relativistic core potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Symmetry.html">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Symmetry.html#schonfliess-symbols-and-symmetry-labels">Schönfliess symbols and symmetry labels</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/Symmetry.html#tddft-irrep-labels">TDDFT irrep labels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Symmetry.html#molecular-orientation-requirements">Molecular orientation requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Binary_result_files.html">Binary result files, KF browser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/TAPE21.html">adf.rkf (TAPE21)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/TAPE21.html#ams-rkf">ams.rkf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/TAPE21.html#contents-of-adf-rkf">Contents of adf.rkf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/TAPE21.html#using-data-from-adf-rkf">Using Data from adf.rkf</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/TAPE13.html">TAPE13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/KF_browser.html">KF browser</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Error_messages.html">Error messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Error_messages.html#warnings">Warnings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#model-hamiltonians">Model Hamiltonians</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#special-exchange-correlation-functionals">Special exchange-correlation functionals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CO_model.html">Example: Asymptotically correct XC potentials: CO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/OH_MetaGGA.html">Example: Meta-GGA energy functionals: OH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HI_EFG.html">Example: Hartree-Fock: HI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2PO_B3LYP.html">Example: B3LYP: H2PO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LCY-BP_H2O.html">Example: Long-range corrected GGA functional LCY-BP: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CAMY-B3LYP_H2O.html">Example: Range-separated functional CAMY-B3LYP: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Water_MP2_AO.html">Example: Single point MP2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/WaterDimer_SOS-MP2_AO.html">Example: Water Dimer SOS-AO-PARI-MP2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Water_MeOH_B2GPPLYP.html">Example: Single point B2GPPLYP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Water_MeOH_DODSCAN.html">Example: Water-MeOH - DODSCAN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/MP2_Li.html">Example: unrestricted MP2: Li</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/RPA_H2O.html">Example: RPA&#64;PBE calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/MM_Dispersion.html">Example: Grimme Molecular Mechanics dispersion-corrected functionals (DFT-D3-BJ)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/methane_dimer_dispersion.html">Example: Density-Dependent Dispersion Correction (dDsC): CH4-dimer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Benzene_dimer_tshaped.html">Example: DFT-ulg Dispersion Correction: Benzene dimer T-shaped</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#zora-and-spin-orbit-relativistic-effects">ZORA and spin-orbit Relativistic Effects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Au2_ZORA.html">Example: ZORA Relativistic Effects: Au2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/SO_ZORA_Bi2.html">Example: Spin-Orbit coupling: Bi and Bi2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Tl_noncollinear.html">Example: Spin-Orbit unrestricted non-collinear: Tl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AuH_analyse_exciso.html">Example: Excitation energies including spin-orbit coupling: AuH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HgI2.html">Example: ZORA, X2C and RA-X2C: HgI2 = Hg + I2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#solvents-other-environments">Solvents, other environments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Solv_HCl.html">Example: COSMO: HCl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Acetamide_SM12.html">Example: solvation model SM12: Acetamide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Field_PtCO.html">Example: Electric Field: PtCO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Efield.PntQ_N2.html">Example: Electric Field, Point Charge: N2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/3D-RISM.html">Example: 3D-RISM: Glycine</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#fde-frozen-density-embedding">FDE: Frozen Density Embedding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_H2O_128.html">Example: FDE: H2O in water</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_HeCO2_freezeandthaw.html">Example: FDE freeze-and-thaw: HeCO2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_Energy_NH3-H2O.html">Example: FDE energy: NH3-H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_Energy_H2O-Ne_unrestricted.html">Example: FDE energy: unrestricted fragments: Ne-H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GO_FDE_H2O-Li.html">Example: FDE geometry optimization: H2O-Li(+)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_NMR_relax.html">Example: FDE NMR shielding: Acetonitrile in water</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_CPL_NH3-H2O.html">Example: FDE NMR spin-spin coupling: NH3-H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/SUBEXCI_dimer.html">Example: Subsystem TDDFT, coupled FDE excitation energies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LoCOSMO_H2O-NH3.html">Example: FDE and COSMO: H2O-NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LoCOSMO_H2O-NH3_TDDFT.html">Example: FDE and COSMO: H2O-NH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#qm-mm-calculations">QM/MM calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#quild-quantum-regions-interconnected-by-local-descriptions">Quild: Quantum-regions Interconnected by Local Descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#dim-qm-discrete-interaction-model-quantum-mechanics">DIM/QM: Discrete Interaction Model/Quantum Mechanics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_DRF_BE.html">Example: DRF: H2O and H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_DRF_Hyperpol.html">Example: DRF: hyperpolarizability H2O in water</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_DRF_plams.html">Example: DRF: scripting tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_DRF2.html">Example: DRF2: Polarizability N2 on Ag68 + H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_CPIM_Excitations.html">Example: CPIM: excitation energies N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_JACOBI.html">Example: CPIM: polarizability N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_LOCAL.html">Example: PIM: H2O on Ag2689</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_READLCLFLD.html">Example: PIM: Polarizability with local fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_Gradients.html">Example: PIM: optimization N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_PIM_Pol.html">Example: PIM: polarizability N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_Raman.html">Example: PIM: Raman scattering N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_SEROA.html">Example: PIM: SEROA calculation N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_PIM_CMM.html">Example: PIM: Multipole Method N2 on silver cluster Ag1415</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#qm-fq-quantum-mechanics-fluctuating-charges">QM/FQ: Quantum Mechanics/Fluctuating Charges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FQQM_scf.html">Example: QM/FQ: 2-Methyloxirane (QM) in Water (FQ)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FQQM_aoresponse.html">Example: QM/FQ: polarizability 2-Methyloxirane (AORESPONSE)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FQQM_response.html">Example: QM/FQ: polarizability 2-Methyloxirane (RESPONSE)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FQQM_td.html">Example: QM/FQ: excitations 2-Methyloxirane</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#structure-and-reactivity">Structure and Reactivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#geometry-optimizations">Geometry Optimizations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GO_H2O.html">Example: Geometry Optimization: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GO_restraint.html">Example: Restraint Geometry Optimization: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GO_constraints.html">Example: Constraint Geometry Optimization: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/InitHess.html">Example: Initial Hessian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GO_LiF_Efield.html">Example: Geometry optimization with an external electric field or point charges: LiF</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#transition-states-linear-transits-intrinsic-reaction-coordinates">Transition States, Linear Transits, Intrinsic Reaction Coordinates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HCN.html">Example: LT, Frequencies, TS, and IRC: HCN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TS_C2H6.html">Example: TS search using partial Hessian: C2H6 internal rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TS_CH4_HgCl2.html">Example: Relativistic ZORA TS search: CH4 + HgCl2 &lt;==&gt; CH3HgCl + HCl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TSRC_SN2.html">Example: TS reaction coordinate: F- + CH3Cl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Transit_H2O.html">Example: (non-)Linear Transit: H2O</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#total-energy-multiplet-states-s2-localized-hole-cebe">Total energy, Multiplet States, S2, Localized hole, CEBE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Energy_H2O.html">Example: Total Energy calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/SD_CrNH3_6.html">Example: Multiplet States: [Cr(NH3)6]3+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CuH+_S-squared.html">Example: Calculation of S2: CuH+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ModStPot_N2+.html">Example: Localized Hole: N2+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Fe4S4_BrokenSymm.html">Example: Broken spin-symmetry: Fe4S4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CEBE_NNO.html">Example: Core-electron binding energies (CEBE): NNO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/WaterDimer.html">Example: Constrained DFT: H2O+ … H2O</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#spectroscopic-properties">Spectroscopic Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#ir-frequencies-resonance-raman-vroa-vcd">IR Frequencies, (resonance) Raman, VROA, VCD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Freq_NH3.html">Example: Numerical Frequencies: NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Freq_UF6.html">Example: Numerical Frequencies, spin-orbit coupled ZORA: UF6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_HF_freq.html">Example: Numerical Frequencies, accurate Hartree-Fock: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CN_SecDeriv.html">Example: Analytic Frequencies: CN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CH4_SecDeriv.html">Example: Analytic Frequencies: CH4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HI_SecDer_ZORA.html">Example: Analytic Frequencies: HI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/MBH_Ethanol.html">Example: Mobile Block Hessian (MBH): Ethanol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/MBH_CH4.html">Example: Mobile Block Hessian: CH4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Freq_NH3_RAMAN.html">Example: Raman: NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HI_Raman.html">Example: Raman: HI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HF_ResonanceRaman.html">Example: Resonance Raman, excited state finite lifetime: HF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/VROA.html">Example: Vibrational Raman optical activity (VROA): H2O2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/VROA_RESO.html">Example: Resonance VROA: H2O2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DFTB_modes_ADF_Raman_VROA.html">Example: Raman and VROA for approximate modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/VCD_COG_NHDT.html">Example: Vibrational Circular Dichroism (VCD): NHDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/VCD_CHFClBr_DZP.html">Example: unrestricted VCD: CHFClBr</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#excitation-energies-uv-vis-spectra-x-ray-absorption-cd-mcd">Excitation energies: UV/Vis spectra, X-ray absorption, CD, MCD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Au2_Resp.html">Example: Excitation energies and polarizability: Au2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CN_unr_exci.html">Example: Excitation energies open shell molecule: CN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/SiH2_spinflip.html">Example: Spin-flip excitation energies: SiH2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/N2_TDHF.html">Example: TDHF excitation energies: N2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Pyridine_CAM-B3LYP.html">Example: excitation energies CAM-B3LYP: Pyridine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CAMY-B3LYP_TDDFT_H2O.html">Example: CAMY-B3LYP excitation energies: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/XCFUN_FULLKERNEL_TDDFT_H2O.html">Example: Full XC kernel in excitation energy calculation: H2O+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/XCFUN_TDDFT_H2O.html">Example: Use of xcfun in excitation energy calculations: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TiCl4_CoreExci.html">Example: Core excitation energies: TiCl4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TiCl4_XASXES.html">Example: X-Ray Absorption and Emission Quadrupole Oscillator strengths at the Cl K-edge: TiCl4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Ne_exciso.html">Example: (Core) Excitation energies including spin-orbit coupling: Ne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AgI_asoexcit.html">Example: Excitation energies perturbative spin-orbit coupling: AgI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/PbF_excisou.html">Example: Excitation energies including spin-orbit coupling for open shell: PbF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DMO_CD.html">Example: Circular Dichroism (CD) spectrum: DMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Twist_Ethene_TDDFT.html">Example: CD spectrum, hybrid functional: Twisted ethene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_MCD.html">Example: MCD: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_MCD_ZFS.html">Example: MCD including zero-field splitting: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Formamide_CVnDFT.html">Example: CV(n)-DFT excitation energies: Formamide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NH3_HDA.html">Example: HDA excitation energies: NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_SO_HDA.html">Example: HDA spin-orbit coupled excitation energies: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TD-DFTB_betacarotene.html">Example: TD-DFT+TB excitation energies: beta-Carotene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Adenine_sTDA.html">Example: sTDA excitation energies: Adenine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Adenine_sTDDFT.html">Example: sTDDFT excitation energies: Adenine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Bimane_wB97X.html">Example: sTDA excitation energies RS functional: Bimane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TCNE-Benzene_wB97.html">Example: sTDA excitation energies wB97: TCNE-Benzene</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#excited-state-geometry-optimizations">Excited state (geometry) optimizations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EGO_N2.html">Example: Excited state geometry optimization: N2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EGO_CH2O_trip_constr.html">Example: Excited state geometry optimization with a constraint: CH2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EGO_CH2_sf.html">Example: Spin-flip excited state geometry optimization: CH2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EGO_PH2.html">Example: Numerical Frequencies of an excited state: PH2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#vibrationally-resolved-electronic-spectra">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FranckCondon_NO2.html">Example: Franck-Condon Factors: NO2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Naphthalene_VST.html">Example: Vibronic-Structure Tracking: Naphthalene</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#hyper-polarizabilities-dispersion-coefficients-ord-magnetizabilities-verdet-constants">(Hyper-)Polarizabilities, dispersion coefficients, ORD, magnetizabilities, Verdet constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AgI_SO_Pol.html">Example: Polarizabilities including spin-orbit coupling: AgI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LiH_DampedBeta.html">Example: damped first hyperpolarizability: LiH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LiH_DampedGamma.html">Example: damped second hyperpolarizability: LiH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_Verdet.html">Example: Verdet constants: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Disper_HF.html">Example: Dispersion Coefficients: HF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DMO_ORD.html">Example: Optical Rotation Dispersion (ORD): DMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DMO_ORD_aoresponse.html">Example: ORD, lifetime effects (key AORESPONSE): DMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ALPHA_DENSITY.html">Example: Polarizability: first order perturbed density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Hyperpol.html">Example: Hyperpolarizabilities of He and H2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DampedVerdet.html">Example: Damped Verdet constants: Propene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_magnet.html">Example: Static magnetizability: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_TD_magnet.html">Example: Dynamic magnetizability: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/C2H4_TDCDFT.html">Example: Time-dependent current-density-functional theory: C2H4:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Au10_POLTDDFT.html">Example: Damped complex polarizabilities with POLTDDFT: Au10</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NH3_POLTDDFT.html">Example: POLTDDFT with hybrid functional: NH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#ligand-field-dft-lfdft">Ligand Field DFT (LFDFT)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Co_LFDFT.html">Example: Ligand Field DFT: Co 2+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Pr_LFDFT.html">Example: Ligand Field DFT: f-d transitions in Pr 3+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Co_LFDFT_gtensor.html">Example: LFDFT: g-tensor of Co(acacen)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Cu_LFDFT_gtensor.html">Example: LFDFT: g-tensor of Cu(H2O)6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Er_LFDFT_MCD.html">Example: LFDFT: XMCD 3d-4f transitions in Er 3+</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#nmr-chemical-shifts-and-spin-spin-coupling-constants">NMR chemical shifts and spin-spin coupling constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HBr.html">Example: NMR Chemical Shifts: HBr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HgMeBr_pnr.html">Example: NMR Chemical Shifts: HgMeBr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CH4_SAOP.html">Example: NMR Chemical Shifts, SAOP potential: CH4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NMR_NICS.html">Example: NMR Nucleus-independent chemical shifts (NICS): PF3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NMR_B3LYP.html">Example: NMR with B3LYP: PF3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CPL_C2H2.html">Example: NMR Spin-spin coupling constants: C2H2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CPL_HF_hybrid.html">Example: NMR Spin-spin coupling constants, hybrid PBE0: HF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/PbH4_finitenuc.html">Example: NMR Spin-spin coupling constants, finite nucleus: PbH4</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#esr-epr-g-tensor-a-tensor-q-tensor-zfs">ESR/EPR g-tensor, A-tensor, Q-tensor, ZFS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ESR_HfV.html">Example: ESR g-tensor, A-tensor, Q-tensor, D-tensor: HfV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/VO_collinear.html">Example: ESR g-tensor, A-tensor, self consistent spin-orbit coupling: VO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ESR_HgF_2der.html">Example: ESR g-tensor, A-tensor, perturbative spin-orbit coupling: HgF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ESR_TiF3.html">Example: ESR spin-restricted and spin-unrestricted: TiF3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/PdH_ESR_X2C.html">Example: ESR, X2C and RA-X2C: PdH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NH_ZFS.html">Example: Zero-field splitting (ZFS), ESR D-tensor: NH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Phenylnitrene_ZFS.html">Example: ZFS D tensor, including direct electron spin-spin part: Phenylnitrene</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#efg-mossbauer">EFG, Mössbauer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Mossbauer.html">Example: Mössbauer spectroscopy: Ferrocene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Hg_Mossbauer_X2C.html">Example: Mössbauer with X2C: Hg compounds</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#gw">GW</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GW_H2O.html">Example: G<sub>0</sub>W<sub>0</sub>&#64;PBE calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GW_O3.html">Example: G<sub>0</sub>W<sub>0</sub>&#64;PBE0 calculation: O3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GW_Phenol.html">Example: G<sub>0</sub>W<sub>0</sub>&#64;PBE0 calculation: Phenol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/evGW_H2O.html">Example: evGW&#64;M06-2X calculation: H2O</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#transport-properties">Transport properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#charge-transfer-integrals-transport-properties">Charge transfer integrals (transport properties)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AT_transferintegrals.html">Example: Charge transfer integrals: AT base pair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ElectronTransfer_FDE_H2O.html">Example: Charge transfer integrals with FDE: water dimer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ChargeSeparation_Toluene_TCNE.html">Example: Charge Recombination Calculation of Toluene and TCNE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/XCDFT_FDE_ET_ethylene.html">Example: XCDFT: Charge Separation of an ethylene dimer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#non-self-consistent-green-s-function-calculation">Non-self-consistent Green’s function calculation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/green_Al.html">Example: DOS and transmission: Aluminium</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/green_Au.html">Example: Gold electrodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/green_WBL.html">Example: Benzenedithiol junction: Wide-Band-Limit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/green_BDT.html">Example: Benzenedithiol junction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#fragment-orbitals-bond-energy-decomposition">Fragment orbitals, bond energy decomposition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Frags_NiCO4.html">Example: Compound Fragments: Ni(CO)4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Frags_PtCl4H2.html">Example: Fragments: PtCl4H2 2-</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/UnrFrag_H2.html">Example: Spin-unrestricted Fragments: H2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/PCCP_Unr_BondEnergy.html">Example: Bond Energy analysis open-shell fragments: PCCP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NaCl_ionicbonding.html">Example: Analysis of NaCl using ionic fragments: Na+ and Cl-</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NaCl_pairbonding.html">Example: Electron Pair bonding in NaCl: open shell fragments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EDA_meta_gga_hybrid.html">Example: Bond Energy analysis meta-GGA, (meta-)hybrids: Zn2, Cr2, CrH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EDA_Unr_C2H4_Cu_C2H4.html">Example: unrestricted EDA: Cu(C2H4)2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EDA_Unr_CH3I.html">Example: unrestricted fragments: CH3I</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TlH_SO_analysis.html">Example: Spin-Orbit SFO analysis: TlH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/PyFrag.html">Example: Activation Strain Model Analysis using PyFrag</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#localized-orbitals-bond-orders-charge-analysis">Localized orbitals, bond orders, charge analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LocMO_Resp.html">Example: (Perturbed) localized molecular orbitals in twisted Ethene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CM5_chargemodel.html">Example: Charge model 5 (CM5)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/BondOrder.html">Example: Bond Orders</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#ets-nocv">ETS-NOCV</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Diimina_NOCV.html">Example: NOCV: ethylene – Ni-diimina</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Hplus_CO_etsnocv.html">Example: NOCV: H+ – CO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NOCV_CrCO5-CH2.html">Example: NOCV: CH2 – Cr(CO)5</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CH3_CH3_etsnocv.html">Example: NOCV: CH3 – CH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#qtaim">QTAIM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Bader.html">Example: QTAIM Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Bader_Reactivity.html">Example: QTAIM Reactivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/IQA.html">Example: IQA/QTAIM analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Aromaticity.html">Example: QTAIM Aromaticity indices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#dos-density-of-states">DOS: Density of states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DOS_Cu4CO.html">Example: Density of States: Cu4CO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#third-party-analysis-software">Third party analysis software</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AIM_HF.html">Example: adf2aim: convert an ADF adf.rkf to WFN format (for Bader analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_ADFNBO.html">Example: NBO analysis: adfnbo, gennbo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AlCl3_efgnbo.html">Example: NBO analysis: EFG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CH4_nmrnbo.html">Example: NBO analysis: NMR chemical shift</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CPL_CH3OH_NBO.html">Example: NBO analysis: NMR spin-spin coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EGO_H2O_multi.html">Example: Multiple excited state gradients: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CalcOverlapOnly.html">Example: Calculation of overlap of primitive basis functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#accuracy-and-efficiency">Accuracy and Efficiency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#bsse-scf-convergence-frequencies">BSSE, SCF convergence, Frequencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/BSSE_CrCO6.html">Example: Basis Set Superposition Error (BSSE): Cr(CO)5 +CO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/SCF_Ti2O4.html">Example: Troubleshooting SCF convergence: Ti2O4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Freq_NH3_Scan.html">Example: Rescan frequencies: NH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#speed">Speed</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Multiresolution_H2O.html">Example: Multiresolution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#scripting">Scripting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#prepare-an-adf-job-and-generate-a-report">Prepare an ADF job and generate a report</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/BakersetSP.html">Example: Single point for multiple xyz files: Bakerset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ConvergenceTestCH4.html">Example: Basis set and integration accuracy convergence test: Methane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LoopAtomsLigands.html">Example: amsprep: Replace atom with ligand</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#list-of-examples">List of Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#feature-references">Feature References</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#coordinates-basis-sets-fragments">Coordinates, basis sets, fragments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#geometry-optimizations-transition-states-and-reaction-paths">Geometry optimizations, transition states, and reaction paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#model-hamiltonians">Model Hamiltonians</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#relativistic-effects">Relativistic Effects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#solvents-and-other-environments">Solvents and other environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#frequencies-ir-intensities-raman-vcd">Frequencies, IR Intensities, Raman, VCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#time-dependent-dft">Time-Dependent DFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#lfdft">LFDFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#nmr">NMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#esr-epr">ESR/EPR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#gw">GW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#transport-properties-non-self-consistent-green-s-function">Transport properties: Non-self-consistent Green’s function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#accuracy-and-efficiency">Accuracy and efficiency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ADF</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../ADF.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">ADF</a>/</li>
+      
+          <li><a href="Model_Hamiltonians.html">Model Hamiltonians</a>/</li>
+      
+          <li><a href="Solvents_and_other_environments.html">Solvents and other environments</a>/</li>
+      
+    <li class="orange-text">DIM/QM: Discrete Interaction Model/Quantum Mechanics</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="dimqm"></span><span class="target" id="index-0"></span><span class="target" id="index-1"></span><div class="section" id="dim-qm-discrete-interaction-model-quantum-mechanics">
+<span id="index-2"></span><h1>DIM/QM: Discrete Interaction Model/Quantum Mechanics<a class="headerlink" href="#dim-qm-discrete-interaction-model-quantum-mechanics" title="Permalink to this headline">¶</a></h1>
+<p>The Discrete Interaction Model/Quantum Mechanics (DIM/QM) method facilitates calculating the optical properties of molecules under the influence of a discrete solvent or a metal nanoparticle, see for example Ref. <a class="footnote-reference" href="#ref1" id="id1">[1]</a>. DIM/QM relies on one of three descriptions of the system: Discrete Reaction Field (DRF), where the atoms interact via induced dipoles and static charge, Capacitance Polarizability Interaction Model (CPIM), where the atoms interact via induced dipoles and induced charges, and Polarizability Interaction Model (PIM), where the atoms interact via induced dipoles only. DRF is best for solvents, CPIM is best for small metal nanoparticles, and PIM is best for large metal nanoparticles.</p>
+<p>The DRF module is now a part of DIM/QM, so DRF is now a submodule of DIM/QM.</p>
+<p>To perform a DIM/QM calculation, two block keys are required.  The first is the DIMQM block which activates the DIM/QM module.  The parameters for each DIM atom must also be given, and they can be given with either the DIMPAR block which is most convenient for metal nanoparticles, or with the EXTERNALS block which is designed for DRF.</p>
+<p>In ADF2019 the bond energies calculated with DIM/QM in ADF have been corrected.</p>
+<span class="target" id="drf"></span><span class="target" id="index-3"></span><div class="section" id="index-4">
+<span id="id2"></span><h2>DRF<a class="headerlink" href="#index-4" title="Permalink to this headline">¶</a></h2>
+<p>The Discrete Solvent Reaction Field (DRF) model is a hybrid Quantum mechanical and Molecular Mechanics (QM/MM) model for studying solvation effects on (time-dependent) molecular properties such as dipole moments, excitation energies and (hyper)polarizabilities <a class="footnote-reference" href="#ref7" id="id3">[7]</a> <a class="footnote-reference" href="#ref8" id="id4">[8]</a> <a class="footnote-reference" href="#ref9" id="id5">[9]</a> <a class="footnote-reference" href="#ref10" id="id6">[10]</a> <a class="footnote-reference" href="#ref11" id="id7">[11]</a>. The classical solvent molecules are represented using distributed atomic charges and polarizabilities.</p>
+<p>With the ADF-GUI it is simple to setup a DRF calculation.
+Another possibility is to use and/or modify a python script that is explained in the example <a class="reference internal" href="../Examples/DIMQM_DRF_plams.html#example-dimqm-drf-plams"><span class="std std-ref">DIMQM_DRF_plams</span></a>.
+Both the ADF-GUI and the DRF python script have default settings which can be easily modified if this is required.
+In the simplest case the user just needs to provide the QM and DRF regions.
+By default, atomic charges that are used, in case of the ADF-GUI or the DRF python script, for the DRF are computed with LDA functional, DZP basis set and normal numerical quality.
+Also by default, atomic polarizabilities (computed with the Thole’s model) are taken from a inner database including H, C, N, O, F, S, Cl, Br, I atoms <a class="footnote-reference" href="#ref2" id="id8">[2]</a>.
+If one does not use the ADF-GUI or the DRF python script, the user has to specify this by hand.</p>
+<p>Within the Discrete Solvent Reaction Field model the QM/MM operator is</p>
+<div class="math notranslate nohighlight">
+\[H_\text{QM/MM} = \sum_i v_\text{DRF} (r_i, \omega) = \sum_i V^\text{el} (r_i) + V^\text{pol} (r_i, \omega)\]</div>
+<p>where the first term, v<sup>el</sup> , is the electrostatic operator and describes the Coulombic interaction between the QM system and the permanent charge distribution of the solvent molecules. The second term, v<sup>pol</sup> , is the polarization operator and describes the many-body polarization of the solvent molecules, i.e. the change in the charge distribution of the solvent molecules due to interaction with the QM part and other solvent molecules. The charge distribution of the solvent is represented by atomic point charges and the many-body polarization by induced atomic dipoles at the solvent molecules. The induced atomic dipole at site <em>s</em> is found by solving a set of linear equations</p>
+<div class="math notranslate nohighlight">
+\[\mu^\text{ind}_{s,\alpha} (\omega) = \alpha_{s,\alpha \beta} \left( F^\text{init}_{s,\beta} (\omega) + \sum_{t \neq s} T^{(2)}_{st,\beta \gamma} \mu^\text{ind}_{t,\gamma} (\omega) \right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_{s,\alpha \beta}\)</span>  is a component of the atomic polarizability tensor at site <em>s</em>. The screened dipole interaction tensor is given by</p>
+<div class="math notranslate nohighlight">
+\[T^{(2)}_{st,\beta \gamma} = 3f^T_{st} R_{st,\alpha} R_{st,\beta} / R^5_{st} - f^E_{st} \delta_{\alpha \beta} / R^3_{st}\]</div>
+<p>where the damping functions f<sup>T</sup> <sub>st</sub>  and f<sup>E</sup> <sub>st</sub>  have been introduced, see also <a class="footnote-reference" href="#ref2" id="id9">[2]</a>. A smeared-out point charge model <a class="footnote-reference" href="#ref3" id="id10">[3]</a> is used for short-range damping of the QM/MM operator</p>
+<div class="math notranslate nohighlight">
+\[1/R_{st}  \rightarrow 1/S_{st}  = erf(R_{st})/R_{st}\]</div>
+<p>The scaled distance, S<sub>st</sub> , then replaces the normal distance, R<sub>st</sub> , in the QM/MM operator.</p>
+<p>In order to perform a DRF calculation two types of parameters (model atomic charges and atomic polarizabilities) for each type of atom in the MM part are required. The point charges should represent at least the permanent molecular dipole moment, and the distributed atomic polarizabilities the full molecular polarizability tensor. The atomic charges can straightforward be obtained using e.g. Multipole Derived Charges (MDC) [See  <a class="reference internal" href="Results_Output.html#mdc"><span class="std std-ref">section on MDC</span></a> and the distributed polarizabilities by adopting standard parameters or refitting them to match the calculated polarizability tensor <a class="footnote-reference" href="#ref2" id="id11">[2]</a> <a class="footnote-reference" href="#ref3" id="id12">[3]</a>. This allows for a simple procedure to obtain the solvent model parameters which subsequently can be used in the DRF calculation.</p>
+<p>DRF gradients can be calculated by using the DRF2 keyword in the DIMQM block. This is an expert option and should be used with great caution. The DRF2 keyword uses DRF but with Gaussian screening like that of the PIM method. It also allows for input of parameters by atom type like the PIM method. The user must specify a radius and charge for the atom type like seen below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DIMPAR</span>
+  <span class="n">O</span>
+    <span class="n">rad</span><span class="o">=</span><span class="mf">0.9028</span>
+    <span class="n">char</span><span class="o">=-</span><span class="mf">0.6690</span>
+    <span class="n">STATIC</span>
+  <span class="n">SUBEND</span>
+  <span class="n">H</span>
+    <span class="n">rad</span><span class="o">=</span><span class="mf">0.2479</span>
+    <span class="n">char</span><span class="o">=</span><span class="mf">0.3345</span>
+    <span class="n">STATIC</span>
+  <span class="n">SUBEND</span>
+  <span class="n">Ag</span>
+    <span class="n">rad</span><span class="o">=</span><span class="mf">1.445</span>
+    <span class="n">char</span><span class="o">=</span><span class="mf">0.0000</span>
+  <span class="n">SUBEND</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<p>Here, the STATIC keyword is used to tell DIM/QM to ignore the frequency dependent response for those atom types.</p>
+<span class="target" id="index-5"></span><span class="target" id="index-6"></span></div>
+<div class="section" id="surface-enhanced-response-properties">
+<span id="index-7"></span><h2>Surface-enhanced response properties<a class="headerlink" href="#surface-enhanced-response-properties" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the calculation of solvation effects on response properties,
+DIM/QM can also be used for simulating nonlinear optical properties of molecules near metal surfaces of a nanoparticle.
+A TDDFT description of the molecule is coupled to an electrodynamical treatment of the nanoparticle, including electrostatics and polarization of the atoms.
+In this way DIM/QM can be used to study surface-enhance Raman scattering (SERS) <a class="footnote-reference" href="#ref1" id="id13">[1]</a>, surface-enhanced Raman optical activity (SEROA)
+<a class="footnote-reference" href="#ref4" id="id14">[4]</a>, and plasmon-enhanced photochemistry.</p>
+<p>Starting from ADF2018 the Polarizability Interaction Model (PIM) can be used to calculate damped first hyperpolarizabilities <span class="math notranslate nohighlight">\(\beta\)</span> and damped second hyperpolarizabilities <span class="math notranslate nohighlight">\(\gamma\)</span>.
+Different types of <span class="math notranslate nohighlight">\(\beta\)</span>-tensors can be calculated, such as STATIC, OPTICALR, EOPE, and SHG.
+This allows for simulation of surface-enhanced hyper-Raman scattering (SEHRS) <a class="footnote-reference" href="#ref5" id="id15">[5]</a>.
+All the (sub)keywords for regular damped <span class="math notranslate nohighlight">\(\beta\)</span>, such as BETA and QUADRATIC, can also be used.
+Also different types of <span class="math notranslate nohighlight">\(\gamma\)</span>-tensors can be calculated, such as STATIC, EFIOR, OKE, IDRI, EFISHG, THG and TPA.
+This allows for simulation of plasmon-enhanced two-photon absorption (PETPA).
+Except CUBIC, all the other (sub)keywords for regular damped <span class="math notranslate nohighlight">\(\gamma\)</span> can also be used.</p>
+</div>
+<div class="section" id="input-options">
+<h2>Input options<a class="headerlink" href="#input-options" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate" id="keyscheme-drf"><span id="keyscheme-dimqm"></span><div class="highlight"><pre><span></span><span class="n">DIMQM</span>
+  <span class="o">&lt;</span><span class="n">DRF</span><span class="o">|</span><span class="n">PIM</span><span class="o">|</span><span class="n">CPIM</span><span class="o">&gt;</span>
+  <span class="n">NOPOL</span>
+  <span class="n">NOCHAR</span>
+  <span class="n">NOCROSS</span>
+  <span class="n">DDA</span>
+  <span class="n">FULLGRID</span>
+  <span class="n">LOCALFIELD</span> <span class="o">&lt;</span><span class="n">Resp</span><span class="o">|</span><span class="n">All</span><span class="o">|</span><span class="n">Static</span><span class="o">&gt;</span>
+  <span class="n">EFIELD</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
+  <span class="n">SCREEN</span> <span class="o">&lt;</span><span class="n">ERF</span><span class="o">|</span><span class="n">EXP</span><span class="o">|</span><span class="n">ESP</span><span class="o">|</span><span class="n">GAU</span><span class="o">|</span><span class="n">NONE</span><span class="o">&gt;</span> <span class="p">{</span><span class="n">length</span><span class="p">}</span>
+  <span class="p">::</span> <span class="n">FREQUENCY</span><span class="o">-</span><span class="n">DEPENDENT</span> <span class="n">PARAMETERS</span>
+  <span class="n">FREQUENCY</span>
+  <span class="n">OM_H</span> <span class="n">value</span>
+  <span class="n">OM_C</span> <span class="n">value</span>
+  <span class="n">OM_O</span> <span class="n">value</span>
+  <span class="n">OM_N</span> <span class="n">value</span>
+  <span class="p">::</span> <span class="n">CONTROL</span> <span class="n">OVER</span> <span class="n">SOLVER</span>
+  <span class="n">ALGORITHM</span> <span class="o">&lt;</span><span class="n">BEST</span><span class="o">|</span><span class="n">DIRECT</span><span class="o">|</span><span class="n">BRUTE</span><span class="o">|</span><span class="n">SINGLE</span><span class="o">|</span><span class="n">MULTI</span><span class="o">&gt;</span>
+  <span class="n">TOLERANCE</span> <span class="n">tol</span>
+  <span class="n">NITER</span> <span class="n">iterations</span>
+  <span class="n">VOLUME</span> <span class="n">vol_in_nm</span><span class="o">^</span><span class="mi">3</span>
+  <span class="n">MULTIPLIER</span> <span class="n">aterm</span> <span class="n">bterm</span> <span class="n">cterm</span>
+  <span class="n">GRID</span> <span class="o">&lt;</span><span class="n">COARSE</span><span class="o">|</span><span class="n">MEDUIM</span><span class="o">|</span><span class="n">FINE</span><span class="o">&gt;</span>
+  <span class="p">::</span> <span class="n">GRADIENT</span> <span class="n">OPTIONS</span>
+  <span class="n">FORCEFIELD</span>
+  <span class="n">CHEMBOND</span> <span class="n">qmindex</span> <span class="n">dimindex</span>
+  <span class="n">COORDDEPEND</span>
+  <span class="n">CHEMISORPTION</span>
+  <span class="n">COORDPAR</span> <span class="n">atomtype</span> <span class="n">e0</span> <span class="n">e1</span> <span class="n">r0</span> <span class="n">r1</span> <span class="n">CNmax</span> <span class="n">Rmax</span> <span class="n">Rmin</span>
+  <span class="n">CHEMPAR</span> <span class="n">atomtype</span> <span class="n">e0</span> <span class="n">e1</span> <span class="n">r0</span> <span class="n">r1</span> <span class="n">cutoff</span>
+  <span class="n">PROJECTIONMATRIXPOINTS</span> <span class="o">&lt;</span><span class="n">ALL</span><span class="o">|</span><span class="n">CUTOFF</span> <span class="n">radius</span><span class="o">|</span><span class="n">OFF</span><span class="o">&gt;</span>
+  <span class="p">::</span> <span class="n">OUTPUT</span> <span class="n">CONTROL</span>
+  <span class="n">PRINTATOMICDIPOLES</span>
+  <span class="n">PRINTLJPAR</span>
+  <span class="n">DEBUG</span>
+  <span class="n">LOCALDIM</span>
+  <span class="n">LOCALDIRECT</span>
+  <span class="n">DIMBUFFER</span>
+  <span class="n">QMBUFFER</span>
+  <span class="n">CUTOFFDIST</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;DRF|CPIM|PIM&gt;</span></code></dt>
+<dd>DIM/QM relies on one of three descriptions of the system: Discrete Reaction Field (DRF), where the atoms interact via induced dipoles and static charge, Capacitance Polarizability Interaction Model (CPIM), where the atoms interact via induced dipoles and induced charges, and Polarizability Interaction Model (PIM), where the atoms interact via induced dipoles only.  DRF is best for solvents, CPIM is best for small metal nanoparticles, and PIM is best for large metal nanoparticles. One and only one of these three keys must be included in every DIM/QM calculation. However, in ADF2019 there is also the expert DRF2 possibility, which allows for DRF gradients but should be used cautiously.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NOPOL</span></code></dt>
+<dd>The NOPOL key turns off the polarization terms, and thus all induced dipoles are zero.  This key is only valid for DRF or CPIM calculations.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NOCHAR</span></code></dt>
+<dd>The NOCHAR key turns off the charge terms, and thus all induced or static charges are zero.  This key is only valid for DRF or CPIM calculations.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NOCHOSS</span></code></dt>
+<dd>The NOCROSS key turns off the charge-dipole interactions.  This key is only valid for CPIM calculations.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DDA</span></code></dt>
+<dd>By default, the dipole-dipole, charge-dipole and charge-charge interactions are screened to take into account that atoms are not point charges.  The DDA key will turn off this screening so that the results can be compared directly to the discrete dipole approximation (DDA).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FULLGRID</span></code></dt>
+<dd>This is used in conjunction with the frozen density approximation.</dd>
+</dl>
+<span class="target" id="index-8"></span><dl class="docutils" id="index-9">
+<dt><code class="docutils literal notranslate"><span class="pre">LOCALFIELD</span> <span class="pre">&lt;Resp|All|Static&gt;</span></code></dt>
+<dd><p class="first">Default is All, when no option is specified. When the molecule interacts with a (for example) metal nanoparticle, there are two types of interactions: the image field and the local field. The image field is caused by the dipoles induced into the nanoparticle by the molecule’s electron density. This is always taken into account in a DIM/QM calculation. The local field arises by direct interactions of the nanoparticle with an external field. Addition of the LOCALFIELD key causes the DIM/QM calculation to include this effect, but by default this is not included in a DIM/QM calculation. In ADF2016 the correct behavior with local fields for the electric dipole-dipole, electric dipole-quadrupole, and electric dipole-magnetic dipole response tensors in the velocity gauge is implemented. This allows for correct calculation of surface-enhanced Raman optical activity (SEROA) (Ref. <a class="footnote-reference" href="#ref4" id="id16">[4]</a>) and plasmonic circular dichroism (Ref. <a class="footnote-reference" href="#ref6" id="id17">[6]</a>).</p>
+<p class="last">Default option should be used in most situations as other options are expert options. In effort to speed up calculation times, one can request to just calculate the Local Fields during the response section of the calculation by using the Resp keyword after local fields. All will calculate the local field for both ground state calculations and the response calculations, while static will calculate the local field during the ground state only.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EFIELD</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">z</span></code></dt>
+<dd>The EFIELD key is used to include an external static electric field in the vector x y z.  Internally, the static charges used in a DRF calculation use AMS’s System%ElectrostaticEmbedding, and therefore use of the AMS System%ElectrostaticEmbedding is not allowed icw the DIMQM block. This key is included so the user may include an external static electric field.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SCREEN</span> <span class="pre">&lt;ERF|EXP|ESP|GAU|NONE&gt;</span> <span class="pre">{length}</span></code></dt>
+<dd>The SCREEN key indicates what functional form is used to screen the interactions between each DIM atom and the QM density.  The choices are ERF (error function), EXP (exponential), ESP (error function for potential operator only), GAU (Gaussian), or NONE.  For CPIM and PIM the default is GAU; for DRF, the default is ESP.  In all cases, the default screening length is 1.0, but this may be changed with the optional length parameter.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FREQUENCY</span></code></dt>
+<dd>The FREQUENCY key turns on frequency-dependent parameters.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">OM_[HCON]</span> <span class="pre">value</span></code></dt>
+<dd>The OM_H, OM_C, OM_O, and OM_N keys provide the resonance frequency (in atomic units) for the elements H, C, O and N, respectively.  These keys are only for use with DRF and only when the older EXTERNALS block is used.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ALGORITHM</span> <span class="pre">&lt;BEST|DIRECT|BRUTE|SINGLE|MULTI&gt;</span></code></dt>
+<dd><p class="first">DIM/QM can choose between several solver algorithms.  The DIRECT method solves the linear system of equations directly with a LAPACK routine; this should be considered the most robust method, but scales poorly with the number of atoms (O(N<sup>3</sup> ) where N is the number of atoms in the system).  The other three methods use an iterative technique, The BRUTE method (brute force) takes into account all atoms in the matrix-vector multiply step, and scales as O(N<sup>2</sup> ).  The SINGLE method uses the single-level cell-multipole-method (CMM), wherein dipoles that are spatially similar are collected into a multipole moment which effectively reduces the system size.  This also scales as O(N<sup>2</sup> ) but with a lower prefactor than BRUTE.  The MULTI method uses the multi-level cell-multipole-method, which uses larger and large multipole the farther apart the dipoles are.  This is the fastest method and scales as O(N log N).</p>
+<p class="last">Due to technical limitations, CPIM can only use DIRECT.  Further, depending on the system size DIRECT or SINGLE may be more efficient than MULTI.  To simplify choosing the solving algorithm, there is a BEST option that chooses the best algorithm for the particular system.  BEST is the default option for algorithm.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TOLERANCE</span> <span class="pre">tol</span></code></dt>
+<dd>The TOLERANCE key allows the user to specify a tolerance for the iterative solver.  By default the tolerance is based on ADF’s INTEGRATION key.  This has no effect with the DIRECT solver.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NITER</span> <span class="pre">iterations</span></code></dt>
+<dd>The NITER key allows the user to specify the maximum number of iterations for the iterative solver.  By default this is MAX(N/100, 200) where N is the number of DIM atoms.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">VOLUME</span> <span class="pre">vol_in_nm3</span></code></dt>
+<dd>The VOLUME key is used to specify the DIM system volume.  The volume is used to determine how to partition the system for the cell multipole method (ALGORITHM options SINGLE or MULTI), and is also use to determine the scattering efficiencies for frequency-dependent polarizability calculations.  The volume does not need to be supplied; if it is missing, it will be calculated based on each atom’s radius and the MULTIPLIER key.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MULTIPLIER</span> <span class="pre">aterm</span> <span class="pre">bterm</span> <span class="pre">cterm</span></code></dt>
+<dd><p class="first">An efficient way to get a approximation for the volume of the system is to sum the volume of each atom in the system, modified to account for the space between the atoms.  This is done by modifying the atomic radius by a formula that takes into account the number of DIM atoms so that the effective radius changes with surface-to-bulk ratio.  This formula is given by</p>
+<p><em>r</em><sub>eff</sub>  = -<em>ar</em>/N<sup>b</sup>  + <em>c</em></p>
+<p class="last">where <em>r</em> is the atomic radius, <em>r</em><sub>eff</sub>  is the effective radius, N is the number of atoms, and the <em>a</em>, <em>b</em>, and <em>c</em> terms are the three parameters defined by the MULTIPLIER key. If the MULTIPLIER key is missing, the default values are 0.7, 0.5, and 1.13, respectively.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GRID</span> <span class="pre">&lt;COARSE|MEDIUM|FINE&gt;</span></code></dt>
+<dd>In the cell multipole method (ALGORITHM options SINGLE or MULTI), a certain number of the closest atom interactions must be calculated explicitly.  The GRID key controls how many atoms must be calculated this way, with COARSE being the least and FINE being the most. COARSE will be the fastest to calculate but may be numerically unstable.  FINE is slowest to calculate but is the most stable.  If the GRID key is missing, the default is MEDIUM.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FORCEFIELD</span></code></dt>
+<dd><p class="first">The FORCEFIELD key indicates that the DIM/QM calculation will include the DIM/QM force field. Currently the only maintained potential is the Lennard-Jones 12-6 potential (see  Ref. <a class="footnote-reference" href="#ref1" id="id18">[1]</a>). This key is required to perform a DIM/QM geometry optimization and vibrational frequencies. By default, the DIM/QM force field is not included into the calculation. DRF gradients are not implemented.</p>
+<p class="last">Currently, DIM/QM geometry optimizations must be done in Cartesian coordinates which is specified in the GEOMETRY block. The user should be aware that ADF’s default convergence criterion for a geometry optimization are relatively low, thus it is strongly suggested for a DIM/QM calculation to set the numerical integration quality (BeckeGrid) to good and change the convergence criterion of the max gradient to 1E-4. It is not possible to do geometry optimization with DRF.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">COORDDEPEND</span></code></dt>
+<dd>The COORDDEPEND key indicates that the DIM/QM force field will be coordination dependent. This only effects the Lennard-Jones parameters for DIM atoms (see Ref. <a class="footnote-reference" href="#ref1" id="id19">[1]</a>). By default, the DIM/QM force field is not coordination dependent.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CHEMISORPTION</span></code></dt>
+<dd>The CHEMISORPTION key will include chemisorption corrections for all atoms that have chemisorption parameters within a given cutoff radius. By default, the DIM/QM force field does not included chemisorption corrections.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">COORDPAR</span> <span class="pre">atomtype</span> <span class="pre">e0</span> <span class="pre">e1</span> <span class="pre">r0</span> <span class="pre">r1</span> <span class="pre">CNmax</span> <span class="pre">Rmax</span> <span class="pre">Rmin</span></code></dt>
+<dd>The COORDPAR key allows the user to add additional coordination dependent parameter for a selected element type. atomtype specifies the element type (i.e., Ag for silver) for the given parameter set. e0, e1, r0, and r1 are the coordination dependent Lennard-Jones parameters; see Ref. <a class="footnote-reference" href="#ref1" id="id20">[1]</a>) for more details. The coordination numbers of the DIM atoms are computed as an effective coordination number. This scheme requires a maximum and minimum cutoff distances, Rmax and Rmin respectively, and a maximum coordination number, CNmax. All parameters need to be in atomic units.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CHEMPAR</span> <span class="pre">atomtype</span> <span class="pre">e0</span> <span class="pre">e1</span> <span class="pre">r0</span> <span class="pre">r1</span> <span class="pre">CUTOFF</span></code></dt>
+<dd>The CHEMPAR key allows the user to add additional chemisorption dependent parameter for a selected element type. atomtype specifies the element type (i.e., N for nitrogen) for the given parameter set. e0, e1, r0, and r1 are the coordination dependent Lennard-Jones parameters; see Ref. <a class="footnote-reference" href="#ref1" id="id21">[1]</a>) for more details. The code determines if there is a chemical bond by a cutoff distance parameter, CUTOFF. If the QM-DIM bond is within the cutoff, the code uses the chemisorption parameter; otherwise, the code uses the standard parameter set. All parameters need to be in atomic units.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CHEMBOND</span> <span class="pre">qmindex</span> <span class="pre">dimindex</span></code></dt>
+<dd>The CHEMBOND key indicates that there will a chemisorption correction used for the bond between the specified QM and DIM atoms. The user may repeat the CHEMBOD key up to 50 times to specify up to 50 different chemical bonds for the force field. The qmindex is an integer based on the order of atoms in the ATOMS block; i.e. the fifth QM atom in the ATOMS block would have qmindex = 5. The dimindex is the same but corresponds to the DIM atom involved in the bond. This key should only be used when the CHEMISORPTION key is also specified. When using CHEMBOND, the cutoff distance parameter for chemisorption correction parameter key will be ignored. It is suggested to use CHEMBOND if the user is generating a potential energy surface with a chemisorbed QM system.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PROJECTIONMATRIXPOINTS</span> <span class="pre">&lt;ALL|CUTOFF</span> <span class="pre">radius|OFF&gt;</span></code></dt>
+<dd>The PROJECTIONMATRIXPOINTS key specifies what DIM atoms to include for the projection matrix when removing rigid motions out of the gradient. The methods available are ALL, CUTOFF, or OFF.  The ALL option causes PROJECTIONMATRIXPOINTS to include all DIM atoms. OFF will turn off the removal of rigid motions. CUTOFF includes any DIM atom points within a cutoff radius from the center of mass of the QM system to the DIM atom points and requires a cutoff radius to be given in Angstrom. This key only applies to a geometry optimization.  If the PROJECTIONMATRIXPOINTS key is not given, the option CUTOFF with a cutoff radius of 25.4 Angstrom is assumed.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PRINTATOMICDIPOLES</span></code></dt>
+<dd>The PRINTATOMICDIPOLES key causes all the induced dipole moments of each DIM atom to be printed at the conclusion of each SCF cycle and each RESPONSE or AORESPONSE polarizability calculation. Because DIM/QM is typically used with many thousands of atoms, this can result in a large output file, but they may be useful for debugging purposes or to calculate electric fields. By default these are not printed.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PRINTLJPAR</span></code></dt>
+<dd>The PRINTLJPAR key specifies that all Lennard-Jones parameters used for the calculation will be printed in the output file. The QM atoms’ Lennard-Jones parameters are also printed with the DEBUG key.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code></dt>
+<dd>The DEBUG key will print out extra information in the process of the calculation.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LocalDIM</span></code></dt>
+<dd>LocalDIM performs the calculation fully for a specified CutOffDist (in Bohr) but ignores the image dipoles from atoms outside of this distance. This option should converge to the full simulation and the distance should be chosen wisely. Must have LocalDirect keyword as well.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LocalDirect</span></code></dt>
+<dd>Tells LocalDIM calculation to use the direct solver for the DIM dipoles. This solver is generally much faster than the other solvers available when the system is small. Currently, LocalDIM only works with the intention of using this faster solver, so this option must be used with LocalDIM</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DIMBUFFER</span></code></dt>
+<dd>Default value = 0.85. This keyword tells DIM how to decide for DRF2 calculations which atoms are in the same molecular grouping. This grouping decides if the charges polarize other atomic dipoles. For example, the charge for atoms in the same molecule will not polarize each other but they will polarize atomic dipoles in other molecules. This value should be adjusted based on the XYZ you supply and checked in the output file to ensure proper grouping behavior.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">QMBUFFER</span></code></dt>
+<dd>Default value = 0.85. This keyword tells DIM how to decide if the QM atoms are “bonded” to one another to determine the force field parameters needed calculations requiring DIM/QM gradient terms. As with the DIMBUFFER keyword, this value should be adjusted for each system and checked in the output file to ensure proper behavior.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CutOffDist</span></code></dt>
+<dd>Distance in Bohr that determines if the image dipoles of a DIM atom is included in a LocalDIM calculation. Any DIM atom that is inside the supplied distance from any QM atom will be fully included in the calculation.</dd>
+</dl>
+</div>
+<div class="section" id="drf-atomic-parameters">
+<h2>DRF atomic parameters<a class="headerlink" href="#drf-atomic-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The EXTERNALS block key controls the input data for the MM atoms. The EXTERNALS block is designed for DRF calculations.  For each MM atom the following data are required:</p>
+<div class="highlight-default notranslate" id="keyscheme-externals"><div class="highlight"><pre><span></span><span class="n">EXTERNALS</span>
+ <span class="n">atm</span> <span class="n">num</span> <span class="n">grp</span><span class="o">-</span><span class="n">nam</span> <span class="n">grp</span><span class="o">-</span><span class="n">num</span><span class="p">,</span> <span class="n">char</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">pol</span>
+ <span class="o">...</span>
+ <span class="n">GROUP</span>
+ <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">atm</span></code></dt>
+<dd>Type of atom, i.e., H, O, …</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">num</span></code></dt>
+<dd>number of atoms (optional)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">grp-nam</span></code></dt>
+<dd>Name of the group to which the atom belongs</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">grp-num</span></code></dt>
+<dd>Number of the group to which the atom belong</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">char</span></code></dt>
+<dd>atomic charge (in atomic units)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">x</span></code></dt>
+<dd>x-coordinate</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">y</span></code></dt>
+<dd>y-coordinate</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">z</span></code></dt>
+<dd>z-coordinate</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pol</span></code></dt>
+<dd>atomic polarizability (in atomic units)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GROUP</span></code></dt>
+<dd>Indicates the end of group</dd>
+</dl>
+<p>The separation of molecules into GROUP’s are important. Since in the many-body polarization operator only inter-molecular interactions, i.e. only interaction between sites which do not belong to the some group, are included. Therefore, it is important that the combined string (grp-nam + grp-num) is unique for each GROUP.</p>
+<p>An example of a EXTERNALS block for two water molecules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EXTERNALS</span>
+ <span class="n">O</span> <span class="mi">4</span> <span class="n">water</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6690</span><span class="p">,</span> <span class="o">-</span><span class="mf">11.380487</span><span class="p">,</span> <span class="o">-</span><span class="mf">11.810553</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.515226</span><span class="p">,</span> <span class="mf">9.3005</span>
+ <span class="n">H</span> <span class="mi">5</span> <span class="n">water</span> <span class="mi">2</span><span class="p">,</span>  <span class="mf">0.3345</span><span class="p">,</span> <span class="o">-</span><span class="mf">13.104751</span><span class="p">,</span> <span class="o">-</span><span class="mf">11.837669</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.969549</span><span class="p">,</span> <span class="mf">0.0690</span>
+ <span class="n">H</span> <span class="mi">6</span> <span class="n">water</span> <span class="mi">2</span><span class="p">,</span>  <span class="mf">0.3345</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.510898</span><span class="p">,</span> <span class="o">-</span><span class="mf">12.853311</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.320199</span><span class="p">,</span> <span class="mf">0.0690</span>
+ <span class="n">GROUP</span>
+ <span class="n">O</span> <span class="mi">7</span> <span class="n">water</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6690</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.116350</span><span class="p">,</span>   <span class="mf">9.119186</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.230948</span><span class="p">,</span> <span class="mf">9.3005</span>
+ <span class="n">H</span> <span class="mi">8</span> <span class="n">water</span> <span class="mi">3</span><span class="p">,</span>  <span class="mf">0.3345</span><span class="p">,</span>  <span class="o">-</span><span class="mf">2.822714</span><span class="p">,</span>   <span class="mf">9.717033</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.180632</span><span class="p">,</span> <span class="mf">0.0690</span>
+ <span class="n">H</span> <span class="mi">9</span> <span class="n">water</span> <span class="mi">3</span><span class="p">,</span>  <span class="mf">0.3345</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.123788</span><span class="p">,</span>  <span class="mf">10.538199</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.708607</span><span class="p">,</span> <span class="mf">0.0690</span>
+ <span class="n">GROUP</span>
+ <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dim-atomic-parameters">
+<span id="keyscheme-dimpar"></span><h2>DIM atomic parameters<a class="headerlink" href="#dim-atomic-parameters" title="Permalink to this headline">¶</a></h2>
+<p>In this block, the parameters for the DIM atoms are defined.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DIMPAR</span>
+  <span class="n">Element</span>
+    <span class="n">RAD</span> <span class="n">val</span>
+    <span class="n">POL</span> <span class="n">val</span>
+    <span class="n">CAP</span> <span class="n">val</span>
+    <span class="n">CHAR</span> <span class="n">val</span>
+    <span class="n">OM</span> <span class="n">val</span>
+    <span class="n">OM1</span> <span class="n">val</span>
+    <span class="n">OM2</span> <span class="n">val</span>
+    <span class="n">GM1</span> <span class="n">val</span>
+    <span class="n">GM2</span> <span class="n">val</span>
+    <span class="n">SIZE</span> <span class="n">val</span>
+    <span class="n">BOUND</span> <span class="n">val</span>
+    <span class="n">STATIC</span>
+    <span class="n">EXP</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">experimental</span><span class="o">/</span><span class="n">dielectric</span><span class="o">/</span><span class="n">file</span>
+    <span class="n">DRUDE</span> <span class="n">plasma</span> <span class="n">damping</span> <span class="p">{</span><span class="n">EV</span><span class="p">}</span>
+    <span class="n">FERMI</span> <span class="n">val</span>
+    <span class="o">&lt;</span><span class="n">LRTZ</span><span class="o">|</span><span class="n">LRTZ1</span><span class="o">&gt;</span> <span class="n">osc</span> <span class="n">res</span> <span class="n">damp</span> <span class="p">{</span><span class="n">EV</span><span class="p">}</span>
+    <span class="n">LRTZ2</span> <span class="n">osc</span> <span class="n">pls</span> <span class="n">res</span> <span class="n">damp</span> <span class="p">{</span><span class="n">EV</span><span class="p">}</span>
+    <span class="n">LRTZ3</span> <span class="n">pls</span> <span class="n">res</span> <span class="n">damp</span> <span class="p">{</span><span class="n">EV</span><span class="p">}</span>
+  <span class="n">SUBEND</span>
+  <span class="n">XYZ</span>
+    <span class="p">{</span><span class="o">/</span><span class="n">absolute</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">coordinates</span><span class="o">.</span><span class="n">xyz</span><span class="p">}</span>
+    <span class="p">{</span><span class="n">natoms</span>
+     <span class="n">elem</span> <span class="n">x</span><span class="o">.</span><span class="n">xxx</span> <span class="n">y</span><span class="o">.</span><span class="n">yyy</span> <span class="n">z</span><span class="o">.</span><span class="n">zzz</span>
+     <span class="n">elem</span> <span class="n">x</span><span class="o">.</span><span class="n">xxx</span> <span class="n">y</span><span class="o">.</span><span class="n">yyy</span> <span class="n">z</span><span class="o">.</span><span class="n">zzz</span>
+     <span class="n">elem</span> <span class="n">x</span><span class="o">.</span><span class="n">xxx</span> <span class="n">y</span><span class="o">.</span><span class="n">yyy</span> <span class="n">z</span><span class="o">.</span><span class="n">zzz</span>
+     <span class="o">...</span><span class="p">}</span>
+  <span class="n">SUBEND</span>
+  <span class="n">LCLFLD</span> <span class="o">/</span><span class="n">absolute</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">localfields</span><span class="o">.</span><span class="n">txt</span>
+    <span class="p">{</span><span class="n">freq1</span> <span class="n">freq2</span> <span class="n">freq3</span> <span class="o">..</span>
+     <span class="o">.....</span>
+    <span class="p">}</span>
+  <span class="n">GROUP</span> <span class="n">groupname</span>
+    <span class="n">natoms</span>
+     <span class="n">elem</span> <span class="n">x</span><span class="o">.</span><span class="n">xxx</span> <span class="n">y</span><span class="o">.</span><span class="n">yyy</span> <span class="n">z</span><span class="o">.</span><span class="n">zzz</span> <span class="p">{</span><span class="n">pol</span><span class="o">=</span><span class="n">pol</span><span class="p">}</span> <span class="p">(</span><span class="n">cap</span><span class="o">=</span><span class="n">cap</span><span class="p">}</span> <span class="p">{</span><span class="n">char</span><span class="o">=</span><span class="n">char</span><span class="p">}</span> <span class="p">{</span><span class="o">..</span><span class="p">}</span>
+     <span class="n">elem</span> <span class="n">x</span><span class="o">.</span><span class="n">xxx</span> <span class="n">y</span><span class="o">.</span><span class="n">yyy</span> <span class="n">z</span><span class="o">.</span><span class="n">zzz</span> <span class="p">{</span><span class="n">pol</span><span class="o">=</span><span class="n">pol</span><span class="p">}</span> <span class="p">(</span><span class="n">cap</span><span class="o">=</span><span class="n">cap</span><span class="p">}</span> <span class="p">{</span><span class="n">char</span><span class="o">=</span><span class="n">char</span><span class="p">}</span> <span class="p">{</span><span class="o">..</span><span class="p">}</span>
+     <span class="n">elem</span> <span class="n">x</span><span class="o">.</span><span class="n">xxx</span> <span class="n">y</span><span class="o">.</span><span class="n">yyy</span> <span class="n">z</span><span class="o">.</span><span class="n">zzz</span> <span class="p">{</span><span class="n">pol</span><span class="o">=</span><span class="n">pol</span><span class="p">}</span> <span class="p">(</span><span class="n">cap</span><span class="o">=</span><span class="n">cap</span><span class="p">}</span> <span class="p">{</span><span class="n">char</span><span class="o">=</span><span class="n">char</span><span class="p">}</span> <span class="p">{</span><span class="o">..</span><span class="p">}</span>
+     <span class="o">...</span>
+  <span class="n">SUBEND</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Element</span></code></dt>
+<dd><p class="first">Within the DIMPAR block, you will need a sub-block that defines the parameters for each element that is in your DIM system.  You will need to replace ‘Element’ with the element you are assigning parameters to, as in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Ag</span>
+ <span class="o">...</span>
+<span class="n">SUBEND</span>
+</pre></div>
+</div>
+<p>if you are assigning parameters to Ag.  Note that the first letter MUST be capitalized and the second MUST be lowercase.</p>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">RAD</span> <span class="pre">val</span></code></dt>
+<dd>RAD specifies the atomic radius in the unit defined by the input file.  RAD is required for all PIM calculations, all calculations with ALGORITHM options SINGLE or DIRECT, and all frequency-dependent calculations where the AORESPONSE LIFETIME key is given.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">POL</span> <span class="pre">val</span></code></dt>
+<dd>POL specifies the polarizability parameter (in a.u.) used in DRF or CPIM.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CAP</span> <span class="pre">val</span></code></dt>
+<dd>CAP specifies the capacitance parameter (in a.u.) used in CPIM.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CHAR</span> <span class="pre">val</span></code></dt>
+<dd>CHAR specifies the atomic charge (in a.u) used in DRF.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">OM</span> <span class="pre">val</span></code></dt>
+<dd>OM specifies the resonance frequency (in a.u) used in DRF.  This replaces the OM_[HCON] key in the DIMQM block.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">OM1</span> <span class="pre">val</span></code></dt>
+<dd>OM1 specifies the <span class="math notranslate nohighlight">\(\omega\)</span><sub>1</sub>  parameter (in a.u) used in CPIM.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">OM2</span> <span class="pre">val</span></code></dt>
+<dd>OM2 specifies the <span class="math notranslate nohighlight">\(\omega\)</span><sub>2</sub>  parameter (in a.u) used in CPIM.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GM1</span> <span class="pre">val</span></code></dt>
+<dd>GM1 specifies the <span class="math notranslate nohighlight">\(\gamma\)</span><sub>1</sub>  parameter (in a.u) used in CPIM.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GM2</span> <span class="pre">val</span></code></dt>
+<dd>GM2 specifies the <span class="math notranslate nohighlight">\(\gamma\)</span><sub>2</sub>  parameter (in a.u) used in CPIM.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SIZE</span> <span class="pre">val</span></code></dt>
+<dd>SIZE specifies the size-dependent parameter used in CPIM.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">STATIC</span></code></dt>
+<dd>Calculate the response properties for this atom type as static during a frequency dependent calculation.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EXP</span> <span class="pre">/absolute/path/to/experimental/dielectric/file</span></code></dt>
+<dd>In PIM, the atomic polarizabilities are calculated from the dielectric constant. If you have access to the experimental dielectric constant, this may be supplied directly to DIM/QM.  The values will be splined, so it is not necessary to ensure that each frequency at which you are calculating be in the file.  DIM/QM expects the file to be formatted with the wavelength (in nm) in the first column, the real part of the dielectric in the second column, and the imaginary part of the dielectric in the third column.  All other columns that may exist will be ignored, as well as lines beginning with the hash (#) symbol.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">BOUND</span> <span class="pre">val</span></code></dt>
+<dd><p class="first">A Drude function is typically written as</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_\infty - \frac{\omega_p^2}{\omega (\omega + i \gamma)}\]</div>
+<p class="last">with the second term being the Drude function, and the first term accounting for bound electrons.  For a conductor with no bound electrons, <span class="math notranslate nohighlight">\(\epsilon\)</span><sub>∞</sub>  = 1 which is the default value for BOUND.  To account for bound electrons you may set BOUND to a value greater than 1.  This key only affects PIM.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DRUDE</span> <span class="pre">plasma</span> <span class="pre">damping</span> <span class="pre">{EV}</span></code></dt>
+<dd><p class="first">The formula for a Drude function is</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_\infty - \frac{\omega_p^2}{\omega (\omega + i \gamma)}\]</div>
+<p class="last">where <span class="math notranslate nohighlight">\(\epsilon\)</span><sub>∞</sub> represents the bound electrons (as discussed for BOUND), <span class="math notranslate nohighlight">\(\omega\)</span><sub>p</sub>  (plasma) is the plasma frequency, and <span class="math notranslate nohighlight">\(\gamma\)</span> (damping) is the damping parameter (decay rate).  Optionally, EV may be added to specify the values be read in units of electron volts, otherwise they are read in units of a.u. This key only affects PIM.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FERMI</span> <span class="pre">val</span></code></dt>
+<dd><p class="first">The FERMI key is used to specify a Fermi velocity (in m/s) so that the Drude function may be size-corrected using a modified Drude function:</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_\infty - \frac{\omega_p^2}{\omega (\omega + i (\gamma + v_\text{fermi}/R_\text{eff}))}\]</div>
+<p>where +v<sub>fermi</sub>  is the Fermi velocity and R<sub>eff</sub>  is the effective nanoparticle radius.  This can also be used in conjunction with EXP and DRUDE to size-correct experimental dielectric parameters.  This key only affects PIM:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">LRTZ</span><span class="o">|</span><span class="n">LRTZ1</span><span class="o">&gt;</span> <span class="n">osc</span> <span class="n">res</span> <span class="n">damp</span> <span class="p">{</span><span class="n">EV</span><span class="p">}</span>
+<span class="n">LRTZ2</span> <span class="n">osc</span> <span class="n">pls</span> <span class="n">res</span> <span class="n">damp</span> <span class="p">{</span><span class="n">EV</span><span class="p">}</span>
+<span class="n">LRTZ3</span> <span class="n">pls</span> <span class="n">res</span> <span class="n">damp</span> <span class="p">{</span><span class="n">EV</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>There are three forms of the Lorentzian function seen in the literature:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp; \sum_n \frac{f_n \Omega_{0,n}^2}{\Omega_{0,n}^2 - \omega^2 - i \Gamma_n \omega} \\
+&amp; \sum_n \frac{f_n \omega_{p}^2}{\Omega_{0,n}^2 - \omega^2 - i \Gamma_n \omega} \\
+&amp; \sum_n \frac{\Omega_{p,n}^2}{\Omega_{0,n}^2 - \omega^2 - i \Gamma_n \omega}\end{split}\]</div>
+<p class="last">where <span class="math notranslate nohighlight">\(\Omega\)</span><sub>0,n</sub>  (res) is a bound electron resonance frequency, f<sub>n</sub>  (osc) is a bound electron oscillator strength, <span class="math notranslate nohighlight">\(\Gamma\)</span><sub>n</sub>  (damp) is a bound electron excited state decay rate (or damping parameter), <span class="math notranslate nohighlight">\(\omega\)</span><sub>p</sub>  (pls) is the free electron plasma frequency, and <span class="math notranslate nohighlight">\(\Omega\)</span><sub>p,n</sub>  (pls) is the bound electron plasma frequency.  You may choose the Lorentzian for against which your parameters were parametrized.  The top form is LRTZ1, the middle is LRTZ2, and the bottom is LRTZ3.  Because LRTZ1 is the most common, it is also aliased as LRTZ.  Optionally, EV may be added to specify the values be read in units of electron volts, otherwise they are read in units of a.u. This key only affects PIM.  You may give any of the form of the LRTZ key up to 50 times supply up to 50 Lortenzian functions to make a Drude-Lorentz function.</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">XYZ</span></code></dt>
+<dd><p class="first">The XYZ sub-block is where the DIM atom coordinates are given.  Two methods of supplying coordinates are allowed.</p>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">In-File</span> <span class="pre">Coordinates</span></code></dt>
+<dd><p class="first">As an example of how to supply coordinates in-file, imagine you wish to calculate a Au dimer system on the Z-axis.  You might define your coordinates as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">XYZ</span>
+ <span class="mi">2</span>
+ <span class="n">Au</span> <span class="mf">0.0</span> <span class="mf">0.0</span> <span class="mf">0.0</span>
+ <span class="n">Au</span> <span class="mf">0.0</span> <span class="mf">0.0</span> <span class="mf">3.0</span>
+<span class="n">SUBEND</span>
+</pre></div>
+</div>
+<p class="last">The first line gives the number of atoms to follow.  Every line after that contains the element in the first column (first letter MUST be capitalized, second MUST be lowercase), then the x-component, then the y-component, then the z-component.  You may not number the atoms.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">External</span> <span class="pre">File</span> <span class="pre">Coordinates</span></code></dt>
+<dd><p class="first">When the DIM system size becomes large, it is often more convenient to keep the DIM coordinates in a separate file.  The XYZ block would then look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">XYZ</span>
+ <span class="o">/</span><span class="n">absolute</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">coordinates</span><span class="o">.</span><span class="n">xyz</span>
+<span class="n">SUBEND</span>
+</pre></div>
+</div>
+<p>Note that you MUST include the absolute path to your file and the file name must end with <code class="docutils literal notranslate"><span class="pre">.xyz</span></code>.</p>
+<p>The .xyz file is set up identically to the in-file table, except that there is a comment line between the number of atoms and the first atom.  The .xyz file for our dimer system would be:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>
+<span class="n">A</span> <span class="n">gold</span> <span class="n">dimer</span> <span class="p">(</span><span class="n">this</span> <span class="n">line</span> <span class="n">will</span> <span class="n">be</span> <span class="n">ignored</span><span class="p">)</span>
+<span class="n">Au</span> <span class="mf">0.0</span> <span class="mf">0.0</span> <span class="mf">0.0</span>
+<span class="n">Au</span> <span class="mf">0.0</span> <span class="mf">0.0</span> <span class="mf">3.0</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LCLFLD</span> <span class="pre">/absolute/path/to/localfields.txt</span></code></dt>
+<dd><p class="first">Text file of the local field induced dipoles that can be read in to reduce calculation time. The file must be in the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">freq1</span> <span class="n">freq2</span> <span class="n">freq3</span>  <span class="o">...</span>
+<span class="mi">1</span>
+<span class="n">X</span>
+<span class="n">Atom1R</span><span class="o">-</span><span class="n">DipoleX</span>    <span class="n">Atom1R</span><span class="o">-</span><span class="n">DipoleY</span>    <span class="n">Atom1R</span><span class="o">-</span><span class="n">DipoleZ</span>
+<span class="n">Atom1I</span><span class="o">-</span><span class="n">DipoleX</span>    <span class="n">Atom1I</span><span class="o">-</span><span class="n">DipoleY</span>    <span class="n">Atom1I</span><span class="o">-</span><span class="n">DipoleZ</span>
+<span class="n">Atom2R</span><span class="o">-</span><span class="n">DipoleX</span>    <span class="n">Atom2R</span><span class="o">-</span><span class="n">DipoleY</span>    <span class="n">Atom2R</span><span class="o">-</span><span class="n">DipoleZ</span>
+<span class="n">Atom2I</span><span class="o">-</span><span class="n">DipoleX</span>    <span class="n">Atom2I</span><span class="o">-</span><span class="n">DipoleY</span>    <span class="n">Atom2I</span><span class="o">-</span><span class="n">DipoleZ</span>
+<span class="o">...</span>
+<span class="n">Y</span>
+<span class="n">Atom1R</span><span class="o">-</span><span class="n">DipoleX</span>    <span class="n">Atom1R</span><span class="o">-</span><span class="n">DipoleY</span>    <span class="n">Atom1R</span><span class="o">-</span><span class="n">DipoleZ</span>
+<span class="n">Atom1I</span><span class="o">-</span><span class="n">DipoleX</span>    <span class="n">Atom1I</span><span class="o">-</span><span class="n">DipoleY</span>    <span class="n">Atom1I</span><span class="o">-</span><span class="n">DipoleZ</span>
+<span class="n">Atom2R</span><span class="o">-</span><span class="n">DipoleX</span>    <span class="n">Atom2R</span><span class="o">-</span><span class="n">DipoleY</span>    <span class="n">Atom2R</span><span class="o">-</span><span class="n">DipoleZ</span>
+<span class="n">Atom2I</span><span class="o">-</span><span class="n">DipoleX</span>    <span class="n">Atom2I</span><span class="o">-</span><span class="n">DipoleY</span>    <span class="n">Atom2I</span><span class="o">-</span><span class="n">DipoleZ</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p class="last">Here freq1 freq2 freq3 … are the frequencies that are being used in the response calculation and 1 tells the program that the following dipoles are to be used with the first frequency. X and Y tell the program that these are the induced dipoles from perturbations in the X and Y Cartesian direction respectively.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">groupname</span></code></dt>
+<dd><p class="first">The GROUP sub-block is where the DIM atom coordinates and parameters are given. Combines the XYZ subblock and Element subblock. A (unique) groupname is required (maximum 10 characters).</p>
+<p>Example for a water molecule:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GROUP</span> <span class="n">water1</span>
+<span class="mi">3</span>
+<span class="n">O</span>  <span class="mf">0.00000</span>  <span class="mf">0.00000</span>  <span class="mf">0.59372</span>  <span class="n">pol</span><span class="o">=</span><span class="mf">5.7494</span>  <span class="n">char</span><span class="o">=-</span><span class="mf">0.6690</span>
+<span class="n">H</span>  <span class="mf">0.00000</span>  <span class="mf">0.76544</span> <span class="o">-</span><span class="mf">0.00836</span>  <span class="n">pol</span><span class="o">=</span><span class="mf">2.7927</span>  <span class="n">char</span><span class="o">=</span><span class="mf">0.3345</span>
+<span class="n">H</span>  <span class="mf">0.00000</span> <span class="o">-</span><span class="mf">0.76544</span> <span class="o">-</span><span class="mf">0.00836</span>  <span class="n">pol</span><span class="o">=</span><span class="mf">2.7927</span>  <span class="n">char</span><span class="o">=</span><span class="mf">0.3345</span>
+<span class="n">SUBEND</span>
+</pre></div>
+</div>
+<p class="last">The first line gives the number of atoms to follow.  Every line after that contains the element in the first column (first letter MUST be capitalized, second MUST be lowercase), then the x-component, then the y-component, then the z-component.  You may not number the atoms. At the end of the line for each element you can specify the DIM/QM parameters, as in the format in the example. The DIM/QM parameters can be ‘POL’, ‘CAP’, ‘CHAR’, ‘OM1’, ‘OM2’, ‘GM1’, ‘GM2’, ‘SIZE’, ‘RAD’, ‘SPILLOUT’, ‘BOUND’, ‘DRUDE’, ‘FERMI’, ‘LRTZ’, or ‘EXP’.</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="ref1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id13">2</a>, <a class="fn-backref" href="#id18">3</a>, <a class="fn-backref" href="#id19">4</a>, <a class="fn-backref" href="#id20">5</a>, <a class="fn-backref" href="#id21">6</a>)</em> J.L. Payton, S.M. Morton, Justin E. Moore, and Lasse Jensen, <em>A discrete interaction model/quantum mechanical method for simulating surface-enhanced Raman spectroscopy</em>, <a class="reference external" href="https://doi.org/10.1063/1.4722755">Journal of Chemical Physics 136, 214103 (2012)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id8">1</a>, <a class="fn-backref" href="#id9">2</a>, <a class="fn-backref" href="#id11">3</a>)</em> P.T. van Duijnen and M. Swart, <em>Molecular and Atomic Polarizabilities: Thole’s Model Revisited</em>, <a class="reference external" href="https://doi.org/10.1021/jp980221f">Journal of Physical Chemistry A 102, 2399 (1998)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id10">1</a>, <a class="fn-backref" href="#id12">2</a>)</em> L. Jensen, P.-O. Astrand, A. Osted, J. Kongsted and K.V. Mikkelsen, <em>Polarizability of molecular clusters as calculated by a dipole interaction model</em>, <a class="reference external" href="https://doi.org/10.1063/1.1433747">Journal of Chemical Physics 116, 4001 (2002)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id14">1</a>, <a class="fn-backref" href="#id16">2</a>)</em> D.V. Chulhai and L. Jensen, <em>Simulating Surface-Enhanced Raman Optical Activity Using Atomistic Electrodynamics-Quantum Mechanical Models</em>, <a class="reference external" href="https://doi.org/10.1021/jp502107f">Journal of Physical Chemistry A 118, 9069 (2014)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15">[5]</a></td><td>Z. Hu, D.V. Chulhai, and L. Jensen, <em>Simulating Surface-Enhanced Hyper-Raman Scattering Using Atomistic Electrodynamics-Quantum Mechanical Models</em>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.6b00940">Journal of Chemical Theory and Computation 12, 5968 (2016)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17">[6]</a></td><td>D.V. Chulhai and L. Jensen, <em>Plasmonic Circular Dichroism of 310- and α-Helix Using a Discrete Interaction Model/Quantum Mechanics Method</em>, <a class="reference external" href="https://doi.org/10.1021/jp5099188">Journal of Physical Chemistry A 119, 5218 (2015)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[7]</a></td><td>L. Jensen, P.T. van Duijnen and J.G. Snijders, <em>A discrete solvent reaction field model within density functional theory</em>, <a class="reference external" href="https://doi.org/10.1063/1.1527010">Journal of Chemical Physics 118, 514 (2003)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[8]</a></td><td>L. Jensen, P.T. van Duijnen and J.G. Snijders, <em>A discrete solvent reaction field model for calculating molecular linear response properties in solution</em>, <a class="reference external" href="https://doi.org/10.1063/1.1590643">Journal of Chemical Physics 119, 3800 (2003)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[9]</a></td><td>L. Jensen, P.T. van Duijnen and J.G. Snijders, <em>A discrete solvent reaction field model for calculating frequency-dependent hyperpolarizabilities of molecules in solution</em>, <a class="reference external" href="https://doi.org/10.1063/1.1627760">Journal of Chemical Physics 119, 12998 (2003)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[10]</a></td><td>L. Jensen, M. Swart and P.T. van Duijnen, <em>Microscopic and macroscopic polarization within a combined quantum mechanics and molecular mechanics model</em>, <a class="reference external" href="https://doi.org/10.1063/1.1831271">Journal of Chemical Physics 122, 34103 (2005)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[11]</a></td><td>L. Jensen, <a class="reference external" href="http://downloads.scm.com/Doc/jensen.pdf">Modelling of optical response properties: Application to nanostructures,</a> PhD thesis, Rijksuniversiteit Groningen, 2004.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="FQ-QM.html" class="btn btn-neutral float-right" title="QM/FQ: Quantum Mechanics/Fluctuating Charges" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Quild.html" class="btn btn-neutral" title="Quild" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

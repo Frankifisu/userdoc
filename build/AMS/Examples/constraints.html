@@ -1,0 +1,1652 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Example: Constrained optimizations &mdash; AMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="AMS 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="../Examples.html"/>
+        <link rel="next" title="Example: TS search starting from initial Hessian" href="COChainFreqTS.html"/>
+        <link rel="prev" title="Example: Graphene optimization under external stress" href="ExternalStress_graphene.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search AMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-AMS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#what-s-new-in-the-ams-driver">What’s new in the AMS driver?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2021-3">New in AMS2021.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2021-1">New in AMS2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2020-1">New in AMS2020.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2019-3">New in AMS2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2019-1">New in AMS2019.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#motivation-and-progress">Motivation and progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#input-execution-and-output">Input, execution and output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input_Output.html">Input, execution and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#tasks">Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#properties">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#units">Units</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#execution">Execution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#shell-script">Shell script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#interactive-input-file">Interactive input file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#running-ams-on-compute-clusters">Running AMS on compute clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#output">Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#index-13">Results directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#logfile-ams-log">Logfile ams.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#binary-output-files">Binary output files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#standard-output">Standard output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#optimized-geometry-in-xyz-format">Optimized geometry in xyz format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-environment-variables">AMS environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#driver-level-parallelism">Driver level parallelism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#python-interface">Python interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Pipe_protocol.html">AMSPipe protocol specification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#low-level-message-encoding">Low-level message encoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#return-messages-and-error-handling">Return messages and error handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-as-a-pipe-master">AMS as a pipe master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-as-a-pipe-worker">AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../System.html">Geometry, System definition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#geometry-lattice">Geometry, Lattice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#modifying-the-geometry">Modifying the geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#symmetry">Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#regions">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#charge-atomic-masses-input-bond-orders">Charge, atomic masses, input bond orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#homogeneous-electric-field-and-multipole-charges">Homogeneous electric field and multipole charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#load-a-system-from-file">Load a System from file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#atom-attributes">Atom attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#force-field-related-extensions">Force field related extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#load-charges-for-a-forcefield-into-regions">Load charges for a forcefield into regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#load-forcefield-atom-types">Load forcefield atom types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Tasks/TOC.html">Structure and Reactivity, Molecular Dynamics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/Single_Point.html">Single point calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/Bond_Energy.html">Bond energy calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Bond_Energy.html#ground-state-energy">Ground state energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Bond_Energy.html#formation-energy">Formation energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Bond_Energy.html#atomization-energies">Atomization energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Bond_Energy.html#chemisorption-energies">Chemisorption energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Bond_Energy.html#atomic-corrections">Atomic corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Bond_Energy.html#open-shell-systems">Open shell systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Bond_Energy.html#impurities">Impurities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/Geometry_Optimization.html">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#constrained-optimization">Constrained optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#restraints">Restraints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#optimization-under-pressure-external-stress">Optimization under pressure / external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#optimization-methods">Optimization methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#quasi-newton">Quasi-Newton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#fire">FIRE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#index-17">SCMGO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#limited-memory-bfgs">Limited-memory BFGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#conjugate-gradients">Conjugate gradients</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#failure-to-converge">Failure to converge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Geometry_Optimization.html#restarting-a-geometry-optimization">Restarting a geometry optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/Transition_State_Search.html">Transition state search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/PES_Scan.html">Linear Transit, PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Scan.html#distance-angle-and-dihedral-angle-coordinates">Distance, angle, and dihedral angle coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Scan.html#joint-scan-coordinates">Joint scan coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Scan.html#multidimensional-pes-scan">Multidimensional PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Scan.html#lattice-scan-coordinates-for-periodic-systems">Lattice scan coordinates for periodic systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Scan.html#isotropic-scaling-of-the-unit-cell-volume-or-area">Isotropic scaling of the unit cell volume or area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Scan.html#scaling-of-the-lattice-vector-lengths">Scaling of the lattice vector lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Scan.html#strain-matrix-in-voigt-notation">Strain matrix in Voigt notation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Scan.html#scan-arbitrary-lattices">Scan arbitrary lattices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Scan.html#calculate-properties-for-all-pes-points">Calculate properties for all PES points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Scan.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/NEB.html">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/NEB.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/NEB.html#frozen-atom-constraints">Frozen atom constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/NEB.html#optimizations-and-convergence-criteria">Optimizations and convergence criteria</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/NEB.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/NEB.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/IRC.html">Intrinsic Reaction Coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/IRC.html#method-details">Method details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/IRC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/IRC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/Excited_State_Optimizations.html">Excited state optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#constrained-molecular-dynamics">Constrained molecular dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#re-starting-a-simulation">(Re-)Starting a simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#thermostats-and-barostats">Thermostats and barostats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#temperature-and-pressure-regimes">Temperature and pressure regimes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#trajectory-sampling-and-output">Trajectory sampling and output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#lattice-deformations-volume-regimes">Lattice deformations (volume regimes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#molecule-gun-adding-molecules-during-simulation">Molecule Gun: adding molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#removing-molecules-during-simulation">Removing molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#accelerated-dynamics">Accelerated dynamics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#the-plumed-library-support-in-ams">The PLUMED library support in AMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#metadynamics-for-conformer-rotamer-ensemble-sampling-crest-mtd">Metadynamics for Conformer-Rotamer Ensemble Sampling (CREST-MTD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#collective-variable-driven-hyperdynamics-cvhd">Collective Variable-driven HyperDynamics (CVHD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#temperature-replica-exchange">Temperature Replica Exchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#bond-boost-method">Bond Boost Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#force-bias-monte-carlo-fbmc">Force bias Monte Carlo (fbMC)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#non-equilibrium-md-nemd">Non-equilibrium MD (NEMD)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/Molecular_Dynamics.html#t-nemd-for-thermoconductivity-heat-exchange">T-NEMD for thermoconductivity: heat exchange</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/TrajectoryReplay.html">Trajectory replay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/GCMC.html">Grand Canonical Monte Carlo (GCMC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/GCMC.html#general-info">General info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/GCMC.html#method-details">Method Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/GCMC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/GCMC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/PES_Exploration.html">Automated PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#job-selection-and-main-options">Job selection and main options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#results-the-energy-landscape">Results: the “Energy Landscape”</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Exploration.html#results-on-the-text-output">Results on the text output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#continue-a-pes-exploration-from-a-previous-calculation">Continue a PES exploration from a previous calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#structure-comparison">Structure comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#process-search-job">Process Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Exploration.html#id2">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Exploration.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#saddle-search-job">Saddle Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Exploration.html#id3">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Exploration.html#id8">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#basin-hopping-job">Basin Hopping job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Exploration.html#id9">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Exploration.html#id11">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#landscape-refinement">Landscape Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#optimizer">Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#binding-sites">Binding Sites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/PES_Exploration.html#id12">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/PES_Exploration.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Gradients_Stress_Elasticity.html">Gradients, Hessian, Stress tensor, Elasticity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#nuclear-gradients">Nuclear gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#index-3">Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#pes-point-character">PES point character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#thermodynamics-gas-phase-gibbs-free-energy">Thermodynamics, gas phase Gibbs free energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#stress-tensor">Stress tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#elastic-tensor">Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#numerical-differentiation-options">Numerical differentiation options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Vibrational_Spectroscopy.html">Vibrational Spectroscopy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#general">General</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#where-are-the-results">Where are the results?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#ir-frequencies-and-normal-modes">IR frequencies and normal modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#all-vibrational-modes">All vibrational Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#rescanning-imaginary-modes">Rescanning Imaginary modes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#symmetric-displacements">Symmetric Displacements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mobile-block-hessian-mbh">Mobile Block Hessian (MBH)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-scanning">Mode Scanning</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-refinement">Mode Refinement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id4">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id5">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-tracking">Mode Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id8">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id11">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-tracking-methods">Input: Tracking methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-selecting-modes">Input: Selecting modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-convergence">Input: Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#selecting-modes">Selecting modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#thermodynamics-ideal-gas">Thermodynamics (ideal gas)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#gibbs-free-energy-change-for-a-gas-phase-reaction">Gibbs free energy change for a gas phase reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#moments-of-inertia">Moments of inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#partial-vibrational-spectra-pvdos">Partial Vibrational Spectra (PVDOS)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#phonons">Phonons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman">(Resonance) Raman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id19">Raman</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman-excited-state-finite-lifetime">Resonance Raman: excited-state finite lifetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman-vg-fc">Resonance Raman: VG-FC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id22">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id24">Input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#vroa-resonance-vibrational-raman-optical-activity">VROA: (Resonance) vibrational Raman optical activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#engine-adf">Engine ADF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#vcd-vibrational-circular-dichroism">VCD: Vibrational Circular Dichroism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#atomic-polar-tensor-apt-model">Atomic polar tensor (APT) model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#analytical-vcd-in-adf">Analytical VCD in ADF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Vibrationally_resolved_electronic_spectra.html">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/FCF_module.html">AH-FC: Adiabatic Hessian Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-module-franck-condon-factors">FCF module: Franck-Condon Factors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#algorithm">Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#result-tape61">Result: TAPE61</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-example-absorption-and-fluorescence">FCF example absorption and fluorescence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-example-phosphorescence">FCF Example phosphorescence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html">VG-FC: Vertical Gradient Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory">Theory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-tracking">Theory: Vibronic-Structure Tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-refinement">Theory: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-adiabatic-excitation-energy">Theory: Adiabatic excitation energy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-all-modes">Input: Vibronic-Structure all modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-tracking">Input: Vibronic-Structure Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-restarting-vst">Input: Restarting VST</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-refinement">Input: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-excited-state">Input: Excited State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tasks/VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-producing-the-spectrum">Input: Producing the spectrum</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Properties.html">Dipole moment, Polarizability, Bond orders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Properties.html#charges-dipole-moment-polarizability">Charges, Dipole Moment, Polarizability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Properties.html#bond-orders-molecule-detection">Bond orders &amp; Molecule detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Engines.html">Engines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#index-2">Available engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#summary-of-engine-capabilities">Summary of engine capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#external-programs-as-engines">External programs as engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#toy-engines">Toy engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#engine-add-ons">Engine add-ons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#dispersion-corrections">Dispersion corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#pressure">Pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#non-isotropic-external-stress">Non-isotropic external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#atom-energies">Atom energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#restraints">Restraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#wall-potential">Wall potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Utilities/TOC.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/ChemTraYzer.html">ChemTraYzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#general-information">General information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#graphical-user-interface">Graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#command-line-execution">Command line execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/ChemTraYzer2.html">ChemTraYzer2 (beta version)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#using-chemtrayzer2-via-the-graphical-user-interface">Using ChemTraYzer2 via the graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#minimal-input">Minimal input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#ouput">Ouput</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html">Trajectory Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#radial-distribution-function-rdf">Radial Distribution Function (RDF)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#histogram">Histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#autocorrelation-functions">Autocorrelation Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#id2">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#id3">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#diffusion-coefficient">Diffusion Coefficient</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/VCDtools.html">VCD Analysis: VCDtools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#general-theory">General Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#general-coupled-oscillator-analysis">General Coupled Oscillator Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#available-options">Available options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../Examples.html#geometry-optimization">Geometry optimization</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="GO_formaldehyde_noSCC.html">Example: Simple geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2StepGO.html">Example: Two-stage geometry optimization with initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Diamond_under_pressure.html">Example: Periodic lattice optimization under pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Diamond_from_pressure.html">Example: Phase Transition Due To External Nonuniform Stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ExternalStress_BN.html">Example: Boron nitride optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ExternalStress_graphene.html">Example: Graphene optimization under external stress</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example: Constrained optimizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#transition-state-search">Transition state search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="COChainFreqTS.html">Example: TS search starting from initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and TS search for H2 on graphene</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#nudged-elastic-band-neb">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html">Nudged Elastic Band (NEB) Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="NEB.html#hcn-isomerization-reaction-with-neb">HCN isomerization reaction with NEB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NEB.html#h2-dissociation-on-graphene">H2 dissociation on graphene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NEB.html#running-multiple-neb-calculations-using-plams">Running multiple NEB calculations using PLAMS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#intrinsic-reaction-coordinate-irc">Intrinsic reaction coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="IRC_HCN.html">Example: IRC for HCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TS_and_IRC_Claisen.html">Example: TS and IRC for Claisen reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-scan">PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PESScan.html">Example: 2D PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PESScan_lattice.html">Example: PES scan for lattice degrees of freedom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-exploration">PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="BasinHopping_Ar13.html">Example: Basin Hopping for Ar 13 cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProcessSearch_alanine.html">Example: PES Exploration, Process Search for alanine with PLAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BindingSites_O+Pt111.html">Example: PES Exploration, Binding Sites for O on Pt 111</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#molecular-dynamics">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MD_hydrogen_longrun.html">Example: Simple MD for H2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2O_nreac.html">Example: MD for a box of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MD_Deformation.html">Example: Lattice deformations in MD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#trajectory-replay">Trajectory replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="TrajectoryReplay.html">Example: Trajectory replays for PES scans, NEB and MD calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#vibrational-analysis">Vibrational analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="VATools_dydrogesterone.html">Example: Mode Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VATools_cyclohexanone.html">Example: Mode Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VST_pyrene.html">Example: Vibronic-Structure Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-point-properties">PES point properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Phonons_Graphene.html">Example: Phonons for graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Phonons_Isotopes.html">Example: Phonons with isotopes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Phonons_UserBZPath.html">Example: User-defined Brillouin zone for phonon dispersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ElasticTensor.html">Example: Elastic tensor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Pipe_ASEWorker.html">Example: ASE calculator as a pipe worker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Pipe_AMSonAMS.html">Example: AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#extended-xyz-file-format">Extended XYZ file format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#developer-options">Developer options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#symmetry">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices.html#schonfliess-symbols-and-symmetry-labels">Schönfliess symbols and symmetry labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices.html#molecular-orientation-requirements">Molecular orientation requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#feature-references">Feature references</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#frequencies-ir-intensities-raman-vcd">Frequencies, IR Intensities, Raman, VCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#pes-exploration">PES Exploration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">AMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../AMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">AMS</a>/</li>
+      
+          <li><a href="../Examples.html">Examples</a>/</li>
+      
+    <li class="orange-text">Example: Constrained optimizations</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="example-constrained-optimizations">
+<span id="example-constraints"></span><h1>Example: Constrained optimizations<a class="headerlink" href="#example-constrained-optimizations" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" download="" href="../_downloads/364abb979d684180849350b29a727ea7/constraints.run"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">constraints.run</span></code></a></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># This example demonstrates the setup of all different types of constraints.</span>
+<span class="c1"># Note that all constraints types can be combined with each other, as long as</span>
+<span class="c1"># the resulting set of constraints actually makes sense. (It must of course be</span>
+<span class="c1"># possible to satisfy all of them at the same time. AMS is not able to check</span>
+<span class="c1"># that and you might get really surprising results if that is not the case ...)</span>
+
+
+<span class="c1"># 1. Angle constraints</span>
+<span class="c1"># ====================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>angle <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      Convergence Step=1.0e-3</span>
+<span class="s">   End</span>
+
+<span class="s">   System</span>
+<span class="s">       Atoms</span>
+<span class="s">          O   0.001356   0.000999   0.000000</span>
+<span class="s">          H   0.994442  -0.037855   0.000000</span>
+<span class="s">          H  -0.298554   0.948531   0.000000</span>
+<span class="s">       End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">     # Fix the H--O--H angle to 125 degrees.</span>
+<span class="s">     Angle  3 1 2 125.0</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">       Model SCC-DFTB</span>
+<span class="s">       ResourcesDir Dresden</span>
+<span class="s">       DispersionCorrection Auto</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 2. Distance constraints</span>
+<span class="c1"># =======================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>dist <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      Convergence Step=1.0e-3</span>
+<span class="s">   End</span>
+
+<span class="s">   System</span>
+<span class="s">       Atoms</span>
+<span class="s">          O   0.001356   0.000999   0.000000</span>
+<span class="s">          H   0.994442  -0.037855   0.000000</span>
+<span class="s">          H  -0.298554   0.948531   0.000000</span>
+<span class="s">       End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">      # Fix the O--H bond distances to 1.03 Angstrom.</span>
+<span class="s">      Distance  1 2 1.03</span>
+<span class="s">      Distance  1 3 1.03</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">       Model SCC-DFTB</span>
+<span class="s">       ResourcesDir Dresden</span>
+<span class="s">       DispersionCorrection Auto</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 3. Dihedral angle constraint</span>
+<span class="c1"># ============================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>dihed <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      Convergence Step=1.0e-3</span>
+<span class="s">   End</span>
+
+<span class="s">   System</span>
+<span class="s">       Atoms</span>
+<span class="s">          C   -0.004115   -0.000021    0.000023</span>
+<span class="s">          C    1.535711    0.000022    0.000008</span>
+<span class="s">          H   -0.399693    1.027812   -0.000082</span>
+<span class="s">          H   -0.399745   -0.513934    0.890139</span>
+<span class="s">          H   -0.399612   -0.513952   -0.890156</span>
+<span class="s">          H    1.931188    0.514066    0.890140</span>
+<span class="s">          H    1.931432    0.513819   -0.890121</span>
+<span class="s">          H    1.931281   -1.027824    0.000244</span>
+<span class="s">       End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">      # Fix the dihedral angle H(6)--C(2)--C(1)--H(3) to 20 degrees.</span>
+<span class="s">      Dihedral  6 2 1 3 20.00</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">       Model SCC-DFTB</span>
+<span class="s">       ResourcesDir Dresden</span>
+<span class="s">       DispersionCorrection Auto</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 4a. Fixed atom constraint (Atoms keyword)</span>
+<span class="c1"># =========================================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>atom <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      Convergence Energy=1.0e-6 Gradients=1.0e-4 Step=1.0e-3</span>
+<span class="s">      CoordinateType Cartesian</span>
+<span class="s">   End</span>
+
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         C   -0.2460249052   -1.70363153     0.0005128649944</span>
+<span class="s">         O    1.152833576    -1.81594932    -0.0004409224206</span>
+<span class="s">         C    1.489235475     0.61782051    10.0004771689226</span>
+<span class="s">         O    0.5700116914    0.627761615   10.0005491194077</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">      # Fix atom 1 and 2 at their initial positions.</span>
+<span class="s">      Atom 1</span>
+<span class="s">      Atom 2</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model SCC-DFTB</span>
+<span class="s">      ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 4b. Fixed atom constraint (AtomList keyword)</span>
+<span class="c1"># ============================================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>atomlist <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      Convergence Energy=1.0e-6 Gradients=1.0e-4 Step=1.0e-3</span>
+<span class="s">      CoordinateType Cartesian</span>
+<span class="s">   End</span>
+
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         C   -0.2460249052   -1.70363153     0.0005128649944</span>
+<span class="s">         O    1.152833576    -1.81594932    -0.0004409224206</span>
+<span class="s">         C    1.489235475     0.61782051    10.0004771689226</span>
+<span class="s">         O    0.5700116914    0.627761615   10.0005491194077</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">      # Fix atom 1 and 2 at their initial positions.</span>
+<span class="s">      AtomList 1:2</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model SCC-DFTB</span>
+<span class="s">      ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 4c. Fixed atom constraint (FixedRegion keyword)</span>
+<span class="c1"># ===============================================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>region <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      Convergence Energy=1.0e-6 Gradients=1.0e-4 Step=1.0e-3</span>
+<span class="s">      CoordinateType Cartesian</span>
+<span class="s">   End</span>
+
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         C   -0.2460249052   -1.70363153     0.0005128649944    region=fixed</span>
+<span class="s">         O    1.152833576    -1.81594932    -0.0004409224206    region=fixed</span>
+<span class="s">         C    1.489235475     0.61782051    10.0004771689226</span>
+<span class="s">         O    0.5700116914    0.627761615   10.0005491194077</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">      # Fix all atoms in region &quot;fixed&quot;</span>
+<span class="s">      FixedRegion fixed</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model SCC-DFTB</span>
+<span class="s">      ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 4d. Fixed atom constraint (overlapping combination)</span>
+<span class="c1"># ===================================================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>combination <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      Convergence Energy=1.0e-6 Gradients=1.0e-4 Step=1.0e-3</span>
+<span class="s">      CoordinateType Cartesian</span>
+<span class="s">   End</span>
+
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         C   -0.2460249052   -1.70363153     0.0005128649944    region=fixed</span>
+<span class="s">         O    1.152833576    -1.81594932    -0.0004409224206    region=fixed</span>
+<span class="s">         C    1.489235475     0.61782051    10.0004771689226</span>
+<span class="s">         O    0.5700116914    0.627761615   10.0005491194077</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">      Atom 1</span>
+<span class="s">      AtomList 1 2</span>
+<span class="s">      FixedRegion fixed</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model SCC-DFTB</span>
+<span class="s">      ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 5. Fixed coordinate constraint</span>
+<span class="c1"># ==============================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>coord <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      Convergence Energy=1.0e-6 Gradients=1.0e-4 Step=1.0e-3</span>
+<span class="s">      CoordinateType Cartesian</span>
+<span class="s">   End</span>
+
+<span class="s">   System</span>
+<span class="s">      Atoms</span>
+<span class="s">         C   -0.2460249052   -1.70363153     0.0005128649944</span>
+<span class="s">         O    1.152833576    -1.81594932    -0.0004409224206</span>
+<span class="s">         C    1.489235475     0.61782051    10.0004771689226</span>
+<span class="s">         O    0.5700116914    0.627761615   10.0005491194077</span>
+<span class="s">      End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">      # Fix the x-coordinate of all atoms.</span>
+<span class="s">      Coordinate 1 x</span>
+<span class="s">      Coordinate 2 x</span>
+<span class="s">      Coordinate 3 x</span>
+<span class="s">      Coordinate 4 x</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model SCC-DFTB</span>
+<span class="s">      ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 6. Fixed atom constraint (in periodic system)</span>
+<span class="c1"># =============================================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>pbcatom <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">      Convergence Step=1.0e-3</span>
+<span class="s">   End</span>
+
+<span class="s">   System</span>
+<span class="s">       Atoms</span>
+<span class="s">           C  -1.23  -0.710140830   0.0</span>
+<span class="s">           C  -1.23  -0.710140830   3.8</span>
+<span class="s">           C   0.0    0.0           0.4</span>
+<span class="s">           C   0.0   -1.42028166    3.355</span>
+<span class="s">       End</span>
+
+<span class="s">       Lattice</span>
+<span class="s">           1.23  -2.130422493309719  0.0</span>
+<span class="s">           1.23   2.130422493309719  0.0</span>
+<span class="s">       End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">      # Fix atom 1 and 3 at their initial positions.</span>
+<span class="s">      Atom 1</span>
+<span class="s">      Atom 3</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">      Model SCC-DFTB</span>
+<span class="s">      ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">      KSpace Quality=GammaOnly</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 7. Block constraints (with listing the atoms in a block)</span>
+<span class="c1"># ========================================================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>block_list <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   System</span>
+<span class="s">       Atoms</span>
+<span class="s">           C   0.5584839616765542   0.5023705181144142  -0.4625483159356394</span>
+<span class="s">           C   1.07173137896726     0.2125484528111251  -1.892767990599312</span>
+<span class="s">           C   1.699248504588085   -1.006061067555322   -2.191856791501442</span>
+<span class="s">           C   2.242484629452111   -1.236470028363516   -3.455616615521399</span>
+<span class="s">           C   2.18874580207099    -0.2444337131062739  -4.435483595049287</span>
+<span class="s">           C   1.604409798904145    0.9866950282217637  -4.135465239465763</span>
+<span class="s">           C   1.061086793296828    1.217355116664161   -2.871773146851866</span>
+<span class="s">           H   1.763625603740592   -1.780903563899969   -1.431707209662057</span>
+<span class="s">           H   2.716038261390732   -2.190869049673275   -3.672115451399807</span>
+<span class="s">           H   2.611833078693977   -0.4241619800888815  -5.420308290235123</span>
+<span class="s">           H   1.578029796368043    1.774138556616255   -4.884624561698751</span>
+<span class="s">           H   0.6247213391616491   2.187200330357715   -2.64521108544713</span>
+<span class="s">           C   1.303528070245188   -0.1416812092038768   0.7303699949711653</span>
+<span class="s">           C   0.8164830922475474  -1.314631142230651    1.326337082260565</span>
+<span class="s">           C   1.531799364672407   -1.947399963062604    2.342825210379356</span>
+<span class="s">           C   2.757684862125068   -1.432061688813837    2.765634667957531</span>
+<span class="s">           C   3.271640455523863   -0.2897364031184506   2.150731553729188</span>
+<span class="s">           C   2.556535912403799    0.3432056352653093   1.134221563049466</span>
+<span class="s">           H  -0.128925843064934   -1.7366201913903      0.9939642396630857</span>
+<span class="s">           H   1.133600273086767   -2.849990046242235    2.799740694330775</span>
+<span class="s">           H   3.31486005979636    -1.925049398411132    3.557912279830031</span>
+<span class="s">           H   4.236604921323707    0.1064455961800578   2.457138367063388</span>
+<span class="s">           H   2.976510069814392    1.222131876866508    0.6510413538003352</span>
+<span class="s">           C  -0.930165749820548    0.9153412637395284  -0.5420710991631585</span>
+<span class="s">           C  -1.791729737216814    0.6892660986048864   0.5418285200469819</span>
+<span class="s">           C  -3.111373625199894    1.139542032267652    0.5090625363459357</span>
+<span class="s">           C  -3.586568528476239    1.843983986018719   -0.5977864609101087</span>
+<span class="s">           C  -2.726152821786783    2.111108432452229   -1.663369105880468</span>
+<span class="s">           C  -1.406454626777386    1.660929752085611   -1.63085383469072</span>
+<span class="s">           H  -1.428888457076976    0.1571120160719108   1.417905619994904</span>
+<span class="s">           H  -3.76723983501283     0.9462006794587581   1.35432032282366</span>
+<span class="s">           H  -4.614972346570283    2.194578435055282   -0.6233521468909432</span>
+<span class="s">           H  -3.080200905921361    2.678981846821393   -2.520207901691867</span>
+<span class="s">           H  -0.7413545301831963   1.891248563160919   -2.459672151335554</span>
+<span class="s">           C   1.235557647765805    1.735720249011045    0.1803884343948648</span>
+<span class="s">           C   1.377191890012647    1.826646222422494    1.573181692925026</span>
+<span class="s">           C   1.905898822116255    2.975086608901246    2.16214311213053</span>
+<span class="s">           C   2.280792642899383    4.061906342938987    1.371311861877147</span>
+<span class="s">           C   2.105006642447361    3.998471351380415   -0.0115253875199488</span>
+<span class="s">           C   1.576317094651283    2.850163227898022   -0.6007264381779673</span>
+<span class="s">           H   1.072424817958776    0.9937816064904853   2.202306496283991</span>
+<span class="s">           H   2.017471491684088    3.023369029562452    3.242524256706377</span>
+<span class="s">           H   2.693031233132915    4.956641734238467    1.830324484771476</span>
+<span class="s">           H   2.372569859099136    4.8485771293401     -0.6342066225733602</span>
+<span class="s">           H   1.427765851939196    2.820397327218896   -1.677480576376967</span>
+<span class="s">       End</span>
+<span class="s">   End</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">       Convergence</span>
+<span class="s">           Energy 1.0e-6</span>
+<span class="s">           Gradients 1.0e-4</span>
+<span class="s">           Step 1.0e-4</span>
+<span class="s">       End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">      # Create blocks from the 4 phenyl groups by specifying the atom indices</span>
+<span class="s">      # explicitly. (The indices follow the order in the System%Atoms block,</span>
+<span class="s">      # where we happen to have the atoms belonging to the different phenyl</span>
+<span class="s">      # groups consecutive.)</span>
+<span class="s">      BlockAtoms  2  3  4  5  6  7  8  9 10 11 12</span>
+<span class="s">      BlockAtoms 13 14 15 16 17 18 19 20 21 22 23</span>
+<span class="s">      BlockAtoms 24 25 26 27 28 29 30 31 32 33 34</span>
+<span class="s">      BlockAtoms 35 36 37 38 39 40 41 42 43 44 45</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">       Model DFTB3</span>
+<span class="s">       ResourcesDir DFTB.org/3ob-3-1</span>
+<span class="s">       DispersionCorrection D3-BJ</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 8. Block constraints (with named blocks)</span>
+<span class="c1"># ========================================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>block_names <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">   Task GeometryOptimization</span>
+
+<span class="s">   System</span>
+<span class="s">       Atoms</span>
+<span class="s">           C   0.5584839616765542   0.5023705181144142  -0.4625483159356394</span>
+<span class="s">           C   1.07173137896726     0.2125484528111251  -1.892767990599312        region=phenyl1</span>
+<span class="s">           C   1.699248504588085   -1.006061067555322   -2.191856791501442        region=phenyl1</span>
+<span class="s">           C   2.242484629452111   -1.236470028363516   -3.455616615521399        region=phenyl1</span>
+<span class="s">           C   2.18874580207099    -0.2444337131062739  -4.435483595049287        region=phenyl1</span>
+<span class="s">           C   1.604409798904145    0.9866950282217637  -4.135465239465763        region=phenyl1</span>
+<span class="s">           C   1.061086793296828    1.217355116664161   -2.871773146851866        region=phenyl1</span>
+<span class="s">           H   1.763625603740592   -1.780903563899969   -1.431707209662057        region=phenyl1</span>
+<span class="s">           H   2.716038261390732   -2.190869049673275   -3.672115451399807        region=phenyl1</span>
+<span class="s">           H   2.611833078693977   -0.4241619800888815  -5.420308290235123        region=phenyl1</span>
+<span class="s">           H   1.578029796368043    1.774138556616255   -4.884624561698751        region=phenyl1</span>
+<span class="s">           H   0.6247213391616491   2.187200330357715   -2.64521108544713         region=phenyl1</span>
+<span class="s">           C   1.303528070245188   -0.1416812092038768   0.7303699949711653       region=phenyl2</span>
+<span class="s">           C   0.8164830922475474  -1.314631142230651    1.326337082260565        region=phenyl2</span>
+<span class="s">           C   1.531799364672407   -1.947399963062604    2.342825210379356        region=phenyl2</span>
+<span class="s">           C   2.757684862125068   -1.432061688813837    2.765634667957531        region=phenyl2</span>
+<span class="s">           C   3.271640455523863   -0.2897364031184506   2.150731553729188        region=phenyl2</span>
+<span class="s">           C   2.556535912403799    0.3432056352653093   1.134221563049466        region=phenyl2</span>
+<span class="s">           H  -0.128925843064934   -1.7366201913903      0.9939642396630857       region=phenyl2</span>
+<span class="s">           H   1.133600273086767   -2.849990046242235    2.799740694330775        region=phenyl2</span>
+<span class="s">           H   3.31486005979636    -1.925049398411132    3.557912279830031        region=phenyl2</span>
+<span class="s">           H   4.236604921323707    0.1064455961800578   2.457138367063388        region=phenyl2</span>
+<span class="s">           H   2.976510069814392    1.222131876866508    0.6510413538003352       region=phenyl2</span>
+<span class="s">           C  -0.930165749820548    0.9153412637395284  -0.5420710991631585       region=phenyl3</span>
+<span class="s">           C  -1.791729737216814    0.6892660986048864   0.5418285200469819       region=phenyl3</span>
+<span class="s">           C  -3.111373625199894    1.139542032267652    0.5090625363459357       region=phenyl3</span>
+<span class="s">           C  -3.586568528476239    1.843983986018719   -0.5977864609101087       region=phenyl3</span>
+<span class="s">           C  -2.726152821786783    2.111108432452229   -1.663369105880468        region=phenyl3</span>
+<span class="s">           C  -1.406454626777386    1.660929752085611   -1.63085383469072         region=phenyl3</span>
+<span class="s">           H  -1.428888457076976    0.1571120160719108   1.417905619994904        region=phenyl3</span>
+<span class="s">           H  -3.76723983501283     0.9462006794587581   1.35432032282366         region=phenyl3</span>
+<span class="s">           H  -4.614972346570283    2.194578435055282   -0.6233521468909432       region=phenyl3</span>
+<span class="s">           H  -3.080200905921361    2.678981846821393   -2.520207901691867        region=phenyl3</span>
+<span class="s">           H  -0.7413545301831963   1.891248563160919   -2.459672151335554        region=phenyl3</span>
+<span class="s">           C   1.235557647765805    1.735720249011045    0.1803884343948648       region=phenyl4</span>
+<span class="s">           C   1.377191890012647    1.826646222422494    1.573181692925026        region=phenyl4</span>
+<span class="s">           C   1.905898822116255    2.975086608901246    2.16214311213053         region=phenyl4</span>
+<span class="s">           C   2.280792642899383    4.061906342938987    1.371311861877147        region=phenyl4</span>
+<span class="s">           C   2.105006642447361    3.998471351380415   -0.0115253875199488       region=phenyl4</span>
+<span class="s">           C   1.576317094651283    2.850163227898022   -0.6007264381779673       region=phenyl4</span>
+<span class="s">           H   1.072424817958776    0.9937816064904853   2.202306496283991        region=phenyl4</span>
+<span class="s">           H   2.017471491684088    3.023369029562452    3.242524256706377        region=phenyl4</span>
+<span class="s">           H   2.693031233132915    4.956641734238467    1.830324484771476        region=phenyl4</span>
+<span class="s">           H   2.372569859099136    4.8485771293401     -0.6342066225733602       region=phenyl4</span>
+<span class="s">           H   1.427765851939196    2.820397327218896   -1.677480576376967        region=phenyl4</span>
+<span class="s">       End</span>
+<span class="s">   End</span>
+
+<span class="s">   GeometryOptimization</span>
+<span class="s">       Convergence</span>
+<span class="s">           Energy 1.0e-6</span>
+<span class="s">           Gradients 1.0e-4</span>
+<span class="s">           Step 1.0e-4</span>
+<span class="s">       End</span>
+<span class="s">   End</span>
+
+<span class="s">   Constraints</span>
+<span class="s">      # Use the region from System%Atoms to set up the block constraints.</span>
+<span class="s">      Block phenyl1</span>
+<span class="s">      Block phenyl2</span>
+<span class="s">      Block phenyl3</span>
+<span class="s">      Block phenyl4</span>
+<span class="s">   End</span>
+
+<span class="s">   Engine DFTB</span>
+<span class="s">       Model DFTB3</span>
+<span class="s">       ResourcesDir DFTB.org/3ob-3-1</span>
+<span class="s">       DispersionCorrection D3-BJ</span>
+<span class="s">   EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 9. Frozen strain components</span>
+<span class="c1"># ===========================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>freezestrain <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">Task GeometryOptimization</span>
+
+<span class="s">GeometryOptimization</span>
+<span class="s">    OptimizeLattice Yes</span>
+<span class="s">    Convergence Step=1.0e-3</span>
+<span class="s">End</span>
+
+<span class="s">Constraints</span>
+<span class="s">   # Keeps first two lattice vectors orthogonal to the third.  Also fixes the</span>
+<span class="s">   # length of the third vector, keeping the graphene layer compressed.</span>
+<span class="s">   FreezeStrain xz yz zz</span>
+<span class="s">End</span>
+
+<span class="s">System</span>
+<span class="s">    Atoms</span>
+<span class="s">        C 1.332002504889882e-05 -0.0005830055256093706 -8.209389319526933e-06</span>
+<span class="s">        C -1.22799350000696 -0.7102112812520209 2.281155685325205e-06</span>
+<span class="s">        C -0.0006872840163290542 -0.0003386565731411325 -1.981477647175959</span>
+<span class="s">        C 1.2274512359848 0.7092866246929653 -1.981478017299119</span>
+<span class="s">        C 2.455989750017203 -0.000767672446473915 -5.638209535859324e-06</span>
+<span class="s">        C 1.227983749989149 -0.7105220051279582 3.556077144406634e-06</span>
+<span class="s">        C 2.455553905980411 -0.0003697961984884611 -1.981476578954899</span>
+<span class="s">        C 3.68349483597652 0.7093774139714127 -1.981475303736415</span>
+<span class="s">        C 4.912014119974971 -0.0004697689000645081 8.202057640607653e-06</span>
+<span class="s">        C 3.68401303002027 -0.7103327188132248 -6.644074866545941e-06</span>
+<span class="s">        C 4.911561265976663 -0.0002732185613776612 -1.98147535090646</span>
+<span class="s">        C -3.685503114025999 0.7094747213946447 -1.98147447813657</span>
+<span class="s">        C -2.457004890026731 -0.0008782302621621878 8.760751751649826e-06</span>
+<span class="s">        C -3.684994169978904 -0.7103491590560944 -6.913500704937906e-06</span>
+<span class="s">        C -2.45740142402999 -0.0002120088132086839 -1.981473170030486</span>
+<span class="s">        C -1.229200584026242 0.709517932531879 -1.98147439816519</span>
+<span class="s">        C 1.227980230018157 2.127401471357515 -5.950364005944094e-06</span>
+<span class="s">        C 9.469984377119545e-06 1.417970232416515 5.120417805695729e-06</span>
+<span class="s">        C 1.227229005981529 2.127790824745807 -1.981476944534885</span>
+<span class="s">        C 2.45544009594217 2.837313001498961 -1.981464045820237</span>
+<span class="s">        C 3.683977240012926 2.127396400995821 -4.237131224100653e-06</span>
+<span class="s">        C 2.456019429974761 1.41770041892015 8.271514976735398e-06</span>
+<span class="s">        C 3.683520895940616 2.127826615636785 -1.981463536474189</span>
+<span class="s">        C 4.911484545967099 2.837408990674362 -1.981472216079415</span>
+<span class="s">        C 6.140019459971655 2.127636216669431 9.289406940173374e-06</span>
+<span class="s">        C 4.912011129977858 1.417969521782559 7.256699431696856e-06</span>
+<span class="s">        C 6.139527915931508 2.12792209328836 -1.981460550680031</span>
+<span class="s">        C -2.457504644023984 2.837506078460876 -1.981475136785154</span>
+<span class="s">        C -1.229001220032881 2.127025640069692 1.077705178964691e-05</span>
+<span class="s">        C -2.457025360024441 1.417788944250494 8.010947395781608e-06</span>
+<span class="s">        C -1.229428944072945 2.128012192586653 -1.981459091806229</span>
+<span class="s">        C -0.001217694074323372 2.837543459113209 -1.981458639351295</span>
+<span class="s">        C 2.455982410005773 4.255441598373883 -1.892083560740779e-06</span>
+<span class="s">        C 1.228003499971814 3.545886142064043 9.237737681677788e-06</span>
+<span class="s">        C 2.455221785970465 4.255792992279458 -1.981473318340598</span>
+<span class="s">        C -1.228386974045185 -3.547700260767117 -1.981468190394571</span>
+<span class="s">        C 4.911976899993052 4.255411828501257 2.27723146438149e-06</span>
+<span class="s">        C 3.684014579960917 3.545723396055813 1.280915829951697e-05</span>
+<span class="s">        C 4.911520375955087 4.255828023455356 -1.981468278811</span>
+<span class="s">        C 1.227655395958869 -3.547614761418386 -1.98146951906497</span>
+<span class="s">        C -2.457018900008975 4.255512695928259 2.943041159330732e-06</span>
+<span class="s">        C 6.140026009993287 3.545891232143294 2.20060806891485e-06</span>
+<span class="s">        C 7.367526315913146 4.255927240986645 -1.981454533470139</span>
+<span class="s">        C -6.141340994042006 -3.547511474074143 -1.981469232026619</span>
+<span class="s">        C -0.001002500050462096 4.255387679251578 1.654017565004685e-05</span>
+<span class="s">        C -1.228981830007242 3.545851372434187 2.37503105142233e-06</span>
+<span class="s">        C -0.00142595404759982 4.256013860539822 -1.981467396982039</span>
+<span class="s">        C -3.685044664049419 -3.547477052980626 -1.981466802486946</span>
+<span class="s">        C -1.227808819999351 -2.12938224692705 -2.127801149456805e-07</span>
+<span class="s">        C -2.455832350038186 -2.838708610558109 1.251523005803983e-05</span>
+<span class="s">        C -1.228620264037983 -2.129205540950233 -1.981470550283798</span>
+<span class="s">        C -0.0004192140835714842 -1.419477849521901 -1.981455609514733</span>
+<span class="s">        C 1.228193719957573 -2.129406616582517 1.390527520593389e-05</span>
+<span class="s">        C 0.0001477699611014405 -2.839255138681037 1.274825905530347e-05</span>
+<span class="s">        C 1.227684425953123 -2.129163359695275 -1.981467635427455</span>
+<span class="s">        C 2.455626385910209 -1.419413169537493 -1.981453570671329</span>
+<span class="s">        C -6.140842350045955 -2.129322170430451 1.506226938282425e-05</span>
+<span class="s">        C 2.456153479955113 -2.839200210115958 1.47101339575357e-05</span>
+<span class="s">        C 3.683689305925244 -2.129064842197087 -1.981458500475127</span>
+<span class="s">        C -4.913374384079035 -1.419316522220884 -1.981457095053834</span>
+<span class="s">        C -3.684843340052955 -2.129350560151249 1.735547419229382e-05</span>
+<span class="s">        C -4.912808430047692 -2.839071261955975 1.563048016823986e-05</span>
+<span class="s">        C -3.685268534086676 -2.128978772839927 -1.98145459141338</span>
+<span class="s">        C -2.45712732409351 -1.419353221465499 -1.981452351546793</span>
+<span class="s">        C -2.996192032925579e-05 -0.000699242152149526 3.962939886687566</span>
+<span class="s">        C -1.228003971875175 -0.7103778453492622 3.962925088122617</span>
+<span class="s">        C -0.000700355908038296 -0.0003332148789394825 1.981452859744668</span>
+<span class="s">        C 1.227439704045832 0.7092909964964251 1.981467977918086</span>
+<span class="s">        C 2.455972288079895 -0.000591484995550912 3.962939812711258</span>
+<span class="s">        C 1.228003298120663 -0.7104549535647978 3.962926452096982</span>
+<span class="s">        C 2.455542044092204 -0.0003647244468015716 1.981452779807835</span>
+<span class="s">        C 3.683482354040657 0.7093820057289575 1.981469673526022</span>
+<span class="s">        C 4.912000348117807 -0.0004686671456845799 3.96292738718769</span>
+<span class="s">        C 3.683997778083127 -0.7103249572456309 3.962938753391991</span>
+<span class="s">        C 4.911548884078128 -0.0002680168299863262 1.981457393146928</span>
+<span class="s">        C -3.685515265933381 0.7094801331342701 1.981461165904004</span>
+<span class="s">        C -2.457014661901717 -0.0008761383582568633 3.962933787286889</span>
+<span class="s">        C -3.685007531928472 -0.7103425373777408 3.962942555784025</span>
+<span class="s">        C -2.457412705931413 -0.0002065770405354501 1.981460520958165</span>
+<span class="s">        C -1.229211335932976 0.7095228343414065 1.98146103281522</span>
+<span class="s">        C 1.227967348110556 2.127386193561453 3.962929764672974</span>
+<span class="s">        C -4.281883530521391e-06 1.417919455416095 3.96292782690195</span>
+<span class="s">        C 1.227218624090811 2.127796526544795 1.981453236878594</span>
+<span class="s">        C 2.455427384033809 2.83731889320433 1.981471917810995</span>
+<span class="s">        C 3.683966438104317 2.127406352683383 3.962931809362267</span>
+<span class="s">        C 2.456006178071116 1.417740879775001 3.962942690498066</span>
+<span class="s">        C 3.683508864080636 2.127831077384122 1.981456571921596</span>
+<span class="s">        C 4.911472874041424 2.837414422441095 1.981469423240322</span>
+<span class="s">        C 6.140006188100173 2.127640908364754 3.96293316778528</span>
+<span class="s">        C 4.912000948062944 1.417975193600739 3.962945368689221</span>
+<span class="s">        C 6.139515384034993 2.127928054994523 1.981471530520008</span>
+<span class="s">        C -2.457516635928298 2.837511270211092 1.981459501137365</span>
+<span class="s">        C -1.229012451945974 2.127104470095207 3.962948291371187</span>
+<span class="s">        C -2.457033631907664 1.417792836176979 3.962935736248542</span>
+<span class="s">        C -1.229441855971066 2.128017364296635 1.981473516125039</span>
+<span class="s">        C -0.001231065982844282 2.83754798082405 1.981477377543141</span>
+<span class="s">        C 2.455970918062962 4.255446730162459 3.962945363741043</span>
+<span class="s">        C 1.227990978068837 3.545888883850297 3.962943437699987</span>
+<span class="s">        C 2.455207564067417 4.255798083939164 1.981460905296909</span>
+<span class="s">        C -1.228397585936881 -3.54769452897796 1.981462310609218</span>
+<span class="s">        C 4.911964488060532 4.255420650159205 3.962946159605713</span>
+<span class="s">        C 3.684002968100828 3.545727757822979 3.962932953064215</span>
+<span class="s">        C 4.911507194030889 4.25583213519047 1.981472875202606</span>
+<span class="s">        C 1.22764468406568 -3.547609799614339 1.981461473160161</span>
+<span class="s">        C -2.457027591902453 4.255510887977889 3.962934029953071</span>
+<span class="s">        C 6.140011718057854 3.545898453762834 3.962947035832434</span>
+<span class="s">        C 7.367513404018803 4.25593209270268 1.981476837527609</span>
+<span class="s">        C -6.141352815949912 -3.547506482310592 1.981466583645511</span>
+<span class="s">        C -0.001013701916043441 4.255385511194097 3.962938483249906</span>
+<span class="s">        C -1.228995721948309 3.545866003895579 3.962949056786192</span>
+<span class="s">        C -0.001438315946372004 4.256019262267359 1.98146542401001</span>
+<span class="s">        C -3.68505504595736 -3.547472521146422 1.981469025022036</span>
+<span class="s">        C -1.227817711946263 -2.129397354545356 3.962948386486201</span>
+<span class="s">        C -2.45584760189824 -2.838693919188594 3.962932647309199</span>
+<span class="s">        C -1.22863031596877 -2.129200899095368 1.981472763926178</span>
+<span class="s">        C -0.0004312259786934947 -1.419471387806733 1.981476015973903</span>
+<span class="s">        C 1.228183428085925 -2.129384525179524 3.962937836939656</span>
+<span class="s">        C 0.0001342880538246494 -2.839225227582055 3.962948356816577</span>
+<span class="s">        C 1.227671624025677 -2.129158527960262 1.981474583888431</span>
+<span class="s">        C 2.455614294015247 -1.419407657803005 1.981478001551132</span>
+<span class="s">        C -6.140855951953014 -2.129314868796188 3.962950599781267</span>
+<span class="s">        C 2.456139408049645 -2.839212628030558 3.962949726809414</span>
+<span class="s">        C 3.683677514018658 -2.12905939044384 1.98147688315868</span>
+<span class="s">        C -4.913386125957436 -1.419311390469788 1.981469050050141</span>
+<span class="s">        C -3.68485488196171 -2.129348928295441 3.96295344930467</span>
+<span class="s">        C -4.91282016191732 -2.839063750265042 3.962938899273355</span>
+<span class="s">        C -3.685281025994509 -2.12897353111013 1.981481200585353</span>
+<span class="s">        C -2.457141595966529 -1.419347949824808 1.981472029890663</span>
+<span class="s">    End</span>
+<span class="s">    Lattice</span>
+<span class="s">        9.825000579999999 0.0 0.0</span>
+<span class="s">        4.91182904 8.51302256 0.0</span>
+<span class="s">        0.0 0.0 8.0</span>
+<span class="s">    End</span>
+<span class="s">End</span>
+
+<span class="s">Engine DFTB</span>
+<span class="s">    Model DFTB</span>
+<span class="s">    ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">    KSpace</span>
+<span class="s">        Quality GammaOnly</span>
+<span class="s">    End</span>
+<span class="s">EndEngine</span>
+
+<span class="s">EOF</span>
+
+
+<span class="c1"># 10. Equalized strain components</span>
+<span class="c1"># ===============================</span>
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>equalstrain <span class="s2">&quot;</span><span class="nv">$AMSBIN</span><span class="s2">/ams&quot;</span> <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">Task GeometryOptimization</span>
+
+<span class="s">GeometryOptimization</span>
+<span class="s">    OptimizeLattice Yes</span>
+<span class="s">    Convergence Step=1.0e-3</span>
+<span class="s">End</span>
+
+<span class="s">Constraints</span>
+<span class="s">   # Keep the cell cubic, but allow the size of the cube to vary.</span>
+<span class="s">   FreezeStrain xy xz yz</span>
+<span class="s">   EqualStrain  xx yy zz</span>
+<span class="s">End</span>
+
+<span class="s">System</span>
+<span class="s">    Atoms</span>
+<span class="s">        C -0.132285 3.230196 3.399625</span>
+<span class="s">        H 0.67231 2.571995 3.747816</span>
+<span class="s">        H -0.546925 3.782407 4.25108</span>
+<span class="s">        H -0.921872 2.627955 2.935193</span>
+<span class="s">        H 0.267346 3.938428 2.664409</span>
+<span class="s">        C 2.647972 3.79511 0.161215</span>
+<span class="s">        H 2.745753 2.707187 0.254494</span>
+<span class="s">        H 2.108302 4.189352 1.030219</span>
+<span class="s">        H 2.093026 4.03506 -0.753279</span>
+<span class="s">        H 3.644808 4.248843 0.113424</span>
+<span class="s">        C -3.290954 -3.607704 -3.419879</span>
+<span class="s">        H -4.099867 -4.000479 -4.046956</span>
+<span class="s">        H -2.386445 -3.482146 -4.026458</span>
+<span class="s">        H -3.088346 -4.309774 -2.602634</span>
+<span class="s">        H -3.589157 -2.638419 -3.003466</span>
+<span class="s">        C -3.900392 1.971446 -2.092972</span>
+<span class="s">        H -2.821972 1.97396 -1.895882</span>
+<span class="s">        H -4.303924 2.977719 -1.930439</span>
+<span class="s">        H -4.394183 1.265761 -1.414725</span>
+<span class="s">        H -4.081488 1.668344 -3.130841</span>
+<span class="s">        C -3.143958 -3.520015 3.393796</span>
+<span class="s">        H -3.128547 -4.088022 2.456262</span>
+<span class="s">        H -3.994325 -3.845525 4.004334</span>
+<span class="s">        H -3.24151 -2.450891 3.171766</span>
+<span class="s">        H -2.211449 -3.695621 3.94282</span>
+<span class="s">        C -0.31406 -0.626145 3.522914</span>
+<span class="s">        H -0.044022 0.228271 4.154493</span>
+<span class="s">        H -1.353702 -0.912447 3.720437</span>
+<span class="s">        H 0.346904 -1.471041 3.749005</span>
+<span class="s">        H -0.205421 -0.349364 2.467723</span>
+<span class="s">        C 3.411151 -3.454122 0.161835</span>
+<span class="s">        H 2.877462 -2.569463 0.528433</span>
+<span class="s">        H 4.211866 -3.141886 -0.518755</span>
+<span class="s">        H 2.711585 -4.107617 -0.372385</span>
+<span class="s">        H 3.843691 -3.997522 1.010048</span>
+<span class="s">        H -3.283653 -0.451758 -4.172013</span>
+<span class="s">        H -1.922139 0.6502520000000001 -3.802207</span>
+<span class="s">        H -2.586463 -0.412172 -2.523601</span>
+<span class="s">        C -2.360175 -0.332772 -3.593334</span>
+<span class="s">        H -1.648446 -1.117408 -3.875514</span>
+<span class="s">        C 3.046249 -3.33059 3.76859</span>
+<span class="s">        H 2.414628 -3.18136 2.88506</span>
+<span class="s">        H 2.465863 -3.831302 4.55235</span>
+<span class="s">        H 3.39517 -2.358701 4.136729</span>
+<span class="s">        H 3.909333 -3.950995 3.500222</span>
+<span class="s">        C -3.086408 3.73574 0.4638</span>
+<span class="s">        H -2.559805 3.990117 -0.463465</span>
+<span class="s">        H -2.394025 3.813016 1.310247</span>
+<span class="s">        H -3.469203 2.710618 0.397221</span>
+<span class="s">        H -3.922599 4.429208 0.611196</span>
+<span class="s">        C 3.736451 0.338903 -0.234383</span>
+<span class="s">        H 4.139844 -0.659226 -0.441391</span>
+<span class="s">        H 4.286082 0.789262 0.6004350000000001</span>
+<span class="s">        H 2.675343 0.256879 0.028602</span>
+<span class="s">        H 3.844535 0.968696 -1.125179</span>
+<span class="s">        C -0.953217 3.761489 -3.029722</span>
+<span class="s">        H -0.738671 2.687271 -2.986546</span>
+<span class="s">        H -2.017033 3.913231 -3.24677</span>
+<span class="s">        H -0.349572 4.223228 -3.819817</span>
+<span class="s">        H -0.707592 4.222226 -2.065757</span>
+<span class="s">        C 3.438238 3.368005 3.536049</span>
+<span class="s">        H 3.718968 3.030104 2.531632</span>
+<span class="s">        H 4.305113 3.831685 4.021198</span>
+<span class="s">        H 3.102844 2.509703 4.129906</span>
+<span class="s">        H 2.62603 4.10053 3.461459</span>
+<span class="s">        C -0.093351 2.447961 0.147782</span>
+<span class="s">        H 0.412783 2.191741 -0.790311</span>
+<span class="s">        H -1.100739 2.015519 0.149423</span>
+<span class="s">        H -0.163522 3.53817 0.239205</span>
+<span class="s">        H 0.478074 2.046413 0.99281</span>
+<span class="s">        C -0.06737899999999999 -1.067744 -0.644773</span>
+<span class="s">        H 0.831493 -1.69444 -0.611303</span>
+<span class="s">        H -0.920384 -1.630791 -0.248288</span>
+<span class="s">        H -0.271712 -0.77696 -1.681851</span>
+<span class="s">        H 0.091087 -0.168785 -0.037648</span>
+<span class="s">        C -3.13266 0.095347 1.684164</span>
+<span class="s">        H -2.468956 -0.758832 1.506078</span>
+<span class="s">        H -3.797646 -0.127993 2.526632</span>
+<span class="s">        H -3.731911 0.285949 0.786162</span>
+<span class="s">        H -2.532126 0.982263 1.917783</span>
+<span class="s">        C -3.650862 -2.700373 -0.074687</span>
+<span class="s">        H -4.155919 -2.467829 0.87013</span>
+<span class="s">        H -2.740814 -3.276506 0.129574</span>
+<span class="s">        H -3.385824 -1.767849 -0.58654</span>
+<span class="s">        H -4.32089 -3.289309 -0.711913</span>
+<span class="s">        C 3.803884 3.754796 -3.348637</span>
+<span class="s">        H 3.946713 2.667857 -3.350306</span>
+<span class="s">        H 2.769436 3.987861 -3.626912</span>
+<span class="s">        H 4.48894 4.214494 -4.07059</span>
+<span class="s">        H 4.010448 4.148971 -2.34674</span>
+<span class="s">        C 2.868209 0.11231 2.894284</span>
+<span class="s">        H 2.317604 0.914041 2.388417</span>
+<span class="s">        H 2.406222 -0.09055000000000001 3.867554</span>
+<span class="s">        H 3.909847 0.420825 3.041412</span>
+<span class="s">        H 2.839161 -0.7950739999999999 2.279753</span>
+<span class="s">        C -0.320765 -3.560008 1.887422</span>
+<span class="s">        H -0.965068 -2.68183 2.011986</span>
+<span class="s">        H 0.02585 -3.901247 2.869895</span>
+<span class="s">        H 0.543227 -3.294315 1.26713</span>
+<span class="s">        H -0.88707 -4.36264 1.400678</span>
+<span class="s">        C 2.415398 -1.437717 -2.776235</span>
+<span class="s">        H 1.964383 -1.676188 -3.746573</span>
+<span class="s">        H 2.445411 -2.340763 -2.155392</span>
+<span class="s">        H 1.816728 -0.668767 -2.274091</span>
+<span class="s">        H 3.43507 -1.065149 -2.928883</span>
+<span class="s">        C -3.625996 2.934989 3.78523</span>
+<span class="s">        H -4.070333 2.734452 2.803299</span>
+<span class="s">        H -3.043299 2.064066 4.107404</span>
+<span class="s">        H -4.421782 3.131813 4.513121</span>
+<span class="s">        H -2.968572 3.809626 3.717096</span>
+<span class="s">        C 1.422335 1.538945 -3.931672</span>
+<span class="s">        H 0.608488 0.8054 -3.894205</span>
+<span class="s">        H 2.3282 1.060135 -4.321529</span>
+<span class="s">        H 1.616409 1.921293 -2.92272</span>
+<span class="s">        H 1.136242 2.368954 -4.588236</span>
+<span class="s">        C 0.028875 -3.521123 -2.677443</span>
+<span class="s">        H 0.240436 -2.624091 -3.271089</span>
+<span class="s">        H -0.857142 -3.347281 -2.055678</span>
+<span class="s">        H 0.888225 -3.744967 -2.034598</span>
+<span class="s">        H -0.156019 -4.368152 -3.348409</span>
+<span class="s">    End</span>
+<span class="s">    Lattice</span>
+<span class="s">        10.0 0.0 0.0</span>
+<span class="s">        0.0 10.0 0.0</span>
+<span class="s">        0.0 0.0 10.0</span>
+<span class="s">    End</span>
+<span class="s">End</span>
+
+<span class="s">Engine DFTB</span>
+<span class="s">    Model DFTB</span>
+<span class="s">    ResourcesDir DFTB.org/mio-1-1</span>
+<span class="s">    KSpace</span>
+<span class="s">        Quality GammaOnly</span>
+<span class="s">    End</span>
+<span class="s">EndEngine</span>
+
+<span class="s">EOF</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="COChainFreqTS.html" class="btn btn-neutral float-right" title="Example: TS search starting from initial Hessian" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ExternalStress_graphene.html" class="btn btn-neutral" title="Example: Graphene optimization under external stress" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

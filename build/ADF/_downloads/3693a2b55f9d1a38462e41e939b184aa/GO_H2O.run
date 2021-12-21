@@ -1,0 +1,28 @@
+#!/bin/sh
+
+"$AMSBIN/ams" <<eor
+
+Task GeometryOptimization
+
+System
+    Atoms
+        O 0.0 0.0 0.0
+        H 1.0 0.0 0.0
+        H 0.0 0.0 1.0
+    End
+End
+
+Properties 
+   NormalModes Yes
+End
+
+Engine ADF
+    Symmetry NoSym
+    basis
+        Type DZP
+        CreateOutput Yes
+    End
+EndEngine
+
+eor
+

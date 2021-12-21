@@ -1,0 +1,82 @@
+Frequently Asked Questions
+==========================
+
+
+.. _faq-manual-evaluation:
+
+.. container:: toggle
+
+    .. container:: header
+
+        **How do I manually evaluate a set of parameters?**
+
+    Below is a minimal self-contained example of how
+    manual evaluation of parameters can be implemented.
+    Replace the random sampling of `X` with your parameters.
+
+    .. code-block:: python
+      :linenos:
+
+      import numpy as np
+      from scm.params import *
+      from scm.plams import from_smiles, Settings
+
+      # Prepare the training data:
+      jc = JobCollection()
+      jc.add_entry('water', JCEntry(molecule=from_smiles('O'), settings='go'))
+      ds = DataSet()
+      ds.add_entry("rmsd('water')")
+      # Run the reference calculation:
+      s = Settings()
+      s.input.mopac
+      results = jc.run(s)
+      ds.calculate_reference(results)
+
+      # Manually evaluate 10 random points
+      ljp = LennardJonesParameters() # your favourite parameter interface
+      X   = np.array([np.random.uniform(p.range[0], p.range[1], size=10) for p in ljp.active]).T # replace with something more meaningful
+      fX  = [] # stores all loss function values
+      for x in X:
+          ljp.active.x = x # manually set the parameters
+          results = jc.run(ljp) # run all jobs
+          fx = ds.evaluate(results) # evaluate the data set, calculating the loss
+          fX.append(fx)
+
+
+
+
+
+
+
+
+
+.. _faq-anchor-1:
+
+.. container:: toggle
+
+    .. container:: header
+
+        **The reference dihedral angle is given as 0° in the output (scatter_plots/dihedral.txt)**
+
+    The output gives all reference dihedral angles as 0°, and the prediction as
+    the difference to the reference value. This is because the dihedral
+    :ref:`extractor <AvailableExtractors>` uses a :ref:`comparator <Custom
+    Comparators>` to compare the prediction to the reference value.  This is to
+    ensure that if the reference value is 1° and the prediction is 359°, the
+    difference is actually only 2° and not 358°.
+
+    You can access the actual reference value in the input (training_set.yaml),
+    and get the actual prediction by adding the difference from
+    scatter_plots/dihedral.txt.
+
+
+
+
+
+.. container:: toggle
+
+    .. container:: header
+
+        **My questions is not listed here**
+
+    For further support, contact us at support@scm.com.

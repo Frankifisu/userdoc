@@ -1,0 +1,1504 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Model Hamiltonians &mdash; DFTB 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="DFTB 2021.1 documentation" href="index.html"/>
+        <link rel="next" title="Spectroscopy and properties" href="Spectroscopy_and_Properties.html"/>
+        <link rel="prev" title="AMS driver’s tasks and properties" href="AMSdriver_tasks_and_properties.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="keywords.html">Keywords</a>
+           
+           
+           <a href="genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search DFTB" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-DFTB" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#what-s-new-in-dftb">What’s new in DFTB?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2022-1">New in DFTB2022.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2021-1">New in DFTB2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2020">New in DFTB2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2019-3">New in DFTB2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2019-1">New in DFTB2019.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2018">New in DFTB2018</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="General.html#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="General.html#ams-a-new-driver-program">AMS: a new driver program</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AMSdriver_tasks_and_properties.html">AMS driver’s tasks and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AMSdriver_tasks_and_properties.html#geometry-system-definition">Geometry, System definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMSdriver_tasks_and_properties.html#tasks-exploring-the-pes">Tasks: exploring the PES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMSdriver_tasks_and_properties.html#properties-in-the-ams-driver">Properties in the AMS driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Model Hamiltonians</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#slater-koster-based-dftb">Slater-Koster based DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-hamiltonian">Model Hamiltonian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dispersion-correction">Dispersion correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solvation-gbsa">Solvation (GBSA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scc-details-and-spin-polarization">SCC details and spin-polarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#k-space-integration">k-space integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xtb-specific-keywords">xTB specific keywords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-options">Technical options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Spectroscopy_and_Properties.html">Spectroscopy and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Spectroscopy_and_Properties.html#electronic-structure-of-periodic-systems">Electronic structure of periodic systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spectroscopy_and_Properties.html#excited-states-with-time-dependent-dftb">Excited states with time-dependent DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spectroscopy_and_Properties.html#frequencies-phonons-and-elastic-tensor">Frequencies, phonons and elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spectroscopy_and_Properties.html#other-properties">Other properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NEGF.html">Electronic transport (NEGF)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#transport-with-negf-in-a-nutshell">Transport with NEGF in a nutshell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#simulations-work-flow">Simulations work flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#conductance-input-options">Conductance input options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#miscellaneous-remarks-on-dftb-negf">Miscellaneous remarks on DFTB-NEGF</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Examples/FREQ_aspirin_SCC.html">Example: Normal modes (frequencies) for aspirin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/MD_aspirin.html">Example: Molecular dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and transition state search for H2 on graphene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/FREQ_HNDT_VCD.html">Example: Vibrational circular dichroism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/conductance.html">Example: Electronic transport with NEGF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/Diamond_under_pressure.html">Example: Diamond under pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/ElasticTensor.html">Example: Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/FREQ_LR-TDDFTB_benzene.html">Example: Excited states frequencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/GO_LR-TDDFTB_benzene.html">Example: Geometry optimization for an excited state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/GO_LR-TDDFTB_CO_eigenfollow.html">Example: Geometry optimization following a specific excited state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/SP_LR-TDDFTB_fullerene.html">Example: Fullerene excitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/Li_BZPlot.html">Example: Band structure with user-defined BZ path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/GO_restart.html">Example: Restarting a geometry optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Parameter_files.html">Parameterizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Parameter_files.html#parameter-meta-info">Parameter meta-info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Parameter_files.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Parameter_files.html#available-parameter-sets">Available parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#dftb-org">DFTB.org</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#quasinano">QUASINANO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#dresden">Dresden</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Parameter_files.html#files-in-the-resources-directory">Files in the resources directory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#slater-koster-files">Slater-Koster files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#additional-yaml-files">Additional .yaml files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#basis-function-information-in-rkf-files">Basis function information in .rkf files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Parameter_files.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#parameter-references">Parameter references</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="References.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="References.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="References.html#general-description">General Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#parameter-sets">Parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="References.html#quasinano2013-1">QUASINANO2013.1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#quasinano2015">QUASINANO2015</a></li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#dresden">Dresden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#dftb-org">DFTB.org</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">DFTB</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="DFTB.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">DFTB</a>/</li>
+      
+    <li class="orange-text">Model Hamiltonians</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="model-hamiltonians">
+<span id="modelhamiltonians"></span><h1>Model Hamiltonians<a class="headerlink" href="#model-hamiltonians" title="Permalink to this headline">¶</a></h1>
+<p>As of the 2020 release, the DFTB engine supports two different classes of model Hamiltonians, Grimme’s extended tight-binding, and the classic Slater-Koster based DFTB. All of these model Hamiltonians are obtained by applying tight-binding approximations to the DFT total energy expression.</p>
+<div class="section" id="slater-koster-based-dftb">
+<span id="index-0"></span><h2>Slater-Koster based DFTB<a class="headerlink" href="#slater-koster-based-dftb" title="Permalink to this headline">¶</a></h2>
+<p>The efficiency of Slater-Koster based DFTB stems from its use of an optimized minimum valence orbital basis that reduces the linear algebra operations, and a two center-approximation for the Kohn-Sham potential that allows precalculation and storage of integrals using the Slater-Koster technique. This makes DFTB orders of magnitude faster than DFT, but requires parameter files (containing the integrals) for all pair-wise combinations of atoms in a molecule. Many elements can be handled with the parameter sets included in the distribution. Alternatively, sets of parameters in the SKF format can be downloaded and used from third party sources.</p>
+<p>There are three flavors of Slater-Koster based DFTB available in our implementation:</p>
+<ul class="simple">
+<li>The “plain” DFTB Hamiltonian as introduced by Porezag and Seifert without a self-consistency cycle.</li>
+<li>The second order self-consistent charge extension SCC-DFTB (recently also called DFTB2), which accounts for density fluctuations and improves results on polar bonds. Note that the self-consistent calculations is about an order of magnitude slower than calculations with the “plain” DFTB Hamiltonian.</li>
+<li>The third order extension known as DFTB3, which improve the description of hydrogen-bonded complexes and proton affinities. Note that DFTB3 calculations are only marginally slower than SCC-DFTB based calculations.</li>
+</ul>
+<p>Note that since these methods have been respectively parametrized, it is important to specify a matching parameter set when applying one of these models.</p>
+<span class="target" id="index-1"></span></div>
+<div class="section" id="extended-tight-binding-xtb">
+<span id="index-2"></span><h2>Extended tight-binding (xTB)<a class="headerlink" href="#extended-tight-binding-xtb" title="Permalink to this headline">¶</a></h2>
+<p>The extended tight-binding (xTB) model Hamiltonian as recently been introduced by Grimme and coworkers. It makes similar approximations as Slater-Koster based DFTB, but instead of using precalculated integrals, xTB employs a (small) basis of Slater-type orbitals and uses an extended Hückel-like approximation for the Hamiltonian.</p>
+<p>The DFTB Engine supports the GFN1-xTB parameterization of xTB, which is optimized for geometries, frequencies and non-covalent interactions and covers all elements of the periodic table up to radon.</p>
+</div>
+<div class="section" id="model-hamiltonian">
+<h2>Model Hamiltonian<a class="headerlink" href="#model-hamiltonian" title="Permalink to this headline">¶</a></h2>
+<p>The following keys allow you to select a model Hamiltonian and control different aspects of how the stationary Schroedinger equation is solved.</p>
+<div class="highlight-none notranslate" id="dftb-key-model"><div class="highlight"><pre><span></span>Model [DFTB | SCC-DFTB | DFTB3 | GFN1-xTB | NonSCC-GFN1-xTB]
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Model</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">GFN1-xTB</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[DFTB, SCC-DFTB, DFTB3, GFN1-xTB, NonSCC-GFN1-xTB]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Selects the Hamiltonian used in the DFTB calculation:
+- DFTB/DFTB0/DFTB1 for classic DFTB without a self-consistent charge cycle
+- SCC-DFTB/DFTB2 with a self-consistency loop for the Mulliken charges
+- DFTB3 for additional third-order contributions.
+- GFN1-xTB for Grimme’s extended tight-binding model in the GFN1 version.
+- NonSCC-GFN1-xTB for a less accurate but faster version of GFN1-xTB without a self-consistency cycle
+
+The choice has to be supported by the selected parameter set.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Different parameters may be suitable for different model Hamiltonians. It is important to choose the appropriate parameter set for the type of calculation and molecular system under study, see <a class="reference internal" href="Parameter_files.html#dftb-parameters"><span class="std std-ref">parameter sets</span></a>.</p>
+<div class="highlight-none notranslate" id="dftb-key-resourcesdir"><div class="highlight"><pre><span></span>ResourcesDir string
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ResourcesDir</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The directory containing the parameter files. The path can be absolute or relative. Relative paths starting with ./ are considered relative to the directory in which the calculation is started, otherwise they are considered relative to $AMSRESOURCES/DFTB. This key is required for the Slater-Koster based DFTB models, but optional for xTB.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ResourcesDir</span> <span class="pre">Dresden</span></code></dt>
+<dd>Uses the resource directory $AMSRESOURCES/DFTB/Dresden.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ResourcesDir</span> <span class="pre">/home/myusername/myparamsdir</span></code></dt>
+<dd>Uses the specified path /home/myusername/myparamsdir as the resource directory.</dd>
+</dl>
+<p><strong>NOTE:</strong> Each resource directory must contain a file called <em>metainfo.yaml</em>, which specifies the capabilities of the parameter set. For details see <a class="reference internal" href="Parameter_files.html#metainfo-yaml"><span class="std std-ref">metainfo.yaml</span></a>.</p>
+</div>
+<div class="section" id="dispersion-correction">
+<span id="dispersioncorrection"></span><span id="index-3"></span><h2>Dispersion correction<a class="headerlink" href="#dispersion-correction" title="Permalink to this headline">¶</a></h2>
+<p>The selected model Hamiltonian can be extended with dispersion correction:</p>
+<div class="highlight-none notranslate" id="dftb-key-dispersioncorrection"><div class="highlight"><pre><span></span>DispersionCorrection [None | Auto | UFF | ULG | D2 | D3-BJ | D4]
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">DispersionCorrection</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[None, Auto, UFF, ULG, D2, D3-BJ, D4]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Dispersion</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">This key is used to specify an empirical dispersion model. Please refer to the DFTB documentation for details on the different methods.
+
+By default no dispersion correction will be applied. Setting this to auto applies the dispersion correction recommended in the DFTB parameter set’s metainfo file. Note that the D3-BJ dispersion correction is enabled by default when using the GFN1-xTB model Hamiltonian, but can be disabled manually by setting this keyword to None.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>The newest and most accurate dispersion correction is D4. We recommend both the D3-BJ and D4 dispersion corrections as good defaults, depending on their availability for the specific combination of the model Hamiltonian and parameterization. Note that the D4 dispersion corrections is computationally more expensive than D3-BJ for bulk periodic systems (it scales as O(N<sup>3</sup>) with the number of atoms and is not parallelized), thus the user may first want to evaluate if the increased accuracy justifies the increased computational cost.</p>
+<span class="target" id="index-4"></span></div>
+<div class="section" id="solvation-gbsa">
+<span id="solvation"></span><span id="index-5"></span><h2>Solvation (GBSA)<a class="headerlink" href="#solvation-gbsa" title="Permalink to this headline">¶</a></h2>
+<p>Solvation effects can be included via the implicit GBSA solvation model. We gratefully acknowledge the Grimme’s group in Bonn for their contribution of the GBSA solvation method code.</p>
+<p>To enable the GBSA method, specify the desired solvent:</p>
+<div class="highlight-none notranslate" id="dftb-key-solvation"><div class="highlight"><pre><span></span>Solvation
+   Solvent [None | Acetone | Acetonitrile | CHCl3 | CS2 | DMSO | Ether | H2O | Methanol | 
+            THF | Toluene]
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Solvation</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Generalized Born solvation model with Solvent Accessible Surface Area (GBSA).</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Solvent</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[None, Acetone, Acetonitrile, CHCl3, CS2, DMSO, Ether, H2O, Methanol, THF, Toluene]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Solvent used in the GBSA implicit solvation model.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>More options can be specified in the <code class="docutils literal notranslate"><span class="pre">Solvation</span></code> block:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Solvation
+   UseGSASA Yes/No
+   GSolvState [Gas1BarSolvent | Gas1MSolvent1M | Gas1BarSolvent1M]
+   Temperature float
+   SurfaceGrid [230 | 974 | 2030 | 5810]
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Solvation</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">UseGSASA</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Solvation Free Energy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Include shift term and G(SASA) terms in the energy and gradient.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GSolvState</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Gas1MSolvent1M</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[Gas1BarSolvent, Gas1MSolvent1M, Gas1BarSolvent1M]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Reference state for solvation free energy shift.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Temperature</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">298.15</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Kelvin</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The temperature used when calculating the solvation free energy shift. Only used for ‘Gas1BarSolvent’ and ‘Gas1BarSolvent1M’ GSolvState options.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SurfaceGrid</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">230</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[230, 974, 2030, 5810]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Number of angular grid points for the construction of the solvent accessible surface area. Usually the default number of grid point suffices, but in case of suspicious behaviors you can increase the number of points.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="scc-details-and-spin-polarization">
+<span id="sccdetails"></span><h2>SCC details and spin-polarization<a class="headerlink" href="#scc-details-and-spin-polarization" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none notranslate" id="dftb-key-scc"><div class="highlight"><pre><span></span>SCC
+   AdaptiveMixing Yes/No
+   Converge
+      Charge float
+   End
+   DIIS
+      Enabled Yes/No
+      MaxSamples integer
+      MaximumCoefficient float
+      MinSamples integer
+      MixingFactor float
+   End
+   HXDamping Yes/No
+   Iterations integer
+   OrbitalDependent Yes/No
+   Unrestricted Yes/No
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">SCC</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This optional section configures various details of the self-consistent charge cycle. If the model Hamiltonian does not need a self-consistent solution (e.g. plain DFTB0), none of this information is used and the entire section will be ignored.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">AdaptiveMixing</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Change the mixing parameter based on the monitored energy. A significant increase of energy will strongly reduce the mixing. Then it will slowly grow back to the SCC%Mixing value.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Converge</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Controls the convergence criteria of the SCC cycle.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Charge</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1e-08</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Charge convergence</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The maximum change in atomic charges between subsequent SCC iterations. If the charges change less, the SCC cycle is considered converged.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DIIS</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Parameters influencing the DIIS self-consistency method</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">If not enabled simple mixing without DIIS acceleration will be used.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MaxSamples</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">20</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Specifies the maximum number of samples considered during the direct inversion of iteration of subspace (DIIS) extrapolation of the atomic charges during the SCC iterations. A smaller number of samples potentially leads to a more aggressive convergence acceleration, while a larger number often guarantees a more stable iteration. Due to often occurring linear dependencies within the set of sample vectors, the maximum number of samples is reached only in very rare cases.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MaximumCoefficient</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">10.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">When the diis expansion coefficients exceed this threshold, the solution is rejected. The vector space is too crowded. The oldest vector is discarded, and the expansion is re-evaluated.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MinSamples</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">-1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">When bigger than one, this affects the shrinking of the DIIS space on linear depence. It will not reduce to a smaller space than MinSamples unless there is extreme dependency.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MixingFactor</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.15</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The parameter used to mix the DIIS linear combination of previously sampled atomic charge vectors with an analogous linear combination of charge vectors resulting from population analysis combination. It can assume real values between 0 and 1.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">HXDamping</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This option activates the DFTB3 style damping for H-X bonds. Note that this is always enabled if the DFTB%Model key is set to DFTB3. Not used with xTB.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Iterations</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">500</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Allows to specify the maximum number of SCC iterations. The default should suffice for most standard calculations.
+
+Convergence issues may arise due to the use of the Aufbau occupations for systems with small HOMO-LUMO gaps. In this case the use of a Fermi broadening strategy may improve convergence.
+
+Choosing a smaller mixing parameter (see DFTB%SCC%Mixing) may also help with convergence issues: it often provides a more stable but slower way to converge the SCC cycle.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">OrbitalDependent</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Activates or disables orbital resolved calculations. If this key is absent the recommended settings from the parameter file’s metainfo.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Unrestricted</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Enables spin unrestricted calculations.
+
+Only collinear spin polarization is supported, see Theor Chem Acc (2016) 135: 232, for details.
+
+Must be supported by the chosen parameter set. Not yet compatible with DFTB3, k-space sampling periodic calculations or the xTB models.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="highlight-none notranslate" id="dftb-key-occupation"><div class="highlight"><pre><span></span>Occupation
+   KT float
+   NumBoltz integer
+   Strategy [Auto | Aufbau | Fermi]
+   Temperature float
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Occupation</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures the details of how the molecular orbitals are occupied with electrons.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">KT</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">(KT) Boltmann constant times temperature, used for electronic temperature with strategy is auto.
+The default value is the default value for Temperature*3.166815423e-6.
+This key and Temperature are mutually exlusive.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NumBoltz</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">10</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The electronic temperature is done with a Riemann Stieltjes numerical integration, between zero and one occupation. This defines the number of points to be used.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Strategy</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Auto</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[Auto, Aufbau, Fermi]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Occupation</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">This optional key allows to specify the fill strategy to use for the molecular orbitals.
+
+Can either be ‘Aufbau’ for simply filling the energetically lowest orbitals, or ‘Fermi’ for a smeared out Fermi-Dirac occupation. By default the occupation strategy is determined automatically, based on the other settings (such as the number of unpaired electrons).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Temperature</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">300.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Kelvin</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Fermi temperature</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The Fermi temperature used for the Fermi-Dirac distribution. Ignored in case of aufbau occupations.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="highlight-none notranslate" id="dftb-key-unpairedelectrons"><div class="highlight"><pre><span></span>UnpairedElectrons integer
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">UnpairedElectrons</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Spin polarization</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This specifies the number of unpaired electrons (not the multiplicity!).
+
+This number will then be used in the orbital-filling strategy. Has to be compatible with the total number of electrons, meaning it must be an even number if the total number of electrons is even and odd if the total number is odd. Must be an integer value.
+
+Note that this does not activate spin polarization, it only affects the filling of the orbitals.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+<div class="section" id="k-space-integration">
+<span id="kspace"></span><h2>k-space integration<a class="headerlink" href="#k-space-integration" title="Permalink to this headline">¶</a></h2>
+<p>As of the 2019 release, the k-space integration is unified between BAND and DFTB and uses the same keys as input, and the same defaults. See the <a class="reference external" href="../BAND/Accuracy_and_Efficiency/K-Space_Integration.html">page on k-space integration in the BAND manual</a> for details and recommendations.</p>
+<div class="highlight-none notranslate" id="dftb-key-kspace"><div class="highlight"><pre><span></span>KSpace
+   Quality [GammaOnly | Basic | Normal | Good | VeryGood | Excellent]
+   Regular
+      NumberOfPoints integer_list
+   End
+   Symmetric
+      KInteg integer
+   End
+   Type [Regular | Symmetric]
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">KSpace</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options for the k-space integration (i.e. the grid used to sample the Brillouin zone).</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Quality</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Normal</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[GammaOnly, Basic, Normal, Good, VeryGood, Excellent]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">K-space</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Select the quality of the K-space grid used to sample the Brillouin Zone. If ‘GammaOnly’, only one point (the gamma point) will be used. 
+
+ For the other options, the actual number of K points generated depends on the size of the unit cell. The larger the real space cell, the fewer K points will be generated.
+
+The CPU-time and accuracy strongly depend on this option.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Regular</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options for the regular k-space integration grid.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">NumberOfPoints</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Use a regular grid with the specified number of k-points along each reciprocal lattice vector.
+
+For 1D periodic systems you should specify only one number, for 2D systems two numbers, and for 3D systems three numbers.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Symmetric</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options for the symmetric k-space integration grid.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">KInteg</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Accuracy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Specify the accuracy for the Symmetric method.
+
+1: absolutely minimal (only the G-point is used)
+2: linear tetrahedron method, coarsest spacing
+3: quadratic tetrahedron method, coarsest spacing
+4,6,… (even): linear tetrahedron method
+5,7…. (odd): quadratic method
+
+The tetrahedron method is usually by far inferior.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Type</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Regular</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[Regular, Symmetric]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">K-space grid type</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The type of k-space integration grid used to sample the Brillouin zone (BZ) used.
+
+‘Regular’: simple regular grid.
+
+‘Symmetric’: symmetric grid for the irreducible wedge of the first BZ (useful when high-symmetry points in the BZ are needed to capture the correct physics of the system, graphene being a notable example).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="xtb-specific-keywords">
+<h2>xTB specific keywords<a class="headerlink" href="#xtb-specific-keywords" title="Permalink to this headline">¶</a></h2>
+<p>A few keywords only apply to the xTB model Hamiltonian.</p>
+<div class="highlight-none notranslate" id="dftb-key-xtbconfig"><div class="highlight"><pre><span></span>XTBConfig
+   SlaterRadialThreshold float
+   useXBTerm Yes/No
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">XTBConfig</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This block allows for minor tweaking.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">SlaterRadialThreshold</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1e-05</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Threshold determining the range of the basis functions. Using a larger threshold will speed up the calculation, but will also make the results less accurate.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">useXBTerm</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether to use the Halogen bonding (XB) term. This is not advised as it has a non-continuous PES.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The GFN1-xTB implementation in AMS currently does not implement the electronic entropy term from the article by Grimme et al. It therefore gives slightly different energies (but not gradients!) for systems with partially occupied molecular orbitals.</p>
+</div>
+</div>
+<div class="section" id="technical-options">
+<h2>Technical options<a class="headerlink" href="#technical-options" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none notranslate" id="dftb-key-technical"><div class="highlight"><pre><span></span>Technical
+   AnalyticalStressTensor Yes/No
+   EwaldSummation
+      CellRangeFactor float
+      Enabled Yes/No
+      Tolerance float
+   End
+   MatricesViaFullMaxSize integer
+   Parallel
+      nCoresPerGroup integer
+      nGroups integer
+      nNodesPerGroup integer
+   End
+   ReuseKSpaceConfig Yes/No
+   Screening
+      dMadel float
+      rMadel float
+   End
+   UseGeneralizedDiagonalization Yes/No
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Technical</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This optional section is about technical aspects of the program that should not concern the normal user.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">AnalyticalStressTensor</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether to compute the stress tensor analytically. Note: This can only be used together with Ewald summation as it will give (slightly) wrong results with Madelung screening.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EwaldSummation</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures the details of the Ewald summation of the Coulomb interaction.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">CellRangeFactor</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">2.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Smaller values will make the Ewald summation less accurate but faster.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether to use Ewald summation for the long-range part of the Coulomb interaction. Otherwise screening is used.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1e-10</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Larger values will make the Ewald summation less accurate but faster.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MatricesViaFullMaxSize</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">2047</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Matrices smaller than this size are constructed via a full matrix. This is faster, but uses more memory in the construction.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Parallel</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Calculation of the orbitals in several k-points is trivially parallel.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">nCoresPerGroup</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Number of cores in each working group.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nGroups</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Total number of processor groups. This is the number of tasks that will be executed in parallel.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nNodesPerGroup</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Cores per task</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Number of nodes in each group. This option should only be used on homogeneous compute clusters, where all used compute nodes have the same number of processor cores.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ReuseKSpaceConfig</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Keep the number of k-points constant during a lattice optimization. Otherwise the PES might display jumps, because the number of points depends on the lattice vector sizes. If this option is on it will always use the number of k-points that was used from a previous result.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Screening</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">For SCC-DFTB in periodic systems the Coulomb interaction can (instead of using Ewald summation) be screened with a Fermi-Dirac like function defined as S(r)=1/(exp((r-r_madel)/d_madel)+1). This section allows to change some details of the screening procedure. Note that Coulomb screening is only used if the Ewald summation is disabled.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">dMadel</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">Bohr</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Sets the smoothness of the screening function. The default is 1/10 of [rMadel].</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">rMadel</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">Bohr</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Sets the range of the screening function. The default is 2x the norm of the longest lattice vector.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">UseGeneralizedDiagonalization</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether or not to use generalized diagonalization. Does not affect the results, but might be faster or slower.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="highlight-none notranslate" id="dftb-key-storematrices"><div class="highlight"><pre><span></span>StoreMatrices Yes/No
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">StoreMatrices</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Determines whether the Hamiltonian and overlap matrices are stored in the binary result file.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Spectroscopy_and_Properties.html" class="btn btn-neutral float-right" title="Spectroscopy and properties" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="AMSdriver_tasks_and_properties.html" class="btn btn-neutral" title="AMS driver’s tasks and properties" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

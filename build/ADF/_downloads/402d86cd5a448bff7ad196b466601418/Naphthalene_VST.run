@@ -1,0 +1,112 @@
+#!/bin/sh
+
+
+# Calculation of a vibrationally resolved electronically excited
+# state spectrum with the VG-FC vibronic-structure tracking (VST)
+# method of the molecule naphthalene.
+# Important is to be at the ground state geometry of naphthalene.
+# Note that a geometry optimization of naphthalene is skipped here,
+# but we do use optimized cooredinates.
+
+# The lowest singlet-singlet excitation of naphthalene and
+# its excited state gradient is calculated at the optimized 
+# ground state geometry of naphthalene.
+
+# In the single point calclation the 'Gradients' are requested in the properties block
+# In addition one needs to include the EXCITATIONS key and the EXCITEDGO key such that the
+# excited state nuclear gradients are calculated.
+
+AMS_JOBNAME=ES $AMSBIN/ams <<eor
+System
+  atoms
+     C 0.0  0.705203949620  2.423171793837
+     C 0.0  1.398484082024  1.236799665234
+     C 0.0 -1.398484082024  1.236799665234
+     C 0.0  0.715180917267  0.0
+     C 0.0 -0.705203949620  2.423171793837
+     C 0.0 -0.715180917267  0.0
+     C 0.0  1.398484082024 -1.236799665234
+     C 0.0  0.705203949620 -2.423171793837
+     C 0.0 -0.705203949620 -2.423171793837
+     C 0.0 -1.398484082024 -1.236799665234
+     H 0.0  2.493594473281  1.232860022766
+     H 0.0  1.244970418595  3.374117886966
+     H 0.0 -1.244970418595  3.374117886966
+     H 0.0 -2.493594473281  1.232860022766
+     H 0.0 -2.493594473281 -1.232860022766
+     H 0.0 -1.244970418595 -3.374117886966
+     H 0.0  1.244970418595 -3.374117886966
+     H 0.0  2.493594473281 -1.232860022766
+  end
+end
+
+Task SinglePoint
+
+Properties
+    Gradients Yes
+End
+
+Engine ADF
+  excitations
+    lowest 1
+    nto
+    onlysing
+  end
+  excitedgo
+    allgradients
+  end
+  basis
+    type DZ
+    core None
+  end
+EndEngine
+eor
+
+# The calculation of the vibrationally resolved spectrum of the lowest
+# singlet excited state of naphthalene is calculated with the VG-FC VST method.
+# The excited state gradient is read from the file ES.results/adf.rkf.
+
+AMS_JOBNAME=VibronicStructure "$AMSBIN/ams" <<eor
+    Task VibrationalAnalysis
+    System
+        Atoms
+            C 0.0  0.705203949620  2.423171793837
+            C 0.0  1.398484082024  1.236799665234
+            C 0.0 -1.398484082024  1.236799665234
+            C 0.0  0.715180917267  0.0
+            C 0.0 -0.705203949620  2.423171793837
+            C 0.0 -0.715180917267  0.0
+            C 0.0  1.398484082024 -1.236799665234
+            C 0.0  0.705203949620 -2.423171793837
+            C 0.0 -0.705203949620 -2.423171793837
+            C 0.0 -1.398484082024 -1.236799665234
+            H 0.0  2.493594473281  1.232860022766
+            H 0.0  1.244970418595  3.374117886966
+            H 0.0 -1.244970418595  3.374117886966
+            H 0.0 -2.493594473281  1.232860022766
+            H 0.0 -2.493594473281 -1.232860022766
+            H 0.0 -1.244970418595 -3.374117886966
+            H 0.0  1.244970418595 -3.374117886966
+            H 0.0  2.493594473281 -1.232860022766
+        End
+    End
+    VibrationalAnalysis
+        Type VibronicStructureTracking
+        AbsorptionSpectrum
+            LineWidth 50.0
+            AbsorptionRange -200.0 4000.0
+        End
+        ExcitationSettings
+            ExcitationFile ES.results/adf.rkf
+            Singlet
+                B2.u 1
+            End
+        End
+    End
+    Engine ADF
+        basis
+            Type DZ
+            Core None
+        End
+    EndEngine
+eor

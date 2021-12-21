@@ -1,0 +1,146 @@
+#! /bin/sh
+
+# This example shows how to use the NEGF key when including a bias potential
+# between the electrodes. It starts of with the usual tight-binding run,
+# followed by an SGF one. The alignment run is omitted. Finally, there is a loop
+# over bias potentials. Here the scale feature of the FuzzyPotential is used.
+# The current is appended to a text file, which one could plot eg. with gnuplot.
+
+# Note: Setting up a NEGF calculation is quite hard without the GUI.
+
+AMS_JOBNAME=tight-binding $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  Atoms
+      Li.1 0.0 0.0 0.0
+      Li.2 2.876 0.0 0.0
+      Li.3 5.752 0.0 0.0
+  End
+  Lattice
+   8.628 0.0 0.0
+  End
+End
+
+Engine Band 
+  TITLE tight-binding
+
+  KSpace
+    Quality VeryGood
+  End
+
+  SoftConfinement
+    Quality Basic
+  End
+
+  Basis
+    Type DZ
+    Core Large
+  End
+
+  StoreHamiltonian2
+EndEngine
+eor
+
+
+$AMSBIN/sgf   <<eor
+TITLE Test for NEGF inputs
+SAVE SIGMA
+SURFACEGF
+   RKFFileName tight-binding.results/band.rkf
+   SCMCode
+   KT 0.001
+   ContourQuality normal
+END
+eor
+
+mv SigmaSCM Sigma.kf
+
+REPORT=Li-CuAg.report
+touch $REPORT
+
+for bias in -0.01 0.01
+do
+
+
+AMS_JOBNAME=negf $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  ATOMS
+      Li.1L -15.818 0.0 0.0
+      Li.2L -12.942 0.0 0.0
+      Li.3L -10.066 0.0 0.0
+      Li.1C -7.19 0.0 0.0
+      Li.2C -4.314 0.0 0.0
+      Cu.C -0.7 -1.0 0
+      Ag.C 0.7 1.0 0
+      Li.3C 4.314 0.0 0.0
+      Li.4C 7.19 0.0 0.0
+      Li.1R 10.066 0.0 0.0
+      Li.2R 12.942 0.0 0.0
+      Li.3R 15.818 0.0 0.0
+  END
+End
+
+Engine Band 
+  TITLE bias=$bias
+
+  SoftConfinement
+    Quality Basic
+  End
+
+  Basis
+    Type DZ
+    Core Large
+  End
+
+  NEGF
+    LeadFile tight-binding.results/band.rkf
+    SGFFile Sigma.kf
+    EMin -5.0
+    EMax 5.0
+    NE 200
+    ApplyShift2 False
+    BiasPotential $bias
+  End
+
+  FuzzyPotential
+  scale $bias
+  1   0.5
+  2   0.5
+  3   0.5
+  4   0.5
+  5   0.5
+  6   0.2
+  7   -0.2
+  8   -0.5
+  9   -0.5
+  10  -0.5
+  11  -0.5
+  12  -0.5
+  end
+EndEngine
+
+eor
+
+current=`$AMSBIN/amsreport negf.results/band.rkf 'NEGF%current'`
+echo "NEGFREPORT: Bias=$bias, Current=$current" >> $REPORT
+
+echo "start of transmission (bias=$bias)"
+cat Transmission_*.plt
+echo "end of transmission"
+
+rm Transmission_*.plt
+
+rm -r negf.results
+
+done
+
+echo "Start of report"
+cat $REPORT
+echo "End of report"
+
+

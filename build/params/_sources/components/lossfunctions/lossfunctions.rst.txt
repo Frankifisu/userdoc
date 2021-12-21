@@ -1,0 +1,116 @@
+Loss Functions
+==============
+.. currentmodule:: scm.params.core.lossfunctions
+
+The loss function measures how good a set of parameters are. The loss function is a single real-valued number.
+The smaller the loss function value, the better the parameters are.
+
+The following loss functions are available:
+
+.. csv-table::
+   :header: name, string, class
+   :delim: #
+
+   **Sum of Squared Errors (default, recommended)** #'sse', 'rss'#:meth:`SSE`
+   Sum of Absolute Errors#'sae', #:meth:`SAE`
+   Mean Absolute Error#'mad', 'mae'#:meth:`MAE`
+   Root Mean Squared Error#'rmsd', 'rmse'#:meth:`RMSE`
+
+.. important::
+
+   The value of the loss function will be weighted by the data_set entry weights, and the residuals will first be normalized by the data_set entry sigma.
+   So for example using the "Mean Absolute Error" as the loss function will not necessarily calculate a physically meaningful mean absolute error.
+   Instead, use the :ref:`DataSetEvaluator <DataSetEvaluator>` to calculate meaningful MAE and RMSE.
+
+By default the following equations are used to calculate the loss function
+value, where :math:`N` is the number of data_set entries, :math:`w` is the
+weight, :math:`\sigma` is the sigma value, :math:`y` is the predicted value and
+:math:`\hat{y}` is the reference value. For array reference values, there are
+:math:`M_i` elements of the array for data_set entry :math:`i`.
+
+.. csv-table::
+   :header: loss, scalar values, array values
+   :delim: #
+
+   **SSE** #:math:`\sum_{i=1}^N w_i\left(\frac{y_i - \hat{y}_i}{\sigma _i}\right)^2`# :math:`\sum_{i=1}^N\sum_{j=1}^{M_i} w_{i,j}\left(\frac{y_{i,j} - \hat{y}_{i,j}}{\sigma _i}\right)^2`
+   SAE#:math:`\sum_{i=1}^N w_i\frac{|y_i - \hat{y}_i|}{\sigma _i}`# :math:`\sum_{i=1}^N\sum_{j=1}^{M_i} w_{i,j}\frac{|y_{i,j} - \hat{y}_{i,j}|}{\sigma _i}`
+   MAE#:math:`\frac{1}{N}\sum_{i=1}^N w_i\frac{|y_i - \hat{y}_i|}{\sigma _i}`# :math:`\frac{1}{N}\sum_{i=1}^N\frac{1}{M_i}\sum_{j=1}^{M_i} w_{i,j}\frac{|y_{i,j} - \hat{y}_{i,j}|}{\sigma _i}`
+   RMSE#:math:`\sqrt{\frac{1}{N}\sum_{i=1}^N w_i\left(\frac{y_i - \hat{y}_i}{\sigma _i}\right)^2}`# :math:`\sqrt{\frac{1}{N}\sum_{i=1}^N\frac{1}{M_i}\sum_{j=1}^{M_i} w_{i,j}\left(\frac{y_{i,j} - \hat{y}_{i,j}}{\sigma _i}\right)^2}`
+
+
+Note that for MAE and RMSE loss functions with array reference values, averages are first
+calculated over the individual arrays, and the :math:`N` averages are then
+again averaged.  **It is also common to use a different definition**, in which the
+:math:`N` arrays are first concatenated and only a single average is calculated
+over this larger array.  This second way is referred to as "other" in the below
+example, and is the default for the MAE and RMSE reported by the :ref:`Data Set Evaluator`.
+
+**Example**:
+
+.. include:: lossfunctions_demo.rst.include
+
+
+
+Specifying the loss function
+----------------------------------
+
+The loss function can be passed to an :ref:`Optimization` in one of the following ways:
+
+.. code:: python
+
+   my_optimization = {Runner}(*args, loss='sse') # As the string keyword
+
+   from scm.params.core.lossfunctions import SSE # Loss functions are not imported automatically
+   my_optimization = {Runner}(*args, loss=SSE()) # Or directly
+
+A loss function can also be passed to :meth:`DataSet.evaluate() <scm.params.core.dataset.DataSet.evaluate>` in the same manner.
+
+
+
+
+Technical information
+--------------------------
+
+Each loss function class (:meth:`SAE`, :meth:`MAE`, :meth:`RMSE`, :meth:`SSE`) derives from the ``Loss`` base class.
+The ``__call__`` method takes two arguments: ``residuals`` and ``weights``.
+
+* ``residuals`` is a list of residuals vectors between reference and predicted properties. When called from :meth:`DataSet.evaluatio() <scm.params.core.dataset.DataSet.evaluate>`, each item has been normalized by the sigma value of the corresponding data_set entry: :math:`(\boldsymbol{y} - \boldsymbol{\hat{y}})/\boldsymbol{\sigma}`.
+
+* ``weights`` is a list of a set of weights :math:`\boldsymbol{w}`.
+
+The ``__call__`` method returns a 2-tuple consisting of the loss function value (float) and a list of contributions.
+
+
+Sum of Squares Error
+--------------------
+.. autoclass:: SSE
+  :no-members:
+
+Sum of Absolute Errors
+-----------------------
+.. autoclass:: SAE
+  :no-members:
+
+Mean Absolute Error
+-------------------
+.. autoclass:: MAE
+  :no-members:
+
+Root-Mean-Square Error
+----------------------
+.. autoclass:: RMSE
+  :no-members:
+
+Loss Function API
+-----------------
+User-specific loss functions can be defined by inheriting from the base class below.
+Please make sure that your loss returns a tuple of two vlaues: `fx` and `contributions` (see below).
+The latter should contain a percentual per-element contribution of `residuals`
+to the overall loss function value.
+
+Note that although the residuals are depicted as a single vector throughout the documentation,
+the data structure that a `Loss` receives is a `List[1d array]`, where every element
+in the list stores the (weighted) residuals vector of the respective Data Set entry.
+
+.. autoclass:: Loss
+  :exclude-members: __weakref__

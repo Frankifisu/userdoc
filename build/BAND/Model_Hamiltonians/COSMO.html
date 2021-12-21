@@ -1,0 +1,1415 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>COSMO: Conductor like Screening Model and the Solvation-key &mdash; BAND 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="BAND 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Solvation" href="Solvation.html"/>
+        <link rel="next" title="SM12: Solvation Model 12" href="SM12.html"/>
+        <link rel="prev" title="Solvation" href="Solvation.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search BAND" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-BAND" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General/TOC.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General/Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General/feature_list.html">Feature List</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#model-hamiltonians">Model Hamiltonians</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#structure-and-reactivity">Structure and Reactivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#spectroscopy-and-properties">Spectroscopy and Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#charge-transport">Charge transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#analysis">Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/New_in_BAND.html">What’s new in Band 2021.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General/New_in_BAND.html#what-s-new-in-band-2020">What’s new in Band 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General/input.html">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/input.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/input.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/input.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/input.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/input.html#units">Units</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html">AMS driver’s tasks and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#geometry-system-definition">Geometry, System definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#tasks-exploring-the-pes">Tasks: exploring the PES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#properties-in-the-ams-driver">Properties in the AMS driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="TOC.html">Model Hamiltonians</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Density_Functional.html">Density Functional (XC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#lda-gga-metagga">LDA/GGA/metaGGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#dispersion-correction">Dispersion Correction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#d4-eeq">D4(EEQ)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#d3-and-d3-bj">D3 and D3-BJ</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#model-potentials">Model Potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#non-collinear-approach">Non-Collinear Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#libxc-library-integration">LibXC Library Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#range-separated-hybrid-functionals">Range-separated hybrid functionals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#defaults-and-special-cases">Defaults and special cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#gga-u">GGA+U</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#index-12">OEP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#dft-1-2">DFT-1/2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Relativistic_Effects_and_Spin.html">Relativistic Effects and Spin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Relativistic_Effects_and_Spin.html#spin-polarization">Spin polarization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Relativistic_Effects_and_Spin.html#relativistic-effects">Relativistic Effects</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="Solvation.html">Solvation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">COSMO: Conductor like Screening Model and the Solvation-key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-keys-for-periodic-systems">Additional keys for periodic systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SM12.html">SM12: Solvation Model 12</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SM12.html#input">Input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Electric_and_Magnetic_Fields.html">Electric and Magnetic Fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Electric_and_Magnetic_Fields.html#electric-field">Electric Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Electric_and_Magnetic_Fields.html#magnetic-field">Magnetic Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Electric_and_Magnetic_Fields.html#atom-wise-fuzzy-potential">Atom-wise fuzzy potential</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Nuclear_Model.html">Nuclear Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Accuracy_and_Efficiency/TOC.html">Accuracy and Efficiency</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html">Basis set</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#basis-input-block">Basis input block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#which-basis-set-should-i-use">Which basis set should I use?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#available-basis-sets">Available Basis Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#more-basis-input-options">More Basis input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#confinement-of-basis-functions">Confinement of basis functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#manually-specifying-atomtypes-expert-option">Manually specifying AtomTypes (expert option)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#basis-set-superposition-error-bsse">Basis Set Superposition Error (BSSE)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Accuracy_and_Efficiency/K-Space_Integration.html">K-Space</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/K-Space_Integration.html#kspace-input-block">KSpace input block</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Accuracy_and_Efficiency/K-Space_Integration.html#regular-k-space-grid">Regular K-Space grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Accuracy_and_Efficiency/K-Space_Integration.html#symmetric-k-space-grid-tetrahedron-method">Symmetric K-Space grid (tetrahedron method)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/K-Space_Integration.html#recommendations-for-k-space">Recommendations for k-space</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Accuracy_and_Efficiency/Numerical_Integration.html">Numerical Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Numerical_Integration.html#becke-grid">Becke Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Numerical_Integration.html#radial-grid-of-naos">Radial grid of NAOs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Numerical_Integration.html#voronoi-grid-deprecated">Voronoi grid (deprecated)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Accuracy_and_Efficiency/Density_Fitting.html">Density Fitting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Density_Fitting.html#zlm-fit">Zlm Fit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Accuracy_and_Efficiency/Density_Fitting.html#expert-options">Expert options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Density_Fitting.html#sto-fit-deprecated">STO Fit (Deprecated)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Accuracy_and_Efficiency/Hartree-Fock_RI.html">Hartree–Fock RI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Accuracy_and_Efficiency/SCF.html">Self Consistent Field (SCF)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/SCF.html#scf-block">SCF block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/SCF.html#convergence">Convergence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/SCF.html#diis">DIIS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/SCF.html#multisecant">Multisecant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/SCF.html#diris">DIRIS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Accuracy_and_Efficiency/More_Technical_Settings.html">More Technical Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/More_Technical_Settings.html#linear-scaling">Linear Scaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/More_Technical_Settings.html#dependency">Dependency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/More_Technical_Settings.html#screening">Screening</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/More_Technical_Settings.html#direct-on-the-fly-calculation-of-basis-and-fit">Direct (on the fly) calculation of basis and fit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/More_Technical_Settings.html#fermi-energy-search">Fermi energy search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/More_Technical_Settings.html#block-size">Block size</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Spectroscopy_and_Properties/TOC.html">Spectroscopy and Properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Frequencies_and_Phonons.html">Frequencies and Phonons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Elastic_Tensor.html">Elastic Tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html">Optical Properties: Time-Dependent Current DFT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#insulators-semiconductors-and-metals">Insulators, semiconductors  and metals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#frequency-dependent-kernel">Frequency dependent kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#eels">EELS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#input-options">Input Options</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#newresponse">NewResponse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#oldresponse">OldResponse</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/ESR_EPR.html">ESR/EPR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/EFG.html">Nuclear Quadrupole Interaction (EFG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/NMR.html">NMR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Effective_Mass.html">Effective Mass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Properties_at_Nuclei.html">Properties at Nuclei</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/X-Ray_Form_Factors.html">X-Ray Form Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Berry_Phase.html">Dipole moment and Berry Phase</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Analysis/TOC.html">Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/DOS.html">Density of States (DOS)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/DOS.html#gross-populations">Gross populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/DOS.html#overlap-populations">Overlap populations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/Band_Structure.html">Band Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Band_Structure.html#user-defined-path-in-the-brillouin-zone">User-defined path in the Brillouin zone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Band_Structure.html#definition-of-the-fat-bands">Definition of the Fat Bands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Band_Structure.html#band-gap">Band Gap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/Charges.html">Charges</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Charges.html#default-atomic-charge-analysis">Default Atomic Charge Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Charges.html#bader-analysis-aim">Bader Analysis (AIM)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/Fragments.html">Fragments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/Energy_Decomposition_Analysis.html">Energy Decomposition Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Energy_Decomposition_Analysis.html#periodic-energy-decomposition-analysis-peda">Periodic Energy Decomposition Analysis (PEDA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Energy_Decomposition_Analysis.html#periodic-energy-decomposition-analysis-and-natural-orbitals-of-chemical-valency-peda-nocv">Periodic Energy Decomposition Analysis and natural orbitals of chemical valency (PEDA-NOCV)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/LDOS.html">Local Density of States (STM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/ThreeD_Fields_Visualization.html">3D field visualization with BAND</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Electronic_Transport/NEGF.html">Electronic Transport (NEGF)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Electronic_Transport/NEGF.html#transport-with-negf-in-a-nutshell">Transport with NEGF in a nutshell</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#self-consistency">Self consistency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#contour-integral">Contour integral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#gate-potential">Gate potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#bias-potential">Bias potential</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Electronic_Transport/NEGF.html#workflow">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Electronic_Transport/NEGF.html#input-options">Input options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#sgf-input-options">SGF Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#negf-input-options-no-bias">NEGF Input options (no bias)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#negf-input-options-with-bias">NEGF Input options (with bias)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#negf-input-options-alignment">NEGF Input options (alignment)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Electronic_Transport/NEGF.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Electronic_Transport/NEGF.html#miscellaneous-remarks-on-band-negf">Miscellaneous remarks on BAND-NEGF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#store-tight-binding-hamiltonian">Store tight-binding Hamiltonian</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Expert_Options/TOC.html">Expert Options</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Expert_Options/Restarts.html">Restarts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#restart-key">Restart key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#grid">Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#plots-of-the-density-potential-and-many-more-properties">Plots of the density, potential, and many more properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#orbital-plots">Orbital plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#induced-density-plots-of-response-calculations">Induced Density Plots of Response Calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#nocv-orbital-plots">NOCV Orbital Plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#nocv-deformation-density-plots">NOCV Deformation Density Plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#ldos-stm">LDOS (STM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#save">Save</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Expert_Options/Symmetry.html">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Symmetry.html#symmetry-breaking-for-scf">Symmetry breaking for SCF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Expert_Options/Advanced_Occupation_Options.html">Advanced Occupation Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Troubleshooting/TOC.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Troubleshooting/Recommendations.html">Recommendations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Recommendations.html#model-hamiltonian">Model Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#relativistic-model">Relativistic model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#xc-functional">XC functional</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Recommendations.html#technical-precision">Technical Precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Recommendations.html#performance">Performance</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#reduced-precision">Reduced precision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#memory-usage">Memory usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#reduced-basis-set">Reduced basis set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#frozen-core-for-5d-elements">Frozen core for 5d elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#performance-on-machines-with-many-cores">Performance on machines with many cores</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#scf-does-not-converge">SCF does not converge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#finite-temperature-during-geometry-optimization">Finite temperature during geometry optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#geometry-does-not-converge">Geometry does not converge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#negative-frequencies-in-phonon-spectra">Negative frequencies in phonon spectra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#basis-set-dependency">Basis set dependency</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#using-confinement">Using confinement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#removing-basis-functions">Removing basis functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#frozen-core-too-large">Frozen core too large</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Troubleshooting/Various_issues.html">Various issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Various_issues.html#understanding-the-logfile">Understanding the logfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Various_issues.html#breaking-the-symmetry">Breaking the symmetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Various_issues.html#labels-for-the-basis-functions">Labels for the basis functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Various_issues.html#reference-and-startup-atoms">Reference and Startup Atoms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Various_issues.html#numerical-atoms-and-basis-functions">Numerical Atoms and Basis functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Troubleshooting/Error_messages.html">Warnings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Error_messages.html#warnings-specific-to-periodic-codes-band-dftb">Warnings specific to periodic codes (BAND, DFTB)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/TOC.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#model-hamiltonians">Model Hamiltonians</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BetaIron.html">Example: Spin polarization: antiferromagnetic iron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BFieldLdotB.html">Example: Applying a Magnetic Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Graphene_Dispersion.html">Example: Graphene sheet with dispersion correction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/HonPerovskite_Solvation.html">Example: H on perovskite with the COSMO solvation model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/EField.html">Example: Applying a homogeneous electric field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/FiniteNucleus.html">Example: Finite nucleus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NiO_Hubbard.html">Example: Fixing the Band gap of NiO with GGA+U</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ZnS_ModelPotential.html">Example: Fixing the band gap of ZnS with the TB-mBJ model potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/DFTHalf_Si.html">Example: DFT-1/2 method for Silicon</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#precision-and-performance">Precision and performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BasisDefaults.html">Example: Convenient way to specify a basis set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Peptide_NumericalQuality.html">Example: Tuning precision and performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Multiresolution_H2O.html">Example: Multiresolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BSSE.html">Example: BSSE correction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BandAutomations.html">Example: Speed up SCF during geometry optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#restarts">Restarts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/RestartSCF.html">Example: Restart the SCF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/RestartProperties.html">Example: Restart SCF for properties calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BeO_tape41.html">Example: Properties on a grid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#negf">NEGF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NEGF_Cr_wire.html">Example: Main NEGF flavors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NEGF_bias.html">Example: NEGF with bias</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NEGF_Conductance.html">Example: NEGF using the non-self consistent method</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#structure-and-reactivity">Structure and Reactivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NaCl.html">Example: NaCl: Bulk Crystal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/COChainFreqTS.html">Example: Transition-State search using initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/H_ref.html">Example: Atomic energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BNForce.html">Example: Calculating the atomic forces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/H2BulkGeo.html">Example: Optimizing the geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#time-dependent-dft">Time dependent DFT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NewResp_2DMoS2Restart.html">Example: TD-CDFT for MoS2 Monolayer (NewResponse)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NewResp_3DCopper.html">Example: TD-CDFT for Copper (NewResponse)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NewResp_PlotInducedDensity.html">Example: TDCDFT: Plot induced density (NewResponse)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/OldResp_Diamond.html">Example: TD-CDFT for bulk diamond (OldResponse)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#spectroscopy">Spectroscopy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/TiF3a.html">Example: Hyperfine A-tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/TiF3g.html">Example: Zeeman g-tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PE-NMR.html">Example: NMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/SnO_EFG.html">Example: EFG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/GraphenePhonons.html">Example: Phonons</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Frags_COCu.html">Example: CO absorption on a Cu slab: fragment option and densityplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/GridKey.html">Example: Grid key for plotting results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PEDA_0D_PtCl4H2.html">Example: H2 on [PtCl4]2-: charged molecules and PEDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PEDA_MgO+CO.html">Example: CO absorption on a MgO slab: fragment option and PEDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PEDANOCV_MgO+CO.html">Example: CO absorption on a MgO slab: fragment option, PEDA and PEDANOCV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Li2O_Bader.html">Example: Bader analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PropertiesAtNuclei.html">Example: Properties at nuclei</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Li_BZPlot.html">Example: Band structure plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/EffectiveMass.html">Example: Effective Mass (electron mobility)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Si_ElectronHole.html">Example: Generating an Excited State with and Electron Hole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BNSlabLDOS.html">Example: LDOS (STM) for a BN slab</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#list-of-examples">List of Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#feature-references">Feature References</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#geometry-optimization">Geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#tddft">TDDFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#relativistic-tddft">Relativistic TDDFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#vignale-kohn">Vignale Kohn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#nmr">NMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#esr">ESR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#negf">NEGF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">BAND</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../BAND.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">BAND</a>/</li>
+      
+          <li><a href="TOC.html">Model Hamiltonians</a>/</li>
+      
+          <li><a href="Solvation.html">Solvation</a>/</li>
+      
+    <li class="orange-text">COSMO: Conductor like Screening Model and the Solvation-key</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cosmo-conductor-like-screening-model-and-the-solvation-key">
+<span id="cosmo"></span><span id="index-0"></span><h1>COSMO: Conductor like Screening Model and the Solvation-key<a class="headerlink" href="#cosmo-conductor-like-screening-model-and-the-solvation-key" title="Permalink to this headline">¶</a></h1>
+<p>You can study chemistry in solution, as contrasted to the gas phase, with the implementation in BAND of the Conductor like Screening Model (COSMO) of solvation <a class="footnote-reference" href="#ref1" id="id1">[1]</a>.</p>
+<p>In the COSMO model all solvents are roughly the same, and approximated by an enveloping metal sheet. One explicit dependency on the solvent is that the solvation energy is scaled by</p>
+<div class="math notranslate nohighlight">
+\[f(\epsilon) = \frac{\epsilon-1}{\epsilon+\chi}\]</div>
+<p>and this depends on the dielectric constant of the solvent, and an empirical factor <span class="math notranslate nohighlight">\(\chi\)</span>. The other is that the shape of the surface is influenced by the <em>Rad</em> parameter, see below.</p>
+<p>The solvent information is specified in the <code class="docutils literal notranslate"><span class="pre">solvent</span></code> key of the <code class="docutils literal notranslate"><span class="pre">solvation</span></code> block. The simplest option is to use one of the pre-defined solvents:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Solvation
+   Enabled Yes/No
+   Solvent
+      Name [...]
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Solvation</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options for the COSMO (Conductor like Screening Model) solvation model.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Include COSMO solvation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Use the Conductor like Screening Model (COSMO) to include solvent effects.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Solvent</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Solvent details</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Name</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Water</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[AceticAcid, Acetone, Acetonitrile, Ammonia, Aniline, Benzene, BenzylAlcohol, Bromoform, Butanol, isoButanol, tertButanol, CarbonDisulfide, CarbonTetrachloride, Chloroform, Cyclohexane, Cyclohexanone, Dichlorobenzene, DiethylEther, Dioxane, DMFA, DMSO, Ethanol, EthylAcetate, Dichloroethane, EthyleneGlycol, Formamide, FormicAcid, Glycerol, HexamethylPhosphoramide, Hexane, Hydrazine, Methanol, MethylEthylKetone, Dichloromethane, Methylformamide, Methypyrrolidinone, Nitrobenzene, Nitrogen, Nitromethane, PhosphorylChloride, IsoPropanol, Pyridine, Sulfolane, Tetrahydrofuran, Toluene, Triethylamine, TrifluoroaceticAcid, Water]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Solvent</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Name of a pre-defined solvent. A solvent is characterized by the dielectric constant (Eps) and the solvent radius (Rad).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>This is the list of possible solvents and their corresponding <code class="docutils literal notranslate"><span class="pre">Eps</span></code> and <code class="docutils literal notranslate"><span class="pre">Rad</span></code> values:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Solvent Name</td>
+<td>Formula</td>
+<td>Eps</td>
+<td>Rad</td>
+</tr>
+<tr class="row-even"><td>AceticAcid</td>
+<td>CH3COOH</td>
+<td>6.19</td>
+<td>2.83</td>
+</tr>
+<tr class="row-odd"><td>Acetone</td>
+<td>CH3COCH3</td>
+<td>20.7</td>
+<td>3.08</td>
+</tr>
+<tr class="row-even"><td>Acetonitrile</td>
+<td>CH3CN</td>
+<td>37.5</td>
+<td>2.76</td>
+</tr>
+<tr class="row-odd"><td>Ammonia</td>
+<td>NH3</td>
+<td>16.9</td>
+<td>2.24</td>
+</tr>
+<tr class="row-even"><td>Aniline</td>
+<td>C6H5NH2</td>
+<td>6.8</td>
+<td>3.31</td>
+</tr>
+<tr class="row-odd"><td>Benzene</td>
+<td>C6H6</td>
+<td>2.3</td>
+<td>3.28</td>
+</tr>
+<tr class="row-even"><td>BenzylAlcohol</td>
+<td>C6H5CH2OH</td>
+<td>13.1</td>
+<td>3.45</td>
+</tr>
+<tr class="row-odd"><td>Bromoform</td>
+<td>CHBr3</td>
+<td>4.3</td>
+<td>3.26</td>
+</tr>
+<tr class="row-even"><td>Butanol</td>
+<td>C4H9OH</td>
+<td>17.5</td>
+<td>3.31</td>
+</tr>
+<tr class="row-odd"><td>isoButanol</td>
+<td>(CH3)2CHCH2OH</td>
+<td>17.9</td>
+<td>3.33</td>
+</tr>
+<tr class="row-even"><td>tertButanol</td>
+<td>(CH3)3COH</td>
+<td>12.4</td>
+<td>3.35</td>
+</tr>
+<tr class="row-odd"><td>CarbonDisulfide</td>
+<td>CS2</td>
+<td>2.6</td>
+<td>2.88</td>
+</tr>
+<tr class="row-even"><td>CarbonTetrachloride</td>
+<td>CCl4</td>
+<td>2.2</td>
+<td>3.37</td>
+</tr>
+<tr class="row-odd"><td>Chloroform</td>
+<td>CHCl3</td>
+<td>4.8</td>
+<td>3.17</td>
+</tr>
+<tr class="row-even"><td>Cyclohexane</td>
+<td>C6H12</td>
+<td>2</td>
+<td>3.5</td>
+</tr>
+<tr class="row-odd"><td>Cyclohexanone</td>
+<td>C6H10O</td>
+<td>15</td>
+<td>3.46</td>
+</tr>
+<tr class="row-even"><td>Dichlorobenzene</td>
+<td>C6H4Cl2</td>
+<td>9.8</td>
+<td>3.54</td>
+</tr>
+<tr class="row-odd"><td>DiethylEther</td>
+<td>(CH3CH2)2O</td>
+<td>4.34</td>
+<td>3.46</td>
+</tr>
+<tr class="row-even"><td>Dioxane</td>
+<td>C4H8O2</td>
+<td>2.2</td>
+<td>3.24</td>
+</tr>
+<tr class="row-odd"><td>DMFA</td>
+<td>(CH3)2NCHO</td>
+<td>37</td>
+<td>3.13</td>
+</tr>
+<tr class="row-even"><td>DMSO</td>
+<td>(CH3)2SO</td>
+<td>46.7</td>
+<td>3.04</td>
+</tr>
+<tr class="row-odd"><td>Ethanol</td>
+<td>CH3CH2OH</td>
+<td>24.55</td>
+<td>2.85</td>
+</tr>
+<tr class="row-even"><td>EthylAcetate</td>
+<td>CH3COOCH2CH3</td>
+<td>6.02</td>
+<td>3.39</td>
+</tr>
+<tr class="row-odd"><td>Dichloroethane</td>
+<td>ClCH2CH2Cl</td>
+<td>10.66</td>
+<td>3.15</td>
+</tr>
+<tr class="row-even"><td>EthyleneGlycol</td>
+<td>HOCH2CH2OH</td>
+<td>37.7</td>
+<td>2.81</td>
+</tr>
+<tr class="row-odd"><td>Formamide</td>
+<td>HCONH2</td>
+<td>109.5</td>
+<td>2.51</td>
+</tr>
+<tr class="row-even"><td>FormicAcid</td>
+<td>HCOOH</td>
+<td>58.5</td>
+<td>2.47</td>
+</tr>
+<tr class="row-odd"><td>Glycerol</td>
+<td>C3H8O3</td>
+<td>42.5</td>
+<td>3.07</td>
+</tr>
+<tr class="row-even"><td>HexamethylPhosphoramide</td>
+<td>C6H18N3OP</td>
+<td>43.3</td>
+<td>4.1</td>
+</tr>
+<tr class="row-odd"><td>Hexane</td>
+<td>C6H14</td>
+<td>1.88</td>
+<td>3.74</td>
+</tr>
+<tr class="row-even"><td>Hydrazine</td>
+<td>N2H4</td>
+<td>51.7</td>
+<td>2.33</td>
+</tr>
+<tr class="row-odd"><td>Methanol</td>
+<td>CH3OH</td>
+<td>32.6</td>
+<td>2.53</td>
+</tr>
+<tr class="row-even"><td>MethylEthylKetone</td>
+<td>CH3CH2COCH3</td>
+<td>18.5</td>
+<td>3.3</td>
+</tr>
+<tr class="row-odd"><td>Dichloromethane</td>
+<td>CH2Cl2</td>
+<td>8.9</td>
+<td>2.94</td>
+</tr>
+<tr class="row-even"><td>Methylformamide</td>
+<td>HCONHCH3</td>
+<td>182.4</td>
+<td>2.86</td>
+</tr>
+<tr class="row-odd"><td>Methypyrrolidinone</td>
+<td>C5H9NO</td>
+<td>33</td>
+<td>3.36</td>
+</tr>
+<tr class="row-even"><td>Nitrobenzene</td>
+<td>C6H5NO2</td>
+<td>34.8</td>
+<td>3.44</td>
+</tr>
+<tr class="row-odd"><td>Nitrogen</td>
+<td>N2</td>
+<td>1.45</td>
+<td>2.36</td>
+</tr>
+<tr class="row-even"><td>Nitromethane</td>
+<td>CH3NO2</td>
+<td>35.87</td>
+<td>2.77</td>
+</tr>
+<tr class="row-odd"><td>PhosphorylChloride</td>
+<td>POCl3</td>
+<td>13.9</td>
+<td>3.33</td>
+</tr>
+<tr class="row-even"><td>IsoPropanol</td>
+<td>(CH3)2CHOH</td>
+<td>19.9</td>
+<td>3.12</td>
+</tr>
+<tr class="row-odd"><td>Pyridine</td>
+<td>C5H5N</td>
+<td>12.4</td>
+<td>3.18</td>
+</tr>
+<tr class="row-even"><td>Sulfolane</td>
+<td>C4H8SO2</td>
+<td>43.3</td>
+<td>3.35</td>
+</tr>
+<tr class="row-odd"><td>Tetrahydrofuran</td>
+<td>C4H8O</td>
+<td>7.58</td>
+<td>3.18</td>
+</tr>
+<tr class="row-even"><td>Toluene</td>
+<td>C6H5CH3</td>
+<td>2.38</td>
+<td>3.48</td>
+</tr>
+<tr class="row-odd"><td>Triethylamine</td>
+<td>(CH3CH2)3N</td>
+<td>2.44</td>
+<td>3.81</td>
+</tr>
+<tr class="row-even"><td>TrifluoroaceticAcid</td>
+<td>CF3COOH</td>
+<td>8.55</td>
+<td>3.12</td>
+</tr>
+<tr class="row-odd"><td>Water</td>
+<td>H2O</td>
+<td>78.39</td>
+<td>1.93</td>
+</tr>
+</tbody>
+</table>
+<p>Several other options can be defined in the <code class="docutils literal notranslate"><span class="pre">Solvation</span></code> block:</p>
+<div class="highlight-none notranslate" id="band-key-solvation"><div class="highlight"><pre><span></span>Solvation
+   CVec [EXACT | FITPOT]
+   Charge
+      Conv float
+      Corr Yes/No
+      Iter integer
+      Method [CONJ | INVER]
+   End
+   Enabled Yes/No
+   Radii # Non-standard block. See details.
+      ...
+   End
+   SCF [VAR | PERT | NONE]
+   Solvent
+      Del float
+      Emp float
+      Eps float
+      Name [...]
+      Rad float
+   End
+   Surf [Delley | Wsurf | Asurf | Esurf | Klamt]
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Solvation</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options for the COSMO (Conductor like Screening Model) solvation model.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">CVec</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">EXACT</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[EXACT, FITPOT]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Calculate Coulomb interaction</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Choose how to calculate the Coulomb interaction matrix between the molecule and the point charges on the surface:
+
+- EXACT: use exact density, and integrate against the potential of the point charges. This may have inaccuracies when integration points are close to the point charges.
+
+- FITPOT: evaluate the molecular potential at the positions of the point charges, and multiply with these charges.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Charge</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Select the algorithm to determine the charges.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Conv</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1e-08</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Charge convergence threshold in iterative COSMO solution.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Corr</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Correct for outlying charge</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Correct for outlying charge.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Iter</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1000</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Maximum number of iterations to solve COSMO equations.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Method</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">CONJ</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[CONJ, INVER]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Charge determination method</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">INVER: matrix inversion, CONJ: biconjugate gradient method.
+
+The CONJ method is guaranteed to converge with small memory requirements and is normally the preferred method.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Include COSMO solvation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Use the Conductor like Screening Model (COSMO) to include solvent effects.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Radii</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Non-standard block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The values are the radii of the atomic spheres. If not specified the default values are those by Allinge. Format: ‘AtomType value’. e.g.: ‘H 0.7’</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SCF</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">VAR</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[VAR, PERT, NONE]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Handle charges</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Determine the point charges either Variational (VAR) or after the SCF as a Perturbation (PERT).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Solvent</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Solvent details</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Del</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Del is the value of Klamt’s delta_sol parameter, only relevant in case of Klamt surface.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Emp</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Emp is the empirical scaling factor x for the energy scaling.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Eps</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">User-defined dielectric constant of the solvent (overrides the Eps value of the solvent defined in ‘Name’)</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Name</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Water</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[AceticAcid, Acetone, Acetonitrile, Ammonia, Aniline, Benzene, BenzylAlcohol, Bromoform, Butanol, isoButanol, tertButanol, CarbonDisulfide, CarbonTetrachloride, Chloroform, Cyclohexane, Cyclohexanone, Dichlorobenzene, DiethylEther, Dioxane, DMFA, DMSO, Ethanol, EthylAcetate, Dichloroethane, EthyleneGlycol, Formamide, FormicAcid, Glycerol, HexamethylPhosphoramide, Hexane, Hydrazine, Methanol, MethylEthylKetone, Dichloromethane, Methylformamide, Methypyrrolidinone, Nitrobenzene, Nitrogen, Nitromethane, PhosphorylChloride, IsoPropanol, Pyridine, Sulfolane, Tetrahydrofuran, Toluene, Triethylamine, TrifluoroaceticAcid, Water]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Solvent</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Name of a pre-defined solvent. A solvent is characterized by the dielectric constant (Eps) and the solvent radius (Rad).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Rad</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">User-defined radius of the solvent molecule (overrides the Rad value of the solvent defined in ‘Name’).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Surf</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Delley</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[Delley, Wsurf, Asurf, Esurf, Klamt]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Surface type</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Within the COSMO model the molecule is contained in a molecule shaped cavity.
+
+Select one of the following surfaces to define the cavity:
+
+- Wsurf: Van der Waals surface
+- Asurf: solvent accessible surface
+- Esurf: solvent excluding surface
+- Klamt: Klamt surface
+- Delley: Delley surface.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="additional-keys-for-periodic-systems">
+<h1>Additional keys for periodic systems<a class="headerlink" href="#additional-keys-for-periodic-systems" title="Permalink to this headline">¶</a></h1>
+<p>For the simulation of periodic structures ICW solvation, you may specify the following options:</p>
+<div class="highlight-none notranslate" id="band-key-periodicsolvation"><div class="highlight"><pre><span></span>PeriodicSolvation
+   RemovePointsWithNegativeZ Yes/No
+   NStar integer
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PeriodicSolvation</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Additional options for simulations of periodic structures with solvation.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">RemovePointsWithNegativeZ</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Only above slab</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Whether the COSMO surface is constructed on both sides of a surface.
+
+If one is only interested in the solvation effect on the upper side of a surface (in the Z direction), then this option should be set to ‘True’</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NStar</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">4</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">This option, expecting an integer number (&gt;2), handles the accuracy for the construction of the COMSO surface. The larger the given number the more accurate the construction.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>General remarks:</strong> The accuracy of the result and the calculation time is influenced by the screening radius <code class="docutils literal notranslate"><span class="pre">SCREENING%RMADEL</span></code> (see <a class="reference internal" href="../Accuracy_and_Efficiency/More_Technical_Settings.html#band-key-screening"><span class="std std-ref">Screening</span></a> block). If the calculation does take too long, defining a smaller radius does help. <strong>But:</strong> too small radii, especially smaller than the lattice constants, will give unphysical results.</p>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="ref1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>A. Klamt  and G. Schüürmann,  <em>COSMO: a new approach to dielectric screening in solvents with explicit expressions for the screening energy and its gradient.</em>  <a class="reference external" href="https://doi.org/10.1039/P29930000799">Journal of the Chemical Society: Perkin Transactions  2, 799 (1993)</a>.</td></tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SM12.html" class="btn btn-neutral float-right" title="SM12: Solvation Model 12" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Solvation.html" class="btn btn-neutral" title="Solvation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

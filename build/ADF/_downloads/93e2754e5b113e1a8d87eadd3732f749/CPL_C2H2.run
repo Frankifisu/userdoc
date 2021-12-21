@@ -1,0 +1,205 @@
+#!/bin/sh
+
+
+# Non-relativistic calculation
+# ============================
+
+# A calculation of NMR nuclear spin-spin coupling constants (NSCCs).
+
+# As explained in the ADF manual, the quality of a calculation for spin-spin
+# coupling constants, using the program 'CPL', depends largely on the preceding
+# ADF calculation, which produces the Kohn-Sham orbitals and orbital energies,
+# used as a starting point.
+
+# One of the quality-determining factors is the chosen basis set. It should be
+# sufficiently flexible near the nucleus. Although the all-electron basis TZ2P
+# is chosen in this example, it is recommendable to add more functions to the
+# basis sets near the nucleus in case of heavy elements. One could start from a
+# ZORA/QZ4P basis for example.
+
+# The NOSYM symmetry currently needs to be specified in ADF to enable the CPL
+# program to work correctly.
+
+
+AMS_JOBNAME=first $AMSBIN/ams <<eor
+System
+  atoms
+     C 0.0  0.0  0.0
+     C 0.0  0.0  1.20692
+     H 0.0  0.0  2.26672
+     H 0.0  0.0 -1.0598
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title C2H2 nrel
+  beckegrid
+    quality good
+  end
+  basis
+    type TZ2P
+    core None
+  end
+  save TAPE10
+  symmetry NOSYM
+  xc
+    gga Becke Perdew
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+
+# The CPL program can run in parallel.
+
+# The specification of what needs to be calculated is given in the nmrcoupling
+# block key.
+
+# coupling without the SD term
+$AMSBIN/cpl <<eor
+  adffile first.results/adf.rkf
+  tape10file first.results/TAPE10
+  nmrcoupling
+    dso
+    pso
+    scf converge=1e-7
+    nuclei 1 2 3 4 
+    nuclei 3 4
+  end
+eor
+rm logfile
+
+
+# In this first example, the SD subkey is left out, as this would lead to a very
+# strong increase in the required CPU time. The SD subkey is included in the
+# second CPL run. That subkey controls the calculation of the so-called spin-
+# dipole term.
+
+# The subkeys dso and pso specify that, respectively, the diamagnetic and
+# paramagnetic orbital terms will be calculated. The often dominant Fermi
+# contact term (FC) is calculated by default and therefore does not have to be
+# specified explicitly.
+
+# The scf convergence subkey, in this context, refers to the convergence for the
+# solution of the coupled-perturbed Kohn-sham equations which need to be solved
+# to obtain to spin-spin couplings.
+
+# The following lines
+#   nuclei 1 2 3 4
+#   nuclei 3 4
+# specify that one coupled-perturbed Kohn-Sham calculation is performed where
+# nucleus number 1 (according to the ordering in the ADF output) is the
+# perturbing nucleus, and nuclei 2, 3, and 4 are the perturbed nuclei, and
+# another coupled-perturbed Kohn-Sham calculation is performed where nucleus 3
+# is the perturbing nucleus and nucleus 4 is the perturbed nucleus.
+
+# The second CPL run also includes the spin-dipole (SD) term, through the SD
+# subkey.
+
+# The output of the CPL program first contains a lot of general information, a
+# summary of the specified input, and then produces the desired numbers:
+
+# It prints separately the different contributions (FC, DSO, PSO, SD) if
+# specified in input and sums them up to a total number. Experimental NSCCs
+# between two nuclei A and B are usually reported as J(A,B) in Hertz. From a
+# computational point of view, the so-called reduced NSCCs K(A,B) are more
+# convenient for comparisons. CPL outputs both. In this example, the Fermi-
+# contact term is indeed dominant.
+
+# The first part of the output refers to the line
+#   nuclei 1 2 3 4
+# then the same thing is done for the second similar line where nucleus 3 is the
+# perturbing nucleus.
+
+# The output for the second CPL run looks very similar, but now the SD term is
+# added to the Fermi contact term, resulting in much longer execution times.
+
+
+# == Scalar relativistic and spin-orbit calculations ==
+
+# The CPL program also enables calculations using scalar relativistic effects
+# (ZORA) and/or spin-orbit effects.
+
+# Schematically, this requires the following changes to the input file with
+# respect to a regular spin-orbit calculation and a non-relativistic CPL
+# calculation:
+
+# steep (1s) functions may need to be added to the standard basis sets. the
+# full-potential option for ZORA is needed in the create runs and all further
+# runs: relativistic zora scalar full the molecular ADF calculation should
+# contain the line relativistic zora full spinorbit the CPL input is unmodified
+# with respect to the example given here. Please check the ADF manual for
+# details on relativistic input options. 
+
+
+# coupling including the SD term
+
+$AMSBIN/cpl <<eor
+  adffile first.results/adf.rkf
+  tape10file first.results/TAPE10
+  nmrcoupling
+    dso
+    pso
+    sd
+    scf converge=1e-7 
+    nuclei 1 2 3 4                                              
+    nuclei 3 4
+  end                                                         
+eor
+rm logfile
+
+# redo the same set of calculations, but with a different orientation
+# of the molecule this time. Only the CPL calculation without the SD
+# term is carried out in order to keep the execution time for this example
+# within reasonable limits
+
+AMS_JOBNAME=second $AMSBIN/ams <<eor
+System
+  atoms
+     C 0.0  0.0     0.0
+     C 0.0  1.20692 0.0
+     H 0.0  2.26672 0.0
+     H 0.0 -1.0598  0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title C2H2 nrel
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  save TAPE10
+  symmetry NOSYM
+  xc
+    gga Becke Perdew
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+# coupling without the SD term
+
+$AMSBIN/cpl <<eor
+  adffile second.results/adf.rkf
+  tape10file second.results/TAPE10
+  nmrcoupling
+    dso
+    pso
+    scf converge=1e-7
+    nuclei 1 2 3 4 
+    nuclei 3 4
+  end
+eor
+rm logfile

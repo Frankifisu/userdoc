@@ -1,0 +1,118 @@
+#!/bin/sh 
+
+
+# If the subkey OPTICALROTATION is included in the key AORESPONSE, the
+# (frequency dependent) optical rotation is calculated. In this example lifetime
+# effects are included. This test example consists of two ORD calculations: one
+# with and one without the velocity gauge.
+
+# Note: results will be physically meaningless due to small basis set. purpose
+# of this job is to provide a test case for the ORD implementation
+
+
+AMS_JOBNAME=opticalrotation $AMSBIN/ams <<eor
+System
+  atoms
+    O  0.0                 0.0                   1.141417145729065
+    C -0.5970248579978943 -0.4282023310661316   -0.09432400763034821
+    C  0.5970248579978943  0.4282023310661316   -0.09432400763034821
+    H -0.4430356621742249 -1.487679243087769    -0.302562028169632
+    H  0.4430356621742249  1.487679243087769    -0.302562028169632
+    C -1.97874128818512    0.09404171258211136  -0.3866550326347351
+    H -2.723244667053223  -0.4288762211799622    0.2206400185823441
+    H -2.043423652648926   1.15996515750885     -0.1578925102949142
+    H -2.236041307449341  -0.05517048016190529  -1.439977645874023
+    C  1.97874128818512   -0.09404171258211136  -0.3866550326347351
+    H  2.236041307449341   0.05517048016190529  -1.439977645874023
+    H  2.723244667053223   0.4288762211799622    0.2206400185823441
+    H  2.043423652648926  -1.15996515750885     -0.1578925102949142  
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title dimethyloxirane, ORD
+  comment
+     results will be physically meaningless due to small basis set.
+     You may also want to increase the NumericalQuality to "Good".
+     purpose of this job is to provide a test case for the ORD implementation
+  end
+  allpoints
+  aoresponse
+    alda
+    frequencies 2.103923139 [eV]
+    lifetime 0.007
+    opticalrotation
+    scf iter 20
+  end
+  basis
+    core Small
+    type DZP
+  end
+  numericalquality Normal
+  xc
+    gga becke perdew
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+
+eor
+
+
+# In the second example the subkey OPTICALROTATION of the key AORESPONSE is
+# changed into VELOCITYORD:
+
+
+AMS_JOBNAME=velocityord $AMSBIN/ams <<eor
+System
+  atoms
+    O  0.0                 0.0                   1.141417145729065
+    C -0.5970248579978943 -0.4282023310661316   -0.09432400763034821
+    C  0.5970248579978943  0.4282023310661316   -0.09432400763034821
+    H -0.4430356621742249 -1.487679243087769    -0.302562028169632
+    H  0.4430356621742249  1.487679243087769    -0.302562028169632
+    C -1.97874128818512    0.09404171258211136  -0.3866550326347351
+    H -2.723244667053223  -0.4288762211799622    0.2206400185823441
+    H -2.043423652648926   1.15996515750885     -0.1578925102949142
+    H -2.236041307449341  -0.05517048016190529  -1.439977645874023
+    C  1.97874128818512   -0.09404171258211136  -0.3866550326347351
+    H  2.236041307449341   0.05517048016190529  -1.439977645874023
+    H  2.723244667053223   0.4288762211799622    0.2206400185823441
+    H  2.043423652648926  -1.15996515750885     -0.1578925102949142  
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title dimethyloxirane, ORD with velocity gauge
+  comment
+     results will be physically  meaningless due to small basis set.
+     You may also want to increase the NumericalQuality to "Good".
+     purpose of this job is to provide a test case for the ORD implementation
+  end
+  allpoints
+  aoresponse
+    alda
+    frequencies 2.103923139 [eV]
+    lifetime 0.007
+    scf iter 20
+    velocityord
+  end
+  basis
+    core Small
+    type DZP
+  end
+  numericalquality Normal
+  xc
+    gga becke perdew
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+
+eor

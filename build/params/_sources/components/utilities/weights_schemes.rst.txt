@@ -1,0 +1,155 @@
+.. _WeightsSchemes:
+
+Weights schemes
+======================
+
+A weights scheme returns **individual datapoint weights for data that is an array or matrix of several data points**.
+
+For example, if the data consists of the forces of the atoms, then it is an Nx3 matrix, where N is the number of atoms.
+
+With a weights scheme, not all force components need to be weighted equally.
+
+The weights then depend on the **reference** values. They do **not** depend on the calculated value with the parametrized engine. They also do not depend on atomic positions or any other structural information.
+
+The parameters of a weights scheme may need to be changed depending on which unit the reference data is expressed in.
+
+The weights scheme requires that you specify a ``normalization``, which affects the sum of returned weights.
+
+**Example 1: apply a weights scheme when calling a** :ref:`results importer <ResultsImporters>`.
+
+.. code-block:: ipython3
+
+   ri = ResultsImporter()
+
+   # only fit force components between -0.03 and 0.03 force units
+   # the sum of the weights will equal the number of nonzero weights
+   ri.add_singlejob('finished-ams-job.results', properties={
+        'forces': {
+            'weights_scheme': WeightsSchemeClip(normalization='nonzero', min=-0.03, max=0.03)
+        }
+   })
+
+   print(sc.data_set[-1])
+
+**Example 2: apply a weights scheme to many data_set entries**
+
+.. code-block:: ipython3
+
+   # data_set is of type DataSet
+
+   # first filter the data_set to some suitable subset
+   # for example, all data_set entries having the "Group: Forces" metadata.
+   subset = data_set.from_metadata('Group', 'Forces')
+
+   # only fit force components between -0.03 and 0.03 force units
+   # the sum of the weights will equal the number of nonzero weights
+   subset.apply_weights_scheme(WeightsSchemeClip(normalization='nonzero', min=-0.03, max=0.03))
+
+   print(subset)
+
+
+Types of weights schemes
+-------------------------------
+
+**Set weights to 0 outside given range (WeightsSchemeClip)**
+
+.. code-block:: python
+
+   # the weights for force components smaller than -0.03 Ha/bohr or bigger than 0.03 Ha/bohr become 0
+   # if the forces in the reference data are expressed in Ha/bohr
+   # note: the min and max need to be expressed in the same unit as the force components in the data_set!
+   WeightsSchemeClip(min=-0.03,max=0.03)
+
+**Boltzmann weighting**
+
+.. code-block:: python
+
+   WeightsSchemeBoltzmann(normalization=1.0, temperature=3000)
+
+**Gaussian weighting**
+
+.. code-block:: python
+
+   WeightsSchemeGaussian(normalization='dim0', center=0, width=0.01)
+
+
+
+Examples of weight schemes
+--------------------------------
+
+In this example there are
+
+* 66 atoms
+
+* 198 force components, all within the range [-0.06,0.06] Ha/bohr
+
+The figures show the weight for each force component depending on its value, for different weight schemes.
+
+The sum of the weights is printed in the figure title.
+
+.. image:: /_static/weights_scheme_000.png
+   :width: 80%
+
+
+.. image:: /_static/weights_scheme_001.png
+   :width: 80%
+
+
+.. image:: /_static/weights_scheme_002.png
+   :width: 80%
+
+
+.. image:: /_static/weights_scheme_003.png
+   :width: 80%
+
+
+.. image:: /_static/weights_scheme_004.png
+   :width: 80%
+
+
+.. image:: /_static/weights_scheme_005.png
+   :width: 80%
+
+
+.. image:: /_static/weights_scheme_006.png
+   :width: 80%
+
+
+.. image:: /_static/weights_scheme_007.png
+   :width: 80%
+
+
+.. image:: /_static/weights_scheme_008.png
+   :width: 80%
+
+
+.. image:: /_static/weights_scheme_009.png
+   :width: 80%
+
+
+Weights schemes API
+--------------------------
+
+.. currentmodule::
+  scm.params.common.weights_schemes
+
+.. autoclass:: WeightsScheme
+    :no-private-members:
+    :exclude-members: __weakref__
+
+.. autoclass:: WeightsSchemeUniform
+    :no-private-members:
+    :exclude-members: __weakref__
+
+.. autoclass:: WeightsSchemeClip
+    :no-private-members:
+    :exclude-members: __weakref__
+
+.. autoclass:: WeightsSchemeGaussian
+    :no-private-members:
+    :exclude-members: __weakref__
+
+.. autoclass:: WeightsSchemeBoltzmann
+    :no-private-members:
+    :exclude-members: __weakref__
+

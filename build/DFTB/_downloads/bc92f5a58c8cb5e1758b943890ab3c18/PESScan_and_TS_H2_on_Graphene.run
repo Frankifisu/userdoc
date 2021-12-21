@@ -1,0 +1,193 @@
+#! /bin/sh
+
+# First we do a 2D PES scan varying the z-coordinate of the two hydrogen atoms
+# In this example we will keep the graphene slab fixed. From a physical/chemical
+# standpoint this is not a good approximation. The graphene slab is
+# intentionally not perfectly symmetric.
+
+AMS_JOBNAME=PESScan $AMSBIN/ams << EOF
+
+   Task PESScan
+
+   System
+      Atoms
+         H   0.0      1.53633037    1.1
+         H   0.0     -0.11341359    1.1
+         C   0.001    1.42028166    0.0
+         C   1.230    2.13042249    0.0
+         C   1.230   -0.71014083    0.0
+         C   2.460    0.00000000    0.0
+         C   2.460    1.42028167    0.0
+         C   0.000    0.00000000    0.0
+      End
+      Lattice
+         3.69   -2.13042249   0.0
+         0.00    4.26084499   0.0
+      End
+   End
+
+   PESScan
+      ScanCoordinate
+         nPoints 10
+         Coordinate 1 Z 1.1 2.0
+      End
+      ScanCoordinate
+         nPoints 10
+         Coordinate 2 Z 1.1 2.0
+      End
+   End
+
+   GeometryOptimization
+      Convergence Step=1.0e-3
+   End
+
+   Constraints
+      # Fix the entire graphene slab.
+      Atom 3
+      Atom 4
+      Atom 5
+      Atom 6
+      Atom 7
+      Atom 8
+   End
+
+   Engine DFTB
+      Model DFTB
+      ResourcesDir DFTB.org/3ob-3-1
+      DispersionCorrection D3-BJ
+      KSpace
+        Type Symmetric
+        Symmetric KInteg=3
+      End
+   EndEngine
+
+EOF
+
+
+# A human looks at the PES scan and picks a reasonable starting point for the
+# TS search. (Normally you would do that in AMSMovie by looking at the PES and
+# then exporting the geometry into an xyz file.)
+
+#           _           ____
+#        ___))         [  | \
+#        ) //o          | | ]
+#     _ (_    >         | | ]
+#    (O)  \__<          | | ]
+#    [/] /   \)        [__|/_
+#    [\]|  ( \         __/___\_____
+#    [/]|   \ \__  ___|            |
+#    [\]|    \___E/%%/|____________|_
+#    [/]|=====__   (_________________)
+
+cat << EOF > initial_geometry_for_TS.xyz
+8
+
+H    0.4145668856457391      1.72927656037925      1.100000023839768     region=H2
+H   -0.05533871972549955    -0.06805093626643093   1.500000013242627     region=H2
+C    0.001                   1.42028166            0.0
+C    1.230                   2.13042249            0.0
+C    1.230                  -0.71014083            0.0
+C    2.460                   0.00000000            0.0
+C    2.460                   1.42028167            0.0
+C    0.000                   0.00000000            0.0
+VEC1 3.69 -2.13042249 0.0
+VEC2 0.0   4.26084499 0.0
+EOF
+
+
+# Compute the partial initial Hessian to be used in the transition state
+# search. (The Hessian will be computed only for the hydrogen atoms.)
+
+AMS_JOBNAME=Hessian $AMSBIN/ams << EOF
+
+   Task SinglePoint
+
+   System
+      # Load the geometry we just saved.
+      GeometryFile initial_geometry_for_TS.xyz
+   End
+
+   Properties
+      # Calculate the Hessian (implied when calculating normal modes) ...
+      NormalModes True
+      # ... but only the part related to the hydrogen atoms.
+      SelectedRegionForHessian H2
+   End
+
+   Engine DFTB
+      Model DFTB
+      ResourcesDir DFTB.org/3ob-3-1
+      DispersionCorrection D3-BJ
+      KSpace
+        Type Symmetric
+        Symmetric KInteg=3
+      End
+   EndEngine
+
+EOF
+
+echo "Extract the frequencies from the kf file using amsreport:"
+$AMSBIN/amsreport Hessian.results/dftb.rkf -r "Vibrations%Frequencies[cm-1]##1"
+
+
+# Do a transition state search using the initial Hessian just computed (the
+# Graphene slab is constrained). Also compute the final Hessian for the
+# hydrogen atoms to validate the TS.
+
+AMS_JOBNAME=TS $AMSBIN/ams << EOF
+
+   Task TransitionStateSearch
+
+   System
+      # Load the geometry we just saved.
+      GeometryFile initial_geometry_for_TS.xyz
+   End
+
+   GeometryOptimization
+      Quasi-Newton
+         Step TrustRadius=0.05
+      End
+      Convergence Gradients=1.0e-4
+      InitialHessian
+          # Load previously calculated Hessian as initial Hessian for a
+          # transition state search with the Quasi-Newton optimizer.
+          Type FromFile
+          File Hessian.results/dftb.rkf
+      End
+   End
+
+   TransitionStateSearch
+       # Follow the mode with the smallest frequency.
+       ModeToFollow 1
+       # (This is also the default, we wouldn't need to specify this.)
+   End
+
+   Constraints
+      # Fix the entire graphene slab.
+      Atom 3
+      Atom 4
+      Atom 5
+      Atom 6
+      Atom 7
+      Atom 8
+   End
+
+   Properties
+      NormalModes Yes
+      SelectedRegionForHessian H2
+   End
+
+   Engine DFTB
+       Model DFTB
+       ResourcesDir DFTB.org/3ob-3-1
+       DispersionCorrection D3-BJ
+      KSpace
+        Type Symmetric
+        Symmetric KInteg=3
+      End
+   EndEngine
+
+EOF
+
+echo "Extract energy from the rkf file using amsreport:"
+$AMSBIN/amsreport TS.results/dftb.rkf -r "AMSResults%Energy"

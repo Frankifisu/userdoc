@@ -1,0 +1,243 @@
+#! /bin/sh
+
+# In this example we demonstrate how to run a Band-NEGF calculation using the non
+# self consistent approach (using the conductance program). In the first example
+# we study the conductivity of a mono-atomic gold chain with a CO molecule
+# adsorbed on top. Such calculation consists of three separate runs. See the
+# documentation for more details.
+
+# ==============================================================================
+#                             CO on gold chain
+# ==============================================================================
+
+# =======
+# Au lead
+# =======
+
+AMS_JOBNAME=Au_lead $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+    ATOMS
+        Au.1 0.0       0.0  0.0
+        Au.2 2.884996  0.0  0.0
+        Au.3 5.769992  0.0  0.0
+    END
+
+    Lattice
+        8.654988  0.0  0.0
+    End
+End
+
+Engine Band 
+    TITLE Au_lead
+
+    KSpace
+        Quality VeryGood
+    End
+
+    SoftConfinement
+        Quality Basic
+    End
+
+    Basis
+        Type DZ
+        Core Large
+    End
+
+    StoreHamiltonian2
+EndEngine 
+eor
+
+# =============
+# Au scattering 
+# =============
+
+AMS_JOBNAME=Au_scattering $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+    ATOMS
+        Au.1L -20.194972  0.0  0.0
+        Au.2L -17.309976  0.0  0.0
+        Au.3L -14.42498   0.0  0.0
+        Au.C  -11.539984  0.0  0.0
+        Au.C  -8.654988   0.0  0.0
+        Au.C  -5.769992   0.0  0.0
+        Au.C  -2.884996   0.0  0.0
+        Au.C   0.0        0.0  0.20
+        Au.C   2.884996   0.0  0.0
+        Au.C   5.769992   0.0  0.0
+        Au.C   8.654988   0.0  0.0
+        Au.C   11.539984  0.0  0.0
+        O.C    0.0        0.0  3.12
+        C.C    0.0        0.0  1.96
+        Au.1R  14.42498   0.0  0.0
+        Au.2R  17.309976  0.0  0.0
+        Au.3R  20.194972  0.0  0.0
+    END
+
+    Lattice
+        43.27494  0.0  0.0
+    End
+End
+
+Engine Band 
+    TITLE Au_scattering
+
+    SoftConfinement
+        Quality Basic
+    End
+
+    Basis
+        Type DZ
+        Core Large
+    End
+
+    StoreHamiltonian2
+    StoreHamAsMol
+EndEngine
+
+eor
+
+# ==============
+# Au Conductance
+# ==============
+
+$AMSBIN/conductance <<EOF
+EnergyGrid min=-3.5 max=3 num=200
+Files
+  Leads         Au_lead.results/band.rkf
+  Scattering    Au_scattering.results/band.rkf
+End
+EOF
+
+mv ConductanceResults.kf Au_ConductanceResults.kf 
+
+
+echo "Extract DOS from the kf file (AuCO):"
+$AMSBIN/amsreport Au_ConductanceResults.kf -r "results%dos#12.5f##1"
+
+echo "Extract the transmission from the kf file (AuCO):"
+$AMSBIN/amsreport Au_ConductanceResults.kf -r "results%transmission#12.5f##1"
+
+
+# ==============================================================================
+#                          Spin-unrestricted Cr chain
+# ==============================================================================
+
+# =======
+# Cr Lead
+# =======
+
+AMS_JOBNAME=Cr_lead $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+    ATOMS
+        Cr.1 1.18995235  0.0  0.0
+        Cr.2 4.00745359  0.0  0.0
+        Cr.3 6.82495483  0.0  0.0
+    END
+
+    Lattice
+        8.45250372  0.0  0.0
+    End
+End
+
+Engine Band 
+    TITLE Cr_lead
+
+    KSpace
+        Quality VeryGood
+    End
+
+    SoftConfinement
+        Quality Basic
+    End
+
+    Basis
+        Type DZ
+        Core Large
+    End
+
+    UNRESTRICTED
+
+    StoreHamiltonian2
+EndEngine
+
+eor
+
+# =============
+# Cr Scattering
+# =============
+
+AMS_JOBNAME=Cr_scattering $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+    ATOMS
+        Cr.1L -10.08005261  0.0  0.0
+        Cr.2L  -7.26255137  0.0  0.0
+        Cr.3L  -4.44505013  0.0  0.0
+        Cr.C   -1.62754889  0.0  0.0
+        Cr.C    1.18995235  0.0  0.0
+        Cr.C    4.00745359  0.0  0.0
+        Cr.1R   6.82495483  0.0  0.0
+        Cr.2R   9.64245607  0.0  0.0
+        Cr.3R  12.45995731  0.0  0.0
+    END
+
+    Lattice
+        25.35751116  0.0  0.0
+    End
+End
+
+Engine Band 
+    TITLE Cr_scattering
+
+    KSpace
+        Quality Good
+    End
+
+    SoftConfinement
+        Quality Basic
+    End
+
+    Basis
+        Type DZ
+        Core Large
+    End
+
+    UNRESTRICTED
+    StoreHamiltonian2
+    StoreHamAsMol
+EndEngine
+
+eor
+
+# ==============
+# Cr Conductance
+# ==============
+
+$AMSBIN/conductance <<EOF
+EnergyGrid min=-4 max=4 num=200
+Files
+  Leads      Cr_lead.results/band.rkf
+  Scattering Cr_scattering.results/band.rkf
+End
+
+EOF
+
+mv ConductanceResults.kf Cr_ConductanceResults.kf 
+
+echo "Extract DOS from the kf file (Cr):"
+$AMSBIN/amsreport Cr_ConductanceResults.kf -r "results%dos#12.5f##1"
+
+echo "Extract the transmission from the kf file (Cr):"
+$AMSBIN/amsreport Cr_ConductanceResults.kf -r "results%transmission#12.5f##1"
+

@@ -1,0 +1,36 @@
+#! /bin/sh
+
+# This example shows some of the flexibility of the Basis key. The
+# defaults are set to a DZ basis set with a Large frozen core. As the example
+# shows, it is possible to override the defaults per atom type or to directly
+# specify basis set files for particular atom types.
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Atoms [Bohr]
+      C              0.0   0.0   0.0
+      O.large_basis  0.0   2.13  0.0
+      H.large_basis  4.0   0.0   0.0
+      H.custom       4.0   1.43  0.0
+   End
+End
+
+Engine Band
+   Title CO + H2: fine tuning the basis defaults
+
+   NumericalQuality Basic
+
+   Basis
+      ! Cheap defaults
+      Type DZ
+      Core Large
+      PerAtomType Symbol=C              Core=None    ! This C has no frozen core
+      PerAtomType Symbol=O.large_basis  Type=TZ2P    ! This O with a larger basis
+      PerAtomType Symbol=H.large_basis  Type=V       ! This one also with a larger basis
+      PerAtomType Symbol=H.custom File=DZ/H
+   End
+EndEngine
+eor

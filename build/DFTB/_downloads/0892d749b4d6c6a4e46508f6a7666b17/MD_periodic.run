@@ -1,0 +1,44 @@
+#!/bin/sh
+
+$AMSBIN/ams << eor
+
+Task MolecularDynamics
+
+MolecularDynamics
+    nSteps 50
+    TimeStep 0.5
+    InitialVelocities Type=zero
+    Thermostat Type=None
+    Trajectory SamplingFreq=1
+    Print System=true Velocities=true
+    Preserve
+       Momentum        false
+       AngularMomentum false
+    End
+End
+
+System
+   Atoms
+      H  0.0  0.0  0.0
+      H  0.0  0.0  1.4
+      H  2.0  0.0  0.0
+      H  2.0  0.0  1.4
+      H  4.0  0.0  0.0
+      H  4.0  0.0  1.4
+   End
+
+   Lattice
+      0.0 5.0 5.0
+      5.0 0.0 5.0
+      5.0 5.0 0.0
+   End
+End
+
+Engine DFTB
+   ResourcesDir Dresden
+   Model DFTB0
+   KSpace Quality=GammaOnly
+EndEngine
+
+eor
+

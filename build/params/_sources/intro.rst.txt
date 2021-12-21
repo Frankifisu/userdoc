@@ -1,0 +1,91 @@
+Introduction
+============
+
+Parameter Fitting: A Lennard-Jones Example
+------------------------------------------
+
+.. seealso::
+
+    Tutorial: :ref:`LJ_Ar_Tutorial`
+
+Assuming we are interested in calculating the potential energy :math:`{V}(R)` between two Argon atoms,
+one suitable model for this task is the `Lennard-Jones Potential <https://en.wikipedia.org/wiki/Lennard-Jones_potential>`_
+(LJ), which is given by
+
+.. math::
+  :label: LJ1
+
+  \hat{V}(R|\mathrm{\boldsymbol{x}}) =
+    \frac{{x_1}}{R^{12}} - \frac{{x_2}}{R^6},
+
+where :math:`\hat{V}` is the (predicted) potential energy as a function of the interatomic distance
+:math:`R` and a parameter vector :math:`\boldsymbol{x}=({x_ 1}, {x_2})^\mathrm{T}` that modifies
+the shape of the potential.
+
+If reference data
+:math:`\boldsymbol{y} = \{(R_i,V_i)\}` is available for this problem
+(either from an experiment or another model),
+we can measure the quality of the LJ model by
+a :ref:`loss function <Loss Functions>`
+(also called objective or cost function)
+:math:`L`, which is a metric operating on the residuals vector
+:math:`\boldsymbol{y} - \boldsymbol{\hat{y}} = \{V_i - \hat{V}_i\}`.
+One example for such a metric is the mean absolute error (MAE):
+
+.. math::
+  :label: LJloss
+
+  L_\mathrm{MAE}( \boldsymbol{y} - \boldsymbol{\hat{y}} ) =
+    \frac{1}{N}
+    \sum_{i=1}^N | y_i - \hat{y}_i |.
+
+For a case when the LJ model perfectly represents the experimental data,
+:math:`\boldsymbol{y} = \boldsymbol{\hat{y}}`, and :math:`L=0`.
+In contrast, a larger loss function value represents a mismatch between the
+predicted and reference values.
+In such cases the parametric model's parameters can be fitted, assuming the reference set
+of systems and energies does not change during the optimization process.
+We introduce an :ref:`optimizer <Optimizers>` which produces an optimized set of parameters
+:math:`\boldsymbol{x}^*` from an initial point :math:`\boldsymbol{x}_0` by minimizing :math:`L`:
+
+.. math::
+  :label: Optimizer
+
+  O(\boldsymbol{x}_0, L) =
+    \underset{\boldsymbol{x}} {\mathop{\mathrm{arg\,min}}}\,
+    L = \boldsymbol{x}^*.
+
+
+We visualize the influence of two different parameter sets for the Lennard-Jones potential
+in the figure below:
+While the initial model parameters (orange curve) might not represent experimental data
+(discrete marks) very well, an optimization of the parameters with respect to the reference data can
+provide a viable solution (grey curve).
+
+.. figure:: _static/intro_lj.png
+    :align: center
+
+
+
+
+General Application
+-------------------
+
+In a more generalized description of the package,
+ParAMS allows its users to fit a :ref:`variety of parametric (empirical) models <Parameter Interfaces>`
+that are part of the Amsterdam Modeling Suite.
+By design, any physico-chemical property :math:`P` that can be :ref:`extracted from one
+AMS computation (or constructed from multiple) <Data Set>`, can be fitted with a number of different
+:ref:`optimization algorithms <Optimizers>`.
+A minimal set up does not require much more additional user input,
+making setting up of basic workflows easy and accessible.
+
+At the same time ParAMS offers a variety of additional features for the customization of the workflow such as
+automated and manual :ref:`definition of the search space <Constraints>` and relevant parameter subsets,
+support for :ref:`validation sets <Optimization Setup>` or
+additional interaction through :ref:`callbacks <Callbacks>` to name a few,
+resulting in a package that is highly flexible when it comes to advanced user requirements.
+
+Integration with AMS guarantees that the same APIs are supported regardless of the application,
+making workflows highly reusable and storage of relevant reference data in the human-readable
+`YAML <https://yaml.org/>`_ format ensures transparency and reproducibility.

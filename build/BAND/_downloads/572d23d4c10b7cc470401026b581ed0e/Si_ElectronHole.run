@@ -1,0 +1,48 @@
+#! /bin/sh
+
+# There is the possibility define the excitation of an electron from a low
+# lying, localized band to a virtual band. The ElectronHole key does allow the
+# specification of the original band and the spin of the electron. The
+# EnforcedSpinPolarization key allows to restrict the spin polarization of the
+# whole system.
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  Atoms
+    Si.frozen_core -0.67875 -0.67875 -0.67875
+    Si              0.67875  0.67875  0.67875
+  End
+  Lattice
+      0.000  2.715  2.715
+      2.715  0.000  2.715
+      2.715  2.715  0.000
+  End
+End
+
+Engine Band
+
+  TITLE Untitled
+
+  Basis
+    Type DZP
+    Core None
+    PerAtomType Symbol=Si.frozen_core Type=DZP Core=Large
+  End
+
+  XC
+     LDA SCF VWN
+  END
+
+  Unrestricted Yes
+
+  ElectronHole
+      BandIndex 1
+      SpinIndex 1
+  End
+
+  EnforcedSpinPolarization 0
+EndEngine
+eor

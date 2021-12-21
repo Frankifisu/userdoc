@@ -1,0 +1,214 @@
+#! /bin/sh
+
+# This example tries to do the same as in the COSMO-RS GUI Tutorial: The COSMO-RS compound database,
+# using scripts.
+# In many of the next examples fewer compounds are included than in the COSMO-RS GUI Tutorial.
+
+
+# First some .coskf files are copied to the location where the scripts are running.
+# These .coskf files are a sample of the full database.
+
+echo "Results"
+
+cp $AMSHOME/examples/COSMO-RS/Database/*coskf .
+
+rm -f job.sh
+touch job.sh
+chmod +x job.sh
+
+# 4.2 Octanol-Water partition coefficients (log P_OW)
+# ---------------------------------------------------
+
+"$AMSBIN/crsprep" -t LOGP -j t4.2 \
+                  -c Methanol.coskf > job.sh
+./job.sh
+echo "4.2"
+"$AMSBIN/amsreport" t4.2.crskf compounds-name
+"$AMSBIN/amsreport" t4.2.crskf logp
+
+
+
+# 4.3: Henry's law constants
+# --------------------------
+
+"$AMSBIN/crsprep" -t ACTIVITYCOEF -temperature 293.15 -densitysolvent 0.998 -j t4.3a \
+                  -s Water.coskf \
+                  -c Acetone.coskf -c Benzene.coskf -c Ethanol.coskf -c Methanol.coskf > job.sh
+./job.sh
+echo "4.3a"
+"$AMSBIN/amsreport" t4.3a.crskf compounds-name
+"$AMSBIN/amsreport" t4.3a.crskf henry
+
+"$AMSBIN/crsprep" -s Acetone.coskf  -pvap 0.246 -tvap 293.15 -savecompound
+"$AMSBIN/crsprep" -s Benzene.coskf  -pvap 0.100 -tvap 293.15 -savecompound
+"$AMSBIN/crsprep" -s Ethanol.coskf  -pvap 0.059 -tvap 293.15 -savecompound
+"$AMSBIN/crsprep" -s Methanol.coskf -pvap 0.129 -tvap 293.15 -savecompound
+"$AMSBIN/crsprep" -s Water.coskf    -pvap 0.02536 -tvap 293.15 -savecompound
+
+"$AMSBIN/crsprep" -t ACTIVITYCOEF -temperature 293.15 -densitysolvent 0.998 -j t4.3b \
+                  -s Water.coskf \
+                  -c Benzene.coskf -c Ethanol.coskf -c Methanol.coskf > job.sh
+./job.sh
+echo "4.3b"
+"$AMSBIN/amsreport" t4.3b.crskf henry
+
+
+# 4.4: Solubility of Vanillin in organic solvents
+# -----------------------------------------------
+
+"$AMSBIN/crsprep" -s Vanillin.coskf -meltingpoint 355 -hfusion 5.35 -savecompound
+"$AMSBIN/crsprep" -t PURESOLUBILITY -j t4.4 \
+                  -s Vanillin.coskf \
+                  -c Ethanol.coskf -c Methanol.coskf -c Water.coskf > job.sh
+./job.sh
+echo "4.4"
+"$AMSBIN/amsreport" t4.4.crskf compounds-name
+"$AMSBIN/amsreport" t4.4.crskf solubility-x
+"$AMSBIN/amsreport" t4.4.crskf solubility-m
+
+# 4.5: Binary mixture of Methanol and Hexane
+# ------------------------------------------
+
+"$AMSBIN/crsprep" -s Methanol.coskf -pvap 0.845 -tvap 333.15 -savecompound
+"$AMSBIN/crsprep" -s Hexane.coskf   -pvap 0.77  -tvap 333.15 -savecompound
+"$AMSBIN/crsprep" -t BINMIXCOEF -temperature 333.15 -n 100 -j t4.5a \
+                  -s Methanol.coskf \
+                  -s Hexane.coskf > job.sh
+./job.sh
+echo "4.5a"
+"$AMSBIN/amsreport" t4.5a.crskf compounds-name
+"$AMSBIN/amsreport" t4.5a.crskf molar-fraction
+"$AMSBIN/amsreport" t4.5a.crskf pressure
+"$AMSBIN/amsreport" t4.5a.crskf miscibility-gap
+"$AMSBIN/amsreport" t4.5a.crskf miscibility-gap-x
+"$AMSBIN/amsreport" t4.5a.crskf miscibility-gap-a
+
+"$AMSBIN/crsprep" -s Methanol.coskf -pvap 1.01325 -tvap 337.8 -savecompound
+"$AMSBIN/crsprep" -s Hexane.coskf   -pvap 1.01325 -tvap 342   -savecompound
+"$AMSBIN/crsprep" -t BINMIXCOEF -pressure 1.01325 -iso isobar -n 100 -j t4.5b \
+                  -s Methanol.coskf \
+                  -s Hexane.coskf > job.sh
+./job.sh
+echo "4.5b"
+"$AMSBIN/amsreport" t4.5b.crskf molar-fraction
+"$AMSBIN/amsreport" t4.5b.crskf temperature
+"$AMSBIN/amsreport" t4.5b.crskf miscibility-gap
+"$AMSBIN/amsreport" t4.5b.crskf miscibility-gap-x
+"$AMSBIN/amsreport" t4.5b.crskf miscibility-gap-a
+
+# 4.6: Large infinite dilution activity coefficients in Water
+# -----------------------------------------------------------
+
+"$AMSBIN/crsprep" -t ACTIVITYCOEF -temperature 298.15 -j t4.6 \
+                  -s Water.coskf \
+                  -c Benzene.coskf > job.sh
+./job.sh
+echo "4.6"
+"$AMSBIN/amsreport" t4.6.crskf compounds-name
+"$AMSBIN/amsreport" t4.6.crskf activity-coefficient
+
+
+# 4.7: Parametrization of ADF COSMO-RS: solvation energies,
+# vapor pressures, partition coefficients
+# ---------------------------------------------------------
+
+cat << eor > small.compoundlist
+Hexane.coskf
+Methanol.coskf
+Ethanol.coskf
+Acetone.coskf
+Benzene.coskf
+Water.coskf
+eor
+
+"$AMSBIN/crsprep" -t ACTIVITYCOEF -temperature 298.15 -densitysolvent 0.997 -j t4.7a \
+                  -inputpurevap 0 \
+                  -s Water.coskf \
+                  -c small.compoundlist > job.sh
+./job.sh
+echo "4.7a"
+"$AMSBIN/amsreport" t4.7a.crskf compounds-name
+"$AMSBIN/amsreport" t4.7a.crskf gibbs-energy-solvation
+
+"$AMSBIN/crsprep" -t PUREVAPORPRESSURE -temperature 298.15 -j t4.7b \
+                  -c small.compoundlist -inputpurevap 0 > job.sh
+./job.sh
+echo "4.7b"
+"$AMSBIN/amsreport" t4.7b.crskf compounds-name
+"$AMSBIN/amsreport" t4.7b.crskf vapor-pressure
+
+"$AMSBIN/crsprep" -t LOGP -j t4.7c -c small.compoundlist > job.sh
+./job.sh
+echo "4.7c Octanol/Water"
+"$AMSBIN/amsreport" t4.7c.crskf compounds-name
+"$AMSBIN/amsreport" t4.7c.crskf logp
+
+"$AMSBIN/crsprep" -t LOGP -preset 5 -j t4.7d -c small.compoundlist > job.sh
+./job.sh
+echo "4.7d Hexane/Water"
+"$AMSBIN/amsreport" t4.7d.crskf logp
+
+"$AMSBIN/crsprep" -t LOGP -preset 3 -j t4.7e -c small.compoundlist > job.sh
+./job.sh
+echo "4.7e Benzene/Water"
+"$AMSBIN/amsreport" t4.7e.crskf logp
+
+"$AMSBIN/crsprep" -t LOGP -preset 4 -j t4.7f -c small.compoundlist > job.sh
+./job.sh
+echo "4.7f Ether/Water"
+"$AMSBIN/amsreport" t4.7f.crskf logp
+
+
+# 4.8: COSMO-SAC 2013-ADF
+# -----------------------
+
+"$AMSBIN/crsprep" -t PURESIGMAPROFILE -method COSMOSAC2013 -c Water.coskf \
+                  -c Ethanol.coskf -j t4.8a > job.sh
+./job.sh
+echo "4.8a"
+"$AMSBIN/amsreport" t4.8a.crskf sigma
+"$AMSBIN/amsreport" t4.8a.crskf sigma-profile
+"$AMSBIN/amsreport" t4.8a.crskf sigma-profile-hb
+
+"$AMSBIN/crsprep" -s Methanol.coskf -density 0.7918  -savecompound
+"$AMSBIN/crsprep" -s Ethanol.coskf  -density 0.789  -savecompound
+"$AMSBIN/crsprep" -s Acetone.coskf  -density 0.791  -savecompound
+
+"$AMSBIN/crsprep" -t LOGP -method COSMOSAC2013 -j t4.8b \
+                  -c Methanol.coskf -c Ethanol.coskf -c Acetone.coskf > job.sh
+./job.sh
+echo "4.8b Octanol/Water"
+"$AMSBIN/amsreport" t4.8b.crskf compounds-name
+"$AMSBIN/amsreport" t4.8b.crskf logp
+
+"$AMSBIN/crsprep" -t LOGP -method COSMOSAC2013 -preset 5 -j t4.8c \
+                  -c Methanol.coskf -c Ethanol.coskf -c Acetone.coskf > job.sh
+./job.sh
+echo "4.8c Hexane/Water"
+"$AMSBIN/amsreport" t4.8c.crskf logp
+
+"$AMSBIN/crsprep" -t LOGP -method COSMOSAC2013 -preset 3 -j t4.8d \
+                  -c Methanol.coskf -c Ethanol.coskf -c Acetone.coskf > job.sh
+./job.sh
+echo "4.8d Benzene/Water"
+"$AMSBIN/amsreport" t4.8d.crskf logp
+
+"$AMSBIN/crsprep" -t LOGP -method COSMOSAC2013 -preset 4 -j t4.8e \
+                  -c Methanol.coskf -c Ethanol.coskf -c Acetone.coskf > job.sh
+./job.sh
+echo "4.8e Ether/Water"
+"$AMSBIN/amsreport" t4.8e.crskf logp
+
+"$AMSBIN/crsprep" -s Acetone.coskf -density 0.791 -pvap 3.7     -tvap 373.15 -savecompound
+"$AMSBIN/crsprep" -s Water.coskf   -density 0.997 -pvap 1.01325 -tvap 373.15 -savecompound
+
+"$AMSBIN/crsprep" -t BINMIXCOEF -method COSMOSAC2013 -temperature 373.15 -n 20 -j t4.8f \
+                  -s Acetone.coskf \
+                  -s Water.coskf > job.sh
+./job.sh
+echo "4.8f"
+"$AMSBIN/amsreport" t4.8f.crskf molar-fraction
+"$AMSBIN/amsreport" t4.8f.crskf vapor-pressure
+"$AMSBIN/amsreport" t4.8f.crskf pressure
+
+echo "Ready"

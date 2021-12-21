@@ -1,0 +1,41 @@
+#! /bin/sh
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients True
+End
+
+System
+   Atoms
+      Na 0 0 0
+      Cl 0 2.23 0
+      Na 0 0 40
+      Cl 0 2.23 40
+   End
+   Charge 0
+   Lattice
+      6 0 0
+      0 6 0
+   End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir Demo
+   useSymmetry yes
+   KSpace
+     Type Symmetric
+     Symmetric KInteg=8
+   End
+   Technical
+      Screening
+         rMadel 40
+         DirectionalScreening yes
+      End
+   End
+EndEngine
+
+eor

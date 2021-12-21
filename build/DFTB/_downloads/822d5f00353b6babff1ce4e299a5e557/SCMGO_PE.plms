@@ -1,0 +1,60 @@
+import os
+import random
+
+
+# Set random seed to ensure reproducibility 
+random.seed(666)
+
+
+def randomize_xyz(mol, random_size=0.01):
+   mol_pert = mol.copy()
+   for atom in mol_pert:
+      transl = [random.uniform(-1,1)*random_size for i in range(3)]
+      atom.translate(transl)
+   return mol_pert
+
+
+def run_optimization(molecule, settings, title):
+   print("======================= input for {} =======================".format(title))
+   job = AMSJob(molecule=molecule, settings=settings)
+   print(job.get_input())
+   job.run()
+   energy = job.results.readrkf('AMSResults', 'Energy', file='dftb')
+   nSteps = job.results.readrkf('History', 'nEntries', file='ams')
+   return energy, nSteps
+
+
+molecules_dir=os.path.join(os.environ['AMSHOME'],'atomicdata','Molecules','Misc')
+
+molecules = []
+for mol_name in sorted(os.listdir(molecules_dir)):
+   if 'Polyethylene' in mol_name:
+      molecules.append(Molecule(os.path.join(molecules_dir,mol_name)))
+
+
+sett = Settings()
+sett.input.ams.UseSymmetry = False
+sett.input.ams.Task = 'GeometryOptimization'
+sett.input.ams.GeometryOptimization.Method = 'SCMGO'
+sett.input.ams.GeometryOptimization.Convergence.Gradients = 5.0E-5
+sett.input.ams.GeometryOptimization.Convergence.Step      = 4.0E-3
+
+sett.input.dftb.model        = 'DFTB0'
+sett.input.dftb.resourcesdir = 'QUASINANO2015'
+
+
+for mol in molecules:
+   rand_small = randomize_xyz(mol,0.05)
+   rand_large = randomize_xyz(mol,0.2)
+
+   e_unper, n_unper = run_optimization(molecule=mol,        settings=sett, title='Unperturbed ({})'.format(mol.properties.name))
+   e_small, n_small = run_optimization(molecule=rand_small, settings=sett, title='Small perturbation ({})'.format(mol.properties.name))
+   e_large, n_large = run_optimization(molecule=rand_large, settings=sett, title='Large perturbation ({})'.format(mol.properties.name))
+
+   print("")
+   print("Summary for molecule {}".format(mol.properties.name))
+   print("Energy unperturbed: {}".format(e_unper))
+   print("Delta Energy medium perturbation : {}".format(abs(e_unper-e_small)))
+   print("Delta Energy large perturbation  : {}".format(abs(e_unper-e_large)))
+   print("N steps small/medium/large perturbations: {} / {} / {}".format(n_unper,n_small,n_large))
+   print("")

@@ -1,0 +1,69 @@
+#! /bin/sh
+
+# GW calculation of Toluene. By default. The highest occupied and lowest
+# unoccupied state are calculated. We use an all-electron basis set 
+# since core-correlation effects are important to catpure all screening effects.
+
+# since we are interested in an accurate QP HOMO-LUMO gap, we use the aug-TZ2P 
+# basis set. To ensure numerical stability, we swich on the dependency key.
+
+# We also use imaginary time and imaginary frequency grids of 16 points each.
+# Note, that PBE is not a recommended starting point. 
+# Also note, that Good fitsetQuality is recommended
+
+$AMSBIN/ams << eor
+Symmetry
+  SymmetrizeTolerance 0.001
+End
+
+System
+  Atoms
+	C 4.555420 5.661760 4.489060
+	C 4.584960 2.843420 4.498910
+	C 3.378760 3.548270 4.498890
+	C 3.359200 4.943960 4.500070
+	C 5.758650 4.948670 4.502800
+	C 5.789840 3.550210 4.500330
+	H 4.622340 1.760920 4.495600
+	H 3.631910 7.321310 4.523190
+	H 2.474610 2.963630 4.498170
+	H 2.384290 5.419790 4.496670
+	H 6.695040 5.492670 4.498160
+	H 6.727200 3.021210 4.497160
+	O 4.537700 7.024010 4.500450
+  End
+  Symmetrize Yes
+End
+
+task SinglePoint
+
+Engine adf
+  Basis
+    Core None
+    Type AUG/ATZ2P
+  end
+
+  Symmetry nosym
+
+  NumericalQuality Good
+  Dependency bas=1e-03
+
+  MBPT
+    FitsetQuality Normal
+    nFrequency 16
+    nTime 16
+    Dependency
+  end
+
+  XC
+    GGA PBE
+  end
+
+  GW
+  END
+
+  Relativity
+    Level None
+  End
+EndEngine
+eor

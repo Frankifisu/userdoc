@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# Calculation of damped complex polarizabilities of Au10
+# with POLTDDFT.
+# It is very important to use basis sets with specially made
+# auxiliary fit sets available in $AMSHOME/atomicdata/ADF/POLTDDFT
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     Au      -1.44000000       0.00000000       2.88000000
+     Au       1.44000000      -0.00000000      -2.88000000
+     Au      -1.44000000       0.00000000      -2.88000000
+     Au       1.44000000      -0.00000000       2.88000000
+     Au      -0.00000000      -2.03647000      -1.44000000
+     Au       0.00000000       2.03647000      -1.44000000
+     Au       1.44000000      -0.00000000       0.00000000
+     Au      -0.00000000      -2.03647000       1.44000000
+     Au      -1.44000000       0.00000000      -0.00000000
+     Au       0.00000000       2.03647000       1.44000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Au10 DZ GGA LB94
+  basis
+    Type POLTDDFT/DZ
+  end
+  poltddft
+    irrep
+       B1.u
+       B2.u
+       B3.u
+    end
+  end
+  xc
+    gga LB94
+  end
+EndEngine
+
+eor

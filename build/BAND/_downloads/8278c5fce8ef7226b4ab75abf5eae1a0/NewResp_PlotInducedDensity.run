@@ -1,0 +1,120 @@
+#!/bin/sh
+
+AMS_JOBNAME=polyethylene $AMSBIN/ams <<eor
+
+  Task SinglePoint 
+
+  System 
+    Lattice
+      2.553395923     0.000000000     0.000000000
+    end
+
+    Atoms
+       C      -0.623348981    -0.055000000     0.425969423
+       C       0.633348981     0.015000000    -0.422636089
+       H      -0.633348981     0.964974570     1.055290696
+       H      -0.623348981    -0.914974570     1.055290696
+       H       0.633348981     0.904974570    -1.051957363
+       H       0.613348981    -0.914974570    -1.061957363
+    end
+  End
+
+  Engine Band 
+
+    Title Polyethylene
+
+    KSPACE 
+       Regular 
+        NumberOfPoints 11
+      End
+    End
+
+    NumericalQuality basic
+
+    DEPENDENCY BASIS=1e-10
+
+    Tails bas=1e-10
+
+    NEWRESPONSE
+       nFreq        10
+       FreqLow      6.0
+       FreqHigh     8.0
+       ActiveXYZ    T F F
+       ActiveESpace 2.0
+    END
+
+    Relativity Level=None
+
+    NEWRESPONSESCF
+       nCycle     50
+       DIIS MixingFactor=0.075
+       Criterion  0.01
+    End
+
+    Basis
+      Type  TZP
+      Core       small
+    End
+  EndEngine
+eor
+
+# ======================================
+# Restart and compute Induced Densities 
+# ======================================
+
+export NSCM=1
+$AMSBIN/ams -n 1 <<EOF
+
+  Task SinglePoint 
+  
+  LoadSystem
+    File polyethylene.results/ams.rkf
+    Section InputMolecule
+  End
+
+  Engine Band 
+    Title Polyethylene Plot Induced Response Density
+
+    UseSymmetry False
+
+    NumericalQuality basic
+
+    DEPENDENCY BASIS=1e-10
+
+    Tails bas=1e-10
+
+    KSpace
+      Regular 
+        NumberOfPoints 11
+      End
+    End
+
+    Basis
+      Type TZP
+      Core Small
+    End
+
+    Restart
+      File polyethylene.results/band.rkf
+      ResponseInducedDensityPlot
+    End
+
+    ResponseInducedDensityPlot
+     xcomponent 1 2
+     xcomponent 5
+    End
+
+    Relativity Level=None
+
+    Grid
+    End
+
+    debug BlockPropertyModule
+  EndEngine
+EOF
+
+echo ""
+echo "Begin TOC of tape41"
+export NSCM=1
+$AMSBIN/pkf -n 1 ams.results/FILE_BLOCKPROPERTIES
+echo "End TOC of tape41"

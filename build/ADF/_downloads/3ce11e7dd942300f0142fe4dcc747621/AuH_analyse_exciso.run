@@ -1,0 +1,96 @@
+#! /bin/sh
+
+
+# Calculation of the excitation energies of AuH including spin-orbit coupling.
+
+# ADF can not handle ATOM and linear symmetries in excitation calculations.
+# In case of linear symmetries ADF will automatically use a 
+# a subsymmetry, in this case symmetry C(7v).
+# In the excitation part of the output the symmetry labels are those of C(LIN) in this case.
+
+# A relatively small TZ2P basis set is used, which is not sufficient for
+# excitations to Rydberg-like orbitals, one needs more diffuse functions.
+
+# The key STCONTRIB is used, which will give a composition of the spin-orbit
+# coupled excitation in terms of singlet-singlet and singlet-triplet scalar
+# relativistic excitations. In order to use the key STCONTRIB the scalar
+# relativistic fragment should be the complete molecule.
+
+# For precision reasons the Beckegrid quality is set to good. One might also
+# increase the ZlmFit quality for better accuracy
+
+# One needs to include the subkey SFO of the key EPRINT with arguments eig and
+# ovl in order to get the SFO MO coefficients and SFO overlap matrix printed on
+# standard output.
+
+
+AMS_JOBNAME=scalar $AMSBIN/ams <<eor
+System
+  atoms
+     Au 0.0000  0.0000  1.5238
+     H  0.0000  0.0000  0.0000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  eprint
+    sfo eig ovl
+  end
+  excitations
+    descriptors
+    lowest 40
+    nto
+    sfoanalysis
+    esestdm
+  end
+  print SOMATRIX
+  sopert
+  end
+  basis
+    type TZ2P
+    core None
+    CreateOutput Yes
+  end
+EndEngine
+eor
+
+
+
+AMS_JOBNAME=spinorbit $AMSBIN/ams <<eor
+System
+  atoms
+     Au 0.0000  0.0000  1.5238  adf.f=Frag
+     H  0.0000  0.0000  0.0000  adf.f=Frag
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  eprint
+    sfo eig ovl
+  end
+  excitations
+    descriptors
+    lowest 40
+    nto
+    sfoanalysis
+    esestdm
+  end
+  fragments
+     Frag scalar.results/adf.rkf
+  end
+  relativity
+    level spin-orbit
+  end
+  stcontrib
+EndEngine
+eor

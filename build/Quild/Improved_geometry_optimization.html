@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Improved geometry optimization &mdash; Quild 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Quild 2021.1 documentation" href="index.html"/>
+        <link rel="next" title="Special cases" href="Special_cases.html"/>
+        <link rel="prev" title="AddRemove method for capping atoms" href="AddRemove_method_for_capping_atoms.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search Quild" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-Quild" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="QUILD.html">QUantum-regions Interconnected by Local Descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Whats_new.html">What’s new in the 2018 version</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Whats_new.html#what-s-new-in-the-2017-version">What’s new in the 2017 version</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#anti-ferromagnetic-coupling">Anti-ferromagnetic coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#upscaling-low-frequencies-in-gibbs-free-energy">Upscaling low frequencies in Gibbs free energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#bug-fix">Bug fix</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Whats_new.html#what-s-new-in-the-2009-01-version">What’s new in the 2009.01 version</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#gui-support">GUI-support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#symmetry-within-quild">Symmetry within QUILD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#more-qm-programs">More QM programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#frequency-calculations-for-qm-mm-and-multi-level-qm-qm-and-qm-mm-schemes">Frequency calculations for QM, MM and multi-level QM/QM and QM/MM schemes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#spin-contamination-correction-per-region">Spin-contamination correction per region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#improved-transitionstate-ts-search">Improved TransitionState (TS) search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#simplified-and-more-detailed-output">Simplified and more detailed output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#improved-generation-of-primitive-coordinates">Improved generation of primitive coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#frozen-coordinates-versus-constraints">Frozen coordinates versus constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Whats_new.html#numerical-gradients-per-region">Numerical gradients per region</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Basic_philosophy.html">Basic philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Multi-level_energy_expression.html">Multi-level energy expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AddRemove_method_for_capping_atoms.html">AddRemove method for capping atoms</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Improved geometry optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Special_cases.html">Special cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How_to_call_the_program.html">How to call the program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Input_description.html">Input description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#relevant-keywords-in-quild-block">Relevant Keywords in QUILD block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#constr-subblock-in-quild-block">CONSTR subblock in QUILD block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#frozen-subblock-in-quild-block">FROZEN subblock in QUILD block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#symrot-subblock-in-quild-block">SYMROT subblock in QUILD block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#tsrc-subblock-in-quild-block">TSRC subblock in QUILD block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#region-subblocks-in-quild-block">REGION subblocks in QUILD block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#addremove-subblock-in-quild-block">ADDREMOVE subblock in QUILD block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#description-subblocks-in-quild-block">DESCRIPTION subblocks in QUILD block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#numerical-versus-analytical-hessians-for-multi-level-vibrational-frequencies">Numerical versus analytical Hessians for multi-level vibrational frequencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#use-of-a-generic-description-for-use-with-user-provided-qm-program">Use of a GENERIC description for use with user-provided QM-program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#spin-contamination-correction-per-region">Spin-contamination correction per region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#interactions-subblock-in-quild-block">INTERACTIONS subblock in QUILD block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Input_description.html#inline-options-in-the-quild-block">INLINE options in the QUILD block</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Example_inputfiles.html">Example inputfiles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_inputfiles.html#vibrational-frequencies-for-multi-level-qm-qm-scheme">Vibrational frequencies for multi-level QM/QM scheme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_inputfiles.html#symmetry-rotation-with-td-symmetry-for-geometry-and-c2v-for-orbitals">Symmetry rotation with T<sub>d</sub>  symmetry for geometry and C<sub>2v</sub>  for orbitals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_inputfiles.html#optimization-with-b3lyp-through-the-post-scf-metagga-scheme">Optimization with B3LYP through the post-SCF METAGGA scheme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_inputfiles.html#optimization-with-b3lyp-as-scf-functional">Optimization with B3LYP as SCF functional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_inputfiles.html#geometry-optimization-with-qm-mm-treatment-of-water-dimer">Geometry optimization with QM/MM treatment of water dimer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_inputfiles.html#lineartransit-run-for-bimolecular-nucleophilic-reaction-of-f-and-ch3-cl">LinearTransit run for bimolecular nucleophilic reaction of F<sup>-</sup>  and CH<sub>3</sub> Cl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_inputfiles.html#geometry-optimization-of-pure-spin-state-for-spin-contaminated-system">Geometry optimization of pure spin state for spin-contaminated system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_inputfiles.html#lineartransit-run-for-water-dimer">LinearTransit run for water dimer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_inputfiles.html#interface-to-the-ams-driver">Interface to the AMS driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="References.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Quild</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="Quild.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">Quild</a>/</li>
+      
+    <li class="orange-text">Improved geometry optimization</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="improved-geometry-optimization">
+<h1>Improved geometry optimization<a class="headerlink" href="#improved-geometry-optimization" title="Permalink to this headline">¶</a></h1>
+<p>One of the strong points of the QUILD program  [<a class="reference internal" href="References.html#reference-1"><span class="std std-ref">1-2</span></a>] apart from its flexible setup of the multi-level approach, is its enhanced geometry optimization capabilities. These result in part from the use of adapted delocalized coordinates  [<a class="reference internal" href="References.html#reference-41"><span class="std std-ref">41</span></a>], a modification of the original delocalized coordinates setup [<a class="reference internal" href="References.html#reference-42"><span class="std std-ref">42</span></a>], that enables the use on weak coordinates as well. Further enhancements are obtained through the use of regulated GDIIS  [<a class="reference internal" href="References.html#reference-43"><span class="std std-ref">43-44</span></a>], Restricted Second Order model (trust region)  [<a class="reference internal" href="References.html#reference-45"><span class="std std-ref">45-46</span></a>], and a model Hessian [<a class="reference internal" href="References.html#reference-41"><span class="std std-ref">41</span></a>]. The latter includes the generation of a model Hessian for transition state searches by preparing the initial Hessian with the correct curvature and number of negative eigenvalues, which moreover correspond to the reaction coordinates (TSRC) for the transition state under study. The user has to specify on input what the relevant TSRC coordinates are, which will not only be used for the generation of the initial Hessian, but also to select the appropriate Hessian eigenvector when there are more (or less) than 1 negative Hessian eigenvalues.</p>
+<p>The details of setting up the delocalized coordinates, its adaptation to facilitate the use on weak and strong coordinates, and their characteristics can be found in refs.  [<a class="reference internal" href="References.html#reference-41"><span class="std std-ref">41</span></a>] and  [<a class="reference internal" href="References.html#reference-2"><span class="std std-ref">2</span></a>].  Here we briefly mention the performance of the QUILD program for the Baker test set (a set with 30 organic molecules) and a test set with 18 weakly-bound molecules [<a class="reference internal" href="References.html#reference-2"><span class="std std-ref">2</span></a>]. For the Baker set, we need 167 iterations to fully converge all molecules to a gradient of 3.0 10<sup>-4</sup>  a.u. at RHF/STO-3G (results obtained using the interface to ORCA), and 164 at PW91/TZ2P. For comparison, the old-style optimizer in ADF using Cartesians needed 222 iterations. For the weakly-bound set, we need 175 iterations to fully optimize the molecules to a gradient of 1.0 10<sup>-5</sup>  a.u. at PW91/TZ2P. Again for comparison, the old-style optimizer in ADF using Cartesians needed 748 iterations.</p>
+<p>As an example, below is the relevant input for performing a transition state search for the bimolecular nucleophilic substitution reaction of fluoride on methyl chloride (see figure):</p>
+<img alt="_images/image014.png" src="_images/image014.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Geometry</span>
+  <span class="n">TransitionState</span>
+<span class="n">End</span>
+
+<span class="n">QUILD</span>
+  <span class="n">TSRC</span>
+    <span class="n">dist</span> <span class="mi">1</span> <span class="mi">5</span>
+    <span class="n">dist</span> <span class="mi">1</span> <span class="mi">6</span>
+  <span class="n">SUBEND</span>
+<span class="n">END</span>
+
+<span class="n">ATOMS</span>
+   <span class="n">C</span>             <span class="mf">0.000000</span>     <span class="mf">0.000000</span>        <span class="mf">0.000000</span>
+   <span class="n">H</span>            <span class="o">-</span><span class="mf">0.530807</span>     <span class="mf">0.919384693</span>     <span class="mf">0.112892</span>
+   <span class="n">H</span>            <span class="o">-</span><span class="mf">0.530807</span>    <span class="o">-</span><span class="mf">0.919384693</span>     <span class="mf">0.112892</span>
+   <span class="n">H</span>             <span class="mf">1.061614</span>     <span class="mf">0.000000</span>        <span class="mf">0.112892</span>
+   <span class="n">Cl</span>            <span class="mf">0.000000</span>     <span class="mf">0.000000</span>       <span class="o">-</span><span class="mf">2.124300</span>
+   <span class="n">F</span>             <span class="mf">0.000000</span>     <span class="mf">0.000000</span>        <span class="mf">2.019100</span>
+<span class="n">END</span>
+<span class="n">Charge</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">INTEGRATION</span> <span class="mf">6.0</span> <span class="mf">6.0</span>
+
+<span class="n">SCF</span>
+ <span class="n">converge</span> <span class="mf">1.0e-6</span> <span class="mf">1.0e-6</span>
+ <span class="n">diis</span> <span class="n">ok</span><span class="o">=</span><span class="mf">0.01</span>
+ <span class="n">iterations</span> <span class="mi">99</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<p>The QUILD program will scan the input for the existence of a Geometry block (that indicates that QUILD should do an optimization), and will scan the Geometry block for the presence of the TransitionState keyword. If it is found, it will set the number of negative Hessian eigenvalues that are needed (nrnegneed) to 1, otherwise it will remain 0.</p>
+<p>The QUILD block should in this case contain a TSRC subblock where the coordinates involved in the transition state are given. In the example above, there are two TSRC coordinates, the C-Cl and the C-F bond, as indicated by the atom numbers. For the construction of the initial Hessian, a negative force constant is assigned to these coordinates. For instance in the outputfile, first the definition is given for the primitive coordinates as they are constructed by the QUILD program (with the TSRC coordinates shown below in blue):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Number</span> <span class="n">of</span> <span class="n">MM</span> <span class="n">coordinates</span> <span class="p">(</span><span class="n">valence</span><span class="p">,</span><span class="n">intramol</span><span class="p">,</span><span class="n">intermol</span><span class="p">)</span> <span class="p">:</span>    <span class="mi">32</span> <span class="p">(</span>   <span class="mi">32</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">)</span>
+<span class="o">--------------------------------------------------------------------------------</span>
+                             <span class="n">valence</span> <span class="n">coordinates</span>
+<span class="o">--------------------------------------------------------------------------------</span>
+     <span class="mi">1</span>  <span class="n">bnd</span>                <span class="mi">2</span>       <span class="mi">1</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">1</span>             <span class="mf">1.02076</span>
+     <span class="mi">2</span>  <span class="n">bnd</span>                <span class="mi">3</span>       <span class="mi">1</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">1</span>             <span class="mf">1.02076</span>
+     <span class="mi">3</span>  <span class="n">bnd</span>                <span class="mi">4</span>       <span class="mi">1</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">1</span>             <span class="mf">1.02076</span>
+     <span class="mi">4</span>  <span class="n">bnd</span>                <span class="mi">5</span>       <span class="mi">1</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">1</span>             <span class="mf">0.50000</span>
+     <span class="mi">5</span>  <span class="n">bnd</span>                <span class="mi">6</span>       <span class="mi">1</span>       <span class="mi">0</span>       <span class="mi">0</span>       <span class="mi">1</span>             <span class="mf">0.50000</span>
+     <span class="mi">6</span>  <span class="n">ang</span>                <span class="mi">3</span>       <span class="mi">1</span>       <span class="mi">2</span>       <span class="mi">0</span>       <span class="mi">2</span>             <span class="mf">0.90892</span>
+     <span class="mi">7</span>  <span class="n">ang</span>                <span class="mi">4</span>       <span class="mi">1</span>       <span class="mi">2</span>       <span class="mi">0</span>       <span class="mi">2</span>             <span class="mf">0.90892</span>
+<span class="n">etc</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Further down in the output, the force constants for the different MM coordinates are shown (with the ones for the TSRC coordinates given in blue):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Force</span> <span class="n">Constants</span> <span class="n">used</span><span class="p">:</span>
+
+ <span class="n">bnd</span>     <span class="mi">1</span>   <span class="mf">0.40831</span>      <span class="n">bnd</span>     <span class="mi">2</span>   <span class="mf">0.40831</span>      <span class="n">bnd</span>     <span class="mi">3</span>   <span class="mf">0.40831</span>      <span class="n">bnd</span>     <span class="mi">4</span>  <span class="o">-</span><span class="mf">0.03252</span>
+ <span class="n">bnd</span>     <span class="mi">5</span>  <span class="o">-</span><span class="mf">0.02804</span>      <span class="n">ang</span>     <span class="mi">6</span>   <span class="mf">0.20839</span>      <span class="n">ang</span>     <span class="mi">7</span>   <span class="mf">0.20839</span>      <span class="n">ang</span>     <span class="mi">8</span>   <span class="mf">0.20839</span>
+<span class="n">etc</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>which are also coupled with each other:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Off</span><span class="o">-</span><span class="n">diagonal</span> <span class="n">TSRC</span> <span class="n">Hessian</span><span class="o">-</span><span class="n">element</span> <span class="p">:</span>        <span class="mi">5</span>       <span class="mi">4</span>  <span class="o">-</span><span class="mf">0.04271</span>            <span class="o">-</span><span class="mf">0.02804</span>  <span class="o">-</span><span class="mf">0.03252</span>
+</pre></div>
+</div>
+<p>And finally, the contributions of the TSRC coordinates to the Hessian eigenvalues is reported:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Weight</span> <span class="n">TSRC</span><span class="o">-</span><span class="n">coord</span>     <span class="mi">1</span>    <span class="mi">4</span>   <span class="mf">1.00000</span> <span class="n">Flindh</span>    <span class="mf">0.50000</span>
+<span class="n">Weight</span> <span class="n">TSRC</span><span class="o">-</span><span class="n">coord</span>     <span class="mi">2</span>    <span class="mi">5</span>   <span class="mf">1.00000</span> <span class="n">Flindh</span>    <span class="mf">0.50000</span>
+
+<span class="n">Contributions</span> <span class="n">of</span> <span class="n">TSRC</span> <span class="n">coordinates</span> <span class="n">to</span> <span class="n">negative</span> <span class="n">Hessian</span> <span class="n">eigenvalue</span>     <span class="mi">1</span> <span class="ow">is</span>    <span class="mf">0.99996</span>
+<span class="n">Contribution</span> <span class="kn">from</span> <span class="nn">primitive</span>     <span class="mi">5</span>   <span class="mf">0.49998</span>     <span class="n">Bnd</span>     <span class="n">F</span>    <span class="mi">6</span>     <span class="n">C</span>    <span class="mi">1</span>
+<span class="n">Contribution</span> <span class="kn">from</span> <span class="nn">primitive</span>     <span class="mi">4</span>   <span class="mf">0.49998</span>     <span class="n">Bnd</span>     <span class="n">CL</span>   <span class="mi">5</span>     <span class="n">C</span>    <span class="mi">1</span>
+<span class="n">Contribution</span> <span class="kn">from</span> <span class="nn">primitive</span>    <span class="mi">17</span>   <span class="mf">0.00001</span>     <span class="n">Imp</span>     <span class="n">H</span>    <span class="mi">3</span>     <span class="n">C</span>    <span class="mi">1</span>     <span class="n">H</span>    <span class="mi">4</span>     <span class="n">H</span>    <span class="mi">2</span>
+<span class="n">Contribution</span> <span class="kn">from</span> <span class="nn">primitive</span>    <span class="mi">15</span>   <span class="mf">0.00001</span>     <span class="n">Imp</span>     <span class="n">H</span>    <span class="mi">4</span>     <span class="n">C</span>    <span class="mi">1</span>     <span class="n">H</span>    <span class="mi">2</span>     <span class="n">H</span>    <span class="mi">3</span>
+<span class="n">Contribution</span> <span class="kn">from</span> <span class="nn">primitive</span>    <span class="mi">16</span>   <span class="mf">0.00001</span>     <span class="n">Imp</span>     <span class="n">H</span>    <span class="mi">4</span>     <span class="n">C</span>    <span class="mi">1</span>     <span class="n">H</span>    <span class="mi">3</span>     <span class="n">H</span>    <span class="mi">2</span>
+
+<span class="n">Contributions</span> <span class="n">of</span> <span class="n">TSRC</span> <span class="n">coordinates</span> <span class="n">to</span> <span class="nb">all</span> <span class="n">Hessian</span> <span class="n">eigenvalues</span><span class="p">:</span>
+<span class="n">Eigval</span>     <span class="mi">1</span>  <span class="o">-</span><span class="mf">0.07305</span>    <span class="n">Contrib_All</span>    <span class="mf">0.99996</span>   <span class="n">per_tsrc</span>    <span class="mf">0.49998</span>   <span class="mf">0.49998</span>
+<span class="n">Eigval</span>     <span class="mi">2</span>   <span class="mf">0.01248</span>    <span class="n">Contrib_All</span>    <span class="mf">0.93816</span>   <span class="n">per_tsrc</span>    <span class="mf">0.46908</span>   <span class="mf">0.46908</span>
+</pre></div>
+</div>
+<p>As a result, the optimization converges within 10 cycles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>QUILD summary for sn2_ts_orig.out
+
+ Stp#       Energy      Gmax,adf      Grms,adf   Gmax,deloc.   Grms,deloc.   Symm #negH
+        (kcal/mol)        (a.u.)        (a.u.)        (a.u.)        (a.u.)
+=======================================================================================
+    1    -620.9561   0.007101756   0.003028991   0.011855992   0.003715738    C(3V)   1
+    2    -620.8929   0.023635611   0.007391899   0.013690739   0.005638699    C(3V)   1
+    3    -621.2068   0.016710875   0.005351311   0.026217447   0.007807519    C(3V)   1
+    4    -620.8176   0.004699225   0.001709580   0.011879183   0.003484516    C(3V)   1
+    5    -620.3782   0.008811234   0.002829390   0.018504386   0.005671159    C(3V)   1
+    6    -620.8564   0.001689444   0.000533251   0.002432001   0.001015262    C(3V)   1
+    7    -620.9381   0.002213820   0.000584005   0.000987755   0.000448095    C(3V)   1
+    8    -620.8942   0.000576597   0.000161025   0.000424960   0.000141833    C(3V)   1
+    9    -620.8840   0.000112994   0.000037557   0.000241219   0.000074629    C(3V)   1
+   10    -620.8831   0.000010191   0.000003368   0.000021158   0.000006610    C(3V)   1
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                 Geometry CONVERGED !!!
+                 Energy at optimized geometry :        -620.8831 (kcal/mol)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+</pre></div>
+</div>
+<p>Additionally, the QUILD optimizer allows to constrain bonds, angles or dihedrals during the optimization, in which it uses the method by Baker  [<a class="reference internal" href="References.html#reference-47"><span class="std std-ref">47</span></a>]. This method has the nice feature that the constraints do not have to be met in the initial geometry, but are enforced through the use of Lagrangian multipliers. The ability of adding constraints has been extended to perform a LinearTransit, i.e. a series of constrained optimizations, that can be used to scan a potential energy surface as function of e.g. a bond. For the S<sub>N</sub> 2 reaction shown above, the relevant input to do a LinearTransit would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">QUILD</span>
+  <span class="n">nrlt</span> <span class="mi">11</span>
+  <span class="n">CONSTR</span>
+    <span class="n">dist</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mf">2.5</span> <span class="mf">1.5</span>
+  <span class="n">SUBEND</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<p>This means that the C-F distance is reduced (while constrained) in 11 steps, starting from 2.5 Å and going to 1.5 Å, in steps of 0.1 Å. All other coordinates are free to optimize in this example, however a combination of more than one constrained coordinates is possible; either by including them also as LT coordinate, or simply as constraint.</p>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Special_cases.html" class="btn btn-neutral float-right" title="Special cases" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="AddRemove_method_for_capping_atoms.html" class="btn btn-neutral" title="AddRemove method for capping atoms" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

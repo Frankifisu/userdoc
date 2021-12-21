@@ -1,0 +1,35 @@
+#! /bin/sh
+
+# This example tries to do the same as in the COSMO-RS GUI Tutorial: pKa values,
+# using scripts
+# First some .coskf files are copied to the location where the scripts are running,
+# next the jobs are prepared and the reports are made.
+# Check the COSMO-RS GUI Tutorial: pKa values to see what to do with the results.
+
+echo "Results"
+
+rm -f job.sh
+cp $AMSHOME/examples/COSMO-RS/pKa/*.coskf .
+cp $AMSHOME/examples/COSMO-RS/pKa/*compoundlist .
+
+touch job.sh
+chmod +x job.sh
+
+echo "Acids"
+"$AMSBIN/crsprep" -t ACTIVITYCOEF -j t5.1a \
+                  -c tutoral5.1_acid.compoundlist > job.sh
+./job.sh
+"$AMSBIN/amsreport" t5.1a.crskf compounds-name
+"$AMSBIN/amsreport" t5.1a.crskf Activity-Coefficient
+"$AMSBIN/amsreport" t5.1a.crskf Gibbs-energy-solvation
+"$AMSBIN/amsreport" t5.1a.crskf Gibbs-energy-solute
+
+"$AMSBIN/crsprep" -t ACTIVITYCOEF -j t5.1b \
+                  -c tutoral5.1_base.compoundlist > job.sh
+./job.sh
+"$AMSBIN/amsreport" t5.1b.crskf compounds-name
+"$AMSBIN/amsreport" t5.1b.crskf Activity-Coefficient
+"$AMSBIN/amsreport" t5.1b.crskf Gibbs-energy-solvation
+"$AMSBIN/amsreport" t5.1b.crskf Gibbs-energy-solute
+
+echo "Ready"

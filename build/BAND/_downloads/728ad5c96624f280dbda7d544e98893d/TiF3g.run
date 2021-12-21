@@ -1,0 +1,39 @@
+#!/bin/sh 
+
+# Example for an ESR g-tensor calculation. More information in the documentation
+# of ESR
+
+# Be aware that this calculation must include the spin-orbit, relativistic
+# approximation (Relativistic ZORA Spin)!
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Atoms
+      Ti  0.0              0.0   0.0 
+      F   0.0              1.78  0.0
+      F  -1.541525218736  -0.89  0.0
+      F   1.541525218736  -0.89  0.0
+   end 
+End
+
+Engine Band 
+   Title TiF3
+
+   Relativity 
+      Level Spin-Orbit
+   End
+
+   ESR 
+      Enabled True
+   end 
+
+   Basis
+      Type DZ
+      Core None
+   End
+EndEngine 
+
+eor

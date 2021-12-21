@@ -1,0 +1,64 @@
+#!/bin/sh
+
+# This example shows how the Basin Hopping procedure can be used to find the
+# global minimum (and several local minima) of an Argon-13 cluster.
+# The LennardJones engine is used for computing energy and gradients.
+
+
+"$AMSBIN/ams" << EOF
+
+Task PESExploration
+
+System
+    Atoms
+        Ar       3.19796865788947       1.15934987330252      -1.33239534934505
+        Ar       0.77363272043336       0.86005279907579       4.44840472306942
+        Ar       6.16557782618638       1.42715657126078       1.00292335487038
+        Ar       1.31188973509015      -2.14075518617674      -0.96878076867831
+        Ar      -2.41087887202771      -1.38658115989663      -0.47288216008194
+        Ar      -0.21272211859964      -2.33529094743978       2.53956949757235
+        Ar       0.68146295080450       4.04228262113743      -1.08313269600570
+        Ar      -0.30271346683735       0.77172238432013      -2.86122291101125
+        Ar      -2.82554186881390       0.46651994777473       2.87593685953916
+        Ar       3.25381032839757      -0.76862912920592       2.01893019694943
+        Ar      -2.88251373018356       2.43351471156095      -0.54320785580135
+        Ar       0.18478571590318       0.93399697546301       0.81886912458718
+        Ar       2.90785012175754       3.08435653882379       2.01057298433565
+    End
+End
+
+PESExploration
+    Job BasinHopping
+    RandomSeed 10
+    Temperature 50.0
+    NumExpeditions 5
+    NumExplorers 5
+    FiniteDifference 1e-7
+
+    BasinHopping
+        Displacement 5.0
+        Steps 50
+        DisplacementDistribution gaussian
+        WriteUnique T
+    End
+
+    Optimizer
+        ConvergedForce 1e-8
+        MaxIterations 1000
+    End
+
+    StructureComparison
+        DistanceDifference 0.5
+        NeighborCutoff 7.6
+    End
+End
+
+#Engine ForceField
+#EndEngine
+Engine LennardJones
+    Rmin 3.81749342630018000  # sigma=3.401*angs, rmin=2**(1.0/6.0)*3.401*angs
+    Eps 0.000369915709507261  # eps=116.81*K
+    Cutoff 15.00              # 15*angs
+EndEngine
+
+EOF

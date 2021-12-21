@@ -1,0 +1,419 @@
+#! /bin/sh
+
+
+# One can run into SCF convergence problems when calculating certain types of
+# systems. Some of the notorious examples are transition metal oxides and
+# lanthanide compounds. Below, several approaches to solving the SCF convergence
+# problem are demonstrated.
+
+
+AMS_JOBNAME=Default $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test (default case)
+  basis
+    core Small
+    type DZ
+  end
+  scf
+    converge 1.0e-6 1.0e-6
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=MESA $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test MESA
+  basis
+    core Small
+    type DZ
+  end
+  scf
+    accelerationmethod MESA
+    converge 1.0e-6 1.0e-6
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=LISTb $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test (LISTb by Alex Wang)
+  basis
+    core Small
+    type DZ
+  end
+  scf
+    accelerationmethod LISTb
+    converge 1.0e-6 1.0e-6
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=LISTf $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test (LISTf by Alex Wang)
+  basis
+    core Small
+    type DZ
+  end
+  scf
+    accelerationmethod LISTf
+    converge 1.0e-6 1.0e-6
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=fDIIS $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test (fDIIS by Alex Wang)
+  basis
+    core Small
+    type DZ
+  end
+  scf
+    accelerationmethod fDIIS
+    converge 1.0e-6 1.0e-6
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+
+
+# A-DIIS method. The A-DIIS method combines the strength of the ARH and DIIS
+# methods. It does not require energy evaluation so it is much cheaper than the
+# ARH and Energy-DIIS methods.
+
+
+AMS_JOBNAME=ADIIS $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test (A-DIIS by Hu and Yang)
+  basis
+    core Small
+    type DZ
+  end
+  occupations KeepOrbitals=100
+  scf
+    accelerationmethod ADIIS
+    converge 1.0e-6 1.0e-6
+    iterations 300
+    mixing 0.05
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+
+
+# This example uses the LISTi method. LISTi is very
+# similar to the usual DIIS but typically it performs much better. It is also
+# computationally less expensive and scales better in parallel even though DIIS
+# is rarely a scaling bottleneck. 
+
+
+AMS_JOBNAME=LISTi $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test (LISTi)
+  basis
+    core Small
+    type DZ
+  end
+  scf
+    accelerationmethod LISTi
+    iterations 300
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+
+
+# This example uses the Augmented Roothaan-Hall (ARH) method. 
+# The basic idea of this method is that the density matrix is
+# optimized directly to minimize the total energy. Important: the ARH method can
+# be used with SYMMETRY NOSYM only. 
+
+
+AMS_JOBNAME=ARH $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test (Augmented Roothaan-Hall)
+  basis
+    core Small
+    type DZ
+  end
+  scf
+    arh
+    end
+    iterations 300
+    mixing 0.05
+  end
+  symmetry NOSYM
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+
+
+# This is an extension to the so-called 'electron smearing' method.
+# In this method, the electrons are distributed among orbitals around Fermi-
+# level using a pseudo-thermal distribution function. Although the result with
+# fractional occupation number has no physical sense, the method can be used to
+# achieve integer occupation numbers by reducing the smearing parameter step-
+# wise. 
+# A few notes:
+
+# You can specify up to ten comma-delimited values after Smear= (no spaces are
+# allowed). ADF will start from the first value and try to converge SCF using
+# it. If it succeeds, the next value will be picked and so on.
+
+# Because the whole process may require many cycles to converge it is important
+# to set the number of SCF cycles to a large value to avoid a premature
+# termination.
+
+
+AMS_JOBNAME=Smear $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test (Smear)
+  debug DIIS SDIIS
+  basis
+    core Small
+    type DZ
+  end
+  occupations Smear=0.2,0.1,0.07,0.05,0.03,0.02,0.01,0.007,0.005,0.001
+  scf
+    iterations 300
+    oldscf
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+
+# This example demonstrates the use of the Occupations Steep= option (see
+# the User's Guide for details). 
+
+# One difference is, obviously, in the Occupations keyword. The other difference
+# is more subtle. For stable convergence, it is often essential to switch off
+# DIIS and set the mixing parameter to a low value. Of course, it will make
+# convergence quite (sometimes very) slow. Ultimately you should get either an
+# aufbau configuration or a configuration with exactly degenerate HOMO. In this
+# example, the result is an aufbau solution.
+
+# Both methods should, in principle, give the same result, which is the case in
+# this example.
+
+
+AMS_JOBNAME=Steep $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test (Steep)
+  basis
+    core Small
+    type DZ
+  end
+  occupations Steep=0.5,0.3
+  scf
+    diis
+      n 0
+    end
+    iterations 300
+    mixing 0.05
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+
+# This example uses the so called Energy-DIIS method. Please note that similar
+# to ARH and unlike the standard SCF procedure in ADF this method requires
+# energy evaluation at each SCF cycle, which makes it significantly slower
+# compared to energy-free SCF.
+
+
+AMS_JOBNAME=EDIIS $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  1.730   0.000   0.000
+     Ti -1.730   0.000   0.000
+     O   0.000   1.224   0.000
+     O   0.000  -1.224   0.000
+     O   3.850   0.000   0.000
+     O  -3.850   0.000   0.000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ti2O4 SCF aid test (Energy-DIIS)
+  basis
+    core Small
+    type DZ
+  end
+  scf
+    converge 1.0e-6 1.0e-6
+    ediis
+    iterations 300
+    mixing 0.05
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor

@@ -1,0 +1,75 @@
+#! /bin/sh
+
+
+# Compute the approximate initial hessian using DFTB:
+
+AMS_JOBNAME=InitialHessian $AMSBIN/ams <<eor
+
+System
+  atoms
+     C         0.049484    0.042994    0.000000
+     H        -0.068980    0.638928   -0.915972
+     H        -0.068980    0.638928    0.915972
+     H        -0.841513   -0.626342    0.000000
+     H         0.555494   -1.148227    0.000000
+     Hg        2.303289   -0.007233    0.000000
+     Cl        4.429752    0.776056    0.000000
+     Cl        1.342057   -2.676083    0.000000
+  end
+  Symmetrize Yes
+end
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+End
+
+Engine DFTB
+  Model GFN1-xTB
+EndEngine
+eor
+
+# A ZORA scalar relativistic Transition State calculation using the 
+# initial hessian computed by DFTB
+
+AMS_JOBNAME=TS $AMSBIN/ams <<eor
+
+LoadSystem
+  File InitialHessian.results/dftb.rkf
+End
+
+EngineDebugging
+  NeverQuiet True
+End
+
+Task TransitionStateSearch
+
+GeometryOptimization
+  Convergence
+    Energy 1.25e-6
+  End
+  InitialHessian
+    Type FromFile
+    File InitialHessian.results/dftb.rkf
+  End
+End
+
+Properties
+  PESPointCharacter Yes
+End
+
+Engine ADF
+  Title Transition State: CH4 + HgCl2 <==> CH3HgCl + HCl
+  basis
+    Type TZP
+    Core Small
+    PerAtomType Symbol=Cl File=TZP/Cl.2p
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+EndEngine
+
+eor

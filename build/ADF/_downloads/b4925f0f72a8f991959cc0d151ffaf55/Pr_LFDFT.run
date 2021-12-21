@@ -1,0 +1,116 @@
+#!/bin/sh 
+
+
+# Application of the Ligand Field DFT approach for the atomic Pr 4f^2 -> Pr 4f^1
+# 5d^1 transition.
+
+# First an average of configuration calculation (AOC) is performed for the 4f^2
+# electron configuration, where 2 electrons are equally distributed over the 7
+# orbitals that have the most dominant Pr 4f character. Depending on the
+# electron configuration this might be a non-trivial task.
+
+SCM_LFDFT="$AMSHOME/examples/adf/Pr_LFDFT/LFDFT"
+export SCM_LFDFT
+
+AMS_JOBNAME=f2 $AMSBIN/ams <<eor
+System
+  atoms
+     Pr        0.000000    0.000000    0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  irrepoccupations
+     A 54 0.2857143 0.2857143 0.2857143 0.2857143 0.2857143 0.2857143 0.2857143
+  end
+  basis
+    core none
+    type ZORA/TZ2P+
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  symmetry nosym
+EndEngine
+eor
+
+# Next the an LFDFT calculation is performed including spin-orbit coupling (soc
+# 1). In this case there is 1 shell, and the nlval for 4f is '4 3'. The MO
+# indices should be the fractionally occupied levels of the AOC calculation (28
+# 29 30 31 32 33 34). Results are added on adf.rkf.
+
+
+$AMSBIN/lfdft <<eor
+ adffile f2.results/adf.rkf
+ nshel 1
+ nlval 4 3
+ MOind 28 29 30 31 32 33 34
+ soc 1
+eor
+
+rm logfile
+
+# Next an average of configuration calculation (AOC) is performed for the 4f^1
+# 5d^1 electron configuration, where 1 electron is equally distributed over the 
+# 7 orbitals that have the most dominant Pr 4f character, and 1 electron is
+# equally distributed over the 7 orbitals that have the most dominant Pr 5d
+# character. Depending on the electron configuration this might be a non-trivial
+# task.
+
+AMS_JOBNAME=f1d1 $AMSBIN/ams <<eor
+System
+  atoms
+     Pr        0.000000    0.000000    0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  irrepoccupations
+     A 54 0.1428571 0.1428571 0.1428571 0.1428571 0.1428571 0.1428571 0.1428571 0.2 0.2 0.2 0.2 0.2
+  end
+  basis
+    core none
+    type ZORA/TZ2P+
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  symmetry nosym
+EndEngine
+eor
+
+# Next the an LFDFT calculation is performed including spin-orbit coupling for
+# both 4f and 5d (soc 1 1). In this case there are 2 shells, and the nlval for
+# 4f is '4 3', and for 5d '5 2'. The MO indices should be the fractionally
+# occupied levels of the AOC calculation for 4f (28 29 30 31 32 33 34), and for
+# 5d (35 36 37 38 39). Results are added on adf.rkf.
+
+$AMSBIN/lfdft <<eor
+ adffile f1d1.results/adf.rkf
+ nshel 2
+ nlval1 4 3
+ nlval2 5 2
+ MOind1 28 29 30 31 32 33 34
+ MOind2 35 36 37 38 39
+ soc 1 1
+eor
+
+rm logfile
+
+# Next excitation energies are calculated for exciting from the ground state of
+# the Pr 4f^2 -> Pr 4f^1 5d^1. Input for lfdft_tdm are the 2 .t21 files that were
+# calculated previously. Results of the excitation energies are added on the
+# adf.rkf file belonging to state2.
+
+$AMSBIN/lfdft_tdm <<eor
+ state1 f2.results/adf.rkf
+ state2 f1d1.results/adf.rkf
+eor

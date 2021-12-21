@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# The calculation of the electric field gradient is invoked by the EFG key
+# block.
+
+# Since Sn is quite an heavy atom we use the scalar relativistic option.
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   FractionalCoords True
+
+   Lattice
+      3.8029  0.0  0.0
+      0.0  3.8029  0.0
+      0.0  0.0  4.8382
+   End
+
+   Atoms 
+      O   0.0  0.0  0.0
+      O   0.5  0.5  0.0
+      Sn  0.0  0.5  0.2369
+      Sn  0.5  0.0 -0.2369
+   End
+End
+
+Engine Band 
+   Title SnO EFG
+
+   NumericalQuality Basic ! Only for speed
+
+   Tails bas=1e-8 ! Only for reproducibility with nr. of cores
+
+   ! useful for Moessbauer spectroscopy: density and coulomb pot. at nuclei
+   PropertiesAtNuclei
+   End
+
+   EFG
+      Enabled True
+   End
+
+   Basis
+      Type DZ
+      Core none
+   End
+EndEngine
+eor
+

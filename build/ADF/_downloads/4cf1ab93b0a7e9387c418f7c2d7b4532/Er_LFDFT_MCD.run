@@ -1,0 +1,132 @@
+#!/bin/sh
+
+# Application of the Ligand Field DFT approach for the calculation
+# of the X-ray Magnetic Circular Dichroism (XMCD) for lanthanide ion and complexes.
+# This example calculates the XMCD spectra of the Er3+ ion
+# for an Er 4f^11 (ground state) -> Er 3d^9 4f^12 transition, in which case a 3d core
+# electron is promoted to the 4f shell.
+
+# First an average of configuration calculation (AOC) is performed, where 11
+# electrons are equally distributed over the 7 orbitals that have the most
+# dominant Er 4f character. Depending on the electron configuration this might
+# be a non-trivial task. 
+# Symmetry NOSYM should be specified.
+
+SCM_LFDFT="$AMSHOME/examples/adf/Er_LFDFT_MCD/LFDFT"
+export SCM_LFDFT
+
+AMS_JOBNAME=GS $AMSBIN/ams <<eor
+System
+  Atoms
+     Er      0.0000000000      0.0000000000      0.0000000000
+  End
+  Charge +3
+End
+
+task SinglePoint
+
+Engine adf
+  Unrestricted No
+  Symmetry NOSYM
+  IrrepOccupations
+   A 54 1.571428571428571 1.571428571428571 1.571428571428571 1.571428571428571 1.571428571428571 1.571428571428571 1.571428571428571 
+  End
+  basis
+     Core None
+     Type TZP
+  End
+  XC
+    GGA PBE
+  End
+EndEngine
+eor
+
+# When the AOC calculation is ready, you need to make sure that indeed the
+# partially occupied orbitals are dominantly f orbitals. In the ADF output you
+# can find the character of the MOs in the list of all MOs, ordered by energy,
+# with the most significant SFO gross populations.
+
+# Next the LFDFT calculation is performed including a magnetic field of 1 Tesla 
+# in the z-direction (Bfield 0 0 1),
+# which is needed for the XMCD calculation. In this case there is 1
+# shell, and the nlval for 4f is '4 3'. The MO indices should be the
+# fractionally occupied levels of the AOC calculation (in this case 28 29 30 31 32 33 34).
+
+$AMSBIN/lfdft << eor
+ adffile GS.results/adf.rkf
+ nshel 1
+ nlval 4 3
+ MOind 28 29 30 31 32 33 34
+ soc 1.0
+ Bfield 0.0 0.0 1.0 
+ DegeneracyThreshold 1.0E-8
+eor
+
+# Then, we need to calculate the electronic structure corresponding to the Er
+# core electron excitation. In this case, we promote 1 electron from 3d orbitals
+# to the 4f. Therefore, an average of configuration calculation (AOC) is
+# performed, where 9 electrons are equally distributed over the 5 orbitals 
+# that have the most dominant Er 3d character; and 11+1 electrons are 
+# equally distributed over the 7 orbitals that have the most dominant Er 4f 
+# character. Symmetry NOSYM should be specified.
+
+AMS_JOBNAME=ES $AMSBIN/ams <<eor
+System
+  Atoms
+     Er      0.0000000000      0.0000000000      0.0000000000
+  End
+  Charge +3
+End
+
+task SinglePoint
+
+Engine adf
+  Unrestricted No
+  Symmetry NOSYM
+  IrrepOccupations
+   A 18 1.8 1.8 1.8 1.8 1.8 26 1.714285714285714 1.714285714285714 1.714285714285714 1.714285714285714 1.714285714285714 1.714285714285714 1.714285714285714 
+  End
+  basis
+     Core None
+     Type TZP
+  End
+  XC
+    GGA PBE
+  End
+EndEngine
+eor
+
+# When the AOC calculation is ready, you need to make sure that indeed the
+# partially occupied orbitals are dominantly d and f orbitals. In the ADF output you
+# can find the character of the MOs in the list of all MOs, ordered by energy,
+# with the most significant SFO gross populations.
+
+# Next the LFDFT calculation is performed, again including a magnetic field of 1 Tesla 
+# in the z-direction (Bfield 0 0 1),
+# which is needed for the XMCD calculation. In this case there are 2
+# shells, and the nlval for 3d is '3 2' and 4f is '4 3'. The MO indices should be the
+# fractionally occupied levels of the AOC calculation 
+# (in this case 10, 11, 12, 13, and 14 for the 3d; and 28, 29, 30, 31, 32, 33, and 34 for 4f).
+
+$AMSBIN/lfdft << eor
+ adffile ES.results/adf.rkf
+ nshel 2
+ nlval1 3 2
+ nlval2 4 3
+ MOind1 10 11 12 13 14
+ MOind2 28 29 30 31 32 33 34
+ soc 1.0 1.0
+ Bfield 0.0 0.0 1.0
+ DegeneracyThreshold 1.0E-08
+eor
+
+# Finally, we use lfdft_tdm to calculate the oscillator strengths for the 
+# Er 4f^11 (ground state) -> 3d^9 4f^12 transitions. 
+# Input for lfdft_tdm are the 2 adf.rkf files that were
+# calculated previously. Results of the excitation energies are added on the
+# adf.rkf file belonging to state2.
+
+$AMSBIN/lfdft_tdm << eor
+ STATE1 GS.results/adf.rkf
+ STATE2 ES.results/adf.rkf
+eor

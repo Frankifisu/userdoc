@@ -1,0 +1,88 @@
+#!/bin/sh
+
+# With the EFIELD keyword you can specify a static electric field in the
+# z-direction.
+
+# == first run: field of 1.5427 Volt/Angstrom ==
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   lattice [Bohr]
+      15.0 0.0  0.0
+      0.0  15.0 0.0
+   End
+   Atoms [Bohr]
+      H   0.0 0.0 0.0
+      Li  0.0 1.0 3.0
+   End
+   ElectrostaticEmbedding
+      ElectricField 0.0 0.0 1.5427
+   End
+End
+
+Properties
+  Gradients True
+End
+
+Engine Band 
+   Output
+      Print Section=Properties Level=Detail
+   End
+   KSpace 
+      Quality GammaOnly
+   End
+
+   Basis
+      Type TZP
+      Core Large
+   End
+EndEngine
+eor
+
+rm -r ams.results
+
+# == second run: field of -1 Volt/Angstrom ==
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   lattice [Bohr]
+      15.0 0.0  0.0
+      0.0  15.0 0.0
+   End
+   Atoms [Bohr]
+      H   0.0 0.0 0.0
+      Li  0.0 1.0 3.0
+   End
+   ElectrostaticEmbedding
+      ElectricField 0.0 0.0 -1.0
+   End
+End
+
+Properties
+  Gradients True
+End
+
+Engine Band 
+
+Output
+   Print Section=Properties Level=Detail
+End
+
+
+   KSpace 
+      Quality GammaOnly
+   End
+
+   Basis
+      Type TZP
+      Core Large
+   End
+EndEngine
+
+eor

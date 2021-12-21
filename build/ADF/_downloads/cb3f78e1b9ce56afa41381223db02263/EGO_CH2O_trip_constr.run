@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# Example for an excited triplet state geometry optimization with a constraint
+# included.
+
+# Needed for such excited state optimizations are the key EXCITATIONS (to
+# calculate excitation energies), and the key EXCITEDGO (to select for which 
+# excitation a geometry optimization should be performed). 
+# Note that one has to select the state with the irrep name A'', and not with AAA.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C  0.0  0.0  0.0
+     O  1.2  0.0  0.0
+     H -0.5  0.5  0.9
+     H -0.5  0.4 -0.9
+  end
+end
+
+Task GeometryOptimization
+
+Constraints
+  Distance 1 2 1.2
+end
+
+Engine ADF
+  excitations
+    davidson
+    end
+    lowest 5
+    onlytrip
+  end
+  excitedgo
+    output 2
+    state A 1
+    triplet
+  end
+  numericalquality good
+  basis
+    core NONE
+    type DZ
+  end
+  symmetry nosym
+EndEngine
+eor

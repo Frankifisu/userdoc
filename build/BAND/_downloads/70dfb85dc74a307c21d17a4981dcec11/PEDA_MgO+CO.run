@@ -1,0 +1,187 @@
+#! /bin/sh
+
+# This example shall illustrate the use of the Fragment keywords in combination
+# with the PEDA keyword to perform the PEDA. For this example two fragment
+# calculations are necessary to calculate the unperturbed eigensystems of the
+# MgO slab and CO fragment.
+
+# == Fragment calculations ==
+
+# ------------------------------ MgO slab ------------------------
+
+AMS_JOBNAME=MgO $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  Atoms
+     Mg  0.00000000       0.00000000       0.00000000
+     Mg  1.50260191      -1.50260191      -2.12400000
+     Mg  0.00000000       0.00000000      -4.24800000
+     Mg  3.00520382       0.00000000       0.00000000
+     Mg  1.50260191       1.50260191      -2.12400000
+     Mg  3.00520382       0.00000000      -4.24800000
+     O   1.50260191      -1.50260191       0.00200000
+     O   0.00000000       0.00000000      -2.12400000
+     O   1.50260191      -1.50260191      -4.25000000
+     O   1.50260191       1.50260191       0.00200000
+     O   3.00520382       0.00000000      -2.12400000
+     O   1.50260191       1.50260191      -4.25000000
+  End
+
+  Lattice
+         3.00520382      -3.00520382       0.00000000
+         3.00520382       3.00520382       0.00000000
+  End
+End
+
+Engine Band 
+  Title MgO surface
+
+  skip dos
+
+  KSpace
+    Regular
+      NumberOfPoints 3 3
+    End
+  End
+
+  XC
+     GGA PBE
+  End
+
+  Basis
+     Type TZP
+     Core small
+  End
+EndEngine 
+
+eor
+
+#------------------------------ CO fragment ------------------------
+
+AMS_JOBNAME=CO $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  Atoms 
+     C   0.00000000       0.00000000       2.61000000
+     O   0.00000000       0.00000000       3.737000000
+  End
+
+  Lattice
+         3.00520382      -3.00520382       0.00000000
+         3.00520382       3.00520382       0.00000000
+  End
+End
+
+Engine Band 
+  Title CO fragment
+
+  KSpace
+    Regular
+      NumberOfPoints 3 3
+    End
+  End
+
+  XC
+     GGA PBE
+  End
+   
+  Basis
+     Type TZP
+     Core small
+  End
+EndEngine
+eor
+
+# == PEDA calculation ==
+
+# The two result files, MgO.kf and CO.kf, can now be used to perform the
+# PEDA. Here, the mapping of the atoms of the PEDA calculation and the fragment
+# calculations is necessary. And the used grid points in reciprocal space have
+# to be identical in all three calculations.
+
+# ----------------------------- PEDA calculation ------------------------
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System 
+  Atoms
+     Mg.frag_MgO  0.00000000       0.00000000       0.00000000
+     Mg.frag_MgO  1.50260191      -1.50260191      -2.12400000
+     Mg.frag_MgO  0.00000000       0.00000000      -4.24800000
+     Mg.frag_MgO  3.00520382       0.00000000       0.00000000
+     Mg.frag_MgO  1.50260191       1.50260191      -2.12400000
+     Mg.frag_MgO  3.00520382       0.00000000      -4.24800000
+     O.frag_MgO   1.50260191      -1.50260191       0.00200000
+     O.frag_MgO   0.00000000       0.00000000      -2.12400000
+     O.frag_MgO   1.50260191      -1.50260191      -4.25000000
+     O.frag_MgO   1.50260191       1.50260191       0.00200000
+     O.frag_MgO   3.00520382       0.00000000      -2.12400000
+     O.frag_MgO   1.50260191       1.50260191      -4.25000000
+     O.frag_CO    0.00000000       0.00000000       3.73700000
+     C.frag_CO    0.00000000       0.00000000       2.61000000
+  End
+
+  Lattice
+         3.00520382      -3.00520382       0.00000000
+         3.00520382       3.00520382       0.00000000
+  End
+End
+
+Engine Band   
+  Title PEDA
+
+  KSpace
+    Regular
+      NumberOfPoints 3 3
+    End
+  End
+
+  XC
+     GGA PBE
+  End
+   
+  fragment 
+    filename MgO.results/band.rkf
+    AtomMapping
+       1  1
+       2  2
+       3  3
+       4  4
+       5  5
+       6  6
+       7  7
+       8  8
+       9  9
+       10 10
+       11 11
+       12 12
+     End
+  end
+
+  fragment 
+    filename CO.results/band.rkf
+    AtomMapping
+       2  13
+       1  14
+     End
+  end
+
+  PEDA
+
+  Basis
+     Type TZP
+     Core small
+  End
+EndEngine
+
+eor
+
+# In the output file the results can be found in the PEDA block after the Energy
+# Analysis.
+

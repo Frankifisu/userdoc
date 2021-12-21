@@ -1,0 +1,62 @@
+#! /bin/sh
+
+# Induce a dipole moment in benzene by applying a field orthogonal to the ring
+
+for EField in 0 0.051422 0.51422 5.1422 ; do # which is 0.001 0.01 0.1 in atomic units
+
+AMS_JOBNAME=benzene_$EField $AMSBIN/ams << eor
+
+Task SinglePoint
+System
+    Atoms
+        C  2.09820318  1.21139817   0.0
+        C -0.69940106  1.21139817   0.0
+        C  1.39880212  0.0          0.0
+        C  1.39880212  2.42279634   0.0
+        C  0.0         2.42279634   0.0
+        C  0.0         0.0          0.0
+        H  3.18949204  1.21139817   0.0
+        H  1.94444655  3.36788021   0.0
+        H -0.54564443  3.36788021   0.0
+        H -1.79068992  1.21139817   0.0
+        H -0.54564443 -0.94508387   0.0
+        H  1.94444655 -0.94508387   0.0
+    End
+    ElectrostaticEmbedding
+        ElectricField 0.0 0.0 $EField
+    End
+End
+
+Engine MOPAC
+EndEngine
+
+eor
+
+done
+
+# If I apply an electric field of 1 [a.u.] (51.42 Volt/Angstrom = 1 a.u.) on a system with charge 1,
+# I expect the net force to be equal to the 1 [a.u.]
+
+AMS_JOBNAME=OH_plus $AMSBIN/ams << eor
+
+Task SinglePoint
+System
+    Atoms
+        O 0.0 0.0 0.0
+        H 1.0 0.0 0.0
+    End
+    Charge 1
+    ElectrostaticEmbedding
+        ElectricField 0.0 51.422 0.0
+    End
+End
+
+Properties
+    Gradients Yes
+End
+
+Engine MOPAC
+EndEngine
+
+eor
+

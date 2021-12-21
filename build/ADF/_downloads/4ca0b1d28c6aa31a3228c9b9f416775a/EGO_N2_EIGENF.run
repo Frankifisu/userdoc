@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# Example for a singlet excited state geometry optimization with eigenvector 
+# following (subkeyword EIGENFOLLOW of key EXCITEDGO), GGA functional used.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     N          0.0         0.0       -0.55
+     N          0.0         0.0        0.55
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence
+    gradients 0.0001
+  End
+End
+
+Engine ADF
+  title N2 Eigenvector follow. Lowest state at the starting geometry is not the lowest at min.
+  beckegrid
+    quality good
+  end
+  excitations
+    lowest 10
+    onlysing
+  end
+  excitedgo
+    eigenfollow
+    output 2
+    state A 1
+  end
+  basis
+    core NONE
+    type DZ
+  end
+  symmetry NOSYM
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+echo "StartGeometry"
+$AMSBIN/amsreport ams.results/ams.rkf Geometry-Angstrom
+echo "EndGeometry"

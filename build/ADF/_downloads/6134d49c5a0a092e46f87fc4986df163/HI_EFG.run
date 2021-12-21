@@ -1,0 +1,150 @@
+#! /bin/sh
+
+
+# Example shows a Hartree-Fock calculation with a non-relativistic, scalar relativistic ZORA,
+# and a spin-orbit coupled ZORA Hamiltonian. In this case ADF also calculates
+# the electric field gradient (EFG) at the H and I nuclei (keyword QTENS).
+
+# First the non-relativistic calculation.
+# Note that in this case the all-electron basis sets are obtained from the $AMSRESOURCES/ADF/ZORA directory
+
+# == non-relativistic ==
+
+
+AMS_JOBNAME=NR $AMSBIN/ams <<eor
+System
+  atoms
+     H 0 0 0
+     I 0 0 1.609
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type ZORA/TZ2P
+    CreateOutput Yes
+  end
+  qtens
+  xc
+    hartreefock
+  end
+EndEngine
+eor
+
+
+# == scalar relativistic ZORA ==
+
+# Next the scalar relativistic ZORA calculation. Note that in this case the all-electron basis sets are
+# also obtained from the $AMSRESOURCES/ADF/ZORA directory, but this is default place where the key BASIS will
+# search for basis sets in case of ZORA. ADF will also calculate the EFG including the small component density,
+# also called SR ZORA-4.
+
+AMS_JOBNAME=SR $AMSBIN/ams <<eor
+System
+  atoms
+     H 0 0 0
+     I 0 0 1.609
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  qtens
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    hartreefock
+  end
+EndEngine
+eor
+
+
+
+# == Relativistic Spinorbit ZORA ==
+
+# Next the spin-orbit coupled relativistic ZORA calculation. Note that in this case the all-electron basis sets are
+# also obtained from the $AMSRESOURCES/ADF/ZORA directory, but again this is default place where the key BASIS will search
+# for basis sets in case of ZORA. ADF will calculate the EFG including the small component density, also called ZORA-4.
+
+AMS_JOBNAME=SO $AMSBIN/ams <<eor
+System
+  atoms
+     H 0 0 0
+     I 0 0 1.609
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  qtens
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  xc
+    hartreefock
+  end
+EndEngine
+eor
+
+
+# == Relativistic Spinorbit ZORA with no symmetry ==
+
+# Should give the same results as with symmetry.
+
+AMS_JOBNAME=SO_nosym $AMSBIN/ams <<eor
+System
+  atoms
+     H 0 0 0
+     I 0 0 1.609
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  qtens
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  symmetry nosym
+  xc
+    hartreefock
+  end
+EndEngine
+eor

@@ -1,0 +1,94 @@
+#! /bin/sh
+
+
+# Example shows an unrestricted B3LYP calculation. In this case ADF also
+# calculates the hyperfine interactions at H, P, and O nuclei (keyword ESR).
+
+# The 'RIHartreeFock%DependencyThreshold' key is set to 1E-4. 
+# One should check that the results remain reliable if one uses a smaller value
+# for the DependencyThreshold key.
+
+
+AMS_JOBNAME=TZ2P $AMSBIN/ams <<eor
+System
+  atoms
+     O   1.492  0.000  0.000
+     P   0.000  0.000  0.000
+     H  -0.600 -0.650  1.100
+     H  -0.600 -0.650 -1.100
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title hfs H2PO B3LYP TZ2P
+  esr
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  numericalquality good
+  rihartreefock
+    dependencythreshold 1E-4
+    quality Normal
+  end
+  spinpolarization 1
+  unrestricted
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor
+
+
+
+# For the hyperfine interactions it is important to use all-electron basis sets
+# on the interesting nuclei. One can get more accurate results if one uses a
+# larger basis set, like the QZ4P basis set, which is present in the
+# $AMSRESOURCES/ADF/ZORA directory. 
+
+
+AMS_JOBNAME=QZ4P $AMSBIN/ams <<eor
+System
+  atoms
+     O   1.492  0.000  0.000
+     P   0.000  0.000  0.000
+     H  -0.600 -0.650  1.100
+     H  -0.600 -0.650 -1.100
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title hfs H2PO B3LYP QZ4P
+  esr
+  end
+  basis
+    core None
+    type ZORA/QZ4P
+  end
+  numericalquality good
+  rihartreefock
+    dependencythreshold 1E-4
+    quality Normal
+  end
+  spinpolarization 1
+  unrestricted
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor
+
+# The QZ4P results for the isotropic value of the A-tensor are approximately:
+# -24.61 MHz for 17O, 957.33 MHz for 31P, and 110.83 MHz for 1H.
+
+# You may want to compare the results with previous B3LYP results by N. R.
+# Brinkmann and I. Carmichael, J. Phys. Chem. A (2004), 108, 9390-9399, which
+# give for the Isotropic Fermi Contact Couplings (MHz) for the 2 A' State of H2
+# PO using B3LYP, with an aug-cc-pCVQZ basis set: -24.24 MHz for 17O, 963.33
+# MHz for 31P, and 111.51 MHz for 1H.
+

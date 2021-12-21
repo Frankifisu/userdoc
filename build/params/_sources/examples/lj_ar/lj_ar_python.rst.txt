@@ -1,0 +1,172 @@
+.. _LJ_Ar_Python:
+
+The params Python library
+=================================================================
+
+The :ref:`LJ_Ar_Tutorial` and :ref:`LJ_Ar_NoReferenceData` tutorials used the
+:ref:`ParAMS Main Script` to run the parametrization or calculate reference
+data. They used .yaml files for the job collection, training set, and engine
+collection.
+
+This tutorial shows how you can do the same things using the ``params``
+:ref:`Python library <Components>`. The Python library is more flexible, and
+offers many useful functions for manipulating the contents of data_sets,
+collections, and parameter interfaces.
+
+Run an optimization with the Python library
+-------------------------------------------------
+
+Here, the :ref:`LJ_Ar_Tutorial` tutorial is run with the params Python library.
+
+Download :download:`LJ_Ar_example.zip`, but replace the ``params.conf.py`` file with a file ``my_optimization.py`` containing the following:
+
+.. code:: ipython3
+
+    #!/usr/bin/env amspython
+
+    from scm.params import *
+
+    def main():
+        ### The training_set and job_collection contain paths to the corresponding .yaml files
+        training_set = DataSet('training_set.yaml')
+        job_collection = JobCollection('job_collection.yaml')
+
+        ### The LennardJonesParameters interface has two parameters: 
+        ### 'eps' (epsilon) and 'rmin' (distance at which the potential reaches a minimum)
+        interface = LennardJonesParameters()
+        interface['eps'].value = 3e-4     # Hartree
+        interface['eps'].range = (1e-5, 1e-2)
+        interface['rmin'].value = 4.0     # angstrom
+        interface['rmin'].range = (1.0, 8.0)
+        print("Initial parameters and ranges:")
+        print(interface)
+
+        ### Define an optimizer for the optimization task. Use either a CMAOptimizer or Scipy
+        #optimizer = CMAOptimizer(sigma=0.1, popsize=10, minsigma=5e-4) 
+        optimizer = Scipy(method='Nelder-Mead')   # Nelder-Mead
+
+        ### loss function: 'sse' = sum of squared errors
+        loss = 'sse'
+
+        ### run the optimization in serial
+        parallel = ParallelLevels(parametervectors=1, jobs=1)
+
+        ### Callbacks allow further control of the optimization procedure
+        ### Here, we stop the optimization after 2 minutes if it has not finished.
+        callbacks = [Logger(), Timeout(60*2)]
+
+        opt = Optimization(job_collection=job_collection,
+                           data_sets=training_set,
+                           parameter_interface=interface,
+                           optimizer=optimizer,
+                           loss=loss,
+                           parallel=parallel,
+                           callbacks=callbacks)
+
+        opt.summary()
+        opt.optimize()
+
+    if __name__ == '__main__':
+        main()
+
+This file is almost identical to the ``params.conf.py`` file. The differences are
+
+* The ``job_collection`` and ``training_set`` are now instances of :ref:`Job Collection` and :ref:`Data Set`.
+
+* The optimization is handled by the :ref:`Optimization` class. The :meth:`summary <scm.params.core.parameteroptimization.Optimization.summary>` method prints out a summary (akin to ``summary.txt``), and the :meth:`optimize <scm.params.core.parameteroptimization.Optimization.optimize>` method runs the optimization.
+
+To run the file, use the **amspython Python interpreter**:
+
+.. code:: ipython3
+    
+    "$AMSBIN/amspython" my_optimization.py
+
+
+Calculate reference values
+---------------------------------
+
+Here, the :ref:`LJ_Ar_NoReferenceData` tutorial is run with the params Python library.
+
+Download :download:`LJ_Ar_no_reference_data_example.zip`, but replace the file ``params.conf.py`` with a file ``calculate_reference_values.py`` file containing the following:
+
+.. literalinclude:: complete_example/LJ_Ar_no_reference_data/calculate_reference_values.py
+   :language: python
+
+Here, the :ref:`DataSetEvaluator` class is used to calculate the reference values.
+
+To run the file, use the **amspython Python interpreter**:
+
+.. code:: ipython3
+    
+    "$AMSBIN/amspython" calculate_reference_values.py
+
+
+Training and validation sets with the Python library
+----------------------------------------------------------------
+
+Here, the :ref:`LJ_Ar_ValidationSet` tutorial is run with the params Python library.
+
+Download :download:`LJ_Ar_validation_set.zip`, but replace the ``params.conf.py`` file with a file ``my_optimization.py`` containing the following:
+
+.. code:: ipython3
+
+    #!/usr/bin/env amspython
+
+    from scm.params import *
+
+    def main():
+        ### The training_set and job_collection contain paths to the corresponding .yaml files
+        training_set = DataSet('training_set.yaml')
+        validation_set = DataSet('validation_set.yaml')
+        job_collection = JobCollection('job_collection.yaml')
+
+        ### The LennardJonesParameters interface has two parameters: 
+        ### 'eps' (epsilon) and 'rmin' (distance at which the potential reaches a minimum)
+        interface = LennardJonesParameters()
+        interface['eps'].value = 3e-4     # Hartree
+        interface['eps'].range = (1e-5, 1e-2)
+        interface['rmin'].value = 4.0     # angstrom
+        interface['rmin'].range = (1.0, 8.0)
+        print("Initial parameters and ranges:")
+        print(interface)
+
+        ### Define an optimizer for the optimization task. Use either a CMAOptimizer or Scipy
+        #optimizer = CMAOptimizer(sigma=0.1, popsize=10, minsigma=5e-4) 
+        optimizer = Scipy(method='Nelder-Mead')   # Nelder-Mead
+
+        ### loss function: 'sse' = sum of squared errors
+        loss = 'sse'
+
+        ### run the optimization in serial
+        parallel = ParallelLevels(parametervectors=1, jobs=1)
+
+        ### Callbacks allow further control of the optimization procedure
+        ### Here, we stop the optimization after 2 minutes if it has not finished.
+        callbacks = [Logger(), Timeout(60*2)]
+
+        opt = Optimization(job_collection=job_collection,
+                           data_sets=[training_set, validation_set], # the first entry must be the training set
+                           parameter_interface=interface,
+                           optimizer=optimizer,
+                           loss=loss,
+                           parallel=parallel,
+                           callbacks=callbacks,
+                           logger_every=5,
+                           eval_every=5)
+
+        opt.summary()
+        opt.optimize()
+
+    if __name__ == '__main__':
+        main()
+
+The ``data_sets`` argument to the ``Optimization`` constructor contains a list of DataSet. The first entry must be
+the training set.
+
+
+To run the file, use the **amspython Python interpreter**:
+
+.. code:: ipython3
+    
+    "$AMSBIN/amspython" my_optimization.py
+

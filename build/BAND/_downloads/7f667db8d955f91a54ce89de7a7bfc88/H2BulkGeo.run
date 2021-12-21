@@ -1,0 +1,72 @@
+#! /bin/sh
+
+# This example shows how to optimize the geometry.
+
+# This example consists of two runs. The first run performs 5 iterations
+# regarding the geometry optimization. And the second run exploits the
+# possibility to restart a geometry optimization based on the rkf of a
+# previous, presumably non-converged run.
+
+# ----------------------------- first run --------------------------
+
+AMS_JOBNAME=First $AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+System
+  ATOMS [Bohr]
+    H   0.0 0.0 0.0
+    H   1.0 0.0 0.0
+  End
+
+  Lattice [Bohr]
+    5.0      0        0
+    0        5.0      0
+    0        0        5.0
+  End
+End
+
+GeometryOptimization
+  MaxIterations 5
+  Convergence Gradients=1e-6 Step=1.0e-3
+End
+
+Engine Band
+  Basis
+    Type DZP
+  End
+EndEngine
+
+eor
+
+
+# In the next run we use the result file to continue the geometry optimization.
+
+# ----------------------------- second run --------------------------
+
+$AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+LoadSystem
+  File First.results/ams.rkf
+End
+
+GeometryOptimization
+  MaxIterations 5
+  Convergence Gradients=1e-6 Step=1.0e-3
+End
+
+Engine Band
+  Basis
+     Type DZP
+  End
+EndEngine
+eor
+
+
+echo 'Extract optimized geometry from the rkf file'
+$AMSBIN/amsreport ams.results/ams.rkf -r 'Molecule%Coords##3'
+
+echo 'Extract number of steps from the rkf file'
+$AMSBIN/amsreport ams.results/ams.rkf -r 'History%nEntries'

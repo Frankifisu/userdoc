@@ -1,0 +1,69 @@
+#! /bin/sh
+
+
+# In this example solvent effects are calculated with the solvation model SM12
+# for Acetamide.
+
+# After a non-solvent (reference gas phase) calculation, the same geometry is
+# used in the solvated case. At the moment it is not possible to do a geometry
+# optimization with the SM12 model in ADF. The default SM12 parameters are used,
+# which means a solvation in Water is simulated.
+
+
+AMS_JOBNAME=Acetamide $AMSBIN/ams <<eor
+System
+  atoms
+     O      -0.08557000       1.83373000       0.00836000
+     C       0.09782000       0.61787000      -0.01303000
+     C      -1.04418000      -0.38854000      -0.01026000
+     N       1.35837000       0.07376000      -0.01671000
+     H      -0.79705000      -1.31834000      -0.54107000
+     H      -1.92168000       0.07841000      -0.46849000
+     H      -1.29425000      -0.64220000       1.03061000
+     H       1.51930000      -0.92568000      -0.01800000
+     H       2.15296000       0.70225000       0.03378000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type TZ2P
+  end
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     O      -0.08557000       1.83373000       0.00836000 adf.f=Acetamide
+     C       0.09782000       0.61787000      -0.01303000 adf.f=Acetamide
+     C      -1.04418000      -0.38854000      -0.01026000 adf.f=Acetamide
+     N       1.35837000       0.07376000      -0.01671000 adf.f=Acetamide
+     H      -0.79705000      -1.31834000      -0.54107000 adf.f=Acetamide
+     H      -1.92168000       0.07841000      -0.46849000 adf.f=Acetamide
+     H      -1.29425000      -0.64220000       1.03061000 adf.f=Acetamide
+     H       1.51930000      -0.92568000      -0.01800000 adf.f=Acetamide
+     H       2.15296000       0.70225000       0.03378000 adf.f=Acetamide
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  fragments
+     Acetamide Acetamide.results/adf.rkf
+  end
+  solvation SM12
+  end
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor

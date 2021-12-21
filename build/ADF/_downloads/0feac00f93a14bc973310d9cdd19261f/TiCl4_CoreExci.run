@@ -1,0 +1,322 @@
+#! /bin/sh
+
+
+# Calculation of the 2p Ti and 2p Cl core excitation energies of TiCl4
+
+# The state selective method (key SELECTEXCITATION) can be used to calculate
+# core excitation energies. The use of the key SELECTEXCITATION is similar as
+# the use of the key MODIFYEXCITATION. However, the key SELECTEXCITATION can not
+# be used in combination with the key MODIFYEXCITATION. In the state selective
+# method (key SELECTEXCITATION) the one-electron excited state configuration
+# space remains complete, whereas it is reduced in case the scheme with the
+# MODIFYEXCITATION key.
+
+AMS_JOBNAME=SOT $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     Ti 0.       0.        0.
+     Cl    2.36754     2.36754     2.36754
+     Cl   -2.36754    -2.36754     2.36754
+     Cl    2.36754    -2.36754    -2.36754
+     Cl   -2.36754     2.36754    -2.36754
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiCl4 TD-DFT spinorbit relativistic 2p Cl core excitations single orbital transitions
+  beckegrid
+    quality good
+  end
+  eprint
+    eigval 1000 1000
+  end
+  excitations
+    allowed
+    kfwrite 0
+    lowest 40
+    singleorbtrans
+  end
+  basis
+    core None
+    type DZ
+    CreateOutput Yes
+  end
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  selectexcitation
+    useoccrange -20.0 -16.0
+    usescaledzora
+  end
+  symmetry T(D)
+  xc
+    gga LB94
+  end
+EndEngine
+
+eor
+
+# == An example with the key MODIFYEXCITATION ==
+
+# In this example, the 12 lowest singlet-singlet excitation energies of T2
+# symmetry are calculated, the dipole allowed excitations. This can also be
+# achieved using the ALLOWED subkey in the key Excitation.
+
+# In this example only excitations from the 2t2 -orbital are included (see the
+# key MODIFYEXCITATION), an almost pure 2p core orbital of titanium. The orbital
+# energies of the uninteresting other occupied orbitals are artificially changed
+# to a large negative value (-1d6 hartree).
+
+
+AMS_JOBNAME=T2 $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     Ti 0.       0.        0.
+     Cl    2.36754     2.36754     2.36754
+     Cl   -2.36754    -2.36754     2.36754
+     Cl    2.36754    -2.36754    -2.36754
+     Cl   -2.36754     2.36754    -2.36754
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiCl4 TD-DFT scalar relativistic 2p Ti core excitations
+  beckegrid
+    quality good
+  end
+  eprint
+    eigval 1000 1000
+  end
+  excitations
+    davidson
+       T2 12
+    end
+    onlysing
+  end
+  modifyexcitation
+    useoccupied
+       T2 2
+    end
+    usescaledzora
+  end
+  basis
+    core None
+    type DZ
+    CreateOutput Yes
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  symmetry T(D)
+  xc
+    gga LB94
+  end
+EndEngine
+
+eor
+
+# In this example the 2p Cl core excitation energies of TiCl4 are calculated.
+
+# In this example only excitations from occupied orbitals are considered which
+# have orbital energies between -8 and -6 hartree, namely the 5a1, 1e, 1t1,
+# 4t2, and 5t2 orbitals, which are almost pure 2p core orbitals of chlorine.
+# The orbital energies of the uninteresting other occupied orbitals are again
+# artificially changed to a large negative value (-1d6 hartree).
+
+AMS_JOBNAME=OccRange $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     Ti 0.       0.        0.
+     Cl    2.36754     2.36754     2.36754
+     Cl   -2.36754    -2.36754     2.36754
+     Cl    2.36754    -2.36754    -2.36754
+     Cl   -2.36754     2.36754    -2.36754
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiCl4 TD-DFT scalar relativistic 2p Cl core excitations
+  beckegrid
+    quality good
+  end
+  eprint
+    eigval 1000 1000
+  end
+  excitations
+    allowed
+    lowest 50
+  end
+  modifyexcitation
+    useoccrange -8.0 -6.0
+    usescaledzora
+  end
+  basis
+    core None
+    type DZ
+    CreateOutput Yes
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  symmetry T(D)
+  xc
+    gga LB94
+  end
+EndEngine
+
+eor
+
+
+# Another possibility is the use of the subkey OccVirtRange:
+
+AMS_JOBNAME=OccVirt $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     Ti 0.       0.        0.
+     Cl    2.36754     2.36754     2.36754
+     Cl   -2.36754    -2.36754     2.36754
+     Cl    2.36754    -2.36754    -2.36754
+     Cl   -2.36754     2.36754    -2.36754
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiCl4 TD-DFT scalar relativistic 2p Cl core excitations
+  beckegrid
+    quality good
+  end
+  eprint
+    eigval 1000 1000
+  end
+  excitations
+    allowed
+    lowest 50
+  end
+  modifyexcitation
+    useoccvirtrange 7.0 100.0
+    usescaledzora
+  end
+  basis
+    core None
+    type DZ
+    CreateOutput Yes
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  symmetry T(D)
+  xc
+    gga LB94
+  end
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=SelectT2 $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     Ti 0.       0.        0.
+     Cl    2.36754     2.36754     2.36754
+     Cl   -2.36754    -2.36754     2.36754
+     Cl    2.36754    -2.36754    -2.36754
+     Cl   -2.36754     2.36754    -2.36754
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiCl4 TD-DFT scalar relativistic 2p Ti core excitations
+  beckegrid
+    quality good
+  end
+  eprint
+    eigval 1000 1000
+  end
+  excitations
+    davidson
+       T2 12
+    end
+    onlysing
+  end
+  basis
+    core None
+    type DZ
+    CreateOutput Yes
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  selectexcitation
+    useoccupied
+       T2 2
+    end
+    usescaledzora
+  end
+  symmetry T(D)
+  xc
+    gga LB94
+  end
+EndEngine
+
+eor
+
+AMS_JOBNAME=SelectOccVir $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     Ti 0.       0.        0.
+     Cl    2.36754     2.36754     2.36754
+     Cl   -2.36754    -2.36754     2.36754
+     Cl    2.36754    -2.36754    -2.36754
+     Cl   -2.36754     2.36754    -2.36754
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiCl4 TD-DFT scalar relativistic 2p Cl core excitations
+  beckegrid
+    quality good
+  end
+  eprint
+    eigval 1000 1000
+  end
+  excitations
+    allowed
+    lowest 25
+  end
+  basis
+    core None
+    type DZ
+    CreateOutput Yes
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  selectexcitation
+    useoccvirtrange 7.0 100.0
+    usescaledzora
+  end
+  symmetry T(D)
+  xc
+    gga LB94
+  end
+EndEngine
+
+eor

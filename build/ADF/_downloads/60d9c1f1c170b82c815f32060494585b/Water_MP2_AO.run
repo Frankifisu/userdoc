@@ -1,0 +1,35 @@
+#! /bin/sh
+
+# spin-restricted calculation on water, SOS-MP2
+# AO-based algorithm, 6 imaginary time points
+
+$AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     O   -0.702196054  -0.056060256   0.009942262
+     H   -1.022193224   0.846775782  -0.011488714
+     H    0.257521062   0.042121496   0.005218999
+  End
+End
+Symmetry
+  SymmetrizeTolerance 0.001
+End
+
+Task SinglePoint
+
+Engine ADF
+  Basis
+    core None
+    type TZP
+  End
+
+  XC
+    MP2
+    EmpiricalScaling SOS
+  End
+
+  MBPT nTime=6
+EndEngine
+
+eor

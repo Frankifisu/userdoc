@@ -1,0 +1,144 @@
+#!/bin/sh
+
+AMS_JOBNAME=0D $AMSBIN/ams << EOF
+
+Task TransitionStateSearch
+
+GeometryOptimization
+   Convergence Energy=1.25e-6
+End
+
+Properties
+   NormalModes true
+End
+
+System
+   Atoms
+      C       0.000000000000       0.000000000000       0.767685465031
+      C       0.000000000000       0.000000000000      -0.767685465031
+      H       0.964354016767       0.347635559279       1.177128271450
+      H      -0.181115782790      -1.008972856410       1.177128271450
+      H      -0.783238233981       0.661337297125       1.177128271450
+      H      -0.500471876676       0.894626767091      -1.177128271450
+      H      -0.524533568868      -0.880734742626      -1.177128271450
+      H       1.025005445540      -0.013892024465      -1.177128271450
+   End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+EndEngine
+
+EOF
+
+
+AMS_JOBNAME=1D $AMSBIN/ams << EOF
+
+Task TransitionStateSearch
+
+GeometryOptimization
+   Convergence Energy=1.25e-6
+End
+
+Properties
+   NormalModes true
+End
+
+System
+   Atoms
+      C       0.000000000000       0.000000000000       0.767685465031
+      C       0.000000000000       0.000000000000      -0.767685465031
+      H       0.964354016767       0.347635559279       1.177128271450
+      H      -0.181115782790      -1.008972856410       1.177128271450
+      H      -0.783238233981       0.661337297125       1.177128271450
+      H      -0.500471876676       0.894626767091      -1.177128271450
+      H      -0.524533568868      -0.880734742626      -1.177128271450
+      H       1.025005445540      -0.013892024465      -1.177128271450
+   End
+   Lattice
+      50.0  0.0  0.0
+   End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+EndEngine
+
+EOF
+
+
+AMS_JOBNAME=2D $AMSBIN/ams << EOF
+
+Task TransitionStateSearch
+
+GeometryOptimization
+   Convergence Energy=1.25e-6
+End
+
+Properties
+   NormalModes true
+End
+
+System
+   Atoms
+      C       0.000000000000       0.000000000000       0.767685465031
+      C       0.000000000000       0.000000000000      -0.767685465031
+      H       0.964354016767       0.347635559279       1.177128271450
+      H      -0.181115782790      -1.008972856410       1.177128271450
+      H      -0.783238233981       0.661337297125       1.177128271450
+      H      -0.500471876676       0.894626767091      -1.177128271450
+      H      -0.524533568868      -0.880734742626      -1.177128271450
+      H       1.025005445540      -0.013892024465      -1.177128271450
+   End
+   Lattice
+      50.0  0.0  0.0
+      0.0  50.0  0.0
+   End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+EndEngine
+
+EOF
+
+
+AMS_JOBNAME=3D $AMSBIN/ams << EOF
+
+Task TransitionStateSearch
+
+GeometryOptimization
+   Convergence Energy=1.25e-6
+End
+
+Properties
+   NormalModes true
+End
+
+System
+   Atoms
+      C       0.000000000000       0.000000000000       0.767685465031
+      C       0.000000000000       0.000000000000      -0.767685465031
+      H       0.964354016767       0.347635559279       1.177128271450
+      H      -0.181115782790      -1.008972856410       1.177128271450
+      H      -0.783238233981       0.661337297125       1.177128271450
+      H      -0.500471876676       0.894626767091      -1.177128271450
+      H      -0.524533568868      -0.880734742626      -1.177128271450
+      H       1.025005445540      -0.013892024465      -1.177128271450
+   End
+   Lattice
+      50.0  0.0  0.0
+      0.0  50.0  0.0
+      0.0   0.0 50.0
+   End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+EndEngine
+
+EOF

@@ -1,0 +1,42 @@
+#! /bin/sh
+
+
+# Calculation of the excitation energies of Pyridine using the range-separated
+# functional CAM-B3LYP. To use this range-separated functional CAM-B3LYP LibXC is needed. 
+# Note that CAM-B3LYP is not the same as CAMY-B3LYP.
+# For the LibXC range separated functionals, like CAM-B3LYP, the kernel consists 
+# of range separated ALDA plus the kernel of the range separated exact exchange part.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     N       0.00000000       0.00000000       1.07112000
+     C       0.00000000       0.00000000       3.88763000
+     C       0.00000000      -1.14432000       1.77593000
+     C       0.00000000       1.14432000       1.77593000
+     C       0.00000000       1.19947000       3.17299000
+     C       0.00000000      -1.19947000       3.17299000
+     H       0.00000000      -2.16297000       3.68508000
+     H       0.00000000      -2.06734000       1.18970000
+     H       0.00000000       0.00000000       4.97897000
+     H       0.00000000       2.16297000       3.68508000
+     H       0.00000000       2.06734000       1.18970000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  excitations
+    onlysing
+  end
+  basis
+    type DZP
+    core None
+  end
+  xc
+    libxc CAM-B3LYP
+  end
+EndEngine
+
+eor

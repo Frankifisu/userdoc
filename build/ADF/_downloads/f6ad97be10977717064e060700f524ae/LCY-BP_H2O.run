@@ -1,0 +1,37 @@
+#! /bin/sh
+
+
+# Example for the range separated functional LCY-BP for a geometry optimization
+# of water.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+    O  -0.00000000   0.00000000   0.46983780
+    H   0.00000000   0.63395481  -0.23491890
+    H   0.00000000  -0.63395481  -0.23491890
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence
+    Gradients 0.0001
+  End
+End
+
+Engine ADF
+  title H2O geometry with LCY-BP functional
+  basis
+    type DZP
+  end
+  noprint BAS FIT FUNCTIONS SFO
+  numericalquality Good
+  xc
+    gga Becke Perdew
+    rangesep GAMMA=0.75
+    xcfun
+  end
+EndEngine
+eor

@@ -1,0 +1,80 @@
+#! /bin/sh
+
+
+# This calculation illustrates:
+
+# - How to specify the net total charge on a molecule
+# - How to enforce breaking the symmetry that is present in the start-up
+#   situation, in this case to localize a hole in the electron density on one of
+#   the two equivalent atoms.
+# - How to prevent the scf from oscillating back and forth between the two
+#   equivalent situations or from even restoring the unwanted symmetry
+
+
+$AMSBIN/ams <<eor
+System
+  Atoms
+     N 0 0  -2.0
+     N 0 0   2.0
+  End
+  Charge 1
+End
+
+Task SinglePoint
+
+Engine ADF
+  Title N2+ hole localization
+  IrrepOccupations
+     sigma 3 // 1 0 1
+     pi    2 // 2
+  End
+
+  ModifyStartPotential
+     N/1    0.5   0.5
+     N/2      4   1
+  End
+  
+  Basis
+    Type DZP
+    Core Small
+    CreateOutput Yes
+  End
+
+  SCF
+    DIIS
+      ok 0.5
+    End
+  End
+  Unrestricted Yes
+  SpinPolarization 1
+  
+  Relativity 
+    Level None
+  End
+
+  Symmetry C(lin)
+EndEngine
+eor
+
+# The purpose of this run is to compute the N2+ ion, with the hole localized on
+# one of the atoms. In a very small system like N2+ this is a tricky thing to
+# do. The program has a tendency towards the symmetric solution, with the hole
+# delocalized. A few trial runs, just putting a net +1 charge into the system,
+# will reveal that clearly.
+
+# To achieve the desired situation we apply the key modifystartpotential to
+# break the symmetry of the initial potential. A potential is generated as if
+# the electronic cloud in the second N fragment is spin-polarized in a ratio 4:1
+# (this precise value is not very relevant), which achieves that initially a
+# non-symmetric solution is obtained. The symmetry must be specified, lest the
+# program determine and use the higher symmetry from the nuclear frame. This
+# would prevent any symmetry breaking altogether.
+
+# Next, in order to prevent that the system relaxes to the symmetric situation,
+# we apply the keeporbitals option of the occupations key. This fixes the
+# occupied orbitals in the sense that in each scf cycle the program will try to
+# keep the electrons in orbitals that resemble the previously occupied orbitals
+# as much as possible.
+
+# The key modifystartpotential here demonstrated has a more relevant and less
+# unstable application in larger systems. See the User's Guide for references.

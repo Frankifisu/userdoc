@@ -1,0 +1,117 @@
+Getting Started
+===============
+
+.. important::
+
+   The ParAMS toolkit is built on top of the `PLAMS <../plams/index.html>`_
+   library. For users new to scripting in the Amsterdam Modeling Suite we
+   recommend to first familiarize themselves with PLAMS. A good place to start
+   are the `PLAMS scripting tutorials <../Tutorials/WorkflowsAndAutomation/PythonScriptingWithPLAMS.html>`_.
+
+
+First Steps with ParAMS
+-----------------------
+
+Launch ``$AMSBIN/amspython``, and import all modules from ``scm.params``:
+
+>>> from scm.params import *
+
+There are three main components to the package:
+
+* The :ref:`Job Collection`, which represents a set of chemical systems
+  stored as `plams.Molecule <../plams/components/mol_api.html>`_ objects
+  alongside `AMS settings <../plams/interfaces/ams.html>`_ specific to each system.
+  The combination of system and settings clearly defines a computational *job*.
+  An example for a job could be a geometry optimization of a methane molecule.
+
+* A :ref:`Data Set`, which holds the definition of all properties that are
+  relevant for the parameter optimization. These could be
+  forces, energy and geometry of the aforementioned methane job.
+  The Data Set is responsible for the extraction and comparison of all properties to
+  their reference values, providing a *loss value* metric.
+
+* A :ref:`parameter interface <Parameter Interfaces>`, which serves as a translation layer
+  between an `AMS engine <../AMS/Engines.html>`_ and a list of parameters.
+  Any available parameter interface in ParAMS can be used for re-parameterization.
+
+Components interact with each other as follows:
+
+>>> print(jc) # jc is a JobCollection instance
+---
+ID: Water01
+ReferenceEngineID: None
+AMSInput: |
+   properties
+     gradients
+   End
+   system
+     Atoms
+                 O      0.0000000000      0.0000000000      0.5937200000
+                 H      0.0000000000     -0.7654400000     -0.0083600000
+                 H      0.0000000000      0.7654400000     -0.0083600000
+     End
+   End
+   task geometryoptimization
+...
+
+>>> print(ds) # ds is a DataSet instance
+---
+Expression: energy('Water01')
+Weight: 1.0
+ReferenceValue: -0.09210963293745549
+---
+Expression: forces('Water01')
+Weight: 1.0
+ReferenceValue: |
+   array([[-4.41310133e-11,  1.24966204e-10, -1.38738596e-05],
+          [-2.19091605e-11, -2.01034720e-05,  6.93698245e-06],
+          [-2.19091605e-11,  2.01036055e-05,  6.93698245e-06]])
+...
+
+>>> params = LennardJonesParameters() # params is a ParameterInterface instance
+>>> params.names # parameter names
+['eps', 'rmin']
+>>> print(params.x) # parameter values
+[0.0003, 3.0]
+>>> jobresults = jc.run(params) # calculate all jobs in `jc` with our parameters
+>>> loss       = ds.evaluate(jobresults)
+>>> print(loss) # How close are the results calculated with `params` to their reference values?
+2082.088800689759
+
+>>> params.x   = [0.0004, 4.] # change the parameter values ...
+>>> jobresults = jc.run(params) # ... re-calculate ...
+>>> loss       = ds.evaluate(jobresults) # ... and re-evaluate.
+2066.4096600168773
+
+Note how in the above code block we are manually assigning different parameter values to our
+`params` instance.
+This is the entry point to the fourth component in ParAMS - the :ref:`optimizer <Optimizers>`.
+Piecing it all together is a top-level :ref:`Optimization` class, which is managing the
+parameter fitting process based on user-defined settings.
+A simplified overview of the ParAMS parameterization loop is depicted in the figure below.
+
+.. figure:: _static/flowchart.png
+    :scale: 30%
+    :align: center
+
+For a hands-on dive into the workings of the package, we recommend
+checking out the :ref:`Examples` section (and trying them yourself).
+If at any point you stumble upon a class, whose functionality is not entirely clear,
+make sure to look it up in the respective :ref:`Components` subsection.
+Most of these provide additional examples on the component's functionality on top of
+introducing the complete API.
+
+Users that are keen on building their own ParAMS scripts can consult the :ref:`Architecture Quick Reference`
+for a rough guide on how different components interact with each other.
+
+Feel free to contact us at support@scm.com in case you encounter difficulties, bugs or
+have questions and comments regarding the package.
+
+Unit Tests
+----------
+
+1.	``cd $AMSHOME/scripting/scm/params/tests``
+2.	``./run_tests.sh``
+
+.. note::
+  The test test_ifreax.py will fail if you do not have a license for ReaxFF.

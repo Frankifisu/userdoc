@@ -1,0 +1,54 @@
+#!/bin/sh
+$AMSBIN/ams << eor
+
+Task GeometryOptimization 
+System
+    Atoms
+          C      -0.353812500     2.476687500     1.569096000
+          C       2.476687500    -0.353812500    -1.569096000
+          O      -0.353812500     2.476687500    -1.899878400
+          O       2.476687500    -0.353812500     1.899878400
+          N       0.460805400    -2.369694600     0.863238400
+          N      -1.168430400     1.662069600     0.863238400
+          N      -2.369694600    -1.168430400    -0.863238400
+          N       1.662069600     0.460805400    -0.863238400
+          H       1.073891700    -1.756608300     1.337736800
+          H      -1.781516700     1.048983300     1.337736800
+          H      -1.756608300    -1.781516700    -1.337736800
+          H       1.048983300     1.073891700    -1.337736800
+          H       0.418914000    -2.411586000    -0.130051200
+          H      -1.126539000     1.703961000    -0.130051200
+          H      -2.411586000    -1.126539000     0.130051200
+          H       1.703961000     0.418914000     0.130051200
+    End
+    Lattice
+          5.661000000     0.000000000     0.000000000
+          0.000000000     5.661000000     0.000000000
+          0.000000000     0.000000000     4.712000000
+    End
+End
+
+NumericalDifferentiation
+  StrainStepSize 0.00001
+  Parallel nCoresPerGroup=1
+End
+
+GeometryOptimization 
+  OptimizeLattice yes
+  Convergence Gradients=1e-3
+  Method Fire
+End
+
+
+Engine DFTB
+    Model DFTB3
+    ResourcesDir DFTB.org/3ob-3-1
+    DispersionCorrection D3-BJ
+    Technical
+      EwaldSummation Enabled=yes
+      AnalyticalStressTensor yes
+    End
+    KSpace Quality=GammaOnly
+EndEngine
+
+eor

@@ -1,0 +1,53 @@
+#! /bin/sh
+
+# A frequency calculation is performed using the mobile block Hessian
+# (MBH)method. The coordinates in the ATOMS section should be the partially
+# optimized coordinates (or the fully optimized coordinates would work too).
+
+# Such geometry optimization will not be discussed here any further. The next
+# input for ADF shows how to perform a frequency calculation with MBH.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C         0.000000    0.000000    0.000000
+     H         0.634671    0.634671    0.634671
+     H        -0.634671   -0.634671    0.634671
+     H        -0.634671    0.634671   -0.634671
+     H         0.634671   -0.634671   -0.634671
+  end
+end
+
+Task SinglePoint
+Properties
+    NormalModes True
+End
+
+NormalModes
+  Displacements Block
+  BlockDisplacements
+    BlockAtoms 1 2 3 4
+    RadialDisplacement 0.001
+  End
+End
+
+Engine ADF
+  title Methane
+  basis
+    core None
+    type DZ
+    CreateOutput Yes
+  end
+  numericalquality verygood
+  symmetry nosym
+EndEngine
+eor
+
+# The quality of the frequencies/modes depends largely on the block choice. Best
+# results are obtained when grouping atoms in a block if those atoms are known
+# to form rather rigid structures. For instance, grouping the 11 atoms of
+# benzene side group into a block, will usually result in representative
+# frequencies. In this example the block choice is only illustrative for the
+# methodology.
+

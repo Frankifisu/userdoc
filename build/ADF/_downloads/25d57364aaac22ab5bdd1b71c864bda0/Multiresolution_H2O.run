@@ -1,0 +1,99 @@
+#! /bin/sh
+
+# This example demonstrates how to use different levels of numerical precision
+# for different regions, with the aim of increasing computational efficiency.
+
+# Let us assume that we are interested in having an accurate description only
+# for a subregion of a large chemical system (in this simple example, the
+# central water molecule). The system can be divided into sub-regions and
+# different levels of numerical accuracy can be used for each of these sub-
+# regions.
+
+# In this example we will tweak:
+# - the basis set (Basis)
+# - the numerical integration (BeckeGrid)
+# - the density fitting for Coulomb potential (ZlmFit)
+# - the fit-set used in the Hartree-Fock Resolution of identity (RIHartreeFock)
+
+# Note: For the regions for which no quality has been explicitly defined
+# through a QualityPerRegion keyword, the quality defined in NumericalQuality
+# will be used (Normal, in this example).
+
+
+$AMSBIN/ams <<eor
+Task SinglePoint
+
+System
+  Atoms
+     O    0.00000000    0.00000000    0.00000000   region=Accurate
+     H    0.40399229   -0.65578342    0.63241539   region=Accurate
+     H    0.81410032    0.55624569   -0.23129097   region=Accurate
+     O   -3.02535626   -0.08473104   -0.47678489
+     H   -2.56531481    0.62644005    0.07759386
+     H   -2.25289644   -0.61700366   -0.80790649
+     O    2.95394790   -0.54939973   -0.38206034
+     H    3.91427727   -0.21304908   -0.44738291
+     H    2.87780992   -1.13241278   -1.20853726
+     O   -5.95425742   -0.56764616   -0.02016682   region=Far
+     H   -5.26308282   -0.46969096    0.69255963   region=Far
+     H   -5.42117992   -0.54361203   -0.86443121   region=Far
+     O    6.25171470   -0.62004899   -0.03702467   region=Far
+     H    6.16508647   -1.38696453    0.58541903   region=Far
+     H    7.09161199   -0.16700550    0.23679419   region=Far
+  End
+End
+
+Engine ADF
+
+   XC
+      LibXC B3LYP
+   End
+
+   ! ========================================================
+   ! Set different basis sets for atoms in different regions:
+   ! ========================================================
+
+   Basis
+      Type DZ
+      Core None
+      PerRegion Region=Accurate Type=TZP
+      PerRegion Region=Far      Type=SZ
+   End
+
+   ! =============================================================
+   ! Set the NumerialQuality to be used for the atoms that are not
+   ! explicitely defined through a QualityPerRegion keyword
+   ! =============================================================
+
+   NumericalQuality Normal
+
+   # ======================
+   # Numerical integration:
+   # ======================
+
+   BeckeGrid
+      QualityPerRegion Region=Accurate Quality=Good
+      QualityPerRegion Region=Far      Quality=Basic
+   End
+
+  # ======================================
+  # Density fitting for Coulomb potential:
+  # ======================================
+
+   ZlmFit
+      QualityPerRegion Region=Accurate Quality=Good
+      QualityPerRegion Region=Far      Quality=Basic
+   End
+
+  # ============================================================
+  # Hartree-Fock Resolution of identity (for hybrid functionals)
+  # ============================================================
+
+   RIHartreeFock
+      QualityPerRegion Region=Accurate Quality=Good
+      QualityPerRegion Region=Far      Quality=Basic
+   End
+
+EndEngine
+
+eor

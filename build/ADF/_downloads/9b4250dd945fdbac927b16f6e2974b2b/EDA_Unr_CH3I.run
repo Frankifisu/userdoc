@@ -1,0 +1,157 @@
+#!/bin/sh
+
+
+# An illustration of an unrestricted energy decomposition analysis (unrestricted EDA).
+
+# Prepared for bonding
+# --------------------
+
+# The electron configuration of the fragments is chosen such that the valence I p_z orbital
+# has 1 alpha electron, and the highest occupied Methyl orbital has 1 beta electron.
+# Note that this electron configuration of the fragments means that they
+# are so called 'prepared for bonding' in order to minimize the Pauli repulsion in
+# the electron pair bond.
+
+AMS_JOBNAME=I_A $AMSBIN/ams <<eor
+System
+  atoms
+     I  0.0 0.0 0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  irrepoccupations
+     Sigma.g 2 // 2
+     Sigma.u 1 // 0
+     Pi.g    2 // 2
+     Pi.u    2 // 2
+     Delta.g 2 // 2
+  end
+  basis
+    core Small
+    type TZ2P
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 1
+  symmetry D(lin)
+  unrestricted
+  xc
+    gga BP86
+  end
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=Methyl_B $AMSBIN/ams <<eor
+System
+  atoms
+     C       0.000000000000       0.000000000000      -0.239316000000
+     H      -0.521322100000      -0.902956360000      -0.562716000000
+     H      -0.521322100000       0.902956360000      -0.562716000000
+     H       1.042644200000      -0.000000000000      -0.562716000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core Small
+    type TZ2P
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization -1
+  unrestricted
+  xc
+    gga BP86
+  end
+EndEngine
+
+eor
+
+# The fragments are prepared. Next the unrestricted EDA is performed,
+# in which symmetry can be used.
+
+AMS_JOBNAME=ch3i $AMSBIN/ams <<eor
+System
+  atoms
+     C       0.000000000000       0.000000000000      -0.239316000000  adf.f=Methyl_B
+     H      -0.521322100000      -0.902956360000      -0.562716000000  adf.f=Methyl_B
+     H      -0.521322100000       0.902956360000      -0.562716000000  adf.f=Methyl_B
+     H       1.042644200000      -0.000000000000      -0.562716000000  adf.f=Methyl_B
+     I       0.000000000000       0.000000000000       1.927464000000  adf.f=I_A
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  fragments
+     I_A I_A.results/adf.rkf
+     Methyl_B Methyl_B.results/adf.rkf
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 0
+  unrestricted
+  unrestrictedfragments
+  xc
+    gga BP86
+  end
+EndEngine
+
+eor
+
+# Same calculation but now using ETS-NOCV.
+# ETS-NOCV: energy analysis using the Natural Orbitals for Chemical Valence.
+# In ETS-NOCV symmetry NOSYM is required.
+
+AMS_JOBNAME=etsnocv $AMSBIN/ams <<eor
+System
+  atoms
+     C       0.000000000000       0.000000000000      -0.239316000000  adf.f=Methyl_B
+     H      -0.521322100000      -0.902956360000      -0.562716000000  adf.f=Methyl_B
+     H      -0.521322100000       0.902956360000      -0.562716000000  adf.f=Methyl_B
+     H       1.042644200000      -0.000000000000      -0.562716000000  adf.f=Methyl_B
+     I       0.000000000000       0.000000000000       1.927464000000  adf.f=I_A
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  etsnocv
+  end
+  fragments
+     I_A I_A.results/adf.rkf
+     Methyl_B Methyl_B.results/adf.rkf
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 0
+  symmetry nosym
+  unrestricted
+  unrestrictedfragments
+  xc
+    gga BP86
+  end
+EndEngine
+
+eor

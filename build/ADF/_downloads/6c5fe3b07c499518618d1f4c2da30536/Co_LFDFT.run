@@ -1,0 +1,90 @@
+#!/bin/sh 
+
+# Application of the Ligand Field DFT approach for a Co^2+ d^7 electron
+# configuration. Here Co is surrounded by 6 Water molecules.
+
+# First an average of configuration calculation (AOC) is performed, where 7
+# electrons are equally distributed over the 5 orbitals that have the most
+# dominant Co 3d character. Depending on the electron configuration this might
+# be a non-trivial task. Symmetry NOSYM should be specified.
+
+
+SCM_LFDFT="$AMSHOME/examples/adf/Co_LFDFT/LFDFT"
+export SCM_LFDFT
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     Co        0.000000    0.000000    0.000000
+     O         2.113495    0.000000    0.000000
+     H         2.687264   -0.787336    0.000000
+     H         2.687264    0.787336    0.000000
+     O         0.000000   -2.016255    0.000000
+     H         0.000000   -2.587300    0.791160
+     H         0.000000   -2.587300   -0.791160
+     O        -2.113495    0.000000    0.000000
+     H        -2.687264   -0.787336    0.000000
+     H        -2.687264    0.787336    0.000000
+     O         0.000000    2.016255    0.000000
+     H         0.000000    2.587300    0.791160
+     H         0.000000    2.587300   -0.791160
+     O         0.000000    0.000000    2.124849
+     H         0.785128    0.000000    2.701737
+     H        -0.785128    0.000000    2.701737
+     O         0.000000    0.000000   -2.124849
+     H         0.785128    0.000000   -2.701737
+     H        -0.785128    0.000000   -2.701737
+  end
+  charge 2
+end
+
+Task SinglePoint
+
+Engine ADF
+  irrepoccupations
+     A 56 1.4 1.4 1.4 1.4 1.4
+  end
+  basis
+    core small
+    type TZP
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  symmetry nosym
+  xc
+    gga bp86
+  end
+EndEngine
+eor
+
+
+# When the AOC calculation is ready, you need to make sure that indeed the
+# partially occupied orbitals are dominantly d orbitals. In the ADF output you
+# can find the character of the MOs in the list of all MOs, ordered by energy,
+# with the most significant SFO gross populations.
+
+# Next two LFDFT calculations are performed, first without spin-orbit coupling
+# (soc 0), next including spin-orbit coupling (soc 1). In this case there is 1
+# shell, and the nlval for 3d is '3 2'. The MO indices should be the
+# fractionally occupied levels of the AOC calculation (in this case 29 30 31 32
+# 33).
+
+
+$AMSBIN/lfdft <<eor
+  adffile ams.results/adf.rkf
+  nshell 1
+  nlval1 3 2
+  MOind1 29 30 31 32 33
+  soc    0
+eor
+
+$AMSBIN/lfdft <<eor
+  adffile ams.results/adf.rkf
+  nshell 1
+  nlval1 3 2
+  MOind1 29 30 31 32 33
+  soc    1
+eor

@@ -1,0 +1,311 @@
+.. py:currentmodule:: scm.params.core.results_importer.ResultsImporter
+
+ResultsImporter overview
+=========================
+
+ResultsImporter summary
+------------------------
+
+The |ResultsImporter| class is convenient for setting up the :ref:`Job Collection`, :ref:`Data Set`, and :ref:`Engine Collection` from
+finished reference calculations.  A *results importer* typically affects all three of those classes
+with a single method (see :ref:`ResultsImporterDemonstration`)
+
+Most ResultsImporters work on **finished reference jobs**, coming from one of these :ref:`computational chemistry programs <ResultsImporterReferenceCodes>`:
+
+.. csv-table::
+   :header: Program, Required results files
+
+   "AMS (ADF, BAND, DFTB, ReaxFF, ...)", ``ams.rkf`` (and sometimes ``engine.rkf``)
+   VASP, ``OUTCAR`` (and optionally ``INCAR``)
+   Quantum ESPRESSO, Standard output file (often ending in ``.out``).
+
+The ResultsImporter
+
+* **reads the input and output** from the reference job,
+
+* **creates a reference engine** in the :ref:`Engine Collection` if it does not already exist,
+
+* **adds one or more jobs** to the :ref:`Job Collection` using one or more systems from the reference job, if they do not already exist
+
+* **adds one or more entries** to the :ref:`Data Set`
+
+The :ref:`ResultsImporterDemonstration` gives an example on how to use ResultsImporters.
+
+All ResultsImporters are summarized in the below table, where SP stands for SinglePoint, GO for GeometryOptimization, MD for MolecularDynamics, and QE for Quantum ESPRESSO.
+
+.. _ResultsImportersList:
+
+.. csv-table::
+   :header: ResultsImporter name, :ref:`add_singlejob <ResultsImporterAddSingleJob>`, :ref:`add_trajectory_singlepoints <ResultsImporterAddTrajectory>`, :ref:`add_reaction_energy <ResultsImporterAddReactionEnergy>`, :ref:`add_pesscan_singlepoints <ResultsImporterAddPESScan>`, :ref:`add_neb_singlepoints <ResultsImporterAddNEB>`, :ref:`add_pesexploration_singlepoints <ResultsImporterAddPESExploration>`
+
+   Reference job type, any, GO or MD, "SP, GO, or None [#jobtype_none]_", PESScan, NEB, PESExploration
+   :ref:`Reference program <ResultsImporterReferenceCodes>`, AMS/VASP/QE, AMS/VASP/QE, AMS/VASP/QE, AMS, AMS, AMS
+   # jobs added, 1, any, 1 per species, any, any, any
+   Default task, SP, SP, SP, SP, SP, SP
+   Allowed tasks, any, SP, SP or GO, SP, SP, SP
+   Systems, final frame [#system_add_singlejob]_, any, final frames, converged points, converged points, minima and transition states
+   # data_set entries, any, any, 1, any, any
+   Properties, all :ref:`extractors <AvailableExtractors>`, traj. prop. [#trajectory_properties]_, None, energy/relative_energies/stresstensor*, energy/relative_energies, energy/relative_energies
+   API docs, :meth:`add_singlejob`, :meth:`add_trajectory_singlepoints`, :meth:`add_reaction_energy`, :meth:`add_pesscan_singlepoints`, :meth:`add_neb_singlepoints`, :meth:`add_pesexploration_singlepoints`
+
+.. [#jobtype_none] add_reaction_energy can also be used without reference jobs, only the atomic coordinates are needed.
+.. [#system_add_singlejob] add_singlejob takes the "main molecule", unless the reference job is a PESScan (then the input molecule is used).
+.. [#trajectory_properties] Trajectory properties: energy, relative_energies, forces, stresstensor
+
+
+
+
+.. _ResultsImporterSettings:
+
+ResultsImporter settings
+----------------------------------
+
+When initializing a ``ResultsImporter``, you can pass a ``settings`` argument, that is
+either a string pointing to a ``results_importer_settings.yaml`` file, or which is a
+PLAMS Settings instance.
+
+Example:
+
+.. code:: ipython3
+
+    results_importer_settings = Settings()
+    results_importer_settings.trim_settings = True
+    results_importer_settings.default_go_settings.MaxIterations = 30
+    results_importer_settings.units.energy = 'kcal/mol'
+
+    ri = ResultsImporter(settings=results_importer_settings)
+
+
+For a detailed description of the available settings, see :meth:`__init__`.
+
+
+.. _ResultsImporterDatasets:
+
+Training set, validation set, etc.
+-------------------------------------------------------
+
+See the tutorial: :ref:`ResultsImporterDemonstrationDatasets`.
+
+Save and load from disk
+-------------------------------------
+
+The job collection, engine collection, data_set(s), and shortcut settings can be
+stored for later retrieval with the :meth:`store` method.
+
+To load them from files, pass the paths to the files as arguments to
+:meth:`__init__`.
+
+For an example, see the tutorial: :ref:`ResultsImporterDemonstrationSaveToDisk`.
+
+
+.. _ResultsImporterAddSingleJob:
+
+add_singlejob
+---------------
+
+:meth:`add_singlejob` adds 1 job to the job collection, together with an arbitrary number of entries in the data_set. 
+
+For how to use it, see the :ref:`ResultsImporterDemonstration`, in particular 
+
+- :ref:`ResultsImporterDemonstrationAddSingleJobSinglePoint` 
+- :ref:`ResultsImporterDemonstrationAddSingleJobGeometryOptimization`
+
+See also the API docs: :meth:`add_singlejob`
+
+Each entry in the data_set must be an :ref:`extractor <AvailableExtractors>` acting on the job.
+
+Adding for example ``'distance(0,1)'`` to the ``properties`` argument will add a data_set entry with the expression ``distance('jobname',0,1)``.
+
+Example:
+
+.. code:: ipython3
+
+    ri = ResultsImporter()
+    ri.add_singlejob('/path/to/ams.rkf', 
+                     properties=['energy', 'distance(0,1)'], 
+                     task='GeometryOptimization')
+
+    
+
+.. _ResultsImporterAddTrajectory:
+
+add_trajectory_singlepoints
+----------------------------
+
+:meth:`add_trajectory_singlepoints` extracts given number of frames from a trajectory file.
+The ``properties`` must be one or more of the following: ``energy``,
+``relative_energies``, ``forces``, or ``stresstensor``.
+
+For how to use it, see :ref:`ResultsImporterDemonstration`, in particular
+
+- :ref:`ResultsImporterDemonstrationAddTrajectory`
+
+See also the API docs: :meth:`add_trajectory_singlepoints`
+
+Example:
+
+.. code:: ipython3
+
+    ri = ResultsImporter()
+
+    # extract every 10 frames
+    ri.add_trajectory_singlepoints('/path/to/ams.rkf', 
+                      properties=['forces', 'relative_energies'], 
+                      start=0, 
+                      step=10)
+
+    # extract 20 frames
+    ri.add_trajectory_singlepoints('/path/to/ams.rkf', 
+                      properties=['forces', 'relative_energies'], 
+                      N=20)
+
+
+
+
+.. _ResultsImporterAddReactionEnergy:
+
+add_reaction_energy
+-------------------------
+
+:meth:`add_reaction_energy` calculates and adds a reaction energy to the
+data_set.  The reaction is automatically balanced: only the reactants and
+products need to specified, not the stoichiometric coefficients.
+The coefficients are normalized according to the ``normalization`` and ``normalization_value`` arguments.
+
+Setting ``normalization='r0'`` will set the coefficient for the first reactant
+to ``normalization_value``. ``normalization='r1'`` would correspond to the
+second reactant, etc. ``normalization='p0'`` would correspond to the first
+product, etc.
+
+add_reaction_energy can also be used with PLAMS molecules instead of reference
+jobs. In that case one should specify the reference value with the
+``reference`` keyword.
+
+For how to use it, see :ref:`ResultsImporterDemonstration`, in particular
+
+- :ref:`ResultsImporterDemonstrationAddReactionEnergy`
+
+See also the API docs: :meth:`add_reaction_energy`
+
+Simple example:
+
+.. code:: ipython3
+
+    ri = ResultsImporter()
+
+    # from reference jobs
+    ri.add_reaction_energy(reactants=['/reactant1/ams.rkf', '/reactant2/ams.rkf'],
+                           products=['/product1/ams.rkf', '/product2/ams.rkf'],
+                           normalization='r0',
+                           normalization_value=1.0)
+
+    # from Molecule instances. mol_1 etc. need to be PLAMS Molecules
+    ri.add_reaction_energy(reactants=[mol_1, mol_2],
+                           products=[mol_3, mol_4],
+                           normalization='p1',
+                           normalization_value=2.0,
+                           reference=12.34,
+                           unit='kcal/mol')
+
+
+
+.. _ResultsImporterAddPESScan:
+
+add_pesscan_singlepoints
+--------------------------------------
+
+:meth:`add_pesscan_singlepoints` extracts a given number of (converged) frames from an AMS PESScan reference job, and adds them as single point calculations to the job collection.
+
+.. important::
+
+   If you want to add a job with ``Task PESScan`` to the job collection, do not
+   use this shortcut but instead :ref:`ResultsImporterAddSingleJob`.
+
+.. tip::
+
+   Adding singlepoint calculations from a PESScan with
+   ``add_pesscan_singlepoints(job, properties='relative_energies')`` will give
+   a much faster parametrization than using ``add_singlejob(job,
+   properties='pes', task='PESScan')``. However, we in general recommend to use
+   ``add_singlejob`` instead, since it will give a more accurate
+   parametrization of the potential energy surface.
+
+The ``properties`` must be one or more of the following: ``energy``, ``relative_energies``, ``stresstensor*`` (``stresstensor``, ``stresstensor_2d``, etc., see :ref:`Available Extractors`).
+
+.. note::
+
+    Extracting the stress tensor from an energy-volume scan will only work if
+    CalcPropertiesAtPESPoints was set when running the job, i.e. if the files
+    ``PESPoint(1).rkf`` etc. exist in the same directory as ``ams.rkf``.
+
+See the API docs for details: :meth:`add_pesscan_singlepoints`
+
+Example:
+
+.. code:: ipython3
+
+    ri = ResultsImporter()
+
+    ri.add_pesscan_singlepoints('/path/to/ams.rkf',  # ams.rkf from a PESScan job
+                   properties=['relative_energies'])
+
+
+
+.. _ResultsImporterAddNEB:
+
+add_neb_singlepoints
+----------------------------------
+
+:meth:`add_neb_singlepoints` extracts the converged frames from an AMS NEB reference job, and adds them as single point calculations to the job collection.
+
+.. important::
+
+   If you want to add a job with ``Task NEB`` to the job collection, do not use this shortcut but instead :ref:`ResultsImporterAddSingleJob`.
+
+
+The ``properties`` must be one or more of the following: ``energy``, ``relative_energies``.
+
+See the API docs for details: :meth:`add_neb_singlepoints`
+
+Example:
+
+.. code:: ipython3
+
+    ri = ResultsImporter()
+
+    ri.add_neb_singlepoints('/path/to/ams.rkf',  # ams.rkf from a NEB job
+               properties=['relative_energies'])
+
+
+.. _ResultsImporterAddPESExploration:
+
+add_pesexploration_singlepoints
+--------------------------------------
+
+:meth:`add_pesexploration_singlepoints` extracts a given list of states an AMS
+PESExploration reference job, and adds them as single point calculations to the
+job collection.
+
+.. important::
+
+   If you want to add a job with ``Task PESExploration`` to the job collection
+   (although you probably do not because of how computationally demanding such
+   jobs are), do not use this shortcut but instead :ref:`ResultsImporterAddSingleJob`.
+
+
+The ``properties`` must be one or more of the following: ``energy``, ``relative_energies``.
+
+See the API docs for details: :meth:`add_pesexploration_singlepoints`
+
+Example:
+
+.. code:: ipython3
+
+    ri = ResultsImporter()
+
+    ri.add_pesexploration_singlepoints('/path/to/ams.rkf',  # ams.rkf from a PESExploration job
+                          properties=['relative_energies'],
+                          indices=[1,2,5,6]) # state numbers (start with 1)
+
+
+

@@ -1,0 +1,179 @@
+#!/bin/sh
+
+
+# With the key BONDORDER a bond order analysis is performed based on SFOs. Note
+# that symmetry used in the calculation should be NOSYM. 
+
+AMS_JOBNAME=benzene $AMSBIN/ams <<eor
+  Task SinglePoint
+  
+  System
+    atoms
+      C  0.0                 0.0                0.0
+      C  1.384765863418579   0.0                0.0
+      C  2.077148675918579   1.199242353439331  0.0
+      C  1.384765863418579   2.398484706878662  0.0
+      C  0.0                 2.398484706878662  0.0
+      C -0.6923829317092896  1.199242353439331  0.0
+      H  1.920830130577087  -0.9284905791282654 0.0
+      H  3.149277210235596   1.199242353439331  0.0
+      H  1.920830130577087   3.326975345611572  0.0
+      H -0.5360642671585083  3.326975345611572  0.0
+      H -1.764511466026306   1.199242353439331  0.0
+      H -0.5360642671585083 -0.9284905791282654 0.0
+    end
+  end
+
+  Properties
+    BondOrders Yes
+  End
+
+  Engine ADF 
+    title benzene BP/SZ bondorders PrintTolerance=0.05
+    basis
+     Type SZ
+     Core None
+    end
+    symmetry NOSYM
+    xc
+      gga becke perdew
+    end
+    BondOrders
+      PrintAll Yes
+      PrintTolerance 0.05
+    End
+    noprint sfo
+  EndEngine
+eor
+
+
+AMS_JOBNAME=ethelene $AMSBIN/ams <<eor
+  Task SinglePoint
+
+  System
+    atoms
+     C               0.0000    0.0000    0.0000
+     C               1.3319    0.0000    0.0000
+     H              -0.5723    0.9299    0.0000
+     H              -0.5725   -0.9297    0.0000
+     H               1.9043    0.9298    0.0000
+     H               1.9042   -0.9298    0.0000
+    end
+  end
+
+  Properties
+    BondOrders Yes
+  End
+
+  Engine ADF 
+    title ethylene BP/SZ bondorders-standard output
+    basis
+     Type SZ
+     Core None
+    end
+    symmetry NOSYM
+    xc
+     gga becke perdew
+    end
+    noprint sfo
+  EndEngine
+eor
+
+AMS_JOBNAME=Cr2 $AMSBIN/ams <<eor
+  Task GeometryOptimization
+
+  System
+    atoms
+     Cr 0.0 0.0 -0.8
+     Cr 0.0 0.0  0.8
+    end
+  end
+
+  GeometryOptimization
+    Convergence 
+      Gradients 0.0001
+    End
+  End
+
+  Properties
+    BondOrders Yes
+  End
+
+  Engine ADF 
+    title Cr2 BP/TZP - bondorder - standard printout
+    basis
+     Type TZP
+     Core None
+    end
+    symmetry NOSYM
+    xc
+     gga becke perdew
+    end
+    noprint sfo
+  EndEngine
+eor
+
+
+AMS_JOBNAME=Mo2 $AMSBIN/ams <<eor
+  Task GeometryOptimization
+
+  System
+    atoms
+     Mo 0.0 0.0 -1.0
+     Mo 0.0 0.0  1.0
+    end
+  end
+
+  Properties
+    BondOrders Yes
+  End
+
+  Engine ADF 
+    title Mo2 BP/TZP - bondorder - standard printout
+    basis
+     Type TZP
+     Core Small
+    end
+    symmetry NOSYM
+    relativity
+      level scalar
+      formalism ZORA
+    end
+    xc
+     gga becke perdew
+    end
+    noprint sfo
+  EndEngine
+eor
+
+
+AMS_JOBNAME=NaCl $AMSBIN/ams <<eor
+  Task SinglePoint
+
+  System
+    atoms
+     Na 0.0 0.0 0.0
+     Cl 0.0 0.0 2.377
+    end
+  end
+
+  Properties
+    BondOrders Yes
+  End
+
+  Engine ADF 
+    title NaCl BP/TZP - bondorder - standard printout
+    basis
+     Type DZP
+     Core None
+    end
+    symmetry NOSYM
+    xc
+     gga becke perdew
+    end
+    BondOrders 
+      PrintAll Yes
+    End
+    noprint sfo
+  EndEngine
+eor

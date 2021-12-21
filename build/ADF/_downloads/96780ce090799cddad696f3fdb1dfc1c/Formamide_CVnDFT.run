@@ -1,0 +1,121 @@
+#!/bin/sh
+
+
+# Calculation of the excitation energies of Formamide using the CV(n)-DFT
+# method. Due to bugs in older versions it is important to use ADF2016.105 or
+# later.
+
+# Example of CV(infinity)-DFT where the molecular orbitals for the particular
+# excitation are optimized (relaxed), which is called the R-CV(infinity)-DFT method.
+# In this case, the transition U-vector is frozen, while the orbitals are
+# relaxed. ALLPOINTS should be used in case of a symmetric molecule.
+# EXACTDENSITY should be used for precision reasons. Note that the irrep labels
+# for C(s) symmetry that are used in the excitation code (A' and A'') differ
+# from those that are used during the SCF (AA and AAA). The example contains of
+# 2 parts. In the first example singlet-singlet excitations are calculated using
+# the subkeyword ONLYSING in the EXCITATIONS block key. In the second example
+# singlet-triplet excitations are calculated replacing the subkeyword ONLYSING
+# with the subkeyword ONLYTRIP in the EXCITATIONS block key.
+
+
+AMS_JOBNAME=SS $AMSBIN/ams <<eor
+System
+  atoms
+     H -0.927427 -0.600301 0.000000
+     H  1.070498 -1.782390 0.000000
+     H  2.024514 -0.325050 0.000000
+     C  0.000000  0.000000 0.000000
+     O  0.000000  1.225060 0.000000
+     N  1.119392 -0.775069 0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allpoints
+  cvndft
+    iteration 10
+    r_cv_dft &
+      damporbrelax 0.2
+      relaxalpha 1
+      relaxbeta 1
+    end
+    tolerance 0.001
+  end
+  exactdensity
+  excitations
+    analytical
+    davidson
+       A' 2
+       A'' 2
+    end
+    lowest 4
+    onlysing
+    tolerance 1e-5
+  end
+  basis
+    core None
+    fittype ZORA/QZ4P
+    type DZ
+  end
+  numericalquality good
+  tda
+  title Formamide
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor
+
+
+
+AMS_JOBNAME=ST $AMSBIN/ams <<eor
+System
+  atoms
+     H -0.927427 -0.600301 0.000000
+     H  1.070498 -1.782390 0.000000
+     H  2.024514 -0.325050 0.000000
+     C  0.000000  0.000000 0.000000
+     O  0.000000  1.225060 0.000000
+     N  1.119392 -0.775069 0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allpoints
+  cvndft
+    iteration 10
+    r_cv_dft &
+      damporbrelax 0.2
+      relaxalpha 1
+      relaxbeta 1
+    end
+    tolerance 0.001
+  end
+  exactdensity
+  excitations
+    analytical
+    davidson
+       A' 2
+       A'' 2
+    end
+    lowest 4
+    onlytrip
+    tolerance 1e-5
+  end
+  basis
+    core None
+    fittype ZORA/QZ4P
+    type DZ
+  end
+  numericalquality good
+  tda
+  title Formamide
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor

@@ -1,0 +1,449 @@
+#!/bin/sh
+
+
+# =======
+# Benzene
+# =======
+
+AMS_JOBNAME=benzene $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      C     1.20938551     0.69823911     0.00000000
+      C    -1.20938551    -0.69823911     0.00000000
+      C     0.00000000     1.39647931     0.00000000
+      C     1.20938551    -0.69823911     0.00000000
+      C     0.00000000    -1.37647931     0.00000000
+      C    -1.20938551     0.69823911     0.00000000
+      H     2.18068291     1.24747033     0.00000000
+      H     2.16068291    -1.24747033     0.00000000
+      H     0.00000000    -2.49494279     0.00000000
+      H    -2.14068291    -1.24747033     0.00000000
+      H    -2.16068291     1.24747033     0.00000000
+      H     0.00000000     2.47494279     0.00000000
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           SingleOrbTrans
+               printlowest 20
+           End
+           TDDFTB
+               calc singlet
+               lowest 14
+               diagonalization davidson
+               DavidsonConfig
+                   ATCharges onTheFly
+               End
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+
+eor
+
+
+# =========
+# Butadiene
+# =========
+
+AMS_JOBNAME=butadiene $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      C     0.00466252    -0.00028952    -0.00104529
+      H    -0.49779025     0.97930953    -0.00159217
+      C     1.45987721     0.00047513    -0.00103479
+      C    -0.72357617    -1.12728993    -0.00048806
+      H     1.96233457    -0.97912057    -0.00242387
+      C     2.18814037     1.12751916     0.00036000
+      H     1.71167857     2.11236793     0.00203718
+      H     3.28068998     1.10035883     0.00074531
+      H    -1.81612590    -1.10012490    -0.00008198
+      H    -0.24711388    -2.11214067     0.00035465
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           SingleOrbTrans
+               printlowest 20
+           End
+           TDDFTB
+               calc triplet
+               lowest 13
+               diagonalization davidson
+               DavidsonConfig
+                   ATCharges onTheFly
+               End
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+
+eor
+
+
+# ============
+# Cyclopropene
+# ============
+
+AMS_JOBNAME=cyclopropene $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      C     0.57102290    -2.27031483     0.21362813
+      C     0.48029660    -0.79657680    -0.01804280
+      C     1.71237550    -1.60993397     0.21483841
+      H     0.05089823    -3.22311984     0.31173291
+      H     0.09953799    -0.14003315     0.78693532
+      H     0.26136156    -0.41625182    -1.03364050
+      H     2.79743635    -1.63396435     0.31513170
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           SingleOrbTrans
+               printlowest 20
+           End
+           TDDFTB
+               calc singlet
+               lowest 12
+               diagonalization davidson
+               DavidsonConfig
+                   ATCharges onTheFly
+               End
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+
+eor
+
+
+# ========
+# Ethylene
+# ========
+
+AMS_JOBNAME=ethylene $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      C     0.00000000     0.00000000     0.66358767
+      C     0.00000000     0.00000000    -0.66358767
+      H     0.00000000     0.93162477    -1.23681998
+      H     0.00000000     0.93162477     1.23681998
+      H     0.00000000    -0.93162477     1.23681998
+      H     0.00000000    -0.93162477    -1.23681998
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           SingleOrbTrans
+               printlowest 20
+           End
+           TDDFTB
+               calc triplet
+               lowest 14
+               diagonalization davidson
+               DavidsonConfig
+                   ATCharges onTheFly
+               End
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+
+eor
+
+
+
+# ============
+# Formaldehyde
+# ============
+
+AMS_JOBNAME=formaldehyde $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      C     0.00000000     0.00000000    -0.01786493
+      O     0.00000000     0.00000000    -1.20109680
+      H     0.00000000    -0.95460929     0.60948087
+      H     0.00000000     0.95460929     0.60948087
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           SingleOrbTrans
+               printlowest 20
+           End
+           TDDFTB
+               calc singlet
+               lowest 9
+               diagonalization davidson
+               DavidsonConfig
+                   ATCharges onTheFly
+               End
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+
+eor
+
+
+# =======
+# Glyoxal
+# =======
+
+AMS_JOBNAME=glyoxal $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      O     1.72385877     0.13122797     0.00000000
+      O    -1.72385877    -0.13122797     0.00000000
+      C     0.64697620    -0.39816537     0.00000000
+      C    -0.64697620     0.39816537     0.00000000
+      H     0.53384841    -1.53815588     0.00000000
+      H    -0.53384841     1.53815588     0.00000000
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           SingleOrbTrans
+               printlowest 20
+           End
+           TDDFTB
+               calc triplet
+               lowest 15
+               diagonalization davidson
+               DavidsonConfig
+                   ATCharges onTheFly
+               End
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+
+eor
+
+
+# ======
+# Ketene
+# ======
+
+AMS_JOBNAME=ketene $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      C     0.00000000     0.00000000     0.54640785
+      C     0.00000000     0.00000000    -0.78272675
+      O     0.00000000     0.00000000    -1.93849838
+      H     0.00000000    -0.94519170     1.08740863
+      H     0.00000000     0.94519170     1.08740863
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           SingleOrbTrans
+               printlowest 20
+           End
+           TDDFTB
+               calc singlet
+               lowest 12
+               diagonalization davidson
+               DavidsonConfig
+                   ATCharges onTheFly
+               End
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+
+eor
+
+
+# =======
+# Propene
+# =======
+
+AMS_JOBNAME=propene $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      C     0.00000000    -0.18063145     1.36950456
+      C     0.00000000     0.50453710     0.22489796
+      C     0.00000000    -0.12822183    -1.11902990
+      H     0.00000000     1.60588976     0.24796806
+      H     0.00000000     0.32869011     2.33647979
+      H     0.00000000    -1.27447627     1.38113901
+      H     0.00000000    -1.22278585    -1.05105048
+      H     0.88416595     0.18349923    -1.69495452
+      H    -0.88416595     0.18349923    -1.69495452
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           SingleOrbTrans
+               printlowest 20
+           End
+           TDDFTB
+               calc triplet
+               lowest 13
+               diagonalization davidson
+               DavidsonConfig
+                   ATCharges onTheFly
+               End
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+
+eor
+
+
+# ========
+# Propynal
+# ========
+
+AMS_JOBNAME=propynal $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      C     0.00000000     0.27956244    -1.52026344
+      C     0.00000000     0.12195280    -0.32047659
+      C     0.00000000    -0.19208888     1.11108555
+      O     0.00000000     0.63096241     1.98042927
+      H     0.00000000    -1.31675676     1.32754962
+      H     0.00000000     0.47636799    -2.57832442
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           SingleOrbTrans
+               printlowest 20
+           End
+           TDDFTB
+               calc singlet
+               lowest 10
+               diagonalization davidson
+               DavidsonConfig
+                   ATCharges onTheFly
+               End
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+
+eor
+
+
+# ========
+# Pyridine
+# ========
+
+AMS_JOBNAME=pyridine $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+      N     0.00000000     0.00000000    -1.60262045
+      C     0.00000000     0.00000000     1.19107401
+      C     0.00000000     1.15158459    -0.91948133
+      C     0.00000000    -1.15158459    -0.91948133
+      C     0.00000000    -1.19927371     0.47941227
+      C     0.00000000     1.19927371     0.47941227
+      H     0.00000000     2.16322205     1.00470037
+      H     0.00000000     2.09200426    -1.50384439
+      H     0.00000000     0.00000000     2.28997262
+      H     0.00000000    -2.16322205     1.00470037
+      H     0.00000000    -2.09200426    -1.50384439
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           SingleOrbTrans
+               printlowest 20
+           End
+           TDDFTB
+               calc triplet
+               lowest 15
+               diagonalization davidson
+               DavidsonConfig
+                   ATCharges onTheFly
+               End
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+
+eor
+

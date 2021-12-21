@@ -1,0 +1,52 @@
+Architecture Quick Reference
+============================
+The following diagram is intended as a quick reference to aid in the building / debugging of personal workflows with ParAMS,
+listing main input-output interactions between classes.
+Boxes bordering from the left are inputs to the ones on the right.
+For more information about a specific class, see it's respective section.
+
+..
+  .. image:: /_static/arch.png
+    :height: 850px
+    :align: center
+
+..
+  Link to editable ASCII diagram:
+  https://textik.com/#54c418c4637a15dd
+
+.. code-block:: text
+
+  +--------------------+--------------------+--------------------+--------------------+
+  |  plams.Settings()  |                    |                    |                    |
+  +--------------------+     JCEntry()      |   JobCollection()  |                    |
+  |  plams.Molecule()  |                    |                    |                    |
+  +--------------------+--------------------+--------------------|                    |
+                                            |                    |                    |
+                       +--------------------+     DataSet()      |                    |
+                       |   extractor.py     |                    |                    |
+                       +--------------------+--------------------|                    |
+                                            |                    |                    |
+                                            |ParameterInterface()|                    |
+                                            |                    |                    |
+                                            +--------------------|    Optimization()  |
+                                            |                    |                    |
+                                            |     Optimizer()    |                    |
+                                            |                    |                    |
+                                            +--------------------|                    |
+                                            |                    |                    |
+                                            |  ParallelLevels()  |                    |
+                                            |                    |                    |
+                                            +--------------------|                    |
+                                            |                    |                    |
+                                            |       Loss()       |                    |
+                                            |                    |                    |
+                                            +--------------------|                    |
+                                            |                    |                    |
+                                            |     Callback()     |                    |
+                                            |                    |                    |
+                                            +--------------------+--------------------+
+                       +--------------------+--------------------+--------------------+
+                       |  plams.Settings()  |                    |                    |
+                       +--------------------+      Engine()      | EngineCollection() |
+                                            |                    |                    |
+                                            +--------------------+--------------------+

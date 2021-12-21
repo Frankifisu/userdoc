@@ -1,0 +1,116 @@
+#! /bin/sh
+
+
+# Example for calculation of ETS-NOCV for spin-restricted fragments. ETS-NOCV:
+# energy analysis using the Natural Orbitals for Chemical Valence. The CH2
+# molecule and Cr(CO)5 are the fragments, which form Cr(CO)5 CH2 molecule.
+
+# First the two fragments are calculated.
+
+
+AMS_JOBNAME=CH2 $AMSBIN/ams <<eor
+System
+  atoms
+     C        -0.429104    1.732058   -0.225052
+     H         0.407023    2.440417   -0.352323
+     H        -1.385325    2.281354   -0.254124
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title CrCO5--[CH2] run from CrCO5 and CH2 closed shell fragments,FULL electron calc.!
+  basis
+    core None
+    type DZP
+  end
+  symmetry NOSYM
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+
+
+AMS_JOBNAME=CrCO5 $AMSBIN/ams <<eor
+System
+  atoms
+     Cr       -0.248053   -0.169062    0.005810
+     C        -0.072963   -2.080685    0.229583
+     O         0.030811   -3.223220    0.361925
+     C        -0.182894    0.049840    1.909128
+     O        -0.142780    0.212309    3.050403
+     C        -0.299940   -0.409118   -1.894730
+     O        -0.331795   -0.521589   -3.042336
+     C        -2.138631   -0.242152    0.075713
+     O        -3.295036   -0.249916    0.115045
+     C         1.624487    0.092244   -0.083118
+     O         2.763411    0.288575   -0.140976
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title [CrCO5] run
+  basis
+    Type DZP
+    Core None
+    PerAtomType Symbol=Cr Type=TZP
+  end
+  symmetry NOSYM
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+
+# Next these fragments are used in the calculation of the full complex. The keys
+# ETSNOCV and 'PRINT etslowdin' are needed in this case to to analyze the
+# bonding in the molecule with respect to the fragments. The symmetry must be
+# NOSYM.
+
+
+AMS_JOBNAME=CrCO5_CH2 $AMSBIN/ams <<eor
+System
+  atoms
+     C        -0.429104    1.732058   -0.225052 adf.f=f1
+     Cr       -0.248053   -0.169062    0.005810 adf.f=f2
+     C        -0.072963   -2.080685    0.229583 adf.f=f2
+     O         0.030811   -3.223220    0.361925 adf.f=f2
+     C        -0.182894    0.049840    1.909128 adf.f=f2
+     O        -0.142780    0.212309    3.050403 adf.f=f2
+     C        -0.299940   -0.409118   -1.894730 adf.f=f2
+     O        -0.331795   -0.521589   -3.042336 adf.f=f2
+     C        -2.138631   -0.242152    0.075713 adf.f=f2
+     O        -3.295036   -0.249916    0.115045 adf.f=f2
+     C         1.624487    0.092244   -0.083118 adf.f=f2
+     O         2.763411    0.288575   -0.140976 adf.f=f2
+     H         0.407023    2.440417   -0.352323 adf.f=f1
+     H        -1.385325    2.281354   -0.254124 adf.f=f1
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title CrCO5--[CH2], etsnocv acitivated by etsnocv and print etslowdin
+  etsnocv
+    ekmin 1.5
+    enocv 0.05
+    rhokmin 1.e-3
+  end
+  fragments
+     f1 CH2.results/adf.rkf
+     f2 CrCO5.results/adf.rkf
+  end
+  print etslowdin
+  symmetry NOSYM
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor

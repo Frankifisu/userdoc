@@ -1,0 +1,76 @@
+#! /bin/sh
+
+# This example demonstrates in the first step how to calculate the Hessian.
+# The second run uses the pre-calculated Hessian and performs a transition
+# state search along the frequency mode with the smallest frequency.
+
+
+# First run: Calculate Hessian
+# ============================
+
+AMS_JOBNAME=hessian $AMSBIN/ams << EOF
+
+   Task SinglePoint
+
+   Properties
+      Hessian True
+   End
+
+   System
+      Atoms
+         C  0.0  0.0  0.0
+         O  1.5  0.5  0.0
+      End
+      Lattice
+         3.2  0.0  0.0
+      End
+   End
+
+   Engine Band
+      Basis Type=DZP
+      KSpace Quality=Good
+   EndEngine
+
+EOF
+
+
+# Second run: TS search with initial Hessian
+# ==========================================
+
+AMS_JOBNAME=TS $AMSBIN/ams << EOF
+
+   Task TransitionStateSearch
+
+   System
+      Atoms
+         C  0.0  0.0  0.0
+         O  1.5  0.5  0.0
+      End
+      Lattice
+         3.2  0.0  0.0
+      End
+   End
+
+   GeometryOptimization
+      Convergence Gradients=1.0e-4
+      InitialHessian
+         # Load the pre-calculated Hessian as the initial Hessian for the
+         # transition state search using the Quasi-Newton based optimizer.
+         Type FromFile
+         File hessian.results/band.rkf
+      End
+   End
+
+   Properties
+      # Also calculate normal modes in the end, so we can see if we actually
+      # found a transition state.
+      NormalModes True
+   End
+
+   Engine Band
+      Basis Type=DZP
+      KSpace Quality=Good
+   EndEngine
+
+EOF
+

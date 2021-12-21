@@ -1,0 +1,1888 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FDE: Frozen Density Embedding &mdash; ADF 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ADF 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Solvents and other environments" href="Solvents_and_other_environments.html"/>
+        <link rel="next" title="SCRF: Self-Consistent Reaction Field" href="SCRF.html"/>
+        <link rel="prev" title="QM/FQ: Quantum Mechanics/Fluctuating Charges (and Fluctuating Dipoles)" href="FQ-QM.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search ADF" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-ADF" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General/General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General/Introduction.html">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#adf-is-an-ams-engine">ADF is an AMS Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#functionality">Functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#applicability">Applicability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#model-hamiltonian">Model Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#technical">Technical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#index-0">Fragments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../General/Introduction.html#basic-atoms">Basic atoms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Introduction.html#automatic-mode">Automatic mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#slater-type-basis-sets">Slater-type basis sets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Release.html">What’s new in ADF 2022.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#new-features">New features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Release.html#what-s-new-in-adf-2021-1">What’s new in ADF 2021.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#id1">New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#new-defaults">New Defaults</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Release.html#adf-is-an-ams-engine">ADF is an AMS Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General/AMSification_of_ADF.html">AMSification of ADF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#restructuring-of-the-input">Restructuring of the input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#restructuring-of-input-keys">Restructuring of input keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#example-shell-script-changes">Example shell script changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#automatic-tool-for-conversion-of-adf2019-shell-scripts">Automatic tool for conversion of ADF2019 shell scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/AMSification_of_ADF.html#input-execution-and-output">Input, execution and output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#adf-specific-files">ADF specific files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Feature_list.html">Feature List</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#model-hamiltonians">Model Hamiltonians</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#structure-and-reactivity">Structure and Reactivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#spectroscopic-properties">Spectroscopic properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#charge-transport-properties">Charge transport properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#accuracy-and-efficiency">Accuracy and Efficiency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Remarks_terminology.html">Technical remarks, Terminology</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#density-functional-theory">Density functional theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#the-kohn-sham-mo-model">The Kohn-Sham MO model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#basis-functions-and-orbitals">Basis functions and orbitals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#cartesian-function-sets-spurious-components">Cartesian function sets, spurious components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#frozen-core-core-orbitals-and-core-functions">Frozen core: Core Orbitals and Core Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#index-6">Symmetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#orthonormal-basis">Orthonormal basis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#fragments">Fragments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#summary-of-functions-and-orbitals">Summary of functions and orbitals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#coulomb-potential-evaluation-density-fitting">Coulomb potential evaluation, density fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#three-step-build-up-of-the-bonding">Three-step build-up of the bonding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#transition-state-procedure">Transition State procedure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Input.html">Input, execution, and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Structure_of_the_input.html">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#title-comment">Title, comment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#amsification-of-adf-in-adf2020">Amsification of ADF in ADF2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_input.html#input-parsing-changes-in-adf2018-and-later">Input parsing changes in ADF2018 and later</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Structure_of_the_input.html#new-syntax-for-a-few-keywords">New syntax for a few keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Structure_of_the_input.html#strict-parsing-of-input-file">Strict parsing of input file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_of_the_input.html#execution">Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_of_the_output.html">Structure of the Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_output.html#job-characteristics-on-standard-output">Job Characteristics on standard Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Structure_of_the_output.html#log-file-adf-rkf-tape13">Log file, adf.rkf, TAPE13</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Coordinates_basis_fragments.html">Coordinates, Basis sets, Fragments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Atomic_coordinates.html">Atomic coordinates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Atomic_coordinates.html#cartesian">Cartesian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Atomic_coordinates.html#z-matrix">Z-Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Atomic_coordinates.html#orientation-of-local-atomic-coordinates">Orientation of Local Atomic Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Atomic_coordinates.html#symmetry-key">Symmetry Key</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html">Basis sets and atomic fragments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#sto-basis-sets">STO basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#available-basis-sets">Available basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#the-basis-key">The Basis Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#automatic-mode">Automatic mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#create-mode">Create mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#ghost-atoms-non-standard-chemical-elements">Ghost Atoms, Non-standard Chemical Elements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#id9">Automatic mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_sets_and_atomic_fragments.html#nuclear-model">Nuclear Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Molecular_fragments.html">Molecular fragments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_fragments.html#fragment-mode">Fragment mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_fragments.html#fragment-files">Fragment files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="Model_Hamiltonians.html">Model Hamiltonians</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Electronic_Configuration.html">Electronic Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#charge-and-spin">Charge and Spin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#spin-restricted-vs-unrestricted">Spin: restricted vs. unrestricted</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#unrestricted-and-spin-orbit-coupling">Unrestricted and Spin-Orbit Coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#net-charge">Net Charge</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#orbital-occupations-electronic-configuration-excited-states">Orbital occupations: electronic configuration, excited states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#aufbau-smearing-freezing">Aufbau, smearing, freezing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#explicit-occupation-numbers">Explicit occupation numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#charge-and-spinpolarization-vs-irrepoccupations">CHARGE and SPINPOLARIZATION vs. IRREPOCCUPATIONS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#create-mode">Create mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#frozen-core-approximation">Frozen core approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#spin-polarized-start-up-potential">Spin-polarized start-up potential</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#spin-flip-method-for-broken-symmetries">Spin-flip method for broken symmetries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#modify-the-starting-potential">Modify the starting potential</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#unrestricted-fragments">Unrestricted fragments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#prepared-for-bonding">Prepared for bonding</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#simulated-unrestricted-fragments-with-key-fragoccupations">Simulated unrestricted fragments with key FRAGOCCUPATIONS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#id8">Prepared for bonding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Electronic_Configuration.html#fragoccupations">FRAGOCCUPATIONS</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#remove-fragment-orbitals">Remove Fragment Orbitals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Electronic_Configuration.html#cdft-constrained-density-functional-theory">CDFT: Constrained Density Functional Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Density_Functional.html">Density Functionals (XC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#lda">LDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#gga">GGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#metagga">MetaGGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#hartree-fock">Hartree-Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#hybrid">Hybrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#meta-hybrid">Meta-Hybrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#range-separated-hybrids">Range separated hybrids</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#rangesep-xcfun-yukawa-range-separated-hybrids">RangeSep + XCFun: Yukawa-range separated hybrids</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#range-separated-hybrids-with-libxc">Range-separated hybrids with LibXC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#notes-on-hartree-fock-and-meta-hybrid-functionals">Notes on Hartree-Fock and (meta-)hybrid functionals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#post-scf-correlation-methods">Post-SCF correlation methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#double-hybrid">Double-Hybrid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#mp2-methods">MP2-methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#rpa-and-rpa-sossx">RPA and RPA + SOSSX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#notes-on-mp2-double-hybrid-functionals-and-rpa">Notes on MP2, double-hybrid functionals and RPA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#model-potentials">Model Potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#optimized-effective-potentials">Optimized effective potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#xcfun">XCFun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#libxc">LibXC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#dispersion-corrections">Dispersion corrections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#dft-d4-functionals">DFT-D4 functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#dft-d3-functionals">DFT-D3 functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#dft-d-functionals">DFT-D functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#ddsc-density-dependent-dispersion-correction">dDsC: density dependent dispersion correction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#dft-ulg">DFT-ulg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#dft-mbd-functionals">DFT-MBD functionals</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Functional.html#post-scf-energy-functionals">Post-SCF energy functionals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#gga-energy-functionals">GGA energy functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#meta-gga-and-hybrid-energy-functionals">Meta-GGA and hybrid energy functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Density_Functional.html#post-hartree-fock-energy-functionals">Post Hartree-Fock energy functionals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Relativistic_effects.html">Relativistic effects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Relativistic_effects.html#pauli">Pauli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Relativistic_effects.html#zora">ZORA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Relativistic_effects.html#x2c-and-ra-x2c">X2C and RA-X2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Relativistic_effects.html#index-7">Spin-Orbit coupling</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="Solvents_and_other_environments.html">Solvents and other environments</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="COSMO.html">COSMO: Conductor like Screening Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SM12.html">SM12: Solvation Model 12</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Quild.html">Quild</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DIM-QM.html">DIM/QM: Discrete Interaction Model/Quantum Mechanics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DIM-QM.html#index-4">DRF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIM-QM.html#surface-enhanced-response-properties">Surface-enhanced response properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIM-QM.html#input-options">Input options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIM-QM.html#drf-atomic-parameters">DRF atomic parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIM-QM.html#dim-atomic-parameters">DIM atomic parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FQ-QM.html">QM/FQ: Quantum Mechanics/Fluctuating Charges (and Fluctuating Dipoles)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FQ-QM.html#coupling-with-fde">Coupling with FDE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">FDE: Frozen Density Embedding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fragment-specific-fde-options">Fragment-specific FDE options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kinetic-energy-approximants">Kinetic energy approximants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#general-fde-options">General FDE options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#frozen-density-embedding-with-external-orthogonality">Frozen Density Embedding with External Orthogonality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fde-and-localized-cosmo">FDE and (localized) COSMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fde-and-qm-fq-f">FDE and QM/FQ(Fμ)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#subsystem-tddft-coupled-fde">Subsystem TDDFT, coupled FDE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restrictions-and-pitfalls">Restrictions and pitfalls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="SCRF.html">SCRF: Self-Consistent Reaction Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VSCRF.html">VSCRF: Vertical Excitation Self-Consistent Reaction Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3D-RISM.html">3D-RISM: 3D reference Interaction Site Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Electric_field.html">Electric Field: Homogeneous, Point Charges, Polarizability</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Structure_and_reactivity.html">Structure and Reactivity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#single-point-calculations">Single point calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#id1">Geometry optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#transition-state-search">Transition state search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#linear-transit-pes-scan">Linear Transit, PES scan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#nudged-elastic-band-neb">Nudged Elastic Band (NEB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#intrinsic-reaction-coordinate-irc">Intrinsic Reaction Coordinate (IRC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#excited-state-optimizations">Excited state optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#molecular-dynamics">Molecular dynamics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Structure_and_reactivity.html#gradients-hessian-thermodynamics">Gradients, Hessian, Thermodynamics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#gradients">Gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#hessian">Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#pes-point-character">PES point character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_and_reactivity.html#thermodynamics-gas-phase-gibbs-free-energy">Thermodynamics, gas phase Gibbs free energy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Spectroscopic_properties.html">Spectroscopic properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Vibrational_Spectroscopy.html">Vibrational Spectroscopy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#ir-frequencies-and-normal-modes">IR frequencies and normal modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Vibrational_Spectroscopy.html#analytical-hessian">Analytical Hessian</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#resonance-raman">(Resonance) Raman</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#vroa-resonance-vibrational-raman-optical-activity">VROA: (Resonance) vibrational Raman optical activity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrational_Spectroscopy.html#vcd-vibrational-circular-dichroism">VCD: Vibrational Circular Dichroism</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Time-dependent_DFT.html">Time-dependent DFT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Time-dependent_DFT.html#general-remarks-on-the-response-and-excitation-functionality">General remarks on the Response and Excitation functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Time-dependent_DFT.html#analysis-options-for-tddft-excitation-energies-and-polarizabilities">Analysis options for TDDFT (excitation energies and polarizabilities)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Time-dependent_DFT.html#time-dependent-current-dft">Time-dependent Current DFT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Time-dependent_DFT.html#magnetic-properties-within-tdcdft">Magnetic properties within TDCDFT</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Excitation_energies.html">Excitation energies: UV/Vis, X-ray, CD, MCD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#excitation-energies-uv-vis-spectra">Excitation energies, UV/Vis spectra</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#tamm-dancoff-approximation">Tamm-Dancoff approximation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#full-xc-kernel">Full XC kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#plasmons-in-molecules">Plasmons in Molecules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#transition-dipole-moments-between-excited-states">Transition dipole moments between excited states</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#accuracy-and-other-technical-parameters">Accuracy and other technical parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#excitation-energies-for-open-shell-systems">Excitation energies for open-shell systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#spin-flip-excitation-energies">Spin-flip excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#select-core-excitation-energies-x-ray-absorption">Select (core) excitation energies, X-ray absorption</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#state-selective-optimization-excitation-energies">State selective optimization excitation energies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#modify-range-of-excitation-energies">Modify range of excitation energies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#excitations-as-orbital-energy-differences">Excitations as orbital energy differences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#quadrupole-intensities-in-x-ray-spectroscopy">Quadrupole intensities in X-ray spectroscopy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#xes-x-ray-emission-spectroscopy">XES: X-ray emission spectroscopy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#excitation-energies-and-spin-orbit-coupling">Excitation energies and Spin-Orbit coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#perturbative-inclusion-of-spin-orbit-coupling">Perturbative inclusion of spin-orbit coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#self-consistent-spin-orbit-coupling">Self-consistent spin-orbit coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#highly-approximate-spin-orbit-coupled-excitation-energies-open-shell-molecule">Highly approximate spin-orbit coupled excitation energies open shell molecule</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#cv-n-dft-constricted-variational-dft">CV(n)-DFT: Constricted Variational DFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#hda-hybrid-diagonal-approximation">HDA: Hybrid Diagonal Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#td-dft-tb">TD-DFT+TB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#stda-stddft">sTDA, sTDDFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#cd-spectra">CD spectra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#mcd">MCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Excitation_energies.html#analysis">Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#nto-natural-transition-orbitals">NTO: Natural Transition Orbitals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#sfo-analysis">SFO analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Excitation_energies.html#charge-transfer-descriptors">Charge-transfer descriptors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Excited_state_optimizations.html">Excited state (geometry) optimizations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Excited_state_optimizations.html#nuclear-gradients-only">Nuclear gradients only</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vibrationally_resolved_el_spectra.html">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Vibrationally_resolved_el_spectra.html#ah-fc-adiabatic-hessian-franck-condon">AH-FC: Adiabatic Hessian Franck-Condon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Vibrationally_resolved_el_spectra.html#vg-fc-vertical-gradient-franck-condon">VG-FC: Vertical Gradient Franck-Condon</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Polarizabilities.html">(Hyper-)Polarizabilities, ORD, magnetizabilities, Verdet constants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Polarizabilities.html#response-hyper-polarizabilities-ord">RESPONSE: (Hyper-)Polarizabilities, ORD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#response-polarizabilities">RESPONSE: Polarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#response-accuracy-and-convergence">RESPONSE: Accuracy and convergence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#response-hyperpolarizabilities">RESPONSE: Hyperpolarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#response-optical-rotation-dispersion-ord">RESPONSE: Optical rotation dispersion (ORD)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Polarizabilities.html#aoresponse-lifetime-effects-hyper-polarizabilities-ord-magnetizabilities-verdet-constants">AORESPONSE: Lifetime effects, (Hyper-)polarizabilities, ORD, magnetizabilities, Verdet constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-polarizabilities">AORESPONSE: Polarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-technical-parameters-and-expert-options">AORESPONSE: Technical parameters and expert options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-damped-first-hyperpolarizabilities">AORESPONSE: Damped First Hyperpolarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-damped-second-hyperpolarizabilities">AORESPONSE: Damped Second Hyperpolarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-ord">AORESPONSE: ORD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-magnetizabilities-verdet-constants-faraday-b-term">AORESPONSE: magnetizabilities, Verdet constants, Faraday B term</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#aoresponse-raman">AORESPONSE: Raman</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#applications-of-aoresponse">Applications of AORESPONSE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Polarizabilities.html#poltddft-damped-complex-polarizabilities">POLTDDFT: Damped Complex Polarizabilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#uv-vis-spectra-cd-spectra">UV/Vis spectra, CD spectra</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#reduced-fit-set">Reduced fit set</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Polarizabilities.html#van-der-waals-dispersion-coefficients">Van der Waals dispersion coefficients</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polarizabilities.html#disper-program-dispersion-coefficients">DISPER program: Dispersion Coefficients</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="LFDFT.html">Ligand Field and Density Functional Theory (LFDFT)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LFDFT.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LFDFT.html#input-description">Input description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#average-of-configuration-run">Average of Configuration run</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#lfdft-atomic-database">LFDFT atomic database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#lfdft-run">LFDFT run</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#epr-esr-g-tensor">EPR (ESR) g-tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#lfdft-intensities">LFDFT intensities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LFDFT.html#mcd">MCD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="NMR.html">NMR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="NMR_chemical_shifts.html">NMR Chemical Shifts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="NMR_chemical_shifts.html#important-notes">Important notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NMR_chemical_shifts.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="NMR_chemical_shifts.html#paramagnetic-nmr-chemical-shifts">Paramagnetic NMR Chemical Shifts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NMR_spin-spin_coupling.html">NMR spin-spin coupling constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="NMR_spin-spin_coupling.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NMR_spin-spin_coupling.html#input-file-for-cpl-adf-rkf">Input file for CPL: adf.rkf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NMR_spin-spin_coupling.html#running-cpl">Running CPL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NMR_spin-spin_coupling.html#practical-aspects">Practical Aspects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ESREPR.html">ESR/EPR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ESREPR.html#esr-epr-g-tensor-and-a-tensor">ESR/EPR g-tensor and A-tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ESREPR.html#esr-epr-q-tensor">ESR/EPR Q-tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ESREPR.html#esr-epr-zero-field-splitting-d-tensor">ESR/EPR Zero-field splitting (D-tensor)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="EFG.html">Nuclear Quadrupole Interaction (EFG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Mossbauer_spectroscopy.html">Mössbauer spectroscopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GW.html">GW</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GW.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GW.html#levels-of-self-consistency">Levels of self-consistency</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#eigenvalue-only-self-consistent-gw">Eigenvalue-only self-consistent GW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#quasiparticle-self-consistent-gw">quasiparticle self-consistent GW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#convergence">Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="GW.html#second-order-self-energy">Second-order self-energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GW.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#basis-sets">Basis sets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#numerical-aspects">Numerical aspects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#choosing-the-ks-reference">Choosing the KS reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="GW.html#gw-key">GW key</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Transport.html">Transport properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Charge_transfer_integrals.html">Charge transfer integrals (transport properties)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Charge_transfer_integrals.html#charge-transfer-integrals-with-the-transferintegrals-key">Charge transfer integrals with the TRANSFERINTEGRALS key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Charge_transfer_integrals.html#charge-transfer-integrals-with-fde">Charge transfer integrals with FDE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GREEN.html">GREEN: Non-self-consistent Green’s function calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GREEN.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN.html#wide-band-limit">Wide-band-limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GREEN.html#green-with-adf-gui">GREEN with ADF-GUI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Analysis.html">Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Molecules_from_fragments.html">Molecules built from fragments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bond_energy_analysis.html">Bond energy analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Bond_energy_analysis.html#bond-energy-details">Bond energy details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_energy_analysis.html#notes-on-double-hybrid-functionals-and-mp2">Notes on double-hybrid functionals and MP2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_energy_analysis.html#total-energy-evaluation">Total energy evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_energy_analysis.html#interacting-quantum-atoms-iqa">Interacting Quantum Atoms (IQA)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Localized_Molecular_Orbitals.html">Localized Molecular Orbitals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Localized_Molecular_Orbitals.html#perturbed-localized-molecular-orbitals">Perturbed Localized Molecular Orbitals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Advanced_analysis.html">Advanced charge density and bond order analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#charges-populations">Charges, Populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#bond-orders">Bond orders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#ets-nocv-natural-orbitals-for-chemical-valence">ETS-NOCV: Natural Orbitals for Chemical Valence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#adfnbo-gennbo-nbo-analysis">Adfnbo, gennbo: NBO analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#nbo-analysis-of-efg-nmr-chemical-shifts-nmr-spin-spin-coupling">NBO analysis of EFG, NMR chemical shifts, NMR spin-spin coupling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#qtaim-atoms-in-molecules">QTAIM: Atoms in Molecules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#local-atomic-and-non-local-properties">Local, atomic, and non-local properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#index-16">ADF2AIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#aromaticity-index-with-qtaim">Aromaticity index with QTAIM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#conceptual-dft">Conceptual DFT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#global-atomic-and-non-local-descriptors">Global, atomic, and non-local descriptors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Advanced_analysis.html#domains-of-the-dual-descriptor">Domains of the dual descriptor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#adf2damqt-damqt-interface">adf2damqt: DAMQT interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Advanced_analysis.html#fod-fractional-orbital-density">FOD: fractional orbital density</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Printed_Output.html">Controlling printed Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#print-noprint">Print / NoPrint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#debug">Debug</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#eprint">Eprint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#eprint-subkeys-vs-print-switches">Eprint subkeys vs. Print switches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#other-eprint-subkeys">Other Eprint subkeys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Printed_Output.html#reduction-of-output">Reduction of output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Results_Output.html">Results on Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#electronic-configuration">Electronic Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#mulliken-populations">Mulliken populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#hirshfeld-charges-voronoi-deformation-density">Hirshfeld charges, Voronoi deformation density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#multipole-derived-charges">Multipole derived charges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#charge-model-5">Charge model 5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#bond-order-analysis">Bond order analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#dipole-moment-quadrupole-moment-electrostatic-potential">Dipole moment, Quadrupole moment, Electrostatic potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#fragments-and-basis-functions">Fragments and Basis Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#mo-analysis">MO analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Results_Output.html#bond-energy-analysis">Bond energy analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Densf.html">Densf: Volume Maps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Densf.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Densf.html#result-tape41">Result: TAPE41</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DOS.html">Dos: Density of States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DOS.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DOS.html#mulliken-population-analysis">Mulliken population analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DOS.html#density-of-states-analyses-based-on-mulliken-population-analysis">Density of states analyses based on Mulliken population analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DOS.html#generalizations-of-opdos-gpdos-pdos">Generalizations of OPDOS, GPDOS, PDOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DOS.html#input">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="VCDtools.html">VCD Analysis: VCDtools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PyFrag.html">PyFrag: Activation Strain Model Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#running-pyfrag">Running PyFrag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#specifying-the-trajectory">Specifying the Trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#molecular-fragments">Molecular Fragments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#adf-options">ADF Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyFrag.html#analysis-options">Analysis Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Accuracy_and_efficiency.html">Accuracy and Efficiency</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Precision_and_Self-Consistency.html">Precision and Self-Consistency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SCF.html">SCF</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SCF.html#main-options">Main options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SCF.html#energy-diis">Energy-DIIS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SCF.html#augmented-roothaan-hall-arh">Augmented Roothaan-Hall (ARH)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Numerical_integration.html">Numerical Integration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Numerical_integration.html#becke-grid">Becke Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Numerical_integration.html#voronoi-grid-deprecated">Voronoi grid (deprecated)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Numerical_integration.html#atomic-radial-grid">Atomic radial grid</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Density_fitting.html">Density fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Hartree-Fock_RI.html">Hartree-Fock RI scheme</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Hartree-Fock_RI.html#old-hartree-fock-ri-scheme">Old Hartree-Fock RI scheme</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="MBPT.html">MBPT scheme</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="MBPT.html#recommended-numerical-settings">Recommended numerical settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Dependency.html">Dependency (basis set, fit set)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="BSSE.html">Basis Set Superposition Error (BSSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Control_of_Program_Flow.html">Control of Program Flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Control_of_Program_Flow.html#limited-execution">Limited execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Control_of_Program_Flow.html#skipping">Skipping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Control_of_Program_Flow.html#ignore-checks">Ignore checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Technical_Settings.html">Technical Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#memory-usage">Memory usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#direct-scf-recalculation-of-data">Direct SCF: recalculation of data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#vector-length">Vector length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#tails-and-old-gradients">Tails and old gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#index-2">Linearscaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#all-points">All Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#full-fock">Full Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Technical_Settings.html#save-info">Save info</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Restarts.html">Restarts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Restart_files.html">ADF Restart files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Restart_files.html#ams-restart-file">AMS restart file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="The_restart_key.html">The restart key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Structure_of_the_restart_file.html">Structure of the restart file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Rec_problems_questions/Rec_problems_questions.html">Recommendations and Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Rec_problems_questions/Recommendations.html">Recommendations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Precision.html">Precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Electronic_Configuration.html">Electronic Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Electronic_Configuration.html#spin-unrestricted-versus-spin-restricted-spin-states">Spin-unrestricted versus spin-restricted, Spin states</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html">What basis set should I use in ADF?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#zora-or-non-relativistic-calculation">ZORA or non-relativistic calculation?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#large-or-small-molecule">Large or small molecule?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#frozen-core-or-all-electron">Frozen core or all-electron?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#diffuse-functions-needed">Diffuse functions needed?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#normal-or-even-tempered-basis">Normal or even-tempered basis?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#recommendations-for-double-hybrids-and-mp2">Recommendations for Double-hybrids and MP2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#what-accuracy-do-the-basis-sets-give">What accuracy do the basis sets give?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Relativistic_methods.html">Relativistic methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Rec_problems_questions/Trouble_shooting.html">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/License_file_corrupt.html">License file corrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Recover_from_Crash.html">Recover from Crash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Memory_Management.html">Memory Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/SCF.html">SCF Convergence Guidelines for ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Geometry_Optimization.html">Geometry Optimization troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Geometry_Optimization.html#very-short-bonds">Very short bonds</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Frequencies.html">Frequencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Frequencies.html#imaginary-frequencies">Imaginary Frequencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Frequencies.html#geometry-displacement-numbers-in-the-logfile-are-not-contiguous">Geometry-displacement numbers in the logfile are not contiguous</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Input_ignored.html">Input ignored</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/SFO_Populations.html">SFO Populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Error_Aborts.html">Error Aborts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Warnings.html">Warnings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendices/Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Basis_set_file_format.html">Basis set file format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Basis_set_file_format.html#sections">Sections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Basis_set_file_format.html#example-of-a-basis-set-file-calcium">Example of a basis set file: Calcium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Basis_set_file_format.html#extending-a-basis-set">Extending a basis set</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Elements_of_the_Periodic_Table.html">Elements of the Periodic Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Multiplet_states.html">Multiplet States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Multiplet_states.html#multiplet-energies">Multiplet energies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Dirac_program.html">Dirac program: relativistic core potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Symmetry.html">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Symmetry.html#schonfliess-symbols-and-symmetry-labels">Schönfliess symbols and symmetry labels</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/Symmetry.html#tddft-irrep-labels">TDDFT irrep labels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Symmetry.html#molecular-orientation-requirements">Molecular orientation requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Binary_result_files.html">Binary result files, KF browser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/TAPE21.html">adf.rkf (TAPE21)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/TAPE21.html#ams-rkf">ams.rkf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/TAPE21.html#contents-of-adf-rkf">Contents of adf.rkf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/TAPE21.html#using-data-from-adf-rkf">Using Data from adf.rkf</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/TAPE13.html">TAPE13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/KF_browser.html">KF browser</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Error_messages.html">Error messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Error_messages.html#warnings">Warnings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#model-hamiltonians">Model Hamiltonians</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#special-exchange-correlation-functionals">Special exchange-correlation functionals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CO_model.html">Example: Asymptotically correct XC potentials: CO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/OH_MetaGGA.html">Example: Meta-GGA energy functionals: OH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HI_EFG.html">Example: Hartree-Fock: HI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2PO_B3LYP.html">Example: B3LYP: H2PO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LCY-BP_H2O.html">Example: Long-range corrected GGA functional LCY-BP: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CAMY-B3LYP_H2O.html">Example: Range-separated functional CAMY-B3LYP: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Water_MP2_AO.html">Example: Single point MP2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/WaterDimer_SOS-MP2_AO.html">Example: Water Dimer SOS-AO-PARI-MP2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Water_MeOH_B2GPPLYP.html">Example: Single point B2GPPLYP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Water_MeOH_DODSCAN.html">Example: Water-MeOH - DODSCAN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/MP2_Li.html">Example: unrestricted MP2: Li</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/RPA_H2O.html">Example: RPA&#64;PBE calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/RPA-SOSSX_H2O.html">Example: RPASOX&#64;PBE0 calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/MM_Dispersion.html">Example: Grimme Molecular Mechanics dispersion-corrected functionals (DFT-D3-BJ)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/methane_dimer_dispersion.html">Example: Density-Dependent Dispersion Correction (dDsC): CH4-dimer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Benzene_dimer_tshaped.html">Example: DFT-ulg Dispersion Correction: Benzene dimer T-shaped</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#relativistic-effects-zora-x2c-spin-orbit-coupling">Relativistic effects: ZORA, X2C, spin-orbit coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Au2_ZORA.html">Example: ZORA Relativistic Effects: Au2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/SO_ZORA_Bi2.html">Example: Spin-Orbit coupling: Bi and Bi2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Tl_noncollinear.html">Example: Spin-Orbit unrestricted non-collinear: Tl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AuH_analyse_exciso.html">Example: Excitation energies including spin-orbit coupling: AuH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HgI2.html">Example: ZORA, X2C and RA-X2C: HgI2 = Hg + I2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/I2_SO_MP2.html">Example: spin-orbit coupled MP2: atomization energy I2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#solvents-other-environments">Solvents, other environments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Solv_HCl.html">Example: COSMO: HCl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Acetamide_SM12.html">Example: solvation model SM12: Acetamide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Field_PtCO.html">Example: Electric Field: PtCO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Efield.PntQ_N2.html">Example: Electric Field, Point Charge: N2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/3D-RISM.html">Example: 3D-RISM: Glycine</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#fde-frozen-density-embedding">FDE: Frozen Density Embedding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_H2O_128.html">Example: FDE: H2O in water</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_HeCO2_freezeandthaw.html">Example: FDE freeze-and-thaw: HeCO2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_Energy_NH3-H2O.html">Example: FDE energy: NH3-H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_Energy_H2O-Ne_unrestricted.html">Example: FDE energy: unrestricted fragments: Ne-H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GO_FDE_H2O-Li.html">Example: FDE geometry optimization: H2O-Li(+)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_NMR_relax.html">Example: FDE NMR shielding: Acetonitrile in water</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FDE_CPL_NH3-H2O.html">Example: FDE NMR spin-spin coupling: NH3-H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/SUBEXCI_dimer.html">Example: Subsystem TDDFT, coupled FDE excitation energies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LoCOSMO_H2O-NH3.html">Example: FDE and COSMO: H2O-NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LoCOSMO_H2O-NH3_TDDFT.html">Example: FDE and COSMO: H2O-NH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#qm-mm-calculations">QM/MM calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#quild-quantum-regions-interconnected-by-local-descriptions">Quild: Quantum-regions Interconnected by Local Descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#dim-qm-discrete-interaction-model-quantum-mechanics">DIM/QM: Discrete Interaction Model/Quantum Mechanics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_DRF_BE.html">Example: DRF: H2O and H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_DRF_Hyperpol.html">Example: DRF: hyperpolarizability H2O in water</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_DRF_plams.html">Example: DRF: scripting tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_DRF2.html">Example: DRF2: Polarizability N2 on Ag68 + H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_CPIM_Excitations.html">Example: CPIM: excitation energies N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_JACOBI.html">Example: CPIM: polarizability N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_LOCAL.html">Example: PIM: H2O on Ag2689</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_READLCLFLD.html">Example: PIM: Polarizability with local fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_Gradients.html">Example: PIM: optimization N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_PIM_Pol.html">Example: PIM: polarizability N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_Raman.html">Example: PIM: Raman scattering N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_SEROA.html">Example: PIM: SEROA calculation N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DIMQM_PIM_CMM.html">Example: PIM: Multipole Method N2 on silver cluster Ag1415</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#qm-fq-quantum-mechanics-fluctuating-charges">QM/FQ: Quantum Mechanics/Fluctuating Charges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FQQM_scf.html">Example: QM/FQ: 2-Methyloxirane (QM) in Water (FQ)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FQQM_aoresponse.html">Example: QM/FQ: polarizability 2-Methyloxirane (AORESPONSE)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FQQM_response.html">Example: QM/FQ: polarizability 2-Methyloxirane (RESPONSE)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FQQM_td.html">Example: QM/FQ: excitations 2-Methyloxirane</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#structure-and-reactivity">Structure and Reactivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#geometry-optimizations">Geometry Optimizations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GO_H2O.html">Example: Geometry Optimization: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GO_restraint.html">Example: Restraint Geometry Optimization: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GO_constraints.html">Example: Constraint Geometry Optimization: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/InitHess.html">Example: Initial Hessian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GO_LiF_Efield.html">Example: Geometry optimization with an external electric field or point charges: LiF</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#transition-states-linear-transits-intrinsic-reaction-coordinates">Transition States, Linear Transits, Intrinsic Reaction Coordinates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HCN.html">Example: LT, Frequencies, TS, and IRC: HCN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TS_C2H6.html">Example: TS search using partial Hessian: C2H6 internal rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TS_CH4_HgCl2.html">Example: Relativistic ZORA TS search: CH4 + HgCl2 &lt;==&gt; CH3HgCl + HCl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TSRC_SN2.html">Example: TS reaction coordinate: F- + CH3Cl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Transit_H2O.html">Example: (non-)Linear Transit: H2O</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#total-energy-multiplet-states-s2-localized-hole-cebe">Total energy, Multiplet States, S2, Localized hole, CEBE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Energy_H2O.html">Example: Total Energy calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/SD_CrNH3_6.html">Example: Multiplet States: [Cr(NH3)6]3+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CuH+_S-squared.html">Example: Calculation of S2: CuH+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ModStPot_N2+.html">Example: Localized Hole: N2+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Fe4S4_BrokenSymm.html">Example: Broken spin-symmetry: Fe4S4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CEBE_NNO.html">Example: Core-electron binding energies (CEBE): NNO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CEBE_HI.html">Example: CEBE 1s Iodine in HI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/WaterDimer.html">Example: Constrained DFT: H2O+ … H2O</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#spectroscopic-properties">Spectroscopic Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#ir-frequencies-resonance-raman-vroa-vcd">IR Frequencies, (resonance) Raman, VROA, VCD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Freq_NH3.html">Example: Numerical Frequencies: NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Freq_UF6.html">Example: Numerical Frequencies, spin-orbit coupled ZORA: UF6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_HF_freq.html">Example: Numerical Frequencies, accurate Hartree-Fock: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CN_SecDeriv.html">Example: Analytic Frequencies: CN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CH4_SecDeriv.html">Example: Analytic Frequencies: CH4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HI_SecDer_ZORA.html">Example: Analytic Frequencies: HI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/MBH_Ethanol.html">Example: Mobile Block Hessian (MBH): Ethanol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/MBH_CH4.html">Example: Mobile Block Hessian: CH4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Freq_NH3_RAMAN.html">Example: Raman: NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HI_Raman.html">Example: Raman: HI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HF_ResonanceRaman.html">Example: Resonance Raman, excited state finite lifetime: HF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/VROA.html">Example: Vibrational Raman optical activity (VROA): H2O2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/VROA_RESO.html">Example: Resonance VROA: H2O2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DFTB_modes_ADF_Raman_VROA.html">Example: Raman and VROA for approximate modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/VCD_COG_NHDT.html">Example: Vibrational Circular Dichroism (VCD): NHDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/VCD_CHFClBr_DZP.html">Example: unrestricted VCD: CHFClBr</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#excitation-energies-uv-vis-spectra-x-ray-absorption-cd-mcd">Excitation energies: UV/Vis spectra, X-ray absorption, CD, MCD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Au2_Resp.html">Example: Excitation energies and polarizability: Au2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CN_unr_exci.html">Example: Excitation energies open shell molecule: CN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/SiH2_spinflip.html">Example: Spin-flip excitation energies: SiH2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/N2_TDHF.html">Example: TDHF excitation energies: N2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Pyridine_CAM-B3LYP.html">Example: excitation energies CAM-B3LYP: Pyridine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CAMY-B3LYP_TDDFT_H2O.html">Example: CAMY-B3LYP excitation energies: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/XCFUN_FULLKERNEL_TDDFT_H2O.html">Example: Full XC kernel in excitation energy calculation: H2O+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/XCFUN_TDDFT_H2O.html">Example: Use of xcfun in excitation energy calculations: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TiCl4_CoreExci.html">Example: Core excitation energies: TiCl4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TiCl4_XASXES.html">Example: X-Ray Absorption and Emission Quadrupole Oscillator strengths at the Cl K-edge: TiCl4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Ne_exciso.html">Example: (Core) Excitation energies including spin-orbit coupling: Ne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AgI_asoexcit.html">Example: Excitation energies perturbative spin-orbit coupling: AgI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/PbF_excisou.html">Example: Excitation energies including spin-orbit coupling for open shell: PbF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DMO_CD.html">Example: Circular Dichroism (CD) spectrum: DMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Twist_Ethene_TDDFT.html">Example: CD spectrum, hybrid functional: Twisted ethene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_MCD.html">Example: MCD: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_MCD_ZFS.html">Example: MCD including zero-field splitting: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Formamide_CVnDFT.html">Example: CV(n)-DFT excitation energies: Formamide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NH3_HDA.html">Example: HDA excitation energies: NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_SO_HDA.html">Example: HDA spin-orbit coupled excitation energies: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TD-DFTB_betacarotene.html">Example: TD-DFT+TB excitation energies: beta-Carotene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Adenine_sTDA.html">Example: sTDA excitation energies: Adenine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Adenine_sTDDFT.html">Example: sTDDFT excitation energies: Adenine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Bimane_wB97X.html">Example: sTDA excitation energies RS functional: Bimane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TCNE-Benzene_wB97.html">Example: sTDA excitation energies wB97: TCNE-Benzene</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#excited-state-geometry-optimizations">Excited state (geometry) optimizations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EGO_N2.html">Example: Excited state geometry optimization: N2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EGO_CH2O_trip_constr.html">Example: Excited state geometry optimization with a constraint: CH2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EGO_CH2_sf.html">Example: Spin-flip excited state geometry optimization: CH2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EGO_PH2.html">Example: Numerical Frequencies of an excited state: PH2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#vibrationally-resolved-electronic-spectra">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/FranckCondon_NO2.html">Example: Franck-Condon Factors: NO2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Naphthalene_VST.html">Example: Vibronic-Structure Tracking: Naphthalene</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#hyper-polarizabilities-dispersion-coefficients-ord-magnetizabilities-verdet-constants">(Hyper-)Polarizabilities, dispersion coefficients, ORD, magnetizabilities, Verdet constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AgI_SO_Pol.html">Example: Polarizabilities including spin-orbit coupling: AgI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LiH_DampedBeta.html">Example: damped first hyperpolarizability: LiH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LiH_DampedGamma.html">Example: damped second hyperpolarizability: LiH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_Verdet.html">Example: Verdet constants: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Disper_HF.html">Example: Dispersion Coefficients: HF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DMO_ORD.html">Example: Optical Rotation Dispersion (ORD): DMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DMO_ORD_aoresponse.html">Example: ORD, lifetime effects (key AORESPONSE): DMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ALPHA_DENSITY.html">Example: Polarizability: first order perturbed density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Hyperpol.html">Example: Hyperpolarizabilities of He and H2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DampedVerdet.html">Example: Damped Verdet constants: Propene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_magnet.html">Example: Static magnetizability: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_TD_magnet.html">Example: Dynamic magnetizability: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/C2H4_TDCDFT.html">Example: Time-dependent current-density-functional theory: C2H4:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Au10_POLTDDFT.html">Example: Damped complex polarizabilities with POLTDDFT: Au10</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NH3_POLTDDFT.html">Example: POLTDDFT with hybrid functional: NH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#ligand-field-dft-lfdft">Ligand Field DFT (LFDFT)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Co_LFDFT.html">Example: Ligand Field DFT: Co 2+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Pr_LFDFT.html">Example: Ligand Field DFT: f-d transitions in Pr 3+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Co_LFDFT_gtensor.html">Example: LFDFT: g-tensor of Co(acacen)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Cu_LFDFT_gtensor.html">Example: LFDFT: g-tensor of Cu(H2O)6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Er_LFDFT_MCD.html">Example: LFDFT: XMCD 3d-4f transitions in Er 3+</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#nmr-chemical-shifts-and-spin-spin-coupling-constants">NMR chemical shifts and spin-spin coupling constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HBr.html">Example: NMR Chemical Shifts: HBr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/HgMeBr_pnr.html">Example: NMR Chemical Shifts: HgMeBr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CH4_SAOP.html">Example: NMR Chemical Shifts, SAOP potential: CH4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NMR_NICS.html">Example: NMR Nucleus-independent chemical shifts (NICS): PF3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NMR_B3LYP.html">Example: NMR with B3LYP: PF3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CPL_C2H2.html">Example: NMR Spin-spin coupling constants: C2H2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CPL_HF_hybrid.html">Example: NMR Spin-spin coupling constants, hybrid PBE0: HF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/PbH4_finitenuc.html">Example: NMR Spin-spin coupling constants, finite nucleus: PbH4</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#esr-epr-g-tensor-a-tensor-q-tensor-zfs">ESR/EPR g-tensor, A-tensor, Q-tensor, ZFS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ESR_HfV.html">Example: ESR g-tensor, A-tensor, Q-tensor, D-tensor: HfV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/VO_collinear.html">Example: ESR g-tensor, A-tensor, self consistent spin-orbit coupling: VO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ESR_HgF_2der.html">Example: ESR g-tensor, A-tensor, perturbative spin-orbit coupling: HgF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ESR_TiF3.html">Example: ESR spin-restricted and spin-unrestricted: TiF3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/PdH_ESR_X2C.html">Example: ESR, X2C and RA-X2C: PdH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NH_ZFS.html">Example: Zero-field splitting (ZFS), ESR D-tensor: NH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Phenylnitrene_ZFS.html">Example: ZFS D tensor, including direct electron spin-spin part: Phenylnitrene</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#efg-mossbauer">EFG, Mössbauer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Mossbauer.html">Example: Mössbauer spectroscopy: Ferrocene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Hg_Mossbauer_X2C.html">Example: Mössbauer with X2C: Hg compounds</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#gw">GW</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GW_H2O.html">Example: G<sub>0</sub>W<sub>0</sub>&#64;PBE calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GW_O3.html">Example: G<sub>0</sub>W<sub>0</sub>&#64;PBE0 calculation: O3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/GW_Phenol.html">Example: G<sub>0</sub>W<sub>0</sub>&#64;PBE0 calculation: Phenol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/evGW_H2O.html">Example: evGW&#64;M06-2X calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/qsGW_N2.html">Example: qsGW calculation: N2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/G3W2_H2O.html">Example: G3W2 calculation: H2O</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#transport-properties">Transport properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#charge-transfer-integrals-transport-properties">Charge transfer integrals (transport properties)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AT_transferintegrals.html">Example: Charge transfer integrals: AT base pair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ElectronTransfer_FDE_H2O.html">Example: Charge transfer integrals with FDE: water dimer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ChargeSeparation_Toluene_TCNE.html">Example: Charge Recombination Calculation of Toluene and TCNE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/XCDFT_FDE_ET_ethylene.html">Example: XCDFT: Charge Separation of an ethylene dimer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#non-self-consistent-green-s-function-calculation">Non-self-consistent Green’s function calculation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/green_Al.html">Example: DOS and transmission: Aluminium</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/green_Au.html">Example: Gold electrodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/green_WBL.html">Example: Benzenedithiol junction: Wide-Band-Limit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/green_BDT.html">Example: Benzenedithiol junction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#fragment-orbitals-bond-energy-decomposition">Fragment orbitals, bond energy decomposition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Frags_NiCO4.html">Example: Compound Fragments: Ni(CO)4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Frags_PtCl4H2.html">Example: Fragments: PtCl4H2 2-</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/UnrFrag_H2.html">Example: Spin-unrestricted Fragments: H2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/PCCP_Unr_BondEnergy.html">Example: Bond Energy analysis open-shell fragments: PCCP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NaCl_ionicbonding.html">Example: Analysis of NaCl using ionic fragments: Na+ and Cl-</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NaCl_pairbonding.html">Example: Electron Pair bonding in NaCl: open shell fragments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EDA_meta_gga_hybrid.html">Example: Bond Energy analysis meta-GGA, (meta-)hybrids: Zn2, Cr2, CrH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EDA_Unr_C2H4_Cu_C2H4.html">Example: unrestricted EDA: Cu(C2H4)2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EDA_Unr_CH3I.html">Example: unrestricted fragments: CH3I</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/TlH_SO_analysis.html">Example: Spin-Orbit SFO analysis: TlH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/PyFrag.html">Example: Activation Strain Model Analysis using PyFrag</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#localized-orbitals-bond-orders-charge-analysis">Localized orbitals, bond orders, charge analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LocMO_Resp.html">Example: (Perturbed) localized molecular orbitals in twisted Ethene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CM5_chargemodel.html">Example: Charge model 5 (CM5)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/BondOrder.html">Example: Bond Orders</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#ets-nocv">ETS-NOCV</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Diimina_NOCV.html">Example: NOCV: ethylene – Ni-diimina</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Hplus_CO_etsnocv.html">Example: NOCV: H+ – CO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NOCV_CrCO5-CH2.html">Example: NOCV: CH2 – Cr(CO)5</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CH3_CH3_etsnocv.html">Example: NOCV: CH3 – CH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#qtaim">QTAIM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Bader.html">Example: QTAIM Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Bader_Reactivity.html">Example: QTAIM Reactivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/IQA.html">Example: IQA/QTAIM analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Aromaticity.html">Example: QTAIM Aromaticity indices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#dos-density-of-states">DOS: Density of states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/DOS_Cu4CO.html">Example: Density of States: Cu4CO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#third-party-analysis-software">Third party analysis software</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AIM_HF.html">Example: adf2aim: convert an ADF adf.rkf to WFN format (for Bader analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/H2O_ADFNBO.html">Example: NBO analysis: adfnbo, gennbo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/AlCl3_efgnbo.html">Example: NBO analysis: EFG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CH4_nmrnbo.html">Example: NBO analysis: NMR chemical shift</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CPL_CH3OH_NBO.html">Example: NBO analysis: NMR spin-spin coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/EGO_H2O_multi.html">Example: Multiple excited state gradients: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/CalcOverlapOnly.html">Example: Calculation of overlap of primitive basis functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#accuracy-and-efficiency">Accuracy and Efficiency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#bsse-scf-convergence-frequencies">BSSE, SCF convergence, Frequencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/BSSE_CrCO6.html">Example: Basis Set Superposition Error (BSSE): Cr(CO)5 +CO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/SCF_Ti2O4.html">Example: Troubleshooting SCF convergence: Ti2O4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Freq_NH3_Scan.html">Example: Rescan frequencies: NH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#speed">Speed</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/Multiresolution_H2O.html">Example: Multiresolution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#scripting">Scripting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Examples.html#prepare-an-adf-job-and-generate-a-report">Prepare an ADF job and generate a report</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/BakersetSP.html">Example: Single point for multiple xyz files: Bakerset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/ConvergenceTestCH4.html">Example: Basis set and integration accuracy convergence test: Methane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/LoopAtomsLigands.html">Example: amsprep: Replace atom with ligand</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/Examples.html#list-of-examples">List of Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#feature-references">Feature References</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#coordinates-basis-sets-fragments">Coordinates, basis sets, fragments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#geometry-optimizations-transition-states-and-reaction-paths">Geometry optimizations, transition states, and reaction paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#model-hamiltonians">Model Hamiltonians</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#relativistic-effects">Relativistic Effects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#solvents-and-other-environments">Solvents and other environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#frequencies-ir-intensities-raman-vcd">Frequencies, IR Intensities, Raman, VCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#time-dependent-dft">Time-Dependent DFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#lfdft">LFDFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#nmr">NMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#esr-epr">ESR/EPR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#gw">GW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#transport-properties-non-self-consistent-green-s-function">Transport properties: Non-self-consistent Green’s function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#accuracy-and-efficiency">Accuracy and efficiency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ADF</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../ADF.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">ADF</a>/</li>
+      
+          <li><a href="Model_Hamiltonians.html">Model Hamiltonians</a>/</li>
+      
+          <li><a href="Solvents_and_other_environments.html">Solvents and other environments</a>/</li>
+      
+    <li class="orange-text">FDE: Frozen Density Embedding</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="fde"></span><span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><div class="section" id="fde-frozen-density-embedding">
+<span id="index-3"></span><h1>FDE: Frozen Density Embedding<a class="headerlink" href="#fde-frozen-density-embedding" title="Permalink to this headline">¶</a></h1>
+<p>The Frozen-Density-Embedding (FDE) option invokes calculation of the effective embedding potential introduced by Wesolowski and Warshel <a class="footnote-reference" href="#ref1" id="id1">[1]</a> in order to take into account the effect of the environment on the electronic structure of an embedded system. The embedding potential (Eq. 3 in Ref. <a class="footnote-reference" href="#ref5" id="id2">[5]</a>) depends  explicitly  on electron densities corresponding to the embedded subsystem (e.g. a solvated molecule) and its environment (e.g. solvent). For a detailed review, see Ref. <a class="footnote-reference" href="#ref3" id="id3">[3]</a>. The ADF implementation of the method is described in detail in Ref. <a class="footnote-reference" href="#ref2" id="id4">[2]</a> <a class="footnote-reference" href="#ref4" id="id5">[4]</a>.</p>
+<p>A time-dependent linear-response generalization of this embedding scheme was derived in Ref. <a class="footnote-reference" href="#ref7" id="id6">[6]</a>. Its implementation in an approximate form, which assumes a localized response of the embedded system only (uncoupled FDE), is described in the supplementary material to Ref. <a class="footnote-reference" href="#ref8" id="id7">[7]</a>. For possible drawbacks and pitfalls in connection with this approximation, see Refs. <a class="footnote-reference" href="#ref2" id="id8">[2]</a> <a class="footnote-reference" href="#ref9" id="id9">[8]</a> <a class="footnote-reference" href="#ref10" id="id10">[9]</a>.</p>
+<p>The theory of coupled excited states for subsystems is described in Refs. <a class="footnote-reference" href="#ref74" id="id11">[35]</a> <a class="footnote-reference" href="#ref72" id="id12">[34]</a>, and extended for general response properties in Ref. <a class="footnote-reference" href="#ref11" id="id13">[10]</a>. This theory (subsystem TDDFT, coupled FDE) allows to treat the mutual response of several subsystems, including the ones that are considered environment.</p>
+<p>A generalization of the FDE scheme to the calculation of NMR shieldings has been given in Ref. <a class="footnote-reference" href="#ref12" id="id14">[11]</a>, where also the approximations involved and possible problems are discussed.</p>
+<p>With the exception of interaction energies, the current implementation in ADF only allows the calculation of molecular properties that only depend on the electron density and of response properties using TDDFT. For an application to the calculation of several molecular properties in solution and a comparison to the DRF model also available in ADF, see Ref. <a class="footnote-reference" href="#ref9" id="id15">[8]</a>. For further applications of the ADF implementation, see Ref. <a class="footnote-reference" href="#ref14" id="id16">[12]</a> (weakly interacting complexes), Refs. <a class="footnote-reference" href="#ref2" id="id17">[2]</a> <a class="footnote-reference" href="#ref9" id="id18">[8]</a> <a class="footnote-reference" href="#ref79" id="id19">[37]</a> <a class="footnote-reference" href="#ref80" id="id20">[38]</a> (solvent effects), and Refs. <a class="footnote-reference" href="#ref81" id="id21">[39]</a> <a class="footnote-reference" href="#ref82" id="id22">[40]</a> (other environment effects).</p>
+<p id="keyscheme-fde">To invoke a frozen-density embedding calculation, two additional specifications in the input are required. First, one or more frozen fragments have to be included in the FRAGMENTS block, and second, the block key FDE has to be included.  In the simplest case, this input should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FRAGMENTS</span>
+   <span class="o">...</span>
+   <span class="n">FragType</span> <span class="n">FragFile</span> <span class="nb">type</span><span class="o">=</span><span class="n">FDE</span>
+   <span class="o">...</span>
+<span class="n">END</span>
+
+<span class="n">FDE</span>
+   <span class="n">PW91K</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<p>In the FRAGMENTS block, for any fragment it is possible to specify the option type=FDE to indicate that the density of this fragment is kept frozen. This density is imported from the file FragFile. The frozen fragments have to be included in addition to the usual, non-frozen fragments. The atoms of the frozen fragments have to be included in the ATOMS block. As with normal fragments, the fragment found in the file will be rotated and translated to its position specified in the ATOMS block.  For more details on specifying fragments, see the section ‘fragment files’.  In the FDE input block, the recommended PW91k (also known as GGA97) approximant is recommended for the non-additive kinetic energy (the default is the local density approximant).  A recommended alternative is NDSD. For all other options the defaults will be used.</p>
+<p>Please note that throughout the FDE part of the documentation, the word “approximant” is used instead of the more usual “functional” to emphasize that the exact functional is not known, also in the case of the kinetic energy functional. In the literature one may encounter both words used interchangeably.</p>
+<p>By including more than one frozen fragment, it is possible to use a frozen fragment that  is a superposition of the densities of isolated molecules (this was possible in the previous version of ADF using the DENSPREP option). For a discussion and tests of the use of such approximate environment densities, see Ref. <a class="footnote-reference" href="#ref2" id="id23">[2]</a>.</p>
+<p>There is no restriction on the use of symmetry in FDE calculations, and usually the correct symmetry will be detected automatically. However, in the preparation of frozen fragments that will be rotated and/or translated in the FDE calculation, one has to include the keyword NOSYMFIT for technical reasons.</p>
+<p>In the current implementation, only the electron density of the embedded (non-frozen) system is  calculated. Therefore, with the exception of interaction energies, only properties that depend directly on the electron density  (e.g. dipole moments) are available. In particular, the calculation of  energy gradients is not implemented yet. All quantities given in the output refer (unless  explicitly specified otherwise) to the non-frozen system only.</p>
+<p>To employ the extension of FDE to the calculation of NMR shieldings, the file TAPE10 has to be used in
+the FDE calculation (by including the option SAVE TAPE10), and  subsequently the NMR shielding has to be calculated using the program NMR (not with EPR).
+The TDDFT extension of the FDE formalism allows the calculation of electronic excitation  energies and polarizabilities. This extension is automatically activated if FDE is used  in combination with the EXCITATIONS or the RESPONSE key. To allow the mutual response of several subsystems, see the section on [<a class="reference internal" href="#subsystem-tddft"><span class="std std-ref">subsystem TDDFT</span></a>].</p>
+<div class="section" id="fragment-specific-fde-options">
+<h2>Fragment-specific FDE options<a class="headerlink" href="#fragment-specific-fde-options" title="Permalink to this headline">¶</a></h2>
+<p>For each frozen fragment, several additional options can be applied. To do this, the fragment specification is used as a subblock key by appending a &amp; sign. The subblock is terminated with SubEnd. This subblock key looks, in the most general form, as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FRAGMENTS</span>
+  <span class="o">...</span>
+  <span class="n">FragType</span> <span class="n">FragFile</span> <span class="nb">type</span><span class="o">=</span><span class="n">FDE</span> <span class="o">&amp;</span>
+     <span class="p">{</span><span class="n">FDEOPTIONS</span> <span class="p">[</span><span class="n">USEBASIS</span><span class="p">]</span> <span class="p">[</span><span class="n">RELAX</span> <span class="ow">or</span> <span class="n">FREEZEANDTHAW</span><span class="p">]</span> <span class="p">[</span><span class="n">OPTIMIZE</span><span class="p">]}</span>
+     <span class="p">{</span><span class="n">FDEDENSTYPE</span> <span class="p">[</span><span class="n">SCF</span> <span class="o">|</span> <span class="n">SCFexact</span> <span class="o">|</span> <span class="n">SCFfitted</span> <span class="p">]}</span>
+     <span class="p">{</span><span class="n">RELAXCYCLES</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">FREEZEANDTHAWCYCLES</span> <span class="n">n</span><span class="p">}</span>
+     <span class="p">{</span><span class="n">XC</span> <span class="p">[</span><span class="n">LDA</span> <span class="o">|</span> <span class="n">GGA</span> <span class="n">ggapotx</span> <span class="n">ggapotc</span> <span class="o">|</span> <span class="n">MODEL</span> <span class="n">SAOP</span><span class="p">]}</span>
+  <span class="n">SubEnd</span>
+  <span class="o">...</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">FDEOPTIONS</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">FDEOPTIONS</span> <span class="pre">USEBASIS</span></code></dt>
+<dd>If the USEBASIS option is specified, the basis functions of this frozen fragment will be included in the calculation of the embedded subsystem.   This allows to expand the density of the embedded subsystem using not only atom-centered basis sets localized in the embedded subsystem but also the ones in the environment Ref. <a class="footnote-reference" href="#ref18" id="id24">[13]</a>. In large-scale simulations using the embedding potential, this option is recommended to be used in the preparation stage to investigate the basis set dependence of the results (chapter 5.3 in Ref. <a class="footnote-reference" href="#ref3" id="id25">[3]</a>). This option is also an indispensable element in the procedure introduced in Ref. <a class="footnote-reference" href="#ref18" id="id26">[13]</a> to test approximants to the kinetic-energy component of the embedding potential introduced by Wesolowski and Warshel.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FDEOPTIONS</span> <span class="pre">RELAX</span> <span class="pre">or</span> <span class="pre">FREEZEANDTHAW</span></code></dt>
+<dd>If the RELAX option (or equivalent FREEZEANDTHAW option) is specified, the density of this frozen fragment will be relaxed in freeze-and-thaw cycles <a class="footnote-reference" href="#ref5" id="id27">[5]</a>, i.e., the embedded subsystem is frozen, while this fragment is thawed. This is repeated, until convergence is reached or until the maximum number  of iterations has been performed. By relaxing frozen fragments, it is possible to improve a given approximate environment density by including the polarization of the environment due to the embedded system. This option is recommended to be used in the preparation stage of a large-scale numerical simulation. The freeze-and-thaw calculations lead to a pair of electron densities (embedded system and environment) that minimizes the total energy. As a consequence, the electron density of the environment derived from the freeze-and-thaw calculations can be used as a reference to verify the adequacy of the assumed electron density for the environment in a large-scale simulation. Due to technical restrictions, freeze-and-thaw is not possible if an open-shell (unrestricted) fragment is present.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FDEOPTIONS</span> <span class="pre">USEBASIS</span> <span class="pre">RELAX</span> <span class="pre">or</span> <span class="pre">FDEOPTIONS</span> <span class="pre">USEBASIS</span> <span class="pre">FREEZEANDTHAW</span></code></dt>
+<dd>It is further possible to combine USEBASIS and RELAX or FREEZEANDTHAW. In this case, the basis functions of the non-frozen fragment will be included when the density of the fragment is relaxed. This allows fully relaxed calculations with supermolecular expansion of the electron density of each subsystem. This option is to be used to test approximants to the kinetic-energy component of the embedding potential introduced by Wesolowski and Warshel by means of the procedure introduced in ref. <a class="footnote-reference" href="#ref18" id="id28">[13]</a>.</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FDEDENSTYPE</span></code></dt>
+<dd><p class="first">The FDEDENSTYPE option can be used to specify which density is read from the fragment file. The possible options are:</p>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">FDEDENSTYPE</span> <span class="pre">SCF</span> <span class="pre">(or</span> <span class="pre">FDEDENSTYPE</span> <span class="pre">SCFexact)</span></code></dt>
+<dd>The exact density (not calculated using the fit functions) is used. This is the default.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FDEDENSTYPE</span> <span class="pre">SCFfitted</span></code></dt>
+<dd>The fitted density is used. This is less accurate but can be significantly faster.</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">RELAXCYCLES</span> <span class="pre">n</span> <span class="pre">or</span> <span class="pre">FREEZEANDTHAWCYCLES</span> <span class="pre">n</span></code></dt>
+<dd>This gives the maximum number of freeze-and-thaw cycles that are performed for this fragment. If the maximum number given in the FDE block is smaller, or if convergence is reached earlier, then fewer cycles are performed. For historical reasons, two equivalent keywords are available.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">XC</span></code></dt>
+<dd><p class="first">The XC option can be used to select the exchange-correlation potential that is used for this fragment when it is relaxed. By default, the same potential as for the non-frozen system is used, but in some cases it might be preferable to use another approximation for certain fragments. An example is given in Ref. <a class="footnote-reference" href="#ref14" id="id29">[12]</a>.</p>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">XC</span> <span class="pre">LDA</span></code></dt>
+<dd>This option selects LDA as exchange-correlation potential for relaxing this fragment.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">XC</span> <span class="pre">GGA</span> <span class="pre">ggapotx</span> <span class="pre">ggapotc</span></code></dt>
+<dd>This selects a GGA potential for relaxing this fragment. The GGA potential is specified by giving the name of the exchange potential, followed by the name of the correlation potential.  The available potentials are listed in the documentation for the XC key.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">XC</span> <span class="pre">MODEL</span> <span class="pre">SAOP</span></code></dt>
+<dd>This selects the model potential SAOP for relaxing this fragment.</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="kinetic-energy-approximants">
+<h2>Kinetic energy approximants<a class="headerlink" href="#kinetic-energy-approximants" title="Permalink to this headline">¶</a></h2>
+<p>The approximants to the kinetic energy dependent component of the embedding potential are described here.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FDE</span>
+  <span class="p">{</span><span class="n">approximants</span> <span class="n">to</span> <span class="n">the</span> <span class="n">kinetic</span> <span class="n">energy</span> <span class="n">dependent</span>
+                <span class="n">component</span> <span class="n">of</span> <span class="n">the</span> <span class="n">embedding</span> <span class="n">potential</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">CJCORR</span> <span class="p">[</span><span class="n">rho_cutoff</span><span class="p">]}</span>
+  <span class="p">{</span><span class="n">GGAPOTXFD</span> <span class="n">exchange</span> <span class="n">approximant</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">GGAPOTCFD</span> <span class="n">correlation</span> <span class="n">approximant</span><span class="p">}</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">approximants</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">kinetic</span> <span class="pre">energy</span> <span class="pre">dependent</span> <span class="pre">component</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">embedding</span> <span class="pre">potential</span></code></dt>
+<dd><p class="first">Several approximants to the kinetic-energy-dependent component of the  effective potential given in Eq. (21) of ref. <a class="footnote-reference" href="#ref1" id="id30">[1]</a> are available. None of them is applicable if the embedded system is covalently bound to its environment. The user is recommended to look at the numerical value of the TSNAD(LDA) parameter which is given in the units of energy and can be considered as a measure of the overlap. The following rule of thumb should be applied: if this parameter is smaller than the estimated interaction energy between the embedded subsystem and the environment, then the available approximants are most probably adequate. If it exceeds this limit, the results can be less reliable.  Printing TSNAD(LDA) is not done by default, as it can be quite time-consuming. Its printing is switched on by including “EXTPRINTENERGY”, and “PRINTRHO2”, and “FULLGRID” in the FDE input block.  If no kinetic energy approximant is specified, by default the local-density approximation (Thomas-Fermi approximant) is used. For an assessment of approximants for weakly overlapping pairs of densities see Refs. <a class="footnote-reference" href="#ref18" id="id31">[13]</a> <a class="footnote-reference" href="#ref26" id="id32">[16]</a> <a class="footnote-reference" href="#ref24" id="id33">[15]</a> <a class="footnote-reference" href="#ref27" id="id34">[17]</a>. Based on these studies, the use of PW91k (= GGA97) is recommended.</p>
+<p><strong>APPROXIMANTS TO BE USED IN NORMAL APPLICATIONS</strong></p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">THOMASFERMI</span> <span class="pre">(default)</span></code></dt>
+<dd>Local-density-approximation form of vt[rhoA,rhoB] <a class="footnote-reference" href="#ref30" id="id35">[20]</a>  derived from Thomas-Fermi expression for Ts[rho] <a class="footnote-reference" href="#ref28" id="id36">[18]</a> <a class="footnote-reference" href="#ref29" id="id37">[19]</a>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GGA97</span> <span class="pre">(or</span> <span class="pre">PW91K)</span></code></dt>
+<dd>Generalized-gradient-approximation form of vt[rhoA,rhoB] <a class="footnote-reference" href="#ref26" id="id38">[16]</a> derived from the  Lembarki-Chermette <a class="footnote-reference" href="#ref32" id="id39">[21]</a> approximant to Ts[rho]. This approximant is currently the recommended one based on the numerical analysis of its accuracy <a class="footnote-reference" href="#ref24" id="id40">[15]</a> <a class="footnote-reference" href="#ref26" id="id41">[16]</a>  and the fact that the used enhancement factor disappears at large reduced density gradients, i.e. where the second-order gradient-expansion approximation fails <a class="footnote-reference" href="#ref18" id="id42">[13]</a> <a class="footnote-reference" href="#ref27" id="id43">[17]</a>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NDSD</span></code></dt>
+<dd>Similarly to GGA97, the NDSD approximant is constructed by taking into account the asymptotic behavior of the functional vt[rhoA,rhoB] at small density gradients. In the construction of NDSD, the exact property of vt[rhoA,rhoB] at rho_A <span class="math notranslate nohighlight">\(\rightarrow\)</span> 0 and for <span class="math notranslate nohighlight">\(\int\)</span> rhoB = 2 given in Eq. A6 of Ref. <a class="footnote-reference" href="#ref36" id="id44">[22]</a> is also taken into account. The analysis of the accuracy of this potential <a class="footnote-reference" href="#ref36" id="id45">[22]</a> shows that NDSD is of the same or superior quality as GGA97. NDSD is, therefore, recommended as the successor of GGA97 to be used anywhere where the quality of the results depends directly on the accuracy of the potential vt[rhoA,rhoB], i.e., for obtaining electronic-structure-dependent properties. The analytical form of the corresponding approximant to the functional  Ts<sup>nad</sup>  [rho_A,rho_B]$ exists (Eq. 23 in Ref. <a class="footnote-reference" href="#ref36" id="id46">[22]</a>). It is not possible, however, to obtain the analytical form of the  corresponding parent functional for the kinetic energy Ts[rho]. To reflect this and the fact that, similarly to the GGA approximants to vt[rhoA,rhoB], the numerical values of only first- and second derivatives  of density are needed, the label NDSD (Non-Decomposable Second Derivatives) is used.</dd>
+</dl>
+<p><strong>OBSOLETE APPROXIMANTS</strong> (can be used but GGA97 leads usually to a better embedding potential see refs. <a class="footnote-reference" href="#ref18" id="id47">[13]</a> <a class="footnote-reference" href="#ref26" id="id48">[16]</a>)</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">LLP91</span></code></dt>
+<dd>Generalized-gradient-approximation form of vt[rhoA,rhoB] <a class="footnote-reference" href="#ref18" id="id49">[13]</a> derived from Lee-Lee-Parr <a class="footnote-reference" href="#ref39" id="id50">[23]</a> approximant to Ts[rho].</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PW86k</span></code></dt>
+<dd>Generalized-gradient-approximation form of vt[rhoA,rhoB] <a class="footnote-reference" href="#ref18" id="id51">[13]</a> derived from the Fuentealba-Reyes approximant to Ts[rho] <a class="footnote-reference" href="#ref42" id="id52">[24]</a>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">THAKKAR92</span></code></dt>
+<dd>Generalized-gradient-approximation form of vt[rhoA,rhoB] <a class="footnote-reference" href="#ref26" id="id53">[16]</a> derived from the Thakkar approximant to Ts[rho] <a class="footnote-reference" href="#ref43" id="id54">[25]</a>.</dd>
+</dl>
+<p><strong>APPROXIMANTS WHICH MIGHT BE USEFUL ONLY FOR THEORY DEVELOPMENT</strong></p>
+<p>The accuracy of <strong>some</strong> of these approximants was investigated in detail <a class="footnote-reference" href="#ref26" id="id55">[16]</a> <a class="footnote-reference" href="#ref18" id="id56">[13]</a>  <a class="footnote-reference" href="#ref24" id="id57">[15]</a> <a class="footnote-reference" href="#ref27" id="id58">[17]</a>.  Each of them was shown to lead to a qualitatively incorrect embedding potential. They shouldn’t be used in practical applications.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">COULOMB</span></code></dt>
+<dd>Neglecting completely vt[rhoA,rhoB] (vt[rhoA,rhoB] equals zero) together with the exchange-correlation component of the embedding potential introduced by Wesolowski and Warshel.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TF9W</span></code></dt>
+<dd>The approximant to vt[rhoA,rhoB]  <a class="footnote-reference" href="#ref1" id="id59">[1]</a> derived from the second-order gradient expansion <a class="footnote-reference" href="#ref42" id="id60">[24]</a> for Ts[rho].</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">WEIZ</span></code></dt>
+<dd>The approximant to vt[rhoA,rhoB]  <a class="footnote-reference" href="#ref27" id="id61">[17]</a> derived from the von Weizsäcker approximant to Ts[rho] <a class="footnote-reference" href="#ref7" id="id62">[6]</a>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">OL91A</span></code></dt>
+<dd>Generalized-gradient-approximation form of vt[rhoA,rhoB] <a class="footnote-reference" href="#ref18" id="id63">[13]</a> derived from the first  Ou-Yang and Levy approximant to Ts[rho] <a class="footnote-reference" href="#ref53" id="id64">[26]</a>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">OL91B</span></code></dt>
+<dd>Generalized-gradient-approximation form of vt[rhoA,rhoB] <a class="footnote-reference" href="#ref26" id="id65">[16]</a> derived from the second  Ou-Yang and Levy approximant to Ts[rho] <a class="footnote-reference" href="#ref53" id="id66">[26]</a>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">E00</span></code></dt>
+<dd>Generalized-gradient-approximation form of vt[rhoA,rhoB]  <a class="footnote-reference" href="#ref57" id="id67">[27]</a> derived from a kinetic energy functional by Ernzerhof <a class="footnote-reference" href="#ref58" id="id68">[28]</a> which represents the gradient expansion approximation up to the fourth order.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">P92</span></code></dt>
+<dd>Generalized-gradient-approximation form of vt[rhoA,rhoB] <a class="footnote-reference" href="#ref57" id="id69">[27]</a> derived from a kinetic energy functional by Perdew <a class="footnote-reference" href="#ref60" id="id70">[29]</a> which represents the gradient expansion approximation up to the sixth order.</dd>
+</dl>
+<p class="last"><strong>LONG DISTANCE CORRECTIONS TO THE EFFECTIVE POTENTIAL</strong></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CJCORR</span></code></dt>
+<dd><p class="first">Option to switch on a long-distance correction. By default this option is not used. As was shown in Ref. <a class="footnote-reference" href="#ref61" id="id71">[30]</a>, with the available approximate kinetic-energy approximants, the embedding potential has the wrong form in  the limit of a large separation of the subsystems. In particular, it was shown that this can have serious consequences in the case of “supermolecular expansion of electron density of each subsystem” calculations (USEBASIS option). In Ref. <a class="footnote-reference" href="#ref61" id="id72">[30]</a>, a correction is proposed that enforces the correct long-distance limit. (See also this reference for limitations of this correction.)</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">CJCORR</span> <span class="pre">[rho_cutoff]</span></code></dt>
+<dd>This option switches on the long-distance correction. This option has to be used in combination with one of the above kinetic-energy approximants. By default, a density cut-off of 0.1 is employed.</dd>
+</dl>
+<p class="last"><strong>NONADDITIVE EXCHANGE-CORRELATION APPROXIMANT</strong></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GGAPOTXFDGGAPOTCFD</span></code></dt>
+<dd><p class="first">Option to specify the non-additive exchange-correlation approximant. By default, in the construction of the effective embedding potential the exchange-correlation approximant that was specified in the XC block is used. It is possible to specify a different approximant with the GGAPOTXFD and GGAPOTCFD options. This is particularly useful in combination with the use of model potentials like SAOP, that can not be used in the embedding potential because of their orbital  dependence. (For a discussion, see Ref. <a class="footnote-reference" href="#ref14" id="id73">[12]</a>.)</p>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">GGAPOTXFD</span> <span class="pre">exchange</span> <span class="pre">approximant</span></code></dt>
+<dd>The exchange approximant is used in the construction of the embedding potential. The same exchange approximants as in the XC key are available.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GGAPOTCFD</span> <span class="pre">correlation</span> <span class="pre">approximant</span></code></dt>
+<dd>The correlation approximant is used in the construction of the embedding potential. The same correlation approximants as in the XC key are available.</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="general-fde-options">
+<h2>General FDE options<a class="headerlink" href="#general-fde-options" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the fragment-specific options and the kinetic energy approximants, there are also a number of options available  in FDE calculations that will be described in the following.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FDE</span>
+  <span class="p">{</span><span class="n">FULLGRID</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">RELAXCYCLES</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">FREEZEANDTHAWCYCLES</span> <span class="n">n</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">RELAXPOSTSCF</span> <span class="ow">or</span> <span class="n">FREEZEANDTHAWPOSTSCF</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">EXTPRINTENERGY</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">PRINTRHO2</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">ENERGY</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">SDFTENERGY</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">DIPOLE</span><span class="p">}</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">FULLGRID</span></code></dt>
+<dd><p class="first">By default, FULLGRID is not used, and in FDE calculations the integration grid is generated as described in Ref. <a class="footnote-reference" href="#ref2" id="id74">[2]</a> by including only atoms of the frozen subsystem that are close to the embedded subsystem in the generation of the integration grid. The distance cutoff used is chosen automatically, based on the extent of the basis functions of the embedded subsystem. (It can also be chosen manually, see the option qpnear in the INTEGRATION key) This scheme results in an efficient and accurate integration grid. However, it is possible that the default integration scheme is not accurate enough. This can be the case for weakly interacting systems and when the distance between the frozen and the embedded  system is large. It is therefore recommended to check the quality of the default integration grid by comparing to results obtained using the full supermolecular grid (FULLGRID option).</p>
+<p class="last">If the subkey FULLGRID is included, all atoms of the frozen system are included in the generation of the integration grid. This results in the same grid that would be  used in a supermolecular calculation of the combined frozen and embedded  system. The integration grid generated by this option might be much larger than the default grid.  This option should be used to check the quality of the default integration grid.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">RELAXCYCLES</span> <span class="pre">n</span> <span class="pre">or</span> <span class="pre">FREEZEANDTHAWCYCLES</span> <span class="pre">n</span></code></dt>
+<dd>Specifies the maximum number n of freeze-and-thaw iterations <a class="footnote-reference" href="#ref5" id="id75">[5]</a> that are performed (for frozen fragments with the RELAX) option. If a smaller number of iterations is specified as a fragment-specific option, for this fragment this smaller number is used. Furthermore, if convergence is reached earlier, no more iterations will  be performed.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">RELAXPOSTSCF</span> <span class="pre">or</span> <span class="pre">FREEZEANDTHAWPOSTSCF</span></code></dt>
+<dd>If this option is included, several post-SCF properties will be calculated after each freeze-and-thaw cycle [Ref.  <a class="footnote-reference" href="#ref5" id="id76">[5]</a>.  These are otherwise only calculated in the last cycle.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EXTPRINTENERGYPRINTRHO2</span></code></dt>
+<dd>If the options EXTPRINTENERGY and PRINTRHO2 are included (both are needed and should be listed on separate lines),  several additional quantities will be printed, including TSNAD(LDA). In order to obtain meaningful numbers, also the FULLGRID keyword (see above) has to be used.</dd>
+</dl>
+<dl class="docutils" id="index-4">
+<dt><code class="docutils literal notranslate"><span class="pre">ENERGY</span></code></dt>
+<dd><p class="first">Option to switch on the calculation of the FDE energy as the sum of the energy E[rhoA] of the active, embedded system and the interaction energy Eint[rhoA,rhoB] of the embedded system with the frozen environment. This relies on the calculation of the total energy for the embedded system and all caveats and restrictions for total energy evaluations apply (see keyword <a class="reference internal" href="Bond_energy_analysis.html#totalenergy"><span class="std std-ref">TOTALENERGY</span></a>). All energy contributions are evaluated on the grid of the active subsystem. Some contributions to the interaction energy Eint[rhoA,rhoB] require an accurate integration grid in the region of the environment. Thus, in pure embedding calculations (without fragment-specific option RELAX), an accurate calculation of the FDE energy requires a full supermolecular integration grid (FULLGRID option). Details on the implementation and the performance of kinetic energy functionals for interaction energies are documented in Ref. <a class="footnote-reference" href="#ref57" id="id77">[27]</a></p>
+<p class="last">The calculation of the full, variationally minimized subsystem DFT energy, that is, the sum of the energy of two subsystems E[rhoA] and E[rhoB] and their interaction energy Eint[rhoA,rhoB] in the framework of FDE, is invoked if then the fragment densities are relaxed in freeze-and-thaw cycles (option RELAXCYCLES and fragment-specific FDE option RELAX). In this case the supermolecular integration grid is not required. Instead, in each step of the freeze-and-thaw cycle, the critical energy terms are taken from the previous freeze-and-thaw step of the presently frozen fragment. The convergence of the energy contributions with the number of freeze-and-thaw iterations should be carefully monitored. Due to conceptual problems for the evaluation of the non-additive kinetic energy contribution, only two subsystems, that is, one frozen fragment, is supported for FDE energy calculations with freeze-and-thaw.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SDFTENERGY</span></code></dt>
+<dd>This is a generalization of the original ENERGY implementation that allows for the evaluation of the FDE/sDFT total energy.
+Usage of a supermolecular integration grid is recommended (FULLGRID option), because of the non-additive kinetic and XC contributions.
+EXTPRINTENERGY can be combined with this option to print the subsystem DFT energy after each freeze-and-thaw cycle.
+For pure embedding calculations, the SDFTENERGY implementation reads the total energy from each frozen fragment’s adf.rkf (TAPE21) file.
+The total energy of frozen fragments is not (re-)evaluated during FDE calculations.
+It is therefore mandatory to add the <a class="reference internal" href="Bond_energy_analysis.html#totalenergy"><span class="std std-ref">TOTALENERGY</span></a> keyword to the preparatory isolated fragment calculations.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DIPOLE</span></code></dt>
+<dd>The dipole of the supersystem is calculated as the sum of analytically integrated fragment dipole moments.
+Note that the dipole moment becomes origin dependent for charged (sub-)fragments.
+The current implementation does NOT take care of this.</dd>
+</dl>
+</div>
+<div class="section" id="frozen-density-embedding-with-external-orthogonality">
+<span id="fde-eo"></span><h2>Frozen Density Embedding with External Orthogonality<a class="headerlink" href="#frozen-density-embedding-with-external-orthogonality" title="Permalink to this headline">¶</a></h2>
+<p>An implementation of External Orthogonality (EO)  into the FDE framework in ADF can be found in Ref. <a class="footnote-reference" href="#ref67" id="id78">[31]</a>.
+In this method in the fragment calculation one need to specify ghost atoms at the positions of the atoms in all the other fragments.
+Thus each fragment is calculated in the supermolecular basis.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AOMat2File</span>
+<span class="n">IgnoreOverlap</span>
+<span class="n">FDE</span>
+  <span class="n">EXTERNALORTHO</span> <span class="p">{</span><span class="n">factor</span><span class="p">}</span>
+  <span class="o">...</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">EXTERNALORTHO</span></code></dt>
+<dd>Used to specify the use of external orthogonality (EO) in the FDE block, with an optional factor (default factor is 1e6). Note that the overlap region is defined by
+ghost atoms, and the general keyword IGNOREOVERLAP is necessary. Additionally, the general keyword  AOMAT2FILE  is required to save some important fragment AO matrices to adf.rkf for use in an EO calculation.  it is recommended that one uses the  STOFIT keyword for the STOFIT density fitting method.</dd>
+</dl>
+<span class="target" id="fde-and-cosmo"></span></div>
+<div class="section" id="fde-and-localized-cosmo">
+<span id="index-5"></span><h2>FDE and (localized) COSMO<a class="headerlink" href="#fde-and-localized-cosmo" title="Permalink to this headline">¶</a></h2>
+<p>COSMO solvation can be included in combination with FDE.
+This means that a COSMO cavity will be created that holds both the active and frozen fragments.</p>
+<p>For very large systems the solution of the COSMO equations can become the bottleneck of the calculation.
+A local COSMO variant, which exploits the subsystem nature of the underlying electronic description, is implemented in ADF, see
+Ref. <a class="footnote-reference" href="#ref68" id="id79">[32]</a>.
+This method, called LoCOSMO, is an approximation to regular COSMO for fragment-based electronic structure methods.
+If a given fragment is active (i.e. only its own density changes over the SCF cycles), the surface charges outside a given radius around this fragment will be kept fixed in magnitude (excluded from the COSMO optimization).
+However, no interactions are ignored by adding a corresponding constant term to the COSMO solution vector.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SOLVATION</span>
+  <span class="o">..</span>
+  <span class="n">CHARGED</span> <span class="n">LoCosmo</span> <span class="n">LoCosmoDist</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">LoCosmo</span> <span class="pre">LoCosmoDist</span></code></dt>
+<dd>If LoCosmo is included the local COSMO will be used in the calculation. LoCosmoDist is a cutoff radius (Angstrom), which must be specified by the user, if LoCOSMO is included. All surface charges within this radius from any atom of the active fragment are included in the active charge space. A sensible value for LoCosmoDist is 5.0 Angstrom.</dd>
+</dl>
+<p>To be really useful, Freeze-and-Thaw cycles should be carried out with LoCOSMO. After each fragment calculation, the KF file LOCSURCH is written to disk. If present, this file will be automatically read in during the next (LoCOSMO) fragment calculation. This means that if the internal FT cycles are used by specifying RELAXCYCLES, the code creates and reads in the file in a fully automatic fashion. LOCSURCH is neither created nor read during a regular COSMO calculation.</p>
+<p>In case one calculates excitation energies with the EXCITATION block key, and LoCOSMO is specified, only the solvent response due to surface charges within the specified cutoff radius will be taken into account, see also Ref. <a class="footnote-reference" href="#ref69" id="id80">[33]</a>.
+It should be noted that in a regular (uncoupled) FDE TDDFT calculation, the response due to the frozen density is neglected.</p>
+</div>
+<div class="section" id="fde-and-qm-fq-f">
+<span id="index-6"></span><span id="id81"></span><h2>FDE and QM/FQ(Fμ)<a class="headerlink" href="#fde-and-qm-fq-f" title="Permalink to this headline">¶</a></h2>
+<p>FDE can also be combined with the <a class="reference internal" href="FQ-QM.html#fqqm"><span class="std std-ref">QM/FQ(Fμ)</span></a> method which can be used to embed a quantum system in a polarizable classical environment.
+The fluctuating classical layer can be included in all stages of an FDE calculation, i.e. when performing the separate calculations for the two isolated fragments as well as the full FDE system.
+There is also the possibility of using the QM/FQ(Fμ) method to account for the mutual response of the subsystems by endowing the frozen layer’s atoms with fluctuating charges (and dipoles), provided a suitable parametrization is available.
+See the <a class="reference internal" href="FQ-QM.html#fqqm"><span class="std std-ref">QM/FQ(Fμ)</span></a> manual page for more details.</p>
+</div>
+<div class="section" id="subsystem-tddft-coupled-fde">
+<span id="subsystem-tddft"></span><span id="index-7"></span><h2>Subsystem TDDFT, coupled FDE<a class="headerlink" href="#subsystem-tddft-coupled-fde" title="Permalink to this headline">¶</a></h2>
+<p>The linear-response subsystem TDDFT code implements the theory of coupled excited states for subsystems as described in Refs. <a class="footnote-reference" href="#ref74" id="id82">[35]</a> <a class="footnote-reference" href="#ref72" id="id83">[34]</a>. This theory is based on the FDE extension to excited states <a class="footnote-reference" href="#ref7" id="id84">[6]</a>, which is implemented in ADF in a local response approximation, i.e., neglecting the dynamic response of the environment <a class="footnote-reference" href="#ref8" id="id85">[7]</a>.</p>
+<p>The subsystem TDDFT code allows to treat the mutual response of several subsystems, including the ones that are considered environment. A more typical situation would be a system composed of several equivalent chromophores treated as individual subsystems. In this case, the local response approximation leads to uncoupled excited states of the subsystems (hence the acronym FDEu is employed often),  while the subsystem TDDFT code couples the monomer excitations to obtain the excited states of the total system (often denoted as coupled frozen density embedding, FDEc). This can be related to excitonic couplings between the monomers <a class="footnote-reference" href="#ref72" id="id86">[34]</a>.</p>
+<p>The current implementation is restricted to NOSYM calculations and Singlet-Singlet excitations without frozen core approximation. It makes use of the ALDA kernel (including a Thomas-Fermi part for the contribution arising from the non-additive kinetic energy) for consistency with the uncoupled FDE implementation for excited states. Some features have not or not extensively been tested and should be used with great care, e.g., linear dependencies in the basis set. Details on the calculation of transition moments, oscillator and rotational strengths are described in Ref. <a class="footnote-reference" href="#ref11" id="id87">[10]</a>.</p>
+<p>Subsystem TDDFT (FDEc) calculations can be invoked with the SUBEXCI key.</p>
+<p><strong>SUBEXCI input</strong></p>
+<p>FDEc calculations on coupled excited states first require that an uncoupled FDE-TDDFT calculation has been performed for every subsystem that should be included in the coupled calculation, and that the corresponding adf.rkf files, in which the considered subsystems are “active”, have been saved (see the separate FDE input description).  This means that it is not possible to use the information on  frozen/inactive fragments from a adf.rkf file of a previous uncoupled FDE calculation, which contains all subsystems.</p>
+<p>Although it is technically possible to use adf.rkf files from non-FDE calculations on the separate subsystems, this would lead to results that are inconsistent with the subsystem TDDFT methodology from Ref. <a class="footnote-reference" href="#ref74" id="id88">[35]</a>. In any case, a previous TDDFT calculation for each subsystem that should be included in the coupling procedure is necessary. If that is not the case, the subsystem will still be considered in the calculation of the total electron density (needed in the setup of the exchange-correlation kernel), but will not be included in the coupling procedure.</p>
+<p>The first subsystem should always be one of the coupled subsystems. The input will then look like the corresponding input for an uncoupled FDE-TDDFT calculation, but in addition should contain the following block:</p>
+<div class="highlight-default notranslate" id="keyscheme-subexci"><div class="highlight"><pre><span></span><span class="n">SUBEXCI</span>
+  <span class="p">{</span><span class="n">LOWEST</span> <span class="n">nlowest</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">OPTSTATES</span> <span class="n">list_of_optstates</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">CTHRES</span> <span class="n">coupling_threshold</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">SFTHRES</span> <span class="n">solutionfactor_threshold</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">COUPLBLOCK</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">TDA</span><span class="p">}</span>
+  <span class="p">{</span><span class="n">CICOUPL</span><span class="p">}</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">LOWEST</span> <span class="pre">nlowest</span></code></dt>
+<dd>The selection of the excited states to be coupled consists of two steps. First, a number of reference states are selected. As a default, the nlowest (default: 10) lowest excited states present on the fragment file for the first subsystem are considered.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">OPTSTATES</span> <span class="pre">list_of_optstates</span></code></dt>
+<dd>If the keyword OPTSTATES is given, only those excited states of the first subsystem are considered as reference states that are given in the list_of_optstates (numbers of states separated by blanks).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CTHRES</span> <span class="pre">coupling_threshold</span></code></dt>
+<dd>Second, all excitations of all subsystems (present on the fragment adf.rkf files) with an excitation energy that differs by less than coupling_threshold (to be given in units of eV; default: 30 eV)  from one of the reference states are selected to be included in the coupling. Note that additional excited states of system 1 may be included here.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">COUPLBLOCK</span></code></dt>
+<dd>If COUPLBLOCK is specified in the input, all couplings between all of these local excited states are included. Otherwise (default), the coupling_threshold is also applied to select pairs of states for which couplings are calculated. I.e., couplings are not calculated if the two particular states to be coupled  differ in energy by more than coupling_threshold.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SFTHRES</span> <span class="pre">solutionfactor_threshold</span></code></dt>
+<dd>To reduce the computational effort, it is possible to ignore the effect of orbital pairs with coefficients less than solutionfactor_threshold in the solution factors (TDDFT eigenvectors) of the underlying uncoupled calculation in the construction of the exact trial densities during the calculation of the coupling matrix elements. These orbital pair contributions are not ignored in the subsequent calculation of transition moments,  oscillator, and rotational strengths. The default value of 0.00001 typically leads to a precision of the coupled excitation energies of about 0.0001 eV.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TDA</span></code></dt>
+<dd>TDA specifies the use of the Tamm-Dancoff-Approximation (<a class="reference internal" href="Excitation_energies.html#tda"><span class="std std-ref">Tamm-Dancoff approximation</span></a>) in the underlying uncoupled FDE-TDDFT calculations (Ref. <a class="footnote-reference" href="#ref75" id="id89">[36]</a>). Contrary to the full SUBEXCI-TDDFT variant, SUBEXCI-TDA allows for the usage of hybrid functionals in the underlying uncoupled FDE-TDDFT calculations.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CICOUPL</span></code></dt>
+<dd>Within the Tamm-Dancoff Approximation, the couplings between localized excited states on different subsystems correspond directly to so-called exciton couplings (see Ref. <a class="footnote-reference" href="#ref75" id="id90">[36]</a>). The CICOUPL keyword, in conjunction with TDA, prints these exciton couplings. It is also possible to use CICOUPL with full FDEc-TDDFT. In that case, the excitonic couplings between monomers are reconstructed from an effective 2x2 CIS-like eigenvalue problem, as e.g. done in Ref. <a class="footnote-reference" href="#ref72" id="id91">[34]</a>.</dd>
+</dl>
+<p>In addition, the input file may contain either an EXCITATION block or the keyword DIFFUSE. Both options lead to a slight adaption of the integration grid. Apart from this, the EXCITATION block will be ignored.</p>
+<p>The key ALLOW PARTIALSUPERFRAGS is currently necessary to be able to use subsystem information for only one subsystem from a adf.rkf file of a previous FDE calculation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ALLOW</span> <span class="n">PARTIALSUPERFRAGS</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="restrictions-and-pitfalls">
+<h2>Restrictions and pitfalls<a class="headerlink" href="#restrictions-and-pitfalls" title="Permalink to this headline">¶</a></h2>
+<p>In the current implementation, only the electron density of the embedded system is  calculated. Therefore, with the exception of interaction energies, only properties that depend directly on the electron density  (e.g., dipole moments) are available. In addition, the TDDFT extension allows the  calculation of electronic excitation energies and polarizabilities, and NMR shieldings can be calculated.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">EVERYTHING ELSE IS NOT YET IMPLEMENTED. THE RESULTS OBTAINED FOR OTHER PROPERTIES MIGHT BE MEANINGLESS.</p>
+</div>
+<p><strong>Kinetic energy approximant:</strong> Although the effective embedding potential is derived from first principles using universal density approximants, the ADF implementation relies on approximations. Currently, two implemented approximations are recommended <a class="footnote-reference" href="#ref24" id="id92">[15]</a>: PW91k (also known as GGA97) which uses electron densities and the corresponding gradients to express the non-additive kinetic energy component of the embedding potential, or TF (Thomas-Fermi LDA approximant), which does not use gradients at all. Either approximation is applicable only in cases where the overlap between electron densities of the corresponding interactions is small.  Note: so far, no approximation has been developed for the strong-overlap case -  two subsystem linked by covalent bonds for instance.</p>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="ref1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id30">2</a>, <a class="fn-backref" href="#id59">3</a>)</em> T.A. Wesolowski and A. Warshel, <em>Frozen Density Functional Approach for ab-initio Calculations of Solvated Molecules</em>, <a class="reference external" href="https://doi.org/10.1021/j100132a040">Journal of Physical Chemistry 97, 8050 (1993)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id17">3</a>, <a class="fn-backref" href="#id23">4</a>, <a class="fn-backref" href="#id74">5</a>)</em> J. Neugebauer, C.R. Jacob, T.A. Wesolowski and E.J. Baerends, <em>An Explicit Quantum Chemical Method for Modeling Large Solvation Shells Applied to Aminocoumarin C151</em>, <a class="reference external" href="https://doi.org/10.1021/jp0528764">Journal of Physical Chemistry A 109, 7805 (2005)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id25">2</a>)</em> T.A. Wesolowski, in: Computational Chemistry: Reviews of Current Trends - Vol. 10, World Scientific, 2006.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>C.R. Jacob, J. Neugebauer and L. Visscher, <em>A flexible implementation of frozen-density embedding for use in multilevel simulations</em>, <a class="reference external" href="https://doi.org/10.1002/jcc.20861">Journal of Computational Chemistry 29, 1011 (2008)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id27">2</a>, <a class="fn-backref" href="#id75">3</a>, <a class="fn-backref" href="#id76">4</a>)</em> T.A. Wesolowski and J. Weber, <em>Kohn-Sham equations with constrained electron density: an iterative evaluation of the ground-state electron density of interacting molecules</em>, <a class="reference external" href="https://doi.org/10.1016/0009-2614(95)01281-8">Chemical Physics Letters 248, 71 (1996)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[6]</td><td><em>(<a class="fn-backref" href="#id6">1</a>, <a class="fn-backref" href="#id62">2</a>, <a class="fn-backref" href="#id84">3</a>)</em> M.E. Casida and T.A. Wesolowski, <em>Generalization of the Kohn-Sham equations with constrained electron density formalism and its time-dependent response theory formulation</em>, <a class="reference external" href="https://doi.org/10.1002/qua.10744">International Journal of Quantum Chemistry 96, 577 (2004)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[7]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id85">2</a>)</em> T.A. Wesolowski, <em>Hydrogen-Bonding-Induced Shifts of the Excitation Energies in Nucleic Acid Bases: An Interplay between Electrostatic and Electron Density Overlap Effects</em>, <a class="reference external" href="https://doi.org/10.1021/ja048846g">Journal of the American Chemical Society 126, 11444 (2004)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[8]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id15">2</a>, <a class="fn-backref" href="#id18">3</a>)</em> C.R. Jacob, J. Neugebauer, L. Jensen and L. Visscher, <em>Comparison of frozen-density embedding and discrete reaction field solvent models for molecular properties</em>, <a class="reference external" href="https://doi.org/10.1039/B601997H">Physical Chemistry Chemical Physics 8, 2349 (2006)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[9]</a></td><td>J. Neugebauer and E.J. Baerends, <em>Exploring the Ability of Frozen-Density Embedding to Model Induced Circular Dichroism</em>, <a class="reference external" href="https://doi.org/10.1021/jp0622280">Journal of Physical Chemistry A 110, 8786 (2006)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[10]</td><td><em>(<a class="fn-backref" href="#id13">1</a>, <a class="fn-backref" href="#id87">2</a>)</em> J. Neugebauer, <em>On the calculation of general response properties in subsystem density functional theory</em>, <a class="reference external" href="https://doi.org/10.1063/1.3212883">Journal of Chemical Physics 131, 084104 (2009)</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[11]</a></td><td>C.R. Jacob and L. Visscher, <em>Calculation of nuclear magnetic resonance shieldings using frozen-density embedding</em>, <a class="reference external" href="https://doi.org/10.1063/1.2370947">Journal of Chemical Physics 125, 194104 (2006)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref14" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[12]</td><td><em>(<a class="fn-backref" href="#id16">1</a>, <a class="fn-backref" href="#id29">2</a>, <a class="fn-backref" href="#id73">3</a>)</em> C.R. Jacob, T.A. Wesolowski and L. Visscher, <em>Orbital-free embedding applied to the calculation of induced dipole moments in</em> CO2<sup>…</sup> X <em>(X=He, Ne, Ar, Kr, Xe, Hg) van der Waals complexes</em>, <a class="reference external" href="https://doi.org/10.1063/1.2107567">Journal of Chemical Physics 123, 174104 (2005)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref18" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[13]</td><td><em>(<a class="fn-backref" href="#id24">1</a>, <a class="fn-backref" href="#id26">2</a>, <a class="fn-backref" href="#id28">3</a>, <a class="fn-backref" href="#id31">4</a>, <a class="fn-backref" href="#id42">5</a>, <a class="fn-backref" href="#id47">6</a>, <a class="fn-backref" href="#id49">7</a>, <a class="fn-backref" href="#id51">8</a>, <a class="fn-backref" href="#id56">9</a>, <a class="fn-backref" href="#id63">10</a>)</em> T.A. Wesolowski and J. Weber, <em>Kohn-Sham equations with constrained electron density: The effect of various kinetic energy functional parametrizations on the ground-state molecular properties</em>, <a class="reference external" href="https://doi.org/10.1002/(SICI)1097-461X(1997)61:2%3C303::AID-QUA13%3E3.0.CO;2-C">International Journal of Quantum Chemistry 61, 303 (1997)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref21" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[14]</td><td>D. Schlüns, M. Franchini, A. W. Götz, J. Neugebauer, C. R. Jacob ,L. Visscher, <em>Analytical gradients for subsystem density functional theory within the slater-function-based amsterdam density functional program</em>, <a class="reference external" href="https://doi.org/10.1002/jcc.24670">J. Comput. Chem. 38, 4 (2017)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref24" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[15]</td><td><em>(<a class="fn-backref" href="#id33">1</a>, <a class="fn-backref" href="#id40">2</a>, <a class="fn-backref" href="#id57">3</a>, <a class="fn-backref" href="#id92">4</a>)</em> T.A. Wesolowski, <em>Density functional theory with approximate kinetic energy functionals applied to hydrogen bonds</em>, <a class="reference external" href="https://doi.org/10.1063/1.473907">Journal of Chemical Physics 106, 8516 (1997)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref26" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[16]</td><td><em>(<a class="fn-backref" href="#id32">1</a>, <a class="fn-backref" href="#id38">2</a>, <a class="fn-backref" href="#id41">3</a>, <a class="fn-backref" href="#id48">4</a>, <a class="fn-backref" href="#id53">5</a>, <a class="fn-backref" href="#id55">6</a>, <a class="fn-backref" href="#id65">7</a>)</em> T.A. Wesolowski, H. Chermette and J. Weber, <em>Accuracy of Approximate Kinetic Energy Functionals in the Model of Kohn-Sham Equations with Constrained Electron Density: the</em> FH<sup>…</sup> NCH <em>complex as a Test Case</em>, <a class="reference external" href="https://doi.org/10.1063/1.472823">Journal of Chemical Physics 105, 9182 (1996)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref27" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[17]</td><td><em>(<a class="fn-backref" href="#id34">1</a>, <a class="fn-backref" href="#id43">2</a>, <a class="fn-backref" href="#id58">3</a>, <a class="fn-backref" href="#id61">4</a>)</em> Y.A. Bernard, M. Dulak, J.W. Kaminski and T.A. Wesolowski, <em>The energy-differences based exact criterion for testing approximations to the functional for the kinetic energy of non-interacting electrons</em>, <a class="reference external" href="https://doi.org/10.1088/1751-8113/41/5/055302">Journal of Physics A 41, 55302 (2008)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref28" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id36">[18]</a></td><td>L.H. Thomas, <em>The calculation of atomic fields</em>, <a class="reference external" href="https://doi.org/10.1017/S0305004100011683">Mathematical Proceedings of the Cambridge Philosophical Society 23, 542 (1927)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref29" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id37">[19]</a></td><td>E. Fermi, <em>Eine statistische Methode zur Bestimmung einiger Eigenschaften des Atoms und ihre Anwendung auf die Theorie des periodischen Systems der Elemente</em>, <a class="reference external" href="https://doi.org/10.1007/BF01351576">Zeitschrift für Physik 48, 73 (1928)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref30" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id35">[20]</a></td><td>P. Cortona, <em>Self-consistently determined properties of solids without band-structure calculations</em>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.44.8454">Physical Review B 44, 8454 (1991)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref32" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id39">[21]</a></td><td>A. Lembarki and H. Chermette, <em>Obtaining a gradient-corrected kinetic-energy functional from the Perdew-Wang exchange functional</em>, <a class="reference external" href="https://doi.org/10.1103/PhysRevA.50.5328">Physical Review A 50, 5328 (1994)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref36" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[22]</td><td><em>(<a class="fn-backref" href="#id44">1</a>, <a class="fn-backref" href="#id45">2</a>, <a class="fn-backref" href="#id46">3</a>)</em> J.M. Garcia Lastra, J.W. Kaminski and T.A. Wesolowski, <em>Orbital-free effective embedding potential at nuclear cusps</em>, <a class="reference external" href="https://doi.org/10.1063/1.2969814">Journal of Chemical Physics 129, 074107 (2008)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref39" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id50">[23]</a></td><td>H. Lee, C. Lee and R.G. Parr, <em>Conjoint gradient correction to the Hartree-Fock kinetic- and exchange-energy density functionals</em>, <a class="reference external" href="https://doi.org/10.1103/PhysRevA.44.768">Physical Review A 44, 768 (1991)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref42" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[24]</td><td><em>(<a class="fn-backref" href="#id52">1</a>, <a class="fn-backref" href="#id60">2</a>)</em> D.A. Kirzhnits, Soviet Physics JETP-USSR 5, 64 (1957)</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref43" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id54">[25]</a></td><td>A.J. Thakkar, <em>Comparison of kinetic-energy density functionals</em>, <a class="reference external" href="https://doi.org/10.1103/PhysRevA.46.6920">Physical Review A 46, 6920 (1992)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref53" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[26]</td><td><em>(<a class="fn-backref" href="#id64">1</a>, <a class="fn-backref" href="#id66">2</a>)</em> H. Ou-Yang and M. Levy, <em>Approximate noninteracting kinetic energy functionals from a nonuniform scaling requirement</em>, <a class="reference external" href="https://doi.org/10.1002/qua.560400309">International Journal of Quantum Chemistry 40, 379 (1991)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref57" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[27]</td><td><em>(<a class="fn-backref" href="#id67">1</a>, <a class="fn-backref" href="#id69">2</a>, <a class="fn-backref" href="#id77">3</a>)</em> A.W. Götz, S.M. Beyhan and L. Visscher, <em>Performance of Kinetic Energy Functionals for Interaction Energies in a Subsystem Formulation of Density Functional Theory</em>, <a class="reference external" href="https://doi.org/10.1021/ct9001784">Journal of Chemical Theory and Computation 5, 3161 (2009)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref58" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id68">[28]</a></td><td>M. Ernzerhof, <em>The role of the kinetic energy density in approximations to the exchange energy</em>, <a class="reference external" href="https://doi.org/10.1016/S0166-1280(99)00414-5">Journal of Molecular Structure: THEOCHEM 501-502, 59 (2000)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref60" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id70">[29]</a></td><td>J.P. Perdew, <em>Generalized gradient approximation for the fermion kinetic energy as a functional of the density</em>, <a class="reference external" href="https://doi.org/10.1016/0375-9601(92)91058-Y">Physics Letters A 165, 79 (1992)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref61" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[30]</td><td><em>(<a class="fn-backref" href="#id71">1</a>, <a class="fn-backref" href="#id72">2</a>)</em> C.R. Jacob, S.M., Beyhan and L. Visscher, <em>Exact functional derivative of the nonadditive kinetic-energy bifunctional in the long-distance limit</em>, <a class="reference external" href="https://doi.org/10.1063/1.2743013">Journal of Chemical Physics 126, 234116 (2007)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref67" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id78">[31]</a></td><td>D.V. Chulhai and L. Jensen, <em>Frozen Density Embedding with External Orthogonality in Delocalized Covalent Systems</em>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.5b00293">Journal of Chemical Theory and Computation 11, 3080 (2015)</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref68" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id79">[32]</a></td><td>A. Goez, and J. Neugebauer, <em>A Local Variant of the Conductor-Like Screening Model for Fragment-Based Electronic-Structure Method</em>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.5b00832">Journal of Chemical Theory and Computation 11, 5277 (2015)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref69" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id80">[33]</a></td><td>A. Goez, and J. Neugebauer, <em>Including protein density relaxation effects in first-principles embedding calculations of cofactor excitation energies</em>, <a class="reference external" href="https://doi.org/10.1080/00268976.2016.1199823">Molecular Physics 115, 526 (2016)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref72" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[34]</td><td><em>(<a class="fn-backref" href="#id12">1</a>, <a class="fn-backref" href="#id83">2</a>, <a class="fn-backref" href="#id86">3</a>, <a class="fn-backref" href="#id91">4</a>)</em> J. Neugebauer, <em>Photophysical Properties of Natural Light-Harvesting Complexes Studied by Subsystem Density Functional Theory</em>, <a class="reference external" href="https://doi.org/10.1021/jp709956k">Journal of Physical Chemistry B 112, 2207 (2008)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref74" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[35]</td><td><em>(<a class="fn-backref" href="#id11">1</a>, <a class="fn-backref" href="#id82">2</a>, <a class="fn-backref" href="#id88">3</a>)</em> J. Neugebauer, <em>Couplings between electronic transitions in a subsystem formulation of time-dependent density functional theory</em>, <a class="reference external" href="https://doi.org/10.1063/1.2713754">Journal of Chemical Physics 126, 134116 (2007)</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref75" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[36]</td><td><em>(<a class="fn-backref" href="#id89">1</a>, <a class="fn-backref" href="#id90">2</a>)</em> C. König, N. Schlüter. J. Neugebauer, <em>Direct Determination of Exciton Couplings from Subsystem TDDFT within the Tamm-Dancoff Approximation</em>, <a class="reference external" href="https://doi.org/10.1063/1.4774117">Journal of Chemical Physics 138, 034104 (2013)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref79" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19">[37]</a></td><td>J. Neugebauer, M.J. Louwerse, E.J. Baerends and T.A. Wesolowski, <em>The merits of the frozen-density embedding scheme to model solvatochromic shifts</em>, <a class="reference external" href="https://doi.org/10.1063/1.1858411">Journal of Chemical Physics 122, 94115 (2005)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref80" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id20">[38]</a></td><td>J. Neugebauer, M.J. Louwerse, P. Belanzoni, T.A. Wesolowski and E.J. Baerends, <em>Modeling solvent effects on electron-spin-resonance hyperfine couplings by frozen-density embedding</em>, <a class="reference external" href="https://doi.org/10.1063/1.2033749">Journal of Chemical Physics 123, 114101 (2005)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref81" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id21">[39]</a></td><td>M. Zbiri, M. Atanasov, C. Daul, J.-M. Garcia Lastra and T.A. Wesolowski, <em>Application of the density functional theory derived orbital-free embedding potential to calculate the splitting energies of lanthanide cations in chloroelpasolite crystals</em>, <a class="reference external" href="https://doi.org/10.1016/j.cplett.2004.09.010">Chemical Physics Letters 397, 441 (2004)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref82" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id22">[40]</a></td><td>M. Zbiri, C.A. Daul and T.A. Wesolowski, <em>Effect of the f-Orbital Delocalization on the Ligand-Field Splitting Energies in Lanthanide-Containing Elpasolites</em>, <a class="reference external" href="https://doi.org/10.1021/ct060035a">Journal of Chemical Theory and Computation 2, 1106 (2006)</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SCRF.html" class="btn btn-neutral float-right" title="SCRF: Self-Consistent Reaction Field" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="FQ-QM.html" class="btn btn-neutral" title="QM/FQ: Quantum Mechanics/Fluctuating Charges (and Fluctuating Dipoles)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

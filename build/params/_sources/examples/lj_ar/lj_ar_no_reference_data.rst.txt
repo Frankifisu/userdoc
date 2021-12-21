@@ -1,0 +1,151 @@
+.. _LJ_Ar_NoReferenceData:
+
+Calculate reference values in training_set.yaml
+=================================================================
+
+This example illustrates how reference values in ``training_set.yaml`` can be
+calculated by launching new AMS jobs that combine information from the
+``job_collection.yaml`` (:ref:`Job Collection`) and ``reference_engines.yaml``
+(:ref:`Engine Collection`) files.
+
+This can be useful if you, for example, 
+
+* want to reevaluate (parts of) the training set with a different reference method
+
+* have added a :ref:`reaction energy with a ResultsImporter <add_reaction_energy>` without a reference value
+
+.. image:: /_static/LJ_Ar_no_reference_data_toc.png
+    :width: 80%
+    :align: center
+
+Prerequisites
+---------------
+
+* Go through the :ref:`LJ_Ar_Tutorial` tutorial to get familiar with the .yaml files
+
+* Download :download:`LJ_Ar_no_reference_data_example.zip` or make a copy of the directory ``$AMSHOME/scripting/scm/params/examples/LJ_Ar_no_reference_data``
+
+
+.. _LJ_Ar_no_reference_data_InputFiles:
+
+The input files
+----------------
+
+.. _LJ_Ar_NRD_training_set_yaml:
+
+training_set.yaml 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Unlike the :ref:`training_set.yaml file in the previous tutorial <LJ_Ar_training_set_yaml>`, this example's training_set.yaml does not contain any reference values:
+
+.. literalinclude :: complete_example/LJ_Ar_no_reference_data/training_set.yaml
+
+This tutorial shows you how you can calculate the reference values (in units of *Unit*) with ``params``.
+
+.. _LJ_Ar_NRD_reference_engines_yaml:
+
+reference_engines.yaml 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The reference_engines.yaml file is an :ref:`Engine Collection`. Each entry has a unique **ID**, and an **AMSInput** block containing `calculation settings for the AMS engine <../../../AMS/Engines.html>`__.
+
+.. literalinclude:: complete_example/LJ_Ar_no_reference_data/job_collection_engines.yaml
+
+In this example, there is only one reference engine. It has the *ID*
+``dftb;;kspace;;quality;GammaOnly;model;GFN1-xTB;``. The *ID* could be any
+string. It does not affect the results, but should describe the reference
+engine. Each job in the job collection with this *ReferenceEngineID* will be
+evaluated with this reference engine.
+
+The *AMSInput* affects the calculation. In this example, it sets up a
+GFN1-xTB engine with Γ-point sampling. The *AMSInput* will be added
+verbatim to the :ref:`input to the reference job <LJ_Ar_NRD_reference_cache>`.
+
+
+.. note::
+
+    If you do not have DFTB license, change the ``Engine`` block in ``reference_engines.yaml`` to
+
+    .. code::
+
+        Engine ForceField
+            Type UFF
+        EndEngine
+
+    to instead use a UFF force field as the reference method.
+
+
+.. _LJ_Ar_NRD_job_collection_yaml:
+
+job_collection.yaml 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Unlike the :ref:`previous tutorial <LJ_Ar_job_collection_yaml>`, here each entry in the job_collection.yaml has a **ReferenceEngineID**. For example, the first entry is
+
+.. literalinclude:: complete_example/LJ_Ar_no_reference_data/job_collection.yaml
+    :lines: 1-50
+    :linenos:
+
+The **ReferenceEngineID** refers to an engine in the :ref:`reference_engines.yaml file <LJ_Ar_NRD_reference_engines_yaml>`.
+
+
+
+
+Calculate reference values with ``params genref``
+--------------------------------------------------------
+
+To run the reference jobs and generate the reference data:
+
+.. code:: ipython3
+
+    "$AMSBIN/params" genref
+
+This creates 
+
+* a folder ``reference.cache`` containing the :ref:`reference jobs' input and output <LJ_Ar_NRD_reference_cache>`, and 
+
+* a file ``training_set.ref.yaml`` containing the :ref:`reference values <LJ_Ar_NRD_training_set_ref_yaml>`. 
+
+
+.. note::
+
+    If you run ``"$AMSBIN/params" run`` when not all entries have reference
+    data, the ``genref`` command will internally be run before the
+    optimization.
+
+
+
+
+.. _LJ_Ar_NRD_reference_cache:
+
+The reference.cache folder
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For example, the file ``reference.cache/Ar32_frame001/Ar32_frame001.in``
+contains the input to the ``Ar32_frame001`` job, which combines input from the
+:ref:`job collection <LJ_Ar_NRD_job_collection_yaml>` and :ref:`engine
+collection <LJ_Ar_NRD_reference_engines_yaml>`:
+
+.. literalinclude:: Ar32_frame001.in
+
+The normal `AMS output <../../../AMS/Input_Output.html#output>`__ can be found
+in the same folder: the logfile, standard outputfile, and the binary ams.rkf
+and dftb.rkf files.
+
+
+
+.. _LJ_Ar_NRD_training_set_ref_yaml:
+
+The training_set.ref.yaml file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The training_set.ref.yaml file contains the calculated reference values.
+For example, it starts with
+
+.. literalinclude:: complete_example/LJ_Ar/training_set.yaml
+    :lines: 1-20
+
+These were the reference values that were used in the :ref:`previous tutorial
+<LJ_Ar_Tutorial>`.
+
+

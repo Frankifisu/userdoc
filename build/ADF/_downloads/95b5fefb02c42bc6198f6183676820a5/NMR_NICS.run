@@ -1,0 +1,62 @@
+#!/bin/sh
+
+
+# The NMR program enables the calculation of so-called nucleus-independent
+# chemical shifts (NICS). More details are available in the Properties Programs
+# User's Guide.
+
+# In the ADF run, the ElectrostaticEmbedding key is used to define points charges with zero
+# charge. The GHOSTS key in the nmr program then basically copies this block.
+# For the interpretation of the results we refer to the literature.
+
+
+AMS_JOBNAME=NICS $AMSBIN/ams <<eor
+System
+  atoms
+     P         1.000000    0.000000    0.000000
+     F         1.813256    1.425667    0.000000
+     F         1.813256   -0.712834    1.234664
+     F         1.813256   -0.712834   -1.234664
+  end
+  ElectrostaticEmbedding
+    MultipolePotential
+      Coordinates
+         3.0 4.0 5.0 0.0
+         1.0 2.0 3.0 0.0
+      end
+    end
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title PF3 - scf
+  basis
+    core Large
+    type TZP
+    CreateOutput Yes
+  end
+  numericalquality Good
+  save TAPE10
+  symmetry NOSYM
+  xc
+    gga revPBE
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+$AMSBIN/nmr <<eor
+adffile NICS.results/adf.rkf
+tape10file NICS.results/TAPE10
+NMR
+  Out Iso Tens
+  GHOSTS
+     3.0 4.0 5.0
+     1.0 2.0 3.0
+  SUBEND
+END
+eor

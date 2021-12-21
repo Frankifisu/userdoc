@@ -1,0 +1,41 @@
+Constraints
+===========
+
+The :ref:`Parameter Interfaces` section already covers how parameters
+can be constrained to lower and upper bounds by defining a suitable
+:class:`range <scm.params.parameterinterfaces.base.Parameter>`.
+In addition to this, advanced inequality constraints
+can be introduced through the rich comparison operators ``<``, ``<=``, ``>``, ``>=``
+between any two parameters,
+This allows to effectively reduce the relevant search space of an optimization problem.
+Any comparison involving a :class:`~scm.params.parameterinterfaces.base.Parameter`
+will be automatically understood as a constraint:
+
+.. code-block:: python
+
+  >>> params = LennardJonesParameters()
+  >>> constraints = [params[1] < 0.5*params[0], 2 < params[1]+5]
+  >>> o = Optimization(jobcol, data_set, params, optimizer, constraints=constraints)
+  >>> o.optimize()
+
+A defined list of constraints can be passed to the :ref:`Optimization` through the
+respective argument.
+Throughout the optimization, all new candidate solutions
+will be checked against the provided definition and discarded whenever any of the
+constraints is violated.
+
+The following should be considered when defining constraints:
+  * Constraints that include parameters which are not part of the
+    :meth:`active <scm.params.parameterinterfaces.base.BaseParameters.active>`
+    subset will automatically be ignored
+  * Numerical operators such as ``+``, ``-``, ``*``, ``/`` are possible
+    within a definition: ``p[0] >= p[1]+2``
+  * Multiple numerical operators are **not** possible, `e.g.`:
+    ``p[0] >= 2*p[1]+2``, ``2*p[0] >= p[1]+2``
+  * Operators that compare to constant scalars ``p[0] > 2`` can be defined, but are
+    discouraged: use the
+    :class:`Parameter.range <scm.params.parameterinterfaces.base.Parameter>`
+    attribute instead
+  * The ``==`` operator is not interpreted as a constraint
+    (it checks if two parameters are the same).
+  * The parameter can not be used as a denominator: ``2/p[0] >= p[2]``

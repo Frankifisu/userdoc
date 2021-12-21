@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# Calculation of the excitation energies of NH3 using the
+# Hybrid Diagonal Approximation (HDA).
+# Relevant in case hybrid XC functionals are used.
+# For speed reasons one should set a (not so large) value for HDA_CutOff.
+
+AMS_JOBNAME=NH3 $AMSBIN/ams << eor
+System
+  symmetrize
+  atoms
+     N   0.000000    0.000000    0.000000
+     H   0.956305    0.000000    0.292372
+     H  -0.478152    0.828184    0.292372
+     H  -0.478152   -0.828184    0.292372
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  Basis
+    Type TZP
+  End 
+
+  XC
+    Hybrid B3LYP
+  End
+
+  Excitations
+    Allowed
+    lowest 21
+    HDA
+    HDA_CutOff 40.0 [eV]
+  End
+EndEngine
+eor

@@ -1,0 +1,1426 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Self Consistent Field (SCF) &mdash; BAND 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="BAND 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Accuracy and Efficiency" href="TOC.html"/>
+        <link rel="next" title="More Technical Settings" href="More_Technical_Settings.html"/>
+        <link rel="prev" title="Hartree–Fock RI" href="Hartree-Fock_RI.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search BAND" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-BAND" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General/TOC.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General/Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General/feature_list.html">Feature List</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#model-hamiltonians">Model Hamiltonians</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#structure-and-reactivity">Structure and Reactivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#spectroscopy-and-properties">Spectroscopy and Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#charge-transport">Charge transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#analysis">Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/New_in_BAND.html">What’s new in Band 2021.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General/New_in_BAND.html#what-s-new-in-band-2020">What’s new in Band 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General/input.html">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/input.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/input.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/input.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/input.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/input.html#units">Units</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html">AMS driver’s tasks and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#geometry-system-definition">Geometry, System definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#tasks-exploring-the-pes">Tasks: exploring the PES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#properties-in-the-ams-driver">Properties in the AMS driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Model_Hamiltonians/TOC.html">Model Hamiltonians</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html">Density Functional (XC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#lda-gga-metagga">LDA/GGA/metaGGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#dispersion-correction">Dispersion Correction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#d4-eeq">D4(EEQ)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#d3-and-d3-bj">D3 and D3-BJ</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#model-potentials">Model Potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#non-collinear-approach">Non-Collinear Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#libxc-library-integration">LibXC Library Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#range-separated-hybrid-functionals">Range-separated hybrid functionals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#defaults-and-special-cases">Defaults and special cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#gga-u">GGA+U</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#index-12">OEP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Density_Functional.html#dft-1-2">DFT-1/2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Model_Hamiltonians/Relativistic_Effects_and_Spin.html">Relativistic Effects and Spin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Relativistic_Effects_and_Spin.html#spin-polarization">Spin polarization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Relativistic_Effects_and_Spin.html#relativistic-effects">Relativistic Effects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Model_Hamiltonians/Solvation.html">Solvation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/COSMO.html">COSMO: Conductor like Screening Model and the Solvation-key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/COSMO.html#additional-keys-for-periodic-systems">Additional keys for periodic systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/SM12.html">SM12: Solvation Model 12</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Model_Hamiltonians/SM12.html#input">Input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Model_Hamiltonians/Electric_and_Magnetic_Fields.html">Electric and Magnetic Fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Electric_and_Magnetic_Fields.html#electric-field">Electric Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Electric_and_Magnetic_Fields.html#magnetic-field">Magnetic Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Model_Hamiltonians/Electric_and_Magnetic_Fields.html#atom-wise-fuzzy-potential">Atom-wise fuzzy potential</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Model_Hamiltonians/Nuclear_Model.html">Nuclear Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="TOC.html">Accuracy and Efficiency</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Basis_Set.html">Basis set</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Basis_Set.html#basis-input-block">Basis input block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_Set.html#which-basis-set-should-i-use">Which basis set should I use?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_Set.html#available-basis-sets">Available Basis Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_Set.html#more-basis-input-options">More Basis input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_Set.html#confinement-of-basis-functions">Confinement of basis functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_Set.html#manually-specifying-atomtypes-expert-option">Manually specifying AtomTypes (expert option)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Basis_Set.html#basis-set-superposition-error-bsse">Basis Set Superposition Error (BSSE)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="K-Space_Integration.html">K-Space</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="K-Space_Integration.html#kspace-input-block">KSpace input block</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="K-Space_Integration.html#regular-k-space-grid">Regular K-Space grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="K-Space_Integration.html#symmetric-k-space-grid-tetrahedron-method">Symmetric K-Space grid (tetrahedron method)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="K-Space_Integration.html#recommendations-for-k-space">Recommendations for k-space</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Numerical_Integration.html">Numerical Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Numerical_Integration.html#becke-grid">Becke Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Numerical_Integration.html#radial-grid-of-naos">Radial grid of NAOs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Numerical_Integration.html#voronoi-grid-deprecated">Voronoi grid (deprecated)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Density_Fitting.html">Density Fitting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Density_Fitting.html#zlm-fit">Zlm Fit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Density_Fitting.html#expert-options">Expert options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Density_Fitting.html#sto-fit-deprecated">STO Fit (Deprecated)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Hartree-Fock_RI.html">Hartree–Fock RI</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Self Consistent Field (SCF)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scf-block">SCF block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convergence">Convergence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diis">DIIS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multisecant">Multisecant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diris">DIRIS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="More_Technical_Settings.html">More Technical Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="More_Technical_Settings.html#linear-scaling">Linear Scaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="More_Technical_Settings.html#dependency">Dependency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="More_Technical_Settings.html#screening">Screening</a></li>
+<li class="toctree-l3"><a class="reference internal" href="More_Technical_Settings.html#direct-on-the-fly-calculation-of-basis-and-fit">Direct (on the fly) calculation of basis and fit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="More_Technical_Settings.html#fermi-energy-search">Fermi energy search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="More_Technical_Settings.html#block-size">Block size</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Spectroscopy_and_Properties/TOC.html">Spectroscopy and Properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Frequencies_and_Phonons.html">Frequencies and Phonons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Elastic_Tensor.html">Elastic Tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html">Optical Properties: Time-Dependent Current DFT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#insulators-semiconductors-and-metals">Insulators, semiconductors  and metals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#frequency-dependent-kernel">Frequency dependent kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#eels">EELS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#input-options">Input Options</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#newresponse">NewResponse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Spectroscopy_and_Properties/Time_Dependent_Current_DFT.html#oldresponse">OldResponse</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/ESR_EPR.html">ESR/EPR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/EFG.html">Nuclear Quadrupole Interaction (EFG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/NMR.html">NMR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Effective_Mass.html">Effective Mass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Properties_at_Nuclei.html">Properties at Nuclei</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/X-Ray_Form_Factors.html">X-Ray Form Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties/Berry_Phase.html">Dipole moment and Berry Phase</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Analysis/TOC.html">Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/DOS.html">Density of States (DOS)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/DOS.html#gross-populations">Gross populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/DOS.html#overlap-populations">Overlap populations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/Band_Structure.html">Band Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Band_Structure.html#user-defined-path-in-the-brillouin-zone">User-defined path in the Brillouin zone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Band_Structure.html#definition-of-the-fat-bands">Definition of the Fat Bands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Band_Structure.html#band-gap">Band Gap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/Charges.html">Charges</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Charges.html#default-atomic-charge-analysis">Default Atomic Charge Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Charges.html#bader-analysis-aim">Bader Analysis (AIM)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/Fragments.html">Fragments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/Energy_Decomposition_Analysis.html">Energy Decomposition Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Energy_Decomposition_Analysis.html#periodic-energy-decomposition-analysis-peda">Periodic Energy Decomposition Analysis (PEDA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Energy_Decomposition_Analysis.html#periodic-energy-decomposition-analysis-and-natural-orbitals-of-chemical-valency-peda-nocv">Periodic Energy Decomposition Analysis and natural orbitals of chemical valency (PEDA-NOCV)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/LDOS.html">Local Density of States (STM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/ThreeD_Fields_Visualization.html">3D field visualization with BAND</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Electronic_Transport/NEGF.html">Electronic Transport (NEGF)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Electronic_Transport/NEGF.html#transport-with-negf-in-a-nutshell">Transport with NEGF in a nutshell</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#self-consistency">Self consistency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#contour-integral">Contour integral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#gate-potential">Gate potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#bias-potential">Bias potential</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Electronic_Transport/NEGF.html#workflow">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Electronic_Transport/NEGF.html#input-options">Input options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#sgf-input-options">SGF Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#negf-input-options-no-bias">NEGF Input options (no bias)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#negf-input-options-with-bias">NEGF Input options (with bias)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#negf-input-options-alignment">NEGF Input options (alignment)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Electronic_Transport/NEGF.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Electronic_Transport/NEGF.html#miscellaneous-remarks-on-band-negf">Miscellaneous remarks on BAND-NEGF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Electronic_Transport/NEGF.html#store-tight-binding-hamiltonian">Store tight-binding Hamiltonian</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Expert_Options/TOC.html">Expert Options</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Expert_Options/Restarts.html">Restarts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#restart-key">Restart key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#grid">Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#plots-of-the-density-potential-and-many-more-properties">Plots of the density, potential, and many more properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#orbital-plots">Orbital plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#induced-density-plots-of-response-calculations">Induced Density Plots of Response Calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#nocv-orbital-plots">NOCV Orbital Plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#nocv-deformation-density-plots">NOCV Deformation Density Plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#ldos-stm">LDOS (STM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Restarts.html#save">Save</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Expert_Options/Symmetry.html">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Expert_Options/Symmetry.html#symmetry-breaking-for-scf">Symmetry breaking for SCF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Expert_Options/Advanced_Occupation_Options.html">Advanced Occupation Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Troubleshooting/TOC.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Troubleshooting/Recommendations.html">Recommendations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Recommendations.html#model-hamiltonian">Model Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#relativistic-model">Relativistic model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#xc-functional">XC functional</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Recommendations.html#technical-precision">Technical Precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Recommendations.html#performance">Performance</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#reduced-precision">Reduced precision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#memory-usage">Memory usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#reduced-basis-set">Reduced basis set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#frozen-core-for-5d-elements">Frozen core for 5d elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Recommendations.html#performance-on-machines-with-many-cores">Performance on machines with many cores</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#scf-does-not-converge">SCF does not converge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#finite-temperature-during-geometry-optimization">Finite temperature during geometry optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#geometry-does-not-converge">Geometry does not converge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#negative-frequencies-in-phonon-spectra">Negative frequencies in phonon spectra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#basis-set-dependency">Basis set dependency</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#using-confinement">Using confinement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#removing-basis-functions">Removing basis functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#frozen-core-too-large">Frozen core too large</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Troubleshooting/Various_issues.html">Various issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Various_issues.html#understanding-the-logfile">Understanding the logfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Various_issues.html#breaking-the-symmetry">Breaking the symmetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Various_issues.html#labels-for-the-basis-functions">Labels for the basis functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Various_issues.html#reference-and-startup-atoms">Reference and Startup Atoms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Various_issues.html#numerical-atoms-and-basis-functions">Numerical Atoms and Basis functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Troubleshooting/Error_messages.html">Warnings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Troubleshooting/Error_messages.html#warnings-specific-to-periodic-codes-band-dftb">Warnings specific to periodic codes (BAND, DFTB)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/TOC.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#model-hamiltonians">Model Hamiltonians</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BetaIron.html">Example: Spin polarization: antiferromagnetic iron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BFieldLdotB.html">Example: Applying a Magnetic Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Graphene_Dispersion.html">Example: Graphene sheet with dispersion correction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/HonPerovskite_Solvation.html">Example: H on perovskite with the COSMO solvation model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/EField.html">Example: Applying a homogeneous electric field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/FiniteNucleus.html">Example: Finite nucleus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NiO_Hubbard.html">Example: Fixing the Band gap of NiO with GGA+U</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ZnS_ModelPotential.html">Example: Fixing the band gap of ZnS with the TB-mBJ model potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/DFTHalf_Si.html">Example: DFT-1/2 method for Silicon</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#precision-and-performance">Precision and performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BasisDefaults.html">Example: Convenient way to specify a basis set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Peptide_NumericalQuality.html">Example: Tuning precision and performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Multiresolution_H2O.html">Example: Multiresolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BSSE.html">Example: BSSE correction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BandAutomations.html">Example: Speed up SCF during geometry optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#restarts">Restarts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/RestartSCF.html">Example: Restart the SCF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/RestartProperties.html">Example: Restart SCF for properties calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BeO_tape41.html">Example: Properties on a grid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#negf">NEGF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NEGF_Cr_wire.html">Example: Main NEGF flavors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NEGF_bias.html">Example: NEGF with bias</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NEGF_Conductance.html">Example: NEGF using the non-self consistent method</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#structure-and-reactivity">Structure and Reactivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NaCl.html">Example: NaCl: Bulk Crystal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/COChainFreqTS.html">Example: Transition-State search using initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/H_ref.html">Example: Atomic energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BNForce.html">Example: Calculating the atomic forces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/H2BulkGeo.html">Example: Optimizing the geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#time-dependent-dft">Time dependent DFT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NewResp_2DMoS2Restart.html">Example: TD-CDFT for MoS2 Monolayer (NewResponse)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NewResp_3DCopper.html">Example: TD-CDFT for Copper (NewResponse)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NewResp_PlotInducedDensity.html">Example: TDCDFT: Plot induced density (NewResponse)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/OldResp_Diamond.html">Example: TD-CDFT for bulk diamond (OldResponse)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#spectroscopy">Spectroscopy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/TiF3a.html">Example: Hyperfine A-tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/TiF3g.html">Example: Zeeman g-tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PE-NMR.html">Example: NMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/SnO_EFG.html">Example: EFG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/GraphenePhonons.html">Example: Phonons</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Frags_COCu.html">Example: CO absorption on a Cu slab: fragment option and densityplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/GridKey.html">Example: Grid key for plotting results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PEDA_0D_PtCl4H2.html">Example: H2 on [PtCl4]2-: charged molecules and PEDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PEDA_MgO+CO.html">Example: CO absorption on a MgO slab: fragment option and PEDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PEDANOCV_MgO+CO.html">Example: CO absorption on a MgO slab: fragment option, PEDA and PEDANOCV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Li2O_Bader.html">Example: Bader analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PropertiesAtNuclei.html">Example: Properties at nuclei</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Li_BZPlot.html">Example: Band structure plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/EffectiveMass.html">Example: Effective Mass (electron mobility)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Si_ElectronHole.html">Example: Generating an Excited State with and Electron Hole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BNSlabLDOS.html">Example: LDOS (STM) for a BN slab</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples/TOC.html#list-of-examples">List of Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#feature-references">Feature References</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#geometry-optimization">Geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#tddft">TDDFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#relativistic-tddft">Relativistic TDDFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#vignale-kohn">Vignale Kohn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#nmr">NMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#esr">ESR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#negf">NEGF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">BAND</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../BAND.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">BAND</a>/</li>
+      
+          <li><a href="TOC.html">Accuracy and Efficiency</a>/</li>
+      
+    <li class="orange-text">Self Consistent Field (SCF)</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="self-consistent-field-scf">
+<span id="scf"></span><span id="index-0"></span><h1>Self Consistent Field (SCF)<a class="headerlink" href="#self-consistent-field-scf" title="Permalink to this headline">¶</a></h1>
+<p>The SCF procedure searches for a self-consistent density. The self-consistent error is the square root of the integral of the squared difference between the input and output density of the cycle operator. When the SCF error is below a certain criterion, controlled by subkey <code class="docutils literal notranslate"><span class="pre">Criterion</span></code> of block key <code class="docutils literal notranslate"><span class="pre">Convergence</span></code>, convergence is reached. In case of bad convergence the SCF looks at the subkeys <code class="docutils literal notranslate"><span class="pre">Mixing</span></code>, and <code class="docutils literal notranslate"><span class="pre">Degenerate</span></code>, and the subkeys of block key <code class="docutils literal notranslate"><span class="pre">DIIS</span></code>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Troubleshooting: <a class="reference internal" href="../Troubleshooting/Trouble_Shooting.html#scf-does-not-converge"><span class="std std-ref">SCF does not converge</span></a></p>
+</div>
+<div class="section" id="scf-block">
+<h2>SCF block<a class="headerlink" href="#scf-block" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none notranslate" id="band-key-scf"><div class="highlight"><pre><span></span>SCF
+   Eigenstates Yes/No
+   Iterations integer
+   Method [DIIS | MultiSecant]
+   Mixing float
+   PMatrix Yes/No
+   PrintAllOccupiedBands Yes/No
+   PrintAllVirtualBands Yes/No
+   PrintAlwaysBandRanges Yes/No
+   Rate float
+   VSplit float
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">SCF</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Controls technical SCF parameters.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Eigenstates</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The program knows two alternative ways to evaluate the charge density iteratively in the SCF procedure: from the P-matrix, and directly from the squared occupied eigenstates. By default the program actually uses both at least one time and tries to take the most efficient. If present, Eigenstates turns off this comparison and lets the program stick to one method (from the eigenstates).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Iterations</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">300</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Maximum number of cycles</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The maximum number of SCF iterations to be performed.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Method</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">DIIS</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[DIIS, MultiSecant]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Choose the general scheme used to converge the density in the SCF. In case of scf problems one can try the MultiSecant alternative at no extra cost per SCF cycle. For more details see the DIIS and MultiSecantConfig block.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Mixing</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.075</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Initial ‘damping’ parameter in the SCF procedure, for the iterative update of the potential: new potential = old potential + mix (computed potential-old potential). Note: the program automatically adapts Mixing during the SCF iterations, in an attempt to find the optimal mixing value.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PMatrix</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">If present, evaluate the charge density from the P-matrix. See also the key Eigenstates.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PrintAllOccupiedBands</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">When printing the ranges of the bands, include all occupied ones.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PrintAllVirtualBands</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">When printing the ranges of the bands, include all virtual ones.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PrintAlwaysBandRanges</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Normally the ranges of the bands are only printed at the last SCF cycle</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Rate</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.99</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Minimum rate of convergence for the SCF procedure. If progress is too slow the program will take measures (such as smearing out occupations around the Fermi level, see key Degenerate of block Convergence) or, if everything seems to fail, it will stop</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">VSplit</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.05</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">To disturb degeneracy of alpha and beta spin MOs the value of this key is added to the beta spin potential at the startup.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="convergence">
+<h2>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline">¶</a></h2>
+<p>All options and parameters related to the convergence behavior of the SCF procedure are defined in the <code class="docutils literal notranslate"><span class="pre">Convergence</span></code> block key. Also the finite temperature distribution is part of this</p>
+<div class="highlight-none notranslate" id="band-key-convergence"><div class="highlight"><pre><span></span>Convergence
+   Criterion float
+   CriterionFactor float
+   Degenerate string
+   ElectronicTemperature float
+   InitialDensity [rho | psi]
+   LessDegenerate Yes/No
+   NoDegenerate Yes/No
+   NumBoltz integer
+   SpinFlip integer_list
+   SpinFlipEnabled Yes/No
+   SpinFlipRegion string
+   StartWithMaxSpin Yes/No
+   StartWithMaxSpinForSO Yes/No
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Convergence</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options and parameters related to the convergence behavior of the SCF procedure.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Criterion</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Criterion for termination of the SCF procedure. The default depends on the NumericalQuality and on the number of atoms in the system.
+Can be used for EngineAutomations</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CriterionFactor</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Multiply Criterion (which depends on system and quality) with this factor.
+Can be used for EngineAutomations</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Degenerate</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">default</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Smooths (slightly) occupation numbers around the Fermi level, so as to insure that nearly-degenerate states get (nearly-) identical occupations. Be aware: In case of problematic SCF convergence the program will turn this key on automatically, unless the key ‘Nodegenerate’ is set in input. The smoothing depends on the argument to this key, which can be considered a ‘degeneration width’. When the argument reads default, the program will use the value 1e-4 a.u. for the energy width.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ElectronicTemperature</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">(KT) Specify this key for a gradient independent electronic temperature</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">InitialDensity</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">rho</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[rho, psi]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The SCF is started with a guess of the density. There are the following choices RHO: the sum of atomic density. PSI: construct an initial eigensystem by occupying the atomic orbitals. The guessed eigensystem is orthonormalized, and from this the density is calculated/</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LessDegenerate</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">If smoothing of occupations over nearly degenerate orbitals is applied (see Degenerate key), then, if this key is set in the input file, the program will limit the smoothing energy range to 1e-4 a.u. as soon as the SCF has converged ‘halfway’, i.e. when the SCF error has decreased to the square root of its convergence criterion.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NoDegenerate</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">This key prevents any internal automatic setting of the key DEGENERATE.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NumBoltz</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">10</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The electronic temperature is done with a Riemann Stieltjes numerical integration, between zero and one occupation. This defines the number of points to be used.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SpinFlip</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Flip spin for atoms</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">List here the atoms for which you want the initial spin polarization to be flipped. This way you can distinguish between ferromagnetic and anti ferromagnetic states. Currently, it is not allowed to give symmetry equivalent atoms a different spin orientation. To achieve that you have to break the symmetry.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SpinFlipEnabled</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">If set to False, the keys SpinFlip and SpinFlipRegion are ignored. Only useful/convenient when trying to compare in a script the effect of spin flip.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SpinFlipRegion</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Recurring:</th><td class="field-body">True</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Flip spin for region</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Specify here the region for which you want the initial spin polarization to be flipped. This way you can distinguish between ferromagnetic and anti ferromagnetic states. Currently, it is not allowed to give symmetry equivalent atoms a different spin orientation. To achieve that you have to break the symmetry.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">StartWithMaxSpin</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">To break the initial perfect symmetry of up and down densities there are two strategies. One is to occupy the numerical orbitals in a maximum spin configuration. The alternative is to add a constant to the potential. See also Vsplit key.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">StartWithMaxSpinForSO</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Same as the StartWithMaxSpin option. In case of spin-orbit band always used to split the potential. Now will use maxspin in case of SpinFlip. With this option it will always do that.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="diis">
+<span id="index-1"></span><h2>DIIS<a class="headerlink" href="#diis" title="Permalink to this headline">¶</a></h2>
+<p>The DIIS procedure to obtain the SCF solution depends on several parameters. Default values can be overruled with this block.</p>
+<div class="highlight-none notranslate" id="band-key-diis"><div class="highlight"><pre><span></span>DIIS
+   Adaptable Yes/No
+   CHuge float
+   CLarge float
+   Condition float
+   DiMix float
+   DiMixMax float
+   DiMixMin float
+   NCycleDamp integer
+   NVctrx integer
+   Variant [DIIS | LISTi | LISTb | LISTd]
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">DIIS</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Parameters for the DIIS procedure to obtain the SCF solution</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Adaptable</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Change automatically the value of dimix during the SCF.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CHuge</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">20.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">No DIIS (but damping) when coefs &gt;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">When the largest coefficient in the DIIS expansion exceeds this value, damping is applied</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CLarge</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">20.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Reduce DIIS space when coefs &gt;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">When the largest DIIS coefficient exceeds this value, the oldest DIIS vector is removed and the procedure re-applied</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Condition</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1000000.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The condition number of the DIIS matrix, the largest eigenvalue divided by the smallest, must not exceed this value. If this value is exceeded, this vector will be removed.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DiMix</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.2</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Bias DIIS towards latest vector with</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Mixing parameter for the DIIS procedure</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DiMixMax</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">-1.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">For adaptive diis: A negative value means automatic, see DiMixatnvctrx. If positive it is an absolute upper bound for (adaptive) dimix</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DiMixMin</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.01</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">An absolute lower bound for adaptive dimix.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NCycleDamp</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Do not start DIIS before cycle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Number of initial iterations where damping is applied, before any DIIS is considered</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NVctrx</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">20</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Size of DIIS space</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Maximum number of DIIS expansion vectors</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Variant</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">DIIS</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[DIIS, LISTi, LISTb, LISTd]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Which variant to use. In case of problematic SCF convergence, first try MultiSecant, and if that does not work the LISTi is the advised method. Note: LIST is computationally more expensive per SCF iteration than DIIS.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="multisecant">
+<span id="index-2"></span><h2>Multisecant<a class="headerlink" href="#multisecant" title="Permalink to this headline">¶</a></h2>
+<p>For more detais on the multisecant method see ref <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+<div class="highlight-none notranslate" id="band-key-multisecantconfig"><div class="highlight"><pre><span></span>MultiSecantConfig
+   CMax float
+   InitialSigmaN float
+   MaxSigmaN float
+   MaxVectors integer
+   MinSigmaN float
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">MultiSecantConfig</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Parameters for the Multi-secant SCF convergence method.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">CMax</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">20.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Max coeff</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Maximum coefficient allowed in expansion</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">InitialSigmaN</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Initial</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This is a lot like a mix factor: bigger means bolder</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MaxSigmaN</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.3</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Max</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Upper bound for the SigmaN parameter</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MaxVectors</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">20</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Number of cycles to use</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Maximum number of previous cycles to be used</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MinSigmaN</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.01</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Min</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Lower bound for the SigmaN parameter</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="diris">
+<h2>DIRIS<a class="headerlink" href="#diris" title="Permalink to this headline">¶</a></h2>
+<p>In the DIRIS block, which has the same options as the <code class="docutils literal notranslate"><span class="pre">DIIS</span></code> block, you can specify the DIIS options to be used in the Dirac subprogram, for numerical single atom calculations, which constructs the radial tables for the NAOs.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>L. D. Marks and D. R. Luke, <em>Robust mixing for ab initio quantum mechanical calculations</em>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.78.075114">Phys. Rev. B 78, 075114 (2008)</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="More_Technical_Settings.html" class="btn btn-neutral float-right" title="More Technical Settings" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Hartree-Fock_RI.html" class="btn btn-neutral" title="Hartree–Fock RI" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

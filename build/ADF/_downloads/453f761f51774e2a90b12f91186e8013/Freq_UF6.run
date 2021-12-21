@@ -1,0 +1,101 @@
+#!/bin/sh
+
+# Optimization and frequencies for scalar relativistic ZORA
+
+AMS_JOBNAME=SR_GO $AMSBIN/ams <<eor
+System
+  atoms
+     U  0.00000  0.00000  0.00000
+     F  2.00000  0.00000  0.00000
+     F -2.00000  0.00000  0.00000
+     F  0.00000  2.00000  0.00000
+     F  0.00000 -2.00000  0.00000
+     F  0.00000  0.00000  2.00000
+     F  0.00000  0.00000 -2.00000
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=1E-4
+End
+
+Engine ADF
+  title UF6 geometry optimization + freq: scalar ZORA
+  beckegrid quality=good
+  basis type=TZP
+  relativity
+    level scalar
+    formalism ZORA
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=SR_Freq $AMSBIN/ams <<eor
+LoadSystem
+  File SR_GO.results/adf.rkf
+End
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+End
+
+LoadEngine SR_GO.results/adf.rkf
+eor
+
+
+
+# # Optimization and frequencies for spinorbit ZORA
+
+AMS_JOBNAME=SO_GO $AMSBIN/ams <<eor
+System
+  atoms
+     U  0.00000  0.00000  0.00000
+     F  2.00000  0.00000  0.00000
+     F -2.00000  0.00000  0.00000
+     F  0.00000  2.00000  0.00000
+     F  0.00000 -2.00000  0.00000
+     F  0.00000  0.00000  2.00000
+     F  0.00000  0.00000 -2.00000
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=1E-4
+End
+
+Engine ADF
+  title UF6 geometry optimization + freq: spinorbit ZORA
+  beckegrid quality=good
+  basis type=TZP
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=SO_Freq $AMSBIN/ams <<eor
+LoadSystem
+  File SO_GO.results/adf.rkf
+End
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+End
+
+NormalModes
+  Displacements Symmetric
+End
+
+LoadEngine SO_GO.results/adf.rkf
+eor

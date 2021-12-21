@@ -1,0 +1,78 @@
+#!/bin/sh
+
+
+# With the key CM5 charge model 5 (CM5) atomic charges are calculated. The CM5
+# model is especially designed such that one can reasonably accurately predict
+# dipole moments with only atomic CM5 charges. 
+
+
+AMS_JOBNAME=Acetone $AMSBIN/ams <<eor
+System
+  atoms
+     O       0.000000    0.000000    1.396962
+     C       0.000000    0.000000    0.188800
+     H       0.871902    1.314824   -1.265092
+     C       0.000000   -1.275657   -0.611044
+     H       0.000000    2.142271    0.042196
+     H       0.000000   -2.142271    0.042196
+     H       0.871902   -1.314824   -1.265092
+     C       0.000000    1.275657   -0.611044
+     H      -0.871902    1.314824   -1.265092
+     H      -0.871902   -1.314824   -1.265092
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Acetone
+  AtomicChargesTypeForAMS CM5
+  basis
+    type TZP
+    core none
+  end
+  numericalquality good
+  xc
+    metagga M06-L
+  end
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=Nitrobenzene $AMSBIN/ams <<eor
+System
+  atoms
+     C       0.000000    0.000000   -2.503225
+     C       0.000000    1.205864   -1.812565
+     C       0.000000    1.214022   -0.427327
+     C       0.000000    0.000000    0.239613
+     C       0.000000   -1.214022   -0.427327
+     C       0.000000   -1.205864   -1.812565
+     H       0.000000   -2.131001    0.143627
+     H       0.000000   -2.142362   -2.354096
+     H       0.000000    2.142362   -2.354096
+     H       0.000000    2.131001    0.143627
+     H       0.000000    0.000000   -3.585546
+     N       0.000000    0.000000    1.715151
+     O       0.000000   -1.084613    2.278800
+     O       0.000000    1.084613    2.278800
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Nitrobenzene
+  AtomicChargesTypeForAMS cm5
+  basis
+    type TZP
+    core none
+  end
+  numericalquality good
+  xc
+    metagga M06-L
+  end
+EndEngine
+
+eor

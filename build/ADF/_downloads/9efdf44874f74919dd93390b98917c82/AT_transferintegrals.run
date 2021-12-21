@@ -1,0 +1,167 @@
+#! /bin/sh
+
+
+# ADF can calculate charge transfer integrals, that are needed in
+# approximate methods that model charge transport properties. The molecular
+# system typically should be build from 2 fragments. In this example charge
+# transfer integrals are calculated between Adenine and Thymine. First these two
+# molecules are calculated. In the fragment calculation full symmetry can be
+# used. For precision reasons the ZlmFit quality is set to good.
+
+AMS_JOBNAME=Adenine $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     N       0.000000000000       0.656191000000       4.473450000000
+     C       0.000000000000       1.850911000000       5.098850000000
+     N       0.000000000000       2.094911000000       6.411070000000
+     C       0.000000000000       0.951291000000       7.115010000000
+     C       0.000000000000      -0.355699000000       6.611740000000
+     C       0.000000000000      -0.487619000000       5.203330000000
+     N       0.000000000000       0.791131000000       8.484350000000
+     C       0.000000000000      -0.567649000000       8.729290000000
+     N       0.000000000000      -1.292469000000       7.631450000000
+     N       0.000000000000      -1.672349000000       4.572610000000
+     H       0.000000000000       2.715551000000       4.433920000000
+     H       0.000000000000       1.540301000000       9.166150000000
+     H       0.000000000000      -0.961519000000       9.739820000000
+     H       0.000000000000      -2.515699000000       5.129900000000
+     H       0.000000000000      -1.718459000000       3.541030000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Adenine fragment
+  basis
+    core None
+    type DZ
+  end
+  zlmfit
+    quality good
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=Thymine $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     N       0.000000000000       0.617991000000       1.666040000000
+     C       0.000000000000       1.851251000000       1.046260000000
+     N       0.000000000000       1.768641000000      -0.347380000000
+     C       0.000000000000       0.582611000000      -1.042160000000
+     C       0.000000000000      -0.621999000000      -0.417040000000
+     C       0.000000000000      -0.627269000000       1.045880000000
+     O       0.000000000000      -1.670479000000       1.720780000000
+     O       0.000000000000       2.924531000000       1.636600000000
+     C       0.000000000000      -1.937039000000      -1.138130000000
+     H       0.000000000000       0.635221000000       2.733380000000
+     H       0.000000000000       2.660141000000      -0.830100000000
+     H       0.000000000000       0.676731000000      -2.127100000000
+     H       0.880180000000      -2.533409000000      -0.860650000000
+     H       0.000000000000      -1.793509000000      -2.225780000000
+     H      -0.880180000000      -2.533409000000      -0.860650000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Thymine fragment
+  basis
+    core None
+    type DZ
+  end
+  zlmfit
+    quality good
+  end
+EndEngine
+eor
+
+
+# Next the the base pair is calculated that consists of Adenine and Thymine. To
+# calculate the charge transfer integrals, spatial overlap integrals and site
+# energies, include the key TRANSFERINTEGRALS in the input for ADF. Symmetry
+# NOSYM should be used.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     N       0.000000000000       0.656191000000       4.473450000000  adf.f=Adenine
+     C       0.000000000000       1.850911000000       5.098850000000  adf.f=Adenine
+     N       0.000000000000       2.094911000000       6.411070000000  adf.f=Adenine
+     C       0.000000000000       0.951291000000       7.115010000000  adf.f=Adenine
+     C       0.000000000000      -0.355699000000       6.611740000000  adf.f=Adenine
+     C       0.000000000000      -0.487619000000       5.203330000000  adf.f=Adenine
+     N       0.000000000000       0.791131000000       8.484350000000  adf.f=Adenine
+     C       0.000000000000      -0.567649000000       8.729290000000  adf.f=Adenine
+     N       0.000000000000      -1.292469000000       7.631450000000  adf.f=Adenine
+     N       0.000000000000      -1.672349000000       4.572610000000  adf.f=Adenine
+     H       0.000000000000       2.715551000000       4.433920000000  adf.f=Adenine
+     H       0.000000000000       1.540301000000       9.166150000000  adf.f=Adenine
+     H       0.000000000000      -0.961519000000       9.739820000000  adf.f=Adenine
+     H       0.000000000000      -2.515699000000       5.129900000000  adf.f=Adenine
+     H       0.000000000000      -1.718459000000       3.541030000000  adf.f=Adenine
+     N       0.000000000000       0.617991000000       1.666040000000  adf.f=Thymine
+     C       0.000000000000       1.851251000000       1.046260000000  adf.f=Thymine
+     N       0.000000000000       1.768641000000      -0.347380000000  adf.f=Thymine
+     C       0.000000000000       0.582611000000      -1.042160000000  adf.f=Thymine
+     C       0.000000000000      -0.621999000000      -0.417040000000  adf.f=Thymine
+     C       0.000000000000      -0.627269000000       1.045880000000  adf.f=Thymine
+     O       0.000000000000      -1.670479000000       1.720780000000  adf.f=Thymine
+     O       0.000000000000       2.924531000000       1.636600000000  adf.f=Thymine
+     C       0.000000000000      -1.937039000000      -1.138130000000  adf.f=Thymine
+     H       0.000000000000       0.635221000000       2.733380000000  adf.f=Thymine
+     H       0.000000000000       2.660141000000      -0.830100000000  adf.f=Thymine
+     H       0.000000000000       0.676731000000      -2.127100000000  adf.f=Thymine
+     H       0.880180000000      -2.533409000000      -0.860650000000  adf.f=Thymine
+     H       0.000000000000      -1.793509000000      -2.225780000000  adf.f=Thymine
+     H      -0.880180000000      -2.533409000000      -0.860650000000  adf.f=Thymine
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title AT
+  fragments
+     Adenine Adenine.results/adf.rkf
+     Thymine Thymine.results/adf.rkf
+  end
+  symmetry NOSYM
+  TransferIntegrals
+  zlmfit
+    quality good
+  end
+EndEngine
+eor
+
+# After the calculation has finished in the output one will find the charge
+# transfer (overlap integrals and site energies) that are needed to calculate
+# hole mobility or electron mobility calculations:
+
+# =============================================================================================
+# Electronic coupling V (also known as effective (generalized) transfer integrals J_eff)
+# V = (J-S(e1+e2)/2)/(1-S^2)
+# 
+# V for hole transfer:           0.000 eV
+# V for electron transfer:      -0.036 eV
+# 
+# The effective transfer integral, or electronic coupling, is calculated from these components:
+# 
+# e1(hole) Site energy HOMO fragment 1:      -6.88 eV
+# e2(hole) Site energy HOMO fragment 2:      -6.46 eV
+# J(hole) Charge transfer integral HOMO fragment 1 - HOMO fragment 2:       0.000 eV
+# S(hole) Overlap integral HOMO fragment 1 - HOMO fragment 2:       0.000
+# 
+# e1(electron) Site energy LUMO fragment 1:      -2.24 eV
+# e2(electron) Site energy LUMO fragment 2:      -2.62 eV
+# J(electron) Charge transfer integral LUMO fragment 1 - LUMO fragment 2:      -0.046 eV
+# S(electron) Overlap integral LUMO fragment 1 - LUMO fragment 2:       0.004
+# =============================================================================================
+
+

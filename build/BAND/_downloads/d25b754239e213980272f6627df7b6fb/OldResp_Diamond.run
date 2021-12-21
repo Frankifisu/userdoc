@@ -1,0 +1,46 @@
+#! /bin/sh
+
+# Response calculation for diamond
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   LATTICE
+      0      1.785  1.785
+      1.785  0      1.785
+      1.785  1.785  0
+   END
+   ATOMS
+      C  0.0   0.0   0.0
+      C  0.8925  0.8925  0.8925
+   END
+End
+
+Engine Band
+   TITLE DIAMOND 
+
+   Integration
+      Accint 5
+   End
+
+   KSPACE 
+      Symmetric KInteg=2
+   End
+
+   Dependency  Basis=1.e-6
+
+   OLDRESPONSE
+      Enabled  True
+      nfreq    7
+      strtfr   0.0
+      endfr    19.0480
+   END
+   
+   Basis
+      Type DZ
+   End
+EndEngine
+
+eor

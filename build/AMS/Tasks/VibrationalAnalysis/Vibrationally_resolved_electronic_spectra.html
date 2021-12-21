@@ -1,0 +1,1163 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>VG-FC: Vertical Gradient Franck-Condon &mdash; AMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="AMS 2021.1 documentation" href="../../index.html"/>
+        <link rel="up" title="Vibrationally resolved electronic spectra" href="../../Vibrationally_resolved_electronic_spectra.html"/>
+        <link rel="next" title="Dipole moment, Polarizability, Bond orders" href="../../Properties.html"/>
+        <link rel="prev" title="AH-FC: Adiabatic Hessian Franck-Condon" href="../../Utilities/FCF_module.html"/> 
+
+  
+  <script src="../../_static/js/jquery.min.js"></script>
+  <script src="../../_static/js/bootstrap.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../../keywords.html">Keywords</a>
+           
+           
+           <a href="../../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search AMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-AMS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../General.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../General.html#what-s-new-in-the-ams-driver">What’s new in the AMS driver?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../General.html#new-in-ams2021-3">New in AMS2021.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../General.html#new-in-ams2021-1">New in AMS2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../General.html#new-in-ams2020-1">New in AMS2020.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../General.html#new-in-ams2019-3">New in AMS2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../General.html#new-in-ams2019-1">New in AMS2019.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../General.html#motivation-and-progress">Motivation and progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../General.html#input-execution-and-output">Input, execution and output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Input_Output.html">Input, execution and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Input_Output.html#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#tasks">Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#properties">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#units">Units</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Input_Output.html#execution">Execution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#shell-script">Shell script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#interactive-input-file">Interactive input file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#running-ams-on-compute-clusters">Running AMS on compute clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Input_Output.html#output">Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#index-13">Results directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#logfile-ams-log">Logfile ams.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#binary-output-files">Binary output files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#standard-output">Standard output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#optimized-geometry-in-xyz-format">Optimized geometry in xyz format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#ams-environment-variables">AMS environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Input_Output.html#driver-level-parallelism">Driver level parallelism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Input_Output.html#python-interface">Python interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Input_Output.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Pipe_protocol.html">AMSPipe protocol specification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Pipe_protocol.html#low-level-message-encoding">Low-level message encoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Pipe_protocol.html#return-messages-and-error-handling">Return messages and error handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Pipe_protocol.html#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#ams-as-a-pipe-master">AMS as a pipe master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Input_Output.html#ams-as-a-pipe-worker">AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../System.html">Geometry, System definition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../System.html#geometry-lattice">Geometry, Lattice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../System.html#modifying-the-geometry">Modifying the geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../System.html#symmetry">Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../System.html#regions">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../System.html#charge-atomic-masses-input-bond-orders">Charge, atomic masses, input bond orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../System.html#homogeneous-electric-field-and-multipole-charges">Homogeneous electric field and multipole charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../System.html#load-a-system-from-file">Load a System from file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../System.html#atom-attributes">Atom attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../System.html#force-field-related-extensions">Force field related extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../System.html#load-charges-for-a-forcefield-into-regions">Load charges for a forcefield into regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../System.html#load-forcefield-atom-types">Load forcefield atom types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../TOC.html">Structure and Reactivity, Molecular Dynamics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Single_Point.html">Single point calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Bond_Energy.html">Bond energy calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Bond_Energy.html#ground-state-energy">Ground state energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Bond_Energy.html#formation-energy">Formation energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Bond_Energy.html#atomization-energies">Atomization energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Bond_Energy.html#chemisorption-energies">Chemisorption energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Bond_Energy.html#atomic-corrections">Atomic corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Bond_Energy.html#open-shell-systems">Open shell systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Bond_Energy.html#impurities">Impurities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Geometry_Optimization.html">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Geometry_Optimization.html#constrained-optimization">Constrained optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Geometry_Optimization.html#restraints">Restraints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Geometry_Optimization.html#optimization-under-pressure-external-stress">Optimization under pressure / external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Geometry_Optimization.html#optimization-methods">Optimization methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Geometry_Optimization.html#quasi-newton">Quasi-Newton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Geometry_Optimization.html#fire">FIRE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Geometry_Optimization.html#index-17">SCMGO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Geometry_Optimization.html#limited-memory-bfgs">Limited-memory BFGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Geometry_Optimization.html#conjugate-gradients">Conjugate gradients</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Geometry_Optimization.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Geometry_Optimization.html#failure-to-converge">Failure to converge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Geometry_Optimization.html#restarting-a-geometry-optimization">Restarting a geometry optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Transition_State_Search.html">Transition state search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PES_Scan.html">Linear Transit, PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Scan.html#distance-angle-and-dihedral-angle-coordinates">Distance, angle, and dihedral angle coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Scan.html#joint-scan-coordinates">Joint scan coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Scan.html#multidimensional-pes-scan">Multidimensional PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Scan.html#lattice-scan-coordinates-for-periodic-systems">Lattice scan coordinates for periodic systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Scan.html#isotropic-scaling-of-the-unit-cell-volume-or-area">Isotropic scaling of the unit cell volume or area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Scan.html#scaling-of-the-lattice-vector-lengths">Scaling of the lattice vector lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Scan.html#strain-matrix-in-voigt-notation">Strain matrix in Voigt notation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Scan.html#scan-arbitrary-lattices">Scan arbitrary lattices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Scan.html#calculate-properties-for-all-pes-points">Calculate properties for all PES points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Scan.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../NEB.html">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../NEB.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../NEB.html#frozen-atom-constraints">Frozen atom constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../NEB.html#optimizations-and-convergence-criteria">Optimizations and convergence criteria</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../NEB.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../NEB.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../IRC.html">Intrinsic Reaction Coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../IRC.html#method-details">Method details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IRC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IRC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Excited_State_Optimizations.html">Excited state optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Molecular_Dynamics.html">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Molecular_Dynamics.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Molecular_Dynamics.html#constrained-molecular-dynamics">Constrained molecular dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Molecular_Dynamics.html#re-starting-a-simulation">(Re-)Starting a simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Molecular_Dynamics.html#thermostats-and-barostats">Thermostats and barostats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Molecular_Dynamics.html#temperature-and-pressure-regimes">Temperature and pressure regimes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Molecular_Dynamics.html#trajectory-sampling-and-output">Trajectory sampling and output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Molecular_Dynamics.html#lattice-deformations-volume-regimes">Lattice deformations (volume regimes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Molecular_Dynamics.html#molecule-gun-adding-molecules-during-simulation">Molecule Gun: adding molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Molecular_Dynamics.html#removing-molecules-during-simulation">Removing molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Molecular_Dynamics.html#accelerated-dynamics">Accelerated dynamics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Molecular_Dynamics.html#the-plumed-library-support-in-ams">The PLUMED library support in AMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Molecular_Dynamics.html#metadynamics-for-conformer-rotamer-ensemble-sampling-crest-mtd">Metadynamics for Conformer-Rotamer Ensemble Sampling (CREST-MTD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Molecular_Dynamics.html#collective-variable-driven-hyperdynamics-cvhd">Collective Variable-driven HyperDynamics (CVHD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Molecular_Dynamics.html#temperature-replica-exchange">Temperature Replica Exchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Molecular_Dynamics.html#bond-boost-method">Bond Boost Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Molecular_Dynamics.html#force-bias-monte-carlo-fbmc">Force bias Monte Carlo (fbMC)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Molecular_Dynamics.html#non-equilibrium-md-nemd">Non-equilibrium MD (NEMD)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Molecular_Dynamics.html#t-nemd-for-thermoconductivity-heat-exchange">T-NEMD for thermoconductivity: heat exchange</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../TrajectoryReplay.html">Trajectory replay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GCMC.html">Grand Canonical Monte Carlo (GCMC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../GCMC.html#general-info">General info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../GCMC.html#method-details">Method Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../GCMC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../GCMC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../PES_Exploration.html">Automated PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#job-selection-and-main-options">Job selection and main options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#results-the-energy-landscape">Results: the “Energy Landscape”</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Exploration.html#results-on-the-text-output">Results on the text output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#continue-a-pes-exploration-from-a-previous-calculation">Continue a PES exploration from a previous calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#structure-comparison">Structure comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#process-search-job">Process Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Exploration.html#id2">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Exploration.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#saddle-search-job">Saddle Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Exploration.html#id3">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Exploration.html#id8">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#basin-hopping-job">Basin Hopping job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Exploration.html#id9">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Exploration.html#id11">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#landscape-refinement">Landscape Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#optimizer">Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#binding-sites">Binding Sites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../PES_Exploration.html#id12">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../PES_Exploration.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Gradients_Stress_Elasticity.html">Gradients, Hessian, Stress tensor, Elasticity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Gradients_Stress_Elasticity.html#nuclear-gradients">Nuclear gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Gradients_Stress_Elasticity.html#index-3">Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Gradients_Stress_Elasticity.html#pes-point-character">PES point character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Gradients_Stress_Elasticity.html#thermodynamics-gas-phase-gibbs-free-energy">Thermodynamics, gas phase Gibbs free energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Gradients_Stress_Elasticity.html#stress-tensor">Stress tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Gradients_Stress_Elasticity.html#elastic-tensor">Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Gradients_Stress_Elasticity.html#numerical-differentiation-options">Numerical differentiation options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Vibrational_Spectroscopy.html">Vibrational Spectroscopy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#general">General</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#where-are-the-results">Where are the results?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#ir-frequencies-and-normal-modes">IR frequencies and normal modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#all-vibrational-modes">All vibrational Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#rescanning-imaginary-modes">Rescanning Imaginary modes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#symmetric-displacements">Symmetric Displacements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#mobile-block-hessian-mbh">Mobile Block Hessian (MBH)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#mode-scanning">Mode Scanning</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#input">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#mode-refinement">Mode Refinement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#id4">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#id5">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#mode-tracking">Mode Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#id8">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#id11">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#input-tracking-methods">Input: Tracking methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#input-selecting-modes">Input: Selecting modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#input-convergence">Input: Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#selecting-modes">Selecting modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#thermodynamics-ideal-gas">Thermodynamics (ideal gas)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#gibbs-free-energy-change-for-a-gas-phase-reaction">Gibbs free energy change for a gas phase reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#moments-of-inertia">Moments of inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#partial-vibrational-spectra-pvdos">Partial Vibrational Spectra (PVDOS)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#phonons">Phonons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#resonance-raman">(Resonance) Raman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#id19">Raman</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#resonance-raman-excited-state-finite-lifetime">Resonance Raman: excited-state finite lifetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#resonance-raman-vg-fc">Resonance Raman: VG-FC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#id22">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#id24">Input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#vroa-resonance-vibrational-raman-optical-activity">VROA: (Resonance) vibrational Raman optical activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#engine-adf">Engine ADF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#vcd-vibrational-circular-dichroism">VCD: Vibrational Circular Dichroism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#atomic-polar-tensor-apt-model">Atomic polar tensor (APT) model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Vibrational_Spectroscopy.html#analytical-vcd-in-adf">Analytical VCD in ADF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../Vibrationally_resolved_electronic_spectra.html">Vibrationally resolved electronic spectra</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../Utilities/FCF_module.html">AH-FC: Adiabatic Hessian Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/FCF_module.html#fcf-module-franck-condon-factors">FCF module: Franck-Condon Factors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Utilities/FCF_module.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Utilities/FCF_module.html#algorithm">Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Utilities/FCF_module.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Utilities/FCF_module.html#result-tape61">Result: TAPE61</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/FCF_module.html#fcf-example-absorption-and-fluorescence">FCF example absorption and fluorescence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/FCF_module.html#fcf-example-phosphorescence">FCF Example phosphorescence</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">VG-FC: Vertical Gradient Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#theory">Theory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#theory-vibronic-structure-tracking">Theory: Vibronic-Structure Tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory-vibronic-structure-refinement">Theory: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory-adiabatic-excitation-energy">Theory: Adiabatic excitation energy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#input-vibronic-structure-all-modes">Input: Vibronic-Structure all modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input-vibronic-structure-tracking">Input: Vibronic-Structure Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-restarting-vst">Input: Restarting VST</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#input-vibronic-structure-refinement">Input: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input-excited-state">Input: Excited State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input-producing-the-spectrum">Input: Producing the spectrum</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Properties.html">Dipole moment, Polarizability, Bond orders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Properties.html#charges-dipole-moment-polarizability">Charges, Dipole Moment, Polarizability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Properties.html#bond-orders-molecule-detection">Bond orders &amp; Molecule detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Engines.html">Engines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Engines.html#index-2">Available engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Engines.html#summary-of-engine-capabilities">Summary of engine capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Engines.html#external-programs-as-engines">External programs as engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Engines.html#toy-engines">Toy engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Engines.html#engine-add-ons">Engine add-ons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Engines.html#dispersion-corrections">Dispersion corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Engines.html#pressure">Pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Engines.html#non-isotropic-external-stress">Non-isotropic external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Engines.html#atom-energies">Atom energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Engines.html#restraints">Restraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Engines.html#wall-potential">Wall potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Utilities/TOC.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Utilities/ChemTraYzer.html">ChemTraYzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/ChemTraYzer.html#general-information">General information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/ChemTraYzer.html#graphical-user-interface">Graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/ChemTraYzer.html#command-line-execution">Command line execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/ChemTraYzer.html#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Utilities/ChemTraYzer2.html">ChemTraYzer2 (beta version)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/ChemTraYzer2.html#using-chemtrayzer2-via-the-graphical-user-interface">Using ChemTraYzer2 via the graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/ChemTraYzer2.html#minimal-input">Minimal input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/ChemTraYzer2.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/ChemTraYzer2.html#ouput">Ouput</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Utilities/TrajectoryAnalysis.html">Trajectory Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/TrajectoryAnalysis.html#radial-distribution-function-rdf">Radial Distribution Function (RDF)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Utilities/TrajectoryAnalysis.html#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Utilities/TrajectoryAnalysis.html#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/TrajectoryAnalysis.html#histogram">Histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/TrajectoryAnalysis.html#autocorrelation-functions">Autocorrelation Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Utilities/TrajectoryAnalysis.html#id2">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Utilities/TrajectoryAnalysis.html#id3">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/TrajectoryAnalysis.html#diffusion-coefficient">Diffusion Coefficient</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Utilities/VCDtools.html">VCD Analysis: VCDtools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/VCDtools.html#general-theory">General Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/VCDtools.html#general-coupled-oscillator-analysis">General Coupled Oscillator Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Utilities/VCDtools.html#available-options">Available options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#geometry-optimization">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/GO_formaldehyde_noSCC.html">Example: Simple geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/2StepGO.html">Example: Two-stage geometry optimization with initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/Diamond_under_pressure.html">Example: Periodic lattice optimization under pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/Diamond_from_pressure.html">Example: Phase Transition Due To External Nonuniform Stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/ExternalStress_BN.html">Example: Boron nitride optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/ExternalStress_graphene.html">Example: Graphene optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/constraints.html">Example: Constrained optimizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#transition-state-search">Transition state search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/COChainFreqTS.html">Example: TS search starting from initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and TS search for H2 on graphene</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#nudged-elastic-band-neb">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/NEB.html">Nudged Elastic Band (NEB) Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Examples/NEB.html#hcn-isomerization-reaction-with-neb">HCN isomerization reaction with NEB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Examples/NEB.html#h2-dissociation-on-graphene">H2 dissociation on graphene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Examples/NEB.html#running-multiple-neb-calculations-using-plams">Running multiple NEB calculations using PLAMS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#intrinsic-reaction-coordinate-irc">Intrinsic reaction coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/IRC_HCN.html">Example: IRC for HCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/TS_and_IRC_Claisen.html">Example: TS and IRC for Claisen reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#pes-scan">PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/PESScan.html">Example: 2D PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/PESScan_lattice.html">Example: PES scan for lattice degrees of freedom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#pes-exploration">PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/BasinHopping_Ar13.html">Example: Basin Hopping for Ar 13 cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/ProcessSearch_alanine.html">Example: PES Exploration, Process Search for alanine with PLAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/BindingSites_O+Pt111.html">Example: PES Exploration, Binding Sites for O on Pt 111</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#molecular-dynamics">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/MD_hydrogen_longrun.html">Example: Simple MD for H2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/H2O_nreac.html">Example: MD for a box of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/MD_Deformation.html">Example: Lattice deformations in MD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#trajectory-replay">Trajectory replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/TrajectoryReplay.html">Example: Trajectory replays for PES scans, NEB and MD calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#vibrational-analysis">Vibrational analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/VATools_dydrogesterone.html">Example: Mode Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/VATools_cyclohexanone.html">Example: Mode Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/VST_pyrene.html">Example: Vibronic-Structure Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#pes-point-properties">PES point properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/Phonons_Graphene.html">Example: Phonons for graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/Phonons_Isotopes.html">Example: Phonons with isotopes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/Phonons_UserBZPath.html">Example: User-defined Brillouin zone for phonon dispersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/ElasticTensor.html">Example: Elastic tensor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Examples.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/Pipe_ASEWorker.html">Example: ASE calculator as a pipe worker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Examples/Pipe_AMSonAMS.html">Example: AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Appendices.html#extended-xyz-file-format">Extended XYZ file format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Appendices.html#developer-options">Developer options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Appendices.html#symmetry">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Appendices.html#schonfliess-symbols-and-symmetry-labels">Schönfliess symbols and symmetry labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Appendices.html#molecular-orientation-requirements">Molecular orientation requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Required_citations.html#feature-references">Feature references</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Required_citations.html#frequencies-ir-intensities-raman-vcd">Frequencies, IR Intensities, Raman, VCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Required_citations.html#pes-exploration">PES Exploration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">AMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../AMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../../index.html">AMS</a>/</li>
+      
+          <li><a href="../../Vibrationally_resolved_electronic_spectra.html">Vibrationally resolved electronic spectra</a>/</li>
+      
+    <li class="orange-text">VG-FC: Vertical Gradient Franck-Condon</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><div class="section" id="vg-fc-vertical-gradient-franck-condon">
+<span id="imdhovibronicstructure"></span><span id="vg-fc"></span><span id="index-3"></span><h1>VG-FC: Vertical Gradient Franck-Condon<a class="headerlink" href="#vg-fc-vertical-gradient-franck-condon" title="Permalink to this headline">¶</a></h1>
+<p>Electronic spectra, such as absorption, emission, phosphorescence, and ionization, may contain a vibrational structure.</p>
+<p>In the vertical gradient Franck-Condon (VG-FC) method some extra assumptions are made compared to the Adiabatic Hessian Franck-Condon (AH-FC) method.
+VG-FC is also called the Independent Mode Displaced Harmonic Oscillator (IMDHO) model.
+The AH-FC model (used in the <a class="reference internal" href="../../Utilities/FCF_module.html#fcf"><span class="std std-ref">FCF Module</span></a>) makes the following assumptions:</p>
+<ul class="simple">
+<li>1. It employs the adiabatic (Born-Oppenheimer) approximation and treats the
+nuclei as moving in an effective potential defined by the electronic configuration.</li>
+<li>2. It works at the Franck-Condon point and assumes that the transition occurs at
+the ground state equilibrium structure for absorption and at the excited state equilibrium structure for emission.</li>
+<li>3. It applies the harmonic approximation to both the ground and excited state
+potential energy surfaces.</li>
+</ul>
+<p>The VG-FC model makes following additional assumptions:</p>
+<ul class="simple">
+<li>4. It assumes the excited state PES has the same shape as that of the ground state,
+but it is displaced from it, i.e. both states have the same normal modes
+and frequencies but different equilibrium geometries.</li>
+<li>5. The excited state equilibrium structure is found from a Newton-Raphson step from
+the ground state geometry using the excited state gradient at this point.</li>
+</ul>
+<p>Under these simplifying approximations we can reduce the ingredients necessary for a spectrum calculation to an excited state gradient and a set of ground state normal modes. Furthermore it uses a time-domain description of the absorption cross-section (this introduces no further approximations) so we do not need any explicit Franck-Condon factors as is done in the <a class="reference internal" href="../../Utilities/FCF_module.html#fcf"><span class="std std-ref">FCF Module</span></a>. This approach is particularly effective for large molecules as it shows linear scaling with the number of normal modes. Further details on how to use this method, and the VG-FC model in general can be found below.</p>
+<p>The approximations we make remove the need for an excited state geometry optimization and frequency analysis. This means the most expensive step in a typical calculation is actually the ground state frequency analysis. The ability of Mode Tracking to generate a set of approximate normal modes, without performing a full frequency analysis can be applied to the calculation of vibrationally resolved optical spectra. This is exactly what is done in <a class="reference internal" href="#vibronicstructuretracking"><span class="std std-ref">Vibronic-Structure Tracking</span></a>. On the other hand, the ability of Mode Refinement to refine entire spectral regions at once means this method can be transferred to calculating vibrationally resolved optical spectra from a select number of (vibronically active) approximate normal modes. This idea is applied in <a class="reference internal" href="#vibronicstructurerefinement"><span class="std std-ref">Vibronic-Structure Refinement</span></a>. Under suitable assumptions, the computational cost of calculating an approximation of the vibronic-structure can be reduced significantly through the use of these two methods, allowing for application to large molecules inaccessible to more detailed methods. While they are clearly best suited for these large molecules, they can also serve as an efficient method to obtain quick, first approximations for more moderately sized molecule.</p>
+<p>With the VG-FC model one can calculate the 0-0 energy difference between the ground state and excited state.
+In this VG-FC method the vibrationally resolved emission spectrum will be a mirror image of the vibrationally resolved absorption spectrum, in which the 0-0 transitions are the same.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The VG-FC model uses certain approximations which may not always be valid. Something to look out for that may affect the reliability of VG-FC results are large changes in conformation upon excitation. In this case the normal modes of the excited state may be completely different from those of the ground state, at which point the model is not expected to produce reliable results. Should non-adiabatic effects become important, the BO approximation could potentially break down as well. In these cases the <a class="reference internal" href="../../Utilities/FCF_module.html#fcf"><span class="std std-ref">FCF Module</span></a> may provide a more suitable alternative to the VG-FC model.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Tutorials: <a class="reference external" href="../../../Tutorials/VibrationalSpectroscopy/ResonanceRaman.html">Resonance Raman</a>, <a class="reference external" href="../../../Tutorials/VibrationalSpectroscopy/VibrationallyResolvedElectronicSpectraADF.html">Vibrationally resolved electronic spectra with ADF</a>, <a class="reference external" href="../../../Tutorials/VibrationalSpectroscopy/VibrationallyResolvedElectronicSpectraDFTB.html">Vibrationally resolved electronic spectra with DFTB</a></p>
+</div>
+<div class="section" id="theory">
+<h2>Theory<a class="headerlink" href="#theory" title="Permalink to this headline">¶</a></h2>
+<p>Here we will introduce the theory behind the model used to compute vibronic couplings. We use the so-called Vertical Gradient Franck-Condon (VG-FC) method, also called Independent Mode Displaced Harmonic Oscillator model (IMDHO). The VG-FC model as used here works as follows: The PES in the ground state is assumed parabolic (the harmonic approximation). Upon excitation, we assume that the only change to the PES that occurs is a shift in origin (i.e. no stretching or rotation of the parabolic well). This means, both the normal modes and their frequencies remain the same in both the ground and excited state. The result is that a spectrum can be calculated using only a single excited state gradient at the optimized ground state geometry. Hence we avoid the expensive excited state geometry optimization and frequency analysis used by methods such as the <a class="reference internal" href="../../Utilities/FCF_module.html#fcf"><span class="std std-ref">FCF Module</span></a>.</p>
+<p>Moving to a slightly more detailed discussion, we can start with an expression for the absorption cross-section in terms of a sum over contributions from different Franck-Condon factors, each homogeneously broadened with an assumed Lorentzian of linewidth <span class="math notranslate nohighlight">\(\Gamma\)</span>. For excitation from the vibrational ground state of electronic state m, to electronic state n we get the following expression (Hartree atomic units are used throughout):</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{n\leftarrow m}(\omega) = \frac{4\pi\omega}{3c}|\mu_{mn}|^2 \sum_{l_{n,1}}...\sum_{l_{n,N_{modes}}} \frac{\Gamma\prod_{i=1}^{N_{modes}}|\langle l_{n,i}|0_{m,i}\rangle|^2}{\bigg(E_{n,0}+\sum_i^{N_{modes}}\omega_i l_{n,i}-E_{m,0}-\omega\bigg)^2+\Gamma^2}\]</div>
+<p>Here the <span class="math notranslate nohighlight">\(\mu_{mn}\)</span> is the transition dipole moment and the <span class="math notranslate nohighlight">\(\prod_{i=1}^{N_{modes}}|\langle l_{n,i}|0_{m,i}\rangle|^2\)</span> denote the Franck-Condon factors for excitation from the vibrational ground state to the vibrationally excited state of the excited state PES, with quantum numbers <span class="math notranslate nohighlight">\(l_{n,i}\)</span>. This sum-over-states formulation is what is also used to compute the spectrum in the <a class="reference internal" href="../../Utilities/FCF_module.html#fcf"><span class="std std-ref">FCF Module</span></a>. While efficient pre-screening and thresholding techniques can make this method applicable to moderately sized molecules, it is still quite expensive for large molecules. We can derive an expression which is equivalent to the one above, but which enjoys significant computational benefits. This is done by writing the cross-section as an integral over time:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{n\leftarrow m}(\omega) = \frac{4\pi\omega}{3c}|\mu_{mn}|^2 Re\int_{0}^{\infty} \langle i|i_n(t)\rangle e^{i[\omega + E_{m,0}]t}\cdot e^{-\Gamma t}dt\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\langle i|i_n(t)\rangle\)</span> denotes the overlap of the initial state, propagated along the excited state PES with itself at time <span class="math notranslate nohighlight">\(t=0\)</span>. This expression is still completely general, however, using the <a class="reference internal" href="../../Vibrationally_resolved_electronic_spectra.html#vibrationallyresolvedelectronicspectra"><span class="std std-ref">assumptions of the VG-FC model</span></a>, this overlap admits a simple closed form expression:</p>
+<div class="math notranslate nohighlight">
+\[\langle i|i_n(t)\rangle = \prod_{j=1}^{N_{modes}}\exp\left[-\frac{\Delta_{n,j}^2}{2}(1-e^{-i\omega_jt})\right]e^{-i E_{n,0} t}\]</div>
+<p>This expression can be derived by different methods and admits a few interpretations, the details of which we will not go into here. The interested reader is referred to reference <a class="footnote-reference" href="#ref1" id="id1">[1]</a>. Instead we will focus on its numerical implementation. The great computational advantage of this expression is that it scales only weakly with the number of degrees of freedom. Compare this with the sum-over-states formalism above, where the number of FCF’s needed to have a converged sum proliferates for large molecules and the advantage becomes clear.</p>
+<p>The <span class="math notranslate nohighlight">\(\Delta_{n,j}\)</span> appearing in the expression are the dimensionless normal mode displacements at the equilibrium geometry in state n, compared to state m along normal mode j which has angular frequency <span class="math notranslate nohighlight">\(\omega_j\)</span>. They represent the change in origin of the PES along a particular normal mode. These are the parameters which control the shape of the spectrum. Under the assumptions we listed above they can be calculated from the excited state energy gradient at the ground state equilibrium structure as:</p>
+<div class="math notranslate nohighlight">
+\[\Delta_{j} = \frac{q^m_j \cdot \nabla_m E}{\omega_j^{3/2}}\]</div>
+<p>Where we have suppressed the n subscript. The gradient is with respect to mass weighted coordinates and the <span class="math notranslate nohighlight">\(q^m_j\)</span> denote the mass-weighted normal modes.</p>
+<p>Essentially, we use the (assumed) parabolic shape of the PES in the harmonic approximation along each of the normal modes to determine the displacement from the gradient projection along that mode. An important consequence of the simplified VG-FC model is that the Franck-Condon factors can be expressed in closed form:</p>
+<div class="math notranslate nohighlight">
+\[|\langle l_i|0_i\rangle|^2 = \frac{\bigg(\frac{\Delta_i}{2}\bigg)^2}{l_i !} e^{-\frac{\Delta_i^2}{2}}\]</div>
+<p>Modes with the largest displacement are then expected to also have the largest impact on the structure of the vibrational progression in the spectrum. This gives us an obvious candidate for a tracking method to be used with the Mode Tracking protocol. This approach is taken in the <a class="reference internal" href="#vibronicstructuretracking"><span class="std std-ref">Vibronic-Structure Tracking</span></a> module.</p>
+<div class="section" id="theory-vibronic-structure-tracking">
+<span id="vibronicstructuretracking"></span><h3>Theory: Vibronic-Structure Tracking<a class="headerlink" href="#theory-vibronic-structure-tracking" title="Permalink to this headline">¶</a></h3>
+<p>Vibronic-structure tracking (VST) is a method for obtaining quick and approximate vibrationally resolved optical spectra for larger sized molecules. It is based on the mode-tracking algorithm and works by tracking those modes that are expected to have the largest impact on the vibronic-structure of the spectrum. Its AMS implementation follows that in reference <a class="footnote-reference" href="#ref1" id="id2">[1]</a>.</p>
+<p>The modes that are tracked by the mode tracking routine are used to generate a UV/vis spectrum. This is done using the Vertical Gradient Franck-Condon (VG-FC) method, also called the Independent Mode Displaced Harmonic Oscillator (IMDHO) model as described on the <a class="reference internal" href="#imdhovibronicstructure"><span class="std std-ref">Vibronic-Structure</span></a> page. This model reduces the necessary TD-DFT calculations to a single excited state gradient performed at the ground state equilibrium geometry. At this point it is typically the ground state frequency analysis which becomes the bottleneck for large molecules. Through the use of Mode Tracking we can circumvent this step and calculate only those modes which will significantly impact the vibronic fine structure. This yields a very cheap and efficient method for obtaining vibrationally resolved optical spectra.</p>
+<p>The use of Mode Tracking within the context of vibronic-structure calculations proceeds as follows: from an initial guess for a normal mode, we construct a new basis vector which we hope will improve the quality of our initial guess. We then iteratively expand the basis by refining those modes which have the largest impact on the vibronic fine structure. We keep iterating until we deem the spectrum to be converged. We’ll address the technical details of this procedure in this section.</p>
+<p>Let us first consider how we can gauge which modes will have a large impact on our spectrum. Over on the <a class="reference internal" href="#imdhovibronicstructure"><span class="std std-ref">Vibronic-Structure</span></a> page, we showed that according to the VG-FC model, the Franck-Condon factors can be written as:</p>
+<div class="math notranslate nohighlight">
+\[|\langle l_i|0_i\rangle|^2 = \frac{\bigg(\frac{\Delta_i}{2}\bigg)^2}{l_i !} e^{-\frac{\Delta_i^2}{2}}\]</div>
+<p>This expression implies modes with large displacements <span class="math notranslate nohighlight">\(\Delta_j\)</span> will have the largest Franck-Condon factors. Thus, we expect that modes with large oscillator displacements will contribute most strongly to the vibronic fine structure of the spectrum. This suggests a tracking method in addition to those described in the <a class="reference internal" href="../../Vibrational_Spectroscopy.html#modetracking"><span class="std std-ref">Mode Tracking</span></a> documentation. Namely, to track the mode with the largest <span class="math notranslate nohighlight">\(\Delta_j\)</span>. This is the only setting for the <code class="docutils literal notranslate"><span class="pre">TrackingMethod</span></code> supported by Vibronic-Structure Tracking and is automatically set when choosing Vibronic-Structure Tracking as the Vibrational Analysis type. As a reminder, the oscillator displacements can be obtained from the assumed parabolic shape of the excited state PES and the known excited state gradient:</p>
+<div class="math notranslate nohighlight">
+\[\Delta_{j} = \frac{q^m_j \cdot \nabla_m E}{\omega_j^{3/2}}\]</div>
+<p>This expression for our normal mode displacements suggests that a reasonable guess for a hypothetical normal mode with a large effect on the spectrum is given by the normalized excited state gradient, as this maximizes the projection.</p>
+<p>The choice of preconditioner is of course an important one. While better preconditioners such as the Jacobi-Davidson method can lead to fast and tightly directed convergence of the modes, this may not be ideal in the case of Vibronic-Structure Tracking, as we are not necessarily focused on obtaining converged modes but rather obtaining a converged spectrum. By default the method does not use any preconditioner for generating normal modes from the residual vectors to allow the procedure to more freely explore the entire space of modes. This means that the new basis vector produced on each iteration is the (normalized) residual vector of that iterations selected mode. Note that this is different from using the Davidson method with an identity matrix as guess for the Hessian. The user is still able to use any of the pre-conditioning options provided by the stand-alone mode tracking method, however we suggest the user uses the default <code class="docutils literal notranslate"><span class="pre">I</span></code> (for identity) as the <code class="docutils literal notranslate"><span class="pre">UpdateMethod</span></code>. This also conveniently means no approximate Hessian is required.</p>
+<p>It is important to choose a suitable convergence criterion. When using Vibronic-Structure Tracking, the aim is to get an approximation of the progression in the spectrum. The convergence of the modes then takes a backseat to the convergence of the spectrum. Although the two usually go hand in hand, requiring that all modes be converged in the usual mode-tracking sense is likely to be far too restrictive. Thus the convergence criterion used for VST is the following: at every iteration, the previous iteration’s spectrum is subtracted from the new one. The absolute difference is then integrated on the requested frequency range. Convergence is achieved once the so-obtained number drops below a pre-set convergence threshold. The result is that it may not be the case that all modes are exact normal modes yet, however further refinement will have a limited effect on the resulting spectrum, for example due to these modes having very small Franck-Condon factors.</p>
+<p>Convergence according to this criterion is affected by the other options that the user chooses, see the section on how the adiabatic excitation energy is calculated.</p>
+</div>
+<div class="section" id="theory-vibronic-structure-refinement">
+<span id="vibronicstructurerefinement"></span><h3>Theory: Vibronic-Structure Refinement<a class="headerlink" href="#theory-vibronic-structure-refinement" title="Permalink to this headline">¶</a></h3>
+<p>Vibronic-Structure Refinement takes the idea of Mode Refinement, and applies it to the calculation of vibrationally resolved optical spectra. Under the assumptions of the Vibronic-Structure application, the most time-consuming step becomes the calculation of the ground state normal modes. However, we may not be interested in all normal modes that contribute to the Vibronic fine structure of a spectrum. By using Mode Refinement we can limit ourselves to the spectral region of interest, or to modes which we expect to have the largest impact on the fine structure. The details of the Mode Refinement protocol can be found on the relevant <a class="reference internal" href="../../Vibrational_Spectroscopy.html#moderefinement"><span class="std std-ref">documentation page</span></a>.</p>
+</div>
+<div class="section" id="theory-adiabatic-excitation-energy">
+<h3>Theory: Adiabatic excitation energy<a class="headerlink" href="#theory-adiabatic-excitation-energy" title="Permalink to this headline">¶</a></h3>
+<p>The last aspect we will comment on here is the calculation of the adiabatic excitation energy. The number we get from an excited state calculation is the vertical excitation energy (<span class="math notranslate nohighlight">\(\Delta E_{vert}\)</span>), this number is generally unobservable in spectra. The more interesting quantity is the adiabatic excitation energy (<span class="math notranslate nohighlight">\(\Delta E_{ad}\)</span>). The former is the difference in energy between the two PES’es at the ground state geometry, the latter is the difference in energy between the ground and excited state vibrational ground states. Since we assumed both PES’es to have the same frequencies, the zero-point energy of the two states are the same and hence, the adiabatic energy difference is the same as the 0-0 energy difference (<span class="math notranslate nohighlight">\(\Delta E_{0-0}\)</span>). This is simply the difference between the bottom of the two PES’es. It can be reconstructed from the excited state gradients projected onto our normal modes, as well as their frequencies. For a molecule with N modes we obtain:</p>
+<div class="math notranslate nohighlight">
+\[\Delta E_{ad} = \Delta E_{vert} - \sum_j^{N_{modes}}\frac{1}{2}\omega_j\Delta_j^2\]</div>
+<p>Where the sum represents the reorganization energy stored in the excited oscillator modes. Depending on the desired information, one can use two different representations of the spectrum. The first is to simply plot the spectrum against an energy range with the ground state energy as an offset. This would represent a true absorption spectrum that can be compared directly with experiment. However, the energy difference <span class="math notranslate nohighlight">\(\Delta E_{vert} - \Delta E_{ad}\)</span> in the VG-FC model is reconstructed only from the ground state equilibrium structure and can thus be somewhat unreliable. If the user is primarily interested in the shape of the spectrum, using the 0-0 excitation energy as an offset may be a more suitable choice. The latter is the default setting in AMS, but the method supports both options.</p>
+<p>Note that in case of a Vibronic-structure tracking (VST) calculation we only have access to a small set of approximate normal modes, we will have an approximation of <span class="math notranslate nohighlight">\(\Delta E_{ad}\)</span> that changes from iteration to iteration as new normal modes are introduced and the old normal modes are refined. If a spectrum relative of the 0-0 energy is requested, the shift caused by the iterative convergence of <span class="math notranslate nohighlight">\(\Delta E_{ad}\)</span> is not taken into account, although it will still have some effect on the spectrum as it also appears in the integral that defines the spectrum. If one is interested in a converged approximation of <span class="math notranslate nohighlight">\(\Delta E_{0-0}\)</span> it may be more reliable to provide an absolute frequency range for the spectrum as the shift in the peak locations will then also affect convergence.</p>
+</div>
+</div>
+<div class="section" id="input-vibronic-structure-all-modes">
+<span id="vg-fc-vs"></span><h2>Input: Vibronic-Structure all modes<a class="headerlink" href="#input-vibronic-structure-all-modes" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned, we need both a set of ground state normal modes as well as an excited state gradient. All the normal modes are calculated using the AMS engine that was selected, or, in case the user has a pre-calculated set of normal modes, these can be read from a .rkf file using the <code class="docutils literal notranslate"><span class="pre">ModeFile</span></code> key in the <code class="docutils literal notranslate"><span class="pre">NormalModes</span></code> sub-block. In this latter case, the engine is not used. One can then use the keys in the <code class="docutils literal notranslate"><span class="pre">ModeSelect</span></code> block to filter out specific modes, or, simply select all modes using the <code class="docutils literal notranslate"><span class="pre">Full</span></code> key in this block. For further details on how to use the Mode Select block for more specialized selection options, see the <a class="reference internal" href="../../Vibrational_Spectroscopy.html#modeselect"><span class="std std-ref">Mode Select</span></a> documentation. As for the excited state information, this is passed to the application via the <code class="docutils literal notranslate"><span class="pre">ExcitationSettings</span></code> block. Additionally there are (optional) settings related to the appearance of the spectrum under the <code class="docutils literal notranslate"><span class="pre">AbsorptionSpectrum</span></code> block. For an overview of the input options see the list of keys at the end of this page.</p>
+<p>For completeness we provide an example of what the user input may look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">VibrationalAnalysis</span>
+<span class="n">VibrationalAnalysis</span>
+   <span class="n">Type</span> <span class="n">VibronicStructure</span>
+   <span class="n">NormalModes</span>
+     <span class="c1"># Select all modes present in the .rkf file</span>
+     <span class="n">ModeSelect</span>
+       <span class="n">Full</span> <span class="kc">True</span>
+     <span class="n">End</span>
+   <span class="n">End</span>
+   <span class="n">ExcitationSettings</span>
+     <span class="n">ExcitationInfo</span> <span class="n">File</span>
+     <span class="n">ExcitationFile</span> <span class="o">./</span><span class="n">your_excitation</span><span class="o">.</span><span class="n">t21</span>
+     <span class="n">Singlet</span>
+       <span class="n">B1</span><span class="o">.</span><span class="n">u</span> <span class="mi">2</span>
+     <span class="n">End</span>
+   <span class="n">End</span>
+   <span class="n">AbsorptionSpectrum</span>
+     <span class="n">LineWidth</span> <span class="mf">100.0</span>
+     <span class="n">AbsorptionRange</span> <span class="o">-</span><span class="mf">500.0</span> <span class="mf">4000.0</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="input-vibronic-structure-tracking">
+<span id="vg-fc-vst"></span><h2>Input: Vibronic-Structure Tracking<a class="headerlink" href="#input-vibronic-structure-tracking" title="Permalink to this headline">¶</a></h2>
+<p>VST is notably the only Vibrational Analysis task that does not support the <code class="docutils literal notranslate"><span class="pre">NormalModes</span></code> block as no initial normal modes are necessary. The excited state gradient fills this role instead. Furthermore, the recommended default of using the identity matrix as a preconditioner means that no approximate Hessian is required either.</p>
+<p>One thing to note regarding the Mode Tracking settings is that VST features a convergence criterion not present in standard Mode Tracking. The tolerance for the convergence of the spectrum is set using the <code class="docutils literal notranslate"><span class="pre">ToleranceForSpectrum</span></code> keyword in the <code class="docutils literal notranslate"><span class="pre">ModeTracking</span></code> block. The default is set to 0.01 and should be sufficient for most purposes, but <a class="reference internal" href="#vstrestart"><span class="std std-ref">restarting</span></a> with a lower value may improve the reliability of the convergence.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The usual Mode Tracking tolerances are still present in addition to the spectral tolerance mentioned above. This is so we do not track modes that have already converged. Instead, once a mode is converged in the usual mode tracking sense, we switch to the next mode that satisfies our tracking criterion. The defaults should normally apply, but may be loosened a bit to allow for more free subspace exploration.</p>
+</div>
+<p>A typical Vibronic-Structure Tracking run may be setup as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">VibrationalAnalysis</span>
+<span class="n">VibrationalAnalysis</span>
+   <span class="n">Type</span> <span class="n">VibronicStructureTracking</span>
+   <span class="c1"># Select our excited state energy+gradient from a previous calculation</span>
+   <span class="n">ExcitationSettings</span>
+     <span class="n">ExcitationInfo</span> <span class="n">File</span>
+     <span class="n">ExcitationFile</span> <span class="o">./</span><span class="n">your_excitation</span><span class="o">.</span><span class="n">t21</span>
+   <span class="n">End</span>
+   <span class="c1"># Tuning how our spectrum will look</span>
+   <span class="n">AbsorptionSpectrum</span>
+     <span class="n">LineWidth</span> <span class="mf">250.0</span>
+     <span class="n">AbsorptionRange</span> <span class="o">-</span><span class="mf">500.0</span> <span class="mf">6000.0</span>
+   <span class="n">End</span>
+   <span class="n">ModeTracking</span>
+     <span class="n">UpdateMethod</span> <span class="n">I</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<div class="section" id="input-restarting-vst">
+<span id="vstrestart"></span><h3>Input: Restarting VST<a class="headerlink" href="#input-restarting-vst" title="Permalink to this headline">¶</a></h3>
+<p>The Vibronic-Structure Tracking task is fully restartable from a previously completed VST run. The main reason why it may be useful to perform a restart is related to the way the spectrum is generated. Most modules/applications in AMS that calculate a spectrum usually produce a stick spectrum. This stick spectrum is then convoluted against either a gaussian or lorentzian of specified width or area. This allows one to tweak the homogeneous broadening post-calculation to improve agreement with experiments. VST operates differently, in that the Lorentzian linewidth is specified at the start of the calculation as an essential input parameter. If upon convergence it becomes clear that a different linewidth would have been better suited for the spectrum at hand, one can restart the calculation with this new linewidth. The program then computes a new spectrum using these new settings and repeats the last iteration of the previous run. The latter is done because the linewidth directly influences the convergence (larger linewidths tend to converge more easily as the features are not as sharply resolved). If the spectrum does not change after the first iteration the program terminates as usual and the new spectrum is now available to the user. However, if this additional iteration does not pass the convergence test, the program keeps iterating until the spectrum converges for this new linewidth.</p>
+<p>In addition to changing the linewidth post-calculation, the user is also free to change the spectral range that is to be computed as well as its resolution through the <code class="docutils literal notranslate"><span class="pre">FrequencyGridPoints</span></code> keywords. Alternatively, the tolerance used may be lowered if tighter convergence is required. Importantly however, none of the previous run’s input settings are retrieved upon restart, so any settings the user doesn’t want to change have to be same in the new run script as in the old. The easiest way to restart is to simply re-use the previous run’s runscript under a new name and then changing the relevant settings.</p>
+<p>The restart functionality is controlled by the <code class="docutils literal notranslate"><span class="pre">RestartPath</span></code> keyword. One simply states the path to a previous calculation’s .rkf file from which the relevant data is to be read. The .rkf file of any VST runs contains a section labeled <code class="docutils literal notranslate"><span class="pre">VSTRestart</span></code> which contains the data needed to restart from that run. Restarting is then a simple one-liner in the <code class="docutils literal notranslate"><span class="pre">VibrationalAnalysis</span></code> block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">VSTRestartFile</span> <span class="o">./</span><span class="n">previous_run</span><span class="o">.</span><span class="n">results</span><span class="o">/</span><span class="n">ams</span><span class="o">.</span><span class="n">rkf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="input-vibronic-structure-refinement">
+<span id="vg-fc-vsr"></span><h2>Input: Vibronic-Structure Refinement<a class="headerlink" href="#input-vibronic-structure-refinement" title="Permalink to this headline">¶</a></h2>
+<p>Vibronic-Structure Refinement (VSR) assumes that the modes relevant to the vibronic-structure are, at least in an approximate sense, known a priori.
+The VSR method takes these approximate modes and refines them via the Mode Refinement algorithm.
+The approximate normal modes should thereby span a subspace containing the exact normal modes and, the more similar they are to the exact mode, the better they allow to reproduce the spectrum of a full ground state frequency analysis.
+Naturally, the refinement becomes more accurate with increasing dimensionality of the spanned subspace, although this this increases the computational costs.
+In any case, the subspace needs to contain those modes that are most relevant for the vibronic progression for the entire approach to work, which leads to the question, how do we select such modes?</p>
+<p>This is done using familiar <code class="docutils literal notranslate"><span class="pre">ModeSelect</span></code> block from the mode selective analysis tasks tasks. While all the usual options are available, for which further details can be found on the <a class="reference internal" href="../../Vibrational_Spectroscopy.html#modeselect"><span class="std std-ref">Vibrational Analysis</span></a> page, there are two selection methods that are geared specifically towards VSR. Within the VG-FC model, the parameters defining the effect a mode will have on the spectrum are the oscillator displacements <span class="math notranslate nohighlight">\(\Delta_j\)</span>. We can determine these values from the projection of the approximate normal modes onto the gradient in combination with their respective frequencies. We are then interested in those modes with the largest displacement. To select these, two options are available:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">VibrationalAnalysis</span>
+<span class="n">VibrationalAnalysis</span>
+   <span class="n">Type</span> <span class="n">VibronicStructureRefinement</span>
+   <span class="n">NormalModes</span>
+      <span class="n">ModeSelect</span>
+         <span class="n">LargestDisplacement</span> <span class="n">integer</span>
+         <span class="n">DisplacementBound</span> <span class="nb">float</span>
+         <span class="o">...</span>
+      <span class="n">End</span>
+      <span class="o">...</span>
+   <span class="n">End</span>
+   <span class="o">...</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">LargestDisplacement</span> <span class="pre">integer</span></code></dt>
+<dd>sets an integer value N, to select the N modes with
+the largest displacements as calculated within the VG-FC model. This method limits the total number of modes we refine and thus places an upper bound on the computational cost required by the method, but it does not ensure that all relevant modes have been selected. In particular there may still be modes with large displacements that have been omitted and as such peaks or progressions may be missing from the spectrum.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DisplacementBound</span> <span class="pre">float</span></code></dt>
+<dd>Alternatively this selects all approximate modes with a
+displacement greater than the supplied lower bound. An appropriate choice for this value ensures all modes which visibly affect the spectrum (at least at the lower level of theory used to produce the approximate modes) are included in the subspace basis used for Mode Refinement. The displacements <span class="math notranslate nohighlight">\(\Delta_j\)</span> are dimensionless and the largest ones will typically be of order one. Based on this, a value of <code class="docutils literal notranslate"><span class="pre">0.01</span></code> for this parameter will generally select all relevant modes. This of course comes at the trade-off that for general molecules it is not known how many such modes there will be and the computational cost may be larger than expected. But, if one is not discouraged by this, this will of course yield the most accurate results. Values up to <code class="docutils literal notranslate"><span class="pre">0.05</span></code> may still provide reasonable results while minimizing computation times. Using larger linewidths (<code class="docutils literal notranslate"><span class="pre">AbsorptionSpectrum%LineWidth</span></code>) for the homogeneous broadening can help to correct for the non-resolved modes.</dd>
+</dl>
+<p>The calculation setup for Vibronic-Structure Refinement is essentially the same as that for Vibronic-Structure, the only difference being that the modes that we provide will first be refined, before a spectrum is computed. A detailed description is given on the <a class="reference internal" href="#imdhovibronicstructure"><span class="std std-ref">Vibronic-Structure</span></a> page. A typical VSR calculation can be setup as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">VibrationalAnalysis</span>
+<span class="n">VibrationalAnalysis</span>
+   <span class="n">Type</span> <span class="n">VibronicStructureRefinement</span>
+   <span class="c1"># Select our normal modes from a previous calculation</span>
+   <span class="n">NormalModes</span>
+     <span class="n">ModeFile</span> <span class="n">ams</span><span class="o">.</span><span class="n">rkf</span>
+     <span class="n">ModeSelect</span>
+        <span class="c1"># select all modes with VG-FC displacements over 0.01</span>
+        <span class="n">DisplacementBound</span> <span class="mf">0.01</span>
+     <span class="n">End</span>
+   <span class="n">End</span>
+   <span class="c1"># Select our excited state energy+gradient from a previous calculation</span>
+   <span class="n">ExcitationSettings</span>
+     <span class="n">ExcitationInfo</span> <span class="n">File</span>
+     <span class="n">ExcitationFile</span> <span class="o">./</span><span class="n">your_excitation</span><span class="o">.</span><span class="n">t21</span>
+     <span class="c1"># Select second singlet excitation with symmetry label A</span>
+     <span class="n">Singlet</span>
+       <span class="n">A</span> <span class="mi">2</span>
+     <span class="n">End</span>
+   <span class="n">End</span>
+   <span class="c1"># Tuning how our spectrum will look</span>
+   <span class="n">AbsorptionSpectrum</span>
+     <span class="n">LineWidth</span> <span class="mf">250.0</span>
+     <span class="n">AbsorptionRange</span> <span class="o">-</span><span class="mf">500.0</span> <span class="mf">6000.0</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="input-excited-state">
+<span id="excitationsettings"></span><h2>Input: Excited State<a class="headerlink" href="#input-excited-state" title="Permalink to this headline">¶</a></h2>
+<p>Both the excited state gradient at the ground state equilibrium structure as well as the vertical excitation energy are necessary to obtain a spectrum. These can be provided by most TD-DFT programs, including ADF. Unfortunately, the AMS driver does not yet support computing these properties on the fly. As a result they are currently required as user input. One can use ADF or DFTB to compute them and then either read them from the produced output file, or copy and paste them to an inline input block.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">VibrationalAnalysis</span>
+<span class="n">VibrationalAnalysis</span>
+   <span class="n">Type</span> <span class="o">...</span>
+   <span class="n">ExcitationSettings</span>
+      <span class="n">ExcitationInputFormat</span> <span class="p">[</span><span class="n">File</span> <span class="o">|</span> <span class="n">Inline</span><span class="p">]</span>
+      <span class="n">ExcitationFile</span> <span class="n">string</span>
+      <span class="n">EnergyInline</span> <span class="nb">float</span>
+      <span class="n">GradientInline</span> <span class="c1"># Non-standard block. See details.</span>
+         <span class="o">...</span>
+      <span class="n">End</span>
+      <span class="n">Singlet</span> <span class="c1"># Non-standard block. See details.</span>
+         <span class="o">...</span>
+      <span class="n">End</span>
+      <span class="n">Triplet</span> <span class="c1"># Non-standard block. See details.</span>
+         <span class="o">...</span>
+      <span class="n">End</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ExcitationInputFormat</span> <span class="pre">[File</span> <span class="pre">|</span> <span class="pre">Inline]</span></code></dt>
+<dd>this keyword is used to specify whether the gradient and
+energy are to be read from a kf file or if one chooses to use the inline block for them. Currently, no TD-DFT engine is implemented in the AMS driver. Furthermore, ADF uses the old tape21 format for its output which is quite different from the more streamlined AMS format. The <code class="docutils literal notranslate"><span class="pre">inline</span></code> option allows one to bypass any possible confusion here. The <code class="docutils literal notranslate"><span class="pre">File</span></code> option requires the specification of the specific excitation to read, which we will discuss below.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GradientInline</span></code></dt>
+<dd>is the block where the gradient can be specified if the
+inline option is selected. The format can be either a N by 3 block (N rows, 3 columns) or a 3N long column vector if one happens to have a gradient in this format.
+The gradient values should be in the unit Hartree/Bohr.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EnergyInline</span> <span class="pre">float</span></code></dt>
+<dd>is used to specify the excitation energy.
+This will just be a single floating point number (in Hartree).</dd>
+</dl>
+<p>The resulting input would look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">VibrationalAnalysis</span>
+<span class="n">VibrationalAnalysis</span>
+   <span class="n">Type</span> <span class="o">...</span>
+   <span class="o">...</span>
+   <span class="n">ExcitationSettings</span>
+     <span class="n">ExcitationInfo</span> <span class="n">Inline</span>
+     <span class="c1"># Excited state gradient for transhexatriene 14 atoms x 3 coordinates (to be provided in Hartree/Bohr)</span>
+     <span class="n">GradientInline</span>
+        <span class="o">-</span><span class="mf">0.03786125</span>        <span class="mf">0.01786798</span>        <span class="mf">0.00003833</span>
+         <span class="mf">0.05322148</span>       <span class="o">-</span><span class="mf">0.00798712</span>       <span class="o">-</span><span class="mf">0.00004152</span>
+        <span class="o">-</span><span class="mf">0.06658803</span>        <span class="mf">0.01373495</span>        <span class="mf">0.00004727</span>
+         <span class="mf">0.06656379</span>       <span class="o">-</span><span class="mf">0.01374825</span>        <span class="mf">0.00002398</span>
+        <span class="o">-</span><span class="mf">0.05318451</span>        <span class="mf">0.00799875</span>       <span class="o">-</span><span class="mf">0.00002097</span>
+         <span class="mf">0.03783718</span>       <span class="o">-</span><span class="mf">0.01786722</span>        <span class="mf">0.00001362</span>
+         <span class="mf">0.00382226</span>        <span class="mf">0.00327391</span>        <span class="mf">0.00001046</span>
+        <span class="o">-</span><span class="mf">0.00046176</span>       <span class="o">-</span><span class="mf">0.00499971</span>       <span class="o">-</span><span class="mf">0.00003583</span>
+         <span class="mf">0.00014312</span>        <span class="mf">0.00534412</span>       <span class="o">-</span><span class="mf">0.00001335</span>
+         <span class="mf">0.00011081</span>       <span class="o">-</span><span class="mf">0.00558254</span>       <span class="o">-</span><span class="mf">0.00002107</span>
+        <span class="o">-</span><span class="mf">0.00011074</span>        <span class="mf">0.00558350</span>       <span class="o">-</span><span class="mf">0.00000933</span>
+        <span class="o">-</span><span class="mf">0.00014517</span>       <span class="o">-</span><span class="mf">0.00534330</span>        <span class="mf">0.00000839</span>
+        <span class="o">-</span><span class="mf">0.00381513</span>       <span class="o">-</span><span class="mf">0.00327314</span>       <span class="o">-</span><span class="mf">0.00000248</span>
+         <span class="mf">0.00046796</span>        <span class="mf">0.00499807</span>        <span class="mf">0.00000250</span>
+     <span class="n">End</span>
+     <span class="c1"># The vertical excitation energy is simply a float (to be provided in Hartree)</span>
+     <span class="n">EnergyInline</span> <span class="mf">0.17062882</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ExcitationFile</span> <span class="pre">string</span></code></dt>
+<dd>If <code class="docutils literal notranslate"><span class="pre">ExcitationInputFormat</span></code> is set to <code class="docutils literal notranslate"><span class="pre">File</span></code> one also has to set the <code class="docutils literal notranslate"><span class="pre">ExcitationFile</span></code> keyword to provide a path to the file from which the info should be read.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Singlet</span> <span class="pre">or</span> <span class="pre">Triplet</span></code></dt>
+<dd>In case the excited state information should be read directly from a file,
+one should specify which excitation AMS should read. This is done analogously to how this is done for excited state gradients in ADF. One chooses either the <code class="docutils literal notranslate"><span class="pre">Singlet</span></code> or <code class="docutils literal notranslate"><span class="pre">Triplet</span></code> blocks (for singlet-singlet or singlet-triplet excitations respectively). Once such a block is chosen, a line containing the symmetry label, followed by the number of the excitation of that symmetry. As for the symmetry labels, the notational convention used can be found in the <a class="reference external" href="../../../ADF/Appendices/Symmetry.html#schonfliess-symbols-and-symmetry-labels">ADF manual appendix</a> on symmetry labels. If symmetry was disabled, either explicitly by the user or when using TD-DFTB which does not support symmetry, when calculating the excited state properties, the symmetry label <code class="docutils literal notranslate"><span class="pre">A</span></code> should be used. Vibronic-structure calculations are only supported for one excitation at a time.</dd>
+</dl>
+<p>The resulting input block looks something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ExcitationSettings</span>
+   <span class="n">ExcitationInputFormat</span> <span class="n">File</span>
+   <span class="n">ExcitationFile</span> <span class="o">./</span><span class="n">ExcitedState</span><span class="o">.</span><span class="n">results</span><span class="o">/</span><span class="n">myengine</span><span class="o">.</span><span class="n">rkf</span>
+   <span class="n">Singlet</span>
+     <span class="n">A</span> <span class="mi">1</span>
+   <span class="n">End</span>
+ <span class="n">End</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="input-producing-the-spectrum">
+<h2>Input: Producing the spectrum<a class="headerlink" href="#input-producing-the-spectrum" title="Permalink to this headline">¶</a></h2>
+<p>To go from normal modes to an actual spectrum, we have to solve the integral that we introduced in the first section, the details of which will be discussed here.</p>
+<p>For long times, the integrand is dominated by the exponential damping term. We can define a suitable cut-off by demanding that this damping term be smaller than some threshold. As mentioned, the integral is evaluated using a Chebyshev quadrature. The number of Chebyshev nodes used for the integral can then be determined from this integration limit and the time step size. This time step size should be large enough to accurately represent the highest frequencies that are present in the highly oscillatory integrand. The Nyquist frequency can be used as a guide here: the highest frequency should be represented by at least two samples each period. Note however, that in principle there is no upper bound to the frequencies present in the integrand due to the fact that modes can be excited to arbitrarily high energy levels. Fortunately, the Franck-Condon factors will quickly act to dampen these high frequencies, restricting their significance. The user may either supply a time step size directly or leave this up to the program to determine. If the latter is chosen the highest relevant frequency is estimated by assuming that oscillator excitations are relevant up to about twice the Huang-Rhys parameter (which follow directly from the displacements). This default should in most cases be sufficient to produce a converged integral.</p>
+<p>The keywords associated with the different input parameters are collected under the <code class="docutils literal notranslate"><span class="pre">AbsorptionSpectrum</span></code> block. It contains the following keys:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">VibrationalAnalysis</span>
+<span class="n">VibrationalAnalysis</span>
+   <span class="n">Type</span> <span class="o">...</span>
+   <span class="o">...</span>
+   <span class="n">AbsorptionSpectrum</span>
+      <span class="n">AbsorptionRange</span> <span class="n">float_list</span>
+      <span class="n">FrequencyGridPoints</span> <span class="n">integer</span>
+      <span class="n">LineWidth</span> <span class="nb">float</span>
+      <span class="n">SpectrumOffset</span> <span class="p">[</span><span class="n">absolute</span> <span class="o">|</span> <span class="n">relative</span><span class="p">]</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">LineWidth</span> <span class="pre">float</span></code></dt>
+<dd>sets the lorentzian line width and thus has a large impact on
+the appearance of the final spectrum. It may be used to improve the agreement of the computed spectrum with experiment.
+Another purpose that the linewidth may serve is that some low frequency modes may not be represented very accurately within the VG-FC model. However, these modes do not result in particularly distinct vibronic progressions but rather cause an unspecific broadening of existing peaks. Applying a homogeneous peak broadening by increasing the value of <span class="math notranslate nohighlight">\(\Gamma\)</span> may be an effective (albeit a little ad hoc) way of resolving such issues, should they occur. The default value is <span class="math notranslate nohighlight">\(200  cm^{-1}\)</span> but it is recommended to do some experimentation with this value.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">AbsorptionRange</span> <span class="pre">float_list</span></code></dt>
+<dd>keyword specifies the frequency range (in <span class="math notranslate nohighlight">\(cm^{-1}\)</span>) that is to be computed by VST.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SpectrumOffset</span> <span class="pre">[absolute</span> <span class="pre">|</span> <span class="pre">relative]</span></code></dt>
+<dd>specifies whether the range provided by the <code class="docutils literal notranslate"><span class="pre">AbsorptionRange</span></code> keyword is relative to the 0-0 excitation energy
+(<code class="docutils literal notranslate"><span class="pre">Relative</span></code>), or relative to the vertical excitation energy (<code class="docutils literal notranslate"><span class="pre">Absolute</span></code>).
+Due to the limited accuracy of the VG-FC model at predicting <span class="math notranslate nohighlight">\(\Delta E_{0-0}\)</span> the default is <code class="docutils literal notranslate"><span class="pre">Relative</span></code> with a <code class="docutils literal notranslate"><span class="pre">AbsorptionRange</span></code> of [-500,4000].</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FrequencyGridPoints</span> <span class="pre">integer</span></code></dt>
+<dd>sets the number of points we use on our frequency
+grid. It is set to 400 by default which generally produces a smooth looking spectrum.</dd>
+</dl>
+<p>The current implementation of VG-FC vibronic-structure supports only spectra for one excitation at a time. The spectrum is normalized such that the highest peak is equal to 1 in arbitrary units. For this reason the prefactor of the integral is irrelevant and transition dipole moments do not affect the appearance of the spectrum.</p>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="ref1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> J.R. Reimers, K.R. Wilson and E.J. Heller, <em>Complex time dependent wave packet technique for thermal equilibrium systems: Electronic spectra</em> <a class="reference external" href="https://doi.org/10.1063/1.445618">The Journal of Chemical Physics 79, 4749 (1983)</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Properties.html" class="btn btn-neutral float-right" title="Dipole moment, Polarizability, Bond orders" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../Utilities/FCF_module.html" class="btn btn-neutral" title="AH-FC: Adiabatic Hessian Franck-Condon" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

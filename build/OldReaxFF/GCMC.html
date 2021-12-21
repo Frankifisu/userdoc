@@ -1,0 +1,692 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Grand Canonical Monte Carlo (GCMC) &mdash; Old Standalone ReaxFF 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Old Standalone ReaxFF 2021.1 documentation" href="index.html"/>
+        <link rel="up" title="Accelerating Molecule Dynamics and Other Related Methods" href="MDAcceleration.html"/>
+        <link rel="next" title="Force-bias Monte Carlo (fbMC)" href="fbMC.html"/>
+        <link rel="prev" title="Accelerating Molecule Dynamics and Other Related Methods" href="MDAcceleration.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search Old Standalone ReaxFF" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-Old Standalone ReaxFF" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General.html#what-s-new-in-reaxff-2019">What’s new in ReaxFF 2019</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Ensembles.html">Ensembles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Ensembles.html#nose-hoover-chains-nvt-ensemble">Nose-Hoover chains NVT ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ensembles.html#ah-and-prh-npt-ensemble-with-nhc">AH and PRH NPT ensemble with NHC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ensembles.html#berendsen-nvt-with-separate-damping-for-translational-rotational-and-vibrational-degrees-of-freedom">Berendsen NVT with separate damping for translational, rotational, and vibrational degrees of freedom</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eReaxFF.html">eReaxff: classical treatment of the explicit electron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Properties.html">Properties and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#vibrational-frequencies">Vibrational Frequencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#per-atoms-stress-tensor">Per-atoms Stress Tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#nemd-methods-for-thermal-conductivity">NEMD Methods for Thermal Conductivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#temperature-profile-along-coordinate-axis">Temperature Profile along Coordinate Axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#local-atomic-temperature">Local Atomic Temperature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#adsorption-analysis">Adsorption Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#on-the-fly-analysis-of-reaction-events">On-the-fly Analysis of Reaction Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#trajectory-analysis">Trajectory Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ChemTraYzer.html">ChemTraYzer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ChemTraYzer.html#general-information">General information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ChemTraYzer.html#command-line-execution">Command line execution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ChemTraYzer.html#results">Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ChemTraYzer.html#very-large-trajectories">Very large trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="travis.html">TRAVIS: A Trajectory Analyzer and Visualizer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FFOptimizer.html">FF Optimizer: framework for force field parameter optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ffopt_Input_files.html">Input files common for all optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ffopt_Control_parameters.html">Control parameters common for all optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MCFFOptimizer.html">MCFF Optimizer: Monte Carlo force field parameter optimizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MCFFOptimizer.html#input-files">Input files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MCFFOptimizer.html#control-parameters">Control parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MCFFOptimizer.html#results">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MCFFOptimizer.html#run-time-control">Run-time control</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CMAESFFOptimizer.html">CMA-ES Force-field Optimizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CMAESFFOptimizer.html#input-files">Input files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMAESFFOptimizer.html#control-parameters">Control parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMAESFFOptimizer.html#results">Results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="MDAcceleration.html">Accelerating Molecule Dynamics and Other Related Methods</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Grand Canonical Monte Carlo (GCMC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general-info">General info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-details">Code Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fbMC.html">Force-bias Monte Carlo (fbMC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CVHD.html">CVHD: Collective Variable-Driven Hyperdynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molgun.html">The Molecule Gun</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BondBoost.html">Bond Boost Method</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Miscellaneous.html">Other new features and fixes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#repeating-the-unit-cells">Repeating the unit cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#molecular-charges">Molecular charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#external-electric-fields">External electric fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#elastic-wall-restraint">Elastic wall restraint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#acks2-atom-condensed-kohn-sham-dft-approximated-to-second-order">ACKS2: Atom-condensed Kohn-Sham DFT approximated to second order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#correction-for-small-bond-orders">Correction for small bond orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#correction-for-torsion-angles-asymptotics">Correction for torsion angles asymptotics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#lg-dispersion">LG dispersion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#the-rxffutil-utility">The rxffutil utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Miscellaneous.html#reformat">reformat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Miscellaneous.html#minmax">minmax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Miscellaneous.html#pdist">pdist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Miscellaneous.html#params">params</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Troubleshooting.html#geometry-optimization">Geometry optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ReaxFFEngine.html">ReaxFF as an AMS engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Technical.html">Technical Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Technical.html#hybrid-parallelism">Hybrid parallelism</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Error_messages.html">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Included_Forcefields.html">Included Forcefields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Included_Forcefields_Trunk.html">Included Forcefields (development)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ffield_descrp.html">The Force Field File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ffield_descrp.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ffield_descrp.html#equation-reference">Equation Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trainset_descrp.html">trainset.in</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trainset_descrp.html#description-of-the-trainset-in-file">Description of the trainset.in file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trainset_descrp.html#sections-format">Sections format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trainset_descrp.html#format-description">Format description</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#general-references">General References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#feature-references">Feature References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Old Standalone ReaxFF</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="Old Standalone ReaxFF.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">Old Standalone ReaxFF</a>/</li>
+      
+          <li><a href="MDAcceleration.html">Accelerating Molecule Dynamics and Other Related Methods</a>/</li>
+      
+    <li class="orange-text">Grand Canonical Monte Carlo (GCMC)</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="grand-canonical-monte-carlo-gcmc">
+<h1>Grand Canonical Monte Carlo (GCMC)<a class="headerlink" href="#grand-canonical-monte-carlo-gcmc" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="general-info">
+<h2>General info<a class="headerlink" href="#general-info" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Take a look at the <a class="reference external" href="../Tutorials/MolecularDynamicsAndMonteCarlo/GCMCLiSBattery.html">GCMC tutorial</a> and learn how to setup a GCMC calculation.</p>
+</div>
+<p><strong>About Monte Carlo / the Grand Canonical Ensemble</strong></p>
+<p>It is best to read a bit about Monte Carlo and ensembles before working with the GCMC code. Almost every book or review text on molecular simulations will do, for example: Frenkel D, Smit B. Understanding molecular simulation: from algorithms to applications. Academic Press; 2002. 672 p.</p>
+<p>Wikipedia also has some pages of interest:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Monte_Carlo_method">http://en.wikipedia.org/wiki/Monte_Carlo_method</a></li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Grand_canonical_ensemble">http://en.wikipedia.org/wiki/Grand_canonical_ensemble</a></li>
+</ul>
+<p>It is important to note that this method heavily relies on random numbers, and simulations are thus non-repeatable in detail, but should converge to the same answer.</p>
+<p><strong>About the Reaxff GCMC code</strong></p>
+<p>The GCMC code for reaxff was originally developed by Thomas Senftle, working as a Graduate Student at Penn State University under the supervision of Dr. Adri van Duin. The original version was a wrapper code that called an external executable to perform the reaxff minimization step and energy calculation, and relied on file modification and parsing to steer the reaxff code and get the results back.</p>
+<p>A rewrite of the code, made by Hans van Schoot (SCM) in close collaboration with Thomas Senftle, is now available in the ADF package. The rewrite directly integrates into the ADF-ReaxFF code, solving performance issues of the original code by removing the calling overhead of the reaxff executable and the relatively slow file management. It also merged several modifications of the original code to support the usage of whole molecules for Monte Carlo moves, and supports the usage of multiple atom/molecule types during the simulation. Other improvements were made on the input options, the accessible volume calculation, the MC acceptance prefactor calculation and the writing of logfiles.</p>
+<p>The relevant papers are:</p>
+<p>Thomas P. Senftle, Randall J. Meyer, Michael J. Janik and Adri C.T. van Duin,
+<em>Development of a ReaxFF potential for Pd/O and application to palladium oxide formation</em>,
+<a class="reference external" href="https://doi.org/10.1063/1.4815820">J. Chem. Phys. 139, 044109 (2013)</a></p>
+<p>Thomas P. Senftle, Adri C.T. van Duin, Michael J. Janik,
+<em>Determining in situ phases of a nanoparticle catalyst via grand canonical Monte Carlo simulations with the ReaxFF potential</em>,
+<a class="reference external" href="https://doi.org/10.1016/j.catcom.2013.12.001">Catalysis Communications volume 52, 5 July 2014, Pages 72–77</a></p>
+</div>
+<div class="section" id="input">
+<h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
+<p>A worked out GCMC exercise is available from a <a class="reference external" href="https://www.scm.com/adf-modeling-suite/adf-hands-on-workshops/advanced-2-day-reaxff-workshop/">2-day ReaxFF workshop</a>.</p>
+<p><strong>Overview</strong></p>
+<p>The GCMC code in ADF-ReaxFF needs the following input files to run:</p>
+<ul class="simple">
+<li>control_MC    : The GCMC control file, which holds MC settings and the atoms/molecules to insert/move/delete</li>
+<li>control       : A reaxff control file, in which only a small number of parameters is of interest</li>
+<li>ffield        : A standard reaxff forcefield file</li>
+<li>geo           : A geometry file, preferably in biograph format (code not yet tested with xyz)</li>
+<li>iopt          : Text file that should only contain a “5” (without the quotes)</li>
+<li>insertData_MC : (optional file) Table used when restarting GCMC simulations</li>
+</ul>
+<p><strong>the control_MC file</strong></p>
+<p>Lines in the control_MC file that start with ! or # will be ignored, so those can be used for comments. Empty lines are also ignored, so feel free to leave some in the file. Lines with keywords should have their value in the first 8 columns, followed by a couple of spaces (at least 1), followed by the 6-character keyword. The order is free, except for the nmols keyword, which should be the last one. The nmols keyword signals the parser that the next section of control_MC will define X new MC Molecule Types.</p>
+<p>This is an example for the control_MC file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>! GCMC control file example
+      0   iensmb !select MC ensemble (0=Mu-NVT with fixed volume, 1=Mu-NPT with variable volume)
+   5000   niter  !number of MC iterations to do this simulation
+      0   nstart !start the iteration counter with an offset, usefull for restarts to avoid double files
+  300.0   mctemp !Temperature of the simulation, affects acceptance rate for steps that increase the energy
+    0.0   mcpres !NPT pressure in GPa (set to zero for incompressible solid systems unless at very high pressures)
+    3.0   rmaxpl !Max radius for atom placement on insert/displace move
+    1.2   rminpl !Min radius for atom placement on insert/displace move
+   2000   nmctry !Maximum number of trials allowed when inserting or moving a molecule. If the
+!                !  rmaxpl and rminpl variables are very strict, this number needs to be large
+      1   igcfac !include GC prefactor in probabilities? 0 = no 1 = yes
+      0   ivol   !select MC volume calculation technique:
+!                !  0: vvacu needed! volume = total volume - occupied volume - specified vacuum volume (vvacu)
+!                !  1:               volume = total cell volume
+!                !  2: vacc needed!  volume = specified accessible volume (vacc)
+!                !  3:               volume = total cell volume - occupied volume
+!                !  4: vacc needed!  volume = specified accessible volume (vacc) - occupied volume
+  435.0   vacc   !if ivol=2 or ivol=4, specify Vacc in angstroms^3
+    0.0   vvacu  !if ivol=0 specify non-accessible (vacuum) volume Vvacu in angstroms^3
+   0.25   ivlim  !volume change limit (value between between 0 and 1, Vnew = ((1+ivlim)*V1)
+      1   resopt !write restart files: 0=no, 1=yes
+      1   resfrq !frequency of writing restart files (MC code only writes files if the MC move is accepted)
+      0   debug  !print debug output if set to 1, print even more debug output when set to 2
+      5   nmols  !Number of MC molecule types, must match the number of molecule blocks that follow!
+!
+! Molecule Specific Data: C2H2 example
+!    This part is fixed format!
+!    We need cmpot on line 1,
+!    possibly followed by the noinsr on line two,
+!    and forced to be ended with nmatom on line 2 or 3, followed by nmatom lines of coordinates.
+! the coordinates are FIXED FORMAT! (24d.15,1x,A2) x,y,z (24 wide, 15 after decimal), 1 space, 2chars symbol)
+ -75.00   cmpot   !chemical potential of molecule
+      4   nmatom  !number of atoms in molecule
+      12.180480000000000       0.421696000000000       1.316689000000000 C
+      13.124731000000000       0.376902000000000       0.568360000000000 C
+      11.349475000000000       0.459560000000000       1.988208000000000 H
+      13.957314000000000       0.335843000000000      -0.101000000000000 H
+
+!Molecule Specific Data: C2H4 example
+ -75.00   cmpot   !chemical potential of molecule
+      6   nmatom  !number of atoms in molecule
+      13.989222000000000       0.405391000000000       1.000150000000000 C
+      13.316784000000000       0.399646000000000       0.885795000000000 C
+      11.494513000000000       0.461837000000000       1.970612000000000 H
+      11.335219000000000       0.353577000000000       0.129581000000000 H
+      13.811701000000000       0.340224000000000      -0.084000000000000 H
+      13.970561000000000       0.453325000000000       1.756236000000000 H
+
+!Molecule Specific Data: H2O Example
+ -75.00   cmpot   !chemical potential of molecule
+      1   noinsr  !setting this to 1 disables insert/deletion moves. If it is set to 1 for all types, the ensemble becomes NVT/NPT
+      3   nmatom  !number of atoms in molecule
+      39.996720000000000      40.747660000000000      40.512210000000000 H
+      40.000210000000000      39.999520000000000      39.934730000000000 O
+      40.000030000000000      39.259880000000000      40.523700000000000 H
+
+!Molecule Specific Data: H2 Example
+ -75.00   cmpot   !chemical potential of molecule
+      2   nmatom  !number of atoms in molecule
+       5.025812000000000      0.0000000000000000       0.000000000000000 H
+       5.774188000000000      0.0000000000000000       0.000000000000000 H
+
+!Molecule Specific Data: Single atom example
+ -75.00   cmpot   !chemical potential of molecule
+      1   nmatom  !number of atoms in molecule
+       0.000000000000000      0.0000000000000000       0.000000000000000 H
+</pre></div>
+</div>
+<p>The Molecule Specific Data blocks define the molecules (or atoms) that can be inserted/moved/deleted with the MC code. The atoms named here should of course be in the forcefield files, and the coordinates should form a reasonable structure. The MC code uses these coordinates during the insertion step by giving them a random rotation, followed by a random translation to generate a random position of the molecule inside the box. Currently, there is no check to make sure the molecule stays inside the boundaries of the box, the code only checks that the rmaxpl/rminpl values are satisfied. If you plan on inserting large molecules, make sure there is enough room in the rmaxpl value, otherwise the code will stop with an error message.</p>
+<p><strong>The chemical potential (cmpot) keyword</strong></p>
+<p>The cmpot keyword sets the chemical potential of the molecule (or atom) reservoir, and is employed when calculating the Boltzmann accept/reject criteria after a MC move is executed. This value can be derived from first principles using statistical mechanics, or equivalently, it can be determined from thermochemical tables available in literature sources.</p>
+<p>For example, the proper chemical potential for a GCMC simulation in which single oxygen atoms are exchanged with a reservoir of O2 gas, should equal 1/2 the chemical potential of O2 at the temperature and pressure of the reservoir:</p>
+<p>cmpot = Mu_O(T,P) = 1/2*Mu_O2(T,P) = 1/2 * [Mu_ref(T,P_ref) + kT*Log(P/Pref) - E_diss]</p>
+<p>where the reference chemical potential [Mu_ref(T,P_ref)] is the experimentally determined chemical potential of O2 at T and Pref, kT*Log(P/Pref) is the pressure correction to the free energy, and E_diss is the dissociation energy of the O2 molecule.</p>
+<p><strong>The no insert (noinsr) keyword</strong></p>
+<p>The noinsr keyword tells the GCMC code to keep the number of molecules/atoms of this type fixed. It will thus disable Insert/Delete moves on this type, meaning it can only do a displacement move, or volume change move (if the iensmb keyword is set to 1).</p>
+<p><strong>the control file</strong></p>
+<p>The control file is a regular reaxff control file and it influences the minimization step after an MC trial move. Because of this, only a small number of the reaxff keywords are used during the GCMC simulation.</p>
+<p>An example of the control file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># some of the parameters that influence the minimization step in the GCMC code</span>
+      <span class="mi">1</span> <span class="n">icentr</span>     <span class="n">Put</span> <span class="n">the</span> <span class="n">center</span> <span class="n">of</span> <span class="n">mass</span> <span class="n">at</span> <span class="n">the</span> <span class="n">center</span> <span class="n">of</span> <span class="n">the</span> <span class="n">cube</span>
+      <span class="mi">1</span> <span class="n">igeofo</span>     <span class="mi">0</span><span class="p">:</span><span class="n">xyz</span><span class="o">-</span><span class="nb">input</span> <span class="n">geometry</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Biograf</span> <span class="nb">input</span> <span class="n">geometry</span> <span class="mi">2</span><span class="p">:</span> <span class="n">xmol</span><span class="o">-</span><span class="nb">input</span> <span class="n">geometry</span>
+<span class="mf">2.50000</span> <span class="n">endmm</span>      <span class="n">End</span> <span class="n">point</span> <span class="n">criterion</span> <span class="k">for</span> <span class="n">MM</span> <span class="n">energy</span> <span class="n">minimization</span>
+    <span class="mi">500</span> <span class="n">imaxit</span>     <span class="n">Maximum</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span>
+      <span class="mi">0</span> <span class="n">icelop</span>     <span class="n">Optimize</span> <span class="n">cell</span> <span class="n">parameters</span> <span class="mi">0</span><span class="o">=</span><span class="n">no</span> <span class="mi">1</span><span class="o">=</span><span class="n">yes</span>
+<span class="mf">1.00050</span> <span class="n">celopt</span>     <span class="n">Cell</span> <span class="n">parameter</span> <span class="n">change</span>
+      <span class="mi">0</span> <span class="n">imaxmo</span>     <span class="n">In</span> <span class="n">this</span> <span class="n">case</span><span class="p">:</span> <span class="mi">0</span><span class="p">:</span> <span class="n">POLAK_RIBIERE</span> <span class="n">Conj</span><span class="o">.</span><span class="n">Grad</span> <span class="n">method</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Limited</span><span class="o">-</span><span class="n">memory</span> <span class="n">BFGS</span> <span class="n">method</span>
+</pre></div>
+</div>
+<p>The code has been tested with various imaxit and endmm values, the other options have not been fully tested. Other reaxff keywords might also influence the minimization procedure, but those are best left to their default settings</p>
+<p><strong>the ffield file</strong></p>
+<p>The ffield file should be an normal reaxff forcefield file, as described in the reaxff documentation by A. van Duin (visit the documentation section on the SCM website to obtain this document).</p>
+<p><strong>the geo file</strong></p>
+<p>The GCMC code has been tested with biograph input files, but other input formats might work. The details of this file are also described in the original reaxff documentation by van Duin.</p>
+<p><strong>the iopt file</strong></p>
+<p>The iopt file is a text file with a single digit inside that selects the execution mode of the reaxff code. To run the GCMC code, this file should contain a “5” (without the quotes).</p>
+<p><strong>the insertData_MC file</strong></p>
+<p>The GCMC code can insert multiple atom/molecule types in a single simulation, so it needs to keep track of what atom belongs to which insert. This information is automatically stored and updated when insertion/deletion/moving of atoms or molecules during the simulation, but is by default unknown of the atoms of the starting geometry. The GCMC code will therefore by default not modify the atoms in the original input in the MC trial moves (keep in mind that they can move around during the minimization step). the insertData_MC file can be used to tell the GCMC code what atoms in the geo file belong to which molecule.</p>
+<p>An example of the insertData_MC file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#   atomNumber  MCInsMolType  MCInsertNmbr</span>
+      <span class="mi">30</span>       <span class="mi">1</span>       <span class="mi">1</span>
+      <span class="mi">40</span>       <span class="mi">2</span>       <span class="mi">1</span>
+      <span class="mi">46</span>       <span class="mi">2</span>       <span class="mi">1</span>
+      <span class="mi">47</span>       <span class="mi">1</span>       <span class="mi">2</span>
+      <span class="mi">48</span>       <span class="mi">1</span>       <span class="mi">3</span>
+</pre></div>
+</div>
+<p>This example specifies 4 molecules/atoms that are modifiable by the GCMC code, belonging to 2 different GCMC molecules/atoms that are defined in the control_MC file. The first “molecule” in the control_MC file should thus consist of a single atom (if this doesn’t match, the code will most likely crash!). It was inserted three times (atom 30, 47 and 48) The second molecule has two atoms, and was inserted once.</p>
+<p>The atoms do not have a fixed order, and not all atoms have to be defined. If an atom is not appointed to a certain MCInsMolType and MCInsertNmbr, if will simply not be modified during the MC moves. The insertData_MCXXXXXX files generated by the restart option of the code can be directly used as valid insertData_MC files, just remove the digits from the filename and replace the geo file with the corresponding geo_MCXXXXXX file.</p>
+</div>
+<div class="section" id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<p><strong>Overview</strong></p>
+<p>The GCMC code writes a couple of output files, each described in this section. It also produces a number of reaxff output files, and some of these are described in the original reaxff documentation by van Duin. Keep in mind that these files might not provide a complete or correct picture of the simulation, as they could also contain data originating from rejected MC trial moves.</p>
+<p><strong>geo_MCXXXXXX</strong></p>
+<p>This file is generated every X accepted MC moves and contains the current geometry of the system in biograph format (X is set with the resfrq keyword in the control_MC file).</p>
+<p><strong>insertData_MCXXXXXX</strong></p>
+<p>This file contains a table of all the atoms in the system with their MC Molecule Type and MC Insert Number. This data can be used to map atoms to an inserted molecule, and is needed if you want to restart your calculation from an accepted MC step. The table contains -1 values for atoms that were in the original input and did not get a manually assigned MCInsert Molecule Type and MC Insert Number, the GCMC code will not modify these atoms during the MC steps.</p>
+<p>Also see the section on insertData_MC file.</p>
+<p><strong>MCstats</strong></p>
+<p>The MCstats file is a logfile that contains the statistics of the MC simulation. The GCMC code writes a single line to it after every MC step, containing the number of: Tried MC moves (tried), Accepted MC moves (accept), Rejected MC moves (reject), Accepted Insertion/Deletion/Moving/Volume change MC moves (addAcc/delAcc/mvAcc/volAcc), Rejected Insertion/Deletion/Moving/Volume change MC moves (addRej/delRej/mvRej/volRej)</p>
+<p>An example of the MCstats file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tried</span> <span class="n">accept</span> <span class="n">reject</span>    <span class="n">addAcc</span> <span class="n">delAcc</span>  <span class="n">mvAcc</span> <span class="n">volAcc</span>    <span class="n">addRej</span> <span class="n">delRej</span>  <span class="n">mvRej</span> <span class="n">volRej</span>
+    <span class="mi">0</span>      <span class="mi">1</span>      <span class="mi">0</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>
+    <span class="mi">1</span>      <span class="mi">1</span>      <span class="mi">1</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">1</span>      <span class="mi">0</span>
+    <span class="mi">2</span>      <span class="mi">1</span>      <span class="mi">2</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">2</span>      <span class="mi">0</span>
+    <span class="mi">3</span>      <span class="mi">1</span>      <span class="mi">3</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">0</span>      <span class="mi">1</span>      <span class="mi">2</span>      <span class="mi">0</span>
+    <span class="mi">4</span>      <span class="mi">1</span>      <span class="mi">4</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">1</span>      <span class="mi">1</span>      <span class="mi">2</span>      <span class="mi">0</span>
+    <span class="mi">5</span>      <span class="mi">1</span>      <span class="mi">5</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">1</span>      <span class="mi">1</span>      <span class="mi">3</span>      <span class="mi">0</span>
+    <span class="mi">6</span>      <span class="mi">1</span>      <span class="mi">6</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">1</span>      <span class="mi">2</span>      <span class="mi">3</span>      <span class="mi">0</span>
+    <span class="mi">7</span>      <span class="mi">1</span>      <span class="mi">7</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">1</span>      <span class="mi">3</span>      <span class="mi">3</span>      <span class="mi">0</span>
+    <span class="mi">8</span>      <span class="mi">1</span>      <span class="mi">8</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">1</span>      <span class="mi">3</span>      <span class="mi">4</span>      <span class="mi">0</span>
+    <span class="mi">9</span>      <span class="mi">1</span>      <span class="mi">9</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">1</span>      <span class="mi">4</span>      <span class="mi">4</span>      <span class="mi">0</span>
+   <span class="mi">10</span>      <span class="mi">1</span>     <span class="mi">10</span>         <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">1</span>      <span class="mi">4</span>      <span class="mi">5</span>      <span class="mi">0</span>
+   <span class="mi">11</span>      <span class="mi">2</span>     <span class="mi">10</span>         <span class="mi">2</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">1</span>      <span class="mi">4</span>      <span class="mi">5</span>      <span class="mi">0</span>
+   <span class="mi">12</span>      <span class="mi">3</span>     <span class="mi">10</span>         <span class="mi">3</span>      <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span>         <span class="mi">1</span>      <span class="mi">4</span>      <span class="mi">5</span>      <span class="mi">0</span>
+</pre></div>
+</div>
+<p><strong>Elog</strong></p>
+<p>The Elog file contains the Volume and energies of the accepted MC steps. The energies in this logfile are the pure ReaxFF energy of the system (RxFFEnergy) and the MC corrected energy, which is used in determining if the step should be accepted or not (see the section on calculating energies for details).</p>
+<p>An example of the Elog file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Iteration</span> <span class="n">Naccepted</span>      <span class="n">Volume</span>   <span class="n">MC</span> <span class="n">Energy</span>  <span class="n">RxFFEnergy</span>
+        <span class="mi">0</span>         <span class="mi">1</span>    <span class="mf">15625.00</span>    <span class="o">-</span><span class="mf">3098.88</span>    <span class="o">-</span><span class="mf">3179.88</span>
+        <span class="mi">2</span>         <span class="mi">2</span>    <span class="mf">15625.00</span>    <span class="o">-</span><span class="mf">3107.92</span>    <span class="o">-</span><span class="mf">3269.92</span>
+        <span class="mi">3</span>         <span class="mi">3</span>    <span class="mf">15625.00</span>    <span class="o">-</span><span class="mf">3130.13</span>    <span class="o">-</span><span class="mf">3373.13</span>
+        <span class="mi">4</span>         <span class="mi">4</span>    <span class="mf">15625.00</span>    <span class="o">-</span><span class="mf">3160.05</span>    <span class="o">-</span><span class="mf">3484.05</span>
+        <span class="mi">6</span>         <span class="mi">5</span>    <span class="mf">15625.00</span>    <span class="o">-</span><span class="mf">3169.77</span>    <span class="o">-</span><span class="mf">3493.77</span>
+       <span class="mi">11</span>         <span class="mi">6</span>    <span class="mf">15625.00</span>    <span class="o">-</span><span class="mf">3200.13</span>    <span class="o">-</span><span class="mf">3605.13</span>
+</pre></div>
+</div>
+<p><strong>reaxout.kf</strong></p>
+<p>This is the binary logfile generated by the GCMC code. Its contents can be viewed with the KFBrowser utility, or it can be loaded into AMSmovie to view the geometries in the file. Only the data of successful MC moves is written to this file.</p>
+</div>
+<div class="section" id="code-details">
+<h2>Code Details<a class="headerlink" href="#code-details" title="Permalink to this headline">¶</a></h2>
+<p><strong>Overview</strong></p>
+<p>The GCMC code will perform niter (control_MC file option) Grand Canonical Monte Carlo trial moves, and accept or reject them based on the Energy produced by the ReaxFF minimization step of the trial geometry. The Monte Carlo algorithm will always accept a step if it results in a decrease of the energy, and accept steps that go up in energy with a probability. This section will give some details about how the code works.</p>
+<p><strong>MC Moves (Insert/Delete/Move/Volume)</strong></p>
+<p>The GCMC code currently supports 4 types of MC Moves: Insert, Delete, Move (displace), Volume change. The first three moves always change a whole “molecule” of the system, as defined in the control_MC file (a molecule can of course contain only a single atom). Every MC iteration selects one MC Molecule Type from the defined molecules in control_MC at random, followed by a random MC Move (unless there are no molecules of the type in the system, in that case it will do an insert move).</p>
+<p>The Insert and Displace (move) MC Moves will generate a random rotation and position for the molecule, and then check if the random positions are within the “RminPl” and “RmaxPl” boundaries (this means no atom in the molecule can be closer to any atom currently in the system than “RminPl”, and it should be within “RmaxPl” distance to an atom in the system). If the conditions are not satisfied, a new set of coordinates is generated and the code checks again. This is repeated a maximum number of “nmctry” times before stopping with an error.</p>
+<p>The volume change is controlled by the “ivlim” variable in control_MC. The ivlim sets the volume change limit, and it should be a value between between 0 and 1. The new volume will be calculated like this: Vnew = (1+ivlim)*Vold.</p>
+<p><strong>Calculating energies</strong></p>
+<p>Because the GCMC simulation adds and deletes atoms or molecules during the runtime, it cannot directly compare the ReaxFF energies for the MC acceptance criteria: inserting a molecule will usually lower the total energy of the system, causing the MC to always accept it, and always reject a deletion. To balance this out, the GCMC code calculates a “corrected” MC energy to compare the trial reaxFF energy with, consisting of the previously accepted ReaxFF energy + the chemical potential (cmpot in control)MC) for the inserted molecule, or the ReaxFF energy - the chemical potential for the deleted molecule. The volume change energy is also corrected, using the following formula:</p>
+<p>E_MC_Corr = E_reaxff_last_accept - (Pressure * 0.1439 * (newV-oldV)) + ((1.0/beta) * nInsertedMols * log(newVavail/oldVavail))</p>
+<p>where newVavail and oldVavail are calculated from the MC available volume (see the section calculating volumes).</p>
+<p><strong>Calculating volumes</strong></p>
+<p>The GCMC code can calculate the available volume in a couple of different ways, depending on the ivol setting in control_MC:</p>
+<ul class="simple">
+<li>ivol = 0: volume = total volume - occupied volume - specified vacuum volume (vvacu)</li>
+<li>ivol = 1: volume = total cell volume</li>
+<li>ivol = 2: volume = specified accessible volume (vacc)</li>
+<li>ivol = 3: volume = total cell volume - occupied volume</li>
+<li>ivol = 4: volume = specified accessible volume (vacc) - occupied volume</li>
+</ul>
+<p>Where the occupied volume is calculated by summing up the volumes of the atoms in the geo file that are not specified to be part of an MC type molecule. The volume of an atom is calculated using the average of the covalent atomic radius and the vd Waals radius of the atom, which are found in the reaxff forcefield file (ffield).</p>
+<p>the vacc and vvacu options can be specified in the control_MC file to get a more accurate available volume.</p>
+<p><strong>Acceptance criteria</strong></p>
+<p>An MC move is always accepted if the reaxff energy is lower than the corrected MC energy of the last accepted MC move, or if the energy increase is small enough. If the new energy is higher, the code generates a random number between 0 and 1, and accepts the move if the random number is bigger than:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="n">preFactor</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Beta</span><span class="o">*</span><span class="n">deltaE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the prefactor is calculated (for insert and delete moves) using the deBroglie wavelength of the inserted molecules, the number of inserted molecules and the available MC volume of the system.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fbMC.html" class="btn btn-neutral float-right" title="Force-bias Monte Carlo (fbMC)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="MDAcceleration.html" class="btn btn-neutral" title="Accelerating Molecule Dynamics and Other Related Methods" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

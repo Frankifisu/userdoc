@@ -1,0 +1,104 @@
+#! /bin/sh
+
+
+# == Expert option ==
+
+# Computing solvent effects with the 3D-RISM model is illustrated on the glycine
+# example.
+
+# All subkeys in the RISM block are discussed in the User's Guide. The things to
+# pay attention to here are adf.SigU and EpsUadf. parameters for each atom in the ATOMS
+# block, the solvent parameters in the SOLVENT sub-block and the FFT box
+# parameters in the SOLUTE sub-block. Both adf.SigU and EpsUadf. values as well as the
+# solvent parameters may be obtained from force field parameter lists.
+# Parameters for some common solvents are available in the ADF User's Guide.
+
+# One should take into account the following when choosing FFT box parameters in
+# the SOLUTE block:
+
+# - the box should be at least twice as large as your model in each dimension,
+# - the number of grid points in each dimension must be a power of 2, and
+# - accuracy of the results and the memory usage depend on the number of grid-
+#   points
+
+# Note: the 3D-RISM part in ADF has not been parallelized, thus calculating on
+# more than 1 processor will not reduce the elapsed time. In this example only
+# the gradients are calculated, no geometry optimization is performed.
+
+
+# == Remarks for different solvent than water ==
+
+# The default values for the RISM1D subblock key are only applicable if the
+# solvent is water. You must change the FLUIDPARAM subkey of the subblock key
+# RISM1D when modeling a different solvent, at least the dielectric constant and
+# the density. In that case you may also have to change other subkeys of the
+# subblock key RISM1D. For a different solvent than water, of course, you also
+# have to change the description of the subblock SOLVENT. You may have to change
+# the boxsize.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C  0.0                  0.0                0.0                   adf.SigU=3.50    adf.EpsU=0.066
+     O  1.208031058311462    0.0                0.0                   adf.SigU=2.96    adf.EpsU=0.200
+     O -0.741720974445343    1.118348836898804  0.0                   adf.SigU=2.96    adf.EpsU=0.200
+     C -0.8529478907585144  -1.228639006614685  0.0                   adf.SigU=3.50    adf.EpsU=0.066
+     N -0.1451586186885834  -2.467742681503296  0.0                   adf.SigU=3.25    adf.EpsU=0.170
+     H -0.09300804138183594  1.869869947433472  0.0                   adf.SigU=1.00    adf.EpsU=0.046
+     H -1.528575420379639   -1.167157530784607  0.8756611347198486    adf.SigU=1.00    adf.EpsU=0.046
+     H -1.528575420379639   -1.167157530784607 -0.8756611347198486    adf.SigU=1.00    adf.EpsU=0.046
+     H  0.4767249822616577  -2.513782262802124  0.8179888725280762    adf.SigU=1.00    adf.EpsU=0.046
+     H  0.4767249822616577  -2.513782262802124 -0.8179888725280762    adf.SigU=1.00    adf.EpsU=0.046
+  end
+end
+
+Task SinglePoint
+
+Properties
+  Gradients Yes
+End
+
+Engine ADF
+  title 3D-RISM test
+  basis
+    core small
+    type DZP
+  end
+  nobeckegrid
+  Relativity Level=None
+  rism glycine 1N
+    RISM1D
+    SUBEND
+    SOLVENT1 water
+      UNITS      uWeight=g/mol  ULJsize=A  ULJenergy=kcal/mol Ucoord=A Udens=1/A3
+      Parameters Weight=18.015   nAtoms=2
+      1    -0.8476   3.166    0.1554       0.000000  0.00000  0.000000
+      2     0.4238   1.000    0.0460      -0.816490  0.00000  0.577359
+                                           0.816490  0.00000  0.577359
+      DenSpe=0.03333
+    SUBEND
+    SOLUTE  CO
+      BOXSIZE 32.0 32.0 32.0
+      BOXGRID   64   64   64
+    SUBEND
+  end
+  symmetry C(s)
+  xc
+    lda
+  end
+EndEngine
+eor
+
+
+# The densf utility can be used to convert the 3D-RISM grid data stored in the adf.rkf file to 
+# the TAPE41 format suitable for visualization by AMSview. The following fields are created 
+# for each solvent site: Huv (solvent total correlation function), Uuv (solvent potential in RT), 
+# Guv (solvent pair distribution function), Cuv (solvent direct correlation), 
+# and PMF (potentials of mean force in kcal/mol)
+
+
+$AMSBIN/densf << eor
+adffile ams.results/adf.rkf
+RISM
+eor

@@ -1,0 +1,406 @@
+.. _AMS_MgO_Adsorption:
+
+Adsorption of CO2 on a MgO Surface
+==================================
+
+Contents
+********
+
+This tutorial will lead you through the workflow of how to create a surface for a quantum chemical calculation and how to study adsorption of a molecule on this surface. A single crystal (of average macroscopic size) can have several cm :sup:`2` of surface area and a typical length scale treated with quantum chemistry would be around 10 Å :sup:`2` which is a factor of 10 :sup:`15` smaller than the average real crystal facet. The following figure shows a crystal and a so-called slab representing a surface
+
+
+.. figure:: ../Images/advanced/AMS_Adsorption_intro_1.png
+  :width: 80%
+  :align: center
+
+  A crystal and its digital twin fit for a QM or MM calculation.
+
+However, we can use periodic boundary conditions to mimic a vast surface and as ionic crystal such as MgO are very regular this is easily possible. 
+Periodic boundary conditions for a surface mean that they are replicas in two dimensions and in the third one there is a limited thickness and “vacuum” below and above – we call this a slab. 
+The figure below shows a slab of MgO which is four layers thick and its eight next nearest neighbors.
+
+.. figure:: ../Images/advanced/AMS_Adsorption_intro_2.png
+  :width: 80%
+  :align: center
+
+  A crystal and its digital twin fit for a QM or MM calculation.
+
+The Contents
+************
+
+If you are familiar with continuum methods you may ask yourself why indeed we don’t build a real size digital twin of crystal and use a finite element solver to calculate what is happening on the surface if someone exposes it to CO2 gas. The answer is we want study electronic properties and adsorption energies of an individual CO2 molecule and its chemisorption. This can only be captured by an electronic method and to some extent by an atomistic method. We will use BAND and thus, will need to build a slab. The ADF GUI has a tool to cleave along the Miller indices of a crystal, but which ones do we choose?
+
+Cleave the right plane
+**********************
+
+In a real crystal we can recognize faces and as MgO is cubic face centered (such as NaCl) we would expect some cubic crystallites. When a crystal grows certain faces can grow faster and some slower – the latter are the larger ones and offer more surface to e.g. catalytic activities. Stable surfaces of ionic crystals have a dipole moment of zero perpendicular to the surface. One can also calculate the surface energy, :math:`E_{SE}`, using:
+
+.. math::
+
+  \Delta E_{SE} = \frac{E_{surface}-E_{bulk}}{A}
+
+Where :math:`E_{surface}` is the relaxed energy of the cleaved system and :math:`E_{bulk}` the energy of the same atoms when they are embedded in a crystal bulk. 
+A is the total surface area, i.e. both sides of the slab. This is a way to test several possible surfaces for stability. For any stable surface this energy must be positive. If this energy was negative the atoms would dissociate into their surroundings. 
+
+Also, there are only seven lattice systems one has to consider: cubic, hexagonal, tetragonal, rhombohedral, orthorhombic, monoclinic and triclinic. A good idea is to do a literature search to see if the surfaces have been studied theoretically ore experimentally and if certain surfaces are described as stable or catalytic active. For MgO the [100] surface is the most stable. Our next move will be to find out what thickness of the surface is needed.
+
+The thickness of the slab
+*************************
+
+Ideally, the thickness of the slab should not influence the binding energy/formula unit. 
+We will create slabs of different thickness and look at the binding energies.
+Start with switching to BAND:
+
+.. rst-class:: steps
+
+  \
+    | In **AMSinput** 
+    | 1. Switch from |ADFPanel|	to |BANDPanel|	
+    | 2. Use the **Search Tool** ( |Search|	) to find ``MgO``
+
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_1.png
+  :width: 90%
+  :align: center
+
+.. rst-class:: steps
+
+  \
+    | Click on the **Slice tool** ( |SliceTool| )
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_2.png
+  :width: 90%
+  :align: center
+
+.. rst-class:: steps
+
+  \
+    | In the **dialogue window** 
+    | 1. choose ``1 0 0`` as Miller indices
+    | 2. tick Cartesian 
+    | 3. Start with number of layers ``2``
+    | 4. Click **Ok**
+
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_3.png
+  :width: 60%
+  :align: center
+
+.. Note::
+   The “Cartesian” option is needed because the Miller indices are usually (with cubic lattices) thought in the conventional unit cell rather than the primitive (minimal) unit cell
+
+You will see
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_4.png
+  :width: 50%
+  :align: center
+
+There is only one formula unit of MgO per layer.
+
+.. tip::
+   You can use the Periodic display tool ( |PeriodicViewTool| ) to see the next nearest neighbors:
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_5.png
+  :width: 80%
+  :align: center
+
+We now want to calculate the binding energies:
+
+.. rst-class:: steps
+
+  \
+    | In the  BAND **Main panel** 
+    | 1. change the calculation setup (**XC functional**, **basis set**, **frozen core** and **numerical quality**) according to the following picture:
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_6.png
+  :width: 80%
+  :align: center
+
+.. Note::
+   LDA and DZP have been chosen to enable you to work fast through this tutorial. 
+   For a high-quality study, you may want to use PBEsol_D3(BJ), which is good for surfaces and covers dispersive interactions needed for the actual adsorption study and a TZP basis set. 
+   Ideally, use these as a benchmark and verify with experimental or literature data. You also will need access to a HPC or similar. Alternatively, you might consider DFTB with  
+   `GFN-xTB <../../DFTB/DFTB_Model_Hamiltonian.html#extended-tight-binding-xtb>`__   
+   which is a more approximate but much faster tight-binding method for the whole periodic table.
+
+When the calculation has finished, open the “Output” using the SCM dropdown menu
+
+.. rst-class:: steps
+
+  \
+    | from the SCM menu ( |SCMMenu| ) select **Output**
+
+You can move to the ‘Bonding Energy’ via the corresponding button in the ‘Iterations’ drop-down menu.
+
+.. rst-class:: steps
+
+  \
+    | from **Iterations** select **Bonding Energy**
+
+You will find
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_7.png
+  :width: 80%
+  :align: center
+
+We will report the Final Bond Energy, i.e. -25.1274 eV. You also can see that the Dipole Moment is zero as expected for a stable surface.
+
+Repeat this calculation for up to 12 layers and create a table. Conveniently, each layer comprises one formula unit, i.e. one Mg :sup:`2+` and one O :sup:`2-` atom.
+
+.. csv-table:: 
+   :header: "Layers", "Binding Energy [eV]", "Binding Energy/formula unit [eV]"
+
+    2, -25.1274, -12.56
+    3, -38.3972,-12.80
+    4,-51.6631,-12.92
+    5,-64.9645,-12.99
+    6,-78.2166,-13.04
+    7,-91.5039,-13.07
+    8,-104.7704,-13.10
+    9,-118.0304,-13.11
+   10,-131.3329,-13.13
+   11,-144.5740,-13.14
+   12,-157.8464,-13.15
+
+You may also want to produce a graph:
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_9.png
+  :width: 90%
+  :align: center
+
+We can see from 8-9 layers onwards the binding energy is changing less and less, so it would be good to work with at least 8 layers. 
+However, bear in mind that electronic calculations are expensive and an adsorption study will need a wider surface area, as we will discuss shortly.
+Thus, now it is time to rethink your methods and make sure you have access to a HPC or you decide to use DFTB or a forcefield method. 
+We will work with four layers to speed up the calculation time for this tutorial.
+
+What could possibly go wrong?
+*****************************
+
+Admittedly, MgO offers with [100] a well-behaved surface. With other surfaces you have to take care with how you cleave the bulk to not end up with a dipole moment:
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_10.png
+  :width: 80%
+  :align: center
+
+  Some Ionic surfaces by `P.W. Tasker <https://iopscience.iop.org/article/10.1088/0022-3719/12/22/036>`__ .
+
+Surfaces may have defects or are doped with other ions. In this case you cleave the surface and use the ADF GUI tools to remove or add atoms to build these defects. 
+Be aware that everything you do to one surface is replicated due to periodic boundary conditions. You may want to use large enough supercells so that defects are better spaced out.
+
+When you cleave surfaces like SiO2 or Si or Ge, the top layer has atom that lose their coordination because due to cleaving some neighboring atoms are removed. These surfaces have the ability to “self-heal” or reconstruct. 
+In this case you have to optimize the surface and mimic this reconstruction of the top layer. The bottom layer can be saturated with hydrogen atoms or OH groups in SiO2. 
+This stabilizes the bottom surface by keeping the coordination intact. A good study on ZnO can be found `here <https://onlinelibrary.wiley.com/doi/full/10.1002/jcc.21051>`__ .
+
+The adsorption of CO2
+*********************
+
+Now we want to adsorb CO2 on the MgO surface. We need a surface area wide enough to make sure the adsorbent has no interactions with its mirror images. 
+The distance between molecules in periodic cells should be 8-10 Å.
+
+Constructing the inputs
+***********************
+
+Use the MgO calculation with 4 layers and open it.
+
+.. rst-class:: steps
+
+  \
+    | select the **Edit → Crystal → Generate Super Cell**
+    | go for a ``4`` by ``4`` cell as shown below, and press **ok**.
+
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_11.png
+  :width: 40%
+  :align: center
+
+We have now a bigger slab ready for us putting the CO2 molecule on.
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_12.png
+  :width: 70%
+  :align: center
+
+What you need to do next is consider in how many ways can you align a molecule of CO2 along the MgO surface to create different motifs. 
+We found seven.
+
+.. rst-class:: steps
+
+  \
+    | **Draw** a molecule of CO2
+    | move the whole molecule (hold down the right mouse button) to replicate the following scenarios:
+
+The CO2 molecule should hover about 2-2.5 Å above the surface (thus, not bonding distance but in the van der Waals catchment area).
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_13.png
+  :width: 100%
+  :align: center
+
+Setting up the calculations
+***************************
+
+We will optimize the first two layers of the slab and the CO2 molecule and we keep the bottom two layers constraint. 
+This mimics very well what happens on a real surface as only the top layers will react to the adsorbent whereas the bottom layers remain unaffected.
+
+.. rst-class:: steps
+
+  \
+    | from the Panel bar choose **Model → Geometry Constraints and PES Scan**
+    | select the bottom two layers of your surface using **SHIFT + left mouse button**
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_14.png
+  :width: 80%
+  :align: center 
+
+.. rst-class:: steps
+
+  \
+    | Press the **+** next to selected atoms (fix positions)
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_15.png
+  :width: 80%
+  :align: center 
+
+.. rst-class:: steps
+
+  \
+    | in the main panel
+    | change the calculation setup (XC functional, basis set, frozen core and numerical quality) as follows
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_16.png
+  :width: 70%
+  :align: center 
+
+The results
+***********
+
+Motif by motif look if the calculations converged and if the position of the CO2 molecule changed. 
+If the latter is the case, you know that your starting position was not favorable, i.e. the repulsive interactions outweighed the attractive ones. 
+See beyond a discussion of all results and suggestions with what structures to proceed.
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_17.png
+  :width: 100%
+  :align: center 
+
+Thus, we will move motifs 1,4,5, and 6 to the next steps.
+
+What to do if my adsorbent is not as simple as CO2?
+***************************************************
+
+CO2 is very simple to place on an MgO surface as there are not many options. 
+A molecule of glycine would have already many more options as you have a COOH, a CH2 and an NH2 to think about. 
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_18.png
+  :width: 40%
+  :align: center 
+
+As you can see, the more functional groups, the more flexible, the bigger, … the numbers of interaction pattern get out of hand.
+In this case one could follow the ReaxFF tutorial, :ref:`reaxff_water_on_alu`, but use only one molecule of adsorbent. 
+The idea is to perform a molecular dynamic run and check how many motifs, i.e. different alignments of the adsorbent to the surface, you find most often. 
+Extract their geometries and feed into BAND or DFTB and use them as inputs for the workflow discussed in this tutorial. 
+
+The interaction energy
+**********************
+
+To find out which of the alignment of CO2 on the surface is the most stable one we have to calculate the interaction energy. 
+We want to use energy decomposition analysis (EDA), which is an established method for molecules and has been implemented into ADF Band for application in extended systems such as surfaces and solids, where it is referred to as periodic EDA (PEDA).
+
+Setting up the fragments
+************************
+
+To run the PEDA for the adsorption of CO2 on MgO(100), you have to define fragments. 
+BAND will run three calculations: one on the surface, one on the CO2 molecule and one on the surface and the CO2 together. 
+For each of the motifs 1,4,5 and 6 open the optimized structure and follow the workflow described below. 
+
+Switch to the Regions menu. 
+
+.. rst-class:: steps
+
+  \
+    | from the Main tab chose
+    | **Model → Regions**
+    | **Tick the boxes** next to **MgO_NaCl** and **Carbondioxide**.
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_19.png
+  :width: 50%
+  :align: center 
+
+.. Note::
+   Our way of constructing the surfaces and adding the CO2 molecule made the GUI recognize the regions already. In case you do not see this do the following.
+   Tick the MgO_NaCl fragment and add a new region by clicking on the ‘+’ button (or Ctrl+G). Select the CO2 fragment and add a new region by clicking on the ‘+’ button (or Ctrl+G).
+
+You need to remove the constraints:
+
+.. rst-class:: steps
+
+  \
+    | from the Panel bar choose **Model → Geometry Constraints and PES Scan**
+    | Press the **-** next to selected atoms (fix positions) to remove the constraints.
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_20.png
+  :width: 90%
+  :align: center 
+
+Setting up the calculation
+**************************
+
+Go to the Main menu,
+
+.. rst-class:: steps
+
+  \
+    | in the Main panel 
+    | change **Task → Single Point**
+
+To enable the PEDA you just have to enable ADF to use the fragments:
+
+.. rst-class:: steps
+
+  \
+    | go to the Fragments menu:  
+    | **MultiLevel → Fragments**
+    | **check** the **Use fragments** box.
+    | **Run** all four calculations.
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_21.png
+  :width: 90%
+  :align: center 
+
+The interaction energy
+**********************
+
+After the calculations of the fragments and the PEDA finished you can look for the PEDA results. 
+Therefore, open the “Output” using the SCM dropdown menu.
+
+.. rst-class:: steps
+
+  \
+    | from |SCMMenu| select **Output**
+
+You can move to the ‘PEDA Energy Terms’ via the corresponding button in the ‘Properties’ drop-down menu.
+
+.. rst-class:: steps
+
+  \
+    | **Properties → PEDA Energy Terms**
+
+You will find
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_23.png
+  :width: 90%
+  :align: center 
+
+“E_int” is the interaction energy between two fragments A and B in a system AB, whereby A = Si-Surface and B=THF in our case. 
+E_int is the sum of contributions from Pauli repulsion (E_Pauli), dispersion (E_disp), electrostatics (E_elstat) and orbital interaction (E_orb).
+
+.. csv-table:: 
+   :header: "Case", "E_int[eV]"
+
+    1, -3.922
+    4, -0.570
+    5, -0.061
+    6, -0.207
+
+Case 1 has the strongest interaction energy as this is the only alignment where all three atoms of the CO2 molecule are in perfect proximity to the atoms of the MgO surface.
+
+.. figure:: ../Images/advanced/AMS_Adsorption_MgO_24.png
+  :width: 60%
+  :align: center

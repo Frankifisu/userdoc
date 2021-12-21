@@ -1,0 +1,139 @@
+#! /bin/sh
+
+
+# Application of the Spin-Orbit relativistic option (using double-group
+# symmetry) to TlH with a detailed analysis of the spinors in terms of SFOs
+# (Symmetrized Fragment Orbitals).
+
+# In order to get the population analysis, one should have one scalar
+# relativistic fragment, which is the whole molecule. The SFOs in this case are
+# the scalar relativistic orbitals, which are already orthonormal, because one
+# has only one fragment which is the whole molecule.
+
+AMS_JOBNAME=Scalar $AMSBIN/ams <<eor
+System
+  atoms
+     Tl       0.0             0.0             0.0
+     H        0.0             0.0             1.870
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TlH, scalar relativistic zora
+  beckegrid
+    quality good
+  end
+  eprint
+    sfo eig ovl
+  end
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  print SFO
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga BP86
+  end
+EndEngine
+
+eor
+
+# In order to get the population analysis, one should have one scalar
+# relativistic fragment, which is the whole molecule, which is TlH in this case.
+
+AMS_JOBNAME=SpinOrbit $AMSBIN/ams <<eor
+System
+  atoms
+     Tl       0.0             0.0             0.0    adf.f=TlH
+     H        0.0             0.0             1.870  adf.f=TlH
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TlH from fragment TlH,  with SpinOrbit coupling
+  beckegrid
+    quality good
+  end
+  eprint
+    sfo eig ovl
+  end
+  fragments
+     TlH Scalar.results/adf.rkf
+  end
+  print SFO
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  xc
+    gga BP86
+  end
+EndEngine
+
+eor
+
+# The output gives something like:
+# ================================================================================
+# 
+#  =======================
+#  Double group symmetry :  *   J1/2  *
+#  =======================
+#                                        ===  J1/2:1 ===
+#  Spinors expanded in SFOs
+# Spinor:             21               22               23               24
+#  occup:            1.00             1.00             1.00             0.00
+#  ------            ----             ----             ----             ----
+#  SFO SIGMA
+#    13.alpha:   0.7614+0.0000i   0.0096+0.0000i   0.0052+0.0000i  -0.0006+0.0000i
+#    14.alpha:   0.0154+0.0000i  -0.9996+0.0000i   0.0208+0.0000i  -0.0077+0.0000i
+#    15.alpha:  -0.0146+0.0000i   0.0185+0.0000i   0.9849+0.0000i   0.1625+0.0000i
+#  SFO PI:x
+#     8.beta :   0.4578+0.0000i   0.0091+0.0000i   0.0112+0.0000i   0.0030+0.0000i
+#     9.beta :   0.0005+0.0000i  -0.0074+0.0000i  -0.1119+0.0000i   0.6910+0.0000i
+#  SFO PI:y
+#     8.beta :   0.0000+0.4578i   0.0000+0.0091i   0.0000+0.0112i   0.0000+0.0030i
+#     9.beta :   0.0000+0.0005i   0.0000-0.0074i   0.0000-0.1119i   0.0000+0.6910i
+#
+# ================================================================================
+
+# Left out are a lot of small numbers. The meaning is that a spinor of J_z=1/2
+# symmetry can have SIGMA and PI character, for example, the 21st spinor with
+# occupation number 1.0, is approximately (21 J_z=1/2) = 0.76 (13 SIGMA alpha) +
+# 0.46 (8 PI:x beta) + i 0.46 (8 PI:y beta)
+
+# Next in the SFO contributions per spinor the real and imaginary spin alpha
+# part and real and imaginary spin beta part are all summed together to give a
+# percentage of a certain SFO. are summed. For example the 21st spinor has
+# almost 60% (13 SIGMA) character.
+
+# ======================================
+#
+# SFO contributions (%) per spinor
+# Spinor:      21     22     23     24
+
+# occup:      1.00   1.00   1.00   0.00
+# ------      ----   ----   ----   ----
+
+# SFO SIGMA
+#     13:    57.97   0.01   0.00   0.00
+#     14:     0.02  99.92   0.04   0.01
+#     15:     0.02   0.03  97.01   2.64
+# SFO PI:x
+#      8:    20.96   0.01   0.01   0.00
+#      9:     0.00   0.01   1.25  47.75
+# SFO PI:y
+#      8:    20.96   0.01   0.01   0.00
+#      9:     0.00   0.01   1.25  47.75
+#
+# ======================================
+
+

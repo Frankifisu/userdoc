@@ -1,0 +1,177 @@
+#! /bin/sh
+
+# This example demonstrates the usage of the AMS vibrational analysis tools
+# on the cyclohexanone molecule.
+
+
+# 1. Optimization with DFT
+# ------------------------
+
+AMS_JOBNAME=DFT $AMSBIN/ams << EOF
+
+   System
+      Atoms
+        C         0.000000    0.000000    0.000000
+        C         0.978606    1.950589   -1.251328
+        C         0.978606    1.950589    1.251328
+        C         0.812569    2.806732    0.000000
+        C        -0.039622    0.802151    1.272926
+        C        -0.039622    0.802151   -1.272926
+        O         0.062619   -1.251283    0.000000
+        H         0.123306    0.119861    2.122758
+        H        -1.060012    1.229063    1.372200
+        H         0.871524    2.560541    2.167037
+        H         2.001065    1.521810    1.263746
+        H        -0.196785    3.268312    0.000000
+        H         1.549313    3.631809    0.000000
+        H         0.871524    2.560541   -2.167037
+        H         2.001065    1.521810   -1.263746
+        H         0.123306    0.119861   -2.122758
+        H        -1.060012    1.229063   -1.372200
+      End
+   End
+
+   Task GeometryOptimization
+
+   GeometryOptimization
+      Convergence Gradients=1.0e-4
+   End
+
+   Engine BAND
+   EndEngine
+
+EOF
+
+
+# 2. Obtain DFTB hessian and modes as preconditioner and guess
+# ------------------------------------------------------------
+
+AMS_JOBNAME=DFTB $AMSBIN/ams << EOF
+
+   LoadSystem
+      File DFT.results/ams.rkf
+   End
+
+   Task GeometryOptimization
+
+   GeometryOptimization
+      Convergence Gradients=1.0e-4
+   End
+
+   Properties
+      NormalModes Yes
+   End
+
+   Engine DFTB
+      Model DFTB3
+      ResourcesDir DFTB.org/3ob-freq-1-2
+   EndEngine
+
+EOF
+
+
+# 3. ModeScanning of DFTB C=O stretch mode with DFT
+# -------------------------------------------------
+
+AMS_JOBNAME=ModeScanning $AMSBIN/ams << EOF
+
+   LoadSystem
+      File DFTB.results/ams.rkf
+   End
+   LoadEngine DFT.results/band.rkf
+
+   Task VibrationalAnalysis
+
+   VibrationalAnalysis
+      Type ModeScanning
+      NormalModes
+         ModeFile DFTB.results/dftb.rkf
+         ModeSelect
+            HighIR 1 # This should select the C=O stretch
+         End
+      End
+   End
+
+EOF
+
+
+# 4. Mode tracking with DFT starting from DFTB C=O stretch mode
+# -------------------------------------------------------------
+
+AMS_JOBNAME=ModeTracking $AMSBIN/ams << EOF
+
+   LoadSystem
+      File DFT.results/ams.rkf
+   End
+   LoadEngine DFT.results/band.rkf
+
+   Task VibrationalAnalysis
+
+   VibrationalAnalysis
+      Type ModeTracking
+      ModeTracking
+         HessianGuess File
+         HessianPath DFTB.results
+      End
+      NormalModes
+         ModeInputFormat File      
+         ModeFile DFTB.results/dftb.rkf
+         ModeSelect
+            HighIR 1 # This should select the C=O stretch
+         End
+      End
+   End
+
+EOF
+
+
+# 5. Mode tracking with DFT starting from a pure C=O stretch
+# ----------------------------------------------------------
+
+AMS_JOBNAME=ModeTracking_COStretch $AMSBIN/ams << EOF
+
+   LoadSystem
+      File DFT.results/ams.rkf
+   End
+   LoadEngine DFT.results/band.rkf
+
+   Task VibrationalAnalysis
+
+   VibrationalAnalysis
+      Type ModeTracking
+      NormalModes
+         ModeInputFormat Inline
+         ModeInline
+            0.0  0.0  0.7071 # This is the C attached to the O
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0 -0.7071 # This is the O
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+            0.0  0.0  0.0
+         End
+         ModeSelect
+            HighIR 1 # This should select the C=O stretch
+         End
+      End
+      ModeTracking
+         HessianGuess File
+         HessianPath DFTB.results
+         TrackingMethod OverlapPrevious
+                      #     ^-- Probably better than the default.
+                      #         Our initial mode is not particularly close yet ...         
+      End
+   End
+
+EOF
+

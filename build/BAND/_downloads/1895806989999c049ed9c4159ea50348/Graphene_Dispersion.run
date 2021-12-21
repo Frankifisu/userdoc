@@ -1,0 +1,100 @@
+#! /bin/sh
+
+# A normal GGA would give only negligible interaction between two graphene
+# sheets.
+
+# Use the dispersion option in the XC key block.
+
+# In the first run we use BP86-D, in the second BLYP-D3 and in the third run
+# BLYP-D3(BJ).
+
+# == First run: dispersion default ==
+
+AMS_JOBNAME=default $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   GeometryFile $AMSHOME/examples/band/Graphene_Dispersion/Graphene_double_layer.xyz
+End
+
+Engine Band 
+   XC
+      gga scf bp86
+      dispersion default
+   End
+
+   NumericalQuality Basic
+
+   Basis
+      Type TZP
+      Core Large
+   End
+EndEngine
+eor
+
+# == Second run: dispersion Grimme3 ==
+
+AMS_JOBNAME=grimme3 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   GeometryFile $AMSHOME/examples/band/Graphene_Dispersion/Graphene_double_layer.xyz
+End
+
+Properties
+  Gradients True
+End
+
+Engine Band 
+   Output
+      Print Section=Properties Level=Detail
+   End
+
+   XC
+      gga scf blyp
+      dispersion Grimme3
+   end
+
+   NumericalQuality Basic
+
+   Basis
+      Type TZP
+      Core Large
+   End
+EndEngine
+eor
+
+# == Third run: dispersion Grimme3 bjdamp ==
+
+AMS_JOBNAME=grimme3_bjdamp $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   GeometryFile $AMSHOME/examples/band/Graphene_Dispersion/Graphene_double_layer.xyz
+End
+
+Properties
+  Gradients True
+End
+
+Engine Band 
+   Output
+      Print Section=Properties Level=Detail
+   End
+
+   XC
+      gga scf blyp
+      dispersion Grimme3 bjdamp
+   end
+
+   NumericalQuality Basic
+
+   Basis
+      Type TZP
+      Core Large
+   End
+EndEngine
+eor

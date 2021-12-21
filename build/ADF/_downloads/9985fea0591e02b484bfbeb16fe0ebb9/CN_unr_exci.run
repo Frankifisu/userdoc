@@ -1,0 +1,115 @@
+#!/bin/sh
+
+
+# Calculation of the excitation energies of the open shell molecule CN
+
+# In this example, the lowest 20 excitation energies of CN are calculated in a
+# spin-unrestricted TDDFT calculation. In the MO -> MO transitions part for the
+# excitations of the output file, the spin of each molecular orbitals are also
+# specified to help assign the spin state of the excited states. The transitions
+# are always from alpha spin-orbital to alpha spin-orbital or from beta spin-
+# orbital to beta spin-orbital.
+
+AMS_JOBNAME=exci $AMSBIN/ams <<eor
+System
+  atoms
+     C  0.0000  0.0000  0.0000
+     N  0.0000  0.0000  1.1718
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title excitation energies of CN
+  excitations
+    lowest 20
+    nto
+    sfoanalysis
+  end
+  basis
+    type AUG/ADZP
+  end
+  spinpolarization 1
+  unrestricted
+EndEngine
+
+eor
+
+
+# Next the same example for CN is given with the Tamm-Dancoff approximation
+# (TDA) approximation (including TDA in the input). Due to this approximation
+# the calculated excitation energies will not be exactly the same as in the
+# first example.
+
+AMS_JOBNAME=exci_tda $AMSBIN/ams <<eor
+System
+  atoms
+     C  0.0000  0.0000  0.0000
+     N  0.0000  0.0000  1.1718
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title excitation energies (TDA) of CN
+  excitations
+    lowest 20
+    nto
+    sfoanalysis
+  end
+  basis
+    type AUG/ADZP
+  end
+  spinpolarization 1
+  tda
+  unrestricted
+EndEngine
+
+eor
+
+
+# Note that the basis set is still far from complete, the ATZ2P is better. For
+# accuracy reasons one may need to increase the numerical quality. If one uses
+# the augmented basis sets for accuracy reasons one could use NumericalQuality
+# Good.
+
+# The third calculation is the calculation of spin-flip excitation energies for
+# CN. Again these energies will not be exactly the same as in the first example.
+# For open-shell molecules, spin-flip transition can result in transition to the
+# ground state with a different S_z value, while the symmetry of the transition
+# density is A1 (Sigma+ for linear molecules). The excitation energy of this
+# transition should be zero and this can be used to test the reliability of
+# spin-flip TDDFT. Indeed the calculation of the spin-flip excitation energies
+# of CN shows one value which is close to zero and has a transition density of
+# Sigma+ symmetry.
+
+
+AMS_JOBNAME=exci_tda_spinflip $AMSBIN/ams <<eor
+System
+  atoms
+     C  .0000  .0000  .0000
+     N  .0000  .0000 1.1718
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title spin-flip excitation energies (TDA) of CN
+  excitations
+    lowest 20
+    nto
+    sfoanalysis
+  end
+  basis
+    type AUG/ADZP
+  end
+  sftddft
+  spinpolarization 1
+  tda
+  unrestricted
+EndEngine
+
+eor

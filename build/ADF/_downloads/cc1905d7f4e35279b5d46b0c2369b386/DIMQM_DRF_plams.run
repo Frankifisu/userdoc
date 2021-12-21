@@ -1,0 +1,78 @@
+#! /bin/sh
+
+# The Discrete Reaction Field (DRF) method is a polarizable QM/MM method. For
+# each type of solvent molecule,the DRF method requires two parameters, atomic
+# polarizabilities and atomic charges. The main program reads the QM and DRF
+# regions, splits the DRF region into unique molecules, computes the atomic
+# charges of a single DRF molecule for each unique type, assigns the atomic
+# charges and atomic polarizabilities for all the DRF molecules and defines the
+# QM_DRF settings. This simple script works for initial configurations that come
+# from a MD  simulation, for example.
+
+# In this example a python script is used for DRF calculations, that uses PLAMS
+# (Python Library for Automating Molecular Simulation). PLAMS takes care of
+# input preparation, job execution, file management and output processing, see
+# also the PLAMS documentation in the Scripting manual. The DRF python script
+# has default settings which can be easily modified if this is required. In the
+# simplest case the user just needs to provide the QM and DRF regions (in xyz
+# format). Typically the user may also want to choose the functional, basis set
+# and numerical quality for the QM and DRF region. By default, atomic charges
+# that are used for the DRF are computed with LDA functional, DZP basis set and
+# normal numerical quality. Also by default, atomic polarizabilities (computed
+# with the Thole's model) are taken from an inner database for the elements
+# H, C, N, O, F, S, Cl, Br, and I [J.Phys.Chem.A 102 (1998) 2399].
+# For the other elements up to U (Z=92) the inner database also include atomic
+# polarizabilities, however, those are not optimized and not tested,
+# and no reference paper exists.
+#
+# The main program defines a series of functions
+# for general settings for a DRF calculation, reading QM and DRF regions,
+# classifying DRF molecules of the same type (first by formula and then for
+# configurations for a given formula), computing, for a given settings, the
+# charges for a single molecule of unique DRF type and assigning the atomic
+# charges for the rest of molecules that belong to a given DRF type (preserving
+# atom orders).
+
+# The DRF python script DIMQM_DRF_plams.py users will probably want to change or
+# extend:
+
+# ==============================================================================
+# from DIMQM_DRF_plams_module import full_DIMQM_DRF
+
+# qm_region_filename = 'qm.xyz'
+# drf_region_filename = 'drf.xyz'
+
+# settings.input.AMS.Task = 'SinglePoint'
+# settings.input.ADF.Basis.Type = 'TZP'
+# settings.input.ADF.XC['_1'] = 'GGA BLYP'
+# settings.input.ADF.NumericalQuality = 'Normal'
+
+# full_DIMQM_DRF(qm_region_filename, drf_region_filename, 
+#                settings, drf_charges_type='MDC-q charges', 
+#                drf_fragment_settings=None)
+# ==============================================================================
+
+
+# This DRF python script DIMQM_DRF_plams.py imports DIMQM_DRF_plams_module.py,
+# which contains a script full_DIMQM_DRF that splits the DRF region into unique
+# molecules, computes the atomic charges of a single DRF molecule for each
+# unique type, assignes the atomic charges and atomic polarizabilities for all
+# the DRF molecules and defines the QM_DRF settings.
+
+# The run script DIMQM_DRF_plams.run contains an example, how one could use the
+# DIMQM_DRF_plams.py script. In this simple example both the QM and DRF region
+# consists of a Formic acid molecule.
+
+cp $AMSHOME/examples/adf/DIMQM_DRF_plams/formic_acid_qm.xyz qm.xyz
+cp $AMSHOME/examples/adf/DIMQM_DRF_plams/formic_acid_drf.xyz drf.xyz
+cp $AMSHOME/examples/adf/DIMQM_DRF_plams/DIMQM_DRF_plams_module.py .
+cp $AMSHOME/examples/adf/DIMQM_DRF_plams/DIMQM_DRF_plams.py .
+
+$AMSBIN/plams DIMQM_DRF_plams.py
+
+# Every time you run a PLAMS script, a uniquely named working directory is
+# created (plams.*****). This folder will contain one subdirectory per job. Each
+# job directory contains the job's input and results files. In this case there
+# will be 1 directory for the ADF calculation of the atomic charges that are
+# used for DRF. Next there is a directory which calculates the full system.
+

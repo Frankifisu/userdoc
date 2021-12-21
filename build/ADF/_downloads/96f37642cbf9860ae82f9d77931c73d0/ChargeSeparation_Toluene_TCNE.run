@@ -1,0 +1,709 @@
+#!/bin/sh
+
+
+# Charge Recombination Calculation of Toluene and TCNE
+# tol + TCNE ==> tol+ + TCNE-	
+# aimed at:
+
+# 1) calculate site energies and couplings of fde-derived neutral states 
+#    (Diabat 1) and charge-localized states (Diabat 2) 
+# 2) calculate the charge-transfer excitation energy from a two-state model that
+#    includes the two Diabatic states involved in the calculation
+
+# First the isolated neutral fragments are obtained. Symmetry NOSYM is used.
+# Resulting files: t21.iso.rho1 and t21.iso.rho2. Next in the first FDE
+# calculations: state Toluene (neutral) and TCNE (neutral), resulting files:
+# fragA1.t21 and fragA2.t21. The freeze and thaw cycles are done manually since
+# open-shell fragments were used. Next in the second FDE calculations: state
+# Toluene+ and TCNE-, resulting files fragB1.t21 and fragB2.t21. Again freeze
+# and thaw cycles are done manually since open-shell fragments were used.
+
+# In the final charge separation calculation the ELECTRONTRANSFER block keyword
+# The program must be executed in serial mode.
+
+#  NOTE: For production-quality results use a larger basis set 
+
+
+# ==================================================
+#           OBTAIN ISOLATED FRAGMENTS
+# ==================================================
+
+AMS_JOBNAME=Iso1 $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.07097000000000     -2.32168000000000      0.00000000000000
+     C        -1.39599000000000     -1.69511000000000      1.20863700000000
+     C        -1.39599000000000     -1.69511000000000     -1.20864000000000
+     H        -0.57394000000000     -3.29447000000000      0.00000000000000
+     C        -2.04242000000000     -0.45596000000000      1.20579700000000
+     H        -1.14539000000000     -2.17411000000000      2.15797500000000
+     C        -2.04242000000000     -0.45596000000000     -1.20580000000000
+     H        -1.14539000000000     -2.17411000000000     -2.15798000000000
+     C        -2.38186000000000      0.18220800000000      0.00000000000000
+     H        -2.29006000000000      0.02569300000000      2.15529900000000
+     H        -2.29006000000000      0.02569300000000     -2.15530000000000
+     C        -3.12057000000000      1.49908200000000      0.00000000000000
+     H        -2.88337000000000      2.09962700000000      0.89190300000000
+     H        -2.88337000000000      2.09962700000000     -0.89190000000000
+     H        -4.21273000000000      1.33541500000000      0.00000000000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  basis
+    core none
+    type DZ
+  end
+  noprint BAS FUNCTIONS
+  symmetry NOSYM
+  title Isolated Toluene
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Iso1.results/adf.rkf t21.iso.rho1
+
+AMS_JOBNAME=Iso2 $AMSBIN/ams <<eor
+System
+  atoms
+     C         1.83245600000000     -0.14587000000000      0.00000000000000
+     C         1.20994900000000      1.07690800000000      0.00000000000000
+     C         2.18809800000000     -0.80630000000000     -1.21971000000000
+     C         2.18809800000000     -0.80630000000000      1.21971000000000
+     C         0.88208300000000      1.75218800000000     -1.21935000000000
+     C         0.88208300000000      1.75218800000000      1.21934500000000
+     N         2.50290100000000     -1.35237000000000     -2.19775000000000
+     N         2.50290100000000     -1.35237000000000      2.19774900000000
+     N         0.61754300000000      2.32819700000000     -2.19523000000000
+     N         0.61754300000000      2.32819700000000      2.19522600000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  basis
+    core none
+    type DZ
+  end
+  noprint BAS FUNCTIONS
+  symmetry NOSYM
+  title Isolated TCNE
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Iso2.results/adf.rkf t21.iso.rho2
+
+# ==============================================================
+#   FIRST FDE CALCULATION: STATE tol(neutral) and TCNE (neutral)
+#   note: the freeze and thaw is done manually
+#         as we have open-shell fragments
+# ==============================================================
+
+AMS_JOBNAME=Emb1 $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.07097000000000     -2.32168000000000      0.00000000000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000      1.20863700000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000     -1.20864000000000    adf.f=rho1
+     H        -0.57394000000000     -3.29447000000000      0.00000000000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000      1.20579700000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000      2.15797500000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000     -1.20580000000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000     -2.15798000000000    adf.f=rho1
+     C        -2.38186000000000      0.18220800000000      0.00000000000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000      2.15529900000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000     -2.15530000000000    adf.f=rho1
+     C        -3.12057000000000      1.49908200000000      0.00000000000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000      0.89190300000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000     -0.89190000000000    adf.f=rho1
+     H        -4.21273000000000      1.33541500000000      0.00000000000000    adf.f=rho1
+     C         1.83245600000000     -0.14587000000000      0.00000000000000    adf.f=rho2
+     C         1.20994900000000      1.07690800000000      0.00000000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000     -1.21971000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000      1.21971000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000     -1.21935000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000      1.21934500000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000     -2.19775000000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000      2.19774900000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000     -2.19523000000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000      2.19522600000000    adf.f=rho2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    pw91k
+    xcnadd PW91
+  end
+  fragments
+     rho1 t21.iso.rho1
+     rho2 t21.iso.rho2 type=fde
+  end
+  noprint BAS FUNCTIONS
+  spinpolarization 0
+  symmetry NOSYM
+  title tol(neutral), First freeze--and--thaw cycle
+  unrestricted
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Emb1.results/adf.rkf t21.emb.rho1
+
+AMS_JOBNAME=Emb2 $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.07097000000000     -2.32168000000000      0.00000000000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000      1.20863700000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000     -1.20864000000000    adf.f=rho1
+     H        -0.57394000000000     -3.29447000000000      0.00000000000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000      1.20579700000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000      2.15797500000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000     -1.20580000000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000     -2.15798000000000    adf.f=rho1
+     C        -2.38186000000000      0.18220800000000      0.00000000000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000      2.15529900000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000     -2.15530000000000    adf.f=rho1
+     C        -3.12057000000000      1.49908200000000      0.00000000000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000      0.89190300000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000     -0.89190000000000    adf.f=rho1
+     H        -4.21273000000000      1.33541500000000      0.00000000000000    adf.f=rho1
+     C         1.83245600000000     -0.14587000000000      0.00000000000000    adf.f=rho2
+     C         1.20994900000000      1.07690800000000      0.00000000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000     -1.21971000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000      1.21971000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000     -1.21935000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000      1.21934500000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000     -2.19775000000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000      2.19774900000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000     -2.19523000000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000      2.19522600000000    adf.f=rho2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    pw91k
+    xcnadd PW91
+  end
+  fragments
+     rho1 t21.emb.rho1 subfrag=active type=fde
+     rho2 t21.iso.rho2
+  end
+  noprint BAS FUNCTIONS
+  spinpolarization 0
+  symmetry NOSYM
+  title TCNE(neutral), First freeze--and--thaw cycle
+  unrestricted
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Emb2.results/adf.rkf t21.emb.rho2
+
+
+it=1
+while [ $it -le 2 ]; do
+
+AMS_JOBNAME=Emb1.$it $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.07097000000000     -2.32168000000000      0.00000000000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000      1.20863700000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000     -1.20864000000000    adf.f=rho1
+     H        -0.57394000000000     -3.29447000000000      0.00000000000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000      1.20579700000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000      2.15797500000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000     -1.20580000000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000     -2.15798000000000    adf.f=rho1
+     C        -2.38186000000000      0.18220800000000      0.00000000000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000      2.15529900000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000     -2.15530000000000    adf.f=rho1
+     C        -3.12057000000000      1.49908200000000      0.00000000000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000      0.89190300000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000     -0.89190000000000    adf.f=rho1
+     H        -4.21273000000000      1.33541500000000      0.00000000000000    adf.f=rho1
+     C         1.83245600000000     -0.14587000000000      0.00000000000000    adf.f=rho2
+     C         1.20994900000000      1.07690800000000      0.00000000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000     -1.21971000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000      1.21971000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000     -1.21935000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000      1.21934500000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000     -2.19775000000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000      2.19774900000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000     -2.19523000000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000      2.19522600000000    adf.f=rho2
+  end
+end
+
+Task SinglePoint
+
+EngineRestart t21.emb.rho1
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    pw91k
+    xcnadd PW91
+  end
+  fragments
+     rho1 t21.iso.rho1
+     rho2 t21.emb.rho2 subfrag=active type=fde
+  end
+  noprint BAS FUNCTIONS
+  spinpolarization 0
+  symmetry NOSYM
+  title tol(neutral), Relaxation cycles
+  unrestricted
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Emb1.$it.results/adf.rkf t21.emb.rho1
+
+AMS_JOBNAME=Emb2.$it $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.07097000000000     -2.32168000000000      0.00000000000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000      1.20863700000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000     -1.20864000000000    adf.f=rho1
+     H        -0.57394000000000     -3.29447000000000      0.00000000000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000      1.20579700000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000      2.15797500000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000     -1.20580000000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000     -2.15798000000000    adf.f=rho1
+     C        -2.38186000000000      0.18220800000000      0.00000000000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000      2.15529900000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000     -2.15530000000000    adf.f=rho1
+     C        -3.12057000000000      1.49908200000000      0.00000000000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000      0.89190300000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000     -0.89190000000000    adf.f=rho1
+     H        -4.21273000000000      1.33541500000000      0.00000000000000    adf.f=rho1
+     C         1.83245600000000     -0.14587000000000      0.00000000000000    adf.f=rho2
+     C         1.20994900000000      1.07690800000000      0.00000000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000     -1.21971000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000      1.21971000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000     -1.21935000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000      1.21934500000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000     -2.19775000000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000      2.19774900000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000     -2.19523000000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000      2.19522600000000    adf.f=rho2
+  end
+end
+
+Task SinglePoint
+
+EngineRestart t21.emb.rho2
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    pw91k
+    xcnadd PW91
+  end
+  fragments
+     rho1 t21.emb.rho1 subfrag=active type=fde
+     rho2 t21.iso.rho2
+  end
+  noprint BAS FUNCTIONS
+  spinpolarization 0
+  symmetry NOSYM
+  title TCNE(neutral), Relaxation cycles
+  unrestricted
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Emb2.$it.results/adf.rkf t21.emb.rho2
+
+
+it=$(($it+1))
+done
+
+mv t21.emb.rho1 fragA1.t21
+mv t21.emb.rho2 fragA2.t21
+
+
+# ==================================================
+#   SECOND FDE CALCULATION: STATE tol+ TCNE-
+#   note: the freeze and thaw is done manually
+#         as we have open-shell fragments
+# ==================================================
+
+AMS_JOBNAME=Emb1p $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.07097000000000     -2.32168000000000      0.00000000000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000      1.20863700000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000     -1.20864000000000    adf.f=rho1
+     H        -0.57394000000000     -3.29447000000000      0.00000000000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000      1.20579700000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000      2.15797500000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000     -1.20580000000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000     -2.15798000000000    adf.f=rho1
+     C        -2.38186000000000      0.18220800000000      0.00000000000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000      2.15529900000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000     -2.15530000000000    adf.f=rho1
+     C        -3.12057000000000      1.49908200000000      0.00000000000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000      0.89190300000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000     -0.89190000000000    adf.f=rho1
+     H        -4.21273000000000      1.33541500000000      0.00000000000000    adf.f=rho1
+     C         1.83245600000000     -0.14587000000000      0.00000000000000    adf.f=rho2
+     C         1.20994900000000      1.07690800000000      0.00000000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000     -1.21971000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000      1.21971000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000     -1.21935000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000      1.21934500000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000     -2.19775000000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000      2.19774900000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000     -2.19523000000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000      2.19522600000000    adf.f=rho2
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    pw91k
+    xcnadd PW91
+  end
+  fragments
+     rho1 t21.iso.rho1
+     rho2 t21.iso.rho2 type=fde
+  end
+  noprint BAS FUNCTIONS
+  spinpolarization 1
+  symmetry NOSYM
+  title tol+, First freeze--and--thaw cycle
+  unrestricted
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Emb1p.results/adf.rkf t21.emb.rho1
+
+AMS_JOBNAME=Emb2p $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.07097000000000     -2.32168000000000      0.00000000000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000      1.20863700000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000     -1.20864000000000    adf.f=rho1
+     H        -0.57394000000000     -3.29447000000000      0.00000000000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000      1.20579700000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000      2.15797500000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000     -1.20580000000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000     -2.15798000000000    adf.f=rho1
+     C        -2.38186000000000      0.18220800000000      0.00000000000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000      2.15529900000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000     -2.15530000000000    adf.f=rho1
+     C        -3.12057000000000      1.49908200000000      0.00000000000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000      0.89190300000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000     -0.89190000000000    adf.f=rho1
+     H        -4.21273000000000      1.33541500000000      0.00000000000000    adf.f=rho1
+     C         1.83245600000000     -0.14587000000000      0.00000000000000    adf.f=rho2
+     C         1.20994900000000      1.07690800000000      0.00000000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000     -1.21971000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000      1.21971000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000     -1.21935000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000      1.21934500000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000     -2.19775000000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000      2.19774900000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000     -2.19523000000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000      2.19522600000000    adf.f=rho2
+  end
+  charge -1
+end
+
+Task SinglePoint
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    pw91k
+    xcnadd PW91
+  end
+  fragments
+     rho1 t21.emb.rho1 subfrag=active type=fde
+     rho2 t21.iso.rho2
+  end
+  noprint BAS FUNCTIONS
+  spinpolarization -1
+  symmetry NOSYM
+  title TCNE-, First freeze--and--thaw cycle
+  unrestricted
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Emb2p.results/adf.rkf t21.emb.rho2
+
+
+it=1
+while [  $it -le 2 ]; do
+
+AMS_JOBNAME=Emb1p.$it $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.07097000000000     -2.32168000000000      0.00000000000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000      1.20863700000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000     -1.20864000000000    adf.f=rho1
+     H        -0.57394000000000     -3.29447000000000      0.00000000000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000      1.20579700000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000      2.15797500000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000     -1.20580000000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000     -2.15798000000000    adf.f=rho1
+     C        -2.38186000000000      0.18220800000000      0.00000000000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000      2.15529900000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000     -2.15530000000000    adf.f=rho1
+     C        -3.12057000000000      1.49908200000000      0.00000000000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000      0.89190300000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000     -0.89190000000000    adf.f=rho1
+     H        -4.21273000000000      1.33541500000000      0.00000000000000    adf.f=rho1
+     C         1.83245600000000     -0.14587000000000      0.00000000000000    adf.f=rho2
+     C         1.20994900000000      1.07690800000000      0.00000000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000     -1.21971000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000      1.21971000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000     -1.21935000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000      1.21934500000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000     -2.19775000000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000      2.19774900000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000     -2.19523000000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000      2.19522600000000    adf.f=rho2
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+EngineRestart t21.emb.rho1
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    pw91k
+    xcnadd PW91
+  end
+  fragments
+     rho1 t21.iso.rho1
+     rho2 t21.emb.rho2 subfrag=active type=fde
+  end
+  noprint BAS FUNCTIONS
+  spinpolarization 1
+  symmetry NOSYM
+  title tol+, Relaxation cycles
+  unrestricted
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Emb1p.$it.results/adf.rkf t21.emb.rho1
+
+AMS_JOBNAME=Emb2p.$it $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.07097000000000     -2.32168000000000      0.00000000000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000      1.20863700000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000     -1.20864000000000    adf.f=rho1
+     H        -0.57394000000000     -3.29447000000000      0.00000000000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000      1.20579700000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000      2.15797500000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000     -1.20580000000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000     -2.15798000000000    adf.f=rho1
+     C        -2.38186000000000      0.18220800000000      0.00000000000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000      2.15529900000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000     -2.15530000000000    adf.f=rho1
+     C        -3.12057000000000      1.49908200000000      0.00000000000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000      0.89190300000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000     -0.89190000000000    adf.f=rho1
+     H        -4.21273000000000      1.33541500000000      0.00000000000000    adf.f=rho1
+     C         1.83245600000000     -0.14587000000000      0.00000000000000    adf.f=rho2
+     C         1.20994900000000      1.07690800000000      0.00000000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000     -1.21971000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000      1.21971000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000     -1.21935000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000      1.21934500000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000     -2.19775000000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000      2.19774900000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000     -2.19523000000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000      2.19522600000000    adf.f=rho2
+  end
+  charge -1
+end
+
+Task SinglePoint
+
+EngineRestart t21.emb.rho2
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    pw91k
+    xcnadd PW91
+  end
+  fragments
+     rho1 t21.emb.rho1 subfrag=active type=fde
+     rho2 t21.iso.rho2
+  end
+  noprint BAS FUNCTIONS
+  spinpolarization -1
+  symmetry NOSYM
+  title TCNE-, Relaxation cycles
+  unrestricted
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv Emb2p.$it.results/adf.rkf t21.emb.rho2
+
+
+it=$(($it+1))
+done
+
+
+mv t21.emb.rho1 fragB1.t21
+mv t21.emb.rho2 fragB2.t21
+
+
+# ======================================
+# Charge Separation calculation is next
+#
+# 1) note the ELECTRONTRANSFER block keyword
+# 2) the program must be execute in 
+#    serial mode (parallel mode not 
+#    supported)
+# 3) hybrids not supported
+# ======================================
+
+AMS_JOBNAME=ET $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.07097000000000     -2.32168000000000      0.00000000000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000      1.20863700000000    adf.f=rho1
+     C        -1.39599000000000     -1.69511000000000     -1.20864000000000    adf.f=rho1
+     H        -0.57394000000000     -3.29447000000000      0.00000000000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000      1.20579700000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000      2.15797500000000    adf.f=rho1
+     C        -2.04242000000000     -0.45596000000000     -1.20580000000000    adf.f=rho1
+     H        -1.14539000000000     -2.17411000000000     -2.15798000000000    adf.f=rho1
+     C        -2.38186000000000      0.18220800000000      0.00000000000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000      2.15529900000000    adf.f=rho1
+     H        -2.29006000000000      0.02569300000000     -2.15530000000000    adf.f=rho1
+     C        -3.12057000000000      1.49908200000000      0.00000000000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000      0.89190300000000    adf.f=rho1
+     H        -2.88337000000000      2.09962700000000     -0.89190000000000    adf.f=rho1
+     H        -4.21273000000000      1.33541500000000      0.00000000000000    adf.f=rho1
+     C         1.83245600000000     -0.14587000000000      0.00000000000000    adf.f=rho2
+     C         1.20994900000000      1.07690800000000      0.00000000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000     -1.21971000000000    adf.f=rho2
+     C         2.18809800000000     -0.80630000000000      1.21971000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000     -1.21935000000000    adf.f=rho2
+     C         0.88208300000000      1.75218800000000      1.21934500000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000     -2.19775000000000    adf.f=rho2
+     N         2.50290100000000     -1.35237000000000      2.19774900000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000     -2.19523000000000    adf.f=rho2
+     N         0.61754300000000      2.32819700000000      2.19522600000000    adf.f=rho2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  electrontransfer
+    debug
+    numfrag 2
+  end
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fragments
+     rho1 t21.iso.rho1
+     rho2 t21.iso.rho2
+  end
+  noprint BAS FUNCTIONS
+  scf
+    iterations 0
+  end
+  spinpolarization 0
+  symmetry NOSYM
+  title ChargeSeparation Calculation
+  unrestricted
+  xc
+    gga PW91
+  end
+  Relativity Level=None
+EndEngine
+eor

@@ -1,0 +1,34 @@
+#!/bin/sh
+
+$AMSBIN/ams << eor
+
+Task MolecularDynamics
+
+MolecularDynamics
+    nSteps 3
+    TimeStep 1
+    InitialVelocities Type=Zero
+    Thermostat Type=none
+    Trajectory SamplingFreq=1
+    Print System=true
+    Preserve
+       Momentum        false
+       AngularMomentum false
+    End
+End
+
+System
+    Atoms [Bohr]
+        H  -2.0  0.0  0.0
+        H   2.0  0.0  0.0
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir Dresden
+   DispersionCorrection Auto
+EndEngine
+
+eor
+

@@ -1,0 +1,40 @@
+#! /bin/sh
+
+
+# In this example we perform a geometry optimization immediately followed by
+# calculation of frequencies. This is done by setting the task to  
+# GeometryOptimization and by requesting the normal modes in Properties block
+
+# Note: when using this feature, one might improve the precision if one uses
+# NumericalQuality Good. In order to save time this is not done in this example.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C  0.0                 0.0                 0.0
+     H  0.6264250420707439  0.6264250420707439  0.6264250420707439
+     H  0.6264250420707439 -0.6264250420707439 -0.6264250420707439
+     H -0.6264250420707439  0.6264250420707439 -0.6264250420707439
+     H -0.6264250420707439 -0.6264250420707439  0.6264250420707439
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence
+    Gradients 1E-4
+  End
+End
+
+Properties
+  NormalModes Yes
+End
+
+Engine ADF
+  basis
+    type TZP
+    core None
+  end
+EndEngine
+eor

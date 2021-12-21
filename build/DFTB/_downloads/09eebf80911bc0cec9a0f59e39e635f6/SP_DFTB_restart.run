@@ -1,0 +1,238 @@
+#!/bin/sh
+
+# ===============================================
+# Generate shell-resolved spin populations
+# ===============================================
+
+AMS_JOBNAME=gen_ldepsp $AMSBIN/ams <<EOF > out.trash
+
+Task SinglePoint
+
+System
+    Atoms
+        O -1.361332295 -0.04735246111 -0.02869152269
+        O -0.09790358374 0.6673459552 0.06152027535
+        H -1.738074016 0.103293031 0.8758691702
+        H 0.2801603051 0.514241345 -0.8420753829
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   SCC
+       OrbitalDependent Yes
+       Unrestricted Yes
+   End
+   Occupation Strategy=aufbau
+   UnpairedElectrons 2
+EndEngine
+
+EOF
+
+# ===============================================
+# Restart from shell-resolved spin populations
+# ===============================================
+AMS_JOBNAME=res_ldepsp $AMSBIN/ams <<EOF
+
+Task SinglePoint
+
+System
+    Atoms
+        O -1.361332295 -0.04735246111 -0.02869152269
+        O -0.09790358374 0.6673459552 0.06152027535
+        H -1.738074016 0.103293031 0.8758691702
+        H 0.2801603051 0.514241345 -0.8420753829
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   SCC
+       OrbitalDependent Yes
+       Unrestricted Yes
+   End
+   Occupation Strategy=aufbau
+   UnpairedElectrons 2
+EndEngine
+
+EngineRestart gen_ldepsp.results/dftb.rkf
+
+EOF
+
+
+
+
+# ===============================================
+# Generate shell-resolved Mulliken charges
+# ===============================================
+
+AMS_JOBNAME=gen_ldepq $AMSBIN/ams <<EOF > out.trash
+
+Task SinglePoint
+
+System
+    Atoms
+        O -1.361332295 -0.04735246111 -0.02869152269
+        O -0.09790358374 0.6673459552 0.06152027535
+        H -1.738074016 0.103293031 0.8758691702
+        H 0.2801603051 0.514241345 -0.8420753829
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   SCC
+       OrbitalDependent Yes
+   End
+EndEngine
+
+EOF
+
+# ===============================================
+# Restart from shell-resolved Mulliken charges
+# ===============================================
+
+AMS_JOBNAME=res_ldepq $AMSBIN/ams <<EOF
+
+Task SinglePoint
+
+System
+    Atoms
+        O -1.361332295 -0.04735246111 -0.02869152269
+        O -0.09790358374 0.6673459552 0.06152027535
+        H -1.738074016 0.103293031 0.8758691702
+        H 0.2801603051 0.514241345 -0.8420753829
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   SCC
+       OrbitalDependent Yes
+   End
+EndEngine
+
+EngineRestart gen_ldepq.results/dftb.rkf
+
+EOF
+
+
+
+
+# ===============================================
+# Generate atom-resolved spin populations
+# ===============================================
+
+AMS_JOBNAME=gen_asp $AMSBIN/ams <<EOF > out.trash
+
+Task SinglePoint
+
+System
+    Atoms
+        O -1.361332295 -0.04735246111 -0.02869152269
+        O -0.09790358374 0.6673459552 0.06152027535
+        H -1.738074016 0.103293031 0.8758691702
+        H 0.2801603051 0.514241345 -0.8420753829
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   SCC
+       Unrestricted Yes
+   End
+   Occupation Strategy=aufbau
+   UnpairedElectrons 2
+EndEngine
+
+EOF
+
+# ===============================================
+# Restart from atom-resolved spin populations
+# ===============================================
+
+AMS_JOBNAME=res_asp $AMSBIN/ams <<EOF
+
+Task SinglePoint
+
+System
+    Atoms
+        O -1.361332295 -0.04735246111 -0.02869152269
+        O -0.09790358374 0.6673459552 0.06152027535
+        H -1.738074016 0.103293031 0.8758691702
+        H 0.2801603051 0.514241345 -0.8420753829
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   SCC
+       Unrestricted Yes
+   End
+   Occupation Strategy=aufbau
+   UnpairedElectrons 2
+EndEngine
+
+EngineRestart gen_asp.results/dftb.rkf
+
+EOF
+
+
+
+
+# ===============================================
+# Generate atom-resolved Mulliken charges
+# ===============================================
+
+AMS_JOBNAME=gen_aq $AMSBIN/ams <<EOF > out.trash
+
+Task SinglePoint
+
+System
+    Atoms
+        O -1.361332295 -0.04735246111 -0.02869152269
+        O -0.09790358374 0.6673459552 0.06152027535
+        H -1.738074016 0.103293031 0.8758691702
+        H 0.2801603051 0.514241345 -0.8420753829
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+EndEngine
+
+EOF
+
+# ===============================================
+# Restart from atom-resolved Mulliken charges
+# ===============================================
+
+AMS_JOBNAME=res_aq $AMSBIN/ams <<EOF
+
+Task SinglePoint
+
+System
+    Atoms
+        O -1.361332295 -0.04735246111 -0.02869152269
+        O -0.09790358374 0.6673459552 0.06152027535
+        H -1.738074016 0.103293031 0.8758691702
+        H 0.2801603051 0.514241345 -0.8420753829
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+EndEngine
+
+EngineRestart gen_aq.results/dftb.rkf
+
+EOF
+

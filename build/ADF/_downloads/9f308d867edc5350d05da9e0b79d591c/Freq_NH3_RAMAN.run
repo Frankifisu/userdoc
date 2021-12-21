@@ -1,0 +1,163 @@
+#! /bin/sh
+
+# Summary:
+# - Analytical frequencies with subsequent calculation of Raman intensities in a
+#   range
+# - Numerical frequencies including all Raman intensities
+
+
+# == Raman Intensities for Selected Frequencies ==
+
+# The VibrationalAnalysis task (type ModeScanning) can be used to calculate Raman 
+# intensities for a range of frequencies only. 
+# The Raman intensities are calculated by numerical differentiation of the  
+# polarizability tensor. Only frequencies frequencies withing the interval 
+# that are known to be Raman-active will be included.
+
+
+AMS_JOBNAME=NH3 $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     N       0.0000    0.0000    0.0000
+     H       0.4729    0.8190    0.3821
+     H      -0.9457    0.0000    0.3821
+     H       0.4729   -0.8190    0.3821
+  end
+end
+Task SinglePoint
+Properties
+  NormalModes True
+End
+thermo
+  temperatures 300:400:10
+end
+Engine ADF
+  title NH3 frequencies
+  beckegrid
+    quality good
+  end
+  basis
+    core Small
+    type TZP
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=RamanRange1 $AMSBIN/ams <<eor
+LoadSystem
+  File NH3.results/ams.rkf
+End
+Task VibrationalAnalysis
+VibrationalAnalysis
+   Type ModeScanning
+   NormalModes
+      ModeFile NH3.results/adf.rkf
+      ModeSelect
+         FreqRange 0.0 2000.0
+      End
+   End
+End
+Properties
+   Raman True
+End
+thermo
+  temperatures 300:400:10
+end
+
+EngineRestart NH3.results/adf.rkf
+
+Engine ADF
+  title NH3 Raman intensities in the range 0-2000 cm-1
+  beckegrid
+    quality good
+  end
+  basis
+    core Small
+    type TZP
+  end
+  responseformalism response
+EndEngine
+eor
+
+AMS_JOBNAME=RamanRange2 $AMSBIN/ams <<eor
+LoadSystem
+  File NH3.results/ams.rkf
+End
+
+Task VibrationalAnalysis
+
+VibrationalAnalysis
+   Type ModeScanning
+   NormalModes
+      ModeFile NH3.results/adf.rkf
+      ModeSelect
+         FreqRange 2000.0 5000.0
+      End
+   End
+End
+
+Properties
+   Raman True
+End
+
+EngineRestart NH3.results/adf.rkf
+
+Engine ADF
+  title NH3 Raman intensities in the range 2000-5000 cm-1
+  beckegrid
+    quality good
+  end
+  basis
+    core Small
+    type TZP
+  end
+  responseformalism response
+EndEngine
+eor
+
+# == Raman Intensities for All Frequencies ==
+
+# Raman scattering intensities and depolarization ratios for all molecular
+# vibrations at a certain laser frequency can be calculated in a single run.
+
+# In this example the static Raman scattering is calculated (omega = 0). This
+# type of calculation is very similar to an IR intensity calculation. In fact,
+# all IR output is automatically generated as well. At all distorted geometries
+# the dipole polarizability tensor is calculated. This is very time-consuming
+# and is only feasible for small molecules.
+
+
+AMS_JOBNAME=Raman $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     N       0.0000    0.0000    0.0000
+     H       0.4729    0.8190    0.3821
+     H      -0.9457    0.0000    0.3821
+     H       0.4729   -0.8190    0.3821
+  end
+end
+Task SinglePoint
+Properties
+   NormalModes True
+   Raman True
+End
+thermo
+  temperatures 300:400:10
+end
+
+Engine ADF
+  title NH3 frequencies with Raman intensities
+  beckegrid
+    quality good
+  end
+  basis
+    core Small
+    type TZP
+  end
+  response
+    raman
+  end
+EndEngine
+eor

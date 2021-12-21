@@ -1,0 +1,73 @@
+#! /bin/sh
+
+
+AMS_JOBNAME=nosym $AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   NormalModes true
+End
+
+System
+  Atoms
+     H -0.4 0 0.1
+     H 0.4 0 -0.1
+  End
+
+  Lattice
+       2.645886  0        0
+       0        2.645886  0
+  End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir Dresden
+   useSymmetry no
+   Repulsion
+       forcePolynomial true
+   End
+   KSpace
+       Type Symmetric
+       Symmetric KInteg=3
+   End
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=sym $AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   NormalModes true
+End
+
+System
+  Atoms
+     H -0.4 0 0.1
+     H 0.4 0 -0.1
+  End
+
+  Lattice
+       2.645886  0        0
+       0        2.645886  0
+  End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir Dresden
+   Repulsion
+       forcePolynomial true
+   End
+   KSpace
+       Type Symmetric
+       Symmetric KInteg=3
+   End
+EndEngine
+
+eor
+

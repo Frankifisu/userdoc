@@ -1,0 +1,69 @@
+#!/bin/sh
+
+AMS_JOBNAME=singlet $AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+GeometryOptimization
+   Convergence Gradients=1.0e-5
+   CoordinateType Cartesian
+End
+
+System
+    Atoms
+        C         0.6  0.8  0.00000000
+        C        -0.6  0.8  0.00000000
+        C        -0.6 -0.8  0.00000000
+        C         0.6 -0.8  0.00000000
+        H         1.4  1.4  0.00000000
+        H        -1.4  1.4  0.00000000
+        H        -1.4 -1.4  0.00000000
+        H         1.4 -1.4  0.00000000
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Occupation
+      Strategy aufbau
+   End
+   UnpairedElectrons 0
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=triplet $AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+GeometryOptimization
+   Convergence Gradients=1.0e-5
+   CoordinateType Cartesian
+End
+
+System
+    Atoms
+        C         0.6  0.8  0.00000000
+        C        -0.6  0.8  0.00000000
+        C        -0.6 -0.8  0.00000000
+        C         0.6 -0.8  0.00000000
+        H         1.4  1.4  0.00000000
+        H        -1.4  1.4  0.00000000
+        H        -1.4 -1.4  0.00000000
+        H         1.4 -1.4  0.00000000
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Occupation
+      Strategy aufbau
+   End
+   UnpairedElectrons 2
+EndEngine
+
+eor
+

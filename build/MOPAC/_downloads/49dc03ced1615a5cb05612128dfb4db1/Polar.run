@@ -1,0 +1,32 @@
+#! /bin/sh
+
+# Compute polarizability and first and second hyperpolarizabilities.
+# The string in the 'Keywords' key is passed to the input-parsing routines of MOPAC.
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+        C -0.917657604523966  0.464763072607994 -0.042272407464148
+        C  0.599132389604762  0.488150975335481  0.042272407810247
+        H -1.336541780023175  1.363372335927188  0.457720688164060
+        H -1.308637306012442 -0.446333757344598  0.457720688143968
+        H -1.234937187765967  0.459870835772842 -1.106331392792046
+        H  0.990112088660506  1.399247806016238 -0.457720688423546
+        H  1.018016566995508 -0.410458286745563 -0.457720688426743
+        H  0.916411973169395  0.493043222972654  1.106331392988198
+    End
+End
+
+Engine MOPAC
+    Keywords POLAR(E=(1.0))
+EndEngine
+
+eor
+
+# The 'polar' results are printed to the mopac.out file, which is located in the ams
+# results folder (and not to standard output)
+
+cat ams.results/mopac.out  

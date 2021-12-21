@@ -1,0 +1,45 @@
+#!/bin/sh
+
+# One can obtain the values of some properties near the nucleus. (see
+# PropertiesAtNuclei)
+
+# Note: Instead of calculating the properties at a point in space an average is
+# taken over a tiny sphere around this point.
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   Atoms 
+      O   0.000  0.000  0.000
+      O   0.000  0.000  1.208
+   end
+End
+
+Engine Band 
+   Title Properties at nuclei for O2
+
+   Unrestricted Yes
+
+   PropertiesAtNuclei
+      vxc[rho(fit)]
+      rho(fit)
+      rho
+      v(coulomb)
+      rho(deformation/fit)
+      rho(deformation/scf)
+   End
+
+   Basis
+      Type DZ
+      Core None
+   End
+
+   Relativity Level=None
+
+   XC
+      gga always pbe
+   END
+EndEngine
+eor

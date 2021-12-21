@@ -1,0 +1,172 @@
+#! /bin/sh
+
+
+# === Diamond ===
+
+AMS_JOBNAME=Diamond $AMSBIN/ams << EOF
+
+   Task GeometryOptimization
+
+   Properties
+       ElasticTensor Yes
+   End
+
+   System
+      Atoms
+         C  0.44625  0.44625  2.23125
+         C  2.23125  2.23125  2.23125
+         C -2.23125 -2.23125 -2.23125
+         C -0.44625 -0.44625 -2.23125
+         C -0.44625 -2.23125 -0.44625
+         C  1.33875 -0.44625 -0.44625
+         C -2.23125 -0.44625 -0.44625
+         C -0.44625  1.33875 -0.44625
+         C -0.44625 -0.44625  1.33875
+         C  1.33875  1.33875  1.33875
+         C -1.33875 -1.33875 -1.33875
+         C  0.44625  0.44625 -1.33875
+         C  0.44625 -1.33875  0.44625
+         C  2.23125  0.44625  0.44625
+         C -1.33875  0.44625  0.44625
+         C  0.44625  2.23125  0.44625
+      End
+      Lattice
+         0.0  3.57 3.57
+         3.57 0.0  3.57
+         3.57 3.57 0.0
+      End
+   End
+
+   GeometryOptimization
+       OptimizeLattice Yes
+       Convergence Gradients=1.0e-5 StressEnergyPerAtom=1.0e-5
+   End
+
+   Symmetry Tolerance=1e-6
+   ElasticTensor MaxGradientForGeoOpt=1e-5
+
+   Engine DFTB
+       Model DFTB
+       ResourcesDir DFTB.org/mio-1-1
+       KSpace
+           Type Symmetric
+           Symmetric KInteg=3
+       End
+       Technical AnalyticalStressTensor=False # Not yet supported with symmetric k-space grid.
+   EndEngine
+
+EOF
+
+
+# === Boron-Nitride sheet ===
+
+# 3x3 super-cell, default k-space sampling
+
+AMS_JOBNAME=BN_sheet $AMSBIN/ams << EOF
+
+   Task GeometryOptimization
+
+   Properties
+       ElasticTensor Yes
+   End
+
+   System
+      Atoms
+         N  3.76095075   0.723795     0.0
+         N  5.01460112   2.89518114   0.0
+         B -3.76095112  -2.17138614   0.0
+         B -2.50730075   0.0          0.0
+         B -1.25365038   2.17138614   0.0
+         B -1.25365037  -2.17138614   0.0
+         B  0.0          0.0          0.0
+         B  1.25365037   2.17138614   0.0
+         B  1.25365038  -2.17138614   0.0
+         B  2.50730075   0.0          0.0
+         B  3.76095112   2.17138614   0.0
+         N -2.50730112  -1.44759114   0.0
+         N -1.25365075   0.723795     0.0
+         N  -3.8e-07      2.89518114 0.0
+         N  -3.7e-07     -1.44759114 0.0
+         N  1.25365      0.723795     0.0
+         N  2.50730037   2.89518114   0.0
+         N  2.50730038  -1.44759114   0.0
+      End
+      Lattice
+         7.52190225 0.0
+         3.76095111 6.51415842
+      End
+   End
+
+   GeometryOptimization
+      OptimizeLattice Yes
+      Convergence Gradients=1.0e-4
+   End
+
+   Engine DFTB
+      Model SCC-DFTB
+      ResourcesDir DFTB.org/matsci-0-3
+   EndEngine
+
+EOF
+
+
+# === Polyoxyethylene ===
+
+# primitive cell with k-space sampling
+
+AMS_JOBNAME=Polyoxyethylene $AMSBIN/ams << EOF
+
+   Task GeometryOptimization
+
+   Properties
+      ElasticTensor Yes
+   End
+
+   ElasticTensor
+      StrainStepSize 0.002
+      MaxGradientForGeoOpt 2.0e-4
+   End
+
+   System
+      Atoms
+         C   -0.279368361   -0.125344097   -0.026221791
+         O    0.840592835   -0.919621431   -0.193214154
+         H   -0.279527057    0.337014408    0.997733792
+         H   -0.281697417    0.707951120   -0.778297849
+      End
+      Lattice
+         2.240292981
+      End
+   End
+
+   GeometryOptimization
+      OptimizeLattice Yes
+      Convergence Gradients=1.0e-4
+   End
+
+   Engine DFTB
+      Model SCC-DFTB
+      ResourcesDir DFTB.org/3ob-3-1
+      KSpace
+          Type Symmetric
+          Symmetric KInteg=5
+      End
+      Technical AnalyticalStressTensor=False # Not yet supported with symmetric k-space grid.
+   EndEngine
+
+EOF
+
+
+# Note: the elastic tensor is also printed to standard output.
+
+echo ""
+echo "Extract the elastic tensor of Diamond from the rkf file:"
+$AMSBIN/amsreport Diamond.results/dftb.rkf -r "AMSResults%ElasticTensor#12.4f##6"
+
+echo ""
+echo "Extract the elastic tensor of Boron-Nitride from the rkf file:"
+$AMSBIN/amsreport BN_sheet.results/dftb.rkf -r "AMSResults%ElasticTensor#12.4f##3"
+
+echo ""
+echo "Extract the elastic tensor of Polyoxyethylene from the rkf file:"
+$AMSBIN/amsreport Polyoxyethylene.results/dftb.rkf -r "AMSResults%ElasticTensor#12.4f##1"

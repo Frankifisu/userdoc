@@ -1,0 +1,329 @@
+#! /bin/sh
+
+
+# This is a small but important example to illustrate what goes into an accurate
+# calculation of the 'true' bond energy of a molecule. The (ADF-specific)
+# problem is that in a straightforward molecular calculation, the bond energy is
+# computed as the energy difference between at the one hand the molecule, and at
+# the other hand the isolated spherically symmetric spin-restricted atoms.
+# This spherically symmetric spin-restricted reference (comparison) state is usually
+# not the physical ground state of the reference system (isolated atoms) and
+# hence the computed energy difference has no direct relation to experimental
+# data. To account for the true atomic ground states, one has to add correction
+# terms. Study this sample carefully to make sure that you fully understand the
+# steps to take and consult the User's Guide for details. See also the this
+# document for a discussion of multiplet states.
+
+# See also the example, SD_Cr(NH3)6.
+
+# The H2 case consists of a sequence of simple calculations to demonstrate the
+# Unrestricted Fragments options.
+# In the first part real spin-unrestricted fragments are used.
+# In the second part simulate spin-unrestricted fragments are used.
+
+# Unrestricted fragments
+# ======================
+
+# If one uses unrestricted fragments one needs to calculate the unrestricted
+# H atom twice, one in which the 1s alpha orbital is occupied, and one in which
+# the 1s beta orbital is occupied.
+
+AMS_JOBNAME=H_A $AMSBIN/ams <<eor
+System
+  atoms
+     H  0.0 0.0 0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    sfo eig ovl
+  end
+  basis
+    type DZP
+  end
+  spinpolarization 1
+  unrestricted
+EndEngine
+eor
+
+AMS_JOBNAME=H_B $AMSBIN/ams <<eor
+System
+  atoms
+     H  0.0 0.0 0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    sfo eig ovl
+  end
+  basis
+    type DZP
+  end
+  spinpolarization -1
+  unrestricted
+EndEngine
+eor
+
+AMS_JOBNAME=H2_AB $AMSBIN/ams <<eor
+System
+  atoms
+     H   0   0   0.375  adf.f=H_A
+     H   0   0  -0.375  adf.f=H_B
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2 from unrestricted fragments
+  eprint
+    sfo eig ovl
+  end
+  fragments
+     H_A  H_A.results/adf.rkf
+     H_B  H_B.results/adf.rkf
+  end
+  spinpolarization 0
+  unrestricted
+  unrestrictedfragments
+EndEngine
+eor
+
+# In the unrestricted fragment different numbers of spin-alpha and spin-beta electrons usually
+# result in different spatial orbitals and different energy eigenvalues for
+# spin-alpha and spin-beta when you go to self-consistency.
+# For H2 calculated from real unrestricted fragments this will mean that the SFO analysis of
+# the H2 molecular orbitals looks a bit unsymmetric.
+# However, if one simulates the unrestricted fragments with the key FRAGOCCUPATIONS
+# the SFO analysis for H2 will be symmetric.
+
+
+# Simulated unrestricted fragments with the key FRAGOCCUPATIONS
+# =============================================================
+
+# In this approach spin-restricted fragments are used, in which
+# one has the same spatial orbitals and energy eigenvalues for
+# spin-alpha and spin-beta.
+# The energy difference between an unrestricted
+# fragment as it is used with the key FRAGOCCUPATIONS and a self-consistent
+# unrestricted fragment is computed. This turns out to be quite small,
+# confirming that this approach with simulated unrestricted fragments,
+# although not formally exact, is also adequate for practical purposes.
+
+$AMSBIN/dirac -n1 < $AMSRESOURCES/Dirac/H
+mv TAPE12 t12.rel
+
+AMS_JOBNAME=H_R $AMSBIN/ams <<eor
+System
+  Atoms
+    H 0.0 0.0 0.0
+  End
+end
+Task SinglePoint
+Engine ADF
+  create H    file=$AMSRESOURCES/ADF/ZORA/DZP/H
+  corepotentials t12.rel
+     H 1
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=H_U_noscf $AMSBIN/ams <<eor
+System
+  atoms
+     H 0 0 0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H unrestr., not self-consistent (as used in unr.frag. calcs)
+  eprint
+    sfo eig ovl
+  end
+  fragments
+     H  H_R.results/adf.rkf
+  end
+  scf
+    iterations 0
+  end
+  spinpolarization 1
+  unrestricted
+EndEngine
+
+eor
+
+# By setting the scf iterations to zero (a value of one (1) would give the same
+# result) we prevent cycling to self-consistency. The energy of the 'final' one-
+# electron orbitals is consequently computed in the start-up potential, i.e. the
+# field of the restricted (basic) atom, where spin-alpha and spin-beta are equally
+# occupied, in this case by 0.5 electron each. The not-self-consistent,
+# unrestricted H atom is precisely the 'unrestricted' fragment as it can be used
+# in an adf calculation with the FRAGOCCUPATIONS key. The fragment file must be
+# the TAPE21 result file from a restricted run, but at start-up you can specify
+# that the Fragment Orbitals are, for purposes of reference and comparison,
+# occupied in an unrestricted way in the final molecule.
+
+# A calculation that uses restricted fragments right away computes the bonding
+# energy relative to the restricted fragments. The difference between using
+# restricted and unrestricted fragments is the 'bonding' energy computed in the
+# run above.
+
+AMS_JOBNAME=H_U_scf $AMSBIN/ams <<eor
+System
+  atoms
+     H  0 0 0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H  unr. self-consistent from unr.0
+  eprint
+    sfo eig ovl
+  end
+  fragments
+     H  H_R.results/adf.rkf
+  end
+  fragoccupations
+     H
+     s  1 // 0
+     subend
+  end
+  spinpolarization 1
+  unrestricted
+EndEngine
+
+eor
+
+# Here we start with the unrestricted fragment and relax to self-consistency.
+# The 'bonding energy', i.e. the relaxation energy, is very small, demonstrating
+# that using non-self-consistent unrestricted fragments involves only a small
+# error (which, moreover, can be computed as shown here).
+
+# The key UnRestricted sets the spin-unrestricted mode. The key Charge is used
+# to specify a net total charge of zero and a net total spin polarization by an
+# excess of 1.0 spin-alpha electrons over spin-beta.
+
+AMS_JOBNAME=H2_R $AMSBIN/ams <<eor
+System
+  atoms
+     H   0  0   0.375
+     H   0  0  -0.375
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2 restricted, from restricted fragments
+  eprint
+    sfo eig ovl
+  end
+  fragments
+     H  H_R.results/adf.rkf
+  end
+EndEngine
+
+eor
+
+# This is the simplest approach, using restricted fragments. The bonding energy
+# must be corrected because the reference (restricted H atoms, with 0.5
+# electrons in spin-alpha and 0.5 in spin-beta) is far from the true H-atom
+# ground state: see the previous runs on the single H atom.
+
+AMS_JOBNAME=H2_U $AMSBIN/ams <<eor
+System
+  atoms
+     H.1   0   0   0.375
+     H.2   0   0  -0.375
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2 from simulated unrestricted fragments using the FRAGOCCUPATIONS key
+  eprint
+    sfo eig ovl
+  end
+  fragments
+     H.1  H_R.results/adf.rkf
+     H.2  H_R.results/adf.rkf
+  end
+  fragoccupations
+     H.1
+     s  1 // 0
+     subend
+     H.2
+     s  0 // 1
+     subend
+  end
+  irrepoccupations
+     sigma   2
+  end
+  modifystartpotential
+     H.1  1 // 0
+     H.2  0 // 1
+  end
+EndEngine
+
+eor
+
+# This should be a fair approximation (in the LDA model) to the bonding energy
+# of H2 with respect to the unrestricted H atoms. The difference between the
+# bonding energies of this and the previous run should be very close to the
+# energy of the not-self-consistent unrestricted H-atom with respect to the
+# restricted basic atom.
+
+# == Excited state ==
+
+AMS_JOBNAME=H2_excited $AMSBIN/ams <<eor
+System
+  atoms
+     H    0 .0     0.375
+     H    0 .0    -0.375
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2  excited
+  eprint
+    sfo eig ovl
+  end
+  fragments
+     H  H_R.results/adf.rkf
+  end
+  fragoccupations
+     H
+     s  1 // 0
+     subend
+  end
+  irrepoccupations
+     sigma.g   1 // 0
+     sigma.u   1 // 0
+  end
+  spinpolarization 2
+  unrestricted
+EndEngine
+
+eor
+
+# Finally the calculation of an excited state, with respect to unrestricted
+# fragments. The excitation energy is obtained by comparing the energy with the
+# energy of the ground state calculation. This difference compares reasonably,
+# but not accurately, to the difference in one-electron ground state energies of
+# the involved orbitals (Koopman's theorem).
+
+# Note that excitation energies can also be calculated with Time-Dependent DFT,
+# using the EXCITATIONS key of ADF. See related sample runs.

@@ -1,0 +1,53 @@
+#!/bin/sh
+
+AMS_JOBNAME=water $AMSBIN/ams << EOF
+
+Task SinglePoint
+
+System
+   Atoms [Bohr]
+      O   0.0000000000   0.0000000000   0.0000000000
+      H   1.7007535125   0.0000000000   0.0000000000
+      H  -0.2953327481   1.6749152451   0.0000000000
+   End
+End
+
+Properties
+   BondOrders yes
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+      NBOInput yes
+   End
+EndEngine
+
+EOF
+
+echo " "
+echo " "
+echo "Contents of water.results/dftb-nboInput.FILE47 ="
+echo " "
+cat water.results/dftb-nboInput.FILE47
+
+$AMSBIN/gennbo6 water.results/dftb-nboInput.FILE47
+
+echo " "
+echo " "
+echo "Contents of dftbnbo.37 = "
+echo " "
+cat dftbnbo.37
+
+echo " "
+echo " "
+echo "Contents of dftbnbo.39 ="
+echo " "
+cat dftbnbo.39
+
+echo " "
+echo " "
+echo "Contents of dftbnbo.49 ="
+echo " "
+cat dftbnbo.49

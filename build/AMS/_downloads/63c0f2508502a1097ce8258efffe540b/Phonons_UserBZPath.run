@@ -1,0 +1,72 @@
+#!/bin/sh
+
+# This example shows how to specify a user-defined path through the 
+# Brillouin zone (BZ) when computing the phonon dispersion curves.
+
+# Note: when computing the phonons, you should first run a geometry 
+# optimization (including relaxation of lattice vectors). 
+# Here we use a pre-optimized structure.
+
+AMS_JOBNAME=BoronNitrade $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+        B 0.0              0.0              0.0 
+        N 0.92538708336681 0.92538708336681 0.92538708336681 
+    End
+    Lattice
+        0.0             1.8507741667336 1.8507741667336
+        1.8507741667336 0.0             1.8507741667336
+        1.8507741667336 1.8507741667336 0.0
+    End
+End
+
+Properties 
+    Phonons Yes
+End
+
+NumericalPhonons
+    SuperCell
+        2 0 0
+        0 2 0
+        0 0 2
+    End
+
+    # Disable the automatically generated path though the BZ
+
+    AutomaticBZPath No
+
+    BZPath
+        # In each 'Path' block you should define the vertices of the path
+        # in fractional coordinates (with respect to the reciprocal lattice 
+        # vectors)
+
+        # First segment: Gamma-X-W-K
+        Path
+             0.0   0.0   0.0  G
+             0.5   0.0   0.5  X
+             0.5   0.25  0.75 W
+             0.375 0.375 0.75 K
+        End
+
+        # Second segment: Gamma-SomeRandomPoint
+        Path
+            0.0  0.0  0.0 G
+            0.1  0.2  0.3 RandomPoint
+        End
+    End
+End
+
+Engine DFTB
+    Model SCC-DFTB
+    ResourcesDir DFTB.org/matsci-0-3
+    KSpace Quality=Basic
+EndEngine
+
+eor
+
+echo 'Content of phonon_curves section'
+$AMSBIN/dmpkf BoronNitrade.results/dftb.rkf 'phonon_curves'
+echo 'End content of phonon_curves section'

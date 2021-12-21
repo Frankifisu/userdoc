@@ -1,0 +1,70 @@
+.. _DFTBSplineRep:
+
+SCC-DFTB repulsive potential
+===================================
+.. currentmodule:: scm.params.parameterinterfaces.dftbsplinerep
+
+The ``DFTBSplineRepulsivePotentialParameters`` class provides an interface to
+reading and writing the two-body repulsive potential contained in the `SCC-DFTB
+Slater-Koster parameter files
+<../../../DFTB/Parameter_files.html#slater-koster-files>`__. An analytical form
+of the repulsive function is represented, for example, by a
+``TaperedDoubleExponential`` instance, or any other instance inheriting from
+``RepulsiveFunction``.
+
+.. note::
+
+   Some DFTB parameter sets (e.g., QUASINANO2015) in the Amsterdam Modeling
+   Suite are encrypted. The encrypted parameters cannot be reparameterized with
+   ParAMS.
+
+.. seealso::
+
+    Tutorial: :ref:`DFTB_ZnO_Tutorial`
+
+To use this interface, the Slater-Koster files must already contain the
+electronic parameters, as well as some repulsive function represented by cubic
+splines. When writing a parameter set, the
+``DFTBSplineRepulsivePotentialParameters`` instance will write out all
+Slater-Koster files, keeping the electronic parts but overwriting the repulsive
+potentials.
+
+The names of parameters are of the form ``Element1-Element2:p0``, e.g.,
+``O-Zn:p0`` is the first parameter of the analytical repulsive function written
+as splines to ``O-Zn.skf``, ``O-Zn:p1`` is the second parameter, etc. For a
+``TaperedDoubleExponential``, there are four parameters per element pair.
+**Note**: The element names **must** be sorted alphabetically. The function
+defined for the element pair ``O-Zn`` will also be written to ``Zn-O.skf``. The
+parameters ``Zn-O:p0`` etc. are ignored.
+
+Slater-Koster files that have no active parameters associated with them will be copied, i.e., the original repulsive potential is used.
+
+Example:
+
+.. code:: python
+
+   # Make an interface to the SCC-DFTB repulsive potential parametrization.
+   interface = DFTBSplineRepulsivePotentialParameters(
+     folder='/amshome/atomicdata/DFTB/DFTB.org/znorg-0-1', # use electronic parameters from znorg-0-1
+     repulsive_function=TaperedDoubleExponential(cutoff=5.67), #repulsive potential defined by four parameters
+     r_range=np.arange(0., 5.87, 0.1), # distances (in bohr) for which to center the cubic splines
+     other_settings=dftb_s # Settings object defining e.g. k-point sampling
+   )
+
+   # Refit only the O-Zn and Zn-O repulsive potential parameters
+   # All other repulsive potentials from znorg-0-1 (e.g. as defined in C-C.skf) 
+   # will be kept in their original form
+   for p in interface:    
+       p.is_active = p.name.startswith('O-Zn')
+
+
+
+DFTBSplineRepulsivePotentialParameters API
+--------------------------------------------
+.. autoclass:: DFTBSplineRepulsivePotentialParameters
+    :exclude-members: __weakref__
+
+TaperedDoubleExponential API
+--------------------------------------------
+.. autoclass:: TaperedDoubleExponential
+    :exclude-members: __weakref__

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+$AMSBIN/ams << eor
+
+Task MolecularDynamics
+
+MolecularDynamics
+    nSteps 1000
+    TimeStep 0.1
+    InitialVelocities Type=zero
+    Thermostat Type=none
+    Trajectory SamplingFreq=100
+End
+
+System
+    Atoms [Bohr]
+        H  -2.0  0.0  0.0
+        H   2.0  0.0  0.0
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir Dresden
+   Occupation Strategy=Fermi Temperature=5
+   Repulsion
+       forcePolynomial true
+   End
+   DispersionCorrection Auto
+EndEngine
+
+eor

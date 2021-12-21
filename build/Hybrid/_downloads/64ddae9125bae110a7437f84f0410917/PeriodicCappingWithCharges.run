@@ -1,0 +1,155 @@
+#!/bin/bash
+
+export NSCM=1
+
+report=report.txt
+
+STRUCTDIR=$AMSHOME/examples/Hybrid/PeriodicCapping/systems
+
+# ensure that not a comma is used for decimals in the printf function
+LC_NUMERIC=en_US.UTF-8
+
+export AMS_JOBNAME=reference
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams<<EOF
+
+Task GeometryOptimization
+
+GeometryOptimization OptimizeLattice=yes Method=FIRE MaxIterations=300
+
+System
+   GeometryFile $STRUCTDIR/var5.xyz
+   GuessBonds true
+end
+
+Engine DFTB
+EndEngine
+
+EOF
+
+aaa1qm=`$AMSBIN/amsreport $AMS_JOBNAME.results/dftb.rkf -r distance#1#2`
+bbb1qm=`$AMSBIN/amsreport $AMS_JOBNAME.results/dftb.rkf -r distance#3#4`
+ccc1qm=`$AMSBIN/amsreport $AMS_JOBNAME.results/dftb.rkf -r distance#1#3`
+
+printf "We optimize the lattice and test several distances\n" > $report
+
+printf "\nWe divide the system in such a way that there are two equivalent, and hence neutral regions.\n" >>$report
+
+export AMS_JOBNAME=cheap
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams<<EOF
+
+Task GeometryOptimization
+
+GeometryOptimization OptimizeLattice=yes Method=FIRE MaxIterations=300
+
+System
+   GeometryFile $STRUCTDIR/var5.xyz
+   LoadForceFieldCharges File=reference.results
+   GuessBonds true
+end
+
+Engine ForceField
+    NonBondedCutoff 50 [Bohr]
+EndEngine
+
+EOF
+
+aaa1mm=`$AMSBIN/amsreport $AMS_JOBNAME.results/forcefield.rkf -r distance#1#2`
+bbb1mm=`$AMSBIN/amsreport $AMS_JOBNAME.results/forcefield.rkf -r distance#3#4`
+ccc1mm=`$AMSBIN/amsreport $AMS_JOBNAME.results/forcefield.rkf -r distance#1#3`
+
+errmma=`echo "$aaa1mm- $aaa1qm" | bc`
+errmmb=`echo "$bbb1mm- $bbb1qm" | bc`
+errmmc=`echo "$ccc1mm- $ccc1qm" | bc`
+
+
+printf "\nHere are the distances (Angstrom) as obtained with a QM and an MM method\n" >> $report
+printf "%10s %10s %10s %10s\n"   "distance"  "qm"  "mm" "err(mm)">> $report
+printf "%10s %10.3f %10.3f %10.3f\n"   "B-H"  $aaa1qm $aaa1mm $errmma >> $report
+printf "%10s %10.3f %10.3f %10.3f\n"   "N-H"  $bbb1qm $bbb1mm $errmmb >> $report
+printf "%10s %10.3f %10.3f %10.3f\n"   "B-N"  $ccc1qm $ccc1mm $errmmc >> $report
+
+printf "\nOf course the force field results do not exactly match the QM results, the error displayed in the last column\n" >> $report
+
+printf "\nNow we try the hybrid engine, can we improve the bonds in the QM region?\n" >> $report
+
+printf "\nWe start from the geometry calculated with the (cheap) forcefield\n" >> $report
+
+printf "\nIn this table we show the errors in bond lengths (in the QM region) of the hybrid method with respect to the QM method\n" >> $report
+
+printf "\n%15s %15s %15s %15s %15s %15s\n" "embedding" "capping" "energy" "B-H"  "N-H"  "B-N"  >> $report
+
+for system in var5
+do
+for embedding in  mechanical electrostatic
+do
+
+for capping in fixed fractional
+do
+
+export AMS_JOBNAME=$system.embedding=$embedding.capping=$capping.go
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams<<EOF
+
+Task GeometryOptimization
+
+Properties Gradients=yes
+
+GeometryOptimization OptimizeLattice=yes Method=FIRE MaxIterations=100
+
+LoadSystem
+ File cheap.results
+End
+
+Engine Hybrid
+
+	Capping AllowHighBondOrders=true Option=$capping
+
+  QMMM qmRegion=qm qmEngineID=dftb mmEngineID=ForceField Embedding=$embedding
+
+    Engine Band
+    EndEngine
+         
+    Engine DFTB
+    EndEngine
+
+    Engine ForceField
+        NonBondedCutoff 50 [Bohr]
+    EndEngine
+
+ EndEngine
+
+EOF
+
+aaa1=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#1#2`
+bbb1=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#3#4`
+ccc1=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#1#3`
+xxx=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -k "AMSResults%Energy"`
+
+# printf "%15s %15s %15s %15.6f %15.3f %15.3f %15.3f\n" $embedding $system $capping $xxx $aaa1 $bbb1 $ccc1  >> $report
+erra=`echo "$aaa1- $aaa1qm" | bc`
+errb=`echo "$bbb1- $bbb1qm" | bc`
+errc=`echo "$ccc1- $ccc1qm" | bc`
+
+printf "%15s %15s %15.6f %15.3f %15.3f %15.3f\n" $embedding $capping $xxx $erra $errb $errc  >> $report
+
+done
+done
+done
+
+printf "\nHere are some observations\n" >>$report
+printf "     * the B-H distance is a bit worse than with a plain forcefield, especially with fractional capping\n" >>$report
+printf "     * the N-H distance is much better than with the plain forcefield \n" >>$report
+printf "     * the B-N distance is a bit better than with the plain forcefield, now too short. Fractional capping works best.\n" >>$report
+printf "     * Electrostatic embedding is doing slightly better than mechanical embedding, the biggest improvement is on the B-N bond\n" >>$report
+
+echo "begin report"
+cat $report
+echo "end report"

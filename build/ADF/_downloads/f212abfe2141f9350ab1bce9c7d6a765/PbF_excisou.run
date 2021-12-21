@@ -1,0 +1,74 @@
+#!/bin/sh
+
+
+# Application of a spin-orbit coupled relativistic excitation energy calculation
+# for an open-shell system. Note that the used method used is highly
+# approximate. In this example the effect of spin-orbit coupling is large, in
+# which case this method can be of use.
+
+# First a scalar relativistic calculation is performed with symmetry. The
+# resulting scalar relativistic adf.rkf file is used as fragment in the spin-orbit
+# coupled calculation. Using a scalar relativistic fragment is not necessary,
+# but makes the identification of the spin-orbit coupled results easier.
+
+AMS_JOBNAME=PbF_SR $AMSBIN/ams <<eor
+System
+  atoms
+     Pb   0    0   0
+     F    0    0   2.06
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type TZ2P
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga bp86
+  end
+EndEngine
+eor
+
+
+# Next the spin-orbit coupled excitation unrestricted calculation is perfomed.
+# The Tamm-Dancoff approximation (TDA) is needed and symmetry NOSYM should be
+# used. Best is to use the noncollinear approximation.
+
+
+AMS_JOBNAME=PbF_SO $AMSBIN/ams <<eor
+System
+  atoms
+     Pb   0    0   0    adf.f=PbF
+     F    0    0   2.06 adf.f=PbF
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  excitations
+    lowest 14
+  end
+  fragments
+     PbF PbF_SR.results/adf.rkf
+  end
+  relativity
+    level spin-orbit
+    formalism ZORA
+    spinorbitmagnetization noncollinear
+  end
+  symmetry nosym
+  tda
+  unrestricted
+  xc
+    gga bp86
+  end
+EndEngine
+eor

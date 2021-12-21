@@ -1,0 +1,62 @@
+#!/bin/sh
+
+# MP2 results are calculated for I2 and the open shell atom I, such
+# that the atomization energy of I2 can be calculated.
+# The relativistic RA-X2C method is used and spin-orbit coupling is included.
+
+# Remark: the atomization energy will be almost the same if one would compare
+# the results for the relativistic methods ZORA, X2C, and RA-X2C in case
+# spin-orbit coupling is included.
+
+AMS_JOBNAME=I2 $AMSBIN/ams <<eor
+System
+  atoms
+     I  0 0  1.333
+     I  0 0 -1.333
+  end
+end
+
+Task SinglePoint
+
+engine ADF
+  Basis
+    Type TZ2P
+    Core None
+  End
+  relativity
+    level spin-orbit
+    formalism RA-X2C
+  end
+  xc
+    mp2
+  end
+endengine
+eor
+
+AMS_JOBNAME=I_SO $AMSBIN/ams <<eor
+System
+  atoms
+     I 0.0 0.0 0.0
+  end
+end
+
+Task SinglePoint
+
+engine ADF
+  Basis
+    Type TZ2P
+    Core None
+  End
+  relativity
+    level spin-orbit
+    formalism RA-X2C
+    SpinOrbitMagnetization NonCollinear
+  end
+  unrestricted
+  occupations integeraufbau
+  symmetry nosym
+  xc
+    mp2
+  end
+endengine
+eor

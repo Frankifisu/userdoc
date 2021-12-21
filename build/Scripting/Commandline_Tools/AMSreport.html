@@ -1,0 +1,872 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>AMSreport: generate reports &mdash; Scripting 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Scripting 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Command Line Tools" href="Commandline_Tools.html"/>
+        <link rel="next" title="KF command line utilities" href="KF_command_line_utilities.html"/>
+        <link rel="prev" title="Tutorial: Generate structures for substituent effects screening" href="AMSprepTutorial.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search Scripting" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-Scripting" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../GettingStarted.html#linux">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GettingStarted.html#macos">MacOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GettingStarted.html#windows">Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GettingStarted.html#notes-on-python">Notes on Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="Commandline_Tools.html">Command Line Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="AMSprep.html">AMSprep: generate (multiple) ADF jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AMSprep.html#additional-notes">Additional Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AMSprepTutorial.html">Tutorial: Generate structures for substituent effects screening</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">AMSreport: generate reports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#additional-notes">Additional notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="KF_command_line_utilities.html">KF command line utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Python_Stack/Python_Stack.html">Python Stack in Amsterdam Modeling Suite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Python_Stack/Python_Stack.html#general">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Python_Stack/Python_Stack.html#included-modules">Included modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Python_Stack/Python_Stack.html#using-other-modules-with-the-ams-python-stack">Using other modules with the AMS Python Stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Python_Stack/Python_Stack.html#python-virtual-environment">Python virtual environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#default-python-virtual-environment">Default python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#virtual-environments-for-different-ams-versions">Virtual environments for different AMS versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#changing-the-location-of-the-python-virtual-environment">Changing the location of the python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#disabling-the-virtual-environment">Disabling the virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#uninstalling-the-virtual-environment">Uninstalling the virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#reinstalling-the-virtual-environment">Reinstalling the virtual environment</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Python_Stack/Python_Stack.html#useful-commands">Useful commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ASE/ASE.html">ASE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ASE/General_ASE_concepts.html">General Concepts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ASE/General_ASE_concepts.html#components-of-ase">Components of ASE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/General_ASE_concepts.html#quantum-chemical-model">Quantum Chemical Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/General_ASE_concepts.html#quantum-chemical-calculation">Quantum Chemical Calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/General_ASE_concepts.html#simulation-definitions">Simulation Definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ASE/General_ASE_concepts.html#a-typical-ase-run">A Typical ASE Run</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html">SCM Calculators in ASE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#technical-notes">Technical Notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#new-interface-design-in-adf2017">New Interface Design in ADF2017</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#interfaces-to-individual-programs">Interfaces to Individual Programs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#usage-and-examples">Usage and Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#import">Import</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#interface-keywords">Interface Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FlexMD/FlexMD.html">FlexMD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FlexMD/Basic_philosophy_and_intended_usage.html">Basic philosophy and intended usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FlexMD/FlexMD_functionality_summary.html">FlexMD functionality summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FlexMD/Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FlexMD/Molecular_Dynamics.html">Molecular Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FlexMD/Multi-scale_Molecular_Dynamics.html">Multi-scale Molecular Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FlexMD/Biased_Molecular_Dynamics.html">Biased Molecular Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FlexMD/Working_with_FlexMD.html">Working with FlexMD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../FlexMD/Creating_a_molecule_object.html">Creating a molecule object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FlexMD/Creating_a_ForceJob.html">Creating a ForceJob</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FlexMD/Creating_and_running_the_MD_job.html">Creating and running the MD job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../FlexMD/Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../FlexMD/Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../FlexMD/References.html">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../PLAMS/PLAMS.html">PLAMS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../PLAMS/PLAMS.html#required-citations">Required Citations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../PLAMS/PLAMS.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../AuToGraFS/AuToGraFS.html">AuToGraFS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html">General AuToGraFS Scripting concepts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#components-of-autografs">Components of AuToGraFS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#the-fragment-class">The Fragment class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#the-model-class">The Model class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#the-autografs-class">The Autografs class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#about-the-databases-of-building-units">About the databases of building units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#using-the-overhauled-atom-typer">Using the overhauled Atom Typer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../AuToGraFS/AuToGraFS_Examples.html">AuToGraFS Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/AuToGraFS_Examples.html#generation-of-all-available-pillared-surmof">Generation of all available pillared SURMOF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/AuToGraFS_Examples.html#generation-of-a-defectuous-uio-66-mof-from-custom-files">Generation of a defectuous UIO-66 MOF from custom files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/AuToGraFS_Examples.html#generation-of-conformers-in-the-irmof-5">Generation of conformers in the IRMOF-5</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Scripting</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../Scripting.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">Scripting</a>/</li>
+      
+          <li><a href="Commandline_Tools.html">Command Line Tools</a>/</li>
+      
+    <li class="orange-text">AMSreport: generate reports</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="amsreport"></span><div class="section" id="amsreport-generate-reports">
+<span id="index-0"></span><h1>AMSreport: generate reports<a class="headerlink" href="#amsreport-generate-reports" title="Permalink to this headline">¶</a></h1>
+<p>The utility AMSreport ($AMSBIN/amsreport) allows to retrieve the results (including images) computed from the binary output files of either ADF, BAND, ReaxFF, DFTB, UFF, or MOPAC.
+For ADF this is the .t21 file (TAPE21). It can also be the .runkf file from BAND, the .rxkf file from ReaxFF or the .rkf file from DFTB, MOPAC or UFF.</p>
+<p>The selected results are printed out via standard output or, alternatively, either written to a tab separated file or an HTML file.
+When creating a new output file AMSreport will also generate a line with headers identifying the information.
+Images are generated using the ADF-GUI.</p>
+<p>Also individual KF variables can be retrieved from the file as shown by the following example, which illustrates how to obtain the bonding energy from a .t21 file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">amsreport</span> <span class="n">job</span><span class="o">.</span><span class="n">t21</span> <span class="n">BondingEnergy</span>
+</pre></div>
+</div>
+<p>Also high-quality pictures of orbitals can be obtained as shown below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">amsreport</span> <span class="n">job</span><span class="o">.</span><span class="n">t21</span> <span class="n">HOMO</span> <span class="n">LUMO</span><span class="o">+</span><span class="mi">1</span> <span class="o">-</span><span class="n">v</span> <span class="s2">&quot;-grid Fine&quot;</span> <span class="o">-</span><span class="n">v</span> <span class="s2">&quot;-antialias&quot;</span> <span class="o">-</span><span class="n">v</span> <span class="s2">&quot;-bgcolor #ffffff&quot;</span>
+</pre></div>
+</div>
+<p>The options of AMSreport are listed when running the module without further command line arguments.
+At present the following command line options are available</p>
+<dl class="docutils">
+<dt>-h</dt>
+<dd>prints the help screen.</dd>
+</dl>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">If used with the name of a valid KF file in the command line the -h option lists the names of all data blocks present in that file.
+It is strongly encouraged to use this option to retrieve the names of the options available in a given situation.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">amsreport</span> <span class="o">-</span><span class="n">h</span> <span class="n">job</span><span class="o">.</span><span class="n">t21</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>-i</dt>
+<dd>specifies the input file (.t21 etc).
+If the specified input file is not present ADF tries to find a valid input file based on the information in the matching .ams file or the most recent available binary output file.</dd>
+<dt>-usefile</dt>
+<dd>specifies the input file like -i but without attempting to find a matching file if the specified input file does not exist.
+Typically -usefile is used to avoid reading data from the result file.</dd>
+<dt>-I &lt;pattern&gt;</dt>
+<dd>glob files, and run over all matching result files</dd>
+<dt>-o</dt>
+<dd>the name of the html file in which the output of AMSreport will be stored.
+The output will be printed to standard output if this option is absent.</dd>
+<dt>-plain</dt>
+<dd>print only output data from AMSreport without any labels and/or units.
+The same can be achieved by setting the environment variable SCM_AMSREPORT_PLAIN to yes.</dd>
+<dt>-noplain</dt>
+<dd>print output data with tab separators, labels, and units.
+Used to override the aforementioned variable SCM_AMSREPORT_PLAIN.</dd>
+<dt>-v</dt>
+<dd><p class="first">command line to pass to amsview (without filenames) to generate images. The image will be generated by AMSview stored in a directory with a name based on the result file, and with extension .jpgs. The result file will contain a path to the image file (directly, or in an IMG tag)
+After the -v the arguments must be listed, with proper quoting. Repeat the -v flag for multiple arguments. The individual -scmgeometry, -bgcolor, -zoom, -viewplane, -antialias and -grid options will be collected and applied to all view options.</p>
+<p>Some shortcuts are predefined (HOMO, HOMO+1, LUMO, Molecule, Density, Potential) and some additional useful flags include</p>
+<p>-scmgeometry (default 200x200)
+-bgcolor (default #220000), -zoom (default 1.0)
+-viewplane (default {1 2 5})
+-antialias (off when not present, especially useful with light bgcolors)
+-grid (Coarse when not present, Medium when specified, or value after flag if a value is present)</p>
+<dl class="last docutils">
+<dt>examples</dt>
+<dd>HOMO-1 LUMO+1 -v “-viewplane {0 0 1}” -v “-grid Fine” -v “-antialias”</dd>
+</dl>
+</dd>
+<dt>-r</dt>
+<dd><p class="first">Specifies the result to be retrieved by AMSreport from the binary output file.
+If this command is omitted all unspecified command line arguments but the first (denotes input file name) will be considered as arguments for this flag.</p>
+<p>If -r is present, the desired result is specified as a string either in form of its preset name (see below) or via a section%variable pair (see the <a class="reference external" href="KF_command_line_utilities.html">KF utilities documentation</a>).
+The -r flag (or arguments without flag) may be repeated for multiple results.
+Additional details can be specified after the variable name, separated by “#”.
+For example</p>
+<dl class="docutils">
+<dt>range</dt>
+<dd>“variable#index” or “variable#firstindex:lastindex”, index starts at 1</dd>
+<dt>format</dt>
+<dd>TclTk format string, e.g. 8.3f or 12.6g</dd>
+<dt>examples</dt>
+<dd><p class="first">prints a formatted table of the coordinates</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="s2">&quot;Geometry</span><span class="si">%x</span><span class="s2">yz#12.4f##3&quot;</span>
+</pre></div>
+</div>
+<p>prints a formatted table for the first two atoms only</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="s2">&quot;Geometry</span><span class="si">%x</span><span class="s2">yz#1:9#12.4f##3&quot;</span>
+</pre></div>
+</div>
+<p>coordinates of the first two atoms in one line</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="s2">&quot;Geometry</span><span class="si">%x</span><span class="s2">yz#12.4f#1:9&quot;</span>
+</pre></div>
+</div>
+<p>print just the first coordinate</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="s2">&quot;Geometry</span><span class="si">%x</span><span class="s2">yz#1&quot;</span>
+</pre></div>
+</div>
+<p>print the bond energy</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="s2">&quot;Energys%Bond Energy&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p class="last">While any proper KF variable can be accessed via a “section%variable” construct, the following predefined keys are available for the KF files resulting from the various programs of the Amsterdam Modeling Suite.</p>
+</dd>
+</dl>
+<p><strong>ADF-specific ``-r`` presets for .t21 files</strong></p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">orient*</span></code></dt>
+<dd>affine transform (3x4) from input to internal ADF orientation, format after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">iorient*</span></code></dt>
+<dd>affine transform (3x4) from internal ADF to input orientation, format after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">title</span></code></dt>
+<dd>title of the calculation</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">type</span></code></dt>
+<dd>calculation type (single point, geometry optimization, …)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">weight</span></code></dt>
+<dd>molecular weight</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">symmetry</span></code></dt>
+<dd>molecular symmetry</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">natoms</span></code></dt>
+<dd>number of atoms</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">integration</span></code></dt>
+<dd>integration accuracy</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">integration-min</span></code></dt>
+<dd>minimum integration accuracy</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">integration-max</span></code></dt>
+<dd>maximum integration accuracy</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">scfstatus</span></code></dt>
+<dd>SCF convergence status</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">charge</span></code></dt>
+<dd>the requested charge</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">charges</span></code></dt>
+<dd>shorthand for Voronoi, Hirshfeld and Mulliken charges</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">voronoi</span></code></dt>
+<dd>Voronoi deformation charges</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hirshfeld</span></code></dt>
+<dd>Hirshfeld fragment charges, atomic fragment definition required</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mdc</span></code></dt>
+<dd>All available MDC atom charges</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mdc-m</span></code></dt>
+<dd>MDC-M charges</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mdc-d</span></code></dt>
+<dd>MDC-D charges</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mdc-q</span></code></dt>
+<dd>MDC-Q charges</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mulliken</span></code></dt>
+<dd>Mulliken charges</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bondorders</span></code></dt>
+<dd>Mayer bond orders</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nmr</span></code></dt>
+<dd>NMR shieldings</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nmr-shieldings</span></code></dt>
+<dd>NMR shieldings</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nmr-shielding-tensor</span></code></dt>
+<dd>NMR shielding tensor</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nmr-j-coupling-tensor</span></code></dt>
+<dd>NMR j coupling tensor</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nmr-k-coupling-tensor</span></code></dt>
+<dd>NMR k coupling tensor</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nmr-j-coupling-constant</span></code></dt>
+<dd>NMR j coupling constant</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nmr-k-coupling-constant</span></code></dt>
+<dd>NMR k coupling constant</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dipolev*</span></code></dt>
+<dd>dipole vector</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dipole</span></code></dt>
+<dd>dipole moment (length of dipole vector)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">quadrupole</span></code></dt>
+<dd>quadrupole tensor</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">orbital-info</span></code></dt>
+<dd><p class="first">orbital info (energy, occupation and label), format for energy after #, range after # with HOMO or LUMO for example:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">orbital</span><span class="o">-</span><span class="n">info</span><span class="c1">#HOMO, orbital-info#HOMO-1,</span>
+<span class="n">orbital</span><span class="o">-</span><span class="n">info</span><span class="c1">#HOMO-2:LUMO+2, orbital-info#HOMO#12.8f</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">orbital-e*</span></code></dt>
+<dd>orbital energies, format and range after # as in orbital-info</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">orbital-o*</span></code></dt>
+<dd>orbital occupations, format and range after # as in orbital-info</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">orbital-l*</span></code></dt>
+<dd>orbital labels, format and range after # as in orbital-info</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">homo-lumo-gap*</span></code></dt>
+<dd>HOMO-LUMO gap, format after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">atomlabels</span></code></dt>
+<dd>name of atoms with sequence number, starting at 0</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">atomlabels-from0</span></code></dt>
+<dd>name of atoms with sequence number, starting at 0</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">atomlabels-from1</span></code></dt>
+<dd>name of atoms with sequence number, starting at 1</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nstep</span></code></dt>
+<dd>number of steps in history / LT / IRC data, type (h,lt,ircf,ircb) after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">spin</span></code></dt>
+<dd>the requested spin polarization</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">step</span></code></dt>
+<dd><p class="first">use coordinates from history / LT / IRC data, step number after # with h for history, lt for LT, ircf/ircb for forward/backward IRC if no letter after #, history data will be used (if not, last step will be used) for example:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">step</span><span class="c1">#23 (or step#h23), step#lt4, step#ircf3</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">geometry,</span> <span class="pre">geometry-a*,</span> <span class="pre">geometry-b*</span></code></dt>
+<dd>geometry (element type and coordinates), in input order, in angstrom or bohr (default)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sdf</span></code></dt>
+<dd>geometry in SDF format</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bgf</span></code></dt>
+<dd>geometry in BGF format</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">distance</span></code></dt>
+<dd><p class="first">distance between two atoms, in angstrom. Input separated by #</p>
+<p>labels (optional): include atom labels in output</p>
+<p>format (optional): format field</p>
+<p>atom numbers, starting at 1, in input order</p>
+<p>examples</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span><span class="c1">#2#3, distance#labels#2#3, distance#-8.3f#5#8,</span>
+<span class="n">distance</span><span class="c1">#labels#8.4f#1#2, distance#2#3#4#5, distance#labels#1#2#3#4</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">angle</span></code></dt>
+<dd>angle between three atoms, in degrees. Input see distance, but with three atoms per angle</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dihedral</span></code></dt>
+<dd>dihedral between four atoms, in degrees. Input see distance, but with our atoms per dihedral</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hessian*</span></code></dt>
+<dd>Hessian matrix (from GeoOpt%Hessian_CART), fmt and nperline options after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gradients*</span></code></dt>
+<dd>gradients with respect to nuclear displacements (from GeoOpt%Gradients), fmt and nperline options after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">energies*</span></code></dt>
+<dd>all available energies (bonding up to xc, with labels), fmt option after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bonding</span></code></dt>
+<dd>total bonding energy</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pauli</span></code></dt>
+<dd>total pauli repulsion</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">steric</span></code></dt>
+<dd>total steric interaction</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">orbital</span></code></dt>
+<dd>total orbital interaction</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">electrostatic</span></code></dt>
+<dd>electrostatic energy</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kinetic</span></code></dt>
+<dd>kinetic energy</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">coulomb</span></code></dt>
+<dd>electrostatic (steric and orbital interaction) energy</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">xc</span></code></dt>
+<dd>exchange-correlation energy</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dispersion</span></code></dt>
+<dd>dispersion energy</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">frequencies*</span></code></dt>
+<dd>IR Frequencies, format, nperline and range (n, or n:n, start at 1) after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">freqint*</span></code></dt>
+<dd>IR Intensities, format, nperline and range (n, or n:n, start at 1) after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">freqlabel*</span></code></dt>
+<dd>IR Frequencies label (symmetry), format, nperline and range (n, or n:n, start at 1) after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">normalmode*</span></code></dt>
+<dd>normal modes (mass weighted), format, nperline and range (n, or n:n, start at 1) after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">zeropoint*</span></code></dt>
+<dd>zero-point energy</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">excitation*</span></code></dt>
+<dd>Excitation energies, format, nperline and range (n, or n:n, start at 1) after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">oscillatorstrength*</span></code></dt>
+<dd>Oscillator strengths for the excitation energies format, nperline and range (n, or n:n, start at 1) after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">excitlabel*</span></code></dt>
+<dd>Excitation labels (symmetry), format, nperline and range (n, or n:n, start at 1) after #</dd>
+</dl>
+<p><strong>BAND specific ``-r`` presets for .runkf files</strong></p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">natoms</span></code></dt>
+<dd>number of atoms</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">geometry,</span> <span class="pre">geometry-a*,</span> <span class="pre">geometry-b*</span></code></dt>
+<dd>geometry (element type and coordinates), in input order, in angstrom or bohr (default)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sdf</span></code></dt>
+<dd>geometry in SDF format</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bgf</span></code></dt>
+<dd>geometry in BGF format</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">distance</span></code></dt>
+<dd><p class="first">distance between two atoms, in angstrom. Input separated by #</p>
+<p>labels (optional): include atom labels in output</p>
+<p>format (optional): format field</p>
+<p>atom numbers, starting at 1, in input order</p>
+<p>examples</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span><span class="c1">#2#3, distance#labels#2#3, distance#-8.3f#5#8,</span>
+<span class="n">distance</span><span class="c1">#labels#8.4f#1#2, distance#2#3#4#5, distance#labels#1#2#3#4</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">angle</span></code></dt>
+<dd>angle between three atoms, in degrees. #4 Input see distance, but with three atoms per angle</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dihedral</span></code></dt>
+<dd>dihedral between four atoms, in degrees. Input see distance, but with our atoms per dihedral</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">atomlabel,</span> <span class="pre">atomlabel-from0</span></code></dt>
+<dd>name of atoms with sequence number, starting at 0</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">atomlabel-from1</span></code></dt>
+<dd>name of atoms with sequence number, starting at 1</dd>
+</dl>
+<p><strong>ReaxFF specific presets for .rxkf files</strong></p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">natoms</span></code></dt>
+<dd>number of atoms</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">geometry,</span> <span class="pre">geometry-a*,</span> <span class="pre">geometry-b*</span></code></dt>
+<dd>geometry (element type and coordinates), in input order, in angstrom or bohr (default)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">distance</span></code></dt>
+<dd><p class="first">distance between two atoms, in angstrom. Input separated by #</p>
+<p>labels (optional): include atom labels in output</p>
+<p>format (optional): format field</p>
+<p>atom numbers, starting at 1, in input order</p>
+<p>examples</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span><span class="c1">#2#3, distance#labels#2#3, distance#-8.3f#5#8,</span>
+<span class="n">distance</span><span class="c1">#labels#8.4f#1#2, distance#2#3#4#5, distance#labels#1#2#3#4</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">angle</span></code></dt>
+<dd>angle between three atoms, in degrees. #4 Input see distance, but with three atoms per angle</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dihedral</span></code></dt>
+<dd>dihedral between four atoms, in degrees. Input see distance, but with our atoms per dihedral</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">atomlabel,</span> <span class="pre">atomlabel-from0</span></code></dt>
+<dd>name of atoms with sequence number, starting at 0</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">atomlabel-from1</span></code></dt>
+<dd>name of atoms with sequence number, starting at 1</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">rx-frame</span> <span class="pre">n</span> <span class="pre">options</span></code></dt>
+<dd><p class="first">information for a particular reaxff frame. Note the spaces, you will need to quote this key.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="p">:</span> <span class="n">frame</span> <span class="n">number</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">...</span> <span class="p">(</span><span class="ow">is</span> <span class="ow">not</span> <span class="n">the</span> <span class="n">ReaxFF</span> <span class="n">step</span> <span class="n">number</span><span class="p">)</span>
+
+<span class="n">options</span><span class="p">:</span> <span class="n">combination</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="p">(</span><span class="k">if</span> <span class="n">omitted</span><span class="p">,</span> <span class="nb">all</span> <span class="n">will</span> <span class="n">be</span> <span class="n">reported</span><span class="p">)</span>
+
+   <span class="n">nframes</span><span class="p">:</span> <span class="n">total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">frames</span>
+
+   <span class="n">step</span><span class="p">:</span> <span class="n">the</span> <span class="n">ReaxFF</span> <span class="n">step</span> <span class="n">number</span> <span class="k">for</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">frame</span>
+
+   <span class="n">nats</span><span class="p">:</span> <span class="n">number</span> <span class="n">of</span> <span class="n">atoms</span>
+
+   <span class="n">xyz</span><span class="p">:</span> <span class="n">the</span> <span class="n">xyz</span> <span class="n">coordinates</span>
+
+   <span class="n">names</span><span class="p">:</span> <span class="n">element</span> <span class="n">names</span> <span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">H</span> <span class="n">etc</span><span class="p">)</span> <span class="k">for</span> <span class="n">each</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">same</span> <span class="n">order</span> <span class="k">as</span> <span class="n">the</span> <span class="n">coordinates</span>
+
+   <span class="n">neighbors</span><span class="p">:</span> <span class="n">bond</span> <span class="n">information</span>
+
+   <span class="n">cell</span><span class="p">:</span> <span class="n">cell</span> <span class="n">information</span>
+</pre></div>
+</div>
+<p>example</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">amsreport</span> <span class="n">water</span><span class="o">.</span><span class="n">rxkf</span> <span class="s2">&quot;rx-frame 20 step xyz cell&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pdbtrajectory</span></code></dt>
+<dd>the trajectory information (including molecule details) as a sequence of PDB models due to limitations of the PDB format to less than 100000 atoms and it will not be a standard conforming PDB file</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">pdbtrajectory-(nobonds|usepdbinfo)</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nobonds</span><span class="p">:</span> <span class="k">as</span> <span class="n">pdbtrajectory</span><span class="p">,</span> <span class="n">but</span> <span class="n">no</span> <span class="n">bond</span> <span class="n">info</span> <span class="p">(</span><span class="n">CONECT</span> <span class="n">records</span><span class="p">)</span>
+
+<span class="n">usepdbinfo</span><span class="p">:</span> <span class="k">as</span> <span class="n">pdbtrajectory</span><span class="p">,</span> <span class="n">but</span> <span class="n">use</span> <span class="n">pdb</span> <span class="n">residue</span> <span class="n">info</span> <span class="kn">from</span> <span class="nn">first</span> <span class="n">step</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">reaxff</span> <span class="n">mol</span> <span class="n">info</span>
+
+<span class="n">xmol</span><span class="p">:</span> <span class="n">the</span> <span class="n">trajectory</span> <span class="n">information</span> <span class="p">(</span><span class="n">only</span> <span class="n">element</span><span class="p">,</span> <span class="n">xyz</span><span class="p">)</span> <span class="ow">in</span> <span class="n">xmol</span> <span class="nb">format</span>
+
+<span class="n">gro</span><span class="p">:</span> <span class="n">trajectory</span> <span class="k">as</span> <span class="o">.</span><span class="n">gro</span> <span class="n">file</span> <span class="p">(</span><span class="n">xyz</span> <span class="ow">and</span> <span class="n">velocities</span><span class="p">)</span> <span class="n">options</span> <span class="n">after</span> <span class="n">a</span> <span class="o">-</span> <span class="n">sign</span><span class="p">:</span>
+
+   <span class="n">m</span> <span class="p">:</span> <span class="nb">print</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">molecule</span> <span class="n">names</span> <span class="ow">and</span> <span class="n">formulas</span> <span class="n">only</span>
+
+   <span class="n">x</span> <span class="p">:</span> <span class="n">allow</span> <span class="n">xyz</span> <span class="n">only</span> <span class="n">frames</span> <span class="p">(</span><span class="n">missing</span> <span class="n">velocities</span><span class="p">)</span>
+
+   <span class="n">f</span> <span class="p">:</span> <span class="n">add</span> <span class="n">forces</span> <span class="k">if</span> <span class="n">available</span>
+
+   <span class="n">tf</span> <span class="p">:</span> <span class="n">add</span> <span class="n">the</span> <span class="n">time</span> <span class="n">step</span><span class="p">,</span> <span class="n">f</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">floating</span> <span class="n">point</span> <span class="n">number</span> <span class="n">that</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">time</span> <span class="n">per</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">ps</span>
+
+<span class="n">examples</span><span class="p">:</span> <span class="n">gro</span><span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="n">gro</span><span class="o">-</span><span class="n">f</span><span class="p">,</span> <span class="n">gro</span><span class="o">-</span><span class="n">xf</span><span class="p">,</span>  <span class="n">gro</span><span class="o">-</span><span class="n">ft0</span><span class="o">.</span><span class="mi">0001</span><span class="p">,</span> <span class="n">gro</span><span class="o">-</span><span class="n">xt0</span><span class="o">.</span><span class="mi">001</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span>
+
+<span class="n">Special</span> <span class="n">features</span> <span class="k">for</span> <span class="n">ReaxFF</span> <span class="n">parameter</span> <span class="n">optimization</span><span class="p">:</span> <span class="n">a</span> <span class="n">geo</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">biograph</span> <span class="nb">format</span> <span class="n">can</span> <span class="n">be</span> <span class="n">converted</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">DFT</span> <span class="n">result</span> <span class="n">file</span> <span class="n">using</span> <span class="n">the</span> <span class="n">bfg</span> <span class="n">option</span> <span class="n">above</span><span class="o">.</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">example</span></code></dt>
+<dd><p class="first">Input file: geo (biograph format)</p>
+<p>-rxtrainset: run over frames in the input file (should be a bgf BIOGRAPH file), put all charges, bonds and angles in the trainset.in (on stdout).</p>
+<p>Input file: ffield (reaxff force field file). The source ffield file determines which atoms, bonds etc are present.</p>
+<p>-ffield-min: generate ffield file with all values replaced by min values</p>
+<p>-ffield-max: generate ffield file with all values replaced by max values</p>
+<p>-ffield-bool: generate ffield file with all values replaced by bool values</p>
+<p>-minmax filename: use data from filename for min and max values,</p>
+<p class="last">format: see RxParRange.txt in atomicdata/ForceFields/ReaxFF</p>
+</dd>
+</dl>
+<p><strong>General presets for .rkf files</strong></p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">natoms</span></code></dt>
+<dd>number of atoms</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">geometry,</span> <span class="pre">geometry-a*,</span> <span class="pre">geometry-b*</span></code></dt>
+<dd>geometry (element type and coordinates), in input order, in angstrom or bohr (default)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sdf</span></code></dt>
+<dd>geometry in SDF format</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bgf</span></code></dt>
+<dd>geometry in BGF format</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">distance</span></code></dt>
+<dd><p class="first">distance between two atoms, in angstrom. Input separated by #</p>
+<p>labels (optional): include atom labels in output</p>
+<p>format (optional): format field</p>
+<p>atom numbers, starting at 1, in input order</p>
+<p>examples</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span><span class="c1">#2#3, distance#labels#2#3, distance#-8.3f#5#8,</span>
+<span class="n">distance</span><span class="c1">#labels#8.4f#1#2, distance#2#3#4#5, distance#labels#1#2#3#4</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">angle</span></code></dt>
+<dd>angle between three atoms, in degrees. #4 Input see distance, but with three atoms per angle</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dihedral</span></code></dt>
+<dd>dihedral between four atoms, in degrees. Input see distance, but with our atoms per dihedral</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hessian*</span></code></dt>
+<dd>Hessian matrix (from GeoOpt%Hessian_CART), fmt and nperline options after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gradients*</span></code></dt>
+<dd>gradients with respect to nuclear displacements (from GeoOpt%Gradients), fmt and nperline options after #</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">energies</span></code></dt>
+<dd>all available energies (bonding up to xc, with labels), fmt option after #</dd>
+</dl>
+<div class="section" id="additional-notes">
+<h2>Additional notes<a class="headerlink" href="#additional-notes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>SDF and BGF records can be produced from from ANY file that can be read by AMSinput.</li>
+<li>KFreader is a free (LGPL) alternative to AMSreport. The C sources are <a class="reference external" href="http://www.scm.com/Downloads/KFReader-20140106.zip">available in our download section</a> and can be modified for more specific needs.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="KF_command_line_utilities.html" class="btn btn-neutral float-right" title="KF command line utilities" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="AMSprepTutorial.html" class="btn btn-neutral" title="Tutorial: Generate structures for substituent effects screening" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

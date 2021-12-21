@@ -1,0 +1,255 @@
+#!/bin/sh
+
+
+# ADF is well suited for calculating Core Electron Binding Energies (CEBEs). In
+# this example it is shown how one can differentiate between the 1s CEBEs of the
+# two non-equivalent nitrogen atoms in N2 O, using a delta-SCF technique. It
+# starts with a regular calculation that has the purpose of preparing a
+# reference adf.rkf file for the NNO molecule, which will later be useful in the
+# energy analysis. The result file is saved to t21.NNO.
+
+# The same GGA functional is specified throughout the run. The amount of output
+# is reduced by using some print keys.
+
+# The prepare the nitrogen atom with a core hole (restricted) will be used as a
+# fragment later. This enables selection of where the core hole should be.
+
+# prepare the Nitrogen core hole restricted to be used as fragment
+
+
+AMS_JOBNAME=N_ch $AMSBIN/ams <<eor
+System
+  atoms
+     N   0.0    0.0     0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title N atom core hole
+  irrepoccupations
+     s    1 2
+     p    3
+  end
+  basis
+    type TZ2P
+    core None
+    CreateOutput Yes
+  end
+  numericalquality good
+  xc
+    gga pw86x pw91c
+  end
+EndEngine
+
+eor
+
+
+# Now perform the restricted ground state molecule for analysis later. The
+# adf.rkf result file is saved.
+# Remark: In the core hole calculation the 2 N atoms will have different fragments.
+# Therefore also in this calculation the 2 N atoms are treated with 2 different fragments,
+# which is done here by using 2 different region: 'one' and 'two'
+
+
+AMS_JOBNAME=NNO $AMSBIN/ams <<eor
+System
+  atoms
+     N   0.0    0.0    -1.1284  region=one
+     N   0.0    0.0     0.0     region=two
+     O   0.0    0.0     1.1841
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title NNO
+  basis
+    type TZ2P
+    core None
+  end
+  noprint sfofragpop fragsfo
+  numericalquality good
+  xc
+    gga pw86x pw91c
+  end
+EndEngine
+
+eor
+
+
+# Next follow two sets of almost identical calculations in which a 1s electron
+# is removed from one or the other N atom (please note that the deepest s level
+# is associated with the 1s of the oxygen atom). The molecular NNO result file
+# is used as fragment. An unrestricted calculation is done and a positive charge
+# is specified. The final result file for the molecule with the core hole is
+# saved. Then another calculation is done to conveniently obtain the energy with
+# respect to the normal molecule. This is repeated for a core hole on the other
+# N atom.
+
+
+AMS_JOBNAME=NNO_unr1 $AMSBIN/ams <<eor
+System
+  atoms
+     N   0.0    0.0    -1.1284  region=one  adf.f=N_ch
+     N   0.0    0.0     0.0     region=two
+     O   0.0    0.0     1.1841
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  title NNO unrestricted core hole
+  fragments
+     N_ch N_ch.results/adf.rkf
+  end
+  irrepoccupations
+     sigma  1 1 1 4 // 1 0 1 4
+     pi     4       // 4
+  end
+  basis
+    type TZ2P
+    core None
+  end
+  noprint sfofragpop fragsfo
+  numericalquality good
+  spinpolarization 1
+  unrestricted Yes
+  xc
+    gga pw86x pw91c
+  end
+EndEngine
+
+eor
+
+
+# In the second calculation the result file of one of the unrestricted NNO
+# calculations is used as restart file, which ensures that the hole stays at its
+# place, because the starting density is already correct. The result file
+# t21.NNO for the normal NNO calculation is specified as fragment to serve as an
+# energy reference. The final Bonding Energy printed by ADF indicates what the
+# CEBE is. However, please check Chong, D.P. Accurate DFT Calculation of Core-
+# Electron Binding Energies in Reviews in Modern Quantum Chemistry, A
+# Celebration of the Contributions of R.G. Parr, edited by K.D. Sen (World
+# Scientific Publishing Co., Singapore), 1106-1139 (2002) for more detailed
+# information on Core-Electron Binding Energies. This reference also contain
+# information on empirical corrections that may have to be made on the final
+# numbers.
+
+
+AMS_JOBNAME=NNO_unr1_1 $AMSBIN/ams <<eor
+System
+  atoms
+     N   0.0    0.0    -1.1284  region=one  adf.f=NNO
+     N   0.0    0.0     0.0     region=two  adf.f=NNO
+     O   0.0    0.0     1.1841              adf.f=NNO
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+EngineRestart NNO_unr1.results/adf.rkf
+
+Engine ADF
+  title NNO unr. core hole
+  fragments
+     NNO NNO.results/adf.rkf
+  end
+  irrepoccupations
+     sigma  1 1 1 4 // 1 0 1 4
+     pi     4       // 4
+  end
+  noprint sfofragpop fragsfo
+  numericalquality good
+  spinpolarization 1
+  unrestricted Yes
+  xc
+    gga pw86x pw91c
+  end
+EndEngine
+
+eor
+
+
+# core hole nr. 2
+
+AMS_JOBNAME=NNO_unr2 $AMSBIN/ams <<eor
+System
+  atoms
+     N   0.0    0.0    -1.1284  region=one
+     N   0.0    0.0     0.0     region=two  adf.f=N_ch
+     O   0.0    0.0     1.1841
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  title NNO unrestricted core hole
+  fragments
+     N_ch N_ch.results/adf.rkf
+  end
+  irrepoccupations
+     sigma  1 1 1 4 // 1 0 1 4
+     pi     4       // 4
+  end
+  basis
+    type TZ2P
+    core None
+  end
+  noprint sfofragpop fragsfo
+  numericalquality good
+  spinpolarization 1
+  unrestricted Yes
+  xc
+    gga pw86x pw91c
+  end
+EndEngine
+
+eor
+
+# analysis for core hole 2 
+
+AMS_JOBNAME=unr3 $AMSBIN/ams <<eor
+System
+  atoms
+     N   0.0    0.0    -1.1284  region=one  adf.f=NNO
+     N   0.0    0.0     0.0     region=two  adf.f=NNO
+     O   0.0    0.0     1.1841              adf.f=NNO
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+EngineRestart NNO_unr2.results/adf.rkf
+
+Engine ADF
+  title NNO unr. core hole
+  fragments
+     NNO NNO.results/adf.rkf
+  end
+  irrepoccupations
+     sigma  1 1 1 4 // 1 0 1 4
+     pi     4       // 4
+  end
+  noprint sfofragpop fragsfo
+  numericalquality good
+  spinpolarization 1
+  unrestricted Yes
+  xc
+    gga pw86x pw91c
+  end
+EndEngine
+
+eor
+
+# Similarly, one could easily have prepared an oxygen with a core hole and
+# determined the CEBE of the oxygen 1s atom.
+

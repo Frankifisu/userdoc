@@ -1,0 +1,262 @@
+#! /bin/sh
+
+
+# This example illustrates the bond energy decomposition scheme using metaGGA or
+# metahybrid or hybrid functionals in ADF.
+
+# The first example is straightforward with closed shell atomic fragments: Zn_2.
+# The second example has open shell atomic fragments: Cr_2, and the extra
+# complication that spin symmetry breaking lowers the energy of the molecule,
+# although the total S_z-value is zero. The third example has open shell atomic
+# fragments, and the molecule is open shell: CrH.
+
+# == Zn2 ==
+
+# In the first example for Zn_2 the metahybrid TPSSh is used. In the bond energy
+# analysis, the bond energy is split in a Pauli repulsion term, a steric
+# interaction, and an orbital interaction.
+
+AMS_JOBNAME=Zn2 $AMSBIN/ams <<eor
+System
+  atoms
+     Zn 0.0 0.0 -1.6
+     Zn 0.0 0.0  1.6
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  xc
+    metahybrid TPSSh
+  end
+EndEngine
+
+eor
+
+# == Cr2 ==
+
+# In the second example for Cr2 the metaGGA TPSS is used. You can use
+# spin-unrestricted fragments in ADF. However, here simulated unrestricted
+# fragments are used. A fair approximation to a computation with unrestricted
+# fragments can be achieved with the key FRAGOCCUPATIONS. You tell ADF that you
+# want to treat the fragments as if they were unrestricted; this causes the
+# program to duplicate the one-electron orbitals of the fragment: one set for
+# spin-alpha and one set for spin-beta. You can then specify occupation numbers
+# for these spin-unrestricted fragments, and occupy spin-alpha orbitals
+# differently from spin-beta orbitals. Especially for the Pauli-repulsion it is
+# important that one chooses the spin-occupations on the different fragments
+# such that they are 'prepared for bonding'.
+
+# Of course, the unrestricted fragments that you use in this way, are not self-
+# consistent: different numbers of spin-alpha and spin-beta electrons usually
+# result in different spatial orbitals and different energy eigenvalues for
+# spin-alpha and spin-beta when you go to self-consistency, while here you have
+# spatially identical fragment orbitals. Nevertheless it is often a fair
+# approximation which gives you a considerable extension of analysis
+# possibilities.
+
+# Spin-symmetry breaking is enforced by the use of the key ModifyStartPotential
+# in combination with the key key UNRESTRICTED. In the ADF output one can find
+# that there is spin-density on both of the atoms.
+
+
+AMS_JOBNAME=Cr2 $AMSBIN/ams <<eor
+System
+  atoms
+     Cr.1 0.0 0.0 -0.9
+     Cr.2 0.0 0.0  0.9
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  fragoccupations
+     Cr.1
+     S 4 // 3
+     P 6 // 6
+     D 5 // 0
+     SubEnd
+     Cr.2
+     S 3 // 4
+     P 6 // 6
+     D 0 // 5
+     SubEnd
+  end
+  modifystartpotential
+     Cr.1 1 // 0
+     Cr.2 0 // 1
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  spinpolarization 0
+  unrestricted
+  xc
+    metagga TPSS
+  end
+EndEngine
+
+eor
+
+
+# In order to calculate the effect of self-consistency one should calculate the
+# Cr atom spin-unrestrictedly.
+
+
+AMS_JOBNAME=Cr $AMSBIN/ams <<eor
+System
+  atoms
+     Cr 0.0 0.0 0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  fragoccupations
+     Cr
+     S 4 // 3
+     P 6 // 6
+     D 5 // 0
+     SubEnd
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  spinpolarization 6
+  unrestricted
+  xc
+    metagga TPSS
+  end
+EndEngine
+
+eor
+
+
+# == CrH ==
+
+# In this example for CrH the hybrid B3LYP is used.
+
+AMS_JOBNAME=CrH $AMSBIN/ams <<eor
+System
+  atoms
+     Cr 0.0 0.0 0.0
+     H  0.0 0.0 1.65
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  fragoccupations
+     Cr
+     S 4 // 3
+     P 6 // 6
+     D 5 // 0
+     SubEnd
+     H
+     S 0 // 1
+     SubEnd
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  spinpolarization 5
+  unrestricted
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+
+eor
+
+
+# In order to calculate the effect of self-consistency of spin-polarization on
+# the atoms one should calculate the Cr and H atom spin-unrestrictedly.
+
+
+AMS_JOBNAME=Cr_B3LYP $AMSBIN/ams <<eor
+System
+  atoms
+     Cr 0.0 0.0 0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  fragoccupations
+     Cr
+     S 4 // 3
+     P 6 // 6
+     D 5 // 0
+     SubEnd
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  spinpolarization 6
+  unrestricted
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=H $AMSBIN/ams <<eor
+System
+  atoms
+     H 0.0 0.0 0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  fragoccupations
+     H
+     S 1 // 0
+     SubEnd
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  spinpolarization 1
+  unrestricted
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+
+eor

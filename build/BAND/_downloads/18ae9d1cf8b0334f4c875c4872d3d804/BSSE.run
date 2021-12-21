@@ -1,0 +1,135 @@
+#!/bin/bash
+
+# This example shows how to calculate the basis set superposition error for the
+# interaction of CO with H2. In this shell script we loop over progressively
+# better basis sets.
+
+for bas in DZ TZ2P QZ4P
+do
+
+$AMSBIN/ams <<eor
+Task SinglePoint
+System
+  Atoms [Bohr] 
+    C 0 0 0
+    O 2.13 0 0
+    H 0 0 6
+    H 1.5 0 6
+  End
+End
+
+Engine Band
+  Basis
+    Type $bas
+  End
+EndEngine
+eor
+
+ECOH2=`$AMSBIN/amsreport  ams.results/band.rkf -r 'Bond energies%final bond energy'`
+rm -r ams.results
+
+$AMSBIN/ams <<eor 
+Task SinglePoint
+System
+  Atoms [Bohr]
+    H 0 0 6
+    H 1.5 0 6
+  End
+End
+
+Engine Band
+  Basis
+    Type $bas
+  End
+EndEngine
+
+eor
+
+EH2=`$AMSBIN/amsreport  ams.results/band.rkf -r 'Bond energies%final bond energy'`
+rm -r ams.results
+
+
+$AMSBIN/ams <<eor 
+Task SinglePoint
+System
+  Atoms [Bohr]
+    Gh.C 0 0 0
+    Gh.O 2.13 0 0
+    H 0 0 6
+    H 1.5 0 6
+  End
+End
+
+Engine Band
+  Basis
+    Type $bas
+  End
+EndEngine
+
+eor
+
+EH2_GHOST_CO=`$AMSBIN/amsreport  ams.results/band.rkf -r 'Bond energies%final bond energy'`
+rm -r ams.results
+
+
+$AMSBIN/ams <<eor
+Task SinglePoint
+System
+  Atoms [Bohr]
+    C 0 0 0
+    O 2.13 0 0
+  End
+End
+
+Engine Band
+  Basis
+    Type $bas
+  End
+EndEngine
+
+eor
+
+ECO=`$AMSBIN/amsreport  ams.results/band.rkf -r 'Bond energies%final bond energy'`
+rm -r ams.results
+
+
+$AMSBIN/ams <<eor
+Task SinglePoint
+System
+  Atoms [Bohr]
+    C 0 0 0
+    O 2.13 0 0
+    Gh.H 0 0 6
+    Gh.H 1.5 0 6
+  End
+End
+
+Engine Band
+  Basis
+    Type $bas
+  End
+EndEngine
+
+eor
+
+ECO_GHOST_H2=`$AMSBIN/amsreport  ams.results/band.rkf -r 'Bond energies%final bond energy'`
+rm -r ams.results
+
+
+EV=27.212
+echo "Start report"
+echo "basis set: $bas"
+echo "H2 + CO : $ECOH2"
+echo "H2 : $EH2"
+echo "H2 (with ghost CO) : $EH2_GHOST_CO"
+echo "CO : $ECO"
+echo "CO (with ghost H2) : $ECO_GHOST_H2"
+BSSEEV=`$AMSBIN/amspython -c "print (( $EH2 - $EH2_GHOST_CO + $ECO - $ECO_GHOST_H2 ) *$EV)"`
+echo "BSSE correction: $BSSEEV (eV)"
+BOND1EV=`$AMSBIN/amspython -c "print (( $ECOH2 - $EH2 - $ECO ) *$EV)"`
+BOND2EV=`$AMSBIN/amspython -c "print ($BOND1EV + $BSSEEV)"`
+echo "Bond energy: $BOND1EV (eV)"
+echo "Bond energy + BSSE: $BOND2EV (eV)"
+echo "End report"
+
+done

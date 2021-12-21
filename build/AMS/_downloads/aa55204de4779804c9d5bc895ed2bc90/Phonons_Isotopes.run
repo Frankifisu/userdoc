@@ -1,0 +1,102 @@
+#! /bin/sh
+
+
+# ====================================
+# Phonons with default nuclear masses:
+# ====================================
+
+AMS_JOBNAME=defmasses $AMSBIN/ams << EOF
+
+   Task SinglePoint
+
+   Properties
+      Phonons True
+   End
+
+   NumericalPhonons
+      StepSize 0.01
+      SuperCell
+         4
+      End
+   End
+
+   System
+      Atoms
+          C  -2.42906152   -0.3445528299    -0.1353492062
+          C  -1.146891508  -1.134644249      0.1353492061
+          H  -2.429062041   0.004468895147  -1.185797304
+          H  -2.429062011   0.5753101439     0.4803683017
+          H  -1.146891017  -2.054507222     -0.4803683019
+          H  -1.146890987  -1.483665974      1.185797304
+      End
+
+      Lattice
+          2.564338467 0.0 0.0
+      End
+   End
+
+   Engine DFTB
+      ResourcesDir QUASINANO2015
+      Model DFTB0
+      KSpace
+        Type Symmetric
+        Symmetric KInteg=9
+      End
+   EndEngine
+
+EOF
+
+echo ""
+echo "Begin TOC of result file"
+$AMSBIN/dmpkf -n 1 defmasses.results/dftb.rkf --toc
+echo "End TOC of result file"
+
+
+# =================================
+# Phonons with two deuterium atoms:
+# =================================
+
+AMS_JOBNAME=usermasses $AMSBIN/ams << EOF
+
+   Task SinglePoint
+
+   Properties
+      Phonons true
+   End
+
+   NumericalPhonons
+      StepSize 0.01
+      SuperCell
+         4
+      End
+   End
+
+   System
+       Atoms
+           C   -2.42906152   -0.3445528299    -0.1353492062
+           C   -1.146891508  -1.134644249      0.1353492061
+           H   -2.429062041   0.004468895147  -1.185797304
+           H   -2.429062011   0.5753101439     0.4803683017
+           H   -1.146891017  -2.054507222     -0.4803683019    mass=2.014
+           H   -1.146890987  -1.483665974      1.185797304     mass=2.014
+       End
+       Lattice
+           2.564338467 0.0 0.0
+       End
+   End
+
+   Engine DFTB
+      ResourcesDir QUASINANO2015
+      Model DFTB0
+      KSpace
+        Type Symmetric
+        Symmetric KInteg=9
+      End
+   EndEngine
+
+EOF
+
+echo ""
+echo "Begin TOC of result file"
+$AMSBIN/dmpkf -n 1 usermasses.results/dftb.rkf --toc
+echo "End TOC of result file"

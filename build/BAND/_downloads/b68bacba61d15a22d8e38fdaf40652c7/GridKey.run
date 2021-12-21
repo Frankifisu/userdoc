@@ -1,0 +1,150 @@
+#!/bin/sh
+
+SYSTEM=$AMSHOME/atomicdata/Molecules/TestMols/Methane.xyz
+
+# Initial run
+
+AMS_JOBNAME=methane $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  GeometryFile $SYSTEM
+End
+
+Engine Band 
+  Basis
+    Type TZP
+  End
+EndEngine
+eor
+
+
+# Use the grid
+
+AMS_JOBNAME=auto_grid $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  GeometryFile $SYSTEM
+End
+
+Engine Band 
+  Restart 
+    File methane.results/band.rkf
+    DensityPlot
+  End
+
+  Grid
+   Type Coarse
+   ExtendX 21.1671 [Angstrom]
+  End
+
+  DensityPlot
+    rho(fit)
+  End
+
+  Basis
+    Type TZP
+  End
+EndEngine
+eor
+
+
+
+echo ""
+echo "Begin TOC of tape41"
+
+$AMSBIN/dmpkf -n 1 auto_grid.results/TAPE41 --toc
+
+echo "End TOC of tape41"
+
+
+
+# Use a completely user specified regular grid
+
+AMS_JOBNAME=user_grid $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  GeometryFile $SYSTEM
+End
+
+Engine Band 
+  Restart 
+    File methane.results/band.rkf
+    DensityPlot
+  End
+
+  Grid
+    UserDefined
+      -2.0 -1.3 -2.5 
+      1.0 0.0 0.0 0.02
+      0 1 0.0 0.02
+      0.0 0.0 1.0 0.02
+      20 30 40
+    End
+  End
+
+  DensityPlot
+    rho(fit)
+  End
+
+  Basis
+    Type TZP
+  End
+EndEngine
+eor
+
+echo ""
+echo "Begin TOC of tape41"
+
+$AMSBIN/dmpkf -n 1 user_grid.results/TAPE41 --toc
+
+echo "End TOC of tape41"
+
+
+# Use a text file to import the (arbitrary grid)
+
+cat << eor > coords.txt
+-3.0 0.0 0.0
+-2.0 0.1 0.0
+ 0.0 0.2 0.0
+eor
+
+AMS_JOBNAME=file_grid $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  GeometryFile $SYSTEM
+End
+
+Engine Band 
+  Restart 
+    File methane.results/band.rkf
+    DensityPlot
+    vtkFile result.txt
+  End
+
+  Grid
+    Filename coords.txt
+  End
+
+  DensityPlot
+    rho(fit)
+  End
+
+  Basis
+    Type TZP
+  End
+EndEngine
+
+eor
+
+echo ""
+echo "Begin of result.txt"
+cat result.txt
+echo "End of result.txt"

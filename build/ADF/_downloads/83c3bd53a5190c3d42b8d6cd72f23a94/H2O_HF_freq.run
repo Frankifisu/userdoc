@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# Example shows a Hartree-Fock frequency calculation with an accurate basis set.
+# Note that numerical issues may be present in ADF with large basis sets icw
+# Hartree-Fock or (range-separated) (meta-)hybrids.
+# An RIHartreeFock  VeryGood fit set is recommended in those cases.
+
+# First a geometry optimization is performed.
+
+
+AMS_JOBNAME=GO $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.000000    0.000000   -0.007124
+     H         0.000000    0.751933    0.556531
+     H         0.000000   -0.751933    0.556531
+  end
+end
+
+Task GeometryOptimization
+
+Engine ADF
+  title accurate HF geometry optimization with large QZ4P basis set
+  basis
+    type QZ4P
+    core None
+  end
+  numericalquality Good
+  rihartreefock
+    quality verygood
+  end
+  xc
+    hartreefock
+  end
+EndEngine
+eor
+
+
+# Next the frequency calculation is done.
+
+
+AMS_JOBNAME=Freq $AMSBIN/ams <<eor
+
+LoadSystem 
+  File GO.results/adf.rkf
+End
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+End
+
+Engine ADF
+  title accurate HF frequency calculation with large QZ4P basis set
+  basis
+    type QZ4P
+    core None
+  end
+  numericalquality Good
+  rihartreefock
+    quality verygood
+  end
+  xc
+    hartreefock
+  end
+EndEngine
+eor

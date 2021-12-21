@@ -1,0 +1,54 @@
+#!/bin/sh
+
+AMS_JOBNAME=graphene $AMSBIN/ams << EOF
+
+   Task GeometryOptimization
+
+   GeometryOptimization
+!      CoordinateType Cartesian
+      OptimizeLattice True
+      Convergence Gradients=1.0e-5
+      Method Quasi-Newton
+   End
+
+   Properties
+      Phonons True
+   End
+
+   NumericalPhonons
+     SuperCell
+       2 0
+       0 2
+     End
+   End
+
+   System
+      Atoms
+         C       0.000000000    -0.000000000     0.00000
+         C       0.000000000    -1.420281662     0.00000
+      End
+
+      Lattice
+         1.230000000    -2.130422493     0.000000000
+         1.230000000     2.130422493     0.000000000
+      End
+   End
+
+   Engine DFTB
+      ResourcesDir Dresden
+      Model DFTB0
+      KSpace
+        Type Symmetric
+        Symmetric KInteg=9
+      End
+      Technical AnalyticalStressTensor=False # Not yet supported with symmetric k-space grid ...
+   EndEngine
+
+EOF
+
+echo ""
+echo "Begin TOC of result file"
+
+$AMSBIN/dmpkf -n 1 graphene.results/dftb.rkf --toc
+
+echo "End TOC of result file"

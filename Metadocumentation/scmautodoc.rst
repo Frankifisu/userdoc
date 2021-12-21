@@ -1,0 +1,178 @@
+Documenting input keywords: scmautodoc
+######################################
+
+Input keywords should as much as possible be documented via the ``scmautodoc`` custom-made directive (``$AMSHOME/userdoc/misc/scmautodoc.py``).
+The scmautodoc directive uses the information from the json input definition files (``$AMSHOME/data/input_def/``) to automagically generate keywords documentation. 
+
+Simple usage
+============
+
+Simple usage: ``.. scmautodoc:: json_filename keyword_name``. For example, this is how to document the 'PESPointCharacter' input block in the 'ams.json' file: 
+
+**Example:**
+
+.. code-block:: rst
+
+  .. scmautodoc:: ams PESPointCharacter
+
+**Result** (the first part is the **summary**, and the second part is the **description**)
+
+.. scmautodoc:: ams PESPointCharacter
+
+By default the scmautodoc directive will also create a **label for cross-reference** called ``json_filename-key-keyword_name``. To reference it, you can use the ``:ref:`` role with an explicit link title. E.g.: 
+
+.. code-block:: rst
+
+  See the :ref:`PESPointCharacter input block <ams-key-PESPointCharacter>` for more details. 
+
+For blocks, you can also explicitly specify the (ordered) list of subkeys you want to document. E.g.:
+
+.. code-block:: rst
+
+  .. scmautodoc:: ams PESPointCharacter Pressure
+
+will only document the ``PESPointCharacter`` block and the ``Pressure`` sub-key.
+
+
+scmautodoc options
+==================
+
+SCMAutodoc directive options:
+
+``:notrecursive:``
+  Do not recursively document sub-keys. E.g. this:
+
+  .. code-block:: rst
+
+    .. scmautodoc:: ams PESPointCharacter
+      :notrecursive:
+
+  will only document the block ``PESPointCharacter``, but will not document its sub-keys and sub-blocks.
+
+``:noref:``
+  Do not create a label for cross-reference. This is necessary if the same key/block is documented multiple times (you cannot have multiple labes with the same name in sphinx).
+
+``:onlysummary:``
+  Only creates the *summary* part of the documentation: E.g. this:
+
+  .. code-block:: rst
+
+    .. scmautodoc:: ams PESPointCharacter
+      :onlysummary:
+
+  will result in the following:
+
+  .. scmautodoc:: ams PESPointCharacter
+    :noref:
+    :onlysummary:
+
+``:nosummary:`` 
+  Do not create the *summary* part (i.e. only create the *description*)
+
+``:skipblockdescription:`` 
+  Do not generate the *description* of the block (only generate the description of the sub-keys)
+
+
+``:collapselongchoicesinsummary:``
+  This only affects the *summary*.
+  If you have a *multiple_choice* input that has a ton of possible *choices*, you might not want to show all these *choices* in the summary.
+  If you include this option, then the *choices* of *multiple_choice* inputs with more than 10 elements will be replaced with ``[...]`` (in the summary).
+
+
+Non-trivial example
+===================
+
+**Example:**
+
+.. code-block:: rst
+
+  Optimizations are controlled via the ``GeometryOptimization`` block:
+
+  .. scmautodoc:: ams GeometryOptimization Convergence MaxIterations OptimizeLattice
+    :onlysummary:
+
+  Convergence details are be specified in with the following options: 
+
+  .. scmautodoc:: ams GeometryOptimization Convergence MaxIterations
+    :skipblockdescription:
+    :nosummary:
+    :noref:
+
+
+**Result:**
+
+Optimizations are controlled via the ``GeometryOptimization`` block:
+
+.. scmautodoc:: ams GeometryOptimization Convergence MaxIterations OptimizeLattice
+  :onlysummary:
+
+Convergence details are be specified in with the following options: 
+
+.. scmautodoc:: ams GeometryOptimization Convergence MaxIterations
+  :skipblockdescription:
+  :nosummary:
+  :noref:
+
+
+
+Free blocks / non-json keywords documentation
+=============================================
+
+Sometimes (e.g. for free blocks) you cannot create the keywords documentation automagically. 
+For such cases you should make the **summary** keywords **description** by hand.
+
+**Example:**
+
+.. code-block:: rst
+
+  .. _key-MyFreeBlock:
+
+  .. code-block:: none
+
+    MyFreeBlock
+      label x y z
+    End
+
+  ``label x y z``:
+    Here you should describe what ``label``, ``x`` ``y`` and ``z`` are.
+
+**Result:**
+
+.. _key-MyFreeBlock:
+
+.. code-block:: none
+
+  MyFreeBlock
+    label x y z
+  End
+
+``label x y z``:
+  Here you should describe what ``label``, ``x`` ``y`` and ``z`` are.
+
+
+scmautodocindex and scmautodoclist
+==================================
+
+There are two custom directives related to ``scmautodoc``: ``scmautodocindex`` and ``scmautodoclist``. 
+``scmautodocindex`` generates a list of links to the keywords which were documented using ``scmautodoc``. 
+``scmautodoclist`` Automatically traverse a specific json file and generates documentation for all the non-hidden keywords.
+
+
+**Example:**
+
+.. code-block:: rst
+
+  Links to manual entries
+  =======================
+
+  .. scmautodocindex::
+
+
+  Summary of all keywords
+  =======================
+
+  .. scmautodoclist:: ams
+
+
+The keywords generated by ``scmautodoclist`` automatically get labels for cross-referencing with the format ``scmautodoclist-json_name-keyword_name``. 
+E.g., to reference the PESPointCharacter generated by scmautodoclist: ``:ref:`PESPointCharacter input block <scmautodoclist-ams-PESPointCharacter>```

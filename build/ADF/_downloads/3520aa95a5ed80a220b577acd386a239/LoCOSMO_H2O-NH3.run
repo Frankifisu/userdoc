@@ -1,0 +1,131 @@
+#!/bin/sh
+
+
+# This is example for a calculation of FDE and (localized) COSMO in ADF in case
+# of closed shell fragments.
+
+# It performs single point runs for H2 O and NH3 in COSMO (water) and uses these
+# fragments in a freeze-and-thaw calculations. Recommended is to limit the
+# number of freeze-and-thaw cycles in such calculations where FDE and COSMO are
+# combined, because the FT convergence criterion may not be met in a finite
+# number of cycles, although the density is practically converged.
+
+# In the freeze-and-thaw cycles LoCosmo is included in the SOLVATION key, thus
+# the local COSMO will be used in the calculation. A cutoff radius (Angstrom)
+# must be specified after the LoCOSMO subargument, in this case it is 3.0
+# Angstrom. All surface charges within this radius from any atom of the active
+# fragment are included in the active charge space.
+
+
+AMS_JOBNAME=Iso1 $AMSBIN/ams <<eor
+System
+  atoms
+     H        0.0201  0.6299  0.0000
+     O       -0.0370  1.6130  0.0000
+     H        0.8936  1.9007  0.0000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    type DZP
+  end
+  noprint BAS FUNCTIONS
+  numericalquality Good
+  solvation
+  end
+  symmetry NOSYM
+  title H2O isolated
+  xc
+    gga BP86
+  end
+EndEngine
+eor
+mv Iso1.results/adf.rkf t21.iso.rho1
+
+
+AMS_JOBNAME=Iso2 $AMSBIN/ams <<eor
+System
+  atoms
+     N       -0.0370  -1.4327  0.0000
+     H        0.8110  -2.0086  0.0000
+     H       -0.5850  -1.6987  0.8244
+     H       -0.5850  -1.6987 -0.8244
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    type DZP
+  end
+  noprint BAS FUNCTIONS
+  numericalquality Good
+  solvation
+  end
+  symmetry NOSYM
+  title NH3 isolated
+  xc
+    gga BP86
+  end
+EndEngine
+eor
+mv Iso2.results/adf.rkf t21.iso.rho2
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     H        0.0201   0.6299   0.0000  adf.f=frag1
+     O       -0.0370   1.6130   0.0000  adf.f=frag1
+     H        0.8936   1.9007   0.0000  adf.f=frag1
+     N       -0.0370  -1.4327   0.0000  adf.f=frag2
+     H        0.8110  -2.0086   0.0000  adf.f=frag2
+     H       -0.5850  -1.6987   0.8244  adf.f=frag2
+     H       -0.5850  -1.6987  -0.8244  adf.f=frag2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  fde
+    pw91k
+    relaxcycles 3
+  end
+  fragments
+     frag1  t21.iso.rho1
+     frag2  t21.iso.rho2 type=FDE &
+     FDEOPTIONS RELAX
+     SubEnd
+  end
+  noprint BAS FUNCTIONS
+  numericalquality Good
+  solvation
+    charged LoCOSMO 3.0
+  end
+  symmetry NOSYM
+  title FT cycles for H2O-NH3
+  xc
+    gga BP86
+  end
+EndEngine
+eor

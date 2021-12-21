@@ -1,0 +1,92 @@
+#! /bin/sh
+
+
+# This sample illustrates the DOS property program to compute density-of-states
+# data, for energy-dependent analysis.
+
+# First, the Cu_4 CO molecule is calculated (ADF), using single-atom fragments.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     Cu     2.784      0.0              0.0
+     Cu    -1.392    2.411014724135877  0.0
+     Cu    -1.392   -2.411014724135877  0.0
+     Cu     0.0      0.0               -3.9371705576466964
+     C      0.0      0.0                2.65
+     O      0.0      0.0                4.91
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Cu4CO (3,1) from atoms
+  basis
+    core small
+    type TZP
+  end
+  print SFO
+  xc
+    gga PostSCF    Becke Perdew
+  end
+EndEngine
+eor
+
+
+# The PostSCF feature in the specification of the XC functional is used: the
+# 'Becke-Perdew' GGA corrections are not included self-consistently but applied
+# to the energy evaluation after the self-consistent LDA solution has been
+# obtained.
+
+# The utility program dos requires as input file a file named TAPE21 in the current directory,
+# or if one uses the key ADFFILE a (relative) path to an adf.rkf file.
+
+
+$AMSBIN/dos <<eor
+adffile ams.results/adf.rkf
+file dostxt
+
+energyrange npoint=36 e-start=-25 e-end=10
+
+tdos
+ 
+! Cu 3d partial DOS
+gpdos
+  a1   14:22 32:34
+  a2    5:10 
+  e1:1 18:32 37:42
+  e1:2 18:32 37:42
+end
+
+! The same but using BAS
+gpdos
+  BAS 17:34 57:74 97:114 137:154
+end
+
+! The same as above, but using much less complicated input
+gpdos
+  ATYPE Cu d
+end
+
+! Overlap PDOS Cu 3d and CO 2p
+opdos
+  ATYPE Cu 3d
+SUBEND
+  ATOM 5 2p
+  ATOM 6 2p
+end
+
+eor
+
+
+echo "DOS result file"
+echo "==============="
+cat dostxt
+echo "END of DOS result file"
+
+# Here, the total density of states, as well as various partial densities of
+# states, are computed. You may feed the results found in the dostxt file into a
+# plotting program such as gnuplot. The result is not displayed here. See the
+# ADF manual for more detailed info about the dos program.

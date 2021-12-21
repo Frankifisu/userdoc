@@ -1,0 +1,52 @@
+#! /bin/sh
+
+# Example of using the full XC kernel in the calculation of excitation energies,
+# in this case for the BP86 functional. Note that SYMMETRY NOSYM is required and
+# XCFUN should be added to the XC block key. In this case spin-flip excitations
+# are calculated.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     O         0.000000    0.000000    0.000631
+     H         0.000000    0.771769   -0.605006
+     H         0.000000   -0.771769   -0.605006
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2O+ spin-flip TDDFT with BP and the non-ALDA kernel
+  
+  basis
+    type DZP
+  end
+  
+  xc
+    gga Becke Perdew
+    xcfun
+  end
+  
+  beckegrid
+    quality good
+  end
+  
+  excitations
+    fullkernel
+    lowest 5
+  end
+  
+  sftddft
+  tda
+  
+  unrestricted
+  spinpolarization 1
+  
+  symmetry NOSYM
+  
+  noprint BAS FIT FUNCTIONS SFO
+EndEngine
+
+eor

@@ -1,0 +1,41 @@
+#! /bin/sh
+
+
+# Analytical frequencies with subsequent calculation of vibrational circular
+# dichroism (VCD)
+
+# Recommended is use to use high accuracy for the geometry optimization which
+# one needs to do before the frequency calculation. This simple example is an
+# NHDT molecule, which is NH3 where one hydrogen atom is replaced with deuterium
+# and another with tritium.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     N       0.000000    0.000000    0.010272
+     H      -0.471582   -0.816803    0.407861
+     H       0.943163    0.000000    0.407861 mass=2.014101778
+     H      -0.471582    0.816803    0.407861 mass=3.01604927
+  end
+end
+
+Task SinglePoint
+
+Properties
+  VCD Yes
+End
+
+Engine ADF
+  basis
+    core None
+    type TZP
+  end
+  xc
+    gga BP86
+  end
+  beckegrid
+    quality verygood
+  end
+EndEngine
+
+eor

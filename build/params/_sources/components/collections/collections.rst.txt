@@ -1,0 +1,354 @@
+Job and Engine Collections
+==========================
+
+Collections represent containers for AMS jobs that need calculation before a :ref:`Data Set` can be evaluated.
+They store all settings necessary for the execution in a human-readable YAML format.
+We divide these settings into two Collections: *Job* and *Engine Collection*.
+
+.. seealso:: YAML -- `Homepage <https://yaml.org/>`_ and on `Wikipedia <https://en.wikipedia.org/wiki/YAML>`_.
+
+The Job Collection holds information relevant to the
+`AMS driver <../../../AMS/index.html>`_,
+such as the chemical system, the driver task, and the properties to calculate.
+The Engine Collection stores different AMS engine blocks. |br|
+Combining an entry from the Job Collection with any entry from the Engine Collection
+ensures that results are comparable:
+Nothing in the job should change apart from the engine that is used to execute it. |br|
+Fundamentally, collections behave like dictionaries with key-value pairs.
+We refer to the key as `ID` (or `jobID` in case of the Job Collection).
+
+.. important::
+  Each ID within a Collection needs to be **unique**
+  due to the `dict <https://docs.python.org/3/tutorial/datastructures.html#dictionaries>`_-like nature of the classes.
+
+
+.. contents:: Contents of this Page
+  :local:
+
+---------------
+
+
+
+
+Job Collection
+--------------
+.. currentmodule:: scm.params.core.jobcollection
+
+The *Job Collection* stores input that can be read by the AMS driver, alongside with optional metadata.
+When stored to disk, the data looks similar to the following:
+
+.. code-block:: yaml
+
+  ---
+  ID: H2O_001
+  ReferenceEngineID: myDFTengine_1
+  AMSInput: |
+     Task SinglePoint
+     system
+       atoms
+          H     -0.7440600000      1.1554900000     -0.0585900000
+          O      0.6438200000      1.2393700000      0.0060400000
+          H     -3.3407000000      0.2702700000      0.7409900000
+       end
+     end
+  Source: ThisAwesomePaper
+  PlotIt: True
+  ---
+  ID: CH4_001
+  ReferenceEngineID: DFTB_1
+  AMSInput: |
+     Task GeometryOptimization
+     properties
+       Gradients True
+     end
+     system
+       atoms
+          C     -0.7809900000      1.1572800000     -0.0369200000
+          H      0.6076000000      1.2309400000      0.0140600000
+          H      1.3758800000      0.0685800000      0.0285600000
+          H      0.7425100000     -1.1714200000     -0.0084500000
+          H     -0.6465400000     -1.2538900000     -0.0595900000
+       end
+     end
+  ...
+
+The collection above contains two entries.
+We can recognize the `ID`, by which each entry is labeled.
+Everything else is a textual representation of the `value` stored under this ID.
+At runtime, each entry is stored as a :class:`JCEntry` instance.
+Basic usage is discussed below.
+
+The Job Collection inherits basic dictionary functionality.
+Consequently, all commonly known  methods are available --  with a few additions:
+
+>>> jc.keys() # All IDs:
+dict_keys(['H2O_001'])
+>>> jc() # A shortcut to list(jc.keys())
+['H2O_001']
+>>> jc.values() # All JCEntries:
+dict_values([<scm.params.core.jobcollection.JCEntry object at 0x7f5a0510db38>])
+>>> for k,v in jc.items(): # Or both of the above
+>>>   ...
+
+
+
+Adding Jobs
+~~~~~~~~~~~
+
+.. important::
+  The *Job Collection* only stores instances of :class:`JCEntry`.
+
+An instance of the Job Collection can be initialized without further parameters.
+The instance can be populated with :class:`JCEntry` objects only.
+Every :class:`JCEntry` instance needs to have at least the attributes
+:attr:`settings` and :attr:`molecule` defined.
+Adding a :attr:`reference_engine` string and :attr:`metadata` is optional:
+
+>>> jc = JobCollection()
+>>> jce = JCEntry()
+>>> jce.settings.input.AMS.Task = 'SinglePoint' # Must be a PLAMS Settings() instance
+>>> jce.molecule = h2o_mol                      # Must be a PLAMS Molecule() instance
+>>> jce.reference_engine = 'myDFTengine'        # Optional: A string that matches the ID of an EngineCollection entry
+>>> jce.metadata['Source'] = 'SomePaper'        # Optional: Metadata can be added to the `metadata` dictionary
+>>> jc.add_entry('H2O_001',jce)                 # Adding `jce` with ID 'H20_001'.
+>>> # jc['H2O_001'] = jce                       # This is the same as the line above.
+>>> # Adding more entries with the same ID to `jc` is not possible anymore.
+
+All attributes can also be assigned when instantiating the object:
+
+>>> jce = JCEntry(settings, molecule, refengine, **metadata)
+
+See :ref:`below <Saving and loading>` for a textual representation of ``jce``.
+
+
+Lookup
+~~~~~~
+
+>>> 'H2O_001' in jc
+True
+>>> jc['H2O_001']      # Get the respective JCEntry
+>>> jc('H2O_001')      # Same
+<scm.params.core.jobcollection.JCEntry object at 0x7f5a0510db38>
+
+Removing Entries
+~~~~~~~~~~~~~~~~
+
+>>> del jc['H2O_001']
+>>> len(jc)
+0
+>>> # Alternatively:
+>>> jc.remove_entry('H2O_001')
+
+Renaming Entries
+~~~~~~~~~~~~~~~~
+
+>>> oldkey = 'H2O_001'
+>>> newkey = 'H2O_002'
+>>> jc.rename_entry(oldkey, newkey)
+
+
+Collections can be added. Duplicate keys will use the value of
+the first argument (`jc` rather than `jc2`):
+
+>>> added_jc = jc + jc2
+
+Comparison
+~~~~~~~~~~
+
+>>> jc == jc
+True
+
+Metadata can be stored per-entry, as shown :ref:`above <Adding Jobs>`.
+For the storage of global metadata or comments, the :attr:`header` attribute
+can be used to store a string:
+
+>>> comments = """this is a multiline
+>>> header comment"""
+>>> jc.header = comments
+>>> jc.store('jc_with_header.yaml') # The header string will be stored when writing to YAML
+
+The :attr:`header` is also available to the :ref:`Data Set` and :ref:`Engine Collection` classes.
+
+
+
+Saving and loading
+~~~~~~~~~~~~~~~~~~
+
+Storing and loading collections can be done with:
+
+>>> jc.store('jobs.yml')       # Store the collection in a YAML format.
+>>> jc.pickle_dump('jobs.pkl') # Or in a pickled binary format.
+
+This produces:
+
+.. code-block:: yaml
+
+  ---
+  ID: H2O_001
+  ReferenceEngineID: myDFTengine
+  AMSInput: |
+     system
+       atoms
+                H      0.0000000000      0.0000000000      0.3753600000
+                H      0.0000000000      0.0000000000     -0.3753600000
+       end
+     end
+     task SinglePoint
+  Source: SomePaper
+  ...
+
+The textual representation of a single :class:`JCEntry` can also be invoked by calling the :meth:`str() <JCEntry.__str__()>` method.
+Calling ``print(jc['H2O_001'])`` would produce the same output as above (since our Job Collection only has one entry).
+
+The file can then be loaded:
+
+>>> jc2 = JobCollection('jobs.yml') # From YAML
+>>> jc2 = JobCollection('jobs.pkl') # From a pickled file
+>>> jc == jc2
+True
+
+.. note::
+  When working with large Job Collections, storing and loading
+  binary files is significantly faster than the YAML counterpart.
+
+
+
+Generating AMSJobs
+~~~~~~~~~~~~~~~~~~
+
+The :meth:`JobCollection.to_amsjobs` method can be used to quickly generate :class:`plams.AMSJob` instances
+from all the entries in a Job Collection.
+You can limit the output to a specific subset of entries by providing the `jobids` argument.
+An additional `engine_settings` argument can be passed to be added to all :attr:`AMSJob.settings`,
+making the returned AMSJobs executable:
+
+>>> engine_settings = Settings()
+>>> engine_settings.input.ams.BAND # Assuming we would like to run all jobs in `jc` with BAND
+>>> jobids = ['job1', 'job2']
+>>> jobs = jc.to_amsjobs(jobids, engine_settings)
+>>> all(isinstance(job, AMSJob) for job in jobs)
+True
+>>> [job.run() for job in jobs] # The jobs can now be executed by PLAMS
+
+
+
+Running Collection Jobs
+~~~~~~~~~~~~~~~~~~~~~~~
+
+All entries in a Job Collection can be calculated at once with the :meth:`JobCollection.run` method,
+returning a respective dictionary of `{jobID : plams.AMSResults}` pairs.
+This can be useful when a manual interaction with the job results is needed, given a specific engine
+(for example when :ref:`calculating the reference data <calculatingandaddingreferencedatawithams>`):
+
+>>> len(jc)
+20
+>>> engine = Settings() # The JCEntries do not include engine settings
+>>> engine.input.BAND   # We would like to run all stored jobs with BAND
+>>> results = jc.run(engine) # Will run all jobs in jc and return their results object
+>>> all(r.ok() for r in results.values()) # The returned value is a dict of {jobID : AMSResults}
+True
+>>> energies = [r.get_energy() for r in results.values()] # We can now process the results
+
+Alternatively, a subset of jobs can be calculated by providing the `jobids` argument:
+
+>>> ids_to_run = ['myjob1', 'myotherjob']
+>>> results = jc.run(engine, jobids=ids_to_run)
+>>> len(results)
+2
+
+.. note::
+  This method uses the `AMSWorker <../../../plams/interfaces/amsworker.html>`_
+  interface where possible.  Use the `use_pipe` keyword to disable it.
+
+
+
+
+
+
+Engine Collection
+-----------------
+.. currentmodule:: scm.params.core.engines
+
+*Engine Collections* are very similar to the :ref:`Job Collection`:
+The user can work with it in exactly the same manner.
+The main difference between those two is that the *Engine Collection* is storing :class:`Engine` instances instead of :class:`~scm.params.core.jobcollection.JCEntry`.
+A textual representation looks similar to this:
+
+.. code-block:: yaml
+
+    ---
+    ID: DFTB_1
+    AMSInput: |
+       engine DFTB
+         Model DFTB3
+         ResourcesDir DFTB.org/3ob-3-1
+       endengine
+    Comment: My favourite engine.
+    ...
+
+.. important:: The *Engine Collection* only stores instances of :class:`Engine`.
+
+Within each entry, only the :attr:`settings` attribute **must** be defined. The remaining metadata is optional.
+
+>>> ec = EngineCollection()
+>>> e  = Engine()
+>>> e.settings.input.DFTB.model = 'DFTB3' # e.settings is a PLAMS Settings() instance.
+>>> e.settings.input.DFTB.ResourceDir = 'DFTB.org/3ob-3-1'
+>>> e.metadata['Comment'] = 'My favourite engine.' # This is optional.
+>>> ec.add_entry('DFTB_1',e)
+>>> # print(ec['DFTB_1']) reproduces the textual representation above
+
+.. seealso::
+  For further examples on how to work with the collection, please refer to the :ref:`Job Collection` section.
+
+
+
+
+Collections API
+---------------
+
+JCEntry
+~~~~~~~
+.. currentmodule::
+  scm.params.core.jobcollection
+
+.. autoclass:: JCEntry
+    :no-private-members:
+    :exclude-members: __weakref__
+
+
+JobCollection
+~~~~~~~~~~~~~
+.. seealso::
+  This class inherits from :class:`BaseCollection <scm.params.core.basecollection.BaseCollection>`. Most methods can be found there.
+
+.. autoclass:: JobCollection
+    :no-private-members:
+
+Engine
+~~~~~~
+.. currentmodule::
+  scm.params.core.engines
+
+.. autoclass:: Engine
+    :no-private-members:
+    :exclude-members: __weakref__
+
+EngineCollection
+~~~~~~~~~~~~~~~~
+.. seealso::
+  This class inherits from :class:`BaseCollection <scm.params.core.basecollection.BaseCollection>`. Most methods can be found there.
+
+.. autoclass:: EngineCollection
+    :no-private-members:
+
+
+Collection Base Class
+~~~~~~~~~~~~~~~~~~~~~
+.. currentmodule::
+  scm.params.core.basecollection
+
+All collections inherit from this base class.
+
+.. autoclass:: BaseCollection
+    :exclude-members: __weakref__

@@ -1,0 +1,229 @@
+#!/bin/sh
+
+
+# You calculate Electron Spin Resonance properties with the keywords ESR and
+# QTENS. ESR is a block-type key and is used to compute the G-tensor or the
+# Nuclear Magnetic Dipole Hyperfine interaction. QTENS is a simple key and
+# invokes the computation of the Nuclear Electric Quadrupole Hyperfine
+# interaction.
+
+# Proper usage of the key ESR requires that you do one of the following:
+
+# (a) A Spin-Orbit calculation, spin-restricted, with exactly one unpaired
+#     electron, or
+# (b) A Spin-Orbit calculation, spin-unrestricted in the collinear
+#     approximation, or 
+# (c) No Spin-Orbit terms and spin-unrestricted.
+
+# In case (a) and (b) you obtain the G-tensor. In case (b) and (c) you get the
+# Magnetic Dipole Hyperfine interaction.
+
+# Note: in case (a) the program also prints a Magnetic Dipole Hyperfine
+# interaction data, but these have then been computed without the terms from the
+# spin-density at the nucleus. Note: in case (b) and (c) one can have more than
+# one unpaired electron. Note: in case (b) one has to use symmetry NOSYM.
+
+# Five calculations are performed:
+# - Scalar relativistic spin-restricted
+# - Scalar relativistic open shell spin-restricted
+# - Scalar relativistic spin-unrestricted
+# - Spin-Orbit relativistic spin-restricted
+# - Spin-Orbit relativistic spin-unrestricted collinear
+
+# First a scalar relativistic spin-restricted calculation is performed. The
+# results of this calculation are used as a fragment in the next spin-
+# unrestricted calculation, using only 0 SCF iterations, which is a way to get
+# the scalar relativistic spin-restricted open shell result for the magnetic
+# dipole hyperfine interaction.
+
+
+AMS_JOBNAME=TiF3_SR $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  0      0                  0
+     F   1.780  0                  0
+     F  -0.89   1.5415252187363007 0
+     F  -0.89  -1.5415252187363007 0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiF3  scalar relativistic restricted
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  noprint sfo frag functions
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=TiF3_SR_0 $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  0      0                  0 adf.f=TiF3
+     F   1.780  0                  0 adf.f=TiF3
+     F  -0.89   1.5415252187363007 0 adf.f=TiF3
+     F  -0.89  -1.5415252187363007 0 adf.f=TiF3
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiF3  scalar relativistic open shell restricted
+  esr
+  end
+  fragments
+     TiF3 TiF3_SR.results/adf.rkf
+  end
+  noprint sfo frag functions
+  qtens
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  scf
+    iterations 0
+  end
+  spinpolarization 1
+  unrestricted
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+# Next a spin-unrestricted SCF calculation is performed to get the scalar
+# relativistic spin-unrestricted result for the magnetic dipole hyperfine
+# interaction.
+
+
+AMS_JOBNAME=TiF3_SR_unrestricted $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  0      0                  0 adf.f=TiF3
+     F   1.780  0                  0 adf.f=TiF3
+     F  -0.89   1.5415252187363007 0 adf.f=TiF3
+     F  -0.89  -1.5415252187363007 0 adf.f=TiF3
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiF3  relativistic open shell unrestricted
+  esr
+  end
+  fragments
+     TiF3   TiF3_SR.results/adf.rkf
+  end
+  noprint sfo frag functions
+  qtens
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 1
+  unrestricted
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+# Then, for the same molecule, we compute the G-tensor in a Spin-Orbit run
+# (spin-restricted).
+
+# The here-computed and printed Dipole Hyperfine interaction misses the terms
+# from the spin-density at the nucleus: compare with the outcomes from the first
+# calculation.
+
+# In each of the calculations, the QTENS key invokes the computation of the
+# Electric Quadrupole Hyperfine interaction.
+
+# Note that an all-electron calculation is carried out. This is relevant for the
+# computation of the A-tensor, the nuclear magnetic dipole hyperfine
+# interaction, where an accurate value of the spin-polarization density at the
+# nucleus is important. For the G-tensor (and also for the Q-tensor) this plays
+# a minor role, but for reasons of consistency both calculations use the same
+# basis set and (absence of) frozen core.
+
+
+AMS_JOBNAME=TiF3_SO $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  0      0                  0 adf.f=TiF3
+     F   1.780  0                  0 adf.f=TiF3
+     F  -0.89   1.5415252187363007 0 adf.f=TiF3
+     F  -0.89  -1.5415252187363007 0 adf.f=TiF3
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiF3  relativistic spinorbit open shell restricted
+  esr
+  end
+  fragments
+     TiF3   TiF3_SR.results/adf.rkf
+  end
+  noprint sfo frag functions
+  qtens
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor
+
+# Finally a spin-orbit coupled spin-unrestricted calculation is performed using
+# the collinear approximation. Note that symmetry NOSYM is used.
+
+
+AMS_JOBNAME=TiF3_SO_unrestricted $AMSBIN/ams <<eor
+System
+  atoms
+     Ti  0      0                  0 adf.f=TiF3
+     F   1.780  0                  0 adf.f=TiF3
+     F  -0.89   1.5415252187363007 0 adf.f=TiF3
+     F  -0.89  -1.5415252187363007 0 adf.f=TiF3
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiF3  relativistic spinorbit open shell unrestricted collinear
+  esr
+  end
+  fragments
+     TiF3   TiF3_SR.results/adf.rkf
+  end
+  noprint sfo frag functions
+  qtens
+  relativity
+    level spin-orbit
+    formalism ZORA
+    spinorbitmagnetization collinear
+  end
+  symmetry nosym
+  unrestricted
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+eor

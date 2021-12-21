@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Example: Using capping atoms in a periodic system with charges &mdash; Hybrid 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Hybrid 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="../Examples.html"/>
+        <link rel="next" title="Example: QMMM with capping atoms" href="QMMM_Butane.html"/>
+        <link rel="prev" title="Example: Using capping atoms in a periodic system" href="PeriodicCapping.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search Hybrid" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-Hybrid" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Introduction.html#linear-combination-of-energy-terms">Linear Combination of Energy Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Introduction.html#qm-mm">QM/MM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Introduction.html#mechanical-embedding">Mechanical embedding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Introduction.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Introduction.html#supported-engines">Supported engines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Introduction.html#electrostatic-embedding">Electrostatic embedding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Introduction.html#id1">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Introduction.html#id2">Supported engines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Introduction.html#capping-atoms">Capping Atoms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Introduction.html#position-of-the-boundary">Position of the Boundary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Introduction.html#qm-mm-partitioning-examples">QM/MM Partitioning Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Introduction.html#id3">Electrostatic Embedding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../EngineOptions.html">Hybrid Engine Options</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../EngineOptions.html#sub-engines-and-engineids">Sub-engines and EngineIDs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EngineOptions.html#linear-combination-of-energy-terms">Linear Combination of Energy Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EngineOptions.html#qm-mm">QM/MM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EngineOptions.html#capping">Capping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EngineOptions.html#restarts">Restarts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EngineOptions.html#charges-per-region">Charges per region</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../EngineOptions.html#id1">Linear Combination of Energy Terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../EngineOptions.html#electrostatic-embedding">Electrostatic Embedding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pdb2adf/pdb2adf.html">pdb2adf: transform PDB file to QMMM input file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pdb2adf/pdb2adf.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pdb2adf/pdb2adf.html#general-description">General description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pdb2adf/pdb2adf.html#things-to-notice">Things to notice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pdb2adf/pdb2adf.html#official-pdb-format">Official PDB format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pdb2adf/pdb2adf.html#contents-of-fragment-file">Contents of fragment file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pdb2adf/pdb2adf.html#contents-of-solvent-box-files">Contents of solvent box files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../pdb2adf/pdb2adf.html#usage-of-pdb2adf">Usage of pdb2adf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pdb2adf/pdb2adf.html#short-description">Short description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pdb2adf/pdb2adf.html#an-example-on-protein-structure">An example on protein structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pdb2adf/pdb2adf.html#id1">Usage of pdb2adf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pdb2adf/pdb2adf.html#contents-of-the-1dyz-pdb2adf-file-generated-by-pdb2adf">Contents of the 1DYZ.pdb2adf file generated by pdb2adf</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../pdb2adf/pdb2adf.html#an-example-on-solvent-shell-run">An example on solvent shell run</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pdb2adf/pdb2adf.html#contents-of-the-hoh-pdb-file">Contents of the hoh.pdb file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pdb2adf/pdb2adf.html#id2">Usage of pdb2adf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pdb2adf/pdb2adf.html#contents-of-the-hoh-pdb2adf-file-generated-by-pdb2adf">Contents of the hoh.pdb2adf file generated by pdb2adf</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qmmm_water.html">Example: QMMM with various forcefields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QUILD_water.html">Example: Mechanical embedding QUILD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HybridWithCharges.html">Example: Hybrid engine with charged regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LoadCharges.html">Example: Loading MM charges for regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HybridGun.html">Example: Molecular gun with the hybrid engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AtomAttributes.html">Example: The effect of specifying atom types, or not</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Propanenitrile.html">Example: The role of specifying the atom types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MixingDFTFunctionals.html">Example: Mixing DFT functionals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PeriodicCapping.html">Example: Using capping atoms in a periodic system</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example: Using capping atoms in a periodic system with charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QMMM_Butane.html">Example: QMMM with capping atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QUILD.html">Example*: Mechanical embedding (QUILD)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pdb2adf.html">Example: pdb2adf transforms a PDB file to a QMMM input file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Hybrid</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../Hybrid.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">Hybrid</a>/</li>
+      
+          <li><a href="../Examples.html">Examples</a>/</li>
+      
+    <li class="orange-text">Example: Using capping atoms in a periodic system with charges</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="example-using-capping-atoms-in-a-periodic-system-with-charges">
+<span id="example-periodiccappingwithcharges"></span><h1>Example: Using capping atoms in a periodic system with charges<a class="headerlink" href="#example-using-capping-atoms-in-a-periodic-system-with-charges" title="Permalink to this headline">¶</a></h1>
+<p>Now we look at a BN chain and use charges for the MM calculation.</p>
+<img alt="../_images/BNChainVar5.png" src="../_images/BNChainVar5.png" />
+<p>Let us have a look at the report generated by the example, that pretty much explains what is done</p>
+<p><a class="reference download internal" download="" href="../_downloads/10add74a2e570bc5662a6d3a5523ca6c/PeriodicCappingWithCharges.txt"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">report</span> <span class="pre">PeriodicCappingWithCharges.txt</span></code></a></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>We optimize the lattice and test several distances
+
+We divide the system in such a way that there are two equivalent, and hence neutral regions.
+
+Here are the distances (Angstrom) as obtained with a QM and an MM method
+  distance         qm         mm    err(mm)
+       B-H      1.182      1.181     -0.001
+       N-H      1.007      1.041      0.034
+       B-N      1.431      1.498      0.067
+
+Of course the force field results do not exactly match the QM results, the error displayed in the last column
+
+Now we try the hybrid engine, can we improve the bonds in the QM region?
+
+We start from the geometry calculated with the (cheap) forcefield
+
+In this table we show the errors in bond lengths (in the QM region) of the hybrid method with respect to the QM method
+
+      embedding         capping          energy             B-H             N-H             B-N
+     mechanical           fixed       -6.845015           0.004          -0.007          -0.049
+     mechanical      fractional       -6.746367           0.013          -0.006          -0.034
+  electrostatic           fixed       -6.748753           0.002          -0.004          -0.040
+  electrostatic      fractional       -6.652196           0.010          -0.003          -0.024
+
+Here are some observations
+     * the B-H distance is a bit worse than with a plain forcefield, especially with fractional capping
+     * the N-H distance is much better than with the plain forcefield 
+     * the B-N distance is a bit better than with the plain forcefield, now too short. Fractional capping works best.
+     * Electrostatic embedding is doing slightly better than mechanical embedding, the biggest improvement is on the B-N bond
+</pre></div>
+</div>
+<p><a class="reference download internal" download="" href="../_downloads/64ddae9125bae110a7437f84f0410917/PeriodicCappingWithCharges.run"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">PeriodicCappingWithCharges.run</span></code></a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nb">export</span> <span class="nv">NSCM</span><span class="o">=</span><span class="m">1</span>
+
+<span class="nv">report</span><span class="o">=</span>report.txt
+
+<span class="nv">STRUCTDIR</span><span class="o">=</span><span class="nv">$AMSHOME</span>/examples/Hybrid/PeriodicCapping/systems
+
+<span class="c1"># ensure that not a comma is used for decimals in the printf function</span>
+<span class="nv">LC_NUMERIC</span><span class="o">=</span>en_US.UTF-8
+
+<span class="nb">export</span> <span class="nv">AMS_JOBNAME</span><span class="o">=</span>reference
+
+rm -rf <span class="nv">$AMS_JOBNAME</span>.results
+
+<span class="nv">$AMSBIN</span>/ams<span class="s">&lt;&lt;EOF</span>
+
+<span class="s">Task GeometryOptimization</span>
+
+<span class="s">GeometryOptimization OptimizeLattice=yes Method=FIRE MaxIterations=300</span>
+
+<span class="s">System</span>
+<span class="s">   GeometryFile $STRUCTDIR/var5.xyz</span>
+<span class="s">   GuessBonds true</span>
+<span class="s">end</span>
+
+<span class="s">Engine DFTB</span>
+<span class="s">EndEngine</span>
+
+<span class="s">EOF</span>
+
+<span class="nv">aaa1qm</span><span class="o">=</span><span class="sb">`</span><span class="nv">$AMSBIN</span>/amsreport <span class="nv">$AMS_JOBNAME</span>.results/dftb.rkf -r distance#1#2<span class="sb">`</span>
+<span class="nv">bbb1qm</span><span class="o">=</span><span class="sb">`</span><span class="nv">$AMSBIN</span>/amsreport <span class="nv">$AMS_JOBNAME</span>.results/dftb.rkf -r distance#3#4<span class="sb">`</span>
+<span class="nv">ccc1qm</span><span class="o">=</span><span class="sb">`</span><span class="nv">$AMSBIN</span>/amsreport <span class="nv">$AMS_JOBNAME</span>.results/dftb.rkf -r distance#1#3<span class="sb">`</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;We optimize the lattice and test several distances\n&quot;</span> &gt; <span class="nv">$report</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;\nWe divide the system in such a way that there are two equivalent, and hence neutral regions.\n&quot;</span> &gt;&gt;<span class="nv">$report</span>
+
+<span class="nb">export</span> <span class="nv">AMS_JOBNAME</span><span class="o">=</span>cheap
+
+rm -rf <span class="nv">$AMS_JOBNAME</span>.results
+
+<span class="nv">$AMSBIN</span>/ams<span class="s">&lt;&lt;EOF</span>
+
+<span class="s">Task GeometryOptimization</span>
+
+<span class="s">GeometryOptimization OptimizeLattice=yes Method=FIRE MaxIterations=300</span>
+
+<span class="s">System</span>
+<span class="s">   GeometryFile $STRUCTDIR/var5.xyz</span>
+<span class="s">   LoadForceFieldCharges File=reference.results</span>
+<span class="s">   GuessBonds true</span>
+<span class="s">end</span>
+
+<span class="s">Engine ForceField</span>
+<span class="s">    NonBondedCutoff 50 [Bohr]</span>
+<span class="s">EndEngine</span>
+
+<span class="s">EOF</span>
+
+<span class="nv">aaa1mm</span><span class="o">=</span><span class="sb">`</span><span class="nv">$AMSBIN</span>/amsreport <span class="nv">$AMS_JOBNAME</span>.results/forcefield.rkf -r distance#1#2<span class="sb">`</span>
+<span class="nv">bbb1mm</span><span class="o">=</span><span class="sb">`</span><span class="nv">$AMSBIN</span>/amsreport <span class="nv">$AMS_JOBNAME</span>.results/forcefield.rkf -r distance#3#4<span class="sb">`</span>
+<span class="nv">ccc1mm</span><span class="o">=</span><span class="sb">`</span><span class="nv">$AMSBIN</span>/amsreport <span class="nv">$AMS_JOBNAME</span>.results/forcefield.rkf -r distance#1#3<span class="sb">`</span>
+
+<span class="nv">errmma</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$aaa1mm</span><span class="s2">- </span><span class="nv">$aaa1qm</span><span class="s2">&quot;</span> <span class="p">|</span> bc<span class="sb">`</span>
+<span class="nv">errmmb</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$bbb1mm</span><span class="s2">- </span><span class="nv">$bbb1qm</span><span class="s2">&quot;</span> <span class="p">|</span> bc<span class="sb">`</span>
+<span class="nv">errmmc</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$ccc1mm</span><span class="s2">- </span><span class="nv">$ccc1qm</span><span class="s2">&quot;</span> <span class="p">|</span> bc<span class="sb">`</span>
+
+
+<span class="nb">printf</span> <span class="s2">&quot;\nHere are the distances (Angstrom) as obtained with a QM and an MM method\n&quot;</span> &gt;&gt; <span class="nv">$report</span>
+<span class="nb">printf</span> <span class="s2">&quot;%10s %10s %10s %10s\n&quot;</span>   <span class="s2">&quot;distance&quot;</span>  <span class="s2">&quot;qm&quot;</span>  <span class="s2">&quot;mm&quot;</span> <span class="s2">&quot;err(mm)&quot;</span>&gt;&gt; <span class="nv">$report</span>
+<span class="nb">printf</span> <span class="s2">&quot;%10s %10.3f %10.3f %10.3f\n&quot;</span>   <span class="s2">&quot;B-H&quot;</span>  <span class="nv">$aaa1qm</span> <span class="nv">$aaa1mm</span> <span class="nv">$errmma</span> &gt;&gt; <span class="nv">$report</span>
+<span class="nb">printf</span> <span class="s2">&quot;%10s %10.3f %10.3f %10.3f\n&quot;</span>   <span class="s2">&quot;N-H&quot;</span>  <span class="nv">$bbb1qm</span> <span class="nv">$bbb1mm</span> <span class="nv">$errmmb</span> &gt;&gt; <span class="nv">$report</span>
+<span class="nb">printf</span> <span class="s2">&quot;%10s %10.3f %10.3f %10.3f\n&quot;</span>   <span class="s2">&quot;B-N&quot;</span>  <span class="nv">$ccc1qm</span> <span class="nv">$ccc1mm</span> <span class="nv">$errmmc</span> &gt;&gt; <span class="nv">$report</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;\nOf course the force field results do not exactly match the QM results, the error displayed in the last column\n&quot;</span> &gt;&gt; <span class="nv">$report</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;\nNow we try the hybrid engine, can we improve the bonds in the QM region?\n&quot;</span> &gt;&gt; <span class="nv">$report</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;\nWe start from the geometry calculated with the (cheap) forcefield\n&quot;</span> &gt;&gt; <span class="nv">$report</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;\nIn this table we show the errors in bond lengths (in the QM region) of the hybrid method with respect to the QM method\n&quot;</span> &gt;&gt; <span class="nv">$report</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;\n%15s %15s %15s %15s %15s %15s\n&quot;</span> <span class="s2">&quot;embedding&quot;</span> <span class="s2">&quot;capping&quot;</span> <span class="s2">&quot;energy&quot;</span> <span class="s2">&quot;B-H&quot;</span>  <span class="s2">&quot;N-H&quot;</span>  <span class="s2">&quot;B-N&quot;</span>  &gt;&gt; <span class="nv">$report</span>
+
+<span class="k">for</span> system in var5
+<span class="k">do</span>
+<span class="k">for</span> embedding in  mechanical electrostatic
+<span class="k">do</span>
+
+<span class="k">for</span> capping in fixed fractional
+<span class="k">do</span>
+
+<span class="nb">export</span> <span class="nv">AMS_JOBNAME</span><span class="o">=</span><span class="nv">$system</span>.embedding<span class="o">=</span><span class="nv">$embedding</span>.capping<span class="o">=</span><span class="nv">$capping</span>.go
+
+rm -rf <span class="nv">$AMS_JOBNAME</span>.results
+
+<span class="nv">$AMSBIN</span>/ams<span class="s">&lt;&lt;EOF</span>
+
+<span class="s">Task GeometryOptimization</span>
+
+<span class="s">Properties Gradients=yes</span>
+
+<span class="s">GeometryOptimization OptimizeLattice=yes Method=FIRE MaxIterations=100</span>
+
+<span class="s">LoadSystem</span>
+<span class="s"> File cheap.results</span>
+<span class="s">End</span>
+
+<span class="s">Engine Hybrid</span>
+
+<span class="s">	Capping AllowHighBondOrders=true Option=$capping</span>
+
+<span class="s">  QMMM qmRegion=qm qmEngineID=dftb mmEngineID=ForceField Embedding=$embedding</span>
+
+<span class="s">    Engine Band</span>
+<span class="s">    EndEngine</span>
+<span class="s">         </span>
+<span class="s">    Engine DFTB</span>
+<span class="s">    EndEngine</span>
+
+<span class="s">    Engine ForceField</span>
+<span class="s">        NonBondedCutoff 50 [Bohr]</span>
+<span class="s">    EndEngine</span>
+
+<span class="s"> EndEngine</span>
+
+<span class="s">EOF</span>
+
+<span class="nv">aaa1</span><span class="o">=</span><span class="sb">`</span><span class="nv">$AMSBIN</span>/amsreport <span class="nv">$AMS_JOBNAME</span>.results/hybrid.rkf -r distance#1#2<span class="sb">`</span>
+<span class="nv">bbb1</span><span class="o">=</span><span class="sb">`</span><span class="nv">$AMSBIN</span>/amsreport <span class="nv">$AMS_JOBNAME</span>.results/hybrid.rkf -r distance#3#4<span class="sb">`</span>
+<span class="nv">ccc1</span><span class="o">=</span><span class="sb">`</span><span class="nv">$AMSBIN</span>/amsreport <span class="nv">$AMS_JOBNAME</span>.results/hybrid.rkf -r distance#1#3<span class="sb">`</span>
+<span class="nv">xxx</span><span class="o">=</span><span class="sb">`</span><span class="nv">$AMSBIN</span>/amsreport <span class="nv">$AMS_JOBNAME</span>.results/hybrid.rkf -k <span class="s2">&quot;AMSResults%Energy&quot;</span><span class="sb">`</span>
+
+<span class="c1"># printf &quot;%15s %15s %15s %15.6f %15.3f %15.3f %15.3f\n&quot; $embedding $system $capping $xxx $aaa1 $bbb1 $ccc1  &gt;&gt; $report</span>
+<span class="nv">erra</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$aaa1</span><span class="s2">- </span><span class="nv">$aaa1qm</span><span class="s2">&quot;</span> <span class="p">|</span> bc<span class="sb">`</span>
+<span class="nv">errb</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$bbb1</span><span class="s2">- </span><span class="nv">$bbb1qm</span><span class="s2">&quot;</span> <span class="p">|</span> bc<span class="sb">`</span>
+<span class="nv">errc</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$ccc1</span><span class="s2">- </span><span class="nv">$ccc1qm</span><span class="s2">&quot;</span> <span class="p">|</span> bc<span class="sb">`</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;%15s %15s %15.6f %15.3f %15.3f %15.3f\n&quot;</span> <span class="nv">$embedding</span> <span class="nv">$capping</span> <span class="nv">$xxx</span> <span class="nv">$erra</span> <span class="nv">$errb</span> <span class="nv">$errc</span>  &gt;&gt; <span class="nv">$report</span>
+
+<span class="k">done</span>
+<span class="k">done</span>
+<span class="k">done</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;\nHere are some observations\n&quot;</span> &gt;&gt;<span class="nv">$report</span>
+<span class="nb">printf</span> <span class="s2">&quot;     * the B-H distance is a bit worse than with a plain forcefield, especially with fractional capping\n&quot;</span> &gt;&gt;<span class="nv">$report</span>
+<span class="nb">printf</span> <span class="s2">&quot;     * the N-H distance is much better than with the plain forcefield \n&quot;</span> &gt;&gt;<span class="nv">$report</span>
+<span class="nb">printf</span> <span class="s2">&quot;     * the B-N distance is a bit better than with the plain forcefield, now too short. Fractional capping works best.\n&quot;</span> &gt;&gt;<span class="nv">$report</span>
+<span class="nb">printf</span> <span class="s2">&quot;     * Electrostatic embedding is doing slightly better than mechanical embedding, the biggest improvement is on the B-N bond\n&quot;</span> &gt;&gt;<span class="nv">$report</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;begin report&quot;</span>
+cat <span class="nv">$report</span>
+<span class="nb">echo</span> <span class="s2">&quot;end report&quot;</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="QMMM_Butane.html" class="btn btn-neutral float-right" title="Example: QMMM with capping atoms" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="PeriodicCapping.html" class="btn btn-neutral" title="Example: Using capping atoms in a periodic system" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

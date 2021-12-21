@@ -1,0 +1,93 @@
+#!/bin/sh
+
+echo ''
+echo 'Reality: O2 triplet state'
+echo '+++++++++++++++++++++++++'
+echo ''
+
+AMS_JOBNAME=O2_triplet $AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients true
+End
+
+System
+    Atoms
+        O         0.00000000  0.00000000  0.00000000
+        O         1.20000000  0.00000000  0.00000000
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   SCC
+       Unrestricted Yes
+   End
+   UnpairedElectrons 2
+   Occupation Strategy=aufbau
+EndEngine
+
+eor
+
+
+echo ''
+echo 'Technical test: O2 singlet as a restricted and unrestricted calculation should give the same result'
+echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+echo ''
+
+AMS_JOBNAME=O2_restricted $AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients true
+End
+
+System
+    Atoms
+        O         0.00000000  0.00000000  0.00000000
+        O         1.20000000  0.00000000  0.00000000
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   SCC
+       Unrestricted No
+   End
+   UnpairedElectrons 0
+   Occupation Strategy=aufbau
+EndEngine
+
+eor
+
+AMS_JOBNAME=O2_unrestricted $AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients true
+End
+
+System
+    Atoms
+        O         0.00000000  0.00000000  0.00000000
+        O         1.20000000  0.00000000  0.00000000
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   SCC
+       Unrestricted Yes
+   End
+   UnpairedElectrons 0
+   Occupation Strategy=aufbau
+EndEngine
+
+eor

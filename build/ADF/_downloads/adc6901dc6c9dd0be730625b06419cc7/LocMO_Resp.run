@@ -1,0 +1,54 @@
+#!/bin/sh 
+
+
+# This is example for the calculation of localized molecular orbitals, and
+# perturbed localized molecular orbitals. This example uses the Pipek-Mezey
+# localization method (criterion PM in the LOCORB block key). With the
+# AORESPONSE block key and the subkey opticalrotation the optical rotation
+# dispersion is calculated. The PERTLOC key is specified in order to calculate
+# perturbed localized molecular orbitals. The subkey gprime and beta of the key
+# PERTLOC are needed to analyze the optical rotation. Note that PERTLOC only
+# makes sense in combination with AORESPONSE and LOCORB.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C 0.000000 0.000000 0.020000
+     C 1.350716 0.000000 -0.000000
+     H -0.540179 -0.745428 -0.565703
+     H -0.540179 0.745428 0.565703
+     H 1.890895 -0.935093 -0.035837
+     H 1.890895 0.935093 0.035837
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title twisted ethene PM localization and response prop analysis
+  aoresponse
+    frequencies .05 [Hartree]
+    giao
+    opticalrotation
+  end
+  locorb
+     criterion PM
+  end
+  basis
+    core None
+    type DZP
+  end
+  pertloc
+    alfa
+    beta
+    dynamic
+    efield
+    fulltens
+    gprime
+  end
+  symmetry nosym
+  Relativity
+    Level None
+  End
+EndEngine
+eor

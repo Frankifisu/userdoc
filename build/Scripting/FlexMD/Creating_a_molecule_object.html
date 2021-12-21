@@ -1,0 +1,482 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating a molecule object &mdash; Scripting 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Scripting 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Working with FlexMD" href="Working_with_FlexMD.html"/>
+        <link rel="next" title="Creating a ForceJob" href="Creating_a_ForceJob.html"/>
+        <link rel="prev" title="Working with FlexMD" href="Working_with_FlexMD.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search Scripting" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-Scripting" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../GettingStarted.html#linux">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GettingStarted.html#macos">MacOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GettingStarted.html#windows">Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GettingStarted.html#notes-on-python">Notes on Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Commandline_Tools/Commandline_Tools.html">Command Line Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Commandline_Tools/AMSprep.html">AMSprep: generate (multiple) ADF jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Commandline_Tools/AMSprep.html#additional-notes">Additional Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Commandline_Tools/AMSprepTutorial.html">Tutorial: Generate structures for substituent effects screening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Commandline_Tools/AMSreport.html">AMSreport: generate reports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Commandline_Tools/AMSreport.html#additional-notes">Additional notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Commandline_Tools/KF_command_line_utilities.html">KF command line utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Python_Stack/Python_Stack.html">Python Stack in Amsterdam Modeling Suite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Python_Stack/Python_Stack.html#general">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Python_Stack/Python_Stack.html#included-modules">Included modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Python_Stack/Python_Stack.html#using-other-modules-with-the-ams-python-stack">Using other modules with the AMS Python Stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Python_Stack/Python_Stack.html#python-virtual-environment">Python virtual environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#default-python-virtual-environment">Default python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#virtual-environments-for-different-ams-versions">Virtual environments for different AMS versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#changing-the-location-of-the-python-virtual-environment">Changing the location of the python virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#disabling-the-virtual-environment">Disabling the virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#uninstalling-the-virtual-environment">Uninstalling the virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Python_Stack/Python_Stack.html#reinstalling-the-virtual-environment">Reinstalling the virtual environment</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Python_Stack/Python_Stack.html#useful-commands">Useful commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ASE/ASE.html">ASE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ASE/General_ASE_concepts.html">General Concepts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ASE/General_ASE_concepts.html#components-of-ase">Components of ASE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/General_ASE_concepts.html#quantum-chemical-model">Quantum Chemical Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/General_ASE_concepts.html#quantum-chemical-calculation">Quantum Chemical Calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/General_ASE_concepts.html#simulation-definitions">Simulation Definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ASE/General_ASE_concepts.html#a-typical-ase-run">A Typical ASE Run</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html">SCM Calculators in ASE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#technical-notes">Technical Notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#new-interface-design-in-adf2017">New Interface Design in ADF2017</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#interfaces-to-individual-programs">Interfaces to Individual Programs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#usage-and-examples">Usage and Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#import">Import</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#interface-keywords">Interface Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ASE/SCM_ASE_Calculators.html#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="FlexMD.html">FlexMD</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Basic_philosophy_and_intended_usage.html">Basic philosophy and intended usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FlexMD_functionality_summary.html">FlexMD functionality summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Molecular_Dynamics.html">Molecular Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Multi-scale_Molecular_Dynamics.html">Multi-scale Molecular Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Biased_Molecular_Dynamics.html">Biased Molecular Dynamics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Working_with_FlexMD.html">Working with FlexMD</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Creating a molecule object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_a_ForceJob.html">Creating a ForceJob</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_and_running_the_MD_job.html">Creating and running the MD job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="References.html">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../PLAMS/PLAMS.html">PLAMS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../PLAMS/PLAMS.html#required-citations">Required Citations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../PLAMS/PLAMS.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../AuToGraFS/AuToGraFS.html">AuToGraFS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html">General AuToGraFS Scripting concepts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#components-of-autografs">Components of AuToGraFS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#the-fragment-class">The Fragment class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#the-model-class">The Model class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#the-autografs-class">The Autografs class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#about-the-databases-of-building-units">About the databases of building units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/General_AuToGraFS_concepts.html#using-the-overhauled-atom-typer">Using the overhauled Atom Typer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../AuToGraFS/AuToGraFS_Examples.html">AuToGraFS Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/AuToGraFS_Examples.html#generation-of-all-available-pillared-surmof">Generation of all available pillared SURMOF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/AuToGraFS_Examples.html#generation-of-a-defectuous-uio-66-mof-from-custom-files">Generation of a defectuous UIO-66 MOF from custom files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../AuToGraFS/AuToGraFS_Examples.html#generation-of-conformers-in-the-irmof-5">Generation of conformers in the IRMOF-5</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Scripting</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../Scripting.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">Scripting</a>/</li>
+      
+          <li><a href="FlexMD.html">FlexMD</a>/</li>
+      
+          <li><a href="Working_with_FlexMD.html">Working with FlexMD</a>/</li>
+      
+    <li class="orange-text">Creating a molecule object</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-a-molecule-object">
+<h1>Creating a molecule object<a class="headerlink" href="#creating-a-molecule-object" title="Permalink to this headline">¶</a></h1>
+<p>FlexMD can be run trough the interactive python interpreter in the ADF package. To start it, run: $AMSBIN/amspython in a terminal, followed by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scm</span> <span class="k">import</span> <span class="n">flexmd</span>
+</pre></div>
+</div>
+<p>Note that it is also possible, and usually more convenient, to write your FlexMD code in a file and then to execute this file. To do this, type all the commands you would use in the interactive interpreter in a file, and then enter $AMSBIN/amspython myFlexMDjob.py in a terminal (after changing to the directory where the file was stored of course).</p>
+<p>Most FlexMD jobs will start with importing FlexMD and creating an MDMolecule object. This can be done by starting from a geometry in xyz or pdb format, or by manually adding the atoms in the FlexMDjob.py file. Geometries can be generated in the ADF GUI, and then be exported to xyz file. For more details on the MDMolecule object, run $AMSBIN/amspython, import flexmd and call help(flexmd.mdmolecule).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scm</span> <span class="k">import</span> <span class="n">flexmd</span>
+<span class="n">myMol</span> <span class="o">=</span> <span class="n">flexmd</span><span class="o">.</span><span class="n">MDMolecule</span><span class="p">(</span><span class="s1">&#39;myGeometryFile.xyz&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some ForceJobs require the system to be periodic. If we create an MDMolecule object from a pdb file that includes periodic information, the periodic boundary conditions are automaticcaly imported. If the information is not there, we can add it to the MDMolecule object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myMol</span> <span class="o">=</span> <span class="n">flexmd</span><span class="o">.</span><span class="n">pdb</span><span class="o">.</span><span class="n">set_box</span><span class="p">([</span><span class="mf">50.0</span><span class="p">,</span><span class="mf">25.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Info on set_box (and other functions, such as set_cellvectors, and write_pdb) can be found using help(flexmd.pdbmolecule).</p>
+<p>It is also possible to write the info in the MDMolecule object to a pdb file. to do so, call pdb.write_pdb(‘mypdbfile.pdb’) on the myMol object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myMol</span><span class="o">.</span><span class="n">pdb</span><span class="o">.</span><span class="n">write_pdb</span><span class="p">(</span><span class="s1">&#39;mypdbfile.pdb&#39;</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Creating_a_ForceJob.html" class="btn btn-neutral float-right" title="Creating a ForceJob" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Working_with_FlexMD.html" class="btn btn-neutral" title="Working with FlexMD" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

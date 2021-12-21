@@ -1,0 +1,233 @@
+import numpy as np
+import os.path
+
+
+# our test molecules and their excitations for which we want to calculate the gradients
+tests = [
+    ('acetamide'      , 'singlet',  2, False),
+    ('acetone'        , 'singlet',  5, False),
+    ('adenine'        , 'singlet',  2, False),
+    ('benzene'        , 'singlet',  1, False),
+    ('benzoquinone'   , 'singlet',  1, False),
+    ('butadiene'      , 'singlet',  1, False),
+    ('carbonmonoxide' , 'singlet',  8, False),
+    ('cyclopentadiene', 'singlet',  1, False),
+    ('cyclopropene'   , 'singlet',  1, False),
+    ('cytosine'       , 'singlet',  2, False),
+    ('ethene'         , 'singlet',  2, False),
+    ('formaldehyde'   , 'singlet',  4, False),
+    ('formamide'      , 'singlet',  2, False),
+    ('furan'          , 'singlet',  1, False),
+    ('hexatriene'     , 'singlet',  1, False),
+    ('imidazole'      , 'singlet',  2, False),
+    ('naphthalene'    , 'singlet',  1, False),
+    ('nitrogen'       , 'singlet',  8, False),
+    ('norbornadiene'  , 'singlet',  1, False),
+    ('octatetraene'   , 'singlet',  1, False),
+    ('propanamide'    , 'singlet',  2, False),
+    ('pyrazine'       , 'singlet',  3, False),
+    ('pyridazine'     , 'singlet',  4, False),
+    ('pyridine'       , 'singlet',  3, False),
+    ('pyrimidine'     , 'singlet',  6, False),
+    ('pyrrole'        , 'singlet',  3, False),
+    ('tetrazine'      , 'singlet',  6, False),
+    ('thymine'        , 'singlet',  3, False),
+    ('triazine'       , 'singlet',  6, False),
+    ('uracil'         , 'singlet',  3, False),
+    ('betacarotene'   , 'singlet',  1, False),
+    ('acetamide'      , 'triplet',  3, False),
+    ('acetone'        , 'triplet',  1, False),
+    ('adenine'        , 'triplet',  4, False),
+    ('benzene'        , 'triplet',  1, False),
+    ('benzoquinone'   , 'triplet',  4, False),
+    ('butadiene'      , 'triplet',  1, False),
+    ('carbonmonoxide' , 'triplet',  3, False),
+    ('cyclopentadiene', 'triplet',  2, False),
+    ('cyclopropene'   , 'triplet',  1, False),
+    ('cytosine'       , 'triplet',  3, False),
+    ('ethene'         , 'triplet',  1, False),
+    ('formaldehyde'   , 'triplet',  7, False),
+    ('formamide'      , 'triplet', 10, False),
+    ('furan'          , 'triplet',  2, False),
+    ('hexatriene'     , 'triplet',  2, False),
+    ('imidazole'      , 'triplet',  1, False),
+    ('naphthalene'    , 'triplet',  9, False),
+    ('nitrogen'       , 'triplet',  1, False),
+    ('norbornadiene'  , 'triplet',  2, False),
+    ('octatetraene'   , 'triplet',  1, False),
+    ('propanamide'    , 'triplet',  1, False),
+    ('pyrazine'       , 'triplet',  4, False),
+    ('pyridazine'     , 'triplet',  1, False),
+    ('pyridine'       , 'triplet',  5, False),
+    ('pyrimidine'     , 'triplet',  1, False),
+    ('pyrrole'        , 'triplet',  2, False),
+    ('tetrazine'      , 'triplet',  6, False),
+    ('thymine'        , 'triplet',  4, False),
+    ('triazine'       , 'triplet',  5, False),
+    ('uracil'         , 'triplet',  2, False),
+    ('betacarotene'   , 'triplet',  1, False),
+    ('acetamide'      , 'singlet',  2, True),
+    ('acetone'        , 'singlet',  5, True),
+    ('adenine'        , 'singlet',  2, True),
+    ('benzene'        , 'singlet',  1, True),
+    ('benzoquinone'   , 'singlet',  1, True),
+    ('butadiene'      , 'singlet',  1, True),
+    ('carbonmonoxide' , 'singlet',  8, True),
+    ('cyclopentadiene', 'singlet',  1, True),
+    ('cyclopropene'   , 'singlet',  1, True),
+    ('cytosine'       , 'singlet',  2, True),
+    ('ethene'         , 'singlet',  2, True),
+    ('formaldehyde'   , 'singlet',  4, True),
+    ('formamide'      , 'singlet',  2, True),
+    ('furan'          , 'singlet',  1, True),
+    ('hexatriene'     , 'singlet',  1, True),
+    ('imidazole'      , 'singlet',  2, True),
+    ('naphthalene'    , 'singlet',  1, True),
+    ('nitrogen'       , 'singlet',  8, True),
+    ('norbornadiene'  , 'singlet',  1, True),
+    ('octatetraene'   , 'singlet',  1, True),
+    ('propanamide'    , 'singlet',  2, True),
+    ('pyrazine'       , 'singlet',  3, True),
+    ('pyridazine'     , 'singlet',  4, True),
+    ('pyridine'       , 'singlet',  3, True),
+    ('pyrimidine'     , 'singlet',  6, True),
+    ('pyrrole'        , 'singlet',  3, True),
+    ('tetrazine'      , 'singlet',  6, True),
+    ('thymine'        , 'singlet',  3, True),
+    ('triazine'       , 'singlet',  6, True),
+    ('uracil'         , 'singlet',  3, True),
+    ('betacarotene'   , 'singlet',  1, True),
+    ('acetamide'      , 'triplet',  3, True),
+    ('acetone'        , 'triplet',  1, True),
+    ('adenine'        , 'triplet',  4, True),
+    ('benzene'        , 'triplet',  1, True),
+    ('benzoquinone'   , 'triplet',  4, True),
+    ('butadiene'      , 'triplet',  1, True),
+    ('carbonmonoxide' , 'triplet',  3, True),
+    ('cyclopentadiene', 'triplet',  2, True),
+    ('cyclopropene'   , 'triplet',  1, True),
+    ('cytosine'       , 'triplet',  3, True),
+    ('ethene'         , 'triplet',  1, True),
+    ('formaldehyde'   , 'triplet',  7, True),
+    ('formamide'      , 'triplet', 10, True),
+    ('furan'          , 'triplet',  2, True),
+    ('hexatriene'     , 'triplet',  2, True),
+    ('imidazole'      , 'triplet',  1, True),
+    ('naphthalene'    , 'triplet',  9, True),
+    ('nitrogen'       , 'triplet',  1, True),
+    ('norbornadiene'  , 'triplet',  2, True),
+    ('octatetraene'   , 'triplet',  1, True),
+    ('propanamide'    , 'triplet',  1, True),
+    ('pyrazine'       , 'triplet',  4, True),
+    ('pyridazine'     , 'triplet',  1, True),
+    ('pyridine'       , 'triplet',  5, True),
+    ('pyrimidine'     , 'triplet',  1, True),
+    ('pyrrole'        , 'triplet',  2, True),
+    ('tetrazine'      , 'triplet',  6, True),
+    ('thymine'        , 'triplet',  4, True),
+    ('triazine'       , 'triplet',  5, True),
+    ('uracil'         , 'triplet',  2, True),
+    ('betacarotene'   , 'triplet',  1, True),
+]
+
+
+# numpy setup
+#np.set_printoptions(precision=8, suppress=True)
+np.set_printoptions(formatter={'float': ' {: 0.8f} '.format})
+
+# plams set up
+config.log.stdout = 0
+
+# common input for all tests
+comin = Settings()
+comin.input.ams.task = 'SinglePoint'
+comin.input.ams.properties.gradients = True
+comin.input.DFTB.model = 'SCC-DFTB'
+comin.input.DFTB.resourcesdir = 'DFTB.org/mio-1-1'
+comin.input.DFTB.properties.excitations.tddftb['print'] = 'evcontribs'
+
+failedtests = []
+for test in tests:
+    molname = test[0]
+    multi   = test[1]
+    excit   = test[2]
+    ldep    = test[3]
+    if multi == 'singlet':
+        kfsec = 'SS'
+    else:
+        kfsec = 'ST'
+    if ldep:
+        ldpf = 'ldep'
+    else:
+        ldpf = 'noldep'
+
+    print('\nTESTING: '+molname+' '+multi+' '+str(excit)+' '+ldpf)
+    teststr = molname+'_'+multi+'_'+str(excit)+'_'+ldpf
+
+    comin_thistest = comin.copy()
+    comin_thistest.input.DFTB.properties.excitations.tddftb.calc = multi
+    comin_thistest.input.DFTB.properties.excitations.tddftb.lowest = excit
+    if ldep: comin_thistest.input.DFTB.scc.orbitaldependent = 'yes'
+    mol = Molecule(filename='./molecules/'+molname+'.xyz')
+
+    # numerical gradient
+    if os.path.isfile('./numgrad_precalc/'+teststr+'.npy'):
+        print('Precalculated numerical gradient found -> reading from file')
+        numgrad = np.load('./numgrad_precalc/'+teststr+'.npy')
+    else:
+        print('Precalculated numerical gradient not found -> calculating')
+        numgradjob = AMSNumGradJob(name=teststr+'_numgrad', molecule=mol, npoints=3, step=0.001)
+        numgradjob.settings.child = comin_thistest
+        numgradresults = numgradjob.run()
+
+        def exenergy(results):
+            if excit == 1:
+               return results.readrkf('Excitations '+kfsec+' A', 'excenergies', file='dftb')
+            else:
+               return results.readrkf('Excitations '+kfsec+' A', 'excenergies', file='dftb')[excit - 1]
+
+        numgrad = np.empty([len(mol), 3])
+        for n in range(1,len(mol)+1):
+            numgrad[n-1,0] = numgradresults.get_gradient(n,'x', func=exenergy)
+            numgrad[n-1,1] = numgradresults.get_gradient(n,'y', func=exenergy)
+            numgrad[n-1,2] = numgradresults.get_gradient(n,'z', func=exenergy)
+        numgrad = Units.conversion_ratio('bohr','angstrom') * numgrad
+
+        # write numerical gradient to file
+        print('Saving numerical gradient to file')
+        np.save('./numgrad_precalc/'+teststr+'.npy', numgrad)
+    print('Numerical gradient =')
+    print(numgrad)
+
+    # analytical gradient
+    job = AMSJob(name=teststr+'_anagrad', molecule=mol, settings=comin_thistest)
+    job.settings.input.DFTB.properties.excitations.tddftbgradients.excitation = excit
+    results = job.run()
+    anagrad = np.array(results.readrkf('Excitations '+kfsec+' A', 'gradient '+str(excit), file='dftb')).reshape((-1,3))
+    print('Analytical gradient =')
+    print(anagrad)
+
+    # print the difference between analytical and numerical gradients
+    diff = numgrad - anagrad
+    print('Deviation =')
+    print(diff)
+
+    # check if the difference is small enough
+    passed = np.allclose(numgrad, anagrad, atol=1e-4)
+    if passed:
+        print('TEST FINISHED: PASSED!')
+    else:
+        print('TEST FINISHED: FAILED!')
+        failedtests.append(test)
+
+print('\nTESTS PASSED: '+str(len(tests)-len(failedtests))+'/'+str(len(tests)))
+for test in failedtests:
+    molname = test[0]
+    multi   = test[1]
+    excit   = test[2]
+    ldep    = test[3]
+    if ldep:
+        ldpf = 'ldep'
+    else:
+        ldpf = 'noldep'
+    print('FAILED: '+molname+' '+multi+' '+str(excit)+' '+ldpf)

@@ -1,0 +1,124 @@
+#! /bin/sh
+
+
+# If the subkey lifetime and BETA or QUADRATIC is included in the key
+# AORESPONSE, the damped (frequency dependent) first hyperpolarizability is
+# calculated. This test example consists of two calculations calculations: one
+# with BETA and the other with QUADRATIC.
+
+# The subkey EOPE is used, which means the electro-optical Pockels effect
+# beta(-omega;omega,0). This example can easily be modified to calculate the
+# static beta(0;0,0), the optical rectification beta(0;omega,-omega), the second
+# harmonic generation beta(-2omega;omega,omega), or the general case
+# beta(-(omega1+omega2);omega1,omega2).
+
+# Note: results will be physically meaningless due to small basis set. Purpose
+# of this job is to provide a test case for the first hyperpolarizability
+# implementation
+
+# In the first example the first hyperpolarizability is calculated with the
+# subkey BETA, for EOPE, the electro-optical Pockels effect
+# beta(-omega;omega,0).
+
+###########################
+# Damped EOPE, 2n+1
+###########################
+
+AMS_JOBNAME=EOPE_beta $AMSBIN/ams <<eor
+System
+  atoms
+     Li    0.00000000    0.00000000    3.49467000
+     H     0.00000000    0.00000000    1.89402300
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Damped EOPE of LiH, 2n+1
+  allpoints
+  aoresponse
+    alda
+    beta
+    eope
+    frequencies 0.1000 0.0000 [Hartree]
+    lifetime 0.0034
+    scf iterations 50
+  end
+  basis
+    core None
+    type SZ
+  end
+  numericalquality good
+  symmetry nosym
+EndEngine
+eor
+
+
+# In the second example the first hyperpolarizability is calculated with the
+# subkey QUADRATIC, again for EOPE, the electro-optical Pockels effect
+# beta(-omega;omega,0).
+
+################################
+# Damped EOPE, Quadratic
+################################
+
+AMS_JOBNAME=EOPE_quadratic $AMSBIN/ams <<eor
+System
+  atoms
+     Li    0.00000000    0.00000000    3.49467000
+     H     0.00000000    0.00000000    1.89402300
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Damped EOPE of LiH, Quadratic
+  allpoints
+  aoresponse
+    alda
+    eope
+    frequencies 0.1000 0.0000 [Hartree]
+    lifetime 0.0034
+    quadratic
+    scf iterations 50
+  end
+  basis
+    core None
+    type SZ
+  end
+  numericalquality good
+  symmetry nosym
+EndEngine
+eor
+
+
+# For the static case beta(0;0,0) use the subkey STATIC
+#   aoresponse
+#    ...
+#    frequencies 0.0000 0.0000 [Hartree]
+#    static
+#   end
+
+# For optical rectification beta(0;omega,-omega) use the subkey OPTICALR.
+#   aoresponse
+#    ...
+#    frequencies 0.1000 -0.1000 [Hartree]
+#    opticalr
+#   end
+
+# For the second harmonic generation beta(-2omega;omega,omega) use the subkey SHG
+#   aoresponse
+#    ...
+#    frequencies 0.1000 0.1000 [Hartree]
+#    shg
+#   end
+
+# Or in the general case for beta(-(omega1+omega2);omega1,omega2) choose two
+# input frequencies omega1 and omega2
+#   aoresponse
+#    ...
+#    frequencies omega1 omega2 [Hartree]
+#   end
+

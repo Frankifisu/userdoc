@@ -1,0 +1,68 @@
+#!/bin/sh 
+
+
+# If the subkey CDSPECTRUM is included in the key EXCITATIONS, the rotatory
+# strength is calculated for the calculated excitations, in order to calculate
+# the CD (Circular Dichroism) spectrum. Only useful for chiral molecules. A
+# hybrid functional is used in this case.
+
+# With the VELOCITY keyword also the dipole-velocity representation of the
+# rotatory strength is calculated.
+
+# Note: results will be physically meaningless due to small basis set. purpose
+# of this job is to provide a test case for the CD implementation
+
+# Do not use less strict convergence criteria than default, better to use
+# tighter criteria. The approximations in the evaluation of the integrals one
+# makes with the linear scaling techniques are effectively switched off by
+# setting LINEARSCALING 99 (recommended to use this).
+
+$AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     C 0.000000 0.000000 0.000000
+     C -0.000000 -0.000000 1.350716
+     H 0.565703 -0.745428 -0.540179
+     H -0.565703 0.745428 -0.540179
+     H 0.035837 -0.935093 1.890895
+     H -0.035837 0.935093 1.890895
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title twisted ethene
+  comment
+     purpose of this job is to provide a test case for the CD implementation
+     with hybrid functionals, and to test the "velocity" keyword
+  end
+  excitations
+    cdspectrum
+    lowest 20
+    onlysing
+    velocity
+  end
+  linearscaling 99
+  end
+  basis
+    core Small
+    type TZ2P
+  end
+  numericalquality good
+  rihartreefock
+    fitsetquality Normal
+  end
+  scf
+    converge 1.e-8
+  end
+  xc
+    hybrid PBE0
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+
+eor

@@ -1,0 +1,259 @@
+.. _DataSet:
+
+Data Set
+========
+.. currentmodule:: scm.params.core.dataset
+
+
+.. contents:: Contents of this Page
+  :local:
+
+---------------
+
+
+An example DataSet
+---------------------
+
+The |Fitfunc| class contains expressions that are evaluated during the parameter optimization.
+For each new parameter set, the expressions are evaluated, and the results are compared to
+reference values.
+
+The |Fitfunc| class contains a series of :class:`DataSetEntry`. For example, a |Fitfunc| instance
+with 3 entries might look like this, when stored on disk in the text-based YAML format:
+
+.. _cfyaml:
+.. literalinclude:: data_set.yaml
+   :language: yaml
+
+
+where
+
+* ``Comment``, ``Date``, ``dtype``, and ``version`` are part of the :ref:`header <DataSet header>`.
+
+* ``H2O``, ``O2``, ``H2``, and ``distorted_H2O`` are jobs that appear in the :ref:`Job Collection`.
+
+* ``energy``, ``forces``, and ``angle`` are :ref:`extractors <AvailableExtractors>` that extract some result from a finished job.
+
+* *Expression* and *Weight* are required for each data_set entry
+
+* *ReferenceValue* is the reference value expressed in *Unit*. If no *Unit* is given, the unit must equal the :ref:`default unit for the given extractor <AvailableExtractors>`. If no *ReferenceValue* is given, it can be calculated by the :ref:`ParAMS Main Script` or with the :ref:`DataSetEvaluator` class.
+
+* *Sigma* is the sigma value expressed in *Unit*. If no *Sigma* is given, it will equal the :ref:`default sigma for the given extractor <AvailableExtractors>`. For details, see :ref:`SigmaVsWeight`.
+
+* *Source* and *Description* are optional metadata keys. Arbitrary metadata keys can be used.
+
+During the parameter optimization you may use both a **training set** and **validation set**. In that case you would have
+two separate |Fitfunc| instances: one for the training set, and one for the validation set. See the tutorial :ref:`LJ_Ar_ValidationSet`.
+
+Use the :ref:`DataSetEvaluator` class to evaluate the data_set
+expressions with any engine settings and to compare the results to the *ReferenceValues*.
+
+For more details, see
+
+
+* :ref:`DataSetLoadOrStore`
+
+* :ref:`DataSetAddEntry`
+
+* :ref:`DataSetDemonstration`
+
+* :ref:`SigmaVsWeight`
+
+* :ref:`DataSetEntryAPI`
+
+* :ref:`DataSetAPI`.
+
+
+
+
+
+.. _DataSetLoadOrStore:
+
+Load or store DataSet
+---------------------------
+
+Save the above text block with the name ``data_set.yaml``. You can then load it into a |Fitfunc| instance with
+
+.. code:: ipython3
+
+   from scm.params import *
+   data_set = DataSet('data_set.yaml')
+   print(data_set)
+
+To save it to a new .yaml file, call the :meth:`store() <scm.params.core.DataSet.store>` method:
+
+.. code:: ipython3
+
+   data_set.store('new_file.yaml')
+
+You can also store the DataSet in a binary (pickled) format:
+
+.. code:: ipython3
+
+   data_set.pickle_dump('data_set.pkl')
+
+The binary .pkl format is faster to read than the text-based .yaml file, especially for large DataSets.
+
+To load a .pkl file:
+
+.. code:: ipython3
+
+   data_set = DataSet('data_set.pkl')
+
+
+------------------------------
+
+
+
+.. _DataSetAddEntry:
+
+Adding entries
+------------------------------
+
+Add entries with the :meth:`add_entry() <DataSet.add_entry>` method.
+
+The arguments are:
+
+* *expression* (**required**): The expression to be evaluated. The *expression* must be unique.
+
+* *weight* (**required**): The weight of the entry. A larger weight will give a bigger contribution to the overall loss function. A larger weight thus indicate a more important data_set entry. The *weight* can either be a scalar or a numpy array with the same dimensions as *reference*. If *weight* is a scalar but *reference* is an array, then **every** component of the *reference* will be weighted with *weight*. See also :ref:`SigmaVsWeight`.
+
+* *reference* (**recommended**): The reference value, expressed in *unit*. If no reference value is given, it is possible to calculate it before the parametrization using the :ref:`params main script <ParAMS Main Script>`. Can either be a scalar or a numpy array, depending on the extractor in *expression*.
+
+* *sigma* (**recommended**): A value to normalize the *expression* (see :ref:`SigmaVsWeight`). If no *sigma* value is given, a default one will be used depending on the :ref:`extractor <AvailableExtractors>` in the *expression*. If the *expression* contains more than one unique extractor, *sigma* is required. *Sigma* has the same *unit* as *reference*.
+
+* *unit* (**recommended**): The unit of *reference* and *sigma*. Should be expressed as a 2-tuple ``('label', conversion_ratio_float)``, where the 'label' is not used other than for being printed to the output, and ``conversion_ratio_float`` is a floating point number which is used to convert the :ref:`default unit <AvailableExtractors>` to the new unit. For example, *unit* for an energy might equal ``('eV', 27.211)`` which will convert the default unit ``('hartree', 1.0)`` to eV. The *reference* and *sigma* values should then be expressed in eV. NOTE: If you specify a *unit* you **must** also specify a *sigma* value, otherwise the default *sigma* will have the wrong unit.
+
+* *metadata* (**optional**): A dictionary containing arbitrary metadata (for example sources for experimental reference data, or other metadata to help with postprocessing).
+
+
+
+.. _DataSetDemonstration:
+
+Demonstration: Working with a DataSet
+------------------------------------------------
+
+Download :download:`data_set_demo.ipynb <data_set_demo.ipynb>` or :download:`data_set_demo.py`
+
+.. include:: data_set_demo.rst.include
+
+------------------------------
+
+.. _calculatingandaddingreferencedatawithams:
+
+Calculating and Adding Reference Data with AMS
+----------------------------------------------
+
+If some reference values are not yet available in the Data Set, the user can
+run AMS calculations to calculate them. This is done with the :ref:`DataSetEvaluator` class.
+
+------------------------------
+
+Calculating the Loss Function Value
+-----------------------------------
+
+The value of the loss function can be calculated with the :ref:`DataSetEvaluator` class.
+
+.. note::
+
+   The execution of jobs and evaluation of the Data Set is handled automatically during the :ref:`Optimization`.
+   In most cases the user does not need to manually calculate the loss function value.
+
+.. important::
+
+   The loss function value can only be calculated if each entry in the data set has a reference value.
+
+
+
+------------------------------
+
+
+
+Checking for Consistency with a given Job Collection
+----------------------------------------------------
+Data Set entries are tied to a |JC| by a common `jobID`.
+The consistency of every `DataSet` instance can be checked with the :meth:`DataSet.check_consistency` method.
+It will check if any :class:`DataSetEntry` has :attr:`jobids` that are not included in a |JC| instance
+and if so, return a list of indices with entries that can not be calculated given the Job Collection:
+
+>>> # DataSet() in ds, JobCollection() in jc
+>>> len(ds)
+>>> 10
+>>> bad_ids = ds.check_consistency(jc)
+>>> bad_ids # `ds` entries with these indices could not be calculated given `jc`, meaning the property for the calculation of these entries requires a chemical system which is not present in `jc`
+[1,10,13]
+>>> del ds[bad_ids]
+>>> len(ds)
+7
+>>> ds.check_consistency(jc) # No more issues
+[]
+
+The :meth:`DataSet.check_consistency` method is equivalent to:
+
+>>> bad_ids = [num for num,entry in enumerate(ds) if any(i not in jc for i in entry.jobids)]
+
+
+
+.. _SigmaVsWeight:
+
+Sigma vs. weight: What is the difference?
+------------------------------------------------
+
+*Sigma* (σ) and *weight* both affect how much a given data_set entry contributes to the loss function.
+
+For example, the loss function might be a sum-of-squared-errors (SSE) function:
+
+.. math::
+
+   \textrm{SSE} = \sum_{i=1}^N w_i\left(\frac{y_i - \hat{y}_i}{\sigma _i}\right)^2
+
+where the sum runs over all data_set entries, :math:`w_i` is the *weight* for data_set entry :math:`i`, :math:`y_i`
+is the reference value, :math:`\hat{y}_i` is the predicted value, and :math:`\sigma` is the *sigma*.
+
+The interpretation for *sigma* is that it corresponds to an "acceptable prediction error". *Sigma*
+has the same unit as the reference value, and its magnitude therefore depends on which unit the
+reference value is expressed in. The purpose of *sigma* is to normalize the residual :math:`(y_i-\hat{y}_i)`,
+no matter which unit :math:`y_i` and :math:`\hat{y}_i` are expressed in. In this way, it is possible
+to mix different physical quantities (energies, forces, charges, etc.) in the same training set.
+
+The interpretation for *weight* is that it corresponds to how important one thinks a datapoint is.
+It has no unit.
+
+For array reference values, like forces, the *sigma* value is the same for each force component, but the
+*weight* can :ref:`vary for different force components in the same structure <WeightsSchemes>`.
+If there are :math:`M_i` force components for the structure :math:`i`, then
+
+.. math::
+
+   \textrm{SSE} = \sum_{i=1}^N\sum_{j=1}^{M_i} w_{i,j}\left(\frac{y_{i,j} - \hat{y}_{i,j}}{\sigma _i}\right)^2
+
+
+Summary table:
+
+.. csv-table::
+   :header: ,Sigma, Weight
+
+   Unit,Same as the reference value,None
+   Interpretation,"Acceptable prediction error",Importance of this data_set entry
+   Default value,:ref:`Extractor <AvailableExtractors>`-dependent,None (must be set explicitly)
+   Element-dependent for arrays,No,Yes
+
+
+
+------------------------------
+
+
+.. _DataSetEntryAPI:
+
+Data Set Entry API
+------------------
+.. autoclass:: DataSetEntry
+  :no-members:
+
+.. _DataSetAPI:
+
+Data Set API
+-------------
+.. autoclass:: DataSet
+  :no-private-members:
+  :exclude-members: __weakref__,

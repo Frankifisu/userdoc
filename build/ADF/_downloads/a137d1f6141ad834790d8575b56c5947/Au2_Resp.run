@@ -1,0 +1,50 @@
+#! /bin/sh
+
+
+# A calculation of response properties of the Au2 dimer, with ZORA relativistic
+# corrections
+
+# In the response module infinite symmetries cannot be handled (see the User's
+# Guide), so we specify a lower subgroup in the input file, here D(8h).
+
+# In this sample run the LB94 potential is used. The implementation implies that
+# the XC potential is evaluated from the exact charge density, rather than the
+# cheaper and faster fitted density (as is the case for other XC functionals).
+# This means that the computation times are longer. In a small molecule like Au2
+# this hardly shows, but in larger molecules the differences may be more
+# significant. Note that the LB94 is a model potential, thus the calculated bond
+# energy has not so much meaning. If the BASIS key is specified and the model
+# potential LB94 is used, in the create run of the atoms the BP86 functional is used.
+
+# Excitation energies are computed, in principle the lowest 10 in each irrep of
+# the symmetry (see the User's Guide for more details).
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     Au   0.0 0.0 1.236
+     Au   0.0 0.0 -1.236
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Au2, Response Properties
+  excitations
+    lowest 10
+    tolerance 1e-10
+  end
+  basis
+    PerAtomType Symbol=Au File=ZORA/DZ/Au.4d
+  end
+  response
+    allcomponents
+  end
+  symmetry D(8h)
+  xc
+    gga LB94
+  end
+EndEngine
+
+eor

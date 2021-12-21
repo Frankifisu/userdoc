@@ -1,0 +1,56 @@
+#!/bin/sh
+
+
+# Calculation of excitation energies and response properties of C2 H4 , with the
+# VK functional, thus using time-dependent current-density-functional theory.
+
+
+AMS_JOBNAME=C2H4_ET-pVQZ $AMSBIN/ams <<eor
+  Task SinglePoint
+  System
+    Atoms
+       C 0.000000    0.000000    0.666318
+       C 0.000000    0.000000   -0.666318
+       H 0.000000    0.928431    1.239388
+       H 0.000000   -0.928431    1.239388
+       H 0.000000    0.928431   -1.239388
+       H 0.000000   -0.928431   -1.239388
+    END
+  END
+  Engine ADF
+    title C2H4 excitation energy calculation with the VK functional
+    basis
+      Type ET/ET-pVQZ
+    END
+    EXCITATIONS
+    END
+    CURRENTRESPONSE
+    END
+  EndEngine
+eor
+
+
+AMS_JOBNAME=C2H4_TZ2P $AMSBIN/ams <<eor
+  Task SinglePoint
+  System
+    Atoms
+       C 0.000000    0.000000    0.666318
+       C 0.000000    0.000000   -0.666318
+       H 0.000000    0.928431    1.239388
+       H 0.000000   -0.928431    1.239388
+       H 0.000000    0.928431   -1.239388
+       H 0.000000   -0.928431   -1.239388
+    END
+  End
+  Engine ADF
+    title C2H4 response calculation with the VK functional
+    basis
+      Type TZ2P
+    END
+    RESPONSE
+    ALLCOMPONENTS
+    END
+    CURRENTRESPONSE
+    END
+  EndEngine
+eor

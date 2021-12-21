@@ -1,0 +1,125 @@
+Callbacks
+=========
+.. currentmodule:: scm.params.core.callbacks
+
+Callbacks allow for further interaction with a running :ref:`Optimization` class.
+A useful callback could, for example, signal the optimization to stop after a certain time, or when overfitting.
+
+Callback instances can be passed when a |Runner| instance is created:
+
+.. code-block:: python
+
+  callbacks       = [Timeout(60*60), Logger()]
+  my_optimization = {Runner}(*args, callbacks=callbacks)
+
+Default callbacks
+--------------------
+
+The Logger and Stopfile callbacks are always present. To have custom settings
+for the Logger or Stopfile, add instances of those to the callbacks.
+
+.. contents:: Available Callbacks
+  :local:
+
+---------------
+
+
+Logger
+------
+.. autoclass:: Logger
+  :no-members:
+
+Timeout
+-------
+.. autoclass:: Timeout
+  :no-members:
+
+Target Value
+------------
+.. autoclass:: TargetValue
+  :no-members:
+
+Maximum Iterations
+------------------
+.. autoclass:: MaxIter
+  :no-members:
+
+Early Stopping
+--------------
+.. autoclass:: EarlyStopping
+  :no-members:
+
+Stopfile
+--------
+.. autoclass:: Stopfile
+  :no-members:
+
+Time per Evaluation
+-------------------
+.. autoclass:: TimePerEval
+  :no-members:
+
+Load Average
+------------
+.. autoclass:: LoadAvg
+  :no-members:
+
+
+User-Defined Callbacks
+----------------------
+The abstract :class:`~scm.params.core.callbacks.Callback` class allows the user to define custom optimization hooks.
+We will demonstrate the implementation of :class:`EarlyStopping` as an example below.
+
+.. code-block:: python
+
+  from scm.params import Callback
+
+  class EarlyStopping(Callback):
+      def __init__(self, patience=0, watch='training_set'):
+          self.watch    = watch
+          self.patience = patience
+          self.count    = 0
+          self.fxmin    = float('inf')
+
+      def __call__(self, evaluator_return):
+          """
+          Callbacks operate on **ALL** Data Sets that are evaluated at every optimization step,
+          meaning there could be more than one Data Set involved: This is for example the case when splitting
+          into a training and a validation set.
+          A named tuple `evaluator_return` will always be passed to the `__call__` method.
+          See below or the `Callback` class API to see how it unpacks.
+
+          You can filter which Data Sets the callback operates on by checking the passed `name` argument,
+          which is always unique per Optimization instance.
+          """
+          fx, x, name, ncalled, interface, data_set, residuals, contrib, time = evaluator_return
+          # the tuple's contents can also be accessed through the respective attribute, i.e. `evaluator_return.fx`
+
+          # Only apply to the set to watch
+          if name != self.watch:
+              return
+          if np.isnan(fx): # nan is a special placeholder and means no evaluation of this DataSet for this call
+              return
+          if fx < self.fxmin:
+              self.count = 0  # Reset the counter if we improved
+              self.fxmin = fx # Adjust the best fx value
+          else:
+              self.count += 1 # Patience counter
+
+          return self.count > self.patience # True if we need to stop
+
+      def reset(self):
+          # Implementation of this method makes the instance re-usable for multiple Optimizations
+          self.count = 0
+          self.fxmin = float('inf')
+
+      def on_end(self):
+          # This method will be called once the Optimization is complete. Implement as needed
+          pass
+
+
+
+Callback API
+------------
+.. autoclass:: Callback
+  :exclude-members: __weakref__

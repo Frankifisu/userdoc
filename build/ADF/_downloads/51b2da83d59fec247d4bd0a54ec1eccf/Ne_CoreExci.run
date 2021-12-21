@@ -1,0 +1,151 @@
+#! /bin/sh
+
+
+AMS_JOBNAME=Fragmod $AMSBIN/ams <<eor
+System
+  atoms
+     Ne .0000  .0000  0.0000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ne
+  excitations
+    lowest 8
+  end
+  modifyexcitation
+    useoccupied
+       A1.g 1
+    end
+    usescaledzora
+  end
+  basis
+    type QZ4P
+    CreateOutput Yes
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  symmetry d(8h)
+  xc
+    model SAOP
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=Excitationsmod $AMSBIN/ams <<eor
+System
+  atoms
+     Ne .0000  .0000  0.0000  adf.f=Frag
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ne spin-orbit
+  excitations
+    alsorestricted
+    lowest 11
+  end
+  fragments
+     Frag Fragmod.results/adf.rkf
+  end
+  modifyexcitation
+    useoccupied
+       E1/2.g 1
+    end
+    usescaledzora
+  end
+  numericalquality Good
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  stcontrib
+  symmetry d(8h)
+  xc
+    model SAOP
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=Fragsel $AMSBIN/ams <<eor
+System
+  atoms
+     Ne .0000  .0000  0.0000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ne
+  excitations
+    lowest 8
+  end
+  basis
+    type QZ4P
+    CreateOutput Yes
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  selectexcitation
+    useoccupied
+       A1.g 1
+    end
+    usescaledzora
+  end
+  symmetry d(8h)
+  xc
+    model SAOP
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=Excitationssel $AMSBIN/ams <<eor
+System
+  atoms
+     Ne .0000  .0000  0.0000  adf.f=Frag
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ne spin-orbit
+  excitations
+    alsorestricted
+    lowest 11
+  end
+  fragments
+     Frag Fragsel.results/adf.rkf
+  end
+  numericalquality Good
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  selectexcitation
+    useoccupied
+       E1/2.g 1
+    end
+    usescaledzora
+  end
+  stcontrib
+  symmetry d(8h)
+  xc
+    model SAOP
+  end
+EndEngine
+eor

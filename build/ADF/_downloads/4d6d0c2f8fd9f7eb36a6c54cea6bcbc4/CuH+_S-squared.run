@@ -1,0 +1,104 @@
+#! /bin/sh
+
+
+# Example calculates expectation value of S^2 (<S^2>) of CuH+ in various
+# symmetries, using unrestricted density functional theory. 
+
+AMS_JOBNAME=first $AMSBIN/ams <<eor
+System
+  atoms
+     Cu   0.0   0.0 0.0
+     H    1.463 0.0 0.0
+  end
+  charge 1.0
+end
+
+Task SinglePoint
+
+Engine ADF
+  title calculate expectation value of S-squared
+  basis
+    core Small
+    type TZP
+  end
+  spinpolarization 1.0
+  symmetry Nosym
+  unrestricted Yes
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=second $AMSBIN/ams <<eor
+System
+  atoms
+     Cu   0.0 0.0 0.0
+     H    0.0 0.0 1.463
+  end
+  charge 1.0
+end
+
+Task SinglePoint
+
+Engine ADF
+  title calculate expectation value of S-squared
+  basis
+    core Small
+    type TZP
+  end
+  spinpolarization 1.0
+  symmetry C(LIN)
+  unrestricted Yes
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=third $AMSBIN/ams <<eor
+System
+  atoms
+     Cu   0.0   0.0 0.0
+     H    1.463 0.0 0.0
+  end
+  charge 1.0
+end
+
+Task SinglePoint
+
+Engine ADF
+  title calculate expectation value of S-squared
+  basis
+    core Small
+    type TZP
+  end
+  spinpolarization 1.0
+  symmetry C(S)
+  unrestricted Yes
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=fourth $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     Cu   0.0   0.0 0.0
+     H    1.463 0.0 0.0
+  end
+  charge 1.0
+end
+
+Task SinglePoint
+
+Engine ADF
+  title calculate expectation value of S-squared
+  basis
+    core Small
+    type TZP
+  end
+  spinpolarization -1.0
+  unrestricted Yes
+EndEngine
+
+eor

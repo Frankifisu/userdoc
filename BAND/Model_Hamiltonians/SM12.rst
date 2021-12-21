@@ -1,0 +1,60 @@
+.. index:: SM12 
+.. index:: Solvation Model 12 
+.. _SM12: 
+
+
+SM12: Solvation Model 12
+========================
+
+Continuum solvation can be done with the Minnesota’s Solvation Model 12 (SM12) (`JCTC,9,609,2013 <https://pubs.acs.org/doi/10.1021/ct300900e>`__).
+Details on the implementation of SM12 in ADF can be found in Ref. (`JCTC,12,4033,2016 <https://pubs.acs.org/doi/10.1021/acs.jctc.6b00410>`__).
+The energetics of solvation is calculated using:
+
+.. math::
+
+   \Delta G_S^\otimes = \Delta E_E + G_P + G_{CDS} + \Delta G_N + \Delta G_{conc}^\otimes
+
+where the symbol :math:`\otimes` denotes an arbitrary choice of standard states, 
+:math:`\Delta E_E` is the change in the solute’s internal electronic energy in transferring from the gas phase to the liquid phase at the same geometry,
+:math:`G_P` is the polarization free energy of the solute–solvent system when the solute is inserted,
+:math:`G_{CDS}` is the component of the free energy that is nominally associated with cavitation, dispersion, and solvent structure,
+:math:`\Delta G_N` is the change in :math:`\Delta G_S^0` due to a change in nuclear coordinates,
+and :math:`\Delta G_{conc}^\otimes` accounts for the difference in concentrations, if any, in the gas-phase standard state and the solution-phase one.
+In case of 1 M concentration in both solution and gas, then :math:`\Delta G_S^\otimes` = 0 kcal/mol, which yields :math:`\Delta G_S^*`.
+If the same geometry is used in solution and gas phase calculation, then :math:`\Delta G_N` is zero.
+
+SM12 makes use of the Generalized Born approximation to calculate the bulk electrostatic contribution.
+This is comprised of several terms that are together known as the ENP (Electronic, Nuclear, and Polarization) term :math:`G_P`.
+The SM12 model in Band uses CM5. CM5 is a class 4 charge model, making use of both empirical and density related terms.
+It is comprised of Hirshfeld charges, a simple bond order calculation, atomic distances,
+and atom specific parameters.
+The covalent radii  utilized are based on the atomic covalent radius from the Handbook of Chemistry and Physics.
+The Coulomb integral is described with the use of an approximation from Still et al..
+Several parameters go into describing this, which include: inter atomic distance, an empirical Born constant, and the Born area, which is calculated with the Analytical Surface Area (ASA) algorithm.
+The Born area is calculated using Legendre-Gauss quadrature from the atomic radii to a sphere that encapsulates the entire molecule.
+
+The ASA algorithm is also used to calculate the solvent accessible surface area (SASA), which is computed within the CDS (Cavitation, Dispersion, Solvation) term of SM12.
+The CDS term depends on three terms:
+
++ SASA (ASA Algorithm)
++ Atomic surface tension
++ Macroscopic surface tension
+
+Atomic surface tension is based on atom-atom distances and the solvent. Macroscopic surface tension is solvent specific.
+The SM12 implementation in Band reports energies in an atom specific way. You can attribute exact CDS and polarization energies to each atom in your solute.
+The parameters for SM12 are derived to explicitly incorporate organic elements (N, C, O, F, Si, P, S, Cl, Br, I), with less emphasis on non-organics.
+Also, while most solvents have a generic atomic surface tension reliance for atoms, water has it’s own explicit set of parameters to better describe it.
+
+Input
+-----
+
+The minimal input for the SM12 method is the following: 
+
+.. scmautodoc:: band SolvationSM12 Enabled Solv
+   :collapselongchoicesinsummary:
+
+This is the full list of input options for the SM12 method:
+
+.. scmautodoc:: band SolvationSM12
+   :collapselongchoicesinsummary:
+   :noref:

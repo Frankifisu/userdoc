@@ -1,0 +1,187 @@
+#! /bin/sh
+
+
+# If the subkey lifetime and GAMMA or CUBIC is included in the key AORESPONSE,
+# the damped (frequency dependent) second hyperpolarizability is calculated.
+# This test example consists of three calculations calculations: two with GAMMA
+# and one with CUBIC.
+
+# The the first two examples subkey EFIOR is used, which means the electric
+# field induced optical rectification gamma(0;omega,-omega,0). In the third
+# example two-photon absorption (TPA) cross sections are calculated, the reduced
+# form of gamma(-omega;omega,omega,-omega). Examples can easily be modified to
+# calculate the static case gamma(0;0,0,0), the optical Kerr effect
+# gamma(-omega;omega,0,0), the intensity dependent refractive index
+# gamma(-omega;omega,omega,-omega), the electric field induced second harmonic
+# generation gamma(-2omega;omega,omega,0), the third harmonic generation
+# gamma(-3omega;omega,omega,omega) use the subkey THG, or the general case
+# gamma(-(omega1+omega2+omega3);omega1,omega2,omega3).
+
+# Note: results will be physically meaningless due to small basis set. Purpose
+# of this job is to provide a test case for the second hyperpolarizability
+# implementation
+
+# In the first example the second hyperpolarizability is calculated with the
+# subkey GAMMA, for EFIOR, the electric field induced optical rectification
+# gamma(0;omega,-omega,0).
+
+
+####################
+# Damped EFIOR, 2n+1
+####################
+
+AMS_JOBNAME=EFIOR_gamma $AMSBIN/ams <<eor
+System
+  atoms
+     Li    0.00000000    0.00000000    3.49467000
+     H     0.00000000    0.00000000    1.89402300
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Damped EFIOR of LiH, 2n+1
+  allpoints
+  aoresponse
+    alda
+    efior
+    frequencies 0.1000 -0.1000 0.0000 [Hartree]
+    gamma
+    lifetime 0.0034
+    scf iterations 50
+  end
+  basis
+    core None
+    type SZ
+  end
+  numericalquality good
+  symmetry nosym
+EndEngine
+eor
+
+
+# In the second example the second hyperpolarizability is calculated with the
+# subkey CUBIC, again for EFIOR, the electric field induced optical
+# rectification gamma(0;omega,-omega,0).
+
+#####################
+# Damped EFIOR, Cubic
+#####################
+
+AMS_JOBNAME=EFOR_cubic $AMSBIN/ams <<eor
+System
+  atoms
+     Li    0.00000000    0.00000000    3.49467000
+     H     0.00000000    0.00000000    1.89402300
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Damped EFIOR of LiH, Cubic
+  allpoints
+  aoresponse
+    alda
+    cubic
+    efior
+    frequencies 0.1000 -0.1000 0.0000 [Hartree]
+    lifetime 0.0034
+    scf iterations 50
+  end
+  basis
+    core None
+    type SZ
+  end
+  numericalquality good
+  symmetry nosym
+EndEngine
+eor
+
+
+# In the third example the subkeyword TPA is be used to calculate the gammagamma
+# corresponding to the two photon absorption process (i.e., the reduced form of
+# gamma(-omega;omega,omega,-omega)), however, TPA can ONLY be used with keyword
+# GAMMA.
+
+##################
+# Damped TPA, 2n+1
+##################
+
+AMS_JOBNAME=TPA_gamma $AMSBIN/ams <<eor
+System
+  atoms
+     Li    0.00000000    0.00000000    3.49467000
+     H     0.00000000    0.00000000    1.89402300
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Damped TPA of LiH, 2n+1
+  allpoints
+  aoresponse
+    alda
+    frequencies 0.1000 0.1000 -0.1000 [Hartree]
+    gamma
+    lifetime 0.0034
+    scf iterations 50
+    tpa
+  end
+  basis
+    core None
+    type SZ
+  end
+  numericalquality good
+  symmetry nosym
+EndEngine
+eor
+
+
+# For the static case gamma(0;0,0,0) use the subkey STATIC
+#   aoresponse
+#    ...
+#    frequencies 0.0000 0.0000 0.0000 [Hartree]
+#    static
+#   end
+
+# For the optical Kerr effect gamma(-omega;omega,0,0) use the subkey OKE
+#   aoresponse
+#    ...
+#    frequencies 0.1000 0.0000 0.0000 [Hartree]
+#    oke
+#   end
+
+# For the intensity dependent refractive index gamma(-omega;omega,omega,-omega)
+# use the subkey IDRI
+#   aoresponse
+#    ...
+#    frequencies 0.1000 0.1000 -0.1000 [Hartree]
+#    idri
+#   end
+
+# For the electric field induced second harmonic generation
+# gamma(-2omega;omega,omega,0) use the subkey EFISHG
+#   aoresponse
+#    ...
+#    frequencies 0.1000 0.1000 0.0000 [Hartree]
+#    efishg
+#   end
+
+# For the third harmonic generation gamma(-3omega;omega,omega,omega) use the
+# subkey THG
+#   aoresponse
+#    ...
+#    frequencies 0.1000 0.1000 0.1000 [Hartree]
+#    thg
+#   end
+
+# Or in the general case for gamma(-(omega1+omega2+omega3);omega1,omega2,omega3)
+# choose three input frequencies omega1, omega2, and omega3
+#   aoresponse
+#    ...
+#    frequencies omega1 omega2 omega3 [Hartree]
+#   end
+

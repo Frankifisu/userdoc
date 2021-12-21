@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# This test calculates frequencies of the lowest singlet excitation
+# of benzene. This was also done in Niehaus paper on excited state
+# gradients, see:
+#      D. Heringer et al. J. Comput. Chem. 28:2589-2601, 2007
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   NormalModes true
+End
+
+System
+    Atoms
+        H     0.00000000     2.52578099     0.00000000
+        H     0.00000000    -2.52578099     0.00000000
+        H     2.18739047     1.26289148     0.00000000
+        H    -2.18739047    -1.26289148     0.00000000
+        H    -2.18739047     1.26289148     0.00000000
+        H     2.18739047    -1.26289148     0.00000000
+        C     0.00000000     1.42809579     0.00000000
+        C     0.00000000    -1.42809579     0.00000000
+        C     1.23676731     0.71404770     0.00000000
+        C    -1.23676731    -0.71404770     0.00000000
+        C    -1.23676731     0.71404770     0.00000000
+        C     1.23676731    -0.71404770     0.00000000
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           TDDFTB
+               Calc singlet
+               Lowest 1
+               Diagonalization exact
+           End
+           TDDFTBGradients
+               Excitation 1
+           End
+       End
+   End
+EndEngine
+
+eor

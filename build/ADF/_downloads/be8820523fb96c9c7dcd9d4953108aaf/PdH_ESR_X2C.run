@@ -1,0 +1,132 @@
+#! /bin/sh
+
+
+# This example calculates the ESR A-tensor and g-tensor of PdH, using the X2C
+# and RA-X2C relativistic methods. Four calculations are performed:
+# - Scalar relativistic X2C open shell spin-restricted
+# - Scalar relativistic RA-X2C open shell spin-restricted
+# - Spin-Orbit relativistic X2C spin-unrestricted collinear
+# - Spin-Orbit relativistic RA-X2C spin-unrestricted collinear
+
+# The spin-orbit coupled spin-unrestricted calculation is performed using the
+# collinear approximation, symmetry NOSYM is required in that case. A finite
+# nucleaus is used, which will be important for the calculated A-tensor,
+# especially for heavy nuclei.
+
+# == Scalar relativistic X2C open shell spin-restricted ==
+
+AMS_JOBNAME=X2C_SR $AMSBIN/ams <<eor
+System
+  atoms
+     Pd 0 0 0
+     H  0 0 1.529
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  esr
+  end
+  basis
+    core None
+    type QZ4P
+  end
+  nuclearmodel gaussian
+  relativity
+    level scalar
+    formalism X2C
+  end
+  spinpolarization 1
+  unrestricted
+EndEngine
+eor
+
+# == Scalar relativistic RA-X2C open shell spin-restricted ==
+
+AMS_JOBNAME=RAX2C_SR $AMSBIN/ams <<eor
+System
+  atoms
+     Pd 0 0 0
+     H  0 0 1.529
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  esr
+  end
+  basis
+    core None
+    type QZ4P
+  end
+  nuclearmodel gaussian
+  relativity
+    level scalar
+    formalism RA-X2C
+  end
+  spinpolarization 1
+  unrestricted
+EndEngine
+eor
+
+# == Spin-Orbit relativistic X2C spin-unrestricted collinear ==
+
+AMS_JOBNAME=X2C_SO $AMSBIN/ams <<eor
+System
+  atoms
+     Pd 0 0 0
+     H  0 0 1.529
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  esr
+  end
+  basis
+    core None
+    type QZ4P
+  end
+  nuclearmodel gaussian
+  relativity
+    level spin-orbit
+    formalism X2C
+    SpinOrbitMagnetization collinear
+  end
+  symmetry nosym
+  unrestricted
+EndEngine
+eor
+
+# == Spin-Orbit relativistic RA-X2C spin-unrestricted collinear ==
+
+AMS_JOBNAME=RAX2C_SO $AMSBIN/ams <<eor
+System
+  atoms
+     Pd 0 0 0
+     H  0 0 1.529
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  esr
+  end
+  basis
+    core None
+    type QZ4P
+  end
+  nuclearmodel gaussian
+  relativity
+    level spin-orbit
+    formalism RA-X2C
+    SpinOrbitMagnetization collinear
+  end
+  symmetry nosym
+  unrestricted
+EndEngine
+eor

@@ -1,0 +1,86 @@
+#!/bin/sh
+
+# This test optimizes the 1st and 3rd triplet excitation of
+# carbon monoxide. The difficult thing about these two is
+# that they change character during the optimization. What
+# is the lowest triplet at the ground state equilibrium will
+# become the third triplet during the optimization and vice
+# versa. We are using the eigenfollow keyword to follow the
+# excitations during the geometry optimization.
+
+AMS_JOBNAME=followT1 $AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+System
+    Atoms
+      C    0.0000    0.0000    0.0000
+      O    1.1000    0.0000    0.0000
+    End
+End
+
+Engine DFTB
+
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+
+   Properties
+       Excitations
+           TDDFTB
+               Calc triplet
+               Lowest 10
+               Print EVContribs
+           End
+           TDDFTBGradients
+               Excitation 1
+               Eigenfollow true
+           End
+       End
+   End
+
+EndEngine
+
+Log
+   Info TDDFTBExcitationFollowerModule
+End
+
+eor
+
+
+AMS_JOBNAME=followT3 $AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+System
+    Atoms
+      C    0.0000    0.0000    0.0000
+      O    1.1000    0.0000    0.0000
+    End
+End
+
+Engine DFTB
+
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+
+   Properties
+       Excitations
+           TDDFTB
+               Calc triplet
+               Lowest 10
+               Print EVContribs
+           End
+           TDDFTBGradients
+               Excitation 3
+               Eigenfollow true
+           End
+       End
+   End
+
+EndEngine
+
+Log
+   Info TDDFTBExcitationFollowerModule
+End
+
+eor

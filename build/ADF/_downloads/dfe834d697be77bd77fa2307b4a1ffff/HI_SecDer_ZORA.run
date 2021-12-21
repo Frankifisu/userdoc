@@ -1,0 +1,39 @@
+#!/bin/sh
+
+
+# Analytical frequencies of HI using the scalar ZORA relativistic approximation.
+# A good NumericalQuality is used.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     I 0.0 0.0 0.0
+     H 0.0 0.0 1.6090
+  end
+end
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+End
+
+Engine ADF
+  title HI scalar, ZORA,
+  basis
+    core None
+    type DZ
+    CreateOutput Yes
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  symmetry NOSYM
+  xc
+    lda Xonly
+  end
+EndEngine
+eor

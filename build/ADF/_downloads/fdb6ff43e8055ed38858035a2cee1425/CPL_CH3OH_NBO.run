@@ -1,0 +1,178 @@
+#!/bin/sh
+
+
+# Example shows an NBO analysis of an NMR spin-spin coupling constants
+# calculation for CH3 OH.
+
+# Some keywords are necessary because of the NBO analysis afterwards. A good
+# quality integration is used. First the scalar relativistic calculation is
+# performed and the scalar relativistic localized orbitals are made, and a
+# calculation of NMR spin-spin coupling constants is performed with an analysis
+# in scalar relativistic localized orbitals. Next the spin-orbit coupled ADF
+# calculation is done, and a calculation of NMR spin-spin coupling constants is
+# performed with an analysis in scalar relativistic localized orbitals.
+
+
+
+AMS_JOBNAME=scalar $AMSBIN/ams <<eor
+System
+  atoms
+     O       0.151078120000      -0.158942890000      -0.184382010000
+     H       0.762854510000       0.480823600000       0.187867830000
+     C       0.654254930000      -1.481762230000       0.026343630000
+     H       1.616760580000      -1.581906770000      -0.455670800000
+     H      -0.035909520000      -2.200223490000      -0.393433960000
+     H       0.761359880000      -1.661537720000       1.087000640000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  aomat2file
+  beckegrid
+    quality good
+  end
+  fullfock
+  basis
+    core None
+    type DZP
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  save TAPE15
+  symmetry nosym
+  xc
+    lda SCF VWN
+  end
+EndEngine
+eor
+
+###### end scalar, run gennbo ##########
+
+
+rm -f adfnbo.kf
+
+$AMSBIN/adfnbo <<eor
+  ADFfile scalar.results/adf.rkf
+  TAPE15file scalar.results/TAPE15
+  write
+  spherical
+  :: read
+  fock
+eor
+
+rm -f adfnbo.37 adfnbo.39 adfnbo.49 adfnbo.48
+$AMSBIN/gennbo6 FILE47
+
+# run adfnbo in COPY mode
+
+$AMSBIN/adfnbo <<eor
+  ADFfile scalar.results/adf.rkf
+  TAPE15file scalar.results/TAPE15
+  spherical
+  fock
+  copy
+eor
+
+# run adfnbo in READ mode: prepare locorb on TAPE21
+
+$AMSBIN/adfnbo <<eor
+  ADFfile scalar.results/adf.rkf
+  TAPE15file scalar.results/TAPE15
+  spherical
+  fock
+  read
+eor
+
+rm -f adfnbo.37 adfnbo.39 adfnbo.49 adfnbo.48
+
+##### end gennbo
+
+## end scalar and gennbo run, now do the coupling constant
+
+$AMSBIN/cpl <<eor
+  adffile scalar.results/adf.rkf
+  nmrcoupling
+    xalpha
+    dso
+    pso
+    sd
+    scf converge=1e-5 iterations=10
+    contributions 1e19 nbo
+    nuclei 3  5 6
+  end
+eor
+
+# redo the coupling constant without the SD term
+
+rm -f TAPE10 TAPE15 TAPE13
+
+$AMSBIN/cpl <<eor
+  adffile scalar.results/adf.rkf
+  nmrcoupling
+    xalpha
+    dso
+    pso
+    scf converge=1e-5 iterations=10
+    contributions 1e19 nbo
+    nuclei 3  5 6
+  end
+eor
+
+
+### scalar CPL done, redo computation with spin-orbit coupling
+for f in TAPE*; do rm -f $f ; done
+
+AMS_JOBNAME=spinorbit $AMSBIN/ams <<eor
+System
+  atoms
+     O       0.151078120000      -0.158942890000      -0.184382010000
+     H       0.762854510000       0.480823600000       0.187867830000
+     C       0.654254930000      -1.481762230000       0.026343630000
+     H       1.616760580000      -1.581906770000      -0.455670800000
+     H      -0.035909520000      -2.200223490000      -0.393433960000
+     H       0.761359880000      -1.661537720000       1.087000640000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type DZP
+  end
+  noprint sfo
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  symmetry nosym
+  xc
+    lda SCF VWN
+  end
+EndEngine
+eor
+
+
+## end spinorbit run, now do the coupling constant
+
+$AMSBIN/cpl <<eor
+  adffile spinorbit.results/adf.rkf
+  nmrcoupling
+    xalpha
+    dso
+    pso
+    sd
+    scf converge=1e-5 iterations=10
+    contributions 1e19 nbo
+    nuclei 3  5 6
+  end
+eor
+

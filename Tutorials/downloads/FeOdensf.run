@@ -1,0 +1,15 @@
+#!/bin/sh
+
+"$AMSBIN/densf" << eor
+ADFFILE FeO.rkf
+Density SCF             ! We require the SCF density to be mapped
+CUBOUTPUT FeO           ! We specify a name (option)
+grid                    ! Definition of the grid (for details, see tutorial Densf: Volume Maps)
+ -10.0 -10.0 -10.0
+ 300  300  350
+ 1.0 0.0 0.0 20.0
+ 0.0 1.0 0.0 20.0
+ 0.0 0.0 1.0 20.0
+end
+end input
+eor

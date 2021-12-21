@@ -1,0 +1,237 @@
+.. _SM12: 
+.. index:: SM12 
+
+
+SM12: Solvation Model 12
+========================
+
+Continuum solvation can be done with the Minnesota's Solvation Model 12 (SM12) [#ref1]_.
+Details on the implementation of SM12 in ADF can be found in Ref. [#ref2]_.
+The energetics of solvation is calculated using:
+
+.. math::
+
+   \Delta G_S^\otimes = \Delta E_E + G_P + G_{CDS} + \Delta G_N + \Delta G_{conc}^\otimes
+
+where the symbol :math:`\otimes` denotes an arbitrary choice of standard states, 
+:math:`\Delta E_E` is the change in the solute's internal electronic energy in transferring from the gas phase to the liquid phase at the same geometry,
+:math:`G_P` is the polarization free energy of the solute–solvent system when the solute is inserted,
+:math:`G_{CDS}` is the component of the free energy that is nominally associated with cavitation, dispersion, and solvent structure,
+:math:`\Delta G_N` is the change in :math:`\Delta G_S^0` due to a change in nuclear coordinates,
+and :math:`\Delta G_{conc}^\otimes` accounts for the difference in concentrations, if any, in the gas-phase standard state and the solution-phase one.
+In case of 1 M concentration in both solution and gas, then :math:`\Delta G_S^\otimes` = 0 kcal/mol, which yields :math:`\Delta G_S^*`.
+If the same geometry is used in solution and gas phase calculation, then :math:`\Delta G_N` is zero.
+
+SM12 makes use of the Generalized Born approximation to calculate the bulk electrostatic contribution.
+This is comprised of several terms that are together known as the ENP (Electronic, Nuclear, and Polarization) term :math:`G_P`.
+The SM12 model in ADF uses :ref:`CM5 charges<CM5>` [#ref3]_. CM5 is a class 4 charge model, making use of both empirical and density related terms.
+It is comprised of Hirshfeld charges [#ref4]_, a simple bond order calculation, atomic distances,
+and atom specific parameters [#ref3]_.
+The covalent radii  utilized are based on the atomic covalent radius from the Handbook of Chemistry and Physics [#ref6]_.
+The Coulomb integral is described with the use of an approximation from Still et al. [#ref7]_.
+Several parameters go into describing this, which include: inter atomic distance, an empirical Born constant, and the Born area, which is calculated with the Analytical Surface Area (ASA) algorithm [#ref8]_.
+The Born area is calculated using Legendre-Gauss quadrature from the atomic radii to a sphere that encapsulates the entire molecule.
+
+The ASA algorithm is also used to calculate the solvent accessible surface area (SASA), which is computed within the CDS (Cavitation, Dispersion, Solvation) term of SM12.
+The CDS term depends on three terms:
+
++ SASA (ASA Algorithm)
++ Atomic surface tension
++ Macroscopic surface tension
+
+Atomic surface tension is based on atom-atom distances and the solvent. Macroscopic surface tension is solvent specific.
+The SM12 implementation in ADF reports energies in an atom specific way. You can attribute exact CDS and polarization energies to each atom in your solute.
+The parameters for SM12 are derived to explicitly incorporate organic elements (N, C, O, F, Si, P, S, Cl, Br, I), with less emphasis on non-organics.
+Also, while most solvents have a generic atomic surface tension reliance for atoms, water has its own explicit set of parameters to better describe it.
+
+.. _keyscheme SM12: 
+
+
+::
+
+  SOLVATION SM12
+    {SOLV NAME=solvent}
+    {CUST {NAME=solvent}}
+    {REF=1.33}
+    {ACID=0.82}
+    {BASE=0.35}
+    {TENS=103.62}
+    {EPS=78.36}
+    {ARO=0.0}
+    {HALO=0.0}
+    {RADSOLV=0.4}
+    {CHGAL=2.474}
+    {BORNC=3.70}
+    {PRINTSM12}
+  End
+
+Presence of the SOLVATION SM12 key block key triggers the solvent calculation and does not require additional data.
+Curly brackets are not part of the key.
+If no other keywords are present the default is water.
+With subkeys you can customize various aspects of the model, for instance to specify the type of solute. None of the subkeys is obligatory. Follows a description of the subkeys 
+
+``SOLV NAME = solvent``
+  Defines which solvent to be used.
+  Each solvent has parameters set for each of the variables defined below. All of which can be found in the SM12 Ref. [#ref1]_. Any variable can be changed with the inclusion of its key.
+  ``solvent`` can be one of the following:
+
+  .. hlist::
+      :columns: 2
+
+      * ACETICACID
+      * ACETONITRILE
+      * ACETOPHENONE
+      * ANILINE
+      * ANISOLE
+      * BENZENE
+      * BENZONITRILE
+      * BENZYLALCOHOL
+      * BROMOBENZENE
+      * BROMOETHANE
+      * BROMOFORM
+      * BROMOOCTANE
+      * N-BUTANOL
+      * SEC-BUTANOL
+      * BUTANONE
+      * BUTYLACETATE
+      * N-BUTYLBENZENE
+      * SEC-BUTYLBENZENE
+      * T-BUTYLBENZENE
+      * CARBONDISULFIDE
+      * CARBONTETRACHLORIDE
+      * CHLOROBENZENE
+      * CHLOROFORM
+      * CHLOROHEXANE
+      * M-CRESOL
+      * CYCLOHEXANE
+      * CYCLOHEXANONE
+      * DECALIN
+      * DECANE
+      * DECANOL
+      * 1-2-DIBROMOETHANE
+      * DIBUTYLETHER
+      * O-DICHLOROBENZENE
+      * 1-2-DICHLOROETHANE
+      * DIETHYLETHER
+      * DIISOPROPYLETHER
+      * N-N-DIMETHYLACETAMIDE
+      * N-N-DIMETHYLFORMAMIDE
+      * 2-6-DIMETHYLPYRIDINE
+      * DIMETHYLSULFOXIDE
+      * DODECANE
+      * ETHANOL
+      * ETHOXYBENZENE
+      * ETHYLACETATE
+      * ETHYLBENZENE
+      * FLUOROBENZENE
+      * 1-FLUORO-N-OCTANE
+      * HEPTANE
+      * HEPTANOL
+      * HEXADECANE
+      * HEXADECYLIODIDE
+      * HEXANE
+      * HEXANOL
+      * IODOBENZENE
+      * ISOBUTANOL
+      * ISOOCTANE
+      * ISOPROPANOL
+      * ISOPROPYLBENZENE
+      * P-ISOPROPYLTOLUENE
+      * MESITYLENE
+      * METHANOL
+      * METHOXYETHANOL
+      * METHYLENECHLORIDE
+      * N-METHYLFORMAMIDE
+      * 2-METHYLPYRIDINE
+      * 4-METHYL-2-PENTANONE
+      * NITROBENZENE
+      * NITROETHANE
+      * NITROMETHANE
+      * O-NITROTOLUENE
+      * NONANE
+      * NONANOL
+      * OCTANE
+      * OCTANOL
+      * PENTADECANE
+      * PENTANE
+      * PENTANOL
+      * PERFLUOROBENZENE
+      * PHENYLETHER
+      * PROPANOL
+      * PYRIDINE
+      * TETRACHLOROETHENE
+      * TETRAHYDROFURAN
+      * TETRAHYDROTHIOPHENEDIOXIDE
+      * TETRALIN
+      * TOLUENE
+      * TRIBUTYLPHOSPHATE
+      * TRIETHYLAMINE
+      * 1-2-4-TRIMETHYLBENZENE
+      * UNDECANE
+      * WATER
+      * XYLENE
+      * 1-2-DIBROMOETHANE_WATER
+      * 1-2-DICHLOROETHANE_WATER
+      * BENZENE_WATER
+      * CARBONTETRACHLORIDE_WATER
+      * CHLOROBENZENE_WATER
+      * CHLOROFORM_WATER
+      * CYCLOHEXANE_WATER
+      * DIBUTYLETHER_WATER
+      * DIETHYLETHER_WATER
+      * ETHYLACETATE_WATER
+      * HEPTANE_WATER
+      * HEXANE_WATER
+      * NITROBENZENE_WATER
+      * OCTANOL_WATER
+
+``CUST {NAME=solvent}``
+  A solvent with user specified parameters can be used. A user specified name of the solvent ``solvent`` can be provided, but should not match one of the solvent names listed above. Any un-specified parameters will be set to zero, with the exception of the dielectric constant, which will be set to the dielectric constant of water.
+
+``REF``
+  Index of refraction at 293K (n).
+
+``ACID``
+  Abrahams hydrogen bond acidity (:math:`\alpha`).
+
+``BASE``
+  Abrahams hydrogen bond basicity (:math:`\beta`).
+
+``TENS``
+  Macroscopic surface tension of the solvent at the air interface cal mol\ :sup:`-1` Å\ :sup:`-2`)(:math:`\gamma`).
+
+``EPS``
+  Dielectric constant. If not specified it will be set to the default of water. (:math:`\epsilon`).
+
+``ARO``
+  Square root of the fraction of non-hydrogen atoms in the solvent molecule that are aromatic carbon atoms (carbon aromaticity) (:math:`\phi`).
+
+``HALO``
+  Square of the fraction of non-hydrogen atoms in the solvent molecule that are halogens (Electronegative halogenicity)(:math:`\psi`).
+
+``RADSOLV``
+  Solvent radius, this is added to the van der Waals radius used for the cavity calculation.
+
+``BORNC``
+  Empirical Born constant, see Ref. [#ref1]_
+
+``PRINTSM12``
+  Print more information on the SM12 calculation: CDS atom terms, ENP charges.
+
+.. only:: html
+
+  .. rubric:: References
+
+.. [#ref1] A.V. Marenich, C.J. Cramer, and D.G. Truhlar, *Generalized Born Solvation Model SM12*, `Journal of Chemical Theory and Computation 9, 609 (2013) <https://doi.org/10.1021/ct300900e>`__
+
+.. [#ref2] C.A. Peeples and G. Schreckenbach, *Implementation of the SM12 Solvation Model into ADF and Comparison with COSMO*, `Journal of Chemical Theory and Computation 12, 4033 (2016) <https://doi.org/10.1021/acs.jctc.6b00410>`__
+
+.. [#ref3] A.V. Marenich, S.V. Jerome, C.J. Cramer, D.G. Truhlar, *Charge Model 5: An Extension of Hirshfeld Population Analysis for the Accurate Description of Molecular Interactions in Gaseous and Condensed Phases*, `Journal of Chemical Theory and Computation 8, 527 (2012) <https://doi.org/10.1021/ct200866d>`__ 
+
+.. [#ref4] F.L. Hirshfeld, *Bonded-atom fragments for describing molecular charge densities*, `Theoretica Chimica Acta 44, 129 (1977) <https://doi.org/10.1007/BF00549096>`__ 
+
+.. [#ref6] M.\  Mantina, R. Valero, C.J. Cramer, D.G. Truhlar, in *CRC Handbook of Chemistry and Physics*, 91st ed. (2010-2011), ISBN13 9781439820773, W.M. Haynes, Ed., CRC Press: Boca Raton, FL, 2010.
+
+.. [#ref7] W.C. Still, A. Tempczyk, R.C. Hawley, and T. Hendrickson, *Semianalytical treatment of solvation for molecular mechanics and dynamics*, `Journal of the American Chemical Society 112, 6127 (1990) <https://doi.org/10.1021/ja00172a038>`__
+
+.. [#ref8] D.A. Liotard, G.D. Hawkins, G.C. Lynch, C.J. Cramer, and D.G. Truhlar, *Improved Methods for Semiempirical Solvation Models*, `Journal of Computational Chemistry 16, 422 (1995) <https://doi.org/10.1002/jcc.540160405>`__

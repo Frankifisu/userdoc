@@ -1,0 +1,23 @@
+Optimizers
+==========
+
+Optimizers change the parameters such that the value of the loss function is
+minimized. ParAMS provides a base class wrapper for different optimization
+algorithms, making the selection of this component open-ended. An optimizer
+instance can be passed to the :ref:`Optimization` class, once everything else
+is set up:
+
+>>> o = CMAOptimizer()
+>>> optimization = Optimization(jobcol, training_set, interface, o)
+>>> optimization.optimize()
+
+Currently, the following optimization algorithms are included:
+
+.. toctree::
+
+    cmaes
+    scipy
+    nevergrad
+    armc
+    grid
+    base

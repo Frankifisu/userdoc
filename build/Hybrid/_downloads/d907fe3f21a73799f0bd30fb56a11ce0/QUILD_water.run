@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# This example shows you how you can use the forcefield with mechanical embedding
+
+
+AMS_JOBNAME=uff $AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+System
+    Atoms
+        O -1.8782  0.0294 -0.7574  region=QM 
+        H -0.9986  0.2961 -0.3861  region=QM 
+        H -1.8623 -0.9560 -0.6510  region=QM 
+        O  0.0121 -1.3731  0.5074  region=MM 
+        H  0.8930 -1.7879  0.3172  region=MM 
+        H -0.5625 -2.1395  0.7656  region=MM 
+    End
+End
+
+Engine Hybrid
+
+    Energy
+       Term region=QM EngineId=DFTB       factor=1.0
+       Term region=*  EngineId=ForceField factor=1.0
+       Term region=QM EngineId=ForceField factor=-1.0
+    End
+    
+    Engine DFTB
+        Model GFN1-xTB
+    EndEngine
+
+    Engine ForceField
+        Type UFF
+    EndEngine
+EndEngine
+eor
+
+

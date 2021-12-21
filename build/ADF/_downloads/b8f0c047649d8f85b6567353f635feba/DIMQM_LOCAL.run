@@ -1,0 +1,50 @@
+#! /bin/sh
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     O         0.016560    0.127604    0.000000
+     H         0.650009    0.566164    0.000000
+     H        -0.666568    0.484010    0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title ['Local Dim Test']
+  allpoints
+  beckegrid
+    quality good
+  end
+  dimpar
+     Ag
+     rad=1.4445
+     SUBEND
+     XYZ
+     $AMSHOME/examples/adf/DIMQM_LOCAL/ag2869.xyz
+     SUBEND
+  end
+  dimqm
+     PIM
+     LOCALDIM
+     debug
+     PRINTLJPAR
+     niter 2000
+     CutOffDist 50.0
+  end
+  basis
+    core None
+    type TZP
+  end
+  symmetry nosym
+  xc
+    model SAOP
+  end
+  Relativity 
+    Level None
+  End
+EndEngine
+
+eor

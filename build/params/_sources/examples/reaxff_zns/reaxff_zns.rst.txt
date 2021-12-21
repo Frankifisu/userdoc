@@ -1,0 +1,82 @@
+ReaxFF: ZnS crystal and adsorption on ZnS(110) surface
+======================================================
+
+This tutorial illustrates ReaxFF parametrization for ZnS and |H2S| on ZnS(110).
+
+The tutorial teaches how to 
+
+* Combine several different force fields from the AMS ReaxFF library into a good initial guess
+
+* Select training jobs to enter the training set
+
+The training data contains
+
+* Energy-volume scans of the zinc blende, wurtzite, and rock salt polymorphs of ZnS
+
+* Atomic charges for a variety of systems
+
+* Optimized S-H bond length in |H2S|, and H-S-H angle
+
+* Bond scan for the S-H bond in gasphase |H2S|
+
+* Angle scan for the H-S-H angle in gasphase |H2S|
+
+* Optimized Zn-S and H...S bond lengths for |H2S|/ZnS(110)
+
+
+This tutorial documents the example in
+``$AMSHOME/scripting/scm/params/examples/ZnS_ReaxFF``. **Copy the files to a new empty directory.**
+
+.. tip::
+
+    The input files can, in principle, be generated with the file
+    ``generate_input_files.py``. However, you'd first need to run the
+    corresponding reference jobs, so that their results could be imported with
+    the script. The settings for the reference jobs can be obtained by
+    combining the ``AMSSettings`` in ``job_collection.yaml`` with the
+    corresponding engine settings in ``job_collection_engines.yaml``.
+
+Mix force fields from the AMS ReaxFF library
+-----------------------------------------------
+
+The `ReaxFF force fields included with AMS <../../../ReaxFF/Included_Forcefields.html>`__ cover a large part of the periodic table, however, far from all interactions are included.
+
+In this tutorial, the goal is to model |H2S| adsorption on a ZnS surface. No ZnS ReaxFF force field is included with AMS, but the following force fields might help:
+
+.. csv-table::
+
+   Force field, Chemistry, Reference
+   LiS.ff, Sulfur, `Islam et al. <http://dx.doi.org/10.1039/C4CP04532G>`__
+   Mue2016.ff, Organic S-containing compounds, `Müller and Hartke <http://dx.doi.org/10.1021/acs.jctc.6b00461>`__
+   ZnOH.ff, Zn and ZnO surfaces, `Raymand et al. <http://dx.doi.org/10.1016/j.susc.2009.12.012>`__
+
+A ReaxFF force field contains :ref:`parameters in the following categories
+<reaxff-names>`: general (GEN), atomic (ATM), bond (BND), angle (ANG),
+off-diagonal (OFD), torsional (TOR), hydrogen bond (HBD).
+
+Here, we'll use the following initial parameters from the above force fields:
+
+* **LiS.ff**: ATM:S, BND:S.S, ANG:S.S.S
+
+* **Mue2016.ff**: ATM:H, BND:S.H, ANG:H.S.H
+
+* **ZnOH.ff**: GEN, ATM:Zn, BND:H.H, BND:Zn.H, BND:Zn.Zn, BND:Zn.O*, ANG:Zn.Zn.O*, ANG:Zn.O*.Zn, ANG:Zn.O*.O*, ANG:O*.Zn*.O
+
+For ZnOH.ff, the asterisks in e.g. BND:Zn.O* indicate that we will instead copy those parameters to initialize the BND:Zn.S block. That is, the Zn-O interaction in ZnOH.ff will be used as first guess for the Zn-S interaction in the new force field.
+
+This is accomplished in the ``create_parameters()`` method of ``generate_input_files.py``:
+
+.. literalinclude:: ../../../../examples/ZnS_ReaxFF/generate_input_files.py
+    :language: python
+    :pyobject: create_parameters
+
+The final part of the above code specifies which parameters to optimize during
+the parametrization (which parameters are *active*). For the BND parameters, we
+choose not to optimize any unused parameters (with ``'n/a`` in the name), the
+π-bond parameters, any parameters with value 0, or the Zn-H and H-H parameters.
+Similar conditions are placed for the ANG parameters.
+
+The initial parameters are stored in ``parameter_interface.yaml``.
+
+
+.. |H2S| replace:: H\ :sub:`2`\ S

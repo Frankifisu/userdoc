@@ -1,0 +1,171 @@
+#! /bin/sh
+
+# Dispersion corrected double hybrid calculation on 
+# a Water-Methanol complex using the double hybrid 
+# B2GPPLYP and standard settings 
+# 
+# First the fragments Water and MeOH are calculated.
+# Next the bond energy of the Water-Methanol complex
+# is calculated wrt to these fragments.
+#
+# Note that for the calculation of the Pauli repulsion
+# term the MP2 part of the double hybrid is not included.
+#
+# Next the BSSE is calculated for Water and MeOH.
+# If one uses a TZ2P instead of a DZP basis set,
+# the BSSE corrections will be smaller.
+
+AMS_JOBNAME=Water $AMSBIN/ams <<eor
+System
+  atoms
+     O     -0.525330     -0.050971     -0.314517
+     H     -0.942007      0.747902      0.011253
+     H      0.403697      0.059786     -0.073568
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type DZP
+  end
+  xc
+    dispersion GRIMME3 BJDAMP
+    doublehybrid B2GPPLYP
+  end
+EndEngine
+
+eor
+
+AMS_JOBNAME=MeOH $AMSBIN/ams <<eor
+System
+  atoms
+     O      2.316633      0.045501      0.071858
+     H      2.684616     -0.526577      0.749387
+     C      2.781638     -0.426129     -1.190301
+     H      2.350821      0.224965     -1.943415
+     H      3.867602     -0.375336     -1.264613
+     H      2.453296     -1.445999     -1.389381
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type DZP
+  end
+  xc
+    dispersion GRIMME3 BJDAMP
+    doublehybrid B2GPPLYP
+  end
+EndEngine
+
+eor
+
+AMS_JOBNAME=Water_MeOH $AMSBIN/ams <<eor
+System
+  atoms
+     O     -0.525330     -0.050971     -0.314517 adf.f=Water
+     H     -0.942007      0.747902      0.011253 adf.f=Water
+     H      0.403697      0.059786     -0.073568 adf.f=Water
+     O      2.316633      0.045501      0.071858 adf.f=MeOH
+     H      2.684616     -0.526577      0.749387 adf.f=MeOH
+     C      2.781638     -0.426129     -1.190301 adf.f=MeOH
+     H      2.350821      0.224965     -1.943415 adf.f=MeOH
+     H      3.867602     -0.375336     -1.264613 adf.f=MeOH
+     H      2.453296     -1.445999     -1.389381 adf.f=MeOH
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  fragments
+     Water Water.results/adf.rkf
+     MeOH MeOH.results/adf.rkf
+  end
+  xc
+    dispersion GRIMME3 BJDAMP
+    doublehybrid B2GPPLYP
+  end
+EndEngine
+
+eor
+
+# ==============
+# BSSE for Water
+# ==============
+
+AMS_JOBNAME=Water_BSSE $AMSBIN/ams <<eor
+System
+  atoms
+     O     -0.525330     -0.050971     -0.314517 adf.f=Water
+     H     -0.942007      0.747902      0.011253 adf.f=Water
+     H      0.403697      0.059786     -0.073568 adf.f=Water
+     Gh.O   2.316633      0.045501      0.071858
+     Gh.H   2.684616     -0.526577      0.749387
+     Gh.C   2.781638     -0.426129     -1.190301
+     Gh.H   2.350821      0.224965     -1.943415
+     Gh.H   3.867602     -0.375336     -1.264613
+     Gh.H   2.453296     -1.445999     -1.389381
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  fragments
+     Water Water.results/adf.rkf
+  end
+  basis
+    core None
+    type DZP
+  end
+  xc
+    dispersion GRIMME3 BJDAMP
+    doublehybrid B2GPPLYP
+  end
+EndEngine
+
+eor
+
+# =============
+# BSSE for MeOH
+# =============
+
+AMS_JOBNAME=MeOH_BSSE $AMSBIN/ams <<eor
+System
+  atoms
+     Gh.O  -0.525330     -0.050971     -0.314517
+     Gh.H  -0.942007      0.747902      0.011253
+     Gh.H   0.403697      0.059786     -0.073568
+     O      2.316633      0.045501      0.071858 adf.f=MeOH
+     H      2.684616     -0.526577      0.749387 adf.f=MeOH
+     C      2.781638     -0.426129     -1.190301 adf.f=MeOH
+     H      2.350821      0.224965     -1.943415 adf.f=MeOH
+     H      3.867602     -0.375336     -1.264613 adf.f=MeOH
+     H      2.453296     -1.445999     -1.389381 adf.f=MeOH
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  fragments
+     MeOH MeOH.results/adf.rkf
+  end
+  basis
+    core None
+    type DZP
+  end
+  xc
+    dispersion GRIMME3 BJDAMP
+    doublehybrid B2GPPLYP
+  end
+EndEngine
+
+eor

@@ -1,0 +1,229 @@
+#!/bin/sh
+
+# not needed, just slighly faster
+export NSCM=1
+
+report=report.txt
+
+
+
+printf "Here we treat H3O+ as qm and OH- as the MM region (Optimizing without regions gives two H2O molecules)\n" > $report
+printf "We do this with both mechanical and electrostatic embedding\n" >> $report
+printf  "\n%15s %10s %10s %10s\n" "embedding" "charge" "d(O-O)" "charges" >> $report
+
+for charge in 0.0 1.0
+do
+
+if [ "$charge" = "0.0" ]; then
+chargeOinOHm=0.0
+chargeHinOHm=0.0
+chargeOinH3Op=0.0
+chargeHinH3Op=0.0
+else
+chargeOinOHm=-1.123
+chargeHinOHm=0.123
+chargeOinH3Op=-0.5
+chargeHinH3Op=0.5
+fi
+
+export AMS_JOBNAME=quild.charge=$charge
+
+rm -rf $AMS_JOBNAME.results
+
+"$AMSBIN/ams" << eor
+
+Task GeometryOptimization
+
+Properties Charges=yes
+
+GeometryOptimization
+  Convergence Gradients=1.0e-6
+End
+
+System
+    Atoms
+        O -1.527946410885647 -0.2107366711137158 -0.0008116899510243671 region=QM   ForceField.Charge=$chargeOinH3Op
+        H -0.8459142126057956 0.3517312394359257 0.4094504676540848     region=QM   ForceField.Charge=$chargeHinH3Op
+        H -1.834953147575289 0.1051014241823828 -0.8704652381864062     region=QM   ForceField.Charge=$chargeHinH3Op
+        H -1.328032016244278 -1.164422847242489 0.02894848344144469     region=QM   ForceField.Charge=$chargeHinH3Op
+        O 0.6370858511871781 -0.3378071707560572 -0.0006181020627287671 region=MM   ForceField.Charge=$chargeOinOHm
+        H 1.318474396634582 0.2241299231185073 0.4092568796869673       region=MM   ForceField.Charge=$chargeHinOHm
+    End
+    GuessBonds True
+End
+
+Engine Hybrid
+    Energy
+       Term Factor=1.0  Region=*  EngineID=ForceField
+       Term Factor=-1.0 Region=QM EngineID=ForceField     Charge=$charge
+       Term Factor=1.0  Region=QM EngineID=DFTB           Charge=$charge
+    End
+
+    Engine DFTB
+        Model GFN1-xTB
+    EndEngine
+    
+    Engine ForceField
+    EndEngine
+EndEngine
+
+eor
+
+ddd=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#1#5`
+eee=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -k AMSResults%Charges#5.3f`
+
+printf "%15s %10s %10s %10s %10s %10s %10s %10s %10s\n" "mechanical"  $charge $ddd $eee >> $report
+
+export AMS_JOBNAME=qmmm.charge=$charge
+
+rm -rf $AMS_JOBNAME.results
+
+"$AMSBIN/ams" << eor
+
+Properties Charges=yes
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=1.0e-6
+End
+
+System
+    Atoms
+        O -1.527946410885647 -0.2107366711137158 -0.0008116899510243671 region=QM    ForceField.Charge=$chargeOinH3Op
+        H -0.8459142126057956 0.3517312394359257 0.4094504676540848     region=QM    ForceField.Charge=$chargeHinH3Op
+        H -1.834953147575289 0.1051014241823828 -0.8704652381864062     region=QM    ForceField.Charge=$chargeHinH3Op
+        H -1.328032016244278 -1.164422847242489 0.02894848344144469     region=QM    ForceField.Charge=$chargeHinH3Op
+        O 0.6370858511871781 -0.3378071707560572 -0.0006181020627287671 region=MM    ForceField.Charge=$chargeOinOHm
+        H 1.318474396634582 0.2241299231185073 0.4092568796869673       region=MM    ForceField.Charge=$chargeHinOHm
+    End
+    GuessBonds True
+End
+
+Engine Hybrid
+    QMMM QMRegion=QM QMEngineID=DFTB MMEngineID=ForceField QMCharge=$charge MMCharge=-$charge
+
+    Engine DFTB
+        Model GFN1-xTB
+    EndEngine
+    
+    Engine ForceField
+    EndEngine
+EndEngine
+
+eor
+
+ddd=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#1#5`
+eee=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -k AMSResults%Charges#5.3f`
+
+printf "%15s %10s %10s %10s %10s %10s %10s %10s %10s\n" "electrostatic"   $charge $ddd $eee >> $report
+
+done
+
+
+printf "\n* Using charges shortens the O-O distance\n" >> $report
+printf "* In this case the results (mechanical vs. electrostatic) are quite similar as apparently the OH does not polarize the QM region much\n" >> $report
+
+
+
+echo "start of report"
+cat $report
+echo "end of report"
+
+
+
+
+
+
+report=report2.txt
+
+printf "\nNow we add an extra OH- to the mm region and get a total charge of -1\n" > $report
+printf "We do this with mechanical and electrostatic embedding\n" >> $report
+printf "We look at two distances: d(O1-O5) and d(O1-O7) \n" >> $report
+printf "Atom O1 is in the H3O+ and atoms O5 and O7 are in the two OH- molecules\n" >> $report
+printf  "\n%15s %15s %10s %10s %10s %10s\n" "embedding"  "optim" "d(1-5)" "d(1-7)" "energy" >> $report
+
+charge=1.0
+chargeOinOHm=-1.123
+chargeHinOHm=0.123
+chargeOinH3Op=-0.5
+chargeHinH3Op=0.5
+
+for embedding in mechanical electrostatic
+do
+
+for optim in FIRE # Quasi-Newton
+do
+
+export AMS_JOBNAME=embedding=$embedding.optim=$optim
+
+rm -rf $AMS_JOBNAME.results
+
+"$AMSBIN/ams" << eor
+
+Task GeometryOptimization
+
+Properties Charges=yes
+
+GeometryOptimization
+  Method $optim
+  MaxIterations 3000
+  Convergence Gradients=1.0e-6
+End
+
+System
+    Atoms
+        O 0.9019652567984636 -1.133079116834755   0.01338426553857459  region=QM   ForceField.Charge=$chargeOinH3Op
+        H 0.1122251167578682 -1.036551903399635   0.5668491423154995   region=QM   ForceField.Charge=$chargeHinH3Op
+        H 1.037136681303829  -0.2320347366030556 -0.3773644469587724   region=QM   ForceField.Charge=$chargeHinH3Op
+        H 1.678241221654873  -1.266912785246295   0.5779953693196539   region=QM   ForceField.Charge=$chargeHinH3Op
+        O -1.130580450693341   0.6009421414132099 -0.02453852439122078  region=MM   ForceField.Charge=$chargeOinOHm
+        H -1.671378074377012   1.410809444490273  -0.2141830902463049   region=MM   ForceField.Charge=$chargeHinOHm
+        O 3.346891191122751  -0.05485781804516161 0.01059240308504993  region=MM   ForceField.Charge=$chargeOinOHm
+        H 4.099773764135065   0.5660034244354222 -0.1683355405307263   region=MM   ForceField.Charge=$chargeHinOHm
+    End
+    BondOrders
+         1 3 1.0
+         1 4 1.0
+         2 1 1.0
+         5 6 1.0
+         7 8 1.0
+    End
+    Charge -1.0
+End
+
+Engine Hybrid
+
+    QMMM qmRegion=QM qmCharge=1.0 mmCharge=-2.0 qmEngineID=dftb mmEngineID=forcefield Embedding=$embedding
+
+    Engine DFTB
+        Model GFN1-xTB
+    EndEngine
+    
+    Engine ForceField
+    EndEngine
+EndEngine
+
+eor
+
+
+d15=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#1#5`
+d17=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#1#7`
+eee=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -k "AMSResults%Energy"`
+
+
+printf "%15s %15s %10s %10s %10.4f\n" $embedding $optim $d15 $d17 $eee >> $report
+
+done
+done
+
+
+printf "\n* Very flat PES as function of these two distances\n" >> $report
+printf "\n* Electrostatic embeddiding gives a bit shorter distances\n" >> $report
+
+
+echo "start of report"
+cat $report
+echo "end of report"
+
+

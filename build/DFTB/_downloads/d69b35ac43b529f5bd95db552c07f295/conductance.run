@@ -1,0 +1,186 @@
+#!/bin/sh
+
+# ==================================
+# First test: Aluminum chain (DFTB0)
+# ==================================
+
+# Lead:
+# =====
+
+AMS_JOBNAME=Al_lead $AMSBIN/ams <<EOF
+    Task SinglePoint
+    System
+        Atoms
+            Al 0.0  0.0 0.0
+            Al 2.83 0.0 0.0
+            Al 5.66 0.0 0.0
+            Al 8.49 0.0 0.0
+        End
+
+        Charge 0
+
+        Lattice
+            11.32 0.0 0.0
+        End
+    End
+
+    Engine DFTB
+       ResourcesDir QUASINANO2013.1
+       StoreMatrices yes
+       Model DFTB0
+       Occupation Strategy=Fermi Temperature=5
+       KSpace
+         Type Symmetric
+         Symmetric KInteg=13
+       End
+    EndEngine
+EOF
+
+# Scattering region:
+# ==================
+
+AMS_JOBNAME=Al_scattering $AMSBIN/ams <<EOF
+    Task SinglePoint
+    System
+        Atoms
+            Al -14.15 0.0 0.0
+            Al -11.32 0.0 0.0
+            Al -8.49 0.0 0.0
+            Al -5.66 0.0 0.0
+            Al -2.83 0 0
+            Al 0 0 0
+            Al 2.83 0 0
+            Al 5.66 0.0 0.0
+            Al 8.49 0.0 0.0
+            Al 11.32 0.0 0.0
+            Al 14.15 0.0 0.0
+        End
+
+        Charge 0
+    End
+
+    Engine DFTB
+       ResourcesDir QUASINANO2013.1
+       StoreMatrices yes
+       Model DFTB0
+       Occupation Strategy=Fermi Temperature=5
+    EndEngine
+EOF
+
+# Conductance:
+# ============
+
+$AMSBIN/conductance <<EOF
+    EnergyGrid min=-5 max=5 num=500
+
+    Files
+       Leads      Al_lead.results/dftb.rkf
+       Scattering Al_scattering.results/dftb.rkf
+    End
+EOF
+
+mv ConductanceResults.kf Al_ConductanceResults.kf
+
+echo "Extract DOS from the kf file Al_ConductanceResults.kf:"
+$AMSBIN/amsreport Al_ConductanceResults.kf -r "results%dos#12.5f##1"
+
+echo "Extract transmission from the kf file Al_ConductanceResults.kf:"
+$AMSBIN/amsreport Al_ConductanceResults.kf -r "results%transmission#12.5f##1"
+
+
+# ==========================================
+#   Second test: CO on gold chain (SCC-DFTB)
+# ==========================================
+
+# Lead:
+# =====
+
+AMS_JOBNAME=Au_lead $AMSBIN/ams <<EOF
+    Task SinglePoint
+    System
+        Atoms
+            Au 0.0 0.0 0.0
+            Au 2.884996 0.0 0.0
+            Au 5.769992 0.0 0.0
+        End
+
+        Charge 0
+
+        Lattice
+            8.654988 0.0 0.0
+        End
+    End
+    Engine DFTB
+       Model SCC-DFTB
+       ResourcesDir QUASINANO2013.1
+       Occupation Strategy=Fermi Temperature=5
+       StoreMatrices yes
+       KSpace
+         Type Symmetric
+         Symmetric KInteg=13
+       End
+    EndEngine
+EOF
+
+# Scattering region:
+# ==================
+
+AMS_JOBNAME=Au_scattering $AMSBIN/ams <<EOF
+    Task SinglePoint
+    System
+        Atoms
+            Au -20.194972   0.0 0.0
+            Au -17.309976   0.0 0.0
+            Au -14.42498    0.0 0.0
+            Au -11.539984   0.0 0.0
+            Au -8.654988    0.0 0.0
+            Au -5.769992    0.0 0.0
+            Au -2.884996    0.0 0.0
+            Au 0.0          0.0 0.20
+            Au 2.884996     0.0 0.0
+            Au 5.769992     0.0 0.0
+            Au 8.654988     0.0 0.0
+            Au 11.539984    0.0 0.0
+            O 0.0           0.0 3.12
+            C 0.0           0.0 1.96
+            Au 14.42498     0.0 0.0
+            Au 17.309976    0.0 0.0
+            Au 20.194972    0.0 0.0
+        End
+
+        Charge 0
+
+        Lattice
+            43.27494 0.0 0.0
+        End
+    End
+
+    Engine DFTB
+       Model SCC-DFTB
+       ResourcesDir QUASINANO2013.1
+       Occupation Strategy=Fermi Temperature=5
+       StoreMatrices yes
+    EndEngine
+EOF
+
+# Conductance:
+# ============
+
+$AMSBIN/conductance <<EOF
+    EnergyGrid min=-3.5 max=3 num=200
+
+    Files
+      Leads      Au_lead.results/dftb.rkf
+      Scattering Au_scattering.results/dftb.rkf
+    End
+EOF
+
+mv ConductanceResults.kf Au_ConductanceResults.kf
+
+echo "Extract DOS from the kf file Au_ConductanceResults.kf:"
+$AMSBIN/amsreport Au_ConductanceResults.kf -r "results%dos#12.5f##1"
+
+echo "Extract transmission from the kf file Au_ConductanceResults.kf:"
+$AMSBIN/amsreport Au_ConductanceResults.kf -r "results%transmission#12.5f##1"
+
+

@@ -1,0 +1,213 @@
+#! /bin/sh
+
+
+# Application of the Spin-Orbit relativistic option (using double-group
+# symmetry) to Bismuth (atom and dimer).
+
+# For comparison with the full double-group calculation, the 'standard'
+# unrestricted calculation on Bismuth is carried out, using the scalar
+# relativistic option.
+
+# A net spin polarization of 3 electrons is applied (key charge).
+
+AMS_JOBNAME=Bi_SR $AMSBIN/ams <<eor
+System
+  atoms
+     Bi   0.000000      0.000000      0.00000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Bi unrestricted
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 3
+  unrestricted
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+
+# The CHARGE key, in conjunction with the UNRESTRICTED key is used to specify
+# that 3 electrons must be unpaired (second value of the CHARGE key), while the
+# system is neutral (first value of the CHARGE key).
+
+# Next we do a Spin-Orbit calculation on the Bismuth atom.
+
+# Note that it is a 'unrestricted' run using the noncollinear approximation, and
+# SYMMETRY NSOYM. The electronic charge density is spin-polarized.
+
+AMS_JOBNAME=Bi_SO $AMSBIN/ams <<eor
+System
+  atoms
+     Bi   0.000000      0.000000      0.00000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Bi spinorbit unrestricted noncollinear
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  relativity
+    level spin-orbit
+    formalism ZORA
+    spinorbitmagnetization noncollinear
+  end
+  symmetry nosym
+  unrestricted
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+
+# Because an all electron basis set is used, the bond energy is huge, due to the
+# very large higher order spin-orbit effect on the 2p orbitals.
+
+# == Bi2 dimer ==
+
+# Now we turn to the dimer Bi2: a series of Single Point calculations, all with
+# the same inter atomic distance.
+
+# First the scalar relativistic run.
+
+AMS_JOBNAME=Bi2_SR $AMSBIN/ams <<eor
+System
+  atoms
+     Bi       0.0             0.0             1.33
+     Bi       0.0             0.0            -1.33
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Bi2, scalar relativistic
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+# The calculated scalar relativistic atomization energy will be close to 2.74
+# eV. This is the bond energy of the dimer minus 2 times the bond energy of the
+# unrestricted scalar relativistic atom.
+
+# The result file tape21 is used as reference in subsequent calculations: run
+# the spin-orbit case starting from the just completed dimer calculation as a
+# fragment. The resulting 'bonding energy', ie the energy w.r.t. the scalar
+# relativistic ZORA dimer, gives directly the effect of the full-relativistic
+# ZORA versus the scalar relativistic ZORA option: the energy is lowered by huge
+# amount, again mainly due to the large spin-orbit effect on the 2p orbitals.
+
+AMS_JOBNAME=Bi2_SO_frag $AMSBIN/ams <<eor
+System
+  atoms
+     Bi    0.0    0.0    1.33  adf.f=Bi2
+     Bi    0.0    0.0   -1.33  adf.f=Bi2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Bi2 from fragment Bi2,  with SpinOrbit coupling
+  beckegrid
+    quality good
+  end
+  fragments
+     Bi2     Bi2_SR.results/adf.rkf
+  end
+  print SpinOrbit
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+
+# If one looks at the SFO analysis in the output of this calculation, one can
+# observe that a first-order spin-orbit splitting of the scalar relativistic
+# fragment orbitals is a good approximation to many of the calculated valence
+# spinors.
+
+# A final consistency check: run the spin-orbit dimer from single-atom
+# fragments. The bonding energy should equal the sum of the bonding energies of
+# the previous two runs: scalar relativistic dimer w.r.t. single atom fragments
+# plus spin-orbit dimer w.r.t. the scalar relativistic dimer.
+
+AMS_JOBNAME=Bi2_SO $AMSBIN/ams <<eor
+System
+  atoms
+     Bi       0.0             0.0             1.33
+     Bi       0.0             0.0            -1.33
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Bi2 from atomic fragments, SpinOrbit coupling
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  print SpinOrbit
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+
+# The calculated spin-orbit coupled relativistic atomization energy will be
+# close to 2.18 eV. This is the bond energy of the dimer minus 2 times the bond
+# energy of the unrestricted non-collinear spin-orbit coupled relativistic atom.
+# Note that one has to subtract huge numbers.

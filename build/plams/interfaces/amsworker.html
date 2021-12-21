@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>AMS worker &mdash; PLAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PLAMS 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Amsterdam Modeling Suite" href="amssuite.html"/>
+        <link rel="next" title="Analysis tools: Densf, FCF, analysis" href="postadf.html"/>
+        <link rel="prev" title="AMS driver and engines" href="ams.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/plams_logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search PLAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-scripting" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-plams">What is PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-can-be-done-with-plams">What can be done with PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#simple-example">Simple example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-plams-is-not">What PLAMS is <em>not</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#library-contents">Library contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#installing-plams">Installing PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#updating-plams">Updating PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#running-plams">Running PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#defaults-file">Defaults file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#the-launch-script">The launch script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#working-folder-location">Working folder location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#passing-variables">Passing variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#importing-past-jobs">Importing past jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#restarting-failed-script">Restarting failed script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#multiple-input-scripts">Multiple input scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../components/components.html">Components overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../components/settings.html">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#tree-like-structure">Tree-like structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#dot-notation">Dot notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#case-sensitivity">Case sensitivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#global-settings">Global settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/jobs.html">Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#preparing-a-job">Preparing a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#contents-of-job-settings">Contents of job settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#default-settings">Default settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#running-a-job">Running a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#name-conflicts">Name conflicts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#prerun-and-postrun-methods">Prerun and postrun methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#preview-mode">Preview mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#job-api">Job API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#single-jobs">Single jobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#subclassing-singlejob">Subclassing SingleJob</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#multijobs">Multijobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#using-multijob">Using MultiJob</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/results.html">Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#files-in-the-job-folder">Files in the job folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#synchronization-of-parallel-job-executions">Synchronization of parallel job executions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/results.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#cleaning-job-folder">Cleaning job folder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/results.html#cleaning-for-multijobs">Cleaning for multijobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/runners.html">Job runners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/runners.html#local-job-runner">Local job runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/runners.html#remote-job-runner">Remote job runner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/jobmanager.html">Job manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#rerun-prevention">Rerun prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#pickling">Pickling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#restarting-scripts">Restarting scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/functions.html">Public functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/functions.html#logging">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/functions.html#binding-decorators">Binding decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/molecule.html">Molecule</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_api.html">Molecule</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/mol_api.html#atom-labeling">Atom labeling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/atombond.html">Atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/atombond.html#bond">Bond</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_rdkit.html">RDKit interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_ase.html">ASE interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/utils.html">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#periodic-table">Periodic Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#geometry-tools">Geometry tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#file-format-conversion-tools">File format conversion tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/trajectories.html">Trajectories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/xyz.html">XYZ trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/xyz.html#xyz-history-files">XYZ history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/rkf.html">RKF trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/rkf.html#rkf-history-files">RKF history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/dcd.html">DCD trajectory files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="interfaces.html">Interfaces</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="amssuite.html">Amsterdam Modeling Suite</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ams.html">AMS driver and engines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#molecule-handling">Molecule handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#amsjob-api">AMSJob API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#amsresults-api">AMSResults API</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">AMS worker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#amsworker-api">AMSWorker API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amsworkerresults-api">AMSWorkerResults API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amsworkerpool-api">AMSWorkerPool API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="postadf.html">Analysis tools: Densf, FCF, analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kffiles.html">KF files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crs.html">COSMO-RS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#settings-with-multiple-compound">Settings with multiple compound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#adf-and-crsjob">ADF and CRSJob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#cosmo-rs-parameters">COSMO-RS Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#data-analyses-and-plotting">Data analyses and plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="adf.html">ADF (pre-2020 version)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="adf.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="adf.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="adf.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reaxff.html">ReaxFF (pre-2019 version)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="thirdparty.html">Other programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cp2k.html">CP2K</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#molecule-loading">Molecule loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="crystal.html">Crystal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus.html">DFTB+</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dirac.html">Dirac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mopac.html">MOPAC (standalone program)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mopac.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mopac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orca.html">ORCA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orca.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="raspa.html">RASPA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#id1">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/He2DissociationCurve.html">Helium dimer dissociation curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/WaterOptimization.html">Geometry optimization of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ManyJobsInParallel.html">Many jobs in parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/BasisSetBenchmark.html">Benchmark accuracy of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ExcitationsWorkflow.html">Workflow: filtering molecules based on excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ChargeTransferIntegralsADF.html">Charge transfer integrals with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/gammascan.html">Tuning the range separation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#pre-made-recipes">Pre-made recipes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ams_crs.html">ADF and COSMO-RS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adffragment.html">ADF fragment job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ReorganizationEnergy.html">Reorganization Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adfnbo.html">NBO with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numgrad.html">Numerical gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numhess.html">Numerical Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/molecule_gun.html">ReaxFF molecule gun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/global_minimum.html">Global Minimum Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vibrationASE.html">Vibrational analysis with ASE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook/cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#settings-and-input">Settings and input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#create-an-input-block-with-an-header">Create an input block with an header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#create-an-empty-input-block">Create an empty input block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-text-input-into-an-ams-job">Convert an AMS text input into an AMS job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-text-input-into-settings-object">Convert an AMS text input into settings object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-run-file-into-an-amsjob">Convert an AMS .run file into an AMSJob</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#molecules">Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#generate-a-molecule-from-a-smiles-string">Generate a molecule from a SMILES string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#counting-rings">Counting rings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#extracting-results">Extracting Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#directly-from-functions">Directly from Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#examples-total-energy-and-final-structure">Examples: Total Energy and Final Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#amsresults-api-functions">AMSResults API Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#from-the-rkf-interface">From the RKF Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#finding-section-variable-pairs">Finding Section/Variable Pairs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#from-python-directories">From Python Directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#kfbrowser">KFBrowser</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#from-molecular-dynamics-trajectories">From molecular dynamics trajectories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#general-md-properties">General MD properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#molecules-from-trajectories">Molecules from trajectories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#accessing-old-jobs">Accessing Old Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#binding-native-plams-jobs">Binding Native PLAMS Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#binding-old-rkf-files">Binding old RKF Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citations.html">Citations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PLAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../PLAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">PLAMS</a>/</li>
+      
+          <li><a href="interfaces.html">Interfaces</a>/</li>
+      
+          <li><a href="amssuite.html">Amsterdam Modeling Suite</a>/</li>
+      
+    <li class="orange-text">AMS worker</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ams-worker">
+<h1>AMS worker<a class="headerlink" href="#ams-worker" title="Permalink to this headline">¶</a></h1>
+<p>The PLAMS interface to the AMS driver and its engines through the <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a> and <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSResults" title="scm.plams.interfaces.adfsuite.ams.AMSResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSResults</span></code></a> questions is technically quite similar to how one would run calculations from the command line or from the GUI: the AMS input files are written to disk, the AMS driver starts up, reads its input, performs the calculations and writes the results to disk in form of human readable text files as well as machine readable binary files, usually in <a class="reference internal" href="kffiles.html#kf-files"><span class="std std-ref">KF format</span></a>. This setup has the advantage that any calculation that can be performed with AMS can be setup from PLAMS as an <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a>, and that any result from any calculation can be accessed from PLAMS through the corresponding <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSResults" title="scm.plams.interfaces.adfsuite.ams.AMSResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSResults</span></code></a> instance. Furthermore, the resulting files on disk can often visualized using the AMS GUI, as if the job had been set up and run through the graphical user interface. As such, this way of running AMS offers maximum flexibility and convenience to users.</p>
+<p>However, for simple and fast jobs where we only care about some basic results, this flexibility comes at a cost: input files need to be created on disk, a process is launched, possibly reading all kinds of configuration and parameter files. The process writes more files to disk, which we later need to open again to extract (in the worst case) just a single number. The overhead might be irrelevant for sufficiently slow engines, but for a very fast force field this overhead can easily become the performance bottleneck.</p>
+<p>Starting with the AMS2019.3 release, the AMS driver implements a special task, in which the running process listens for calculation requests on a named pipe (FIFO) and communicates the results of the calculations back on another pipe. This avoids the overhead of starting processes and eliminates all file based I/O. You can find more information about the pipe interface in the AMS driver in the <a class="reference external" href="../../AMS/Input_Output.html#pipe-interface">corresponding part of the documentation</a>. In PLAMS the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> class is used to represent this running AMS driver process. The <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> class handles all communication with the process and hides the technical details of underlying <a class="reference external" href="../../AMS/Pipe_protocol.html">communication protocol</a>.</p>
+<p>Consider the following short PLAMS script, that calculates and prints the total GFN1-xTB energy for all molecules found in a folder full of xyz-files. Using the regular <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a>, this can be written as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">molecules</span> <span class="o">=</span> <span class="n">read_molecules</span><span class="p">(</span><span class="s1">&#39;folder/with/xyz/files&#39;</span><span class="p">)</span>
+
+<span class="n">sett</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">Task</span> <span class="o">=</span> <span class="s1">&#39;SinglePoint&#39;</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">dftb</span><span class="o">.</span><span class="n">Model</span> <span class="o">=</span> <span class="s1">&#39;GFN1-xTB&#39;</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">molecules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">AMSJob</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="n">sett</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Energy of {} = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">get_energy</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>In order to switch this script over to using the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a>, we need to make only a couple of changes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">molecules</span> <span class="o">=</span> <span class="n">read_molecules</span><span class="p">(</span><span class="s1">&#39;folder/with/xyz/files&#39;</span><span class="p">)</span>
+
+<span class="n">sett</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">dftb</span><span class="o">.</span><span class="n">Model</span> <span class="o">=</span> <span class="s1">&#39;GFN1-xTB&#39;</span>
+
+<span class="k">with</span> <span class="n">AMSWorker</span><span class="p">(</span><span class="n">sett</span><span class="p">)</span> <span class="k">as</span> <span class="n">worker</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">molecules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">worker</span><span class="o">.</span><span class="n">SinglePoint</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Energy of {} = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">get_energy</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>With the first <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a> based version, both the <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance and the <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance were passed into the constructor of the <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a>, while the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> constructor only accepts the <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance. The <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance is only later passed into the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SinglePoint</span></code></a> method. This shows the basic usage of the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> class: create it once, supplying the desired <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a>, and use these fixed settings for calculations on multiple molecules. It is <em>not</em> possible to change the <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> on an already running <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> instance. If you have to switch <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a>, you need to create a new <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> with the new settings. It therefore only makes sense to use the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> if one has to do calculations on many molecules <em>using the same settings</em>.</p>
+<p>Note that when using the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> the type of <code class="docutils literal notranslate"><span class="pre">results</span></code> in the above example is not actually <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSResults" title="scm.plams.interfaces.adfsuite.ams.AMSResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSResults</span></code></a> anymore: the call to <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SinglePoint</span></code></a> returns an instance of <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a>, which only implements a small subset of the methods available in the full <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSResults" title="scm.plams.interfaces.adfsuite.ams.AMSResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSResults</span></code></a>. This is the concession we have to make for using <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> instead of <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a>: after all the <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a> class has many methods to extract arbitrary data from the result files of an AMS calculation. Since none of these files exist when directly communicating with the AMS process over a pipe, the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> class supports none of these methods.</p>
+<p>Given these restrictions we recommend that users first try the traditional route of running the AMS driver via the <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a> class, and only switch to the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> alternative if they observe a significant slowdown due to the startup and I/O cost. The overhead is likely only relevant for simple tasks (single points, geometry optimizations) using rather fast engines such as semi-empirical methods and force fields.</p>
+<p>In case the worker process fails to start up or terminates unexpectedly, an <code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerError</span></code> exception will be raised. The standard output and standard error output from the failed worker process is stored in the <code class="docutils literal notranslate"><span class="pre">stdout</span></code> and <code class="docutils literal notranslate"><span class="pre">stderr</span></code> attributes in <code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerError</span></code>.
+If an <code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerError</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">AMSPipeRuntimeError</span></code> exception occurs during <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SinglePoint</span></code></a>, it will be internally caught and stored in the <code class="docutils literal notranslate"><span class="pre">error</span></code> attribute of the returned <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> object for further inspection.
+These two types of exceptions are typically related to the calculation being performed (the combination of the <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> and <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a>), so they are not allowed to propagate out of <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SinglePoint</span></code></a> to match the behavior of <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a> in similar situations.
+However, other types of exceptions derived from <code class="xref py py-class docutils literal notranslate"><span class="pre">AMSPipeError</span></code> may also occur in <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a>.
+These correspond to other errors defined by the pipe protocol and will propagate normally, because they represent programming and logic errors, protocol incompatibilities, or unsupported features.
+In any case, <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> will be ready to handle another call to <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SinglePoint</span></code></a> after an error.</p>
+<p>PLAMS also provides the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerPool</span></code></a> class, which represents a pool of running <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> instances, which dynamically pick tasks from a queue of calculations to be performed. This is useful for workflows that require the execution of many trivially parallel simple tasks. Using the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerPool</span></code></a> we could write the above example as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">molecules</span> <span class="o">=</span> <span class="n">read_molecules</span><span class="p">(</span><span class="s1">&#39;folder/with/xyz/files&#39;</span><span class="p">)</span>
+
+<span class="n">sett</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">dftb</span><span class="o">.</span><span class="n">Model</span> <span class="o">=</span> <span class="s1">&#39;GFN1-xTB&#39;</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">runscript</span><span class="o">.</span><span class="n">nproc</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># every worker is a serial process now</span>
+
+<span class="k">with</span> <span class="n">AMSWorkerPool</span><span class="p">(</span><span class="n">sett</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+     <span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">SinglePoints</span><span class="p">(</span><span class="n">molecules</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Energy of {} = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">get_energy</span><span class="p">()))</span>
+</pre></div>
+</div>
+<div class="section" id="amsworker-api">
+<h2>AMSWorker API<a class="headerlink" href="#amsworker-api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorker">
+<em class="property">class </em><code class="descname">AMSWorker</code><span class="sig-paren">(</span><em>settings</em>, <em>workerdir_root='/tmp/egidi/ams'</em>, <em>workerdir_prefix='amsworker'</em>, <em>use_restart_cache=True</em>, <em>keep_crashed_workerdir=False</em>, <em>reuse_system=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class representing a running instance of the AMS driver as a worker process.</p>
+<p>Users need to supply a <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance representing the input of the AMS driver process (see <a class="reference internal" href="ams.html#ams-preparing-input"><span class="std std-ref">Preparing input</span></a>), but <strong>not including</strong> the <code class="docutils literal notranslate"><span class="pre">Task</span></code> keyword in the input (the <code class="docutils literal notranslate"><span class="pre">input.ams.Task</span></code> key in the <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance). The <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance should also not contain a system specification in the <code class="docutils literal notranslate"><span class="pre">input.ams.System</span></code> block, the <code class="docutils literal notranslate"><span class="pre">input.ams.Properties</span></code> block, or the <code class="docutils literal notranslate"><span class="pre">input.ams.GeometryOptimization</span></code> block. Often the settings of the AMS driver in worker mode will come down to just the engine block.</p>
+<p>The AMS driver will then start up as a worker, communicating with PLAMS via named pipes created in a temporary directory (determined by the <em>workerdir_root</em> and <em>workerdir_prefix</em> arguments). This temporary directory might also contain temporary files used by the worker process. Note that while an <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> instance exists, the associated worker process can be assumed to be running and ready: If it crashes for some reason, it is automatically restarted.</p>
+<p>The recommended way to start an <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> is as a context manager:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">AMSWorker</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span> <span class="k">as</span> <span class="n">worker</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">worker</span><span class="o">.</span><span class="n">SinglePoint</span><span class="p">(</span><span class="s1">&#39;my_calculation&#39;</span><span class="p">,</span> <span class="n">molecule</span><span class="p">)</span>
+<span class="c1"># clean up happens automatically when leaving the block</span>
+</pre></div>
+</div>
+<p>If it is not possible to use the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> as a context manager, cleanup should be manually triggered by calling the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.stop" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.stop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stop()</span></code></a> method.</p>
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.stop">
+<code class="descname">stop</code><span class="sig-paren">(</span><em>keep_workerdir=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorker.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the worker process and removes its working directory.</p>
+<p>This method should be called when the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> instance is not used as a context manager and the instance is no longer needed. Otherwise proper cleanup is not guaranteed to happen, the worker process might be left running and files might be left on disk.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint">
+<code class="descname">SinglePoint</code><span class="sig-paren">(</span><em>name</em>, <em>molecule</em>, <em>prev_results=None</em>, <em>quiet=True</em>, <em>gradients=False</em>, <em>stresstensor=False</em>, <em>hessian=False</em>, <em>elastictensor=False</em>, <em>charges=False</em>, <em>dipolemoment=False</em>, <em>dipolegradients=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorker.SinglePoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a single point calculation on the geometry given by the <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance <em>molecule</em> and returns an instance of <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> containing the results.</p>
+<p>Every calculation should be given a <em>name</em>. Note that the name <strong>must be unique</strong> for this <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> instance: One should not attempt to reuse calculation names with a given instance of <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a>.</p>
+<p>By default only the total energy is calculated but additional properties can be requested using the corresponding keyword arguments:</p>
+<ul class="simple">
+<li><em>gradients</em>: Calculate the nuclear gradients of the total energy.</li>
+<li><em>stresstensor</em>: Calculate the clamped-ion stress tensor. This should only be requested for periodic systems.</li>
+<li><em>hessian</em>: Calculate the Hessian matrix, i.e. the second derivative of the total energy with respect to the nuclear coordinates.</li>
+<li><em>elastictensor</em>: Calculate the elastic tensor. This should only be requested for periodic systems.</li>
+<li><em>charges</em>: Calculate atomic charges.</li>
+<li><em>dipolemoment</em>: Calculate the electric dipole moment. This should only be requested for non-periodic systems.</li>
+<li><em>dipolegradients</em>: Calculate the nuclear gradients of the electric dipole moment. This should only be requested for non-periodic systems.</li>
+</ul>
+<p>Users can pass an instance of a previously obtained <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> as the <em>prev_results</em> keyword argument. This can trigger a restart from previous results in the worker process, the details of which depend on the used computational engine: For example, a DFT based engine might restart from the electronic density obtained in an earlier calculation on a similar geometry. This is often useful to speed up series of sequentially dependent calculations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="s1">&#39;some/system.xyz&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">AMSWorker</span><span class="p">(</span><span class="n">sett</span><span class="p">)</span> <span class="k">as</span> <span class="n">worker</span><span class="p">:</span>
+    <span class="n">last_results</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">do</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">worker</span><span class="o">.</span><span class="n">SinglePoint</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;step{i}&#39;</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">prev_results</span><span class="o">=</span><span class="n">last_results</span><span class="p">,</span> <span class="n">gradients</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="c1"># modify the geometry of mol using results.get_gradients()</span>
+        <span class="n">last_results</span> <span class="o">=</span> <span class="n">results</span>
+</pre></div>
+</div>
+<p>Note that the restarting is disabled if the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> instance was created with <code class="docutils literal notranslate"><span class="pre">use_restart_cache=False</span></code>. It is still permitted to pass previous <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSResults" title="scm.plams.interfaces.adfsuite.ams.AMSResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSResults</span></code></a> instances as the <em>prev_results</em> argument, but no restarting will happen.</p>
+<p>The <em>quiet</em> keyword can be used to obtain more output from the worker process. Note that the output of the worker process is not printed to the standard output but instead ends up in the <code class="docutils literal notranslate"><span class="pre">ams.out</span></code> file in the temporary working directory of the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> instance. This is mainly useful for debugging.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.GeometryOptimization">
+<code class="descname">GeometryOptimization</code><span class="sig-paren">(</span><em>name</em>, <em>molecule</em>, <em>prev_results=None</em>, <em>quiet=True</em>, <em>gradients=True</em>, <em>stresstensor=False</em>, <em>hessian=False</em>, <em>elastictensor=False</em>, <em>charges=False</em>, <em>dipolemoment=False</em>, <em>dipolegradients=False</em>, <em>method=None</em>, <em>coordinatetype=None</em>, <em>usesymmetry=None</em>, <em>optimizelattice=False</em>, <em>maxiterations=None</em>, <em>pretendconverged=None</em>, <em>calcpropertiesonlyifconverged=True</em>, <em>convenergy=None</em>, <em>convgradients=None</em>, <em>convstep=None</em>, <em>convstressenergyperatom=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorker.GeometryOptimization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.GeometryOptimization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a geometry optimization on the <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance <em>molecule</em> and returns an instance of <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> containing the results from the optimized geometry.</p>
+<p>The geometry optimizer can be controlled using the following keyword arguments:</p>
+<ul class="simple">
+<li><em>method</em>: String identifier of a particular optimization algorithm.</li>
+<li><em>coordinatetype</em>: Select a particular kind of optimization coordinates.</li>
+<li><em>usesymmetry</em>: Enable the use of symmetry when applicable.</li>
+<li><em>optimizelattice</em>: Optimize the lattice vectors together with atomic positions.</li>
+<li><em>maxiterations</em>: Maximum number of iterations allowed.</li>
+<li><em>pretendconverged</em>: If set to true, non converged geometry optimizations will be considered successful.</li>
+<li><em>calcpropertiesonlyifconverged</em>: Calculate properties (e.g. the Hessian) only if the optimization converged.</li>
+<li><em>convenergy</em>: Convergence criterion for the energy (in Hartree).</li>
+<li><em>convgradients</em>: Convergence criterion for the gradients (in Hartree/Bohr).</li>
+<li><em>convstep</em>: Convergence criterion for displacements (in Bohr).</li>
+<li><em>convstressenergyperatom</em>: Convergence criterion for the stress energy per atom (in Hartree).</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.ParseInput">
+<code class="descname">ParseInput</code><span class="sig-paren">(</span><em>program_name</em>, <em>text_input</em>, <em>string_leafs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorker.ParseInput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.ParseInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the text input and return a Python dictionary representing the the JSONified input.</p>
+<ul class="simple">
+<li><em>program_name</em>: the name of the program. This will be used for loading the appropriate json input definitions. e.g. if program_name=’adf’, the input definition file ‘adf.json’ will be used.</li>
+<li><em>text_input</em>: a string containing the text input to be parsed.</li>
+<li><em>string_leafs</em>: if <em>True</em> the values in the parsed json input will always be string. e.g. if in the input you have ‘SomeFloat 1.2’, the json leaf node for ‘SomeFloat’ will be the string ‘1.2’ (and not the float number 1.2). If False the leaf values in the json input will be of the ‘appropriate’ type, i.e. float will be floats, strings will be strings, booleans will be boleans etc…</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="amsworkerresults-api">
+<h2>AMSWorkerResults API<a class="headerlink" href="#amsworkerresults-api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults">
+<em class="property">class </em><code class="descname">AMSWorkerResults</code><span class="sig-paren">(</span><em>name</em>, <em>molecule</em>, <em>results</em>, <em>error=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>A specialized class encapsulating the results from calls to an <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a>.</p>
+<div class="admonition important">
+<p class="first admonition-title">Technical</p>
+<p class="last">AMSWorkerResults is <em>not</em> a subclass of <a class="reference internal" href="../components/results.html#scm.plams.core.results.Results" title="scm.plams.core.results.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">Results</span></code></a> or <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSResults" title="scm.plams.interfaces.adfsuite.ams.AMSResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSResults</span></code></a>. It does however implement some commonly used methods of the <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSResults" title="scm.plams.interfaces.adfsuite.ams.AMSResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSResults</span></code></a> class, so that results calculated by <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a> and <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> can be accessed in a uniform way.</p>
+</div>
+<dl class="attribute">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.name">
+<code class="descname">name</code><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of a calculation.</p>
+<p>That is the name that was passed into the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> method when this <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> object was created. I can not be changed after the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> instance has been created.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.ok">
+<code class="descname">ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.ok" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the calculation was successful. If not, the <code class="docutils literal notranslate"><span class="pre">error</span></code> attribute contains a corresponding exception.</p>
+<p>Users should check if the calculation was successful before using the other methods of the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> instance, as using them might raise a <code class="xref py py-exc docutils literal notranslate"><span class="pre">ResultsError</span></code> exception otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_errormsg">
+<code class="descname">get_errormsg</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_errormsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_errormsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to retreive a human readable error message from a crashed job. Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> for jobs without errors.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_energy">
+<code class="descname">get_energy</code><span class="sig-paren">(</span><em>unit='au'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_energy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the total energy, expressed in <em>unit</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_gradients">
+<code class="descname">get_gradients</code><span class="sig-paren">(</span><em>energy_unit='au'</em>, <em>dist_unit='au'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_gradients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_gradients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the nuclear gradients of the total energy, expressed in <em>energy_unit</em> / <em>dist_unit</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_stresstensor">
+<code class="descname">get_stresstensor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_stresstensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_stresstensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the clamped-ion stress tensor, expressed in atomic units.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_hessian">
+<code class="descname">get_hessian</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_hessian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_hessian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Hessian matrix, i.e. the second derivative of the total energy with respect to the nuclear coordinates, expressed in atomic units.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_elastictensor">
+<code class="descname">get_elastictensor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_elastictensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_elastictensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the elastic tensor, expressed in atomic units.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_charges">
+<code class="descname">get_charges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_charges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_charges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the atomic charges, expressed in atomic units.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_dipolemoment">
+<code class="descname">get_dipolemoment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_dipolemoment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_dipolemoment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the electric dipole moment, expressed in atomic units.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_dipolegradients">
+<code class="descname">get_dipolegradients</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_dipolegradients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_dipolegradients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the nuclear gradients of the electric dipole moment, expressed in atomic units. This is a (3*numAtoms x 3) matrix.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_input_molecule">
+<code class="descname">get_input_molecule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_input_molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_input_molecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance with the coordinates passed into the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a>.</p>
+<p>Note that this method may also be used if the calculation producing this <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> object has failed, i.e. <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.ok" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ok()</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_main_molecule">
+<code class="descname">get_main_molecule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_main_molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_main_molecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance with the final coordinates.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_main_ase_atoms">
+<code class="descname">get_main_ase_atoms</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerResults.get_main_ase_atoms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults.get_main_ase_atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an ASE Atoms instance with the final coordinates.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="amsworkerpool-api">
+<h2>AMSWorkerPool API<a class="headerlink" href="#amsworkerpool-api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool">
+<em class="property">class </em><code class="descname">AMSWorkerPool</code><span class="sig-paren">(</span><em>settings</em>, <em>num_workers=None</em>, <em>jobrunner=None</em>, <em>jobmanager=None</em>, <em>workerdir_root='/tmp/egidi/ams'</em>, <em>workerdir_prefix='awp'</em>, <em>keep_crashed_workerdir=False</em>, <em>reuse_system=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class representing a pool of AMS worker processes.</p>
+<p>All workers of the pool are initialized with the same <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance, see the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> constructor for details.</p>
+<p>The number of spawned workers is determined by the <em>num_workers</em> argument. For optimal performance on many small jobs it is recommended to spawn a number of workers equal to the number of physical CPU cores of the machine the calculation is running on, and to let every worker instance run serially:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psutil</span>
+
+<span class="n">molecules</span> <span class="o">=</span> <span class="n">read_molecules</span><span class="p">(</span><span class="s1">&#39;folder/with/xyz/files&#39;</span><span class="p">)</span>
+
+<span class="n">sett</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="c1"># ... more settings ...</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">runscript</span><span class="o">.</span><span class="n">nproc</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># &lt;-- every worker itself is serial (aka export NSCM=1)</span>
+
+<span class="k">with</span> <span class="n">AMSWorkerPool</span><span class="p">(</span><span class="n">sett</span><span class="p">,</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">(</span><span class="n">logical</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">SinglePoints</span><span class="p">([</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">molecules</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">molecules</span><span class="p">)</span> <span class="p">])</span>
+</pre></div>
+</div>
+<p>As with the underlying <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> class, the location of the temporary directories can be changed with the <em>workerdir_root</em> and <em>workerdir_prefix</em> arguments.</p>
+<p>It is recommended to use the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerPool</span></code></a> as a context manager in order to ensure that cleanup happens automatically. If it is not possible to use the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerPool</span></code></a> as a context manager, cleanup should be manually triggered by calling the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool.stop" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool.stop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stop()</span></code></a> method.</p>
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool.SinglePoints">
+<code class="descname">SinglePoints</code><span class="sig-paren">(</span><em>items</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerPool.SinglePoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool.SinglePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request to pool to execute single point calculations for all items in the iterable <em>items</em>. Returns a list of <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> objects.</p>
+<p>The <em>items</em> argument is expected to be an iterable of 2-tuples <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">molecule)</span></code> and/or 3-tuples <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">molecule,</span> <span class="pre">kwargs)</span></code>, which are passed on to the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.SinglePoint"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SinglePoint</span></code></a> method of the pool’s <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> instances. (Here <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> is a dictionary containing the optional keyword arguments and their values for this method.)</p>
+<p>As an example, the following call would do single point calculations with gradients and (only for periodic systems) stress tensors for all <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instances in the dictionary <code class="docutils literal notranslate"><span class="pre">molecules</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">SinglePoint</span><span class="p">([</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">molecules</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="p">{</span>
+                                 <span class="s2">&quot;gradients&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+                                 <span class="s2">&quot;stresstensor&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">molecules</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">lattice</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+                              <span class="p">})</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">molecules</span><span class="p">)</span> <span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool.GeometryOptimizations">
+<code class="descname">GeometryOptimizations</code><span class="sig-paren">(</span><em>items</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerPool.GeometryOptimizations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool.GeometryOptimizations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request to pool to execute geometry optimizations for all items in the iterable <em>items</em>. Returns a list of <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerResults</span></code></a> objects for the optimized geometries.</p>
+<p>The <em>items</em> argument is expected to be an iterable of 2-tuples <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">molecule)</span></code> and/or 3-tuples <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">molecule,</span> <span class="pre">kwargs)</span></code>, which are passed on to the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker.GeometryOptimization" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker.GeometryOptimization"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GeometryOptimization</span></code></a> method of the pool’s <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorker" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorker</span></code></a> instances. (Here <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> is a dictionary containing the optional keyword arguments and their values for this method.)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool.stop">
+<code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/amsworker.html#AMSWorkerPool.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the all worker processes and removes their working directories.</p>
+<p>This method should be called when the <a class="reference internal" href="#scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool" title="scm.plams.interfaces.adfsuite.amsworker.AMSWorkerPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSWorkerPool</span></code></a> instance is not used as a context manager and the instance is no longer needed. Otherwise proper cleanup is not guaranteed to happen, worker processes might be left running and files might be left on disk.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="postadf.html" class="btn btn-neutral float-right" title="Analysis tools: Densf, FCF, analysis" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ams.html" class="btn btn-neutral" title="AMS driver and engines" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+#!/bin/sh 
+
+# This example shows how to calculate the gradient of the energy with respect to
+# nuclear displacements, by requesting Properties => Gradients Yes
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Atoms 
+    B   0.0     0.0     0.0 
+    N   0.86544 0.86544 0.86544 
+   end 
+   Lattice  
+     0.0 1.8 1.8 
+     1.8 0.0 1.8 
+     1.8 1.8 0.0  
+   End
+End
+
+Properties
+  Gradients Yes
+End
+
+Engine Band
+   Title BN zincblende structure (force calculation)
+
+   NumericalQuality Basic  ! for speed, not very accurate
+
+   Basis
+      Type TZ2P
+      Core Large
+   End
+
+   Relativity
+      Level None
+   End
+EndEngine
+
+eor

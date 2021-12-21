@@ -1,0 +1,89 @@
+#! /bin/sh
+
+# Frequently when searching for a transition state, one needs an accurate second
+# derivatives matrix, a Hessian. An exact Hessian may be obtained analytically
+# but this may be very expensive for large molecules. In such cases it may be
+# beneficial to calculate Hessian matrix elements only for atoms directly
+# involved in the reaction for which a transition state is sought for. The rest
+# of the Hessian can then be approximated using a cheaper method.
+
+# In this example, a saddle point of the ethane internal rotation around C-C
+# bond is found. In principle, only hydrogen atoms contribute to the normal mode
+# we are interested in. Therefore we calculate a partial Hessian matrix
+# including hydrogen atoms only. For this purpose, the SelectedRegionForHessian
+# key is used.
+# In the calculation symmetry will be used.
+
+AMS_JOBNAME=Partial_Hessian $AMSBIN/ams <<eor
+System
+  Symmetrize
+  atoms
+     C       0.000000000000       0.000000000000       0.767685465031
+     C       0.000000000000       0.000000000000      -0.767685465031
+     H       0.964354016767       0.347635559279       1.177128271450 region=hess
+     H      -0.181115782790      -1.008972856410       1.177128271450 region=hess
+     H      -0.783238233981       0.661337297125       1.177128271450 region=hess
+     H      -0.500471876676       0.894626767091      -1.177128271450 region=hess
+     H      -0.524533568868      -0.880734742626      -1.177128271450 region=hess
+     H       1.025005445540      -0.013892024465      -1.177128271450 region=hess
+  end
+end
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+  SelectedRegionForHessian hess
+End
+
+Engine ADF
+  title Ethane transition state search using partial Hessian
+  beckegrid
+    quality good
+  end
+  basis
+    core Large
+    type DZ
+    CreateOutput Yes
+  end
+EndEngine
+eor
+
+# After the Hessian is calculated, the resulting TAPE21 file is used for a
+# subsequent transition state search:
+
+AMS_JOBNAME=TS $AMSBIN/ams <<eor
+LoadSystem
+   File Partial_Hessian.results/ams.rkf
+End
+
+Task TransitionStateSearch
+
+GeometryOptimization
+   InitialHessian
+      Type FromFile
+      File Partial_Hessian.results/adf.rkf
+   End
+End
+
+EngineRestart Partial_Hessian.results/adf.rkf
+
+Engine ADF
+  title Ethane transition state search using partial Hessian
+  beckegrid
+    quality good
+  end
+  basis
+    core Large
+    type DZ
+  end
+EndEngine
+
+eor
+
+# Important note: care should be taken to specify correct mode in the
+# TransitionState keyword. Because a significant part of the Hessian will not be
+# calculated exactly, it is possible that it will have more than one negative
+# eigenvalue, in which case the one we are interested in may not be the first
+# one. In such a case, one needs to specify the correct mode number in the
+# TransitionState keyword.

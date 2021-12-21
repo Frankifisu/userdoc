@@ -1,0 +1,112 @@
+#!/bin/sh
+
+# This example shows you how you can use the forcield engine in a qmmm setup
+# Both the regions and the atom typing and charges (if any) go via te AMS system block
+
+# UFF
+# ===
+
+AMS_JOBNAME=uff $AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+System
+    Atoms
+        O -1.8782  0.0294 -0.7574  region=QM 
+        H -0.9986  0.2961 -0.3861  region=QM 
+        H -1.8623 -0.9560 -0.6510  region=QM 
+        O  0.0121 -1.3731  0.5074  region=MM 
+        H  0.8930 -1.7879  0.3172  region=MM 
+        H -0.5625 -2.1395  0.7656  region=MM 
+    End
+End
+
+Engine Hybrid
+    QMMM qmRegion=QM qmEngineID=DFTB mmEngineID=ForceField
+    
+    Engine DFTB
+        Model GFN1-xTB
+    EndEngine
+
+    Engine ForceField
+        Type UFF
+    EndEngine
+EndEngine
+eor
+
+
+# Amber
+# =====
+
+AMS_JOBNAME=amber $AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+System
+    Atoms
+        O -1.8782  0.0294 -0.7574  region=QM  ForceField.Charge=-0.8340  ForceField.Type=OW
+        H -0.9986  0.2961 -0.3861  region=QM  ForceField.Charge=0.4170   ForceField.Type=HW
+        H -1.8623 -0.9560 -0.6510  region=QM  ForceField.Charge=0.4170   ForceField.Type=HW
+        O  0.0121 -1.3731  0.5074  region=MM  ForceField.Charge=-0.8340  ForceField.Type=OW
+        H  0.8930 -1.7879  0.3172  region=MM  ForceField.Charge=0.4170   ForceField.Type=HW
+        H -0.5625 -2.1395  0.7656  region=MM  ForceField.Charge=0.4170   ForceField.Type=HW
+    End
+    BondOrders
+         1 2 1.0
+         1 3 1.0
+         4 5 1.0
+         4 6 1.0
+    End
+End
+
+Engine Hybrid
+    QMMM qmRegion=QM qmEngineID=DFTB mmEngineID=ForceField
+    
+    Engine DFTB
+        Model GFN1-xTB
+    EndEngine
+
+    Engine ForceField
+        Type Amber95
+        ForceFieldFile $AMSHOME/atomicdata/ForceFields/amber95.ff
+    EndEngine
+EndEngine
+eor
+
+# Tripos
+# ======
+
+AMS_JOBNAME=tripos $AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+System
+    Atoms
+        O -1.8782  0.0294 -0.7574  region=QM  ForceField.Charge=-0.8340   ForceField.Type=O.3
+        H -0.9986  0.2961 -0.3861  region=QM  ForceField.Charge=0.4170    ForceField.Type=H
+        H -1.8623 -0.9560 -0.6510  region=QM  ForceField.Charge=0.4170    ForceField.Type=H
+        O  0.0121 -1.3731  0.5074  region=MM  ForceField.Charge=-0.8340   ForceField.Type=O.3
+        H  0.8930 -1.7879  0.3172  region=MM  ForceField.Charge=0.4170    ForceField.Type=H
+        H -0.5625 -2.1395  0.7656  region=MM  ForceField.Charge=0.4170    ForceField.Type=H
+    End
+    BondOrders
+         1 2 1.0
+         1 3 1.0
+         4 5 1.0
+         4 6 1.0
+    End
+End
+
+Engine Hybrid
+    QMMM qmRegion=QM qmEngineID=DFTB mmEngineID=ForceField
+    
+    Engine DFTB
+        Model GFN1-xTB
+    EndEngine
+
+    Engine ForceField
+        Type Tripos5.2
+        ForceFieldFile $AMSRESOURCES/ForceFields/tripos5.2.ff
+    EndEngine
+EndEngine
+eor

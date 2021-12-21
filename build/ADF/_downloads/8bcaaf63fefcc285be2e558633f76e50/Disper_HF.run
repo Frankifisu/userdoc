@@ -1,0 +1,66 @@
+#! /bin/sh
+
+
+# General dispersion coefficients (beyond de dipole-dipole C6 interaction
+# coefficient) are computed with the auxiliary program DISPER. It uses two
+# output files from previous ADF Response calculations. In the example, the two
+# ADF runs are one and the same and the relevant TENSOR output file is used
+# twice.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     H  0 0  -0.8708056087
+     F  0 0   0.04619439132
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Van der Waals coefficients HF
+  basis
+    core Small
+    type DZP
+  end
+  response
+    allcomponents
+    alltensor
+    maxwaals 8
+    vanderwaals 7
+  end
+  symmetry C(8v)
+EndEngine
+
+eor
+
+# Polarizabilities are computed at 7 (imaginary) frequencies between 0 and
+# infinity. The program determines internally the actual frequency values in
+# this range to use. The user only specifies the number of them, thereby
+# determining the precision of, in fact, a numerical integration over the zero-
+# infinity frequency range. A value of 7 is rather low.
+
+# MaxWaals determines that not only the C6 but also C7 and C8 coefficients are
+# computed. A value higher than 8 would not be recommended, because the
+# available basis sets would be inadequate for higher coefficients.
+
+# In DISPER calculations the preparatory Response calculation must use the
+# AllTensor and AllComponents subkeys.
+
+# The calculation produces a file TENSOR. The subsequent DISPER run uses two
+# such files. In this example, both are taken from the same ADF run, copying the
+# TENSOR file to, respectively, tensorA and tensorB. These names are prescribed
+# for a DISPER calculation.
+
+cp ams.results/TENSOR tensorA
+cp ams.results/TENSOR tensorB
+
+$AMSBIN/disper -n1 <<eor
+eor
+
+# The DISPER program needs no other input than just the files tensorA and
+# tensorB, which must both be present as local files. Note the '-n1' flag: this
+# enforces that a single-node (non-parallel) run is performed. The current
+# implementation does not support parallelization of DISPER, because the kid
+# processes may not have the (local to the master!) files tensorA and tensorB.
+

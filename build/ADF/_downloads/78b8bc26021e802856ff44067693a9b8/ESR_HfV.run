@@ -1,0 +1,126 @@
+#!/bin/sh
+
+
+# For the ESR g-tensor and D-tensor (zero-field splitting, ZFS) the effect of
+# spin-orbit coupling is important. For the ESR A-tensor and Q-tensor (EFG)
+# spin-orbit coupling is less important.
+
+# In this example first spin-orbit coupling is taken into account
+# perturbatively. Next spin-orbit coupling is taken into account self-
+# consistent, using the COLLINEAR keyword.
+
+# Note that an all-electron calculation is carried out. This is relevant for the
+# computation of the A-tensor, the nuclear magnetic dipole hyperfine
+# interaction, where an accurate value of the spin-polarization density at the
+# nucleus is important. For the g-tensor this plays a minor role. However, for
+# the g-tensor calculation that includes spin-orbit coupling perturbatively, all
+# electron basis sets are necessary.
+
+# In the first ADF calculation the A-tensor (block key ESR) is calculated
+# without the effect of spin-orbit coupling included. The zero-field splitting
+# (key ZFS) is calculated by including spin-orbit coupling perturbatively.
+
+
+AMS_JOBNAME=HfV $AMSBIN/ams <<eor
+System
+  atoms
+     Hf  0.0 0.0 0.0
+     V   0.0 0.0 2.033
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  esr
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  qtens
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  save TAPE21 TAPE10
+  spinpolarization 3
+  symmetry NoSym
+  unrestricted
+  zfs
+EndEngine
+eor
+
+
+# In the next calculation the module nmr calculates the g-tensor (subkey
+# GFACTORS) using spin-orbit coupling and the external magnetic field as
+# perturbation.
+
+
+$AMSBIN/nmr <<eor
+  adffile HfV.results/adf.rkf
+  tape10file HfV.results/TAPE10
+  nmr
+   gfactors 
+   u1k best
+   out iso tens 
+  end
+eor
+
+rm logfile TAPE15
+
+# The module cpl can calculate the A-tensor (key HYPERFINE) using spin-orbit
+# coupling and the nuclear magnetic field as perturbation. Note that one needs
+# to set the SCF convergence criterium to a small value.
+
+$AMSBIN/cpl <<eor
+  adffile HfV.results/adf.rkf
+  tape10file HfV.results/TAPE10
+  hyperfine
+   atoms 1 2 :: calculates A-tensor for atom 1 and 2, input order
+   SCF Converge=1e-7
+  end
+eor
+rm logfile
+
+
+# ADF can calculate the g-tensor and A-tensor (block key ESR) using only the
+# nuclear or external magnetic field as perturbation, since spin-orbit coupling
+# can be taken into account self-consistently. However, in this case, degenerate
+# perturbation theory is used. The collinear approximation is used (and symmetry
+# NOSYM) to account for spin-polarization effects.
+
+
+AMS_JOBNAME=HfV_SO $AMSBIN/ams <<eor
+System
+  atoms
+     Hf  0.0 0.0 0.0
+     V   0.0 0.0 2.033
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality good
+  end
+  esr
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  qtens
+  relativity
+    level spin-orbit
+    formalism ZORA
+    spinorbitmagnetization collinear
+  end
+  symmetry NoSym
+  unrestricted
+EndEngine
+eor

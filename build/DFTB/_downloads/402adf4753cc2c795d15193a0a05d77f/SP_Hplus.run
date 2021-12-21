@@ -1,0 +1,88 @@
+#!/bin/sh
+
+# Neutral H atom
+
+AMS_JOBNAME=H_DFTB0 $AMSBIN/ams << eor
+Task SinglePoint
+System
+    Atoms
+        H 0.0 0.0 0.0
+    End
+End
+Engine DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   Model DFTB0
+EndEngine
+eor
+
+AMS_JOBNAME=H_SCC $AMSBIN/ams << eor
+Task SinglePoint
+System
+    Atoms
+        H 0.0 0.0 0.0
+    End
+End
+Engine DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   Model SCC-DFTB
+EndEngine
+eor
+
+AMS_JOBNAME=H_DFTB3 $AMSBIN/ams << eor
+Task SinglePoint
+System
+    Atoms
+        H 0.0 0.0 0.0
+    End
+End
+Engine DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   Model DFTB3
+EndEngine
+eor
+
+
+# H+ ion
+
+AMS_JOBNAME=Hplus_DFTB0 $AMSBIN/ams << eor
+Task SinglePoint
+System
+    Atoms
+        H 0.0 0.0 0.0
+    End
+    Charge 1
+End
+Engine DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   Model DFTB0
+EndEngine
+eor
+
+AMS_JOBNAME=Hplus_SCC $AMSBIN/ams << eor
+Task SinglePoint
+System
+    Atoms
+        H 0.0 0.0 0.0
+    End
+    Charge 1
+End
+Engine DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   Model SCC-DFTB
+EndEngine
+eor
+
+AMS_JOBNAME=Hplus_DFTB3 $AMSBIN/ams << eor
+Task SinglePoint
+System
+    Atoms
+        H 0.0 0.0 0.0
+    End
+    Charge 1
+End
+Engine DFTB
+   ResourcesDir DFTB.org/3ob-3-1
+   Model DFTB3
+EndEngine
+eor
+

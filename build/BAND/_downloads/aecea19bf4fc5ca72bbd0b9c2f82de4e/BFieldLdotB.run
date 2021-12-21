@@ -1,0 +1,64 @@
+#!/bin/sh
+
+export AMS_JOBNAME=run1
+
+$AMSBIN/ams <<EOF
+Task SinglePoint
+
+System
+   GeometryFile $AMSHOME/atomicdata/Molecules/TestMols/Methane.xyz
+End
+
+Engine Band
+
+   BField
+    Unit A.U.
+    BZ 0.001
+    Method NR_LDOTB
+   end
+
+   Basis
+     Type QZ4P
+     Core None
+   End
+
+EndEngine
+
+EOF
+
+echo "Begin of shielding row for all atoms, unit-=ppm"
+$AMSBIN/amsreport $AMS_JOBNAME'.results/band.rkf' -k 'Magnetic properties%ShieldingRowAtNuclei(ppm)#12.5f##3'
+echo "End of shielding row"
+
+
+export AMS_JOBNAME=run2
+
+$AMSBIN/ams <<EOF
+Task SinglePoint
+
+System
+   GeometryFile $AMSHOME/atomicdata/Molecules/TestMols/Methane.xyz
+End
+
+Engine Band
+
+   BField
+    Unit A.U.
+    BZ 0.001
+    Method NR_LDOTB
+    Dipole true
+    DipoleAtom 1
+   end
+
+   Basis
+     Type QZ4P
+     Core None
+   End
+
+EndEngine
+
+EOF
+
+echo "Begin of shielding row for all atoms, unit-=ppm"
+$AMSBIN/amsreport $AMS_JOBNAME'.results/band.rkf' -k 'Magnetic properties%ShieldingRowAtNuclei(ppm)#12.5f##3'
+echo "End of shielding row"

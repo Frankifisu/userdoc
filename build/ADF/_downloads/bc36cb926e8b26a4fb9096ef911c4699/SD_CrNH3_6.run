@@ -1,0 +1,275 @@
+#! /bin/sh
+
+
+# The computation of multiplet states corresponding to an open-shell system can
+# be carried out with ADF by first computing the 'Average-of-Configuration'
+# (aoc) state, where all orbitals in the open shell are degenerate and equally
+# occupied. This computation is spin-restricted and serves as a fragment file
+# for the multiplet run, where then different occupation numbers are assigned to
+# the various orbitals in the open shell. The corresponding energies are
+# computed in the field of the aoc, which is achieved by not iterating the self-
+# consistency equations to convergence but only computing the orbitals in the
+# initial field.
+
+# Since ADF requires that all symmetry-partners in an irreducible representation
+# (irrep) have equal occupations, the multiplet calculation, where such orbitals
+# are not equally occupied, must be carried out in a formally lower point group
+# symmetry. The point group to select and the appropriate occupation numbers to
+# apply must be worked out by the user 'on paper' in advance.
+# See the discussion of Multiplet energies in ADF manual.
+
+# The script starts with the 'creation' of the required basic atoms, N, H, Cr
+# using a fair basis set quality.
+
+# The next step is the computation of the ammonia fragment NH3. This is not a
+# crucial step here: the multiplet state computation can equally well be carried
+# out by not using any intermediate compound fragments. However, it illustrates
+# once more how a bigger molecule can be built up from smaller, but not trivial
+# fragments.
+
+$AMSBIN/dirac -n1 < $AMSRESOURCES/Dirac/Cr.2p
+mv TAPE12 t12.rel
+
+AMS_JOBNAME=Cr $AMSBIN/ams <<eor
+System
+  Atoms
+    Cr 0.0 0.0 0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create Cr file=$AMSRESOURCES/ADF/ZORA/TZP/Cr.2p
+  corepotentials t12.rel
+     Cr 1
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=NH3 $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     N    0              0                    0
+     H   -0.95522523     0                    0.3711068
+     H    0.477612615   -0.8272493155158333   0.3711068
+     H    0.477612615    0.8272493155158333   0.3711068
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title AMMONIA
+  basis
+    core Small
+    type TZP
+    CreateOutput No
+  end
+  noprint sfo,frag,functions
+  symmetry C(3V)
+EndEngine
+eor
+
+# The input of the atomic coordinates does not use expressions. In this case to
+# enforce exact symmetry relations 14-digit input values are required.
+# The symmetrization key is used to enforce the symmetry to machine precision,
+# and to put the molecule in the right orientation for the symmetry.
+# The symmetry specification is redundant: the program would
+# also find it by itself.
+
+# == Average-of-Configuration ==
+
+# The next step is to compute the reference state, with respect to which we will
+# later compute the multiplet states. The reference state is the so-called
+# 'Average-of-configuration' (aoc) state. The result file (TAPE21) of this
+# calculation will be used as a fragment file.
+
+AMS_JOBNAME=AOC $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     Cr      0.00000000     0.00000000     0.00000000
+     N       0.00000000     1.71464325     1.21243632  adf.f=NH3|1
+     H       0.00000000     1.46615142     2.20663314  adf.f=NH3|1
+     H      -0.82724932     2.29340040     1.03672570  adf.f=NH3|1
+     H       0.82724932     2.29340040     1.03672570  adf.f=NH3|1
+     N      -1.48492461    -0.85732162     1.21243632  adf.f=NH3|2
+     H      -1.26972438    -0.73307571     2.20663314  adf.f=NH3|2
+     H      -1.57251835    -1.86311912     1.03672570  adf.f=NH3|2
+     H      -2.39976767    -0.43028128     1.03672570  adf.f=NH3|2
+     N       1.48492461    -0.85732162     1.21243632  adf.f=NH3|3
+     H       1.26972438    -0.73307571     2.20663314  adf.f=NH3|3
+     H       2.39976767    -0.43028128     1.03672570  adf.f=NH3|3
+     H       1.57251835    -1.86311912     1.03672570  adf.f=NH3|3
+     N       0.00000000    -1.71464325    -1.21243632  adf.f=NH3|4
+     H       0.00000000    -1.46615142    -2.20663314  adf.f=NH3|4
+     H       0.82724932    -2.29340040    -1.03672570  adf.f=NH3|4
+     H      -0.82724932    -2.29340040    -1.03672570  adf.f=NH3|4
+     N       1.48492461     0.85732162    -1.21243632  adf.f=NH3|5
+     H       1.26972438     0.73307571    -2.20663314  adf.f=NH3|5
+     H       1.57251835     1.86311912    -1.03672570  adf.f=NH3|5
+     H       2.39976767     0.43028128    -1.03672570  adf.f=NH3|5
+     N      -1.48492461     0.85732162    -1.21243632  adf.f=NH3|6
+     H      -1.26972438     0.73307571    -2.20663314  adf.f=NH3|6
+     H      -2.39976767     0.43028128    -1.03672570  adf.f=NH3|6
+     H      -1.57251835     1.86311912    -1.03672570  adf.f=NH3|6
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Cr(NH3)6 : Average-of-Configuration run
+  comment
+     using NH3-fragments
+  end
+  fragments
+     Cr  Cr.results/adf.rkf
+     NH3 NH3.results/adf.rkf
+  end
+  Basis CreateOutput=No
+  irrepoccupations
+     A1.G 8.75
+     A2.G 2
+     E1.G 16 1.5 0.75
+     A1.U 2
+     A2.U 8
+     E1.U 20
+  end
+  scf
+    iterations 25
+    mixing 0.15
+  end
+  symmetry D(3d)
+EndEngine
+
+eor
+
+
+# Occupation numbers are specified, to make certain what the reference state is
+# that we will start from in the subsequent calculations. The result file TAPE21
+# is saved to serve as fragment file in the subsequent calculations.
+
+# == One-determinant states ==
+
+# Now, we proceed with the multiplet calculations. In the example they are
+# combined in one single run, but they could also be evaluated in separate runs.
+# For each calculation it is required to:
+
+# a) Use the aoc TAPE21 file as fragment file
+# b) Choose which molecular orbitals in the open shell to occupy: select the
+#    appropriate point group symmetry and the UnRestricted key if necessary and
+#    specify the occupation numbers, using the irreducible representations of the
+#    selected point group.
+
+# The results are one-determinant calculations, which must then, later, be
+# combined analytically to obtain the required multiplet energy values.
+
+AMS_JOBNAME=SD $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     Cr      0.00000000     0.00000000     0.00000000  adf.f=CrA6
+     N       0.00000000     1.71464325     1.21243632  adf.f=CrA6
+     H       0.00000000     1.46615142     2.20663314  adf.f=CrA6
+     H      -0.82724932     2.29340040     1.03672570  adf.f=CrA6
+     H       0.82724932     2.29340040     1.03672570  adf.f=CrA6
+     N      -1.48492461    -0.85732162     1.21243632  adf.f=CrA6
+     H      -1.26972438    -0.73307571     2.20663314  adf.f=CrA6
+     H      -1.57251835    -1.86311912     1.03672570  adf.f=CrA6
+     H      -2.39976767    -0.43028128     1.03672570  adf.f=CrA6
+     N       1.48492461    -0.85732162     1.21243632  adf.f=CrA6
+     H       1.26972438    -0.73307571     2.20663314  adf.f=CrA6
+     H       2.39976767    -0.43028128     1.03672570  adf.f=CrA6
+     H       1.57251835    -1.86311912     1.03672570  adf.f=CrA6
+     N       0.00000000    -1.71464325    -1.21243632  adf.f=CrA6
+     H       0.00000000    -1.46615142    -2.20663314  adf.f=CrA6
+     H       0.82724932    -2.29340040    -1.03672570  adf.f=CrA6
+     H      -0.82724932    -2.29340040    -1.03672570  adf.f=CrA6
+     N       1.48492461     0.85732162    -1.21243632  adf.f=CrA6
+     H       1.26972438     0.73307571    -2.20663314  adf.f=CrA6
+     H       1.57251835     1.86311912    -1.03672570  adf.f=CrA6
+     H       2.39976767     0.43028128    -1.03672570  adf.f=CrA6
+     N      -1.48492461     0.85732162    -1.21243632  adf.f=CrA6
+     H      -1.26972438     0.73307571    -2.20663314  adf.f=CrA6
+     H      -2.39976767     0.43028128    -1.03672570  adf.f=CrA6
+     H      -1.57251835     1.86311912    -1.03672570  adf.f=CrA6
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Cr(NH3)6 : SlaterDeterminants run
+  fragments
+     CrA6  AOC.results/adf.rkf
+  end
+  noprint frag
+  scf
+    iterations 0
+  end
+  slaterdeterminants
+     Check AOC
+     A1.g   4 0.375         // 4 0.375
+     A2.g   1               // 1
+     E1.g:1 4 0.375 0.1875  // 4 0.375  0.1875
+     E1.g:2 4 0.375 0.1875  // 4 0.375  0.1875
+     A1.u   1//1
+     A2.u   4//4
+     E1.u:1 5//5
+     E1.u:2 5//5
+     SUBEND
+     State1
+     A1.g   4 1             // 4 1
+     A2.g   1               // 1
+     E1.g:1 4 0     0       // 4 0      1
+     E1.g:2 4 0     0       // 4 0      0
+     A1.u   1//1
+     A2.u   4//4
+     E1.u:1 5//5
+     E1.u:2 5//5
+     SUBEND
+     State2
+     A1.g   4 1             // 4 1
+     A2.g   1               // 1
+     E1.g:1 4 0     0       // 4 1      0
+     E1.g:2 4 0     0       // 4 0      0
+     A1.u   1//1
+     A2.u   4//4
+     E1.u:1 5//5
+     E1.u:2 5//5
+     SUBEND
+     State3
+     A1.g   4 1             // 4 1
+     A2.g   1               // 1
+     E1.g:1 4 0     1       // 4 0      0
+     E1.g:2 4 0     0       // 4 0      0
+     A1.u   1//1
+     A2.u   4//4
+     E1.u:1 5//5
+     E1.u:2 5//5
+     SUBEND
+  end
+  symmetry C(I)
+  unrestricted
+EndEngine
+eor
+
+
+# The SlaterDeterminants block may contain any number of sub blocks, each
+# starting with an (arbitrary) title record, followed by a set of occupation
+# numbers and closed by a SubEnd record. Each such subkey block specifies a
+# single one-determinant-state calculation. All occupation numbers must
+# reference the irreps of the specified point group symmetry, C(I) in the
+# example, and must be just a reassignment of the electrons that are equally
+# distributed over the corresponding degenerate irreps in the reference aoc
+# calculation.
+
+# The so-obtained energies of the one-determinant states can now be combined to
+# calculate the desired multiplet energies. See the ADF manual.
+
+# Note carefully that in the calculation of the SingleDeterminants, the scf
+# procedure is prevented to cycle to convergence by setting the subkey
+# Iterations to zero in the SCF data block.
+

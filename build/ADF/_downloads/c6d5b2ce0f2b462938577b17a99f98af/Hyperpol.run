@@ -1,0 +1,125 @@
+#! /bin/sh
+
+
+# This sample illustrates the computation of (hyper) polarizability tensors for
+# the He atom and the H2 molecule.
+
+# The symmetry is specified, because the Response module in ADF cannot yet
+# handle the infinite symmetries ATOM, C(lin), D(lin).
+
+
+$AMSBIN/dirac -n1 < $AMSRESOURCES/Dirac/He
+mv TAPE12 t12.rel
+
+AMS_JOBNAME=He8 $AMSBIN/ams <<eor
+System
+  Atoms
+     He 0.0 0.0 0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create He  $AMSRESOURCES/ADF/Special/Vdiff/He.2s2p2d2f
+  corepotentials t12.rel
+     He 1
+  end
+EndEngine
+eor
+
+$AMSBIN/dirac -n1 < $AMSRESOURCES/Dirac/H
+mv TAPE12 t12.rel
+
+AMS_JOBNAME=H7 $AMSBIN/ams <<eor
+System
+  Atoms
+     H 0.0 0.0 0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create H  $AMSRESOURCES/ADF/Special/Vdiff/H.2p
+  corepotentials t12.rel
+     H 1
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=H2 $AMSBIN/ams <<eor
+System
+  atoms
+     H 0 0 -0.37305
+     H 0 0  0.37305
+  end
+  ElectrostaticEmbedding
+    ElectricField 0 0 0.001 [a.u.]
+  End
+end
+
+Task SinglePoint
+
+Engine ADF
+  title expt geometrie H2(VII),VWN
+  fragments
+     H H7.results/adf.rkf
+  end
+  noprint sfo,frag,functions
+  numericalquality Good
+  response
+    allcomponents
+    dynahyp
+    hyperpol 0.03 [Hartree]
+  end
+  symmetry C(8v)
+EndEngine
+eor
+
+
+# The Response data block specifies (AllComponents) that not only the (default)
+# zz-dipole polarizability is to be computed, but the complete tensor. The
+# subkey HyperPol instructs the program to compute hyper*polarizabilities and
+# not only polarizabilities. The DynaHyp subkey implies that the *frequency-
+# dependent (hyper)polarizability is calculated. In that case the main laser
+# frequency has to be specified, in hartree units, after the HyperPol subkey.
+
+# Only the first hyperpolarizability has been implemented in ADF. Some
+# information on second hyperpolarizabilities can be obtained from the
+# calculation of the first one in a finite field (ElectricField).
+
+# In similar fashion the frequency-dependent hyperpolarizability is computed for
+# He, but only the zzz-component because now the AllComponents subkey is
+# omitted.
+
+
+AMS_JOBNAME=He $AMSBIN/ams <<eor
+System
+  atoms
+     He 0 0 0
+  end
+  ElectrostaticEmbedding
+    ElectricField 0 0 0.001 [a.u.]
+  End
+end
+
+Task SinglePoint
+
+Engine ADF
+  title hyperpolarizability He with the LB94 potential
+  fragments
+     He He8.results/adf.rkf
+  end
+  noprint sfo,frag,functions
+  numericalquality Good
+  response
+    dynahyp
+    hyperpol 0.07 [Hartree]
+  end
+  scf
+    accelerationmethod LISTi
+    converge 1e-8
+  end
+  symmetry C(8v)
+  xc
+    gga LB94
+  end
+EndEngine
+eor

@@ -1,0 +1,16 @@
+#! /bin/sh
+
+# generate a run file for methane, with 1 H replaced by some ligand (run amsprep
+# -liststructures to get full list of available structures) note the -a flag
+# makes amsprep produce an .ams file as well, which can be opened by AMSinput to
+# check your system
+
+for ligand in CN CO CO3 NC NH2 NH2CH3 NH3 OC OCH3 OH PH3 Pyridine; do
+    "$AMSBIN/amsprep" -t GO -m "$AMSHOME/examples/adf/LoopAtomsLigands/methane.xyz" -structure "2 Ligands/$ligand.ams" -a methane.$ligand.ams
+done
+
+# similar, replace the C atom by other atoms
+
+for atom in C Si Ge Sn Pb; do
+    "$AMSBIN/amsprep" -t GO -m "$AMSHOME/examples/adf/LoopAtomsLigands/methane.xyz" -atomtype "1 $atom" -a methane.$atom.ams
+done

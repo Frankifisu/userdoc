@@ -1,0 +1,24 @@
+#!/bin/sh
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients True
+End
+
+System
+    Atoms
+      H  0.0   0.0  0.0   DFTB.Vext=-0.01
+      H  0.75  0.0  0.0   DFTB.Vext=0.01
+    End
+End
+
+Engine DFTB
+    Model SCC-DFTB
+    ResourcesDir DFTB.org/mio-1-1
+EndEngine
+
+eor
+

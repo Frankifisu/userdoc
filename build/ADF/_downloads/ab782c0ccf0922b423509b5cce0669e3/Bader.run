@@ -1,0 +1,81 @@
+#! /bin/sh
+
+
+# The Bader atomic charges are calculated using a grid based method. Another
+# possibility for Bader's analysis is to use the adf2aim utility such that a
+# third party program Xaim can be used.
+
+# With the QTAIM input block the ADF program will calculate Bader charges (AIM
+# charges) using a grid based method.
+
+
+AMS_JOBNAME=water $AMSBIN/ams <<eor
+  Task SinglePoint
+
+  System
+    Atoms
+      O         0.000000    0.000000   -0.001658
+      H        -0.769048    0.000000    0.595209
+      H         0.769048    0.000000    0.595209
+    End
+  End
+
+  Engine ADF 
+    Title Calculate Bader analysis for water
+    basis
+      Type TZP
+      Core none
+    End
+    QTAIM
+      AnalysisLevel Extended
+      Spacing 0.1
+    End
+  EndEngine
+eor
+
+
+# Next a similar calculation for ferrocene is given
+
+
+AMS_JOBNAME=ferrocene $AMSBIN/ams <<eor
+  Task SinglePoint
+
+  System
+    Symmetrize Yes
+    Atoms
+      Fe        0.000000    0.000000    0.000000
+      C         1.215650    0.000000    1.600813
+      C         0.375656   -1.156152    1.600813
+      C        -0.983481   -0.714541    1.600813
+      C        -0.983481    0.714541    1.600813
+      C         0.375656    1.156152    1.600813
+      C         1.215650    0.000000   -1.600813
+      C         0.375656    1.156152   -1.600813
+      C        -0.983481    0.714541   -1.600813
+      C        -0.983481   -0.714541   -1.600813
+      C         0.375656   -1.156152   -1.600813
+      H         2.310827    0.000000    1.629796
+      H         0.714085   -2.197727    1.629796
+      H        -1.869498   -1.358270    1.629796
+      H        -1.869498    1.358270    1.629796
+      H         0.714085    2.197727    1.629796
+      H         2.310827    0.000000   -1.629796
+      H         0.714085    2.197727   -1.629796
+      H        -1.869498    1.358270   -1.629796
+      H        -1.869498   -1.358270   -1.629796
+      H         0.714085   -2.197727   -1.629796
+    End
+  End
+
+  Engine ADF
+    Title Calculate Bader analysis for ferrocene
+    basis
+      Type TZP
+      Core none
+    End
+    QTAIM
+      AnalysisLevel Extended
+    End
+    NumericalQuality Good
+  EndEngine
+eor

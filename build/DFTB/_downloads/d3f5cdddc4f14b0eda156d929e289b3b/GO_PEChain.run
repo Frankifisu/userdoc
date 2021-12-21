@@ -1,0 +1,76 @@
+#!/bin/sh
+
+
+# first run: optimize coordinates with a fixed unit cell
+
+AMS_JOBNAME=fixed $AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=0.0001
+End
+
+System
+    Atoms [Bohr]
+        C  -1.20630475   0.00000000   0.80181600
+        C   1.20630475   0.00000000  -0.80181600
+        H  -1.20630475   1.68180819   1.99106085
+        H  -1.20630475  -1.68180819   1.99106085
+        H   1.20630475   1.68180819  -1.99106085
+        H   1.20630475  -1.68180819  -1.99106085
+    End
+    Lattice [Bohr]
+       5.7 0 0
+    End
+End
+
+Engine DFTB
+   ResourcesDir Dresden
+   Model DFTB0
+   KSpace
+       Type Symmetric
+       Symmetric KInteg=5
+   End
+   Technical AnalyticalStressTensor=False # Not yet supported with symmetric k-space grid ...
+EndEngine
+
+eor
+
+
+# second run: also optimize lattice vectors
+
+AMS_JOBNAME=lattice $AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=0.0001
+  OptimizeLattice yes
+End
+
+System
+    Atoms [Bohr]
+        C  -1.20630475   0.00000000   0.80181600
+        C   1.20630475   0.00000000  -0.80181600
+        H  -1.20630475   1.68180819   1.99106085
+        H  -1.20630475  -1.68180819   1.99106085
+        H   1.20630475   1.68180819  -1.99106085
+        H   1.20630475  -1.68180819  -1.99106085
+    End
+    Lattice [Bohr]
+       5.7 0 0
+    End
+End
+
+Engine DFTB
+   ResourcesDir Dresden
+   Model DFTB0
+   KSpace
+       Type Symmetric
+       Symmetric KInteg=5
+   End
+   Technical AnalyticalStressTensor=False # Not yet supported with symmetric k-space grid ...
+EndEngine
+
+eor

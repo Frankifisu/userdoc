@@ -1,0 +1,75 @@
+#! /bin/sh
+
+
+# One can calculate Bade atomic charges and other Atoms in Molecule properties
+# directly in ADF using a grid based method, see also an example that uses the
+# grid based method. Another possibility for Bader's analysis, an example is
+# described here, is to use the adf2aim utility such that a third party program
+# Xaim can be used.
+
+# The ADF utility adf2aim (original name rdt21, now part of the ADF package)
+# developed by Xavi Lopez, Engelber Sans and Carles Bo converts an ADF adf.rkf to
+# WFN format (for Bader analysis).
+
+# The WFN file is an input file for the third party program Xaim (see
+# http://www.quimica.urv.es/XAIM for details), which is a graphical user
+# interface to programs that can perform the Bader analysis.
+
+# Usage of adf2aim:
+
+
+AMS_JOBNAME=HF $AMSBIN/ams <<eor
+System
+  atoms
+     H  0.000  0.000  0.000
+     F  0.000  0.000  0.917
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+EndEngine
+eor
+
+$AMSBIN/adf2aim HF.results/adf.rkf
+echo ""
+echo 'Contents of rdt21.res:'
+cat rdt21.res | grep -v RunTime
+echo 'Contents of WFN:'
+cat WFN | grep -v RunTime
+
+rm rdt21.res WFN
+
+
+# In an unrestricted calculation adf2aim will ask if the MOs should be split in
+# two files. In this example the answer is yes (y).
+
+
+AMS_JOBNAME=HF_unrestricted $AMSBIN/ams <<eor
+System
+  atoms
+     H  0.000  0.000  0.000
+     F  0.000  0.000  0.917
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  spinpolarization 0
+  unrestricted Yes
+EndEngine
+eor
+
+$AMSBIN/adf2aim HF_unrestricted.results/adf.rkf <<eor
+y
+eor
+
+echo ""
+echo 'Contents of rdt21.res:'
+cat rdt21.res| grep -v RunTime
+echo 'Contents of WFN-alpha:'
+cat WFN-alpha| grep -v RunTime
+echo 'Contents of WFN-beta:'
+cat WFN-beta| grep -v RunTime

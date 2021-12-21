@@ -1,0 +1,39 @@
+#!/bin/sh
+
+$AMSBIN/ams <<EOR
+
+Task GeometryOptimization
+
+Properties
+    Gradients
+End
+
+System
+  Atoms
+    O    -0.73806601     0.05760021     0.28813500
+    O     0.73806601    -0.05760021     0.28813500
+    H     0.95903096     0.70364829    -0.28813500
+    H    -0.95903096    -0.70364829    -0.28813500
+  End
+End
+
+UseSymmetry False
+
+Restraints
+# Change the default profile type
+   Profile Hyperbolic
+# Change the asymptotic value for the restraint force
+   fInfinity 10.0
+#  Type     Atoms    OptValue  FC   Profile     F(Inf)  
+   Distance 1 2        5.0     1.0  Erf         1.0
+   Angle    1 2 3     90.0
+   SumDist  1 4 2 3    1.5
+   DifDist  2 3 1 4    0.2
+   Dihedral 4 1 2 3  180.0     0.1
+End
+
+
+Engine DFTB
+  Model GFN1-xTB
+EndEngine
+EOR

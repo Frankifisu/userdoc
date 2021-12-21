@@ -1,0 +1,75 @@
+#! /bin/sh
+
+
+# A frequency calculation is performed using the mobile block Hessian (MBH)
+# method. The coordinates in the ATOMS section can be the partially optimized
+# coordinates (or the fully optimized coordinates would work too).
+
+
+AMS_JOBNAME=Ethanol_MBH $AMSBIN/ams <<eor
+System
+  atoms
+     C      -0.029587   -0.006554    0.008124
+     H      -0.087498   -0.025163    1.109913
+     H       1.027473   -0.056237   -0.302751
+     H      -0.565305   -0.891154   -0.376242
+     C      -0.694908    1.238909   -0.501807
+     H      -0.670258    1.265092   -1.608847
+     O      -2.069894    1.175059   -0.017251
+     H      -0.182335    2.138977   -0.109315
+     H      -2.586972    1.972802   -0.317216
+  end
+end
+
+Task SinglePoint
+Properties
+    NormalModes True
+End
+NormalModes
+    Displacements Block
+    BlockDisplacements
+        BlockAtoms 1 2 3 4
+    End
+End
+
+
+Engine ADF
+  title ethanol: second derivatives with MBH approach. CH3 is treated as a rigid block
+  numericalquality good
+  scf
+    converge 1.0e-8
+  end
+  symmetry nosym
+EndEngine
+eor
+
+
+# For comparison in this example also a calculation is performed without any
+# restrictions.
+
+
+AMS_JOBNAME=Ethanol_full $AMSBIN/ams <<eor
+System
+  atoms
+     C      -0.029587   -0.006554    0.008124
+     H      -0.087498   -0.025163    1.109913
+     H       1.027473   -0.056237   -0.302751
+     H      -0.565305   -0.891154   -0.376242
+     C      -0.694908    1.238909   -0.501807
+     H      -0.670258    1.265092   -1.608847
+     O      -2.069894    1.175059   -0.017251
+     H      -0.182335    2.138977   -0.109315
+     H      -2.586972    1.972802   -0.317216
+  end
+end
+
+Task SinglePoint
+Properties
+    NormalModes True
+End
+
+Engine ADF
+  title ethanol: complete vibrational spectrum, compare with MBH above
+  numericalquality good
+EndEngine
+eor

@@ -1,0 +1,91 @@
+Optimization
+============
+.. currentmodule:: scm.params.core.parameteroptimization
+
+The |Runner| class is where the other components
+-- :ref:`Job Collection`, :ref:`Data Set`, :ref:`Parameter Interfaces` and :ref:`Optimizers` -- come together.
+It is responsible for the selection, generation, execution and evaluation of new jobs for every new parameter set.
+
+.. seealso::
+   :ref:`Architecture Quick Reference` for an overview
+
+
+A |Runner| instance will usually be initialized once every other component is defined:
+
+>>> interface     = {Reax}('path/to/ffield.ff')
+>>> jc            = {JobCollection}('path/to/jobcol.yml')
+>>> training_set  = {Fitfunc}('path/to/data_set.yml')
+>>> optimizer     = {OptCMA}(popsize=15)
+>>> optimization  = {Runner}(jc, training_set, interface, optimizer)
+
+Once initialized, the following will run a complete optimization:
+
+>>> optimization.optimize()
+
+After instantiation, a summary of all relevant settings can be printed with :meth:`~Optimization.summary`:
+
+.. code-block:: python
+
+  >>> optimization.summary()
+  Optimization() Instance Settings:
+  =================================
+  Workdir:                           opt
+  JobCollection size:                20
+  Interface:                         ReaxFFParameters
+  Active parameters:                 207
+  Optimizer:                         CMAOptimizer
+  Callbacks:                         Timeout
+                                     Logger
+
+  Evaluators:
+  -----------
+  Name:                              training_set (_LossEvaluator)
+  Loss:                              SSE
+  Evaluation frequency:              1
+
+  Data Set entries:                  20
+  Data Set jobs:                     20
+  Batch size:                        None
+
+  CPU cores:                         6
+  Use PIPE:                          True
+  ---
+  ===
+
+
+
+
+Optimization Setup
+------------------
+The optimization  can be further controlled by providing a number of optional keyword arguments to the |Runner| instance.
+While the full list of arguments is documented in the :ref:`API<Optimization API>` section below,
+the most relevant ones are presented here.
+
+`parallellevels`
+  An instance of the :ref:`ParallelLevels <ParallelLevels>` class describing how the optimization is to be parallelized.
+
+`constraints`
+  :ref:`Constraints` additionally define the parameter search space by
+  checking if every solution is consistent with the definition.
+
+`callbacks`
+  A list of :ref:`callback <Callbacks>` instances.
+  Callbacks provide a versatile way to interact with the optimization process at every iteration.
+
+`validation`
+  Percentage of the `training_set` entries to be used for validation.
+  Can be used with the :ref:`Early Stopping` callback.
+
+`loss`
+  The :ref:`loss function <Loss Functions>` to be used for this optimization instance.
+
+`batch_size`
+  Instead of evaluating all properties in the `training_set`,
+  evaluate a maximum of randomly picked `batch_size` entries per iteration.
+
+
+
+Optimization API
+----------------
+.. autoclass:: Optimization
+    :exclude-members: __weakref__, _wrap_data_sets

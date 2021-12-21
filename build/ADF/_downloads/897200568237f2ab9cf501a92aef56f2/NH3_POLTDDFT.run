@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# Calculation of damped complex polarizabilities of NH3
+# with POLTDDFT.
+# A hybrid XC functionals is used.
+# For hybrid functionals POLTDDFT wil use HDA (hybrid diagonal approximation).
+# For speed reasons one should not use a too large value for CutOff.
+# It is very important to use basis sets with specially made
+# auxiliary fit sets available in $AMSHOME/atomicdata/ADF/POLTDDFT
+
+AMS_JOBNAME=NH3 $AMSBIN/ams << eor
+System
+  symmetrize
+  atoms
+     N   0.000000    0.000000    0.000000
+     H   0.956305    0.000000    0.292372
+     H  -0.478152    0.828184    0.292372
+     H  -0.478152   -0.828184    0.292372
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  Basis
+    Type POLTDDFT/TZP
+  End
+
+  XC
+    Hybrid B3LYP
+  End
+
+  POLTDDFT
+    KGrid 40.
+    NGrid 1600
+    FreqRange 0.02 20.02
+    NFreq 1000
+    Lifetime 0.075
+    Cutoff 20.
+  END
+EndEngine
+eor

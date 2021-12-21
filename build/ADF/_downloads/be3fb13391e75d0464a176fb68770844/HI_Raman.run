@@ -1,0 +1,238 @@
+#!/bin/sh
+
+# Example shows a calculation of the Raman spectrum of HI
+# with a scalar relativistic ZORA and a spin-orbit coupled ZORA Hamiltonian.
+# Note that used basis set is too small to get accurate results.
+
+# == scalar relativistic ZORA ==
+
+# 3 calculations are performed.
+# First a scalar relativistic geometry optimization is performed
+# and analytical frequencies are calculated. This calculation produces a restart file,
+# which is used in the second and third alculation as input for the Raman calculation.
+# The FreqRange keyword is used to calculate Raman intensities for a range of frequencies only.
+# In the second calculation RESPONSE is used and in the third calculation AORESPONSE.
+
+AMS_JOBNAME=SR $AMSBIN/ams <<eor
+System
+  atoms
+     H  0.0000 0.0000 0.0000
+     I  0.0000 0.0000 1.6092
+  end
+end
+
+Task GeometryOptimization
+Properties
+  NormalModes Yes
+End
+
+Engine ADF
+  basis
+    core None
+    type DZ
+  end
+  noprint SFO
+  relativity
+    level scalar
+    formalism ZORA
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=SR_response $AMSBIN/ams <<eor
+Task VibrationalAnalysis
+
+VibrationalAnalysis
+   Type ModeScanning
+   NormalModes
+      ModeFile SR.results/adf.rkf
+      ModeSelect
+         FreqRange 0.0 4000.0
+      End
+   End
+End
+
+Properties
+   Raman True
+End
+Raman
+   IncidentFrequency 2.0 [eV]
+End
+
+LoadSystem
+   File SR.results/ams.rkf
+End
+
+EngineRestart SR.results/adf.rkf
+
+Engine ADF
+  responseformalism response
+  basis
+    core None
+    type DZ
+  end
+  noprint SFO
+  relativity
+    level scalar
+    formalism ZORA
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=SR_aoresponse $AMSBIN/ams <<eor
+Task VibrationalAnalysis
+
+VibrationalAnalysis
+   Type ModeScanning
+   NormalModes
+      ModeFile SR.results/adf.rkf
+      ModeSelect
+         FreqRange 0.0 4000.0
+      End
+   End
+End
+
+Properties
+   Raman True
+End
+Raman
+   IncidentFrequency 2.0 [eV]
+End
+
+LoadSystem
+   File SR.results/ams.rkf
+End
+
+EngineRestart SR.results/adf.rkf
+
+Engine ADF
+  responseformalism aoresponse
+  basis
+    core None
+    type DZ
+  end
+  noprint SFO
+  relativity
+    level scalar
+    formalism ZORA
+  end
+EndEngine
+eor
+
+# == Relativistic Spinorbit ZORA ==
+
+# 4 calculations are performed.
+# First a spin-orbit coupled relativistic geometry optimization is performed.
+# This calculation produces a restart file which is used in the second calculation
+# to calculate numerical frequencies. This calculation produces a restart file
+# which is used in the third and fourth calculation as input for the Raman calculation.
+# The FreqRange keyword is used to calculate Raman intensities for a range of frequencies only.
+# In the third calculation RESPONSE is used and in the fourth calculation AORESPONSE.
+# Symmetry NOSYM is needed for AORESPONSE icw spin-orbit coupling.
+
+AMS_JOBNAME=SO $AMSBIN/ams <<eor
+System
+  atoms
+     H  0.0000 0.0000 0.0000
+     I  0.0000 0.0000 1.6092
+  end
+end
+
+Task GeometryOptimization
+Properties
+  NormalModes Yes
+End
+
+Engine ADF
+  basis
+    core None
+    type DZ
+  end
+  noprint SFO
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=SO_response $AMSBIN/ams <<eor
+Task VibrationalAnalysis
+
+VibrationalAnalysis
+   Type ModeScanning
+   NormalModes
+      ModeFile SO.results/adf.rkf
+      ModeSelect
+         FreqRange 0.0 4000.0
+      End
+   End
+End
+
+Properties
+   Raman True
+End
+Raman
+   IncidentFrequency 2.0 [eV]
+End
+
+LoadSystem
+   File SO.results/ams.rkf
+End
+
+EngineRestart SO.results/adf.rkf
+
+Engine ADF
+  responseformalism response
+  basis
+    core None
+    type DZ
+  end
+  noprint SFO
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=SO_aoresponse $AMSBIN/ams <<eor
+Task VibrationalAnalysis
+
+VibrationalAnalysis
+   Type ModeScanning
+   NormalModes
+      ModeFile SO.results/adf.rkf
+      ModeSelect
+         FreqRange 0.0 4000.0
+      End
+   End
+End
+
+Properties
+   Raman True
+End
+Raman
+   IncidentFrequency 2.0 [eV]
+End
+
+LoadSystem
+   File SO.results/ams.rkf
+End
+
+EngineRestart SO.results/adf.rkf
+
+Engine ADF
+  responseformalism aoresponse
+  basis
+    core None
+    type DZ
+  end
+  noprint SFO
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  symmetry nosym
+EndEngine
+eor

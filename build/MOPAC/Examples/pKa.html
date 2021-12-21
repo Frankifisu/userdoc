@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Example: pKa prediction (PLAMS) &mdash; MOPAC 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="MOPAC 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="../Examples.html"/>
+        <link rel="prev" title="Example: Camp-King Converger" href="CampKingConverger.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search MOPAC" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-MOPAC" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Introduction.html#what-s-new-in-mopac-2019">What’s new in MOPAC 2019</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html">AMS driver’s tasks and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#geometry-system-definition">Geometry, System definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#tasks-exploring-the-pes">Tasks: exploring the PES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#properties-in-the-ams-driver">Properties in the AMS driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input.html">Input keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input.html#model-hamiltonian">Model Hamiltonian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input.html#solvation">Solvation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input.html#properties">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input.html#technical-settings">Technical settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input.html#extra-keywords">Extra keywords</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="GOFREQ_unrestricted.html">Example: GeoOpt+Frequencies of different O2 spin states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Polar.html">Example: Polarizability and hyperpolarizabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phonons.html">Example: Phonons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GO_polyethylene.html">Example: Geometry optimization of polyethylene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EField.html">Example: External electric field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CampKingConverger.html">Example: Camp-King Converger</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example: pKa prediction (PLAMS)</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">MOPAC</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../MOPAC.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">MOPAC</a>/</li>
+      
+          <li><a href="../Examples.html">Examples</a>/</li>
+      
+    <li class="orange-text">Example: pKa prediction (PLAMS)</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="example-pka-prediction-plams">
+<span id="example-pka"></span><h1>Example: pKa prediction (PLAMS)<a class="headerlink" href="#example-pka-prediction-plams" title="Permalink to this headline">¶</a></h1>
+<p>This example should be executed using <a class="reference external" href="../../plams/index.html">PLAMS</a>.</p>
+<p><a class="reference download internal" download="" href="../_downloads/72685fe07f721db35c02146421896592/pKa.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">pKa.py</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scm.plams.interfaces.molecule.rdkit</span> <span class="kn">import</span> <span class="n">from_smiles</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+
+<span class="c1"># In this example we compute pKa (acid dissociation constant) using MOPAC for a set of</span>
+<span class="c1"># molecules. The molecules are defined using smiles strings, and are converted to xyz </span>
+<span class="c1"># structures using the plams-rdkit interface.</span>
+
+<span class="c1"># Important note: the predicted pKa strongly depend on the molecule&#39;s conformer.</span>
+<span class="c1"># Here we use the lowest conformer predicted by rdkit&#39;s UFF.</span>
+<span class="c1"># The difference between the values computed here and the results on the </span>
+<span class="c1"># MOPAC website (ref_mopac_pKa) is due to different conformers </span>
+
+<span class="c1"># Data taken from the online MOPAC manual: http://openmopac.net/manual/ (only a sub set)</span>
+<span class="n">data_tmp</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="c1"># Molecule name                 smiles                            exp_pKa   ref_mopac_pKa (from mopac&#39;s website)</span>
+   <span class="p">[</span><span class="s1">&#39;1-Naphthoic_acid&#39;</span><span class="p">,</span>           <span class="s1">&#39;C1=CC=C2C(=C1)C=CC=C2C(=O)O&#39;</span><span class="p">,</span>      <span class="mf">3.69</span><span class="p">,</span>     <span class="mf">4.35</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;2,2,2-Trichloroethanol&#39;</span><span class="p">,</span>     <span class="s1">&#39;C(C(Cl)(Cl)Cl)O&#39;</span><span class="p">,</span>                 <span class="mf">12.02</span><span class="p">,</span>    <span class="mf">12.22</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;2,2,2-Trifluoroethanol&#39;</span><span class="p">,</span>     <span class="s1">&#39;C(C(F)(F)F)O&#39;</span><span class="p">,</span>                    <span class="mf">12.40</span><span class="p">,</span>    <span class="mf">12.27</span><span class="p">],</span> 
+   <span class="p">[</span><span class="s1">&#39;2,2-Dimethylpropionic_acid&#39;</span><span class="p">,</span> <span class="s1">&#39;CC(C)(C)C(=O)O&#39;</span><span class="p">,</span>                   <span class="mf">5.03</span><span class="p">,</span>     <span class="mf">5.23</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;2,3,4,6-Tetrachlorophenol&#39;</span><span class="p">,</span>  <span class="s1">&#39;C1=C(C(=C(C(=C1Cl)Cl)Cl)O)Cl&#39;</span><span class="p">,</span>     <span class="mf">7.10</span><span class="p">,</span>     <span class="mf">6.08</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Acetic_acid&#39;</span><span class="p">,</span>                <span class="s1">&#39;CC(=O)O&#39;</span><span class="p">,</span>                          <span class="mf">4.76</span><span class="p">,</span>     <span class="mf">5.00</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Acrylic_acid&#39;</span><span class="p">,</span>               <span class="s1">&#39;C=CC(=O)O&#39;</span><span class="p">,</span>                        <span class="mf">4.25</span><span class="p">,</span>     <span class="mf">4.65</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Benzoid_acid&#39;</span><span class="p">,</span>               <span class="s1">&#39;C1=CC=C(C=C1)C(=O)O&#39;</span><span class="p">,</span>              <span class="mf">4.20</span><span class="p">,</span>     <span class="mf">4.30</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Citric_acid&#39;</span><span class="p">,</span>                <span class="s1">&#39;C(C(=O)O)C(CC(=O)O)(C(=O)O)O&#39;</span><span class="p">,</span>     <span class="mf">3.13</span><span class="p">,</span>     <span class="mf">2.56</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Ethanol&#39;</span><span class="p">,</span>                    <span class="s1">&#39;CCO&#39;</span><span class="p">,</span>                             <span class="mf">16.00</span><span class="p">,</span>    <span class="mf">16.37</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Formic_acid&#39;</span><span class="p">,</span>                <span class="s1">&#39;C(=O)O&#39;</span><span class="p">,</span>                           <span class="mf">3.77</span><span class="p">,</span>     <span class="mf">3.77</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Glycine&#39;</span><span class="p">,</span>                    <span class="s1">&#39;C(C(=O)O)N&#39;</span><span class="p">,</span>                       <span class="mf">2.35</span><span class="p">,</span>     <span class="mf">2.53</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Isoleucine&#39;</span><span class="p">,</span>                 <span class="s1">&#39;CCC(C)C(C(=O)O)N&#39;</span><span class="p">,</span>                 <span class="mf">2.32</span><span class="p">,</span>     <span class="mf">2.48</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Methanol&#39;</span><span class="p">,</span>                   <span class="s1">&#39;CO&#39;</span><span class="p">,</span>                              <span class="mf">15.54</span><span class="p">,</span>    <span class="mf">15.23</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;o-Nitrophenol&#39;</span><span class="p">,</span>              <span class="s1">&#39;C1=CC=C(C(=C1)[N+](=O)[O-])O&#39;</span><span class="p">,</span>     <span class="mf">7.17</span><span class="p">,</span>     <span class="mf">7.52</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Pentachlorophenol&#39;</span><span class="p">,</span>          <span class="s1">&#39;C1(=C(C(=C(C(=C1Cl)Cl)Cl)Cl)Cl)O&#39;</span><span class="p">,</span> <span class="mf">4.90</span><span class="p">,</span>     <span class="mf">5.55</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Phenol&#39;</span><span class="p">,</span>                     <span class="s1">&#39;C1=CC=C(C=C1)O&#39;</span><span class="p">,</span>                  <span class="mf">10.00</span><span class="p">,</span>     <span class="mf">9.71</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Pyruvic_acid&#39;</span><span class="p">,</span>               <span class="s1">&#39;CC(=O)C(=O)O&#39;</span><span class="p">,</span>                     <span class="mf">2.50</span><span class="p">,</span>     <span class="mf">2.85</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;T-Butanol&#39;</span><span class="p">,</span>                  <span class="s1">&#39;CC(C)(C)O&#39;</span><span class="p">,</span>                       <span class="mf">17.00</span><span class="p">,</span>    <span class="mf">16.25</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Terephthalic_acid&#39;</span><span class="p">,</span>          <span class="s1">&#39;C1=CC(=CC=C1C(=O)O)C(=O)O&#39;</span><span class="p">,</span>        <span class="mf">3.51</span><span class="p">,</span>     <span class="mf">3.59</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Valine&#39;</span><span class="p">,</span>                     <span class="s1">&#39;CC(C)C(C(=O)O)N&#39;</span><span class="p">,</span>                  <span class="mf">2.29</span><span class="p">,</span>     <span class="mf">2.61</span><span class="p">],</span>
+   <span class="p">[</span><span class="s1">&#39;Water&#39;</span><span class="p">,</span>                      <span class="s1">&#39;O&#39;</span><span class="p">,</span>                               <span class="mf">15.74</span><span class="p">,</span>    <span class="mf">15.75</span><span class="p">]]</span>
+
+<span class="c1"># Turn data_tmp into a dictionary: </span>
+<span class="n">systems</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;smiles&#39;</span><span class="p">:</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;exp_pKa&#39;</span><span class="p">:</span><span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;ref_mopac_pKa&#39;</span><span class="p">:</span><span class="n">d</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data_tmp</span><span class="p">]</span> 
+
+<span class="c1"># Create the molecules from the smiles using rdkit:</span>
+<span class="n">molecules</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">systems</span><span class="p">:</span>
+   <span class="c1"># Compute 30 conformers, optimize with UFF and pick the lowest in energy.</span>
+   <span class="n">mol</span> <span class="o">=</span> <span class="n">from_smiles</span><span class="p">(</span><span class="n">system</span><span class="p">[</span><span class="s1">&#39;smiles&#39;</span><span class="p">],</span> <span class="n">nconfs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s1">&#39;uff&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+   <span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">system</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+   <span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">exp_pKa</span> <span class="o">=</span> <span class="n">system</span><span class="p">[</span><span class="s1">&#39;exp_pKa&#39;</span><span class="p">]</span>
+   <span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ref_mopac_pKa</span> <span class="o">=</span> <span class="n">system</span><span class="p">[</span><span class="s1">&#39;ref_mopac_pKa&#39;</span><span class="p">]</span>
+   
+   <span class="n">molecules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+<span class="c1"># MOPAC input:</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">runscript</span><span class="o">.</span><span class="n">nproc</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># serial calculation</span>
+<span class="n">s</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">Task</span> <span class="o">=</span> <span class="s1">&#39;GeometryOptimization&#39;</span>
+<span class="n">s</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">GeometryOptimization</span><span class="o">.</span><span class="n">Convergence</span><span class="o">.</span><span class="n">Step</span> <span class="o">=</span> <span class="mf">1.0e-3</span>
+<span class="n">s</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">GeometryOptimization</span><span class="o">.</span><span class="n">Convergence</span><span class="o">.</span><span class="n">Gradients</span> <span class="o">=</span> <span class="mf">1.0e-5</span>
+<span class="n">s</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">mopac</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="s1">&#39;PM6&#39;</span>
+<span class="n">s</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">mopac</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">pKa</span> <span class="o">=</span> <span class="s1">&#39;Yes&#39;</span>
+
+<span class="c1"># Set up and run jobs:</span>
+<span class="n">jobs</span> <span class="o">=</span> <span class="n">MultiJob</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">AMSJob</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">molecules</span><span class="p">])</span>
+<span class="n">jr</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">maxjobs</span><span class="o">=</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">())</span> <span class="c1"># run jobs in parallel</span>
+<span class="n">jobs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jobrunner</span><span class="o">=</span><span class="n">jr</span><span class="p">)</span>
+
+<span class="c1"># Collect results:</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">molecules</span><span class="p">):</span>
+   <span class="n">pKaValues</span> <span class="o">=</span> <span class="n">jobs</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">readrkf</span><span class="p">(</span><span class="s1">&#39;Properties&#39;</span><span class="p">,</span> <span class="s1">&#39;pKaValues&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="s1">&#39;mopac&#39;</span><span class="p">)</span>
+   <span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">calc_pKa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pKaValues</span><span class="p">)</span> <span class="c1"># If there is more than one pKa, take the average value</span>
+ 
+<span class="c1"># Print results in a table:</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Results:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;| {:28} | {:8} | {:8} | {:8} | {:8} |&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;Molecule&quot;</span><span class="p">,</span> <span class="s2">&quot;exp pKa&quot;</span><span class="p">,</span> <span class="s2">&quot;calc pKa&quot;</span><span class="p">,</span> <span class="s2">&quot;ref&quot;</span><span class="p">,</span> <span class="s1">&#39;calc-exp&#39;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">molecules</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s2">&quot;| {:28} | {:&gt;8.2f} | {:&gt;8.4f} | {:&gt;8.2f} | {:&gt;8.2f} |&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">exp_pKa</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">calc_pKa</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ref_mopac_pKa</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">calc_pKa</span><span class="o">-</span><span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">exp_pKa</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="n">errors</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">calc_pKa</span> <span class="o">-</span> <span class="n">mol</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">exp_pKa</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">molecules</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Mean signed error  : {:4.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">errors</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Mean unsigned error: {:4.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">])))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Root mean square error: {:4.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">]))))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="CampKingConverger.html" class="btn btn-neutral" title="Example: Camp-King Converger" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

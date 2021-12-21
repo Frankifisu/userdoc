@@ -1,0 +1,48 @@
+#!/bin/sh
+
+#
+# This is a technical example comparing analytical and numerical gradients for the Tripos forcefield
+#
+# The allowMissingParameters is a trick to run this molecule even though it is not fully supported by the definition file
+#
+
+for num in no yes
+do
+
+export AMS_JOBNAME=tripos3.num=$num
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+Properties Gradients=yes
+
+EngineDebugging IgnoreGradientsRequest=$num IgnorePreviousResults=true
+
+NumericalDifferentiation NuclearStepSize=1.0e-4
+
+
+System
+  Atoms
+    N       0.00000000       0.00000000       0.26448000  ForceField.Charge=0.0  ForceField.Type=N.2
+    H      -0.48379000       0.83795000      -0.08816000  ForceField.Charge=0.0  ForceField.Type=H
+    H      -0.48379000      -0.83795000      -0.08816000  ForceField.Charge=0.0  ForceField.Type=H
+    H       0.96758000      -0.00000000      -0.08816000  ForceField.Charge=0.0  ForceField.Type=H
+  End
+
+  BondOrders
+         1 2 1.0
+         1 3 1.0
+         1 4 1.0
+  End
+End
+
+
+Engine ForceField
+  Type Tripos5.2
+  AllowMissingParameters yes
+EndEngine
+eor
+
+done

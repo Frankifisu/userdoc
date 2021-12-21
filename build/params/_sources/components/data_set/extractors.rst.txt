@@ -1,0 +1,158 @@
+Extractors and Comparators
+==========================
+.. currentmodule:: scm.params.core.dataset
+
+.. _AvailableExtractors:
+
+Available Extractors
+--------------------
+
+.. include:: table_extractors.rst.include
+
+.. include:: detailed_extractors.rst.include
+
+
+
+Custom Extractors
+-----------------
+
+The :ref:`DataSet section <Data Set>` described how an arbitrary linear combination
+of properties extracted from jobs :math:`P(J)` can be added to a Data Set for fitting.
+In this chapter, we are going to describe what happens when entries are added and evaluated
+by the Data Set and how the user can extend the number of properties that can be fitted with ParAMS.
+
+We have briefly described the *extractors* in the :ref:`Data Set`:
+They are a collection of Python code snippets available to the |Fitfunc| instance which define
+how to extract an individual property :math:`P` from a job.
+The extractors available to each |Fitfunc| can be checked with the :attr:`extractors` attribute:
+
+>>> ds = DataSet()
+>>> ds.extractors
+{'angles', 'vibfreq', 'charges', 'distance', 'stresstensor', 'energy', 'forces', 'hessian', 'dihedral'}
+
+Any expression passed to the :meth:`DataSet.add_entry` method can be constructed from the available extractors,
+for example ``"angles('myJob1')"``.
+
+The design of the Data Set allows for an easy extension of
+the extractors to suit personal needs beyond what is already provided in the package.
+Users are encouraged to define additional extractors whenever a new property becomes relevant for the fitting process.
+In the following example, we will add the functionality to extract and evaluate elastic tensors to the Data Set:
+
+>>> 'elastictensor' in ds.extractors
+False
+
+Start by creating an `elastictensor.py` in an empty directory of your choice with the following contents:
+
+.. code-block:: python
+
+  from numpy import ndarray, asarray
+
+  sigma = 1e-2
+  def extract(amsresults) -> ndarray:
+    return asarray(amsresults.get_engine_results('ElasticTensor'))
+
+This is a minimal and complete definition of our extractor.
+The code snippet can be saved under any accessible path and
+used by providing |Fitfunc| with the corresponding directory.
+The base file name will be used as the extractor's name
+(make sure not include extractors with the same names).
+Here, we have saved the above under `path/to/extractors/`:
+
+>>> ds = DataSet(more_extractors='path/to/extractors/')
+>>> 'elastictensor' ds.extractors
+True
+
+Because the Data Set natively works with :class:`plams.AMSResults`,
+we were able to take a shortcut in the creation of our extractor:
+All we needed to do in this case is wrap a PLAMS method around the :func:`extract` function.
+Note that in addition to the function definition, we also provided a `sigma` variable.
+This serves as a default value when a related entry is added with through :meth:`DataSet.add_entry`
+and should roughly be in the same order of magnitude as the "accepted accuracy" for this property.
+ParAMS will evaluate all entries according to :math:`(w/\sigma)(y-\hat{y})`, where :math:`w` is the weight.
+Providing a sigma is not mandatory but highly recommended, any extractor without a sigma will set it's value to 1.
+
+.. important::
+  * An extractor stored as `basename.py` will be available through the `basename` string at runtime
+  * For every extractor, the :func:`extract` function returns the property value from a job
+  * ParAMS expects the first argument passed to any :func:`extract` function to be a :class:`plams.AMSResults` instance
+    (see `PLAMS documentation <../../../plams/interfaces/ams.html#amsresults-api>`_)
+  * It is recommended to define a `sigma:float` variable, which should be in the same order of magnitude as the
+    prediction accuracy for this property
+
+However, because the definition of :func:`extract` is completely up to the user,
+it can be made to read and process data from any other source as well.
+Assuming that a property is stored in a text file, an extractor that is independent of
+:class:`plams.AMSResults` could look like this:
+
+.. code-block:: python
+
+  def extract(_, filepath):
+    # AMSResults instance: `_` is ignored.
+    with open(filepath) as f:
+      return float(f.read())
+
+
+
+
+Supported Data Structures
+-------------------------
+
+The above definition of our elastic tensor extractor returns a numpy array to the |Fitfunc| instance
+when evaluated, however, in theory extractors can return an arbitrary data structure which calls for
+additional processing to make all results consistent.
+Internally, each time :meth:`DataSet.evaluate` is called, reference and predicted results are reduced
+to one weighted vector of residuals
+:math:`(\boldsymbol{w}/\boldsymbol{\sigma})(\boldsymbol{y} - \boldsymbol{\hat{y}})`,
+which is then passed to a :ref:`loss function <Loss Functions>` and evaluated.
+This implies that any two return values of the same extractor support subtraction and multiplication
+(which is why we convert the the elastic tensor to a numpy array before returning).
+For anything that does not, a custom :func:`compare` function has to be implemented
+alongside :func:`extract`.
+
+
+
+
+Custom Comparators
+------------------
+
+There might be cases where an extractor either returns
+a data type that does not support mathematical operations
+or the quality of a reference and predicted value can not be measured
+by a simple subtraction :math:`y - \hat{y}`.
+In such cases it is necessary to define an additional :func:`compare`
+in the extractor:
+
+.. code-block:: python
+
+  # dictextractor.py
+  from typing import Dict
+
+  sigma = 0.1
+  def extract(amsresults) -> Dict:
+    return amsresults.some_dict_property()
+
+  def compare(y:Dict, yhat:Dict, au_to_ref:float) -> float:
+    y    = list(y.values())
+    yhat = list(yhat.values())
+
+    # Unit conversion must be handled by the custom comparator:
+    yhat = [i*au_to_ref for i in yhat]
+
+    for i,ihat  in zip(y, yhat):
+      ...
+    return ...
+
+A custom comparator defined in such a way will automatically be used in combination
+with the extractor.
+
+.. important::
+  * Whenever the :func:`extract` function returns a data type that does not support mathematical
+    operations, a :func:`compare` function must be additionally defined.
+  * :func:`compare` **always** follows the signature
+    ``compare(y:Any, yhat:Any, au_to_ref:float) -> Union[ndarray,float,int]``
+  * Note that :func:`compare` should handle possible unit conversions by applying
+    the equivalent of ``yhat = au_to_ref*yhat``
+
+
+
+

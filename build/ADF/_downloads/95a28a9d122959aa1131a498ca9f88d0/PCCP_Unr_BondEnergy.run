@@ -1,0 +1,316 @@
+#! /bin/sh
+
+
+# This example illustrates advanced usage of the bond energy decomposition
+# scheme used in ADF.
+
+# Remark: this calculation simulates unrestricted fragments using the FRAGOCCUPATIONS
+# key. Real unrestricted fragments can also be used in ADF.
+
+# A proper decomposition of an electron-pair bond energy requires specifying
+# opposite spins for the unpaired electrons of the respective radical fragments,
+# which can be done with the input key FragOccupations. The specified alpha- and
+# beta-spin configurations of the radical fragments are shown in the output
+# section B U I L D.
+
+# Please note that if one neglects explicitly specifying opposite spins for the
+# unpaired electrons of the fragments, each of them is treated as being half an
+# alpha and half a beta electron and consequently, they enter into a spurious
+# Pauli repulsive interaction. This results, among others, into the Pauli
+# repulsion term being too repulsive and the orbital interaction term being too
+# much stabilizing.
+
+# The example consists of an analysis of the C-C single bond between two CP
+# radicals in the four-atomic molecule PCCP. The CP fragment calculations used
+# to provide the adf.rkf for the overall PCCP calculation are done here in 
+# the restricted mode ('cp_fpccp_asr'). The proper spins
+# are then specified in the calculation of the overall molecule using the
+# FragOccupations key ('pccp_fa1_as'). Note that this implies a slight
+# approximation because the bond energy computed in this way refers to the
+# energy difference between closed-shell PCCP and two CP radicals that are
+# described by orbitals from a spin-restricted SCF calculation, which have been
+# given an unrestricted occupation. In other words, the set of alpha- and beta-
+# spin orbitals are identical and the effect of spin polarization is missing. In
+# practice, this leads to minor energy differences with respect to the correct
+# bond energy, that is, the energy difference between closed-shell PCCP and two
+# CP radicals treated in the unrestricted mode, i.e., for which the set of
+# alpha- and beta-spin orbitals are allowed to relax toward different solutions
+# in the SCF procedure. This correction term can be computed directly by
+# carrying out an unrestricted computation of the CP radical ('cp_fpccp_asu') using the
+# restricted CP radical ('cp_fpccp_asr') as a fragment.
+
+# The pure orbital interaction effect of forming the electron bonding combination
+# of the two radicals can be isolated from the full orbital interaction by carrying out a
+# separate calculation. In this calculation (pccp_fa1_pb) the bond energy analysis is performed in
+# the absence of any virtual CP fragment orbitals, using the key REMOVEFRAGORBITALS.
+
+
+AMS_JOBNAME=CP $AMSBIN/ams <<eor
+System
+  atoms
+     C         .0000    .0000    .6681
+     P         .0000    .0000   2.2555
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title cp_fpccp_asr
+  eprint
+    sfo eig ovl
+  end
+  basis
+    core Large
+    type TZ2P
+  end
+  numericalquality Good
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=CP_Unrestricted $AMSBIN/ams <<eor
+System
+  atoms
+     C         .0000    .0000    .6681  adf.f=CP
+     P         .0000    .0000   2.2555  adf.f=CP
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title cp_fpccp_asu
+  eprint
+    sfo eig ovl
+  end
+  fragments
+     CP   CP.results/adf.rkf
+  end
+  fragoccupations
+     CP
+     SIGMA 3//2
+     PI    2//2
+     SUBEND
+  end
+  numericalquality Good
+  spinpolarization 1
+  unrestricted
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=PCCP_pb $AMSBIN/ams <<eor
+System
+  atoms
+     P         .0000    .0000   2.2555  adf.f=CP_A
+     C         .0000    .0000    .6681  adf.f=CP_A
+     C         .0000    .0000   -.6681  adf.f=CP_B
+     P         .0000    .0000  -2.2555  adf.f=CP_B
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title pccp_fa1_pb
+  eprint
+    orbpop 20  20
+    end
+    sfo eig ovl
+  end
+  fragments
+     CP_A   CP.results/adf.rkf
+     CP_B   CP.results/adf.rkf
+  end
+  fragoccupations
+     CP_A
+     SIGMA 3//2
+     PI    2//2
+     SUBEND
+     CP_B
+     SIGMA 2//3
+     PI    2//2
+     SUBEND
+  end
+  numericalquality Good
+  removeallfragvirtuals
+  symmetry C(LIN)
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=PCCP $AMSBIN/ams <<eor
+System
+  atoms
+     P         .0000    .0000   2.2555  adf.f=CP_A
+     C         .0000    .0000    .6681  adf.f=CP_A
+     C         .0000    .0000   -.6681  adf.f=CP_B
+     P         .0000    .0000  -2.2555  adf.f=CP_B
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title pccp_fa1_as
+  eprint
+    orbpop 20  20
+    end
+    sfo eig ovl
+  end
+  fragments
+     CP_A   CP.results/adf.rkf
+     CP_B   CP.results/adf.rkf
+  end
+  fragoccupations
+     CP_A
+     SIGMA 3//2
+     PI    2//2
+     SUBEND
+     CP_B
+     SIGMA 2//3
+     PI    2//2
+     SUBEND
+  end
+  numericalquality Good
+  symmetry C(LIN)
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=CP_B3LYP $AMSBIN/ams <<eor
+System
+  atoms
+     C         .0000    .0000    .6681
+     P         .0000    .0000   2.2555
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title B3LYP restricted
+  basis
+    core None
+    type TZ2P
+  end
+  numericalquality Good
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=CP_B3LYP_Unrestricted $AMSBIN/ams <<eor
+System
+  atoms
+     C         .0000    .0000    .6681  adf.f=CP
+     P         .0000    .0000   2.2555  adf.f=CP
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title B3LYP unrestricted
+  fragments
+     CP   CP_B3LYP.results/adf.rkf
+  end
+  fragoccupations
+     CP
+     SIGMA 7//6
+     PI    4//4
+     Subend
+  end
+  numericalquality Good
+  spinpolarization 1
+  unrestricted
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=PCCP_B3LYP_pb  $AMSBIN/ams <<eor
+System
+  atoms
+     P         .0000    .0000   2.2555  adf.f=CP_A
+     C         .0000    .0000    .6681  adf.f=CP_A
+     C         .0000    .0000   -.6681  adf.f=CP_B
+     P         .0000    .0000  -2.2555  adf.f=CP_B
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title PCCP B3LYP PAIRBONDING
+  fragments
+     CP_A   CP_B3LYP.results/adf.rkf
+     CP_B   CP_B3LYP.results/adf.rkf
+  end
+  fragoccupations
+     CP_A
+     SIGMA 7//6
+     PI    4//4
+     Subend
+     CP_B
+     SIGMA 6//7
+     PI    4//4
+     Subend
+  end
+  numericalquality Good
+  removeallfragvirtuals
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=PCCP_B3LYP $AMSBIN/ams <<eor
+System
+  atoms
+     P         .0000    .0000   2.2555  adf.f=CP_A
+     C         .0000    .0000    .6681  adf.f=CP_A
+     C         .0000    .0000   -.6681  adf.f=CP_B
+     P         .0000    .0000  -2.2555  adf.f=CP_B
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title PCCP B3LYP
+  fragments
+     CP_A   CP_B3LYP.results/adf.rkf
+     CP_B   CP_B3LYP.results/adf.rkf
+  end
+  fragoccupations
+     CP_A
+     SIGMA 7//6
+     PI    4//4
+     Subend
+     CP_B
+     SIGMA 6//7
+     PI    4//4
+     Subend
+  end
+  numericalquality Good
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor
+

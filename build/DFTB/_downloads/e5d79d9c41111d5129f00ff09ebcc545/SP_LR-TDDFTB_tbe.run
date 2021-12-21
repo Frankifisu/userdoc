@@ -1,0 +1,66 @@
+#! /bin/sh
+
+echo Singlet Excitations
+for f in $AMSHOME/examples/dftb/SP_LR-TDDFTB_tbe/molecules/*.xyz
+do
+cat <<eor > in
+Task SinglePoint
+System
+    Atoms
+eor
+cat $f >> in
+cat <<eor >> in
+    End
+End
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           TDDFTB
+               calc singlet
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+eor
+g=`basename $f .xyz`
+echo $g
+AMS_JOBNAME=${g}_SS $AMSBIN/ams <in>out
+grep Excitation out
+done
+echo Ready
+
+
+echo Triplet Excitations
+for f in $AMSHOME/examples/dftb/SP_LR-TDDFTB_tbe/molecules/*.xyz
+do
+cat <<eor > in
+System
+    Atoms
+eor
+cat $f >> in
+cat <<eor >> in
+    End
+End
+Task SinglePoint
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   Properties
+       Excitations
+           TDDFTB
+               calc triplet
+               print evcontribs
+           End
+       End
+   End
+EndEngine
+eor
+g=`basename $f .xyz`
+echo $g
+AMS_JOBNAME=${g}_ST $AMSBIN/ams <in>out
+grep Excitation out
+done
+echo Ready

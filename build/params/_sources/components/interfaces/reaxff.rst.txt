@@ -1,0 +1,210 @@
+ReaxFF
+======
+
+.. currentmodule:: scm.params.parameterinterfaces.reaxff
+
+
+The :class:`ReaxFFParameters` class provides a parameterizable interface
+to the ReaxFF reactive force field.
+It can be initialized by passing a force field path to the constructor::
+
+  ff = ReaxFFParameters('path/to/ffield.ff')
+
+By default, all relevant parameters will be marked as `is_active==True`
+(`i.e.` marked for parameterization).
+See the :ref:`API <ReaxFF Interface API>` for parameter naming conventions.
+
+.. contents:: Contents of this Page
+  :local:
+
+
+--------------------------------------
+
+
+Reading Legacy params Files
+---------------------------
+Outside of the ParAMS formalism, a `params file <../../../OldReaxFF/ffopt_Input_files.html#params-file>`_
+is common to mark a set of paramters for optimization, and set their respective ranges.
+Support for these files is implemented in the :meth:`ReaxFFParameters.read_paramsfile` method::
+
+  ff = ReaxFFParameters('path/to/ffield.ff')
+  ff.read_paramsfile('path/to/params')
+
+The method will mark all matching parameters as `is_active=True` (and deactivate all remaining ones).
+Will raise an error if blocks that are not present in the force field are referenced in the `params` file.
+Note that the 4th column in the `params` file (delta value) will be ignored.
+
+
+Addition of Parameters
+----------------------
+The ReaxFF interface allows for the addition of new parameters through the
+:meth:`~scm.params.parameterinterfaces.reaxff.ReaxFFParameters.add_blocks` method.
+
+
+Parameter Databases and Value Suggestions
+-----------------------------------------
+The class can suggest suitable parameter values for
+a number of queried parameters.
+See the :meth:`ReaxFFParameters.params_from_db` method for more information.
+By default, all force fields in `$AMSHOME/atomicdata/ForceFields/ReaxFF` will be used
+to return suggestions.
+Users can create their own databases from fewer (or more) force fields through the
+:meth:`ReaxFFParameters.generate_paramsdb` method.
+
+
+ReaxFF Conversion Functions
+---------------------------
+
+Outside of ParAMS, ReaxFF is parameterized with a training set defined in `trainset.in` and `geo` files.
+There are two functions available to help with the conversion to the ParAMS format:
+
+.. automodule:: scm.params.common.reaxff_converter
+
+
+
+ReaxFF Interface API
+--------------------
+
+.. currentmodule:: scm.params.parameterinterfaces.reaxff
+
+.. autoclass:: ReaxFFParameters
+    :no-private-members:
+    :exclude-members: __weakref__, __call__
+
+
+
+.. _reaxff-names:
+
+Full List of Parameter Names
+----------------------------
+
+`General` block, no prefix
+  #. ``p_boc1``
+  #. ``p_boc2``
+  #. ``-p_coa2``
+  #. ``p_trip4``
+  #. ``p_trip3``
+  #. ``k_c2``
+  #. ``p_ovun6``
+  #. ``p_trip2``
+  #. ``p_ovun7``
+  #. ``p_ovun8``
+  #. ``p_trip1``
+  #. ``nonb_low,swa``
+  #. ``R_cut``
+  #. ``p_fe1``
+  #. ``p_val6``
+  #. ``p_lp1``
+  #. ``p_val9``
+  #. ``p_val10``
+  #. ``p_fe2``
+  #. ``p_pen2``
+  #. ``p_pen3``
+  #. ``p_pen4``
+  #. ``p_fe3``
+  #. ``p_tor2``
+  #. ``p_tor3``
+  #. ``p_tor4``
+  #. ``p_elho`` **only if eReaxFF is enabled**
+  #. ``p_cot2``
+  #. ``p_vdW1``
+  #. ``cutoff*100``
+  #. ``p_coa4``
+  #. ``p_ovun4``
+  #. ``p_ovun3``
+  #. ``p_val8``
+  #. ``X_soft``
+  #. ``n/a``
+  #. ``p_val`` **only if eReaxFF is enabled**
+  #. ``n/a``
+  #. ``p_coa3``
+  #. ``n/a``
+  #. ``n/a`` **only if eReaxFF is enabled**
+
+`Atoms` block, prefix: ``At1:``
+  #. ``r_0^sigma``
+  #. ``Val_i``
+  #. ``n/a``
+  #. ``r_vdW``
+  #. ``D_ij``
+  #. ``gamma_i``
+  #. ``r_0^pi``
+  #. ``Val_i^e``
+  #. ``alpha_ij``
+  #. ``1/gamma_w``
+  #. ``Val_j^angle``
+  #. ``p_ovun5``
+  #. ``p_i^xel2`` **only if eReaxFF is enabled**
+  #. ``chi_i``
+  #. ``eta_i``
+  #. ``n/a``
+  #. ``r_0^pi``
+  #. ``p_lp2``
+  #. ``n/a``
+  #. ``p_boc4``
+  #. ``p_boc3``
+  #. ``p_boc5``
+  #. ``C_i``
+  #. ``alpha_i`` **only if eReaxFF is enabled**
+  #. ``p_ovun2``
+  #. ``p_val3``
+  #. ``beta_i`` **only if eReaxFF is enabled**
+  #. ``Val_i^'boc``
+  #. ``p_val5``
+  #. ``p_c1``
+  #. ``p_c2``
+  #. ``p_c3``
+  #. ``C_i`` **only if Lg dispersion is enabled**
+  #. ``R_eij`` **only if Lg dispersion is enabled**
+
+`Bonds` block, prefix: ``At1.At2:`` (equivalent to ``At2.At1:``)
+  #. ``D_e^sigma``
+  #. ``D_e^pi``
+  #. ``D_e^pipi``
+  #. ``p_be1``
+  #. ``p_bo5``
+  #. ``Val'_i^boc``
+  #. ``p_bo6``
+  #. ``p_ovun1``
+  #. ``p_be2``
+  #. ``p_bo3``
+  #. ``p_bo4``
+  #. ``n/a``
+  #. ``p_bo1``
+  #. ``p_bo2``
+  #. ``delta'_i``
+  #. ``p_ij^xel1`` **only if eReaxFF is enabled**
+
+
+`Off-diagonals` block, prefix: ``At1.At2:`` (equivalent to ``At2.At1:``)
+  #. ``D_ij``
+  #. ``r_vdW``
+  #. ``alpha_ij``
+  #. ``r_0^sigma``
+  #. ``r_0^pi``
+  #. ``r_0^pipi``
+  #. ``C_i,C_lg,ij`` **only if Lg dispersion is enabled**
+
+`Angles` block, prefix ``At1.At2.At3:`` (equivalent to ``At3.At2.At1``, At2 is the central atom)
+  #. ``Theta_0,0``
+  #. ``p_val1``
+  #. ``p_val2``
+  #. ``p_coa1``
+  #. ``p_val7``
+  #. ``p_pen1``
+  #. ``p_val4``
+
+`Torsions` block, prefix ``At1.At2.At3.At4:`` (equivalent to ``At4.At3.At2.A1:``)
+  #. ``V_1``
+  #. ``V_2``
+  #. ``V_3``
+  #. ``p_tor1``
+  #. ``p_cot1``
+  #. ``n/a 1``
+  #. ``n/a 2``
+
+`Hydrogen Bonds` block, prefix ``At1.H.At2:`` (NOT equivalent to ``At2.H.At1:``)
+  #. ``r_hb^0``
+  #. ``p_hb1``
+  #. ``-p_hb2``
+  #. ``-p_hb3``

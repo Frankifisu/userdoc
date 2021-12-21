@@ -1,0 +1,149 @@
+#! /bin/sh
+
+# This example shows that the pEDA formalism can be applied to
+# molecules. Here, there is no periodic boundary condition
+# necessary. Hence, charged fragments or final molecules can be
+# investigated!
+
+#
+#
+# Fragment 1 is the [PtCl4]2- fragment 
+#
+# 
+
+
+AMS_JOBNAME=Frag1 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+    ATOMS
+        Pt 0.0 0.0 0.0
+        Cl 0.0 -2.308048739 0.0
+        Cl 0.0 2.308048739 0.0
+        Cl -2.308048739 0.0 0.0
+        Cl 2.308048739 0.0 0.0
+    END
+
+    Charge -2
+End
+
+Engine Band
+    TITLE PtCl4 2- fragment
+    Relativity
+        Level Scalar
+    End
+
+    Basis
+    Type DZP
+    Core Large
+    End
+
+    XC
+    GGA Becke Perdew
+    END
+
+    UseSymmetry False
+EndEngine
+eor
+
+#
+#
+# Fragment 2 is the H2 fragment 
+#
+# 
+
+AMS_JOBNAME=Frag2 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+    ATOMS
+        H 0.0 0.0 3.84182655
+        H 0.0 0.0 2.952808836
+    END
+End
+
+Engine Band 
+    TITLE H2 fragment
+
+
+    Relativity
+        Level Scalar
+    End
+
+    Basis
+    Type DZP
+    Core Large
+    End
+
+    XC
+    GGA Becke Perdew
+    END
+
+    UseSymmetry False
+EndEngine
+eor
+
+#
+#
+# The energy decomposition run for the complex ([PtCl4]H2)2- complex
+#
+# 
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+    ATOMS
+        Pt 0.0 0.0 0.0
+        Cl 0.0 -2.308048739 0.0
+        Cl 0.0 2.308048739 0.0
+        Cl -2.308048739 0.0 0.0
+        Cl 2.308048739 0.0 0.0
+        H 0.0 0.0 2.952808836
+        H 0.0 0.0 3.84182655
+    END
+    Charge -2
+End
+
+Engine Band 
+    Relativity
+        Level Scalar
+    End
+
+    Basis
+    Type DZP
+    Core Large
+    End
+
+    XC
+    GGA Becke Perdew
+    END
+
+    fragment 
+        filename Frag1.results/band.rkf
+        AtomMapping
+            1 1
+            2 2
+            3 3
+            4 4
+            5 5
+        End
+    end
+
+    fragment 
+        filename Frag2.results/band.rkf
+        AtomMapping
+            1 7
+            2 6
+        End
+    end
+
+    PEDA
+
+    UseSymmetry False
+EndEngine
+
+eor

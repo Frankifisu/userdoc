@@ -1,0 +1,306 @@
+#! /bin/sh
+
+
+# A study of the Basis Set Superposition Error (BSSE) in the formation of
+# Cr(CO)_6. from CO and Cr(CO)_5.
+# This example uses scalar relativistic ZORA calculations.
+
+# For the BSSE calculation special chemical elements must be created to describe
+# the 'ghost' atoms, which have zero nuclear charge and mass. They do have basis
+# functions (and fit functions), however, and they are used to calculate the
+# lowering of the energy of the system to which the ghost atoms are added, due
+# to the enlargement of the basis by the ghost basis. The ghost atom has the
+# same basis and fit set as the normal element but no nuclear charge and no
+# frozen core. The BASIS key recognizes elements denoted with Gh.atom in the
+# ATOMS key as being ghost atoms. If the basis file specifies a frozen core ADF
+# will treat it as if no frozen core is present.
+
+# The following calculations are carried out:
+
+# 1. CO from C and O. This yields the bond energy of CO with respect to
+#    the (restricted) basic atoms.
+# 2. CO from the fragments CO (as calculated in 1) and the ghost atom Cr
+#    and 5 Carbon and 5 Oxygen ghost atoms. The ghost atomic fragments
+#    provide basis and fit functions but do not contribute charge or
+#    potential to the molecule. The bond energy of this calculation is
+#    the energy lowering of CO due to the additional basis functions.
+#    This is the BSSE for CO.
+# 3. Cr(CO)5 from Cr and 5 CO's. This yields the ('normal') bond energy
+#    with respect to the given fragments.
+# 4. Cr(CO)5 from Cr(CO)5 as fragment (as calculated in 3) but with the
+#    CO basis functions added on the position of the 6th CO ('ghost' CO).
+#    The bond energy is the BSSE for Cr(CO)5 .
+# 5. Cr(CO)6 with Cr(CO)5 and CO as fragments. The bond energy is the one
+#    without BSSE. This bond energy can now be corrected by the sum of
+#    superposition contributions of calculations 2 and 4.
+
+
+
+# This series of calculations is carried out with basis set DZ.
+
+# Finally, the whole thing might be redone with basis set TZP, to show that the
+# BSSE decreases with larger basis.
+
+# The calculations for the type DZ basis are contained in the sample script
+# (with input- and output files). Those for type TZP bases can be set up easily
+# and may be done as an exercise.
+
+# For the first series of calculations, with basis type DZ, the input files are
+# discussed below and the relevant parts are echoed from the output files where
+# the energy decomposition and the total bond energy are printed.
+
+# For the other series, using type TZP basis sets, only a summary of the results
+# is given.
+
+# =====================
+# Computational details
+# =====================
+
+# The calculations in this example all use:
+
+# Small core DZ basis set Frozen core level for the Chromium atom: 2p, for
+# Carbon and Oxygen: 1s Numerical integration precision 4.0 (in Create runs
+# 10.0, the default) Default settings for model parameters such as density
+# functional (key XC) and for the remaining computational settings For the BSSE
+# calculations we first do the 'normal' calculations of CO and Cr(CO)5 ,
+# yielding the fragment files t21.CO and t21.CrCO5. The input files for these
+# calculations are not shown here.
+
+
+# ===========
+# BSSE for CO
+# ===========
+
+# For the CO BSSE calculation the standard CO must have been computed first. In
+# the BSSE run a Cr(CO)5 ghost fragment basis set is then added to the 'normal'
+# CO input. Important is the use of the BASIS key. In this case the BASIS key is
+# used for the generation of the ghost atoms, it should have the same definition
+# for the atoms as will be used later for the Cr(CO)5 fragment. The FRAGMENTS
+# key is used for the fragment CO. The energy change (the printed 'bond energy'
+# in the output) is the BSSE.
+
+
+AMS_JOBNAME=CO $AMSBIN/ams <<eor
+  Task SinglePoint
+  System
+    atoms
+      C    0   0   1.86
+      O    0   0   3.03
+    end
+  end
+  Engine ADF
+    title CO (normal run)
+    basis
+      Type DZ
+      Core Small
+    End
+    symmetry C(lin)
+  EndEngine
+eor
+
+
+# The input file for the CO-BSSE run is:
+
+AMS_JOBNAME=CO_with_fake_CrC5O5 $AMSBIN/ams <<eor
+  Task SinglePoint
+  System
+    atoms
+     Gh.Cr    0       0       0
+     Gh.C    -1.86    0       0
+     Gh.C     1.86    0       0
+     Gh.C     0       1.86    0
+     Gh.C     0      -1.86    0
+     Gh.C     0       0      -1.86
+     Gh.O     3.03    0       0
+     Gh.O    -3.03    0       0
+     Gh.O     0       3.03    0
+     Gh.O     0      -3.03    0
+     Gh.O     0       0      -3.03
+        C     0       0       1.86       adf.f=CO
+        O     0       0       3.03       adf.f=CO
+    end
+  end
+  Engine ADF
+    title  BSSE for CO due to Cr(CO)5 ghost
+    noprint sfo,frag,functions
+    basis
+      Type DZ
+      Core Small
+    end
+    fragments
+      CO CO.results/adf.rkf
+    end
+    symmetry  C(4V)
+  EndEngine
+eor
+
+# In the output we find in the Bond Energy section: The BSSE for CO is computed
+# as 2.40 kcal/mol
+
+
+# ================
+# BSSE for Cr(CO)5
+# ================
+
+# In similar fashion the BSSE is computed for Cr(CO)_5 . In the BSSE run a ghost
+# atoms C and O at the positions they will have in the Cr(CO)_6 molecule are
+# added to the normal Cr(CO)_5 input:
+
+AMS_JOBNAME=CrCO5 $AMSBIN/ams <<eor
+  Task SinglePoint
+  System
+    atoms
+      Cr    0       0       0
+      C     1.86    0       0        adf.f=CO|1
+      C    -1.86    0       0        adf.f=CO|2
+      C     0       1.86    0        adf.f=CO|3
+      C     0      -1.86    0        adf.f=CO|4
+      C     0       0      -1.86     adf.f=CO|5
+      O     3.03    0       0        adf.f=CO|1
+      O    -3.03    0       0        adf.f=CO|2
+      O     0       3.03    0        adf.f=CO|3
+      O     0      -3.03    0        adf.f=CO|4
+      O     0       0      -3.03     adf.f=CO|5
+    end
+  end
+  Engine ADF
+    title Cr(CO)5  (normal run)
+    noprint sfo,frag,functions
+    SCF
+      mixing 0.1
+    END
+    basis
+      Type DZ
+      Core Small
+    end
+    fragments
+      CO CO.results/adf.rkf
+    end
+    symmetry C(4v)
+  EndEngine
+eor
+
+
+AMS_JOBNAME=final $AMSBIN/ams <<eor
+  Task SinglePoint
+  System
+    atoms
+      Cr    0       0       0        adf.f=CrCO5
+      C     1.86    0       0        adf.f=CrCO5
+      C    -1.86    0       0        adf.f=CrCO5
+      C     0       1.86    0        adf.f=CrCO5
+      C     0      -1.86    0        adf.f=CrCO5
+      C     0       0      -1.86     adf.f=CrCO5
+      O     3.03    0       0        adf.f=CrCO5
+      O    -3.03    0       0        adf.f=CrCO5
+      O     0       3.03    0        adf.f=CrCO5
+      O     0      -3.03    0        adf.f=CrCO5
+      O     0       0      -3.03     adf.f=CrCO5
+      Gh.C   0       0       1.86
+      Gh.O   0       0       3.03
+    end
+  end
+  Engine ADF
+    title BSSE for Cr(CO)5 due to CO ghost
+    noprint sfo,frag,functions
+    basis
+      Type DZ
+      Core Small
+    end
+    fragments
+      CrCO5   CrCO5.results/adf.rkf
+    end
+    symmetry C(4v)
+  EndEngine
+eor
+
+# The Bond Energy result yields 1.97 kcal/mol for the BSSE.
+
+
+# ============================================
+# Bond Energy calculation with BSSE correction
+# ============================================
+
+# The bonding of CO to Cr(CO)5 is computed in the normal way: from fragments CO
+# and Cr(CO)5 . The obtained value for the bond energy can then simply corrected
+# for the two BSSE terms, (2.40+1.97=) 4.37 kcal/mol together.
+
+
+# ===========================
+# Relevance of Core Functions
+# ===========================
+
+# The two BSSE runs can also be repeated, but now with the core
+# orthogonalization functions omitted from the ghost bases. To to this one can
+# not use the BASIS key, but one needs to explicitly 'create' the ghost atoms.
+# This will not be done here, but only the results will be discussed. One may
+# argue about whether these functions should be included in the ghost basis
+# sets, but since they are very contracted around the ghost nuclei they are not
+# expected to contribute significantly anyway and may then just as well be
+# omitted. This has been explicitly verified by test examples. The Core
+# Functions (the functions in the valence basis set that serve only for core-
+# orthogonalization, for instance the 1S 5.40 in the Carbon basis set (see the
+# $AMSHOME/atomicdata/ADF/ZORA/DZ/C.1s basis set file) are removed from the Create data
+# files used for the creation of the ghost atoms. This yields as BSSE values for
+# CO and Cr(CO)5 respectively 2.32 and 1.97 kcal/mol (compare 2.40 and 1.97
+# kcal/mol for the case with Core Functions included). The net total effect of
+# including/removing the Core Functions is therefore
+# (2.40-2.32)+(1.97-1.97)=0.08 kcal/mol. This is an order of magnitude smaller
+# than the BSSE effect itself.
+
+
+# ==================================
+# BSSE and the size of the basis set
+# ==================================
+
+# BSSE effects should diminish with larger bases and disappear in the limit of a
+# perfect basis. This can be studied by comparing the BSSE for basis DZ, see
+# above, with the BSSE for basis TZP. The procedure is completely similar to the
+# one above and yields: For the BSSE terms: 0.7 kcal/mol for CO (compare: 2.4
+# kcal/mol for basis DZ), and 0.5 kcal/mol for Cr(CO)5 (1.9 for basis DZ) The
+# total BSSE drops from 4.4 kcal/mol in basis DZ to 1.2 in basis TZP.
+
+
+# =========
+# Reference
+# =========
+
+# A systematic study with adf of the BSSE in metal-carbonyl complexes can be
+# found in Rosa, A., et al., Basis Set Effects in Density Functional
+# Calculations on the Metal-Ligand and Metal-Metal Bonds of Cr(CO)5-CO and
+# (CO)5. Journal of Physical Chemistry, 1996, 100: p. 5690-5696.
+
+
+$AMSBIN/ams <<eor
+  Task SinglePoint
+  System
+    atoms
+     Cr    0       0       0        adf.f=CrCO5
+     C     1.86    0       0        adf.f=CrCO5
+     C    -1.86    0       0        adf.f=CrCO5
+     C     0       1.86    0        adf.f=CrCO5
+     C     0      -1.86    0        adf.f=CrCO5
+     C     0       0      -1.86     adf.f=CrCO5
+     O     3.03    0       0        adf.f=CrCO5
+     O    -3.03    0       0        adf.f=CrCO5
+     O     0       3.03    0        adf.f=CrCO5
+     O     0      -3.03    0        adf.f=CrCO5
+     O     0       0      -3.03     adf.f=CrCO5
+     C     0       0       1.86     adf.f=CO
+     O     0       0       3.03     adf.f=CO
+    end
+  end
+  Engine ADF
+    symmetry C(4V)
+    title Bond energy without BSSE for Cr(CO)6 made of Cr(CO)5 and CO
+    noprint sfo,frag,functions
+    basis
+      Type DZ
+      Core Small
+    end
+    fragments
+     CrCO5   CrCO5.results/adf.rkf
+     CO      CO.results/adf.rkf
+    end
+  EndEngine
+eor

@@ -1,0 +1,225 @@
+.. _ff_tool:
+
+FF-Tool
+*******
+
++  :ref:`Motivation behind FF-Tool <FF-T_motivation>`
++  :ref:`Description <FF-T_description>`
++  :ref:`Functionality, scenarios, use cases <FF-T_functionality>`
++  :ref:`Requirements <FF-T_requirements>`
++  :ref:`Usage <FF-T_How_to>`
++  :ref:`Examples. Input / Output <FF-T_examples>`
+
+
+.. _FF-T_motivation:
+
+Motivation behind FF-Tool
+*************************
+
+
+ReaxFF by design has a fixed and not always intuitive format for the force field files.
+Even such simple case as extracting parameters from one force field file and comparing them or adding them to the other force field file, having a different order of atoms is not always trivial, time-consuming and might become a source of errors.
+
+FF-Tool was created with the goal to operate with the existing force field files in the easier, user-friendly manner and capture certain classical scenarios for typical force fields usage. 
+
+.. _FF-T_description:
+.. _FF-T_functionality:
+
+Functionality, scenarios, use cases
+***********************************
+
+FF-Tool covers the following  most typical scenarios:
+
+**Input generation** for the parameter optimization algorithms: MCFF or CMA_ES, based on the existing force field files. 
+
+- Generating ranges (ffield_min / ffield_max), based on the DataBase formed from the list of existing force field files. This could be either SCM DataBase of force fields or the list of the force field files, provided by the user.
+- Generating a ffiled_bool input file used for the parameter optimization in the understandable by ReaxFF format, specifying which parameters needs to be optimized, based on the user input. 
+
+
+**Comparison**
+
+Sometimes it can be useful to compare a force field file from a new publication with existing force field files, which may help to understand which parameters were re-optimized and which were kept the same. 
+FF-Tool can compare either two or more force fields by keys, even if the order of atoms differs. It shows which keys are matching and which are not. Keys could also partially match in cases when the same key is present in a force field several times and only one of them matches the values present in the second force field. 
+This feature can be useful in tracing down (indirectly) the ancestry of a force field and finding similar ones. 
+
+
+**Sanity checks**
+
+Based on numerous queries and direct interaction with Adri van Duin, a set of generic rules of thumb for ReaxFF parameter sets were gathered and formulated: 
+
+- **Branches**. There are 2 branches of ReaxFF force fields: **water** and **combustion** branch. Parameters originating from different branches should not be mixed. Hence, merging them without re-optimizing against representative training data is a common source of errors and unexpected ReaxFF behavior.
+- **VdW types**. ReaxFF Force fields can be also classified according to different types of Van der Waals interaction, containing either **'Inner Wall'** or **'Shielding'**, or both. Strictly speaking, the inner-core repulsion term is not related to the Van der Waals interaction for simplicity is as part of it.
+
+**Filtering**
+
+When analyzing published force-fields we found many inconsistencies in the VdW interaction types (different atom types present in the same force field file correspond to different VdW interaction types). Since it is also not recommended to mix force field parameters with different VdW types, a filtering option was added to the FF-Tool. When searching for a force field in the database, the available ff files can be filtered based on their branch and VdW type, which should help force-field developers adhere to the guidelines and create more robust force-fields.
+ 
+
+.. _FF-T_requirements:
+
+Requirements
+************
+
+* python 3.6.1 0 (>=3.5)
+* numpy 1.12.1 py36_0
+* pyparsing 2.2.0 py36_0
+* pyyaml 3.12 py36_0
+
+
+.. _FF-T_How_to:
+
+Usage
+*****
+
+- To run FF-Tool: ``python ff_tool.py <options>``
+
+
+.. _FF-T_flags:
+
+Flags
+*****
+
+.. hint:: Flags could be specified directly in the ``cmd`` command line, or as a part of the ``yaml`` input. For the ``cmd`` input "**--**" is requried for every flag. For instance: ``--inputFF=path_to_the_ffield``. For the keys, requiring path, both relative and absolute path is handled. 
+
+**Input / output flags**:
+
+``inputYaml`` 
+ Path(s) to the input yaml file(s)/dir(s)
+
+``inputFF``
+ Path(s) to the input force field file(s)/dir(s)
+
+``DBinput`` 
+ Path(s) to the file(s)/dir(s) with force field file(s) to form a DataBase.
+
+``KEY``
+ Key(s)[relative/absolute/from DBdir] to YAML file(s)/dir(s) with key(s) to be processed.
+
+``outputPath``
+ Path to the output directory.
+
+``params``
+ Path to the params file.
+
+**Action flags**: In the YAML file it corresponds to the block named ``KEY``.
+
+``ranges``
+ Defines ranges types {``minmax`` (default), ``quartiles``, ``quartiles/2``} to be generated from the ``DBinput`` DataBase for the specified key(s) or file(s).
+
+``check``
+ Depending on the value of the flag it can either check ``keyPresence`` if a particular ``key`` is present in the input force field file ``inputFF`` or if the conditions for ``Eq13`` Equation #13 in the ReaxFF documentation are correct. 
+
+``compare``
+ A flag to turn on comparison option for the force field files from the ``inputFF``. It can either compare entire ``files`` or selected ``keys`` from each file. 
+
+``ffInfo``
+ A flag to detect and print force field info: {``branch``, ``VdWtype``, ``chargeMethod``}, for the ``inputFF`` file(s).
+
+``filter``
+ A list of rules, according to which DataBase from ``DBinput`` should be filtered. It could either be ``branch``, ``VdWtype``, or ``chargeMethod`` or combination of them.
+
+``mcffInput``
+ A flag to generate input files (**ffield**, **ffiled_min**, **ffiled_max**, **ffileld_bool**) for the parameter optimization at the ``outputPath``, based on the ``inputFF``, ``DBinput`` and ``KEY``. 
+
+``randGuess``
+ A flag to generate random force field within the ranges from DataBase ``DBinput``.
+
+``bool``
+ A flag to generate **ffield_bool**, a file specifying which parameters to be optimized, based on the input ``key``. In case ``key`` is not provided - all parameters will be optimized.
+
+``getKey``
+ A flag to get value for specific ``key`` (s) from the ``inputFF`` force field file(s).
+
+``nparr``
+ Generate numpy arrays for the input ``key`` (s) for the files from the ``DBinput`` DataBase.
+
+Arguments for the ``filter`` **-ing option**:
+  * ``branch = {water, combustion, independent}``
+  * ``VdWtype = {'Inner wall, Shieldng' 'Inner wall, No shieldng', 'Inconsistent'}`` 
+  * ``chargeMethod = {EEM, ACKS2}``
+
+.. _FF-T_examples:
+
+Examples
+********
+
+1. Make a DataBase (**DB**) out of list of folders. 
+   
+   **DB** is stored as a **DataBase.yaml**, as a more understandable format (numeric parameter keys are converted into corresponding atom types, more human-readable). 
+   For instance, requesting a key ``C-H`` from DataBase is easier, doesn’t depend on the order in which parameters are present.
+   
+   Detected on the fly:
+    * name of the corresponding force field file ``name``
+    * branch ``branch = {water, combustion, independent}``
+    * charge method  ``chargeMethod = {EEM, ACKS2}``
+    * type of Van der Waals interaction  ``VdWtype = {'Inner wall, Shieldng', 'Inner wall, No shieldng', 'Inconsistent'}``  
+    * DOI of the corresponding paper ``DOI`` 
+
+``angle``
+    * Message / Error about parameter inconsistencies is printed.
+
+    Input ``cmd``
+    ::
+
+        python ../FF-Tool/src/ff_tool.py  --DBinput=$AMSHOME/atomicdata/ForceFields/ReaxFF/
+
+    Output : file **dataBase.yaml** 
+
+2. Generating MCFF input files, based on the given input file and the DataBase [list of files, to form a DataBase].
+
+   There  are several flavours for it: [min/max, quartiles, etc.]
+   MCFF input [ffield_min, ffield_max, ffield_bool], based on:
+
+   1. input force field: --inputFF, --forceField, --ff, -f
+   2. DataBase of ff: --DBinput, --inputForDB, --dB, -i
+   3. Keys to be optimised: --key, -k
+
+   There are few options for generating ffield_min, field_max, depending on which key  is specified in --ranges, '-r':
+
+   1. Min, Max: 'minmax', 'M'
+   2. Quartiles: [Q1-(Q3-Q1), Q3 + (Q3-Q1)]; 'quartiles', 'Q'
+   3. Quartiles/2: [Q1 - (Q3-Q1)/2, Q3 + (Q3 -Q1/2)] , 'quartiles/2'
+
+
+3. COMPARISON OF FF(s)
+  
+   pair by pair comparison of FFs. They are taken from list of inputFF.
+
+   —inputFF = <path to folder /file(s), to be compared > (—inputFF can be specified several times, for each new file),
+   —compare= f (specify what to compare: f - refers to file)
+
+   * For bonds, offdiagonal, angles, torsions blocks reverse keys are additionally compared. For atoms, hydrogen blocks only direct key is checked.
+   * Handling the case of several occurrences of the same key in one ff. => Sets of parameters can partly match (Ex: [[1,2,3],[5,6,7]] vs [5,6,7]) => keys are added to PART.MATCH KEYS,
+
+input example:
+python ../FF-Tool/src/taskManager.py --inputFF=/Users/anna/DataBase/ff/water/InnerWall\ +\ No\ Shielding/CHOLi.ff --inputFF=/Users/anna/DataBase/ff/water/InnerWall\ +\ No\ Shielding/CHOLi_copy.ff --compare=f
+output example [per block]:
+===ABSENT KEYS ===:
+in ff1: 'C-H-S', 'C-H-N'
+===SAME KEYS ===: 'N-H-O', 'S-H-S', 'O-H-N', 'N-H-N', 'O-H-S', 'S-H-O', 'S-H-N', 'N-H-S’
+===DIFF KEYS ===: 'O-H-O’
+===PART.MATCH KEYS===: 'C-H-N'
+
+Example: Pair by pair comparison of 3 force fields files
+ * Input ``cmd`` ::
+
+    python ../FF-Tool/src/ff_tool.py --inputFF=/ff/water/InnerWall\ +\ No\ Shielding/CuBTC.ff --inputFF=/ff/water/InnerWall\ +\ No\ Shielding/CHOLi.ff --inputFF=/ff/water/InnerWall\ +\ No\ Shielding/ZnOH.ff   --compare=f
+ 
+ * Input ``yaml`` : 
+
+
+
+
+4. FILTERS:
+    Filters could be applied to DataBase, so one would work further only with the filtered ffs/data. 
+    Filtering could be done by 'branch' 'charge method', etc. 
+    Examples:
+    * flags: --filter, --fl, -F
+    * cmd: --filter = branch;
+    * yaml: filter: [branch, chargeMethod], (argument 'branch', 'chargeMethod'' should be also specified as an input [ actions block], filter according to specified branch)
+
+5. Specific to MCFF forcefields [intermediate steps]:
+    * Optimised parameters are gathered into a Matrix.
+    * NormalizedMatrix is also computed.
+
+

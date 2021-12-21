@@ -1,0 +1,46 @@
+#! /bin/sh
+
+
+# Computation of the NMR chemical shifts for CH4, with the model potential
+# SAOP.
+
+# Important: use SAVE TAPE10. This is necessary for SAOP, since the nmr program
+# does not know about SAOP or other model potentials. On TAPE10 the SCF
+# potential is written, which is read in by the nmr program.
+
+# Note: For SAOP one needs an all-electron basis set (i.e. Core None)
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C  0                   0                   0
+     H  0.6264250420707439  0.6264250420707439  0.6264250420707439
+     H  0.6264250420707439 -0.6264250420707439 -0.6264250420707439
+     H -0.6264250420707439  0.6264250420707439 -0.6264250420707439
+     H -0.6264250420707439 -0.6264250420707439  0.6264250420707439
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    type TZ2P
+    core None
+  end
+  save TAPE10
+  xc
+    model saop
+  end
+EndEngine
+eor
+
+$AMSBIN/nmr <<eor
+  adffile ams.results/adf.rkf
+  tape10file ams.results/TAPE10
+  NMR
+    Out  TENS
+    Nuc  1  2
+  End
+eor

@@ -1,0 +1,83 @@
+#! /bin/sh
+
+
+# This calculation shows a spin-flip restart feature that allows to exchange
+# alpha and beta fit coefficients for selected atoms upon restart. First the
+# high spin configuration with 8 more alpha-electrons than beta-electrons is
+# calculated (S_z=4). Next the broken spin-symmetry configuration is calculated
+# (S_z=0), using the subkey spinflip in the restart key. In this case the spin
+# will be flipped for iron atoms 1 and 2. Note that the used symmetry C(2v) is
+# lower than the actual symmetry T(d), such that iron atoms 1 and 2 can have a
+# different spin than iron atoms 3 and 4.
+
+
+AMS_JOBNAME=HighSpin $AMSBIN/ams <<eor
+System
+  atoms
+     Fe      -0.000000000000      -1.256142548900       0.888226914500
+     Fe       0.000000000000       1.256142548900       0.888226914500
+     Fe      -1.256142548900       0.000000000000      -0.888226914500
+     Fe       1.256142548900      -0.000000000000      -0.888226914500
+     S       -1.845393493800       0.000000000000       1.304890253400
+     S        1.845393493800      -0.000000000000       1.304890253400
+     S       -0.000000000000      -1.845393493800      -1.304890253400
+     S        0.000000000000       1.845393493800      -1.304890253400
+  End
+End
+
+Task SinglePoint
+
+Engine ADF
+  Title Fe4S4 High-spin configuration
+
+  Unrestricted Yes
+  SpinPolarization 8.0
+
+  symmetry C(2v)
+
+  XC
+    GGA OPBE
+  End
+
+  ! Omit printing of SFOs, populations, etc. since they may change per computer
+  ! In real-life calculations you may want to have them
+  NoPrint SFO SCF FIT NUMINT MDC DensityAtNucleus
+EndEngine
+eor
+
+
+AMS_JOBNAME=LowSpin $AMSBIN/ams <<eor
+System
+  atoms
+     Fe      -0.000000000000      -1.256142548900       0.888226914500
+     Fe       0.000000000000       1.256142548900       0.888226914500
+     Fe      -1.256142548900       0.000000000000      -0.888226914500
+     Fe       1.256142548900      -0.000000000000      -0.888226914500
+     S       -1.845393493800       0.000000000000       1.304890253400
+     S        1.845393493800      -0.000000000000       1.304890253400
+     S       -0.000000000000      -1.845393493800      -1.304890253400
+     S        0.000000000000       1.845393493800      -1.304890253400
+  End
+End
+
+Task SinglePoint
+
+EngineRestart HighSpin.results/adf.rkf
+
+Engine ADF
+  Title Fe4S4 low-spin configuration
+
+  Restart
+    SpinFlip 1 2
+  End
+
+  Unrestricted Yes
+  SpinPolarization 0.0
+
+  symmetry C(2v)
+  
+  XC
+    GGA OPBE
+  End
+EndEngine
+eor

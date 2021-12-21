@@ -1,0 +1,1022 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python scripting for COSMO-RS with PLAMS &mdash; COSMO-RS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="COSMO-RS 2021.1 documentation" href="index.html"/>
+        <link rel="up" title="Scripting with COSMO-RS" href="Scripting_with_COSMO-RS.html"/>
+        <link rel="next" title="AMSprep: construct an ADF COSMO results file" href="AMSprep.html"/>
+        <link rel="prev" title="Scripting with COSMO-RS" href="Scripting_with_COSMO-RS.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="keywords.html">Keywords</a>
+           
+           
+           <a href="genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search COSMO-RS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-COSMO-RS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#release-2021-1">Release 2021.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#release-2020-1">Release 2020.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC.html">COSMO-RS, COSMO-SAC, UNIFAC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_theory.html">COSMO-RS theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_theory.html#cosmo-rs-combinatorial-term">COSMO-RS combinatorial term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_theory.html#fast-approximation-for-cosmo-rs-calculations">Fast approximation for COSMO-RS calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_theory.html#temperature-dependent-hydrogen-bond-interaction">Temperature dependent hydrogen bond interaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-SAC_2013-ADF.html">COSMO-SAC 2013-ADF, 2016-ADF, DHB-ADF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_theory.html">UNIFAC theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_theory.html#residual-term">Residual term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_theory.html#combinatorial-term">Combinatorial term</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Calculation_of_properties.html">Calculation of properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="COSMO_result_files.html">COSMO result files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ADF_COSMO_calculation.html">ADF COSMO calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#adf-cosmo-settings">ADF COSMO settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#atomic-cation-or-anion">Atomic cation or anion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#accuracy">Accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#cavity-construction">Cavity construction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_Databases.html">ADFCRS-2018 Database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_Databases.html#adfcrs-2010">ADFCRS-2010</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_Databases.html#adfcrs-il-2014">ADFCRS-IL-2014</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_Databases.html#adfcrs-polymers-2019-database">ADFCRS-POLYMERS-2019 Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html">Fast Sigma: a QSPR method to estimate COSMO sigma-profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#gui-input">GUI Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MOPAC_COSMO_calculation.html">MOPAC COSMO calculation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="The_COSMO-RS_program.html">The COSMO-RS program</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Running_the_COSMO-RS_program.html">Running the COSMO-RS program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html">COSMO-RS and COSMO-SAC parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-rs-general-parameters">COSMO-RS general parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-rs-element-specific-parameters">COSMO-RS element specific parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-sac-general-parameters">COSMO-SAC general parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-sac-element-specific-parameters">COSMO-SAC element specific parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#technical-and-accuracy-parameters">Technical and accuracy parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Compounds.html">Compounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Temperature.html">Temperature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pressure.html">Pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Molar_fractions_and_mass_fraction.html">Molar fractions and mass fraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html">Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#vapor-pressure">Vapor pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#boiling-point">Boiling point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#solvent-flash-point">Solvent flash point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#partition-coefficients-logp">Partition coefficients (LogP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#activity-coefficients-solvent-and-solute">Activity coefficients solvent and solute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#solubility">Solubility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#binary-mixture-vle-lle">Binary mixture (VLE/LLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#ternary-mixture-vle-lle">Ternary mixture (VLE/LLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#solvents-s1-s2-composition-line">Solvents s1 - s2 Composition Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Analysis.html">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Analysis.html#sigma-profile">Sigma profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Analysis.html#sigma-potential">Sigma potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Polymers_With_COSMO-RS.html">Polymers with COSMO-RS(-SAC)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#additional-properties-units-for-polymer-systems">Additional properties/units for polymer systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#average-molecular-weight">Average molecular weight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#mole-fractions-of-the-monomers-and-polymers">Mole fractions of the monomers and polymers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polymers_With_COSMO-RS.html#x-monomer">x(monomer)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polymers_With_COSMO-RS.html#x-polymer">x(polymer)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#weight-and-volume-fraction-activity-coefficients">Weight- and volume-fraction activity coefficients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#flory-huggins-parameter">Flory-Huggins parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#modified-combinatorial-term">Modified combinatorial term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#general-application-guidelines-warnings">General application guidelines/warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#downloading-the-adfcrs-polymer-2019-database">Downloading the ADFCRS-POLYMER-2019 database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#tutorial-on-polymer-calculations">Tutorial on polymer calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="The_UNIFAC_program.html">The UNIFAC program</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_program/Input_formatting.html">Compound Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Input_formatting.html#basic-input">Basic Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Input_formatting.html#physical-property-input">Physical Property Input</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_program/General_options.html">Program Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/General_options.html#list-of-possible-input-flags">List of possible input flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/General_options.html#examples-of-general-program-flags">Examples of general program flags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#t">-t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#temperature">-temperature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#n">-n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#preset">-preset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_program/Templates.html">Templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#activitycoef">ACTIVITYCOEF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#logp">LOGP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#puresolubility">PURESOLUBILITY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#solubility">SOLUBILITY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#purevaporpressure">PUREVAPORPRESSURE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#vaporpressure">VAPORPRESSURE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#binmixcoef">BINMIXCOEF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#ternarymix">TERNARYMIX</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Property_Prediction.html">Pure compound property prediction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#available-properties">Available properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#running-the-property-prediction-program">Running the Property Prediction program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#index-of-property-keys">Index of property keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#general-warnings">General warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#equations-for-temperature-dependent-properties">Equations for temperature-dependent properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Property_Prediction.html#vpm1-liquid-vapor-pressure"><strong>VPM1</strong>: liquid vapor pressure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Solvent_Optimization.html">Solvent Optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#problem-types">Problem types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#running-the-solvent-optimization-program">Running the Solvent Optimization program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Solvent_Optimization.html#solubility">Solubility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Solvent_Optimization.html#liquid-liquid-extraction">Liquid-liquid extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#guidelines-for-difficult-problems">Guidelines for difficult problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#differences-from-standard-implementations">Differences from standard implementations</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="Scripting_with_COSMO-RS.html">Scripting with COSMO-RS</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Python scripting for COSMO-RS with PLAMS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general-information">General Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#executing-the-code-from-the-command-line">Executing the code from the command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-a-problem-type">Specifying a problem type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputting-compounds">Inputting Compounds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-mole-fractions-temperatures-and-pressures">Specifying mole fractions, temperatures, and pressures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-jobs">Running jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-the-results-of-a-job">Reading the results of a job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plotting-results">Plotting results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#partition-coefficient">Partition coefficient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#binary-mixture">Binary mixture</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AMSprep.html">AMSprep: construct an ADF COSMO results file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CRSprep.html">CRSprep: generate (multiple) COSMO-RS jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMSreport.html">AMSreport: generate report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html">KF utilities for COSMO-RS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html#kf-browser">KF browser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html#kf2cosmo-and-cosmo2kf">kf2cosmo and cosmo2kf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html#pkf-cpkf-dmpkf-udmpkf">pkf, cpkf, dmpkf, udmpkf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Scripting_Examples.html">Scripting Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-cosmo-result-files">Example: COSMO result files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-cosmo-rs-parameters-and-analysis">Example: COSMO-RS parameters and analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-cosmo-rs-properties">Example: COSMO-RS properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-the-cosmo-rs-compound-database">Example: The COSMO-RS compound database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-pka-values">Example: pKa values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-polymers">Example: Polymers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced_scripting.html">Advanced scripting examples with PLAMS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Changing_parameters.html">Changing the default parameters or re-parameterizing the COSMO-RS/-SAC methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Changing_parameters.html#python-code-cosmo-rs-parameters">Python code (COSMO-RS parameters)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Changing_parameters.html#python-code-cosmo-sac-parameters">Python code (COSMO-SAC parameters)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Sigma_profiles.html">Calculating and estimating sigma profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Sigma_profiles.html#python-code">Python code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Sigma_moments.html">Sigma Moments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Sigma_moments.html#python-code">Python code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Sigma_moments.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Cocrystal_screening.html">Screening for cocrystals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Cocrystal_screening.html#python-code">Python code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Cocrystal_screening.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Eutectics.html">Eutectic systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Eutectics.html#python-code">Python code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Eutectics.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/BinodalSpinodal.html">Binodal and Spinodal Curves</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/BinodalSpinodal.html#python-code-binary-mixture">Python code (Binary mixture)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/BinodalSpinodal.html#python-code-ternary-mixture">Python code (Ternary mixture)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Multispecies_distribution.html">Distribution of species in multispecies calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Multispecies_distribution.html#python-code-binary-mixture">Python code (Binary mixture)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#general-references">General References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#solvent-optimizations">Solvent Optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Keywords</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">COSMO-RS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="COSMO-RS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">COSMO-RS</a>/</li>
+      
+          <li><a href="Scripting_with_COSMO-RS.html">Scripting with COSMO-RS</a>/</li>
+      
+    <li class="orange-text">Python scripting for COSMO-RS with PLAMS</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python-scripting-for-cosmo-rs-with-plams">
+<span id="metatag-plams-cosmors"></span><h1>Python scripting for COSMO-RS with PLAMS<a class="headerlink" href="#python-scripting-for-cosmo-rs-with-plams" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-information">
+<h2>General Information<a class="headerlink" href="#general-information" title="Permalink to this headline">¶</a></h2>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Windows and Mac users may find it helpful to first read the <em>Getting Started</em> guides for scripting:
+<a class="reference external" href="../Scripting/GettingStarted.html#windows">scripting with Windows</a>
+| <a class="reference external" href="../Scripting/GettingStarted.html#macos">scripting with MacOS</a></p>
+</div>
+<p>Python and the <a class="reference external" href="../plams/index.html">PLAMS library</a> can be used for scripting with COSMO-RS.  Due to the speed of COSMO-RS calculations, these jobs can be run interactively from the python interpreter.  Larger numbers of jobs or high-throughput calculations can also easily be automated with python scripting.  All results are returned as a python object, meaning the properties calculated with COSMO-RS can immediately be post-processed or used directly in other python functions.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">COSMO-RS calculations require a <code class="docutils literal notranslate"><span class="pre">.coskf</span></code> or <code class="docutils literal notranslate"><span class="pre">.compkf</span></code> file for every compound in the system.  <code class="docutils literal notranslate"><span class="pre">.coskf</span></code> and <code class="docutils literal notranslate"><span class="pre">.compkf</span></code> files only need to be calculated once and then are stored in a database and can be used for any future calculation containing the corresponding compound.  Generating these files requires calculating the COSMO surface with ADF (a relatively more expensive DFT calculation).  Setting up these calculations is not directly supported with this version of PLAMS but can be done using scripting with <a class="reference external" href="../COSMO-RS/AMSprep.html">amsprep</a>.</p>
+</div>
+</div>
+<div class="section" id="executing-the-code-from-the-command-line">
+<h2>Executing the code from the command line<a class="headerlink" href="#executing-the-code-from-the-command-line" title="Permalink to this headline">¶</a></h2>
+<p>It is recommended to use the version of python that is shipped with AMS.  This version ensures that all the necessary libraries (e.g., <a class="reference external" href="../plams/index.html">PLAMS</a>) are properly imported and are mutually compatible.  The best way to do this is to run the <code class="docutils literal notranslate"><span class="pre">amspython</span></code> program.  That can be executed from the command line as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">$AMSBIN</span>/amspython &lt;your_program.py&gt;
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">&lt;your_program.py&gt;</span></code> should of course be replaced by the name of your program.</p>
+</div>
+<div class="section" id="specifying-a-problem-type">
+<h2>Specifying a problem type<a class="headerlink" href="#specifying-a-problem-type" title="Permalink to this headline">¶</a></h2>
+<p>To run COSMO-RS, the user must first provide a problem type for the calculation.  This can be done by first creating a <code class="docutils literal notranslate"><span class="pre">Settings</span></code> object and then specifying the <code class="docutils literal notranslate"><span class="pre">.input.property._h</span></code> attribute.  For example,  to set up an activity coefficient calculation, we do the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scm.plams</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="s1">&#39;ACTIVITYCOEF&#39;</span>
+</pre></div>
+</div>
+<p>For other problem types, the <code class="docutils literal notranslate"><span class="pre">.input.property._h</span></code> attribute must be set to other values.  The other options for this value are summarized below:</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><code class="docutils literal notranslate"><span class="pre">._h</span></code> value</th>
+<th class="head">Problem type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ACTIVITYCOEF</td>
+<td>Activity Coefficient</td>
+</tr>
+<tr class="row-odd"><td>BINMIXCOEF</td>
+<td>Binary mixture LLE/VLE</td>
+</tr>
+<tr class="row-even"><td>TERNARYMIX</td>
+<td>Ternary mixture LLE/VLE</td>
+</tr>
+<tr class="row-odd"><td>COMPOSITIONLINE</td>
+<td>Solvent composition line interpolation</td>
+</tr>
+<tr class="row-even"><td>SOLUBILITY</td>
+<td>Solubility calculation in a mixed solvent</td>
+</tr>
+<tr class="row-odd"><td>PURESOLUBILITY</td>
+<td>Solubility calculation in a pure solvent</td>
+</tr>
+<tr class="row-even"><td>LOGP</td>
+<td>Partition coefficient calculation</td>
+</tr>
+<tr class="row-odd"><td>VAPORPRESSURE</td>
+<td>Vapor pressure calculation for a mixed solvent</td>
+</tr>
+<tr class="row-even"><td>PUREVAPORPRESSURE</td>
+<td>Vapor pressure calculation for a pure solvent</td>
+</tr>
+<tr class="row-odd"><td>BOILINGPOINT</td>
+<td>Boiling point calculation for a mixture</td>
+</tr>
+<tr class="row-even"><td>PUREBOILINGPOINT</td>
+<td>Boiling point calculation for a pure solvent(s)</td>
+</tr>
+<tr class="row-odd"><td>FLASHPOINT</td>
+<td>Flashpoint calculation for a mixture</td>
+</tr>
+<tr class="row-even"><td>SIGMAPROFILE</td>
+<td>Sigma profile calculation for a mixture</td>
+</tr>
+<tr class="row-odd"><td>PURESIGMAPROFILE</td>
+<td>Sigma profile calculation for a pure component(s)</td>
+</tr>
+<tr class="row-even"><td>SIGMAPOTENTIAL</td>
+<td>Sigma potential calculation for a mixture</td>
+</tr>
+<tr class="row-odd"><td>PURESIGMAPOTENTIAL</td>
+<td>Sigma potential calculation for a pure component(s)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="inputting-compounds">
+<h2>Inputting Compounds<a class="headerlink" href="#inputting-compounds" title="Permalink to this headline">¶</a></h2>
+<p>In PLAMS, each compound is also input as a <code class="docutils literal notranslate"><span class="pre">Settings</span></code> object.  Additional information about the compounds required for the calculation (e.g.,  mole fraction) can be specified as an attribute of the compound’s <code class="docutils literal notranslate"><span class="pre">Settings</span></code> object.  An example for a calculation with two compounds is given below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># set the number of compounds</span>
+<span class="n">num_compounds</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">compounds</span> <span class="o">=</span> <span class="p">[</span><span class="n">Settings</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_compounds</span><span class="p">)]</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="s2">&quot;Water.coskf&quot;</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="s2">&quot;1-Hexanol.coskf&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specifying-mole-fractions-temperatures-and-pressures">
+<h2>Specifying mole fractions, temperatures, and pressures<a class="headerlink" href="#specifying-mole-fractions-temperatures-and-pressures" title="Permalink to this headline">¶</a></h2>
+<p>Mole fractions are attributes of the compound <code class="docutils literal notranslate"><span class="pre">Settings</span></code> object.  There are two types of mole fractions used in COSMO-RS.  <code class="docutils literal notranslate"><span class="pre">frac1</span></code> is for standard specification of mole fractions in most problem types.  <code class="docutils literal notranslate"><span class="pre">frac2</span></code> is used when the problem type requires two distinct liquid phases (COMPOSITIONLINE or LOGP).  Additionally, the temperature can be specified using the <code class="docutils literal notranslate"><span class="pre">input.temperature</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">Settings</span></code> object.  An example of this is shown below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#set compound mole fractions</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">frac1</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">frac1</span> <span class="o">=</span> <span class="mf">0.7</span>
+
+<span class="c1">#set temperature (range)</span>
+<span class="c1">#to specify a range, use 3 numbers: (1) the lowest temperature,</span>
+<span class="c1">#(2) the highest temperature, and (3) the steps taken between these temperatures</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="s2">&quot;298.15&quot;</span>
+</pre></div>
+</div>
+<p>To specify a temperature range, set the <code class="docutils literal notranslate"><span class="pre">input.temperature</span></code> object equal to a python <code class="docutils literal notranslate"><span class="pre">str</span></code> which contains the lower temperature, upper temperature, and number of steps taken between the temperatures. These values should simply be separated by spaces.  For example, to specify that a calculation should go over the temperature range 298.15K to 398.15K with 10 temperature steps, do the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="s2">&quot;298.15 398.15 10&quot;</span>
+</pre></div>
+</div>
+<p>Pressure works in much the same way.  To input the system pressure (in bar), do the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">pressure</span> <span class="o">=</span> <span class="s2">&quot;1.5&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-jobs">
+<h2>Running jobs<a class="headerlink" href="#running-jobs" title="Permalink to this headline">¶</a></h2>
+<p>To run a job with COSMO-RS, first assign the <code class="docutils literal notranslate"><span class="pre">input.compound</span></code> attribute to the list of compound <code class="docutils literal notranslate"><span class="pre">Settings</span></code> objects used previously.  Then, simply create the job using <code class="docutils literal notranslate"><span class="pre">CRSJob(settings=&lt;your</span> <span class="pre">previously</span> <span class="pre">defined</span> <span class="pre">Settings</span> <span class="pre">object&gt;)</span></code>.  Once a job is created, you can run it with the <code class="docutils literal notranslate"><span class="pre">.run()</span></code> function.  An example of this is given below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># specify the compounds as the compounds to be used in the calculation</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">compound</span> <span class="o">=</span> <span class="n">compounds</span>
+<span class="c1"># create a job that can be run by COSMO-RS</span>
+<span class="n">my_job</span> <span class="o">=</span> <span class="n">CRSJob</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+<span class="c1"># run the job</span>
+<span class="n">init</span><span class="p">()</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">my_job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-the-results-of-a-job">
+<h2>Reading the results of a job<a class="headerlink" href="#reading-the-results-of-a-job" title="Permalink to this headline">¶</a></h2>
+<p>Once a job has finished running, we can access the results directly in python.  First, we can check to see which properties are available.  We can do this using the <code class="docutils literal notranslate"><span class="pre">get_prop_names()</span></code> function on the output.  For example, adding the line:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># check for the available properties</span>
+<span class="k">print</span><span class="p">(</span> <span class="s2">&quot;Available properties:&quot;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">get_prop_names</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>gives us the available properties as a python <code class="docutils literal notranslate"><span class="pre">set</span></code> for our calculation type (“ACTIVITYCOEF” in this case).  The result of the print statement is the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Available properties: <span class="o">{</span><span class="s1">&#39;henrycnodim&#39;</span>, <span class="s1">&#39;property&#39;</span>, <span class="s1">&#39;deltag&#39;</span>, <span class="s1">&#39;henryc&#39;</span>, <span class="s1">&#39;nitems&#39;</span>, <span class="s1">&#39;gamma&#39;</span>,
+<span class="s1">&#39;ncomp&#39;</span>, <span class="s1">&#39;filename&#39;</span>, <span class="s1">&#39;temperature&#39;</span>, <span class="s1">&#39;frac1&#39;</span>, <span class="s1">&#39;G solute&#39;</span>, <span class="s1">&#39;mu gas&#39;</span>, <span class="s1">&#39;molmass&#39;</span>, <span class="s1">&#39;E gas&#39;</span>,
+<span class="s1">&#39;mu&#39;</span>, <span class="s1">&#39;usepolyunits&#39;</span>, <span class="s1">&#39;mu pure&#39;</span>, <span class="s1">&#39;method&#39;</span><span class="o">}</span>
+</pre></div>
+</div>
+<p>We can also convert all of the calculation results to a python <code class="docutils literal notranslate"><span class="pre">dict</span></code> using the <code class="docutils literal notranslate"><span class="pre">get_results()</span></code> function.  For example, to collect all of the results and then print the activity coefficient values (“gamma”), we write the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert all the results into a python dict</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span> <span class="s2">&quot;Activity coef values:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;gamma&quot;</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>This results in the following program output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Activity coef values:
+ <span class="o">[[</span> <span class="m">3</span>.71486   <span class="o">]</span>
+ <span class="o">[</span> <span class="m">1</span>.04484607<span class="o">]]</span>
+</pre></div>
+</div>
+<p>Here the two activity coefficient values are returned as elements in a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.  Properties with multiple values are always stored as a numpy array.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For properties with multiple values, the dictionary values are stored as a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.  If applicable to the calculation, the rows of the array represent different compounds and the columns represent different steps of the calculation  (e.g., different temperatures/pressures or different mole fractions for a binary/ternary mixture calculation).</p>
+</div>
+<p>Putting all the previous code together, we have the following working example for calculating activity coefficients for 2 components:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scm.plams</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="c1">##################  Be sure to add the path to your own ADFCRS directory here  ##################</span>
+<span class="c1">#################################################################################################</span>
+<span class="n">database_path</span> <span class="o">=</span> <span class="s2">&quot;&lt;Path to ADFCRS directory containing .coskf files&gt;&quot;</span>
+<span class="c1">#################################################################################################</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">database_path</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The provided path does not exist. Exiting.&#39;</span><span class="p">)</span>
+
+<span class="c1"># initialize settings object</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="s1">&#39;ACTIVITYCOEF&#39;</span>
+
+<span class="c1"># set the number of compounds</span>
+<span class="n">num_compounds</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">compounds</span> <span class="o">=</span> <span class="p">[</span><span class="n">Settings</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_compounds</span><span class="p">)]</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">database_path</span><span class="p">,</span> <span class="s2">&quot;Water.coskf&quot;</span> <span class="p">)</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">database_path</span><span class="p">,</span> <span class="s2">&quot;1-Hexanol.coskf&quot;</span> <span class="p">)</span>
+
+<span class="c1">#set compound mole fractions</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">frac1</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">frac1</span> <span class="o">=</span> <span class="mf">0.7</span>
+
+<span class="c1">#set temperature (range)</span>
+<span class="c1">#to specify a range, use 3 numbers: (1) the lowest temperature,</span>
+<span class="c1">#(2) the highest temperature, and (3) the steps taken between these temperatures</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="s2">&quot;298.15&quot;</span>
+
+<span class="c1"># specify the compounds as the compounds to be used in the calculation</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">compound</span> <span class="o">=</span> <span class="n">compounds</span>
+<span class="c1"># create a job that can be run by COSMO-RS</span>
+<span class="n">my_job</span> <span class="o">=</span> <span class="n">CRSJob</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+<span class="c1"># run the job</span>
+<span class="n">init</span><span class="p">()</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">my_job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">finish</span><span class="p">()</span>
+
+<span class="c1"># check for the available properties</span>
+<span class="k">print</span><span class="p">(</span> <span class="s2">&quot;Available properties:&quot;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">get_prop_names</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="c1"># convert all the results into a python dict</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span> <span class="s2">&quot;Activity coef values:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;gamma&quot;</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plotting-results">
+<h2>Plotting results<a class="headerlink" href="#plotting-results" title="Permalink to this headline">¶</a></h2>
+<p>2D graphs can also be generated to visualize the results with the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function.   The <code class="docutils literal notranslate"><span class="pre">plot</span></code> function takes as a first argument any (or multiple) of the following:</p>
+<ul class="simple">
+<li>a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> object.  This can be passed to the function as a dictionary value after calling the <code class="docutils literal notranslate"><span class="pre">get_results()</span></code> function.</li>
+<li>the name of a property.  This property is read from the results and plotted.  For a list of available properties, use the <code class="docutils literal notranslate"><span class="pre">get_prop_names()</span></code> function.</li>
+</ul>
+<p>Additionally, the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function takes the following keyword arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">x_axis</span></code>.  This can be the name of a property or a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> object.  This represents the independent variable in the plot.  This value must be one dimensional, meaning it cannot be indexed over both compounds and temperatures.</li>
+<li><code class="docutils literal notranslate"><span class="pre">x_label</span></code>.  This can be used to label the x axis in the plot.</li>
+<li><code class="docutils literal notranslate"><span class="pre">y_label</span></code>.  This can be used to label the y axis in the plot.</li>
+<li><code class="docutils literal notranslate"><span class="pre">plot_fig</span></code>.  This is set to True/False to indicate whether a plotted figure should be displayed.  The default is True.</li>
+</ul>
+<p>The results of <code class="docutils literal notranslate"><span class="pre">plot</span></code> are returned as a <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> object and can be further modified.</p>
+<p>To demonstrate the use of plot, we do an example in which we calculate the solubility of methane gas in 1-Octanol and Ethanol across the temperature range from 298.15K to 398.15K.  We also include the vapor pressure of methane using the VPM1 model.  The code is shown below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scm.plams</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="c1">##################  Be sure to add the path to your own ADFCRS directory here  ##################</span>
+<span class="c1">#################################################################################################</span>
+<span class="n">database_path</span> <span class="o">=</span> <span class="s2">&quot;&lt;Path to ADFCRS directory containing .coskf files&gt;&quot;</span>
+<span class="c1">#################################################################################################</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">database_path</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The provided path does not exist. Exiting.&#39;</span><span class="p">)</span>
+
+<span class="c1"># initialize settings object</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="s1">&#39;PURESOLUBILITY&#39;</span>
+
+<span class="c1"># this indicates we&#39;re calculating gas solubility</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">isobar</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<span class="c1"># set the number of compounds</span>
+<span class="n">num_compounds</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">compounds</span> <span class="o">=</span> <span class="p">[</span><span class="n">Settings</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_compounds</span><span class="p">)]</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">database_path</span><span class="p">,</span> <span class="s2">&quot;Methane.coskf&quot;</span> <span class="p">)</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">database_path</span><span class="p">,</span> <span class="s2">&quot;1-Octanol.coskf&quot;</span> <span class="p">)</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">database_path</span><span class="p">,</span> <span class="s2">&quot;Ethanol.coskf&quot;</span> <span class="p">)</span>
+
+<span class="c1">#set compound mole fractions</span>
+<span class="c1">#for pure solubility the solvent gets a mole fraction of 1</span>
+<span class="c1">#and the solute does not have the frac1 attribute</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">frac1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">frac1</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># specify the vapor pressure equation for methane</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">vp_equation</span> <span class="o">=</span> <span class="s2">&quot;VPM1&quot;</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">vp_params</span> <span class="o">=</span> <span class="s2">&quot;-1039.67755001 -0.183945615995 0.00061368649128 10.1113503603315 0.0&quot;</span>
+
+<span class="c1">#set temperature (range)</span>
+<span class="c1">#to specify a range, use 3 numbers: (1) the lowest temperature,</span>
+<span class="c1">#(2) the highest temperature, and (3) the steps taken between these temperatures</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="s2">&quot;298.15 398.15 10&quot;</span>
+
+<span class="c1">#1 atm = 1.01325 bar</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">pressure</span> <span class="o">=</span> <span class="s2">&quot;1.01325&quot;</span>
+
+<span class="c1"># specify the compounds as the compounds to be used in the calculation</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">compound</span> <span class="o">=</span> <span class="n">compounds</span>
+<span class="c1"># create a job that can be run by COSMO-RS</span>
+<span class="n">my_job</span> <span class="o">=</span> <span class="n">CRSJob</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+<span class="c1"># run the job</span>
+<span class="n">init</span><span class="p">()</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">my_job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">finish</span><span class="p">()</span>
+
+<span class="c1"># convert all the results into a python dict</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+
+<span class="c1">#plot the solubilities in g/L solution</span>
+<span class="c1">#the [1:] indicates that we&#39;re not plotting the values for methane (these are automatically set to 0)</span>
+<span class="n">out</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;solubility g_per_L_solution&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:],</span> <span class="n">x_axis</span> <span class="o">=</span> <span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">y_label</span> <span class="o">=</span> <span class="s2">&quot;solubility g/L solution&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code generates the following plot:</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="_images/CRS_PLAMS_plot_1.png"><img alt="_images/CRS_PLAMS_plot_1.png" src="_images/CRS_PLAMS_plot_1.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">The output of the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function for a gas solubility calculation.</span></p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="partition-coefficient">
+<h3>Partition coefficient<a class="headerlink" href="#partition-coefficient" title="Permalink to this headline">¶</a></h3>
+<p>In this example, we calculate the logP of Ibuprofen.  We use the standard octanol/water system.  The code is as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scm.plams</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="c1">##################  Be sure to add the path to your own ADFCRS directory here  ##################</span>
+<span class="c1">#################################################################################################</span>
+<span class="n">database_path</span> <span class="o">=</span> <span class="s2">&quot;&lt;Path to ADFCRS directory containing .coskf files&gt;&quot;</span>
+<span class="c1">#################################################################################################</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">database_path</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The provided path does not exist. Exiting.&#39;</span><span class="p">)</span>
+
+<span class="c1"># initialize settings object</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="s1">&#39;LOGP&#39;</span>
+
+<span class="c1"># set the number of compounds</span>
+<span class="n">num_compounds</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">compounds</span> <span class="o">=</span> <span class="p">[</span><span class="n">Settings</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_compounds</span><span class="p">)]</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">database_path</span><span class="p">,</span> <span class="s2">&quot;1-Octanol.coskf&quot;</span> <span class="p">)</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">database_path</span><span class="p">,</span> <span class="s2">&quot;Water.coskf&quot;</span> <span class="p">)</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">database_path</span><span class="p">,</span> <span class="s2">&quot;Ibuprofen.coskf&quot;</span> <span class="p">)</span>
+
+<span class="c1">#phase1 (octanol phase)</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">frac1</span> <span class="o">=</span> <span class="mf">0.725</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">frac1</span> <span class="o">=</span> <span class="mf">0.275</span>
+
+<span class="c1">#phase2 (water phase)</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">frac2</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">frac2</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">#set temperature (range)</span>
+<span class="c1">#to specify a range, use 3 numbers: (1) the lowest temperature,</span>
+<span class="c1">#(2) the highest temperature, and (3) the steps taken between these temperatures</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="s2">&quot;298.15&quot;</span>
+
+<span class="c1"># specify the compounds as the compounds to be used in the calculation</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">compound</span> <span class="o">=</span> <span class="n">compounds</span>
+<span class="c1"># create a job that can be run by COSMO-RS</span>
+<span class="n">my_job</span> <span class="o">=</span> <span class="n">CRSJob</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+<span class="c1"># run the job</span>
+<span class="n">init</span><span class="p">()</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">my_job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">finish</span><span class="p">()</span>
+
+<span class="c1"># convert all the results into a python dict</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+
+<span class="c1"># print the logP of Ibuprofen</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">&quot;logP of Ibuprofen:&quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;logp&quot;</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This generates the following output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>logP of Ibuprofen: <span class="o">[</span> <span class="m">4</span>.67381309<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="binary-mixture">
+<h3>Binary mixture<a class="headerlink" href="#binary-mixture" title="Permalink to this headline">¶</a></h3>
+<p>In this example, we calculate a binary mixture of water and 2-Hexanone and plot the vapor pressures as a function of composition.  We also show how to change the method and calculate the binary mixture with the COSMO-SAC2013-Xiong model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scm.plams</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="c1">##################  Be sure to add the path to your own ADFCRS directory here  ##################</span>
+<span class="c1">#################################################################################################</span>
+<span class="n">database_path</span> <span class="o">=</span> <span class="s2">&quot;&lt;Path to ADFCRS directory containing .coskf files&gt;&quot;</span>
+<span class="c1">#################################################################################################</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">database_path</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The provided path does not exist. Exiting.&#39;</span><span class="p">)</span>
+
+<span class="c1"># initialize settings object</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="s1">&#39;BINMIXCOEF&#39;</span>
+
+<span class="c1"># let&#39;s also change to the COSMOSAC2013 method</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;COSMOSAC2013&#39;</span>
+
+<span class="c1"># set the number of compounds</span>
+<span class="n">num_compounds</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">compounds</span> <span class="o">=</span> <span class="p">[</span><span class="n">Settings</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_compounds</span><span class="p">)]</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">database_path</span><span class="p">,</span> <span class="s2">&quot;Water.coskf&quot;</span> <span class="p">)</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">database_path</span><span class="p">,</span> <span class="s2">&quot;2-Hexanone.coskf&quot;</span> <span class="p">)</span>
+
+<span class="c1"># use the vapor pressures from the VPM1 model</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">vp_equation</span> <span class="o">=</span> <span class="s2">&quot;VPM1&quot;</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">vp_params</span> <span class="o">=</span> <span class="s2">&quot;-6093.40215895 -3.09584608667 0.000498622924643 34.47450247140318 0.0&quot;</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">vp_equation</span> <span class="o">=</span> <span class="s2">&quot;VPM1&quot;</span>
+<span class="n">compounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">vp_params</span> <span class="o">=</span> <span class="s2">&quot;-6474.348470271438 -6.057589837807771 0.003390587477679571 51.07134238467479 0.0&quot;</span>
+
+<span class="c1">#set temperature (range)</span>
+<span class="c1">#to specify a range, use 3 numbers: (1) the lowest temperature,</span>
+<span class="c1">#(2) the highest temperature, and (3) the steps taken between these temperatures</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="s2">&quot;298.15&quot;</span>
+
+<span class="c1"># specify the compounds as the compounds to be used in the calculation</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">compound</span> <span class="o">=</span> <span class="n">compounds</span>
+<span class="c1"># create a job that can be run by COSMO-RS</span>
+<span class="n">my_job</span> <span class="o">=</span> <span class="n">CRSJob</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+<span class="c1"># run the job</span>
+<span class="n">init</span><span class="p">()</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">my_job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">finish</span><span class="p">()</span>
+
+<span class="c1"># convert all the results into a python dict</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+
+<span class="c1">#plot all the pressures as a function of mole fraction of water</span>
+<span class="n">out</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="s2">&quot;vapor pressure&quot;</span><span class="p">,</span> <span class="s2">&quot;pressure&quot;</span><span class="p">,</span> <span class="n">x_axis</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;molar fraction&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">&quot;mole fraction water&quot;</span><span class="p">,</span> <span class="n">y_label</span> <span class="o">=</span> <span class="s2">&quot;Pressure (bar)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The code generates the following plot:</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="_images/CRS_PLAMS_plot_2.png"><img alt="_images/CRS_PLAMS_plot_2.png" src="_images/CRS_PLAMS_plot_2.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">A plot showing the total and partial vapor pressures for the water/2-Hexanone system.</span></p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="AMSprep.html" class="btn btn-neutral float-right" title="AMSprep: construct an ADF COSMO results file" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Scripting_with_COSMO-RS.html" class="btn btn-neutral" title="Scripting with COSMO-RS" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

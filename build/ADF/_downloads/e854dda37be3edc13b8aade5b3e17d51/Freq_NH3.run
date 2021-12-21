@@ -1,0 +1,162 @@
+#! /bin/sh
+
+# Summary:
+# - Frequencies with symmetric displacements
+# - Frequencies with Cartesian displacements
+# - Isotope effects in the frequencies
+
+# == Frequencies with symmetric displacements ==
+
+# Computation of frequencies by symmetric displacements. The assumed equilibrium
+# input structure should be given in Cartesian coordinates.
+
+# The symmetry is determined automatically by the program as C(3v), from the
+# input coordinates. During the calculation first symmetric atomic displacements
+# are constructed. The number of such displacements in each irreducible
+# representation corresponds to the number of frequencies with the corresponding
+# symmetry. All displaced geometries within one representation have the same
+# symmetry, which enables us to use it to speed up the computation
+# significantly. 
+
+AMS_JOBNAME=NH3_symm $AMSBIN/ams <<eor
+System
+  atoms
+     N  0.0000    0.0000    0.0000
+     H  0.4729    0.8190    0.3821
+     H -0.9457    0.0000    0.3821
+     H  0.4729   -0.8190    0.3821
+  end
+  Symmetrize Yes
+end
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+End
+
+NormalModes
+  Displacements Symmetric
+End
+
+Thermo
+  Temperatures 300:400:10
+End
+
+Engine ADF
+  title NH3 frequencies in symmetric displacements
+  BeckeGrid 
+    quality good
+  End
+  Basis 
+    type TZP 
+    core Small
+  End
+EndEngine
+eor
+
+
+# == Frequencies with Cartesian displacements ==
+
+# Computation of frequencies by Cartesian displacements. The assumed equilibrium
+# input structure is given in internal coordinates. 
+
+AMS_JOBNAME=NH3_cartesian $AMSBIN/ams <<eor
+System
+  atoms
+     N  0.0000    0.0000    0.0000
+     H  0.4729    0.8190    0.3821
+     H -0.9457    0.0000    0.3821
+     H  0.4729   -0.8190    0.3821
+  end
+  Symmetrize Yes
+end
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+End
+
+NormalModes
+  Hessian Numerical
+  Displacements Cartesian
+End
+
+Thermo
+  Temperatures 300:400:10
+End
+
+Engine ADF
+  title NH3 frequencies
+  BeckeGrid 
+    quality good
+  End
+  Basis 
+    type TZP 
+    core Small
+  End
+EndEngine
+eor
+
+
+# The symmetry is determined automatically by the program as C(3v), from the
+# input coordinates. In a Frequencies calculation the symmetry (specified on
+# input or computed internally) is used for analysis and in some cases to speed
+# up the calculation.
+
+# The equilibrium coordinate values are supplied as identifiers that are
+# associated with values in the define block.
+
+# The key thermo addresses the thermodynamical analysis (only available in a
+# Frequencies calculation, otherwise ignored). The specification Temperatures 300:400:10
+# means that the thermodynamic properties are printed for the temperature range
+# 300-400K using 10 equidistant steps and for a pressure of 1.0 atmosphere
+# (default).
+
+# Frequencies calculations suffer easily from numerical inaccuracies. Therefore,
+# the default numerical integration precision in a Frequencies calculation is
+# higher than in an ordinary single-point or minimization run.
+
+
+# == Isotope effects in the frequencies ==
+
+# Calculate a different isotope of H, in this case deuterium.
+
+AMS_JOBNAME=Isotope $AMSBIN/ams <<eor
+System
+  atoms
+     N   0.0000    0.0000    0.0000
+     H   0.4729    0.8190    0.3821 mass=2.014
+     H  -0.9457    0.0000    0.3821 mass=2.014
+     H   0.4729   -0.8190    0.3821 mass=2.014
+  end
+  Symmetrize Yes
+end
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+End
+
+NormalModes
+  Hessian Numerical
+  Displacements Cartesian
+End
+
+Thermo
+  Temperatures 300:400:10
+End
+
+Engine ADF
+  title NH3 frequencies
+  BeckeGrid 
+    quality good
+  End
+  Basis 
+    type TZP 
+    core Small
+  End
+EndEngine
+eor

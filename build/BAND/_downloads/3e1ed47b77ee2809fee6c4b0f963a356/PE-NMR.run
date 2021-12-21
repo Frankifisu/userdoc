@@ -1,0 +1,59 @@
+#! /bin/sh
+
+# With the NMR key block you can specify for which atom you want the shielding
+# tensor.
+
+# Be aware that the NMR option is not implemented for the frozen core
+# approximation, hence one must set option core of the Basis key block
+# to NONE.
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   Atoms 
+      C      -0.638348981     0.000000000     0.424302756
+      C       0.638348981     0.000000000    -0.424302756
+      H      -0.638348981     0.889974570     1.053624029
+      H      -0.638348981    -0.889974570     1.053624029
+      H       0.638348981     0.889974570    -1.053624029
+      H       0.638348981    -0.889974570    -1.053624029
+   End
+
+   Lattice 
+      2.553395923     0.000000000     0.000000000
+   end 
+End
+
+Engine Band 
+   NMR
+      Enabled True
+      nmratom 1
+      ms0 1.
+   end
+
+   XC
+      GGA Always Becke Perdew
+   end
+
+   Dependency
+      Basis 1e-10
+   End
+
+   Kspace 
+      Symmetric KInteg=3
+   End 
+   Integration
+      Accint 5
+   End
+
+   Relativity Level=None
+
+   Basis
+      Type TZ2P
+      Core NONE
+   End
+EndEngine 
+
+eor

@@ -1,0 +1,1121 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ADF (pre-2020 version) &mdash; PLAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PLAMS 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Amsterdam Modeling Suite" href="amssuite.html"/>
+        <link rel="next" title="ReaxFF (pre-2019 version)" href="reaxff.html"/>
+        <link rel="prev" title="COSMO-RS" href="crs.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/plams_logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search PLAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-scripting" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-plams">What is PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-can-be-done-with-plams">What can be done with PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#simple-example">Simple example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-plams-is-not">What PLAMS is <em>not</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#library-contents">Library contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#installing-plams">Installing PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#updating-plams">Updating PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#running-plams">Running PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#defaults-file">Defaults file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#the-launch-script">The launch script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#working-folder-location">Working folder location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#passing-variables">Passing variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#importing-past-jobs">Importing past jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#restarting-failed-script">Restarting failed script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#multiple-input-scripts">Multiple input scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../components/components.html">Components overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../components/settings.html">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#tree-like-structure">Tree-like structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#dot-notation">Dot notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#case-sensitivity">Case sensitivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#global-settings">Global settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/jobs.html">Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#preparing-a-job">Preparing a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#contents-of-job-settings">Contents of job settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#default-settings">Default settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#running-a-job">Running a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#name-conflicts">Name conflicts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#prerun-and-postrun-methods">Prerun and postrun methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#preview-mode">Preview mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#job-api">Job API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#single-jobs">Single jobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#subclassing-singlejob">Subclassing SingleJob</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#multijobs">Multijobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#using-multijob">Using MultiJob</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/results.html">Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#files-in-the-job-folder">Files in the job folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#synchronization-of-parallel-job-executions">Synchronization of parallel job executions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/results.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#cleaning-job-folder">Cleaning job folder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/results.html#cleaning-for-multijobs">Cleaning for multijobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/runners.html">Job runners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/runners.html#local-job-runner">Local job runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/runners.html#remote-job-runner">Remote job runner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/jobmanager.html">Job manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#rerun-prevention">Rerun prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#pickling">Pickling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#restarting-scripts">Restarting scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/functions.html">Public functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/functions.html#logging">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/functions.html#binding-decorators">Binding decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/molecule.html">Molecule</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_api.html">Molecule</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/mol_api.html#atom-labeling">Atom labeling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/atombond.html">Atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/atombond.html#bond">Bond</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_rdkit.html">RDKit interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_ase.html">ASE interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/utils.html">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#periodic-table">Periodic Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#geometry-tools">Geometry tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#file-format-conversion-tools">File format conversion tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/trajectories.html">Trajectories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/xyz.html">XYZ trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/xyz.html#xyz-history-files">XYZ history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/rkf.html">RKF trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/rkf.html#rkf-history-files">RKF history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/dcd.html">DCD trajectory files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="interfaces.html">Interfaces</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="amssuite.html">Amsterdam Modeling Suite</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ams.html">AMS driver and engines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#molecule-handling">Molecule handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#amsjob-api">AMSJob API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ams.html#amsresults-api">AMSResults API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="amsworker.html">AMS worker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="amsworker.html#amsworker-api">AMSWorker API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="amsworker.html#amsworkerresults-api">AMSWorkerResults API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="amsworker.html#amsworkerpool-api">AMSWorkerPool API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="postadf.html">Analysis tools: Densf, FCF, analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kffiles.html">KF files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crs.html">COSMO-RS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#settings-with-multiple-compound">Settings with multiple compound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#adf-and-crsjob">ADF and CRSJob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#cosmo-rs-parameters">COSMO-RS Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#data-analyses-and-plotting">Data analyses and plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crs.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ADF (pre-2020 version)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reaxff.html">ReaxFF (pre-2019 version)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="thirdparty.html">Other programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cp2k.html">CP2K</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#molecule-loading">Molecule loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cp2k.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="crystal.html">Crystal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crystal.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dftbplus.html">DFTB+</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dftbplus.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dirac.html">Dirac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dirac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mopac.html">MOPAC (standalone program)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mopac.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mopac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="orca.html">ORCA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="orca.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="raspa.html">RASPA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="raspa.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#id1">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/He2DissociationCurve.html">Helium dimer dissociation curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/WaterOptimization.html">Geometry optimization of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ManyJobsInParallel.html">Many jobs in parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/BasisSetBenchmark.html">Benchmark accuracy of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ExcitationsWorkflow.html">Workflow: filtering molecules based on excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ChargeTransferIntegralsADF.html">Charge transfer integrals with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/gammascan.html">Tuning the range separation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#pre-made-recipes">Pre-made recipes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ams_crs.html">ADF and COSMO-RS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adffragment.html">ADF fragment job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ReorganizationEnergy.html">Reorganization Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adfnbo.html">NBO with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numgrad.html">Numerical gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numhess.html">Numerical Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/molecule_gun.html">ReaxFF molecule gun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/global_minimum.html">Global Minimum Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vibrationASE.html">Vibrational analysis with ASE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook/cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#settings-and-input">Settings and input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#create-an-input-block-with-an-header">Create an input block with an header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#create-an-empty-input-block">Create an empty input block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-text-input-into-an-ams-job">Convert an AMS text input into an AMS job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-text-input-into-settings-object">Convert an AMS text input into settings object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-run-file-into-an-amsjob">Convert an AMS .run file into an AMSJob</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#molecules">Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#generate-a-molecule-from-a-smiles-string">Generate a molecule from a SMILES string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#counting-rings">Counting rings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#extracting-results">Extracting Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#directly-from-functions">Directly from Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#examples-total-energy-and-final-structure">Examples: Total Energy and Final Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#amsresults-api-functions">AMSResults API Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#from-the-rkf-interface">From the RKF Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#finding-section-variable-pairs">Finding Section/Variable Pairs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#from-python-directories">From Python Directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#kfbrowser">KFBrowser</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#from-md-trajectories">From MD trajectories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#general-md-properties">General MD properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#molecules-from-trajectories">Molecules from trajectories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#accessing-old-jobs">Accessing Old Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#binding-native-plams-jobs">Binding Native PLAMS Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#binding-old-rkf-files">Binding old RKF Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citations.html">Citations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PLAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../PLAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">PLAMS</a>/</li>
+      
+          <li><a href="interfaces.html">Interfaces</a>/</li>
+      
+          <li><a href="amssuite.html">Amsterdam Modeling Suite</a>/</li>
+      
+    <li class="orange-text">ADF (pre-2020 version)</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="adf-pre-2020-version">
+<h1>ADF (pre-2020 version)<a class="headerlink" href="#adf-pre-2020-version" title="Permalink to this headline">¶</a></h1>
+<div class="admonition danger">
+<p class="first admonition-title">Warning</p>
+<p class="last">This page describes the old interface to the standalone ADF binary.
+Starting from AMS2020, ADF is an AMS engine and should be run using <a class="reference internal" href="ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a>.
+If you are running AMS2019.3 or older version, you should still use <code class="xref py py-class docutils literal notranslate"><span class="pre">ADFJob</span></code></p>
+</div>
+<p>ADF can be run from PLAMS using the <code class="xref py py-class docutils literal notranslate"><span class="pre">ADFJob</span></code> class and the corresponding <a class="reference internal" href="#scm.plams.interfaces.adfsuite.adf.ADFResults" title="scm.plams.interfaces.adfsuite.adf.ADFResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">ADFResults</span></code></a>.
+The are subclasses of, respectively, <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob" title="scm.plams.interfaces.adfsuite.scmjob.SCMJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMJob</span></code></a> and <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults" title="scm.plams.interfaces.adfsuite.scmjob.SCMResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMResults</span></code></a>, which gather common pre-AMS logic for all members of the former ADFSuite.</p>
+<div class="section" id="preparing-input">
+<h2>Preparing input<a class="headerlink" href="#preparing-input" title="Permalink to this headline">¶</a></h2>
+<p>Input files for ADF consist of blocks and subblocks containg keys and values.
+That kind of structure can be easily reflected by <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> objects since they are built in a similar way.</p>
+<p>The input file is generated based on <code class="docutils literal notranslate"><span class="pre">input</span></code> branch of job’s <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a>.
+All data present there is translated to input contents.
+Nested <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instances define blocks and subblocks, as in the example below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myjob</span> <span class="o">=</span> <span class="n">ADFJob</span><span class="p">(</span><span class="n">molecule</span><span class="o">=</span><span class="n">Molecule</span><span class="p">(</span><span class="s1">&#39;water.xyz&#39;</span><span class="p">))</span>
+<span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;DZP&#39;</span>
+<span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">core</span> <span class="o">=</span> <span class="s1">&#39;None&#39;</span>
+<span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">createoutput</span> <span class="o">=</span> <span class="s1">&#39;None&#39;</span>
+<span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">scf</span><span class="o">.</span><span class="n">iterations</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">scf</span><span class="o">.</span><span class="n">converge</span> <span class="o">=</span> <span class="s1">&#39;1.0e-06 1.0e-06&#39;</span>
+<span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">save</span> <span class="o">=</span> <span class="s1">&#39;TAPE13&#39;</span>
+</pre></div>
+</div>
+<p>Input file created during execution of <code class="docutils literal notranslate"><span class="pre">myjob</span></code> looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">atoms</span>
+    <span class="c1">#coordinates from water.xyz</span>
+<span class="n">end</span>
+
+<span class="n">basis</span>
+  <span class="n">createoutput</span> <span class="kc">None</span>
+  <span class="n">core</span> <span class="kc">None</span>
+  <span class="nb">type</span> <span class="n">DZP</span>
+<span class="n">end</span>
+
+<span class="n">save</span> <span class="n">TAPE13</span>
+
+<span class="n">scf</span>
+  <span class="n">converge</span> <span class="mf">1.0e-06</span> <span class="mf">1.0e-06</span>
+  <span class="n">iterations</span> <span class="mi">100</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<p>As you can see, entries present in <code class="docutils literal notranslate"><span class="pre">myjob.settings.input.</span></code> are listed in the alphabetical order.
+If an entry is a regular key-value pair it is printed in one line (like <code class="docutils literal notranslate"><span class="pre">save</span> <span class="pre">TAPE13</span></code> above).
+If an entry is a nested <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance it is printed as a block and entries in this instance correspond to contents of a the block.
+Both keys and values are kept in their original case.
+Strings put as values can contain spaces like <code class="docutils literal notranslate"><span class="pre">converge</span></code> above – the whole string is printed after the key.
+That allows to handle lines that need to contain more than one key=value pair.
+If you need to put a key without any value, <code class="docutils literal notranslate"><span class="pre">True</span></code> or empty string can be given as a value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">SP</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">writefock</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="go"># translates to:</span>
+<span class="go">geometry</span>
+<span class="go">  SP</span>
+<span class="go">end</span>
+
+<span class="go">writefock</span>
+</pre></div>
+</div>
+<p>If a value of a particualr key is <code class="docutils literal notranslate"><span class="pre">False</span></code>, that key is omitted.
+To produce an empty block simply type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">geometry</span>  <span class="c1"># this is equivalent to myjob.settings.input.geometry = Settings()</span>
+<span class="go">#</span>
+<span class="go">geometry</span>
+<span class="go">end</span>
+</pre></div>
+</div>
+<p>The algorithm translating <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> contents into input file does not check the correctness of the data - it simply takes keys and values from <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance and puts them in the text file.
+Due to that you are not going to be warned if you make a typo, use wrong keyword or improper syntax.
+Beware of that.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">dog</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">apple</span> <span class="o">=</span> <span class="s1">&#39;pear&#39;</span>
+<span class="go">#</span>
+<span class="go">dog</span>
+<span class="go">  cat</span>
+<span class="go">    apple pear</span>
+<span class="go">  subend</span>
+<span class="go">end</span>
+</pre></div>
+</div>
+<p>Some blocks require (or allow) some data to be put in the header line, next to the block name.
+Special key <code class="docutils literal notranslate"><span class="pre">_h</span></code> is helpful in these situations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">someblock</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="s1">&#39;header=very important&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">someblock</span><span class="o">.</span><span class="n">key1</span> <span class="o">=</span> <span class="s1">&#39;value1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">someblock</span><span class="o">.</span><span class="n">key2</span> <span class="o">=</span> <span class="s1">&#39;value2&#39;</span>
+<span class="go">#</span>
+<span class="go">someblock header=very important</span>
+<span class="go">  key1 value1</span>
+<span class="go">  key2 value2</span>
+<span class="go">end</span>
+</pre></div>
+</div>
+<p>The order of blocks within input file and subblocks within a parent block follows <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> iteration order which is lexicographical (however, <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob" title="scm.plams.interfaces.adfsuite.scmjob.SCMJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMJob</span></code></a> is smart enough to put blocks like DEFINE or UNITS at the top of the input).
+In rare cases you would want to override this order, for example when you supply ATOMS block manually, which can be done when automatic molecule handling is disabled (see below).
+That behavior can be achieved by another type of special key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">_1</span> <span class="o">=</span> <span class="s1">&#39;entire line that has to be the first line of block&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">_2</span> <span class="o">=</span> <span class="s1">&#39;second line&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">_4</span> <span class="o">=</span> <span class="s1">&#39;I will not be printed&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">key1</span> <span class="o">=</span> <span class="s1">&#39;value1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">key2</span> <span class="o">=</span> <span class="s1">&#39;value2&#39;</span>
+<span class="go">#</span>
+<span class="go">block</span>
+<span class="go">  entire line that has to be the first line of block</span>
+<span class="go">  second line</span>
+<span class="go">  key1 value1</span>
+<span class="go">  key2 value2</span>
+<span class="go">end</span>
+</pre></div>
+</div>
+<p>Sometimes one needs to put more instances of the same key within one block, like for example in CONSTRAINTS block in ADF.
+It can be done by using list of values instead of a single value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">constraints</span><span class="o">.</span><span class="n">atom</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">constraints</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ligand&#39;</span><span class="p">,</span> <span class="s1">&#39;residue&#39;</span><span class="p">]</span>
+<span class="go">#</span>
+<span class="go">constraints</span>
+<span class="go">  atom 1</span>
+<span class="go">  atom 5</span>
+<span class="go">  atom 4</span>
+<span class="go">  block ligand</span>
+<span class="go">  block residue</span>
+<span class="go">end</span>
+</pre></div>
+</div>
+<p>Finally, in some rare cases key and value pair in the input needs to be printed in a form <code class="docutils literal notranslate"><span class="pre">key=value</span></code> instead of <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">value</span></code>.
+When value is a string starting with the equal sign, no space is inserted between key and value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;=value&#39;</span>
+<span class="go">#</span>
+<span class="go">block</span>
+<span class="go">  key=value</span>
+<span class="go">end</span>
+</pre></div>
+</div>
+<p>Sometimes a value of a key in the input file needs to be a path to some file, usually KF file with results of some previous calculation.
+Of course such a path can be given explicitly <code class="docutils literal notranslate"><span class="pre">newjob.restart</span> <span class="pre">=</span> <span class="pre">'/home/user/science/plams.12345/oldjob/oldjob.t21'</span></code>, but for user’s convenience instances of <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob" title="scm.plams.interfaces.adfsuite.scmjob.SCMJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMJob</span></code></a> or <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults" title="scm.plams.interfaces.adfsuite.scmjob.SCMResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMResults</span></code></a> (or directly <a class="reference internal" href="kffiles.html#scm.plams.tools.kftools.KFFile" title="scm.plams.tools.kftools.KFFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFFile</span></code></a>) can be also used.
+Algorithm will detect it and use an absolute path to the main KF file instead:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">restart</span> <span class="o">=</span> <span class="n">oldjob</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">fragment</span><span class="o">.</span><span class="n">frag1</span> <span class="o">=</span> <span class="n">fragjob</span>
+<span class="go">#</span>
+<span class="go">restart /home/user/science/plams.12345/oldjob/oldjob.t21</span>
+<span class="go">fragment</span>
+<span class="go">  frag1 /home/user/science/fragmentresults/somejob/somejob.t21</span>
+<span class="go">end</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance stored in job’s <code class="docutils literal notranslate"><span class="pre">molecule</span></code> attribute is automatically processed during the input file preparation and printed in the proper format, depending on the program.
+It is possible to disable that and give molecular coordinates explicitly as entries in <code class="docutils literal notranslate"><span class="pre">myjob.settings.input.</span></code>.
+Automatic molecule processing can be turned off by <code class="docutils literal notranslate"><span class="pre">myjob.settings.ignore_molecule</span> <span class="pre">=</span> <span class="pre">True</span></code>.</p>
+<div class="section" id="special-atoms-in-adf">
+<h3>Special atoms in ADF<a class="headerlink" href="#special-atoms-in-adf" title="Permalink to this headline">¶</a></h3>
+<p>In ADF atomic coordinates in <code class="docutils literal notranslate"><span class="pre">atoms</span></code> block can be enriched with some additional information like special names of atoms (for example in case of using different isotopes) or block/fragment membership.
+Since usually contents of <code class="docutils literal notranslate"><span class="pre">atoms</span></code> block are generated automatically based on the <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> associated with a job, this information needs to be supplied inside the given <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance.
+Details about every atom can be adjusted separately, by modifying attributes of a particular <a class="reference internal" href="../components/atombond.html#scm.plams.mol.atom.Atom" title="scm.plams.mol.atom.Atom"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a> instance according to the following convention:</p>
+<ul class="simple">
+<li>Atomic symbol is generated based on atomic number stored in <code class="docutils literal notranslate"><span class="pre">atnum</span></code> attribute of a corresponding <a class="reference internal" href="../components/atombond.html#scm.plams.mol.atom.Atom" title="scm.plams.mol.atom.Atom"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a>.
+Atomic number 0 corresponds to the “dummy atom” for which the symbol is empty.</li>
+<li>If <code class="docutils literal notranslate"><span class="pre">atom.properties.ghost</span></code> exists and is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the above atomic symbol is prefixed with <code class="docutils literal notranslate"><span class="pre">Gh.</span></code>.</li>
+<li>If <code class="docutils literal notranslate"><span class="pre">atom.properties.name</span></code> exists, its contents are added after the symbol.
+Hence setting <code class="docutils literal notranslate"><span class="pre">atnum</span></code> to 0 and adjusting <code class="docutils literal notranslate"><span class="pre">name</span></code> allows to put an arbitrary string as the atomic symbol.</li>
+<li>If <code class="docutils literal notranslate"><span class="pre">atom.properties.adf.fragment</span></code> exists, its contents are added after atomic coordinates with <code class="docutils literal notranslate"><span class="pre">f=</span></code> prefix.</li>
+<li>If <code class="docutils literal notranslate"><span class="pre">atom.properties.adf.block</span></code> exists, its contents are added after atomic coordinates with <code class="docutils literal notranslate"><span class="pre">b=</span></code> prefix.</li>
+</ul>
+<p>The following example illustrates the usage of this mechanism:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="s1">&#39;xyz/Ethanol.xyz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ghost</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;D&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ghost</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;T&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">atnum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;J.XYZ&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">atnum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;J.ASD&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ghost</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">adf</span><span class="o">.</span><span class="n">fragment</span> <span class="o">=</span> <span class="s1">&#39;myfragment&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">adf</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="s1">&#39;block1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">adf</span><span class="o">.</span><span class="n">fragment</span> <span class="o">=</span> <span class="s1">&#39;frag&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">adf</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="s1">&#39;block2&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myjob</span> <span class="o">=</span> <span class="n">ADFJob</span><span class="p">(</span><span class="n">molecule</span><span class="o">=</span><span class="n">mol</span><span class="p">)</span>
+<span class="go">#</span>
+<span class="go">atoms</span>
+<span class="go">      1      Gh.C       0.01247       0.02254       1.08262</span>
+<span class="go">      2       C.D      -0.00894      -0.01624      -0.43421</span>
+<span class="go">      3    Gh.H.T      -0.49334       0.93505       1.44716</span>
+<span class="go">      4     J.XYZ       1.05522       0.04512       1.44808</span>
+<span class="go">      5  Gh.J.ASD      -0.64695      -1.12346       2.54219</span>
+<span class="go">      6         H       0.50112      -0.91640      -0.80440 f=myfragment</span>
+<span class="go">      7         H       0.49999       0.86726      -0.84481 b=block1</span>
+<span class="go">      8         H      -1.04310      -0.02739      -0.80544 f=frag b=block2</span>
+<span class="go">      9         O      -0.66442      -1.15471       1.56909</span>
+<span class="go">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="preparing-runscript">
+<h2>Preparing runscript<a class="headerlink" href="#preparing-runscript" title="Permalink to this headline">¶</a></h2>
+<p>Runscripts for ADF are very simple.
+The only adjustable option (apart from usual <code class="docutils literal notranslate"><span class="pre">pre</span></code>, <code class="docutils literal notranslate"><span class="pre">post</span></code>, <code class="docutils literal notranslate"><span class="pre">shebang</span></code> and <code class="docutils literal notranslate"><span class="pre">stdout_redirect</span></code> which are common for all single jobs) is <code class="docutils literal notranslate"><span class="pre">myjob.settings.runscript.nproc</span></code>, indicating the number of parallel processes to run ADF with (like with <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag or <code class="docutils literal notranslate"><span class="pre">NSCM</span></code> environmental variable).</p>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults">
+<em class="property">class </em><code class="descname">ADFResults</code><span class="sig-paren">(</span><em>job</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>A specialized <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults" title="scm.plams.interfaces.adfsuite.scmjob.SCMResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMResults</span></code></a> subclass for accessing the results of <code class="xref py py-class docutils literal notranslate"><span class="pre">ADFJob</span></code>.</p>
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.get_properties">
+<code class="descname">get_properties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.get_properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary with all the entries from <code class="docutils literal notranslate"><span class="pre">Properties</span></code> section in the main KF file (<code class="docutils literal notranslate"><span class="pre">$JN.t21</span></code>).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.get_main_molecule">
+<code class="descname">get_main_molecule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.get_main_molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_main_molecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance based on the <code class="docutils literal notranslate"><span class="pre">Geometry</span></code> section in the main KF file (<code class="docutils literal notranslate"><span class="pre">$JN.t21</span></code>).</p>
+<p>For runs with multiple geometries (geometry optimization, transition state search, intrinsic reaction coordinate) this is the <strong>final</strong> geometry. In such a case, to access the initial (or any intermediate) coordinates please use <a class="reference internal" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_input_molecule" title="scm.plams.interfaces.adfsuite.adf.ADFResults.get_input_molecule"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_input_molecule()</span></code></a> or extract coordinates from section <code class="docutils literal notranslate"><span class="pre">History</span></code>, variables <code class="docutils literal notranslate"><span class="pre">xyz</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">xyz</span> <span class="pre">2</span></code> and so on. Mind the fact that all coordinates written by ADF to <code class="docutils literal notranslate"><span class="pre">History</span></code> section are in bohr and internal atom order:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_molecule</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="s1">&#39;History&#39;</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;xyz 1&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;bohr&#39;</span><span class="p">,</span> <span class="n">internal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.get_input_molecule">
+<code class="descname">get_input_molecule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.get_input_molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_input_molecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance with initial coordinates.</p>
+<p>All data used by this method is taken from <code class="docutils literal notranslate"><span class="pre">$JN.t21</span></code> file. The <code class="docutils literal notranslate"><span class="pre">molecule</span></code> attribute of the corresponding job is ignored.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.get_energy">
+<code class="descname">get_energy</code><span class="sig-paren">(</span><em>unit='au'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.get_energy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return final bond energy, expressed in <em>unit</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.get_dipole_vector">
+<code class="descname">get_dipole_vector</code><span class="sig-paren">(</span><em>unit='au'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.get_dipole_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_dipole_vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the dipole vector, expressed in <em>unit</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.get_gradients">
+<code class="descname">get_gradients</code><span class="sig-paren">(</span><em>energy_unit='au'</em>, <em>dist_unit='bohr'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.get_gradients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_gradients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the cartesian gradients from the ‘Gradients_InputOrder’ field of the ‘GeoOpt’ Section in the kf-file, expressed in given units. Returned value is a numpy array with shape (nAtoms,3).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults._extract_hessian">
+<code class="descname">_extract_hessian</code><span class="sig-paren">(</span><em>section</em>, <em>variable</em>, <em>internal_order</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults._extract_hessian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults._extract_hessian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract Hessian from <em>section</em>/<em>variable</em> of the TAPE21 file. Reorder from internal to input order, if <em>internal_order</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.get_hessian">
+<code class="descname">get_hessian</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.get_hessian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_hessian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try extracting Hessian, either analytical or numerical, whichever is present in the TAPE21 file, in the input order. Returned value is a square numpy array of size 3*nAtoms.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.get_energy_decomposition">
+<code class="descname">get_energy_decomposition</code><span class="sig-paren">(</span><em>unit='au'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.get_energy_decomposition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_energy_decomposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>get_energy(unit=’au’)
+Return a dictionary with energy decomposition terms, expressed in <em>unit</em>.</p>
+<p>The following keys are present in the returned dictionary: <code class="docutils literal notranslate"><span class="pre">Electrostatic</span></code>, <code class="docutils literal notranslate"><span class="pre">Kinetic</span></code>, <code class="docutils literal notranslate"><span class="pre">Coulomb</span></code>, <code class="docutils literal notranslate"><span class="pre">XC</span></code>. The sum of all the values is equal to the value returned by <a class="reference internal" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_energy" title="scm.plams.interfaces.adfsuite.adf.ADFResults.get_energy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_energy()</span></code></a>.
+Note that additional contributions might be included, those are up to now: <code class="docutils literal notranslate"><span class="pre">Dispersion</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.get_frequencies">
+<code class="descname">get_frequencies</code><span class="sig-paren">(</span><em>unit='cm^-1'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.get_frequencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_frequencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a numpy array of vibrational frequencies, expressed in <em>unit</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.get_timings">
+<code class="descname">get_timings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.get_timings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.get_timings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary with timing statistics of the job execution. Returned dictionary contains keys <code class="docutils literal notranslate"><span class="pre">cpu</span></code>, <code class="docutils literal notranslate"><span class="pre">system</span></code> and <code class="docutils literal notranslate"><span class="pre">elapsed</span></code>. The values are corresponding timings, expressed in seconds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults._atomic_numbers_input_order">
+<code class="descname">_atomic_numbers_input_order</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults._atomic_numbers_input_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults._atomic_numbers_input_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of atomic numbers, in the input order.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults._int2inp">
+<code class="descname">_int2inp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults._int2inp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults._int2inp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get mapping from the internal atom order to the input atom order.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.recreate_molecule">
+<code class="descname">recreate_molecule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.recreate_molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.recreate_molecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate the input molecule for the corresponding job based on files present in the job folder. This method is used by <a class="reference internal" href="../components/jobs.html#scm.plams.core.basejob.SingleJob.load_external" title="scm.plams.core.basejob.SingleJob.load_external"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load_external()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.adf.ADFResults.recreate_settings">
+<code class="descname">recreate_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/adf.html#ADFResults.recreate_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.adf.ADFResults.recreate_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate the input <a class="reference internal" href="../components/settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance for the corresponding job based on files present in the job folder. This method is used by <a class="reference internal" href="../components/jobs.html#scm.plams.core.basejob.SingleJob.load_external" title="scm.plams.core.basejob.SingleJob.load_external"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load_external()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>Parent abstract classes:</p>
+<dl class="class">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob">
+<em class="property">class </em><code class="descname">SCMJob</code><span class="sig-paren">(</span><em>molecule=None</em>, <em>name='plamsjob'</em>, <em>settings=None</em>, <em>depend=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract class gathering common mechanisms for jobs with ADF Suite programs.</p>
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob.get_input">
+<code class="descname">get_input</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob.get_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob.get_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the input file. This method is just a wrapper around <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob._serialize_input" title="scm.plams.interfaces.adfsuite.scmjob.SCMJob._serialize_input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_serialize_input()</span></code></a>.</p>
+<p>Each instance of <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob" title="scm.plams.interfaces.adfsuite.scmjob.SCMJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMJob</span></code></a> or <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults" title="scm.plams.interfaces.adfsuite.scmjob.SCMResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMResults</span></code></a> present as a value in <code class="docutils literal notranslate"><span class="pre">settings.input</span></code> branch is replaced with an absolute path to the main KF file of that job.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob.get_runscript">
+<code class="descname">get_runscript</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob.get_runscript"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob.get_runscript" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a runscript. Returned string is of the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$AMSBIN/name [-n nproc] &lt;jobname.in [&gt;jobname.out]
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">name</span></code> is taken from the class attribute <code class="docutils literal notranslate"><span class="pre">_command</span></code>. <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag is added if <code class="docutils literal notranslate"><span class="pre">settings.runscript.nproc</span></code> exists. <code class="docutils literal notranslate"><span class="pre">[&gt;jobname.out]</span></code> is used based on <code class="docutils literal notranslate"><span class="pre">settings.runscript.stdout_redirect</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">termination</span> <span class="pre">status</span></code> variable from <code class="docutils literal notranslate"><span class="pre">General</span></code> section of main KF file equals <code class="docutils literal notranslate"><span class="pre">NORMAL</span> <span class="pre">TERMINATION</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob.hash_input">
+<code class="descname">hash_input</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob.hash_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob.hash_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the hash of the input file.</p>
+<p>All instances of <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob" title="scm.plams.interfaces.adfsuite.scmjob.SCMJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMJob</span></code></a> or <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults" title="scm.plams.interfaces.adfsuite.scmjob.SCMResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMResults</span></code></a> present as values in <code class="docutils literal notranslate"><span class="pre">settings.input</span></code> branch are replaced with hashes of corresponding job’s inputs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob._serialize_input">
+<code class="descname">_serialize_input</code><span class="sig-paren">(</span><em>special</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob._serialize_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob._serialize_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform all contents of <code class="docutils literal notranslate"><span class="pre">setting.input</span></code> branch into string with blocks, keys and values.</p>
+<p>On the highest level alphabetic order of iteration is modified: keys occuring in attribute <code class="docutils literal notranslate"><span class="pre">_top</span></code> are printed first. Special values can be indicated with <em>special</em> argument, which should be a dictionary having types of objects as keys and functions translating these types to strings as values.</p>
+<p>Automatic handling of <code class="docutils literal notranslate"><span class="pre">molecule</span></code> can be disabled with <code class="docutils literal notranslate"><span class="pre">settings.ignore_molecule</span> <span class="pre">=</span> <span class="pre">True</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob._serialize_mol">
+<code class="descname">_serialize_mol</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob._serialize_mol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob._serialize_mol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance stored in <code class="docutils literal notranslate"><span class="pre">molecule</span></code> attribute and add it as relevant entries of <code class="docutils literal notranslate"><span class="pre">settings.input</span></code> branch. Abstract method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob._remove_mol">
+<code class="descname">_remove_mol</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob._remove_mol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob._remove_mol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove from <code class="docutils literal notranslate"><span class="pre">settings.input</span></code> all entries added by <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob._serialize_mol" title="scm.plams.interfaces.adfsuite.scmjob.SCMJob._serialize_mol"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_serialize_mol()</span></code></a>. Abstract method.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob._atom_symbol">
+<em class="property">static </em><code class="descname">_atom_symbol</code><span class="sig-paren">(</span><em>atom</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob._atom_symbol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob._atom_symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the atomic symbol of <em>atom</em>. Ensure proper formatting for ADFSuite input taking into account <code class="docutils literal notranslate"><span class="pre">ghost</span></code> and <code class="docutils literal notranslate"><span class="pre">name</span></code> entries in <code class="docutils literal notranslate"><span class="pre">properties</span></code> of <em>atom</em>.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob.from_inputfile">
+<em class="property">classmethod </em><code class="descname">from_inputfile</code><span class="sig-paren">(</span><em>filename: str</em>, <em>heredoc_delimit: str = 'eor'</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; scm.plams.interfaces.adfsuite.scmjob.SCMJob<a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob.from_inputfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob.from_inputfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob" title="scm.plams.interfaces.adfsuite.scmjob.SCMJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMJob</span></code></a> instance from an ADF inputfile.</p>
+<p>If a runscript is provide than this method will attempt to extract the input file based
+on the heredoc delimiter (see <em>heredoc_delimit</em>).</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMJob.settings_to_mol">
+<em class="property">static </em><code class="descname">settings_to_mol</code><span class="sig-paren">(</span><em>s: scm.plams.core.settings.Settings</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMJob.settings_to_mol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob.settings_to_mol" title="Permalink to this definition">¶</a></dt>
+<dd><p>An abstract method for extracting molecules from input settings (see <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob.from_inputfile" title="scm.plams.interfaces.adfsuite.scmjob.SCMJob.from_inputfile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SCMJob.from_inputfile()</span></code></a>).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults">
+<em class="property">class </em><code class="descname">SCMResults</code><span class="sig-paren">(</span><em>job</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract class gathering common mechanisms for results of ADF Suite programs.</p>
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults.collect">
+<code class="descname">collect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults.collect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults.collect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collect files present in the job folder. Use parent method from <a class="reference internal" href="../components/results.html#scm.plams.core.results.Results" title="scm.plams.core.results.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">Results</span></code></a>, then create an instance of <a class="reference internal" href="kffiles.html#scm.plams.tools.kftools.KFFile" title="scm.plams.tools.kftools.KFFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFFile</span></code></a> for the main KF file and store it as <code class="docutils literal notranslate"><span class="pre">_kf</span></code> attribute.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults.refresh">
+<code class="descname">refresh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults.refresh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refresh the contents of <code class="docutils literal notranslate"><span class="pre">files</span></code> list. Use parent method from <a class="reference internal" href="../components/results.html#scm.plams.core.results.Results" title="scm.plams.core.results.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">Results</span></code></a>, then look at all attributes that are instances of <a class="reference internal" href="kffiles.html#scm.plams.tools.kftools.KFFile" title="scm.plams.tools.kftools.KFFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFFile</span></code></a> and check if they point to existing files. If not, try to reinstantiate them with current job path (that can happen while loading a pickled job after the entire job folder was moved).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults.readkf">
+<code class="descname">readkf</code><span class="sig-paren">(</span><em>section</em>, <em>variable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults.readkf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults.readkf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read data from <em>section</em>/<em>variable</em> of the main KF file.</p>
+<p>The type of the returned value depends on the type of <em>variable</em> defined inside KF file. It can be: single int, list of ints, single float, list of floats, single boolean, list of booleans or string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults.newkf">
+<code class="descname">newkf</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults.newkf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults.newkf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create new <a class="reference internal" href="kffiles.html#scm.plams.tools.kftools.KFFile" title="scm.plams.tools.kftools.KFFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFFile</span></code></a> instance using file <em>filename</em> in the job folder.</p>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">someadfjob</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tape13</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">newkf</span><span class="p">(</span><span class="s1">&#39;$JN.t13&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tape13</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;Geometry&#39;</span><span class="p">,</span> <span class="s1">&#39;xyz&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults.get_properties">
+<code class="descname">get_properties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults.get_properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults.get_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary with all the entries from <code class="docutils literal notranslate"><span class="pre">Properties</span></code> section in the main KF file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults.get_molecule">
+<code class="descname">get_molecule</code><span class="sig-paren">(</span><em>section</em>, <em>variable</em>, <em>unit='bohr'</em>, <em>internal=False</em>, <em>n=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults.get_molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults.get_molecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read molecule coordinates from <em>section</em>/<em>variable</em> of the main KF file.</p>
+<p>Returned <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule" title="scm.plams.mol.molecule.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> instance is created by copying a molecule from associated <a class="reference internal" href="#scm.plams.interfaces.adfsuite.scmjob.SCMJob" title="scm.plams.interfaces.adfsuite.scmjob.SCMJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCMJob</span></code></a> instance and updating atomic coordinates with values read from <em>section</em>/<em>variable</em>. The format in which coordinates are stored is not consistent for all programs or even for different sections of the same KF file. Sometimes coordinates are stored in bohr, sometimes in angstrom. The order of atoms can be either input order or internal order. These settings can be adjusted with <em>unit</em> and <em>internal</em> parameters. Some variables store more than one geometry, in those cases <em>n</em> can be used to choose the preferred one.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults._get_single_value">
+<code class="descname">_get_single_value</code><span class="sig-paren">(</span><em>section</em>, <em>variable</em>, <em>output_unit</em>, <em>native_unit='au'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults._get_single_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults._get_single_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A small method template for all the single number “get_something()” methods extracting data from main KF file. Returned value is converted from <em>native_unit</em> to <em>output_unit</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults._atomic_numbers_input_order">
+<code class="descname">_atomic_numbers_input_order</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults._atomic_numbers_input_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults._atomic_numbers_input_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of atomic numbers, in the input order. Abstract method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults._kfpath">
+<code class="descname">_kfpath</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults._kfpath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults._kfpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the absolute path to the main KF file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults._kfpresent">
+<code class="descname">_kfpresent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults._kfpresent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults._kfpresent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this instance has a valid <code class="docutils literal notranslate"><span class="pre">_kf</span></code> attribute.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults._export_attribute">
+<code class="descname">_export_attribute</code><span class="sig-paren">(</span><em>attr</em>, <em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults._export_attribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults._export_attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <em>attr</em> is a KF file take care of a proper path. Otherwise use parent method. See <a class="reference internal" href="../components/results.html#scm.plams.core.results.Results._copy_to" title="scm.plams.core.results.Results._copy_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Results._copy_to</span></code></a> for details.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults._int2inp">
+<code class="descname">_int2inp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults._int2inp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults._int2inp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain mapping from internal atom order to the input one. Abstract method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults.to_input_order">
+<code class="descname">to_input_order</code><span class="sig-paren">(</span><em>self</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults.to_input_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults.to_input_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reorder any iterable <em>data</em> from the internal atom order to the input atom order. The length of <em>data</em> must be equal to the number of atoms, otherwise an exception is raised. Returned value is a container of the same type as <em>data</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.interfaces.adfsuite.scmjob.SCMResults.readarray">
+<code class="descname">readarray</code><span class="sig-paren">(</span><em>section: str</em>, <em>subsection: str</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="../_modules/scm/plams/interfaces/adfsuite/scmjob.html#SCMResults.readarray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.interfaces.adfsuite.scmjob.SCMResults.readarray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read data from <em>section</em>/<em>subsection</em> of the main KF file and return as NumPy array.</p>
+<p>All additional provided keyword arguments will be passed onto the <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html">numpy.array</a> function.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="reaxff.html" class="btn btn-neutral float-right" title="ReaxFF (pre-2019 version)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="crs.html" class="btn btn-neutral" title="COSMO-RS" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

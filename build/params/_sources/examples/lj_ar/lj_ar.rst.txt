@@ -1,0 +1,393 @@
+..
+    NOTE: this workflow needs to be followed when updating the LJ_Ar example or this documentation.
+    1) make any desired changes to complete_example/{params.conf.py,README.txt,generate_examples_folders.py}
+    2) cd complete_example; amspython generate_examples_folders.py
+    3) this writes out the complete examples to complete_example/LJ_Ar/ and complete_example/LJ_Ar_no_reference_data/
+    4) ./update_lj_ar_output.sh This reruns the parametrization and writes ./{stats.txt,predictions_energy.txt} and doc/source/_static/LJ_Ar*png
+    5) ./copy_to_exported_version.sh this copies the complete_example/LJ_Ar* folders to params/examples (i.e. what the user sees!)
+    6) ./create_zip_file_example.sh this zips the contents of 
+    6a) params/examples (exported version) and places it in ./LJ_Ar_example.zip for user download
+    6b) complete_example/{generate_exampels_folders.py, Ar32.xyz} and places it in ./LJ_Ar_generate_reference_structures.zip for user download
+    7) check that the line numbers in this documentation (for job_collection.yaml annd training_set.yaml) still are valid!
+
+.. _LJ_Ar_Tutorial:
+
+Lennard-Jones Potential for Argon
+====================================================
+
+This example illustrates how to fit a **Lennard-Jones potential**.  The
+**systems** are snapshots from a liquid Ar MD simulation. The **forces and
+energies** (the **reference data**) were **calculated with dispersion-corrected
+DFTB**. 
+
+.. note::
+
+   In this tutorial the training data has already been prepared. See :ref:`how it was generated <LJ_Ar_CreationOfInputFiles>`,
+   or go to the :ref:`Results Importer tutorial <ResultsImporterDemonstration>` for how to import training data into params.
+
+.. figure:: /_static/LJ_Ar_snapshot_and_correlation_plot.png
+    :width: 80%
+    :align: center
+
+    Left: One of the systems in the job collection. Right: predicted (with
+    parametrized Lennard-Jones) forces compared to reference (dispersion-corrected
+    DFTB) forces.
+
+
+Lennard-Jones Parameters, Engine, and Interface
+---------------------------------------------------
+
+The Lennard-Jones potential has the form
+
+.. math::
+
+    V(r) = 4\epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6 \right]
+    = \epsilon \left[\left(\frac{r_{\text{min}}}{r}\right)^{12} - 2\left(\frac{r_{\text{min}}}{r}\right)^6 \right]
+
+where :math:`\epsilon` and :math:`\sigma` are parameters.
+The `Lennard-Jones engine in AMS <../../../AMS/Engines.html#lennardjones>`__
+has the two parameters **Eps** (:math:`\epsilon`) and **RMin** (distance at which the
+potential reaches a minimum), where :math:`\text{Rmin} = 2^{1/6}\sigma`.
+
+In ParAMS, those two parameters can be optimized with the :ref:`Lennard-Jones
+parameter interface <LennardJones>`, which is used in this example. The
+parameters then have the names ``eps`` and ``rmin`` (lowercase).
+
+
+
+.. _LJ_Ar_Files:
+
+Files 
+-------------------------------------
+
+**Download** :download:`LJ_Ar_example.zip`, or make a copy of the directory ``$AMSHOME/scripting/scm/params/examples/LJ_Ar``.
+
+The directory contains four files that can be **opened and edited in any text editor**:
+
+* ``parameter_interface.yaml`` : A :ref:`Parameter Interface <Parameter Interfaces>` containing the **initial values and allowed ranges** of the ``eps`` and ``rmin`` parameters. See :ref:`LJ_Ar_parameter_interface_yaml`.
+
+* ``job_collection.yaml`` : A set of **jobs** (a :ref:`Job Collection`) to be run during the parametrization. The **structures** are stored in this file. See: :ref:`LJ_Ar_job_collection_yaml`
+
+* ``training_set.yaml`` : A :ref:`Data Set` containing **reference values** and **expressions** that extract results from the jobs. See :ref:`LJ_Ar_training_set_yaml`.
+
+
+* ``params.conf.py`` : The main configuration file containing some settings for the optimization. See :ref:`LJ_Ar_params.conf.py`
+
+::
+
+  LJ_Ar
+  ├── job_collection.yaml
+  ├── params.conf.py
+  └── training_set.yaml
+
+Run the example
+--------------------------
+
+Start a terminal window as follows:
+
+* `Windows <../../../Scripting/GettingStarted.html#windows>`__: In AMSjobs, select **Help → Command-line**, type ``bash`` and hit Enter.
+* `MacOS <../../../Scripting/GettingStarted.html#macos>`__: In AMSjobs, select **Help → Terminal**.
+* `Linux <../../../Installation/Linux_Quickstart_Guide.html>`__ : Open a terminal and ``source /path/to/ams/amsbashrc.sh``
+
+In the terminal, go to the ``LJ_Ar`` :ref:`directory <LJ_Ar_Files>`, and run the :ref:`ParAMS Main Script`:
+
+.. code:: ipython3
+
+    $AMSBIN/params optimize
+
+which gives beginning output similar to this:
+
+.. literalinclude:: params_output.txt
+   :lines: 1-30
+
+The **starting parameters** were ``eps=0.0003`` and ``rmin=4.0`` (as can be seen on the line starting with ``Step 000000``).  Every 10
+iterations, or whenever the loss function decreases, the current value of the loss function is printed. The goal of the
+parametrization is to minimize the loss function.  It should take less than a
+minute for the parametrization to finish. 
+
+.. _LJ_Ar_running_loss:
+
+You can plot the value of the **loss function vs. the iteration number**. Go to the ``optimization/training_set_results`` directory, and run
+
+.. code:: ipython3
+    
+    $AMSBIN/params plot running_loss.txt
+
+.. figure:: /_static/LJ_Ar_running_loss.png
+    :width: 60%
+    :align: center
+
+    Loss function (logscale) vs. iteration number. After about 100 iterations, the loss function value converges.
+
+
+.. _LJ_Ar_parameters_ams:
+
+The best parameter values
+------------------------------
+
+The best (optimized) parameters are stored in ``optimization/training_set_results/best/lj_parameters.txt`` (or ``optimization/training_set_results/best/parameter_interface.yaml``):
+
+.. literalinclude:: lj_parameters.txt
+
+See also: :ref:`LJ_Ar_DetailedResults`
+
+
+.. _LJ_Ar_InputFiles:
+
+Input files
+--------------------------------
+
+
+.. _LJ_Ar_parameter_interface_yaml:
+
+.. _LJ_Ar_InitialParameters:
+
+The parameter_interface.yaml file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+The ``parameter_interface.yaml`` file is a  :ref:`Parameter Interface <Parameter Interfaces>` of type :ref:`LennardJonesParameters <LennardJones>`. It contains the following:
+
+.. literalinclude:: complete_example/LJ_Ar/parameter_interface.yaml
+    :linenos:
+
+
+All the parameters in a
+parameter interface have names. For Lennard-Jones, there are only two
+parameters: ``eps`` and ``rmin``.
+
+Every parameter needs an **initial value** and an **allowed range of values**.
+Above, the initial value for ``eps`` is set to ``0.0003``, and the allowed range to between ``1e-5`` and ``0.01``.
+This means that the ``eps`` variable will only be varied between :math:`10^{-5}` and :math:`10^{-2}`
+during the parametrization.
+
+Similarly, the initial value for ``rmin`` is set to ``4.0``, and the allowed range is between ``1.0`` and ``8.0``.
+
+The ``is_active`` attribute of the parameters is set to True, meaning that they will be optimized.
+
+For details about the **header** of the file (lines 2-6), see the :ref:`parameter interface <Parameter Interfaces>` documentation.
+
+.. _LJ_Ar_job_collection_yaml:
+
+The job_collection.yaml file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``job_collection.yaml`` file is a :ref:`Job Collection`. It contains entries like these:
+
+.. literalinclude:: complete_example/LJ_Ar/job_collection.yaml
+    :lines: 1-50
+    :linenos:
+
+Each job collection entry has an **ID** (above ``Ar32_frame001``) and some
+input to AMS, in particular the structure (atomic species, coordinates, and
+lattice). Each entry in the job collection constitutes a **job** that is
+run for every iteration during the parametrization.
+
+What to extract from the jobs is defined in :ref:`LJ_Ar_training_set_yaml`.
+
+.. _LJ_Ar_training_set_yaml:
+
+The training_set.yaml file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``training_set.yaml`` file is a :ref:`Data Set`.  
+It contains entries like these:
+
+.. literalinclude:: complete_example/LJ_Ar/training_set.yaml
+    :lines: 1-54
+    :linenos:
+
+The first entry has the *Expression*
+
+.. literalinclude:: complete_example/LJ_Ar/training_set.yaml
+    :lines: 5
+
+which means that for every iteration during the parametrization, the current
+Lennard-Jones parameters will be used to calculate the quantity *the energy of
+the job Ar32_frame001 minus the energy of the job Ar32_frame002*. The number
+should ideally be as close as possible to the *ReferenceValue*, which above
+is given as 0.204 eV. The greater the deviation from the reference value, the
+more this entry will contribute to the loss function.
+
+The *Weight* and *Sigma* also affect how much the entry contributes to the loss
+function. For details, see :ref:`Data Set` and :ref:`SigmaVsWeight`.
+
+.. note::
+
+    The *Sigma* in training_set.yaml is **not** the :math:`\sigma` that appears
+    in the Lennard-Jones equation.
+
+Reference data can be expressed in any *Unit*. The *Unit* for the first expression
+is given as ``eV, 27.21138``. The number specifies a conversion factor from the
+:ref:`default unit <AvailableExtractors>` Ha. If no *Unit* is given, the data must
+be given in the default unit.
+
+
+Many different quantities can be :ref:`extracted <AvailableExtractors>` from a job.
+The third entry (starting on line 17) has the *Expression*
+
+.. literalinclude:: complete_example/LJ_Ar/training_set.yaml
+    :lines: 17
+
+which extracts the atomic forces (32 × 3 force components) from the job
+``Ar32_frame001``. The reference value for the force components are given as a matrix
+in eV/angstrom (as specified by the *Unit*).
+
+.. _LJ_Ar_params.conf.py:
+
+The params.conf.py file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``params.conf.py`` file contains
+
+.. literalinclude:: complete_example/LJ_Ar/params.conf.py
+    :linenos:
+
+**Variables**: The ``training_set``, ``job_collection``, ``parameter_interface``, ``optimizer``, ``loss``, ``parallel``, and
+``timeout`` variables are interpreted by the :ref:`ParAMS Main Script` (the
+``$AMSBIN/params optimize`` command).
+
+
+**Optimizer**: The ``optimizer`` variable is an :ref:`Optimizer <Optimizers>`.
+For simple optimization problems like Lennard-Jones, the Nelder-Mead method
+from :ref:`scipy <Scipy>` can be used. For more complicated problems, like ReaxFF
+optimization, a more advanced optimizer like the :ref:`CMAOptimizer <CMA-ES>` is
+recommended.
+
+**Loss function**: The ``loss`` variable specifies the :ref:`loss function
+<Loss Functions>` to be minimized.
+
+**Parallellization**: The ``parallel`` variable is a :ref:`ParallelLevels
+<Parallelization>`, specifying how to parallelize the parameter optimization.
+Set it to ``None`` to use a good default for your machine.
+
+
+
+.. _LJ_Ar_CreationOfInputFiles:
+
+Creation of the input files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The **params.conf.py** file is a modified version of the standard params.conf.py file that can be generated with this command:
+
+.. code::
+
+    $AMSBIN/params makeconf
+
+The **parameter_interface.yaml**, **job_collection.yaml**, **training_set.yaml** files were created with a
+script combining functionality from `PLAMS <../../../plams/index.html>`__ and
+ParAMS. **Download** :download:`the script
+<LJ_Ar_generate_reference_structures.zip>` if you would like to try it. It sets
+up a molecular dynamics simulation of liquid Ar with the UFF force field.  Some
+snapshots are recalculated with dispersion-corrected DFTB (GFN1-xTB). A
+:ref:`ResultsImporter <ResultsImporters>` then extracts the forces and relative energies, and
+creates the job_collection.yaml and training_set.yaml files.
+
+.. seealso::
+
+    :ref:`ResultsImporterDemonstration`
+
+Output files
+---------------------------
+
+The results from the optimization are stored in the ``optimization`` directory:
+
+::
+
+    .
+    └── optimization
+        ├── settings_and_initial_data
+        │   └── data_sets
+        └── training_set_results
+            ├── best
+            │   ├── pes_predictions
+            │   └── scatter_plots
+            ├── history
+            │   ├── 000000
+            │   │   ├── pes_predictions
+            │   │   └── scatter_plots
+            │   └── 000144
+            │       ├── pes_predictions
+            │       └── scatter_plots
+            ├── initial
+            │   ├── pes_predictions
+            │   └── scatter_plots
+            └── latest
+                ├── pes_predictions
+                └── scatter_plots
+
+
+* The **settings_and_initial_data** directory contains compressed versions of the job collection, training set, and parameter interface.
+
+* The **training_set_results** directory contains :ref:`detailed results <LJ_Ar_DetailedResults>` for the **training set**.
+
+The ``training_set_results`` directory contains the following subdirectories:
+
+* The **best** subdirectory contains :ref:`detailed results <LJ_Ar_DetailedResults>` for the iteration with the lowest loss function value
+
+* The **history** subdirectory contains :ref:`detailed results <LJ_Ar_DetailedResults>` that are stored regularly during the optimization (by default every 500 iterations).
+
+* The **initial** subdirectory contains :ref:`detailed results <LJ_Ar_DetailedResults>` for the first iteration (with the :ref:`initial parameters <LJ_Ar_InitialParameters>`).
+
+* The **latest** subdirectory contains :ref:`detailed results <LJ_Ar_DetailedResults>` for the latest iteration.
+
+
+summary.txt
+~~~~~~~~~~~~~~
+
+The ``optimization/summary.txt`` file contains a summary of the job collection, training set, and settings:
+
+.. literalinclude:: summary.txt
+
+
+.. _LJ_Ar_DetailedResults:
+
+Detailed results: correlation plots, summary statistics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Go to the
+``optimization/training_set_results/best/scatter_plots`` directory, and run
+
+.. code:: ipython3
+
+    $AMSBIN/params plot forces.txt
+
+This creates a **correlation plot** between the predicted forces and reference forces:
+
+.. image:: /_static/LJ_Ar_correlation_plot.png
+    :width: 50%
+    :align: center
+
+You can also open the ``forces.txt`` or ``energy.txt``
+in a text editor, or import them into a spreadsheet (Excel). For example, the
+latter file contains
+
+.. literalinclude:: predictions_energy.txt
+
+This shows a good agreement between the predicted and reference values for the
+relative energies in the training set. 
+
+You can also see some **summary statistics** in the file ``stats.txt``:
+
+.. literalinclude:: stats.txt
+
+This file gives the **mean absolute error (MAE)** and **root-mean-squared error
+(RMSE)** per entry in the training set. You can also see the contribution to the
+loss function value. For example, 99% of the loss function value comes from
+errors in the forces, and only 1% from errors in the relative energies.
+
+**Other files**:
+
+* ``active_parameters.txt`` contains a list of the parameter values.
+
+* ``data_set_predictions.yaml`` is a yaml file storing the training set with both the reference values and predicted values. The file can be loaded in Python (with a :ref:`DataSetEvaluator`) to regenerate (modified version of) ``stats.txt``, ``scatter_plots/energy.txt``, etc.
+
+* ``evaluation.txt`` contains the evaluation (step) number.
+
+* ``loss.txt`` contains the loss function value.
+
+* ``lj_parameters.txt`` contains the optimized parameters in a :ref:`format that can be read by AMS <LJ_Ar_parameters_ams>`.
+
+* ``parameter_interface.yaml`` contains the optimized parameters in a :ref:`format that can be read by ParAMS <LJ_Ar_parameter_interface_yaml>`.
+
+* ``pes_predictions/`` is a directory containing detailed results for the ``pes`` extractor (for example bond scans, angle scans, or volume scans). It is empty in this tutorial.

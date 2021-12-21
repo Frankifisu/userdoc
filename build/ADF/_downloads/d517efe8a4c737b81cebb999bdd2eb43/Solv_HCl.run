@@ -1,0 +1,128 @@
+#! /bin/sh
+
+
+# Computing solvent effects, with the COSMO model, is illustrated in the HCl
+# example.
+
+# After a non-solvent (reference) calculation, which is omitted here, two
+# solvent runs are presented, with somewhat different settings for a few input
+# parameters. The block key Solvation controls all solvent-related input.
+
+# All subkeys in the SOLVATION block are discussed in the User's Guide. Most of
+# them are rather technical and should not severely affect the outcome.
+# Physically relevant is the specification of the solute properties, by the
+# SOLVENT subkey: the dielectric constant and the effective radius of the
+# solvent molecule.
+
+# Note that a non-electrostatic terms as a function of surface area is included
+# in the COSMO calculation, by setting the values for CAV0 and CAV1 in the
+# subkey SOLVENT of the key SOLVATION. In ADF2010 one should explicitly include
+# such values for CAV0 and CAV1, otherwise this non-electrostatic term will be
+# taken to be zero, since the defaults have changed in ADF2010.
+
+# A rather strong impact on the computation times has the method of treating the
+# 'C-matrix'. There are 3 options (see the User's Guide): EXACT is the most
+# expensive, but presumably most accurate. POTENTIAL is the cheapest alternative
+# and is usually quite adequate. EXACT uses the exact charge density for the
+# Coulomb interaction between the molecular charge distribution and the point
+# charges (on the Van der Waals type molecular surface) which model the effects
+# of the solvent. The alternatives, notably 'POTENTIAL', use the fitted charge
+# density instead. Assuming that the fit is a fairly accurate approximation to
+# the exact charge density, the difference in outcome should be marginal.
+
+
+AMS_JOBNAME=Gas $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     H    0.000000     0.000000    0.000000
+     Cl   1.304188     0.000000    0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title HCl(0) reference run (gas phase)
+  eprint
+    scf NoEigvec
+  end
+  basis
+    type DZP
+    CreateOutput Yes
+  end
+  noprint Bas EigSFO EKin SFO, frag, functions
+EndEngine
+eor
+
+
+
+AMS_JOBNAME=Exact $AMSBIN/ams <<eor
+System
+  atoms
+     H    0.000000     0.000000    0.000000    adf.R=1.18
+     Cl   1.304188     0.000000    0.000000    adf.R=1.75
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title HCl(1) Solv-excl surfac; Gauss-Seidel (old std options)
+  eprint
+    scf NoEigvec
+  end
+  noprint Bas EigSFO EKin SFO, frag, functions
+  basis
+    type DZP
+  end
+  solvation
+    c-mat Exact
+    charged Method=Gauss-Seidel
+    disc SCale=0.01  LEGendre=10 TOLerance=1.0e-2
+    div ND=4  min=0.5  Ofac=0.8
+    scf Variational
+    solv epsilon=78.8 radius=1.4 cav0=1.321 cav1=0.0067639
+    surf delley
+  end
+  symmetry NOSYM
+EndEngine
+eor
+
+
+# In the second solvent run, another (technical) method is used for determining
+# the charge distribution on the cavity surface (conjugate-gradient versus
+# Gauss-Seidel in the previous calculation), and the POTENTIAL variety is used
+# for the C-matrix handling. The results show that it makes little difference in
+# outcome, but quite a bit in computation times.
+
+AMS_JOBNAME=Potential $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     H    0.000000     0.000000    0.000000    adf.R=1.18
+     Cl   1.304188     0.000000    0.000000    adf.R=1.75
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title HCl(9) NoDisk and Cmatrix potential
+  eprint
+    scf NoEigvec
+  end
+  noprint Bas EigSFO EKin SFO, frag, functions
+  basis
+    type DZP
+  end
+  solvation
+    c-mat POTENTIAL
+    charged Method=conjugate-gradient
+    div ND=4  min=0.5  Ofac=0.8
+    scf Variational
+    solv epsilon=78.8 radius=1.4 cav0=1.321 cav1=0.0067639
+    surf delley
+  end
+EndEngine
+eor

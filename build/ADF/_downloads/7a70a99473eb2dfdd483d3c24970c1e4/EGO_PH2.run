@@ -1,0 +1,113 @@
+#!/bin/sh
+
+# Example for an excited state geometry optimization and frequency calculation.
+
+# Needed for such excited state optimizations are the key EXCITATIONS (to
+# calculate excitation energies), and the key EXCITEDGO (to select for which 
+# excitation a geometry optimization should be performed). 
+
+# The ground state and excited state are openshell.
+
+
+AMS_JOBNAME=PH2 $AMSBIN/ams <<eor
+System
+  atoms
+     P          0.000000    0.000000   0.0
+     H          0.7         0.0        0.7
+     H         -0.7         0.0        0.7
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence
+    energy    0.0001
+    gradients 0.0001
+  End
+  MaxIterations 50
+End
+
+Engine ADF
+  title PH2 Excited state geometry
+  beckegrid
+    quality good
+  end
+  exactdensity
+  excitations
+    lowest 10
+    onlysing
+  end
+  excitedgo
+    output 1
+    state B2 1
+  end
+  basis
+    core NONE
+    type DZ
+  end
+  scf
+    converge 1.0e-9
+  end
+  unrestricted
+  spinpolarization 1
+  xc
+    gga BP86
+  end
+EndEngine
+eor
+
+
+# Next the frequencies are calculated of the excited state. LoadSystem is used to
+# pick up the optimized excited state geometry of the previous calculation. Note that in a
+# numerical frequencies calculation symmetry is turned off except to reduce the
+# number of points calculated. Thus irrespective of the specified point group
+# symmetry the symmetry label A of SYMMETRY NOSYM should be used to select the
+# excited state. Care should be taken to ensure that the correct state is chosen
+# in this frequencies calculation as the excited state number can change when
+# the point group is changed. In this case instead of 'B2 1' one needs to select
+# 'A 1'. Accurate SCF convergence parameters are used.
+
+
+AMS_JOBNAME=PH2_Freq $AMSBIN/ams <<eor
+LoadSystem
+  File PH2.results/adf.rkf
+End
+
+Task SinglePoint
+Properties
+  NormalModes Yes
+End
+
+Engine ADF
+  title PH2 Excited state frequencies
+  beckegrid
+    quality good
+  end
+  exactdensity
+  excitations
+    lowest 10
+    onlysing
+  end
+  symmetry nosym
+  excitedgo
+    cpks
+      eps 0.000001
+    end
+    output 2
+    state A 1
+  end
+  basis
+    type DZ
+    core NONE
+  end
+  scf
+    converge 1.0e-9
+  end
+  spinpolarization 1
+  unrestricted
+  xc
+    gga BP86
+  end
+EndEngine
+eor

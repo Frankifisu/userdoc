@@ -1,0 +1,221 @@
+#! /bin/sh
+
+
+# In this example a structure with 2 benzene molecules and a hydrogen molecule
+# is optimized with the Grimme dispersion corrected PBE, in this case the (so
+# far) latest variant the DFT-D family, which is DFT-D3-BJ. Needed is the subkey
+# DISPERSION in the key XC, and the arguments Grime3 and BJDAMP. If one starts
+# with atomic fragments the part of the bond energy that is due to the Grimme
+# dispersion corrected functional is both inter-molecular as well as intra-
+# molecular.
+
+
+AMS_JOBNAME=Grimme_dispersion $AMSBIN/ams <<eor
+System
+  atoms
+        C  0.0         1.39730802 -3.09
+        H  0.0         2.48914064 -3.09
+        C  1.21010424  0.69865401 -3.09
+        H  2.15565903  1.24457032 -3.09
+        C  1.21010424 -0.69865401 -3.09
+        H  2.15565903 -1.24457032 -3.09
+        C  0.0        -1.39730802 -3.09
+        H  0.0        -2.48914064 -3.09
+        C -1.21010424 -0.69865401 -3.09
+        H -2.15565903 -1.24457032 -3.09
+        C -1.21010424  0.69865401 -3.09
+        H -2.15565903  1.24457032 -3.09
+        C -1.21010424 -0.69865401  3.09
+        H -2.15565903 -1.24457032  3.09
+        C  0.0        -1.39730802  3.09
+        H  0.0        -2.48914064  3.09
+        C  1.21010424 -0.69865401  3.09
+        H  2.15565903 -1.24457032  3.09
+        C  1.21010424  0.69865401  3.09
+        H  2.15565903  1.24457032  3.09
+        C  0.0         1.39730802  3.09
+        H  0.0         2.48914064  3.09
+        C -1.21010424  0.69865401  3.09
+        H -2.15565903  1.24457032  3.09
+        H  0.0         0.0        -0.37
+        H  0.0         0.0         0.37
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence
+    Gradients 1E-4
+  End
+End
+
+Engine ADF
+  title Geometry optimization with Grimme3-BJ dispersion correction for GGA
+  basis
+    type TZP
+    core small
+  end
+  noprint sfo
+  xc
+    dispersion Grimme3 BJDAMP
+    gga PBE
+  end
+EndEngine
+eor
+
+
+# The next calculations in this example demonstrate dispersion corrections when
+# using non-atomic fragments. First three molecules (2 benzene molecules and a
+# hydrogen molecule) are calculated . Needed again is the subkey DISPERSION in
+# the key XC.
+
+
+AMS_JOBNAME=benzene1 $AMSBIN/ams <<eor
+System
+  atoms
+     C         0.000000    1.398973   -3.054539
+     H         0.000000    2.490908   -3.049828
+     C         1.211546    0.699486   -3.054539
+     H         2.157190    1.245454   -3.049828
+     C         1.211546   -0.699486   -3.054539
+     H         2.157190   -1.245454   -3.049828
+     C         0.000000   -1.398973   -3.054539
+     H         0.000000   -2.490908   -3.049828
+     C        -1.211546   -0.699486   -3.054539
+     H        -2.157190   -1.245454   -3.049828
+     C        -1.211546    0.699486   -3.054539
+     H        -2.157190    1.245454   -3.049828
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Grimme3-BJ dispersion-corrected GGA
+  basis
+    core small
+    type TZP
+  end
+  noprint sfo
+  scf
+    converge 1.0E-06  1.0E-6
+    iterations 60
+  end
+  xc
+    dispersion Grimme3 BJDAMP
+    gga PBE
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=benzene2 $AMSBIN/ams <<eor
+System
+  atoms
+     C        -1.211546   -0.699486    3.054539
+     H        -2.157190   -1.245454    3.049828
+     C         0.000000   -1.398973    3.054539
+     H         0.000000   -2.490908    3.049828
+     C         1.211546   -0.699486    3.054539
+     H         2.157190   -1.245454    3.049828
+     C         1.211546    0.699486    3.054539
+     H         2.157190    1.245454    3.049828
+     C         0.000000    1.398973    3.054539
+     H         0.000000    2.490908    3.049828
+     C        -1.211546    0.699486    3.054539
+     H        -2.157190    1.245454    3.049828
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Grimme3-BJ dispersion-corrected GGA
+  basis
+    core small
+    type TZP
+  end
+  noprint sfo
+  xc
+    dispersion Grimme3 BJDAMP
+    gga PBE
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=h2 $AMSBIN/ams <<eor
+System
+  atoms
+     H         0.000000    0.000000   -0.377906
+     H         0.000000    0.000000    0.377906
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Grimme3-BJ dispersion-corrected GGA
+  basis
+    core small
+    type TZP
+  end
+  noprint sfo
+  xc
+    dispersion Grimme3 BJDAMP
+    gga PBE
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=fragments $AMSBIN/ams <<eor
+System
+  atoms
+     C         0.000000    1.398973   -3.054539  adf.f=b1
+     H         0.000000    2.490908   -3.049828  adf.f=b1
+     C         1.211546    0.699486   -3.054539  adf.f=b1
+     H         2.157190    1.245454   -3.049828  adf.f=b1
+     C         1.211546   -0.699486   -3.054539  adf.f=b1
+     H         2.157190   -1.245454   -3.049828  adf.f=b1
+     C         0.000000   -1.398973   -3.054539  adf.f=b1
+     H         0.000000   -2.490908   -3.049828  adf.f=b1
+     C        -1.211546   -0.699486   -3.054539  adf.f=b1
+     H        -2.157190   -1.245454   -3.049828  adf.f=b1
+     C        -1.211546    0.699486   -3.054539  adf.f=b1
+     H        -2.157190    1.245454   -3.049828  adf.f=b1
+     C        -1.211546   -0.699486    3.054539  adf.f=b2
+     H        -2.157190   -1.245454    3.049828  adf.f=b2
+     C         0.000000   -1.398973    3.054539  adf.f=b2
+     H         0.000000   -2.490908    3.049828  adf.f=b2
+     C         1.211546   -0.699486    3.054539  adf.f=b2
+     H         2.157190   -1.245454    3.049828  adf.f=b2
+     C         1.211546    0.699486    3.054539  adf.f=b2
+     H         2.157190    1.245454    3.049828  adf.f=b2
+     C         0.000000    1.398973    3.054539  adf.f=b2
+     H         0.000000    2.490908    3.049828  adf.f=b2
+     C        -1.211546    0.699486    3.054539  adf.f=b2
+     H        -2.157190    1.245454    3.049828  adf.f=b2
+     H         0.000000    0.000000   -0.377906  adf.f=h2
+     H         0.000000    0.000000    0.377906  adf.f=h2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Grimme3-BJ dispersion-corrected GGA
+  fragments
+     b1 benzene1.results/adf.rkf
+     b2 benzene2.results/adf.rkf
+     h2 h2.results/adf.rkf
+  end
+  noprint sfo
+  xc
+    dispersion Grimme3 BJDAMP
+    gga PBE
+  end
+EndEngine
+
+eor

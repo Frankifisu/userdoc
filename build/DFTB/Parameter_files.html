@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parameterizations &mdash; DFTB 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="DFTB 2021.1 documentation" href="index.html"/>
+        <link rel="next" title="Required citations" href="Required_citations.html"/>
+        <link rel="prev" title="Example: Restarting a geometry optimization" href="Examples/GO_restart.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="keywords.html">Keywords</a>
+           
+           
+           <a href="genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search DFTB" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-DFTB" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#what-s-new-in-dftb">What’s new in DFTB?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2022-1">New in DFTB2022.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2021-1">New in DFTB2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2020">New in DFTB2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2019-3">New in DFTB2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2019-1">New in DFTB2019.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2018">New in DFTB2018</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="General.html#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="General.html#ams-a-new-driver-program">AMS: a new driver program</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AMSdriver_tasks_and_properties.html">AMS driver’s tasks and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AMSdriver_tasks_and_properties.html#geometry-system-definition">Geometry, System definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMSdriver_tasks_and_properties.html#tasks-exploring-the-pes">Tasks: exploring the PES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMSdriver_tasks_and_properties.html#properties-in-the-ams-driver">Properties in the AMS driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DFTB_Model_Hamiltonian.html">Model Hamiltonians</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#slater-koster-based-dftb">Slater-Koster based DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#model-hamiltonian">Model Hamiltonian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#dispersion-correction">Dispersion correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#solvation-gbsa">Solvation (GBSA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#scc-details-and-spin-polarization">SCC details and spin-polarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#k-space-integration">k-space integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#xtb-specific-keywords">xTB specific keywords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#technical-options">Technical options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Spectroscopy_and_Properties.html">Spectroscopy and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Spectroscopy_and_Properties.html#electronic-structure-of-periodic-systems">Electronic structure of periodic systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spectroscopy_and_Properties.html#excited-states-with-time-dependent-dftb">Excited states with time-dependent DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spectroscopy_and_Properties.html#frequencies-phonons-and-elastic-tensor">Frequencies, phonons and elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spectroscopy_and_Properties.html#other-properties">Other properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NEGF.html">Electronic transport (NEGF)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#transport-with-negf-in-a-nutshell">Transport with NEGF in a nutshell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#simulations-work-flow">Simulations work flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#conductance-input-options">Conductance input options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#miscellaneous-remarks-on-dftb-negf">Miscellaneous remarks on DFTB-NEGF</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Examples/FREQ_aspirin_SCC.html">Example: Normal modes (frequencies) for aspirin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/MD_aspirin.html">Example: Molecular dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and transition state search for H2 on graphene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/FREQ_HNDT_VCD.html">Example: Vibrational circular dichroism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/conductance.html">Example: Electronic transport with NEGF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/Diamond_under_pressure.html">Example: Diamond under pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/ElasticTensor.html">Example: Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/FREQ_LR-TDDFTB_benzene.html">Example: Excited states frequencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/GO_LR-TDDFTB_benzene.html">Example: Geometry optimization for an excited state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/GO_LR-TDDFTB_CO_eigenfollow.html">Example: Geometry optimization following a specific excited state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/SP_LR-TDDFTB_fullerene.html">Example: Fullerene excitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/Li_BZPlot.html">Example: Band structure with user-defined BZ path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/GO_restart.html">Example: Restarting a geometry optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parameterizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#parameter-meta-info">Parameter meta-info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#available-parameter-sets">Available parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dftb-org">DFTB.org</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quasinano">QUASINANO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dresden">Dresden</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#files-in-the-resources-directory">Files in the resources directory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slater-koster-files">Slater-Koster files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-yaml-files">Additional .yaml files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis-function-information-in-rkf-files">Basis function information in .rkf files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#parameter-references">Parameter references</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="References.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="References.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="References.html#general-description">General Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#parameter-sets">Parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="References.html#quasinano2013-1">QUASINANO2013.1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#quasinano2015">QUASINANO2015</a></li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#dresden">Dresden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#dftb-org">DFTB.org</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">DFTB</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="DFTB.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">DFTB</a>/</li>
+      
+    <li class="orange-text">Parameterizations</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parameterizations">
+<h1>Parameterizations<a class="headerlink" href="#parameterizations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="parameter-meta-info">
+<span id="metainfo-yaml"></span><h2>Parameter meta-info<a class="headerlink" href="#parameter-meta-info" title="Permalink to this headline">¶</a></h2>
+<p>There is a file named <code class="docutils literal notranslate"><span class="pre">metainfo.yaml</span></code> in each resources directory (see <a class="reference internal" href="DFTB_Model_Hamiltonian.html#dftb-key-resourcesdir"><span class="std std-ref">ResourcesDir</span></a>), for example <em>DFTB.org/3ob-3-1/metainfo.yaml</em>, which contains information about the capabilities of a parameter set.
+The file is in accordance with the  <a class="reference external" href="http://www.yaml.org">YAML</a> syntax convention.
+In older versions of AMS this file was optional and its format was slightly different.
+Starting with the 2017 release of ADF/AMS, the <code class="docutils literal notranslate"><span class="pre">metainfo.yaml</span></code> file is required to use a parameter set.</p>
+<p>The following entries <code class="docutils literal notranslate"><span class="pre">metainfo.yaml</span></code> specify the capabilities of the parameter set:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">supports:</span> <span class="pre">[dftb0,</span> <span class="pre">scc-dftb,</span> <span class="pre">dftb3,</span> <span class="pre">gfn-xtb]</span></code></dt>
+<dd>A comma-separated list of model Hamiltonians for which the parameter set can be used.
+If the parameter set only supports a single model Hamiltonian, the enclosing <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> can be dropped.
+This entry is mandatory. Without it, DFTB will refuse to use the parameter set.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">format:</span> <span class="pre">txt|txtq</span></code></dt>
+<dd>Specifies which format is used for the Slater-Koster files of the parameter set.
+Use <code class="docutils literal notranslate"><span class="pre">txt</span></code> for normal text files with extension <code class="docutils literal notranslate"><span class="pre">.skf</span></code>.
+<code class="docutils literal notranslate"><span class="pre">txtq</span></code> is used for the  encrypted Slater-Koster files from the QUASINANO parameter sets.
+Encrypted Slater-Koster files have the extension <code class="docutils literal notranslate"><span class="pre">.ske</span></code>.
+If the <code class="docutils literal notranslate"><span class="pre">format</span></code> entry is not there, normal (unencrypted) text files are assumed.
+Note that this entry is only relevant for Slater-Koster based DFTB and not used by the extended tight-binding model Hamiltonians.</dd>
+</dl>
+<dl class="docutils" id="repulsive-potential-metainfo">
+<dt><code class="docutils literal notranslate"><span class="pre">repulsion:</span> <span class="pre">no|partial|yes</span></code></dt>
+<dd>Specifies whether the parameter set has repulsive potentials for all pairs of elements.
+Parameter sets that do not have repulsive potentials (e.g. QUASINANO2013.1) can not be used in geometry optimizations, molecular dynamics or frequency calculations.
+However, they can still be used in single point calculations, e.g. for UV/Vis absorption spectra of molecules or band structures of solids.
+Some parameter sets (e.g. DFTB.org/halorg-0-1) have most, <em>but not quite all</em> repulsive potentials.
+If <code class="docutils literal notranslate"><span class="pre">repulsion</span></code> is set to <code class="docutils literal notranslate"><span class="pre">partial</span></code>, DFTB will allow calculations with run-types normally requiring repulsive potentials and will only print a warning about which pairs are missing.
+It is then the user’s responsibility to ensure that element pairs for which the repulsion is missing do not get too close during the calculation.
+If the <code class="docutils literal notranslate"><span class="pre">repulsion</span></code> entry is not found, DFTB will assume that there are repulsive potentials for all element pairs.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">spin_polarization:</span> <span class="pre">no|yes</span></code></dt>
+<dd>Whether the parameter set supports unrestricted calculations.
+The default value is <code class="docutils literal notranslate"><span class="pre">no</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">orbital_dependence:</span> <span class="pre">[</span> <span class="pre">noldep,</span> <span class="pre">ldep</span> <span class="pre">]</span></code></dt>
+<dd>Whether the parameter set supports an atomic and/or shell-resolved SCC cycle.
+If only one of the two is supported, the enclosing <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> can be dropped and the <code class="docutils literal notranslate"><span class="pre">default_orbital_dependence</span></code> entry (see below) does not need to be specified.
+If the <code class="docutils literal notranslate"><span class="pre">orbital_dependence</span></code> key is not found, DFTB assumes that the parameter set only supports atomic SCC cycles.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">default_orbital_dependence:</span> <span class="pre">noldep|ldep</span></code></dt>
+<dd>The default mode for the SCC cycle.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dispersion:</span> <span class="pre">[</span> <span class="pre">uff,</span> <span class="pre">ulg,</span> <span class="pre">d2,</span> <span class="pre">d3-bj,</span> <span class="pre">d4</span> <span class="pre">]</span></code></dt>
+<dd>A comma-separated list of London dispersion corrections supported by the parameter set.
+If only one method is supported, the enclosing <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> can be dropped and the <code class="docutils literal notranslate"><span class="pre">default_dispersion</span></code> entry (see below) does not need to be specified.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">default_dispersion:</span> <span class="pre">uff|ulg|d2|d3-bj|d4</span></code></dt>
+<dd>The default dispersion method to be used if the user enables dispersion but does not specify a method explicitly.
+If the <code class="docutils literal notranslate"><span class="pre">default_dispersion</span></code> entry is not found and more than one method is supported according to <code class="docutils literal notranslate"><span class="pre">dispersion</span></code> entry, <strong>no</strong> dispersion correction will be used by default.
+The user then has to select a dispersion method explicitly in the input file.</dd>
+</dl>
+<p>In addition to specifying the parameter set’s capabilities, the <code class="docutils literal notranslate"><span class="pre">metainfo.yaml</span></code> file should also contain references to the scientific publication describing the parameter set:</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">url</span><span class="p">:</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">scm</span><span class="o">.</span><span class="n">com</span>
+
+<span class="n">reference</span><span class="p">:</span> <span class="o">|</span>
+  <span class="n">M</span><span class="o">.</span> <span class="n">Wahiduzzaman</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span> <span class="n">F</span><span class="o">.</span> <span class="n">Oliveira</span><span class="p">,</span> <span class="n">P</span><span class="o">.</span> <span class="n">Philipsen</span><span class="p">,</span> <span class="n">L</span><span class="o">.</span> <span class="n">Zhechkov</span><span class="p">,</span> <span class="n">E</span><span class="o">.</span> <span class="n">van</span> <span class="n">Lenthe</span><span class="p">,</span> <span class="n">H</span><span class="o">.</span> <span class="n">Witek</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span> <span class="n">Heine</span>
+  <span class="s2">&quot;DFTB Parameters for the Periodic Table: Part 1, Electronic Structure&quot;</span><span class="p">,</span>
+  <span class="n">J</span><span class="o">.</span> <span class="n">Chem</span><span class="o">.</span> <span class="n">Theory</span> <span class="n">Comput</span><span class="o">.</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2013</span><span class="p">,</span> <span class="mi">4006</span><span class="o">-</span><span class="mi">4017</span><span class="p">,</span> <span class="n">DOI</span><span class="p">:</span> <span class="mf">10.1021</span><span class="o">/</span><span class="n">ct4004959</span>
+
+<span class="n">short_reference</span><span class="p">:</span> <span class="n">J</span><span class="o">.</span> <span class="n">Chem</span><span class="o">.</span> <span class="n">Theory</span> <span class="n">Comput</span><span class="o">.</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2013</span><span class="p">,</span> <span class="mi">4006</span><span class="o">-</span><span class="mi">4017</span>
+</pre></div>
+</div>
+<p>All these entries are optional and at the moment only the <code class="docutils literal notranslate"><span class="pre">reference</span></code> entry is read by DFTB (and reproduced verbatim in its output).
+Note that the pipe symbol <code class="docutils literal notranslate"><span class="pre">|</span></code> is necessary to start a multiline entry (with preserved line breaks) and that the following lines have to be indented by at least one space.</p>
+</div>
+<div class="section" id="slater-koster-based-dftb">
+<span id="dftb-parameters"></span><h2>Slater-Koster based DFTB<a class="headerlink" href="#slater-koster-based-dftb" title="Permalink to this headline">¶</a></h2>
+<p>The most popular parameter sets for Slater-Koster based DFTB are <a class="reference internal" href="#available-parameter-sets"><span class="std std-ref">distributed with the AMS package</span></a>.
+Other parameter sets can easily be <a class="reference internal" href="#resource-dir-files"><span class="std std-ref">added</span></a>.</p>
+<p>Often parameter files are designed for a specific purpose, which may be different from your application, and therefore may give not the desired accuracy.
+Note that parameter files coming from different parameter sets are in general not compatible with each other and should not be mixed.</p>
+<p>Additional licenses may be required to use some of the distributed parameter sets.
+Please contact us at <a class="reference external" href="mailto:license&#37;&#52;&#48;scm&#46;com">license<span>&#64;</span>scm<span>&#46;</span>com</a> for details.</p>
+<div class="section" id="available-parameter-sets">
+<span id="id1"></span><h3>Available parameter sets<a class="headerlink" href="#available-parameter-sets" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="dftb-org">
+<h4>DFTB.org<a class="headerlink" href="#dftb-org" title="Permalink to this headline">¶</a></h4>
+<p>The DFTB implementation shipped by SCM provides the most up-to-date parameter sets available on the DFTB.org website.
+The following sets are currently shipped:</p>
+<ul class="simple">
+<li>3ob-3-1 (Br, C, Ca, Cl, F, H, I, K, Mg, N, Na, O, P, S, Zn): general purpose set for the DFTB3 method</li>
+<li>mio-1-1 (H, C, N, O, S, P): for bio and organic molecules with SCC-DFTB</li>
+<li>pbc-0-3 (Si, F, O, N, C, H, Fe): for solid and surfaces</li>
+<li>matsci-0-3 (Al, Si, Cu, Na, Ti, Ba): for various compounds in material science</li>
+</ul>
+<p>In addition, we ship the following specific purpose parameter sets:</p>
+<ul class="simple">
+<li>3ob-freq: modified 3ob parameters for a better description of vibrational frequencies</li>
+<li>3ob-hhmod: modified H-H for 3ob (for a better description of H2)</li>
+<li>3ob-nhmod: modified N-H for 3ob (improves sp3-N proton affinities)</li>
+<li>3ob-ophyd: modified O-P for 3ob (improves description of pentavalent phosphorus species)</li>
+<li>auorg (Au + mio): for gold-thiolate compounds</li>
+<li>borg (B, H): boron systems (solids and molecules)</li>
+<li>chalc-0-1 (As + mio): for chalcogenide glasses</li>
+<li>halorg (F, Cl, Br, I + mio): for halogens</li>
+<li>hyb-0-1 (Ag, Ga, As, Si + mio): for organic and inorganic hybrid systems</li>
+<li>magsil (Mg, Si, O, H, Mg): for chrisotyle nanotubes</li>
+<li>miomod-hh: contains a modified parameter set for H2</li>
+<li>miomod-nh: contains a modified parameter set fo N-H to improve N-H binding energies</li>
+<li>siband (Si, O, H): electronic parameters for accurate silicon and silicon dioxide band structures</li>
+<li>tiorg-0-1 (Ti + mio): for Ti bulk, TiO2 bulk, TiO2 surfaces, and TiO2 with organic molecules</li>
+<li>trans3d-0-1 (Sc, Ti, Fe, Co, Ni + mio): transition metal elements for biological systems</li>
+<li>znorg-0-1 (Zn + mio): for Zn bulk, ZnO bulk, ZnO surfaces, and ZnO with organic molecules</li>
+</ul>
+<p>We recommend to visit the <a class="reference external" href="http://www.dftb.org">DFTB.org</a> web site for more detailed information about each set.
+We are committed to shipping all DFTB.org parameter sets in their latest version.
+If you miss one of the DFTB.org parameter sets in our distribution, please contact us at <a class="reference external" href="mailto:support&#37;&#52;&#48;scm&#46;com">support<span>&#64;</span>scm<span>&#46;</span>com</a>.
+Please note that our implementation of DFTB currently does not support parameter sets containing f-functions, such as the “rare” set.</p>
+</div>
+<div class="section" id="quasinano">
+<h4>QUASINANO<a class="headerlink" href="#quasinano" title="Permalink to this headline">¶</a></h4>
+<p>The <a class="reference internal" href="References.html#quasinano2013-1"><span class="std std-ref">QUASINANO2013.1</span></a> set of DFTB parameter files available in the AMS package is designed by Mohammad Wahiduzzaman et al. contains parameters for a large part of the periodic table (no f-elements).
+Note that the QUASINANO2013.1 set only contains the electronic part of the interaction, so that only the spectrum for a given geometry can be calculated, but no total energy, and thus also no forces.
+These parameters can be used in TD-DFTB calculations, for example.</p>
+<p>The <a class="reference internal" href="References.html#quasinano2015"><span class="std std-ref">QUASINANO2015</span></a> parameter set extends the QUASINANO2013.1 parameter set, and includes terms that are needed to compute the total energy and its gradient.</p>
+</div>
+<div class="section" id="dresden">
+<h4>Dresden<a class="headerlink" href="#dresden" title="Permalink to this headline">¶</a></h4>
+<p>The so called Dresden set of DFTB parameter files available in the AMS package were designed by J. Frenzel, A.F. Oliveira, N. Jardillier, T. Heine, and G. Seifert, mainly at the Technische Universität in Dresden, Germany, see also some <a class="reference internal" href="References.html#dresden"><span class="std std-ref">additional information about the generation of these parameter files</span></a>.
+These parameter files are kept in the directory $AMSHOME/atomicdata/DFTB/Dresden.</p>
+</div>
+</div>
+<div class="section" id="files-in-the-resources-directory">
+<span id="resource-dir-files"></span><h3>Files in the resources directory<a class="headerlink" href="#files-in-the-resources-directory" title="Permalink to this headline">¶</a></h3>
+<p>This section contains a technical description of all the files and their formats which together constitute a DFTB parameter set.
+The parameter sets <a class="reference internal" href="#available-parameter-sets"><span class="std std-ref">distributed with the AMS package</span></a> are ready to be used out-of-the box, and no knowledge about their format should be necessary to run DFTB calculations.
+However, users who want to use their own DFTB parameters with our implementation, will need to package them in a way that is understood by it.</p>
+<p>DFTB parameter sets in the AMS package have up to four components: The <a class="reference internal" href="#slater-koster-files"><span class="std std-ref">Slater-Koster files</span></a>, the <a class="reference internal" href="#metainfo-yaml"><span class="std std-ref">metainfo.yaml file</span></a> and the optionally some <a class="reference internal" href="#additional-yaml-files"><span class="std std-ref">additional .yaml files</span></a> as well as <a class="reference internal" href="#basisfunctions-in-rkf-file"><span class="std std-ref">binary .rkf files containing the basis functions</span></a>.</p>
+<div class="section" id="slater-koster-files">
+<span id="id3"></span><h4>Slater-Koster files<a class="headerlink" href="#slater-koster-files" title="Permalink to this headline">¶</a></h4>
+<p>Most of the data constituting a DFTB parameter set is contained in the so called Slater-Koster files.
+These are typically text files with the file extension <code class="docutils literal notranslate"><span class="pre">.skf</span></code>.
+For legal reasons, some parameter sets that are shipped with AMS the Slater-Koster files are encrypted though, in which case their file extension is <code class="docutils literal notranslate"><span class="pre">.ske</span></code>.</p>
+<p>There is generally a Slater-Koster file per <strong>pair of elements</strong> supported by the parameter set, e.g. for a set supporting the four elements C,H,O,N there will be 16 Slater-Koster files in total.
+The Slater-Koster file names contain the symbols of the elements, e.g. <code class="docutils literal notranslate"><span class="pre">C-H.skf</span></code>, <code class="docutils literal notranslate"><span class="pre">H-O.skf</span></code> and <code class="docutils literal notranslate"><span class="pre">C-C.skf</span></code>.
+Note that files for both element orders, e.g. <code class="docutils literal notranslate"><span class="pre">C-H.skf</span></code> and <code class="docutils literal notranslate"><span class="pre">H-C.skf</span></code>, are needed and differ in general.
+The Slater-Koster files contain the matrix elements of the Hamiltonian operator and the overlap between between basis functions centered on two atoms, tabulated for different distances.
+They also contain a description of a repulsive potential between the two atoms.
+Furthermore the one element Slater-Koster files (like <code class="docutils literal notranslate"><span class="pre">H-H.skf</span></code> and <code class="docutils literal notranslate"><span class="pre">C-C.skf</span></code>) contain some information about the individual atom, e.g. orbital energies of the atomic orbitals.
+A <a class="reference external" href="http://www.dftb.org/fileadmin/DFTB/public/misc/slakoformat.pdf">detailed description</a> of the Slater-Koster file format can be found at <a class="reference external" href="http://www.dftb.org">DFTB.org</a>.</p>
+</div>
+<div class="section" id="additional-yaml-files">
+<span id="id5"></span><h4>Additional .yaml files<a class="headerlink" href="#additional-yaml-files" title="Permalink to this headline">¶</a></h4>
+<p>The <a class="reference external" href="http://www.dftb.org/fileadmin/DFTB/public/misc/slakoformat.pdf">Slater-Koster file format</a> is relatively old and very inflexible.
+Over the years extensions of the DFTB method (e.g. spin-polarization, DFTB3, dispersion corrections) have been developed that require parameters which do not have a place in the Slater-Koster files.
+In the AMS implementation of DFTB, these parameters are stored in additional <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> files in the resources directory of the parameter set:
+The <code class="docutils literal notranslate"><span class="pre">additional_parameters.yaml</span></code> file as well as per element <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> files, e.g. <code class="docutils literal notranslate"><span class="pre">H.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">C.yaml</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">additional_parameters.yaml</span></code> file contains anything that applies to the entire parameter set and does not depend on the individual elements.
+At the moment this is:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">grimme_d3bj_params:</span> <span class="pre">s6</span> <span class="pre">s8</span> <span class="pre">a1</span> <span class="pre">a2</span></code></dt>
+<dd>The fitting parameters for Grimme’s D3-BJ dispersion correction.
+This entry is mandatory if the <code class="docutils literal notranslate"><span class="pre">metainfo.yaml</span></code> file lists D3-BJ as a supported dispersion correction method.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">grimme_d4_params:</span> <span class="pre">s6</span> <span class="pre">s8</span> <span class="pre">a1</span> <span class="pre">a2</span></code></dt>
+<dd>The fitting parameters for Grimme’s D4 dispersion correction.
+This entry is mandatory if the <code class="docutils literal notranslate"><span class="pre">metainfo.yaml</span></code> file lists D4 as a supported dispersion correction method.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">zeta_Hcorr:</span> <span class="pre">zeta</span></code></dt>
+<dd>A single number <code class="docutils literal notranslate"><span class="pre">zeta</span></code> used in the HX-damping usually applied in DFTB3 calculations.</dd>
+</dl>
+<p>The per element <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> files may contain the following entries:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">hubbard:</span> <span class="pre">U_atom</span></code></dt>
+<dd>The atomic Hubbard parameter used in a normal, atomic SCC cycle is specified in the element’s <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file as the <code class="docutils literal notranslate"><span class="pre">hubbard</span></code> entry.
+It is quite surprising that such a commonly used parameter does not have its place in the Slater-Koster files, which only hold the shell-dependent Hubbard parameters.
+For atomic SCC cycles it is common practice to use the Hubbard parameter of the s-shell as the atomic Hubbard parameter, even though the two values are not strictly related.
+For consistency with other DFTB implementations, AMS DFTB will do the same if the atomic Hubbard parameter is not found in the element’s <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file.
+However, it will also notify the user about this potentially questionable behavior.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hubbard_derivative:</span> <span class="pre">dUdq</span></code></dt>
+<dd>The derivative of the the atomic hubbard parameter with respect to the atomic charge.
+This is information is required to perform DFTB3 calculations.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">magnetic_hubbard</span></code> and <code class="docutils literal notranslate"><span class="pre">magnetic_hubbard_ldep</span></code></dt>
+<dd><p class="first">The magnetic Hubbard parameters (often abbreviated W in the literature).
+These are required for unrestricted calculations and TD-DFTB singlet-triplet excitations.
+Depending on whether the parameter set allows atomic and/or shell resolved SCC cycles, the magnetic Hubbard parameter is given as a single number and/or a small matrix:</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">magnetic_hubbard</span><span class="p">:</span> <span class="n">W_atom</span>
+
+<span class="n">magnetic_hubbard_ldep</span><span class="p">:</span> <span class="o">&gt;</span>
+    <span class="n">W_ss</span>  <span class="n">W_sp</span>
+    <span class="n">W_ps</span>  <span class="n">W_pp</span>
+</pre></div>
+</div>
+<p class="last">The size of the matrix is determined by the number of basis functions on the element. Note that the <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> is essential to start a multiline entry (in which line breaks are ignored).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="basis-function-information-in-rkf-files">
+<span id="basisfunctions-in-rkf-file"></span><h4>Basis function information in .rkf files<a class="headerlink" href="#basis-function-information-in-rkf-files" title="Permalink to this headline">¶</a></h4>
+<p>Many parameter sets additionally have per element <code class="docutils literal notranslate"><span class="pre">.rkf</span></code> files in the resources directory, e.g. <code class="docutils literal notranslate"><span class="pre">H.rkf</span></code> and <code class="docutils literal notranslate"><span class="pre">C.rkf</span></code>.
+These binary files, which can be opened in the GUI with KFBrowser, contain information about the basis functions used to calculate the matrix elements in the Slater-Koster files.
+While this information is not needed to perform the DFTB calculation itself, it is used by the GUI in order to visualize properties like molecular orbitals or densities in AMSview.</p>
+</div>
+</div>
+</div>
+<div class="section" id="extended-tight-binding-xtb">
+<span id="xtb-parameters"></span><h2>Extended tight-binding (xTB)<a class="headerlink" href="#extended-tight-binding-xtb" title="Permalink to this headline">¶</a></h2>
+<p>The AMS package comes with the GFN1-xTB parameterization of the extended tight-binding Hamiltonian. This is the parameterization published in the original article on GFN1-xTB, which is optimized for accurate geometries, frequencies and non-covalent interactions.</p>
+<p>In contrast to Slater-Koster based DFTB, the extended tight-binding (xTB) method does not store precalculated matrix elements in Slater-Koster files. Instead there is a parameter file which contains information about the basis functions themselves, which is used to calculate matrix elements at run-time. The entire parameterization of GFN1-xTB is stored in simple text files found in <code class="docutils literal notranslate"><span class="pre">$AMSHOME/atomicdata/DFTB/GFN1-xTB</span></code>. Expert users can copy this directory, modify the parameterization to their needs, and use the <a class="reference internal" href="DFTB_Model_Hamiltonian.html#dftb-key-resourcesdir"><span class="std std-ref">ResourcesDir</span></a> keyword to load their modified parameterization.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">elements.xtbpar</span></code></dt>
+<dd>Contains most the element specific parameters, e.g. the Hubbard parameters and their derivative, as well as the parameters used for the repulsive potential.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">basis.xtbpar</span></code></dt>
+<dd>Contains the definition of the used basis functions. Note that one can add or remove basis functions for an element by adding or deleting lines in this file, as long as there is at most one set of basis functions per angular momentum for each element. For example one can not have two sets of p-functions with a different main quantum number on an atom. (The only exception here is hydrogen, which has both a <code class="docutils literal notranslate"><span class="pre">1s</span></code> and <code class="docutils literal notranslate"><span class="pre">2s</span></code> function. Hydrogen is treated in a special way in the GFN1-xTB implementation in AMS, which allows this. However, one should not change the hydrogen basis by editing the <code class="docutils literal notranslate"><span class="pre">basis.xtbpar</span></code> file. DFTB will refuse to run if this is done.)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">atomic_configurations.xtbpar</span></code></dt>
+<dd>Contains the electron configurations of the isolated atoms.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">electronegativity.xtbpar</span></code></dt>
+<dd>Contains the Pauling electronegativities for all elements.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">globals.xtbpar</span></code></dt>
+<dd>Contains the global parameters of the method, see Table 2 of the GFN1-xTB article.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">metals.xtbpar</span></code></dt>
+<dd>This file defines which elements are considered metals. (The coordination induced scaling of the atomic energy levels is only used for nonmetals.)</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Required_citations.html" class="btn btn-neutral float-right" title="Required citations" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Examples/GO_restart.html" class="btn btn-neutral" title="Example: Restarting a geometry optimization" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

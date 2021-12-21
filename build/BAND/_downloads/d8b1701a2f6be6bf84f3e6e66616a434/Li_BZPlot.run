@@ -1,0 +1,96 @@
+#! /bin/sh
+
+# In the first example we use the automatic k-path through the Brillouin zone
+# (see BandStructure key-block). The results can be visualized with the BandStructure 
+# Gui Module.
+
+
+AMS_JOBNAME=auto $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  Atoms
+     Li 0.0 0.0 0.0
+  END
+  Lattice
+    -1.745  1.745  1.745
+     1.745 -1.745  1.745
+     1.745  1.745 -1.745
+  End
+End
+
+Engine Band 
+  NumericalQuality Basic
+  Relativity Level=None
+
+  BandStructure
+     Enabled   true
+     Automatic true
+     FatBands  false
+     EnergyAboveFermi 2.0
+  end
+EndEngine
+eor
+
+# In the second example we specify the path through the Brillouin zone by hand.
+# We set automatic to false and then specify the path with the BZPath key block,
+# using one or more path subkeys. Here, the second run will produce exactly the
+# same path as the automatic one.
+
+AMS_JOBNAME=user $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  Atoms
+     Li 0.0 0.0 0.0
+  END
+  Lattice
+    -1.745  1.745  1.745
+     1.745 -1.745  1.745
+     1.745  1.745 -1.745
+  End
+End
+
+Engine Band 
+  NumericalQuality Basic
+  Relativity Level=None
+
+  BandStructure
+     Enabled   true
+     Automatic false
+     FatBands  false
+     EnergyAboveFermi 2.0
+  end
+
+  bzpath
+     path
+        0.00  0.00  0.00  G
+        0.50 -0.50  0.50  H
+        0.00  0.00  0.50  N
+        0.00  0.00  0.00  G
+        0.25  0.25  0.25  P
+        0.50 -0.50  0.50  H
+     End
+     path
+        0.25  0.25  0.25  P
+        0.00  0.00  0.50  N
+     End
+  end
+EndEngine
+eor
+
+export NSCM=1
+
+# The band structure is best visualized using the BandStructure GUI module.
+
+echo 'Extract the band_curves section from the rkf files:'
+$AMSBIN/dmpkf auto.results/band.rkf 'band_curves'
+$AMSBIN/dmpkf user.results/band.rkf 'band_curves'
+
+
+
+
+
+

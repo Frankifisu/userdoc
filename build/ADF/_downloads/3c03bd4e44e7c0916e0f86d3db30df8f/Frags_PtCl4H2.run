@@ -1,0 +1,125 @@
+#! /bin/sh
+
+# The (scalar) ZORA relativistic option formalism) is used because of the
+# presence of the heavy Pt atom. The complex is built from fragments H2 and
+# PtCl_4^2- .
+
+# The calculations of the molecule and larger fragments are performed with
+# GGA's.
+
+
+# == fragments H2 and PtCl_4^2- ==
+
+# The two fragments H2 and PtCl_4^2- are first calculated, from which we are
+# going to build the final complex.
+
+
+AMS_JOBNAME=H2 $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     H       0.0             0.0             0.84
+     H       0.0             0.0            -0.84
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2
+  basis
+    type DZP
+    CreateOutput Yes
+  end
+  noprint sfo,frag,functions
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=PtCl4 $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     Pt    0           0          0
+     Cl    4.361580    0.000000   0
+     Cl    0.000000    4.361580   0
+     Cl   -4.361580    0.000000   0
+     Cl    0.000000   -4.361580   0
+  end
+  charge -2
+end
+
+Task SinglePoint
+
+Engine ADF
+  title PtCl4 (2-)
+  basis
+    PerAtomType Symbol=Pt File=ZORA/DZ/Pt.4d
+    type DZP
+    CreateOutput Yes
+  end
+  noprint sfo,frag,functions
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+
+# The key charge is used to specify the net total charge. The default for the
+# net total charge is the sum-of-fragment-charges. The fragments (Pt and Cl
+# atoms) have been computed neutrally, but we want to calculate the PtCl4
+# complex as a 2- ion.
+
+
+# == Main calculation ==
+
+# Finally we compute PtCl4 H2 2- from the fragments PtCl_4^2- and H2/
+
+
+AMS_JOBNAME=PtCl4H2 $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     Pt   0             0             0             adf.f=PtCl4
+     Cl   0.000000     -4.361580      0.00000000    adf.f=PtCl4
+     Cl   0.000000      4.361580      0.00000000    adf.f=PtCl4
+     Cl  -4.361580      0.000000      0.00000000    adf.f=PtCl4
+     Cl   4.361580      0.000000      0.00000000    adf.f=PtCl4
+     H    0.0           0.0           5.58          adf.f=H2
+     H    0.0           0.0           7.26          adf.f=H2
+  end
+  charge -2
+end
+
+Task SinglePoint
+
+Engine ADF
+  title PtCl4 H2
+  eprint
+    sfo eig ovl
+  end
+  fragments
+     PtCl4     PtCl4.results/adf.rkf
+     H2        H2.results/adf.rkf
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga becke perdew
+  end
+EndEngine
+eor
+
+# Note the adf.f=fragment specification in the Atoms block. No fragment-numbering
+# suffix (|n) is required because there is only one fragment of each fragment
+# type.

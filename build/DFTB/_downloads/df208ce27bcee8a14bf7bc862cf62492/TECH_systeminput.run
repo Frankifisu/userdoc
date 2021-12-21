@@ -1,0 +1,58 @@
+#!/bin/sh
+
+cp $AMSHOME/examples/dftb/TECH_systeminput/*.xyz .
+
+AMS_JOBNAME=bc_standard $AMSBIN/ams << EOF
+Task SinglePoint
+Engine DFTB
+   Resourcesdir DFTB.org/mio-1-1
+   Model DFTB0
+EndEngine
+System
+   GeometryFile bc_standard.xyz
+End
+EOF
+
+AMS_JOBNAME=bc_lattice1 $AMSBIN/ams << EOF
+Task SinglePoint
+Engine DFTB
+   Resourcesdir DFTB.org/mio-1-1
+   Model DFTB0
+EndEngine
+System
+   GeometryFile bc_lattice1.xyz
+End
+EOF
+
+AMS_JOBNAME=bc_lattice2 $AMSBIN/ams << EOF
+Task SinglePoint
+Engine DFTB
+   Resourcesdir DFTB.org/mio-1-1
+   Model DFTB0
+EndEngine
+System
+   GeometryFile bc_lattice2.xyz
+End
+EOF
+
+AMS_JOBNAME=bc_lattice3 $AMSBIN/ams << EOF
+Task SinglePoint
+Engine DFTB
+   Resourcesdir DFTB.org/mio-1-1
+   Model DFTB0
+EndEngine
+System
+   GeometryFile bc_lattice3.xyz
+End
+EOF
+
+AMS_JOBNAME=bc_lattice3_blanklines $AMSBIN/ams << EOF
+Task SinglePoint
+Engine DFTB
+   Resourcesdir DFTB.org/mio-1-1
+   Model DFTB0
+EndEngine
+System
+   GeometryFile bc_lattice3_blanklines.xyz
+End
+EOF

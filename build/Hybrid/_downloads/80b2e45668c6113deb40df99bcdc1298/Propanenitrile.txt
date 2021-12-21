@@ -1,0 +1,32 @@
+
+We first check how bad the MM method is compared to the QM method for some distances in the QM region
+
+Here are the distances (Angstrom) as obtained with a QM and an MM method
+  distance         qm         mm    err(mm)
+ C(1)-C(2)      1.456      1.467      0.011
+ C(1)-N(4)      1.147      1.157      0.010
+ C(2)-H(5)      1.095      1.110      0.015
+
+Can we get better results for the QM region with the hybrid engine?
+
+Even though UFF has automatic atom typing, it still matters (in principle) whether we specify it on input or not
+  * Without typing for each region the types are automatically guessed
+  * With typing the types are always as on input (for all regions)
+
+The only difference is in the C type for the MM region.
+
+Here are the distances (Angstrom) as obtained with a QM and an Hybrid method without explicit typing
+  distance         qm     hybrid err(hybrid)
+ C(1)-C(2)      1.456      1.456      0.000
+ C(1)-N(4)      1.147      1.147      0.000
+ C(2)-H(5)      1.095      1.092     -0.003
+
+Here are the distances (Angstrom) as obtained with a QM and an Hybrid method with explicit typing
+  distance         qm     hybrid err(hybrid)
+ C(1)-C(2)      1.456      1.456      0.000
+ C(1)-N(4)      1.147      1.147      0.000
+ C(2)-H(5)      1.095      1.092     -0.003
+
+Here are some observations for this example
+     * The hybrid engine does better than pure MM
+     * The subtle issue whether or not we specify the types has negligible effect.

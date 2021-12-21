@@ -1,0 +1,159 @@
+#! /bin/sh
+
+
+cat <<eor > H2O_on_MgO.xyz
+39
+
+O   0.0           0.0           0.0            region=H2O
+H  -0.704320560   0.0          -0.66779884     region=H2O
+H   0.704320560   0.0          -0.66779884     region=H2O
+O   1.50158914    0.108856250  -2.19963815
+O  -1.48731305    0.108246430  -2.19972248
+Mg  0.00563782    1.59225904   -2.33893848
+Mg  0.00352084   -1.44762418   -2.24965831
+O   0.00696938    1.57832358   -4.42106808
+O   0.00696938    4.55524313   -4.42106808
+O   2.98388893   -1.39859597   -4.42106808
+O   2.98388893    1.57832358   -4.42106808
+O   2.98388893    4.55524313   -4.42106808
+Mg -2.97355121   -1.39556394   -2.31959606
+Mg -2.97743483    1.58619377   -2.31874087
+Mg -2.97337639    4.55937829   -2.31649087
+Mg  0.00549444    4.55739475   -2.31753869
+Mg  2.98277888   -1.39600311   -2.32043545
+Mg  2.98920147    1.58770902   -2.31910664
+Mg  2.98383523    4.55827076   -2.31621824
+O  -1.49388075   -2.89172181   -2.22718875
+O  -1.48165368    3.06816545   -2.20685378
+O   1.50285846   -2.89006842   -2.22921666
+O   1.49233399    3.06893483   -2.20786341
+O   4.47002638   -2.88279517   -2.21228396
+O   4.47076537    0.09231531   -2.20652142
+O   4.47074422    3.07217257   -2.21022983
+Mg -1.48149039   -2.88705574   -4.42106808
+Mg -1.48149039    0.08986381   -4.42106808
+Mg -1.48149039    3.06678335   -4.42106808
+Mg  1.49542915   -2.88705574   -4.42106808
+Mg  1.49542915    0.08986381   -4.42106808
+Mg  1.49542915    3.06678335   -4.42106808
+Mg  4.47234870   -2.88705574   -4.42106808
+Mg  4.47234870    0.08986381   -4.42106808
+Mg  4.47234870    3.06678335   -4.42106808
+O  -2.96995017   -1.39859597   -4.42106808
+O  -2.96995017    1.57832358   -4.42106808
+O  -2.96995017    4.55524313   -4.42106808
+O   0.00696938   -1.39859597   -4.42106808
+VEC1  8.93075865       0.00000000       0.00000000
+VEC2  0.00000000       8.93075865       0.00000000
+eor
+
+
+
+AMS_JOBNAME=hessian $AMSBIN/ams << eor
+
+Task SinglePoint
+System
+    GeometryFile H2O_on_MgO.xyz
+End
+Properties
+    NormalModes Yes
+    SelectedRegionForHessian H2O
+End
+
+NumericalDifferentiation
+    NuclearStepSize 0.0001
+End
+
+Engine DFTB
+    Model SCC-DFTB
+    ResourcesDir DFTB.org/3ob-3-1
+    DispersionCorrection D3-BJ
+    KSpace Quality=GammaOnly
+EndEngine
+eor
+
+
+AMS_JOBNAME=TS $AMSBIN/ams << eor
+
+Task TransitionStateSearch
+
+System
+    GeometryFile H2O_on_MgO.xyz
+End
+
+Properties
+    NormalModes Yes
+    SelectedRegionForHessian H2O
+End
+
+GeometryOptimization
+    Convergence Step=1.0e-3
+    Quasi-Newton
+       Step
+           TrustRadius 0.015
+       End
+    End
+    InitialHessian
+        Type FromFile
+        File hessian.results/dftb.rkf
+    End
+End
+
+TransitionStateSearch
+    ModeToFollow 1
+End
+
+Constraints
+    Atom 4
+    Atom 5
+    Atom 6
+    Atom 7
+    Atom 8
+    Atom 9
+    Atom 10
+    Atom 11
+    Atom 12
+    Atom 13
+    Atom 14
+    Atom 15
+    Atom 16
+    Atom 17
+    Atom 18
+    Atom 19
+    Atom 20
+    Atom 21
+    Atom 22
+    Atom 23
+    Atom 24
+    Atom 25
+    Atom 26
+    Atom 27
+    Atom 28
+    Atom 29
+    Atom 30
+    Atom 31
+    Atom 32
+    Atom 33
+    Atom 34
+    Atom 35
+    Atom 36
+    Atom 37
+    Atom 38
+    Atom 39
+End
+
+Engine DFTB
+    Model SCC-DFTB
+    ResourcesDir DFTB.org/3ob-3-1
+    DispersionCorrection D3-BJ
+    KSpace Quality=GammaOnly
+EndEngine
+
+eor
+
+
+echo "Extract energy from the rkf file using amsreport:"
+$AMSBIN/amsreport TS.results/dftb.rkf -r "AMSResults%Energy"
+
+echo "Extract frequencies from the rkf file using amsreport:"
+$AMSBIN/amsreport TS.results/dftb.rkf -r "Vibrations%Frequencies[cm-1]##1"

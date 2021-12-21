@@ -1,0 +1,50 @@
+#! /bin/sh
+
+
+# Calculation of the excitation energies of AgI including spin-orbit coupling in
+# a perturbative way.
+
+# ADF can not handle ATOM and linear symmetries in excitation calculations.
+# In case of linear symmetries ADF will automatically use a 
+# a subsymmetry, in this case symmetry C(7v).
+# In the excitation part of the output the symmetry labels are those of C(LIN) in this case.
+
+# For such a small molecule, a relatively small TZ2P basis set is used, which is
+# not sufficient for excitations to Rydberg-like orbitals, one needs more
+# diffuse functions. For larger molecules a TZ2P basis set is in most cases
+# sufficient. In that case one might even consider smaller basis sets.
+
+# The key SOPERT is included in scalar relativistic ZORA calculations of
+# excitation energies. First scalar relativistic TDDFT calculations are
+# performed to determine the lowest 60 singlet-singlet and singlet-triplet
+# excited states and the spin-orbit coupling operator is applied to these
+# single-group excited states to obtain the excitation energies with spin-orbit
+# coupling effects included.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     Ag 0.0000  0.0000  2.5446
+     I  0.0000  0.0000  0.0000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title [AgI]
+  excitations
+    lowest 60
+  end
+  basis
+    type TZ2P
+    core None
+    CreateOutput Yes
+  end
+  numericalquality Good
+  sopert
+  end
+EndEngine
+
+eor

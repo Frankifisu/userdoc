@@ -1,0 +1,72 @@
+Convert old ReaxFF training sets to ParAMS
+===================================================
+
+Previous AMS versions supported ReaxFF parametrizations using different file
+formats than ParAMS. This tutorial shows how to convert from the old format
+(files ``geo``, ``control``, ``trainset.in``, and ``params``) to the new format
+(files ``training_set.yaml``, ``job_collection.yaml``, ``params.conf.py``).
+
+
+Convert ``geo`` to ``job_collection.yaml``
+--------------------------------------------------
+
+The old ``geo`` format distinguishes between
+
+* single-point (``RUTYPE SINGLE POINT``),
+* geometry optimization (``RUTYPE MAXIT 100``, where ``100`` is the maximum number of iterations), and
+* "normal runs" (``RUTYPE NORMAL RUN``). The meaning of ``NORMAL RUN`` is defined in the ``control`` file.
+
+To convert to the ``job_collection.yaml`` format used by ParAMS, you only need to specify the path to
+the ``geo`` file and the AMS settings for ``NORMAL RUN`` (the ``control`` file is
+not read). In the below example, ``NORMAL RUN`` is set to mean ``GeometryOptimization`` with the maximum
+number of iterations set to 10.
+
+.. code-block:: python
+
+    from scm.plams import *
+    from scm.params import *
+
+    normal_run_settings = Settings()
+    normal_run_settings.input.ams.Task = 'GeometryOptimization'
+    normal_run_settings.input.ams.GeometryOptimization.MaxIterations = 10
+    # the PretendConveregd option is used to make ParAMS transparently accept
+    # the last iteration of a geometry optimization if it does not converge within
+    # MaxIterations
+    normal_run_settings.input.ams.GeometryOptimization.PretendConverged = 'Yes'
+
+    job_collection = geo_to_params('/path/to/geo', normal_run_settings=normal_run_settings)
+    job_collection.store('job_collection.yaml')
+
+The conversion automatically reads and writes
+
+* The system charge (only one ``MOLCHARGE`` line is allowed).
+* The atomic positions
+* Bond and angle constraints (the force constants are approximately converted to the AMS format)
+
+
+Convert ``trainset.in``
+--------------------------------
+
+The old ``trainset.in`` format can easily be converted to ``training_set.yaml``:
+
+.. code-block:: python
+
+    from scm.params import *
+
+    training_set = trainset_to_params('/path/to/trainset.in', use_weights=True)
+    training_set.store('training_set.yaml')
+
+* ``use_weights=True`` (recommended, default) converts the "accuracy" from the old ``trainset.in`` format to a *Weight* in the new ``training_set.yaml`` format.
+* ``use_weights=False`` sets the *Weight* to 1.0 for all training set entries, and sets the *Sigma* to the "accuracy" from ``trainset.in``.
+
+For more information about Weight and Sigma, see :ref:`SigmaVsWeight`.
+
+Convert the old ``params`` file
+---------------------------------
+
+The old ``params`` file (unrelated to ParAMS) contains the parameters to optimize and their allowed range of values. It can be applied as follows:
+
+.. code-block:: python
+
+    parameter_interface = ReaxFFParameters('/path/to/ffield')
+    parameter_interface.read_paramsfile('/path/to/params')

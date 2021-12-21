@@ -1,0 +1,69 @@
+#! /bin/sh
+
+# To get the Quantum Theory of Atoms In Molecules and Crystals (QT-AIMAC)
+# analysis use the GridBasedAIM block key.
+
+# The grid-based AIM method is very fast, but a bit inaccurate. Hence, on has to
+# make sure that the results are converged w.r.t. the real-space integration
+# grid.
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Lattice [Bohr]
+      0.0   4.365 4.365
+      4.365 0.0   4.365
+      4.365 4.365 0.0
+   end
+
+   Atoms [Bohr]
+      O   0.0     0.0      0.0
+      Li  2.1825  2.1825   2.1825
+      Li  6.5475  2.1825   2.1825
+   end
+End
+
+Engine Band
+   Title Li2O bulk (fluorite structure)
+
+   KSpace 
+      Symmetric KInteg=3
+   End
+
+   IntegrationMethod Voronoi
+
+   Integration
+      Accint 4
+      accsph 6
+      accpyr 6
+   end
+
+   GridBasedAIM
+      Enabled Yes
+   End
+
+   Dependency basis=1e-9 fit=1e-8
+
+   DIIS
+      dimix 0.2
+      ncycledamp 0
+   end
+
+   scf
+      mixing 0.4
+   end
+
+   xc
+      gga scf bp86
+   end
+
+   Basis
+      Type TZ2P
+      Core small
+   end
+   
+   Relativity Level=None
+EndEngine 
+eor

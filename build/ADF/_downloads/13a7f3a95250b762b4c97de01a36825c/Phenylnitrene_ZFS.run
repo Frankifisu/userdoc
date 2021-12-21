@@ -1,0 +1,51 @@
+#! /bin/sh
+
+
+# The zero-field splitting (ZFS) can be calculated for open shell molecules with
+# electron spin S<=1, using the key ZFS.
+
+# The direct electron spin-spin part and the spin-orbit contribution to ZFS is
+# evaluated. Can be used in combination with LDA and GGAs. RELATIVISTIC ZORA is
+# also required. The direct electron spin-spin part is calculated if HARTREEFOCK
+# is included as separate keyword. Both Coulomb and (Hartree-Fock like) exchange
+# contributions to the direct electron spin-spin term are calculated. In the
+# spin-orbit coupling no Hartree-Fock like exchange contributions are included.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C  0.000000  0.000000  1.072671
+     C  0.000000  1.232517  0.336828
+     C  0.000000  1.216609 -1.046705
+     C  0.000000  0.000000 -1.747681
+     C  0.000000 -1.216609 -1.046705
+     C  0.000000 -1.232517  0.336828
+     N  0.000000  0.000000  2.400797
+     H  0.000000  2.164354  0.892961
+     H  0.000000  2.155064 -1.594614
+     H  0.000000  0.000000 -2.833691
+     H  0.000000 -2.155064 -1.594614
+     H  0.000000 -2.164354  0.892961
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  hartreefock
+  basis
+    core None
+    type TZ2P
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 2.0
+  unrestricted
+  xc
+    gga blyp
+  end
+  zfs
+EndEngine
+eor

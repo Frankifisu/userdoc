@@ -1,0 +1,64 @@
+#! /bin/sh
+
+# eigenvalue-only self-consistent GW calculation for Water.
+
+# We change here several options in the GW block to illustrate how this works 
+
+# We chose M06-2X as starting point 
+# We chose good numerical quality. This implies that 20 imaginary time and frequency points each are used 
+
+# nStates 3
+# ==> We want to print out the 3 highest occupied, and the 3 lowest unoccupied quasi-particle states
+
+# nDIIS 5
+# ==> We use DIIS to converge the quasi-particle energies (linear mixing is possible as well, but it is not recommended)
+# ==> Per default, the DIIS algorithm in evGW considers the last 10 iterations. We only want 5 here. If for some reason
+# ==> your evGW calculation should not converge, this is the first parameter to look into 
+
+# Converge HOMO=5e-3 
+# ==> We consider the procedure to be converged when the HOMO quasi-particle energy between 2 iterations does not change
+# ==> by more than 5 meV
+
+
+$AMSBIN/ams << eor
+Symmetry
+  SymmetrizeTolerance 0.001
+End
+
+System
+  Atoms
+    O  0.0000 0.0000 0.0000
+    H  0.7571 0.0000 0.5861
+    H -0.7571 0.0000 0.5861
+  End
+  Symmetrize Yes
+End
+
+task SinglePoint
+
+Engine adf
+  Basis
+    Core None
+    Type TZ2P
+  End
+  symmetry nosym
+  XC
+     libxc M06-2X
+  end
+  MBPT
+     nTime 20
+     nFrequency 20
+  End  
+  numericalQuality Good
+
+  GW
+     DIIS 5 
+     nStates 3
+     Converge HOMO=5e-3
+     selfconsistency evGW
+  END
+
+EndEngine
+eor
+
+

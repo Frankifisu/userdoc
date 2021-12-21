@@ -1,0 +1,26 @@
+#!/bin/sh
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients True
+End
+
+System
+    Atoms
+        H         0.000000     0.000000  0.000000
+        O         0.8          0.000000  0.000000
+    End
+    Charge -1
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir Dresden
+   DispersionCorrection Auto
+EndEngine
+
+eor
+

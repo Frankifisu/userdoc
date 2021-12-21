@@ -1,0 +1,58 @@
+#! /bin/sh
+
+# Sometimes spurious imaginary frequencies are calculated where one would expect
+# a very low (nearly zero) frequency. Most frequently this happens when there is
+# a barrier-free rotation of, for example, methyl groups. The VibrationalAnalysis 
+# task (using ModeRefinement) allows one to rescan calculated frequencies in order 
+# to find out if they were calculated accurately.
+
+# In this example analytical frequencies are calculated. Next recalculation of
+# certain NH3 frequencies are performed by scanning along normal modes from a
+# restart file. In this calculation the frequencies are calculated numerically
+# with finite displacements using symmetry.
+
+AMS_JOBNAME=NH3 $AMSBIN/ams <<eor
+System
+  Symmetrize Yes
+  atoms
+     N               0.0000    0.0000    0.0000
+     H               0.4729    0.8190    0.3821
+     H              -0.9457    0.0000    0.3821
+     H               0.4729   -0.8190    0.3821
+  end
+end
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+End
+
+Engine ADF
+  title NH3 analytic frequencies
+  beckegrid quality=Good
+  basis
+    type TZP
+    core Small
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=ScanFreq $AMSBIN/ams <<eor
+LoadSystem 
+  File NH3.results/adf.rkf
+End
+LoadEngine NH3.results/adf.rkf
+
+Task VibrationalAnalysis
+
+VibrationalAnalysis
+    Type ModeRefinement
+    NormalModes
+       ModeFile NH3.results/adf.rkf
+       ModeSelect
+          FreqRange 0 4000
+       End
+    End
+End
+eor

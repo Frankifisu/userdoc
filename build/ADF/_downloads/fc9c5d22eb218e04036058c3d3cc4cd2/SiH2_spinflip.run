@@ -1,0 +1,92 @@
+#!/bin/sh
+
+
+# Calculation of the spin-flip excitation energies of the open shell molecule SiH2
+
+AMS_JOBNAME=SpinFlip $AMSBIN/ams <<eor
+System
+  atoms
+     Si 0.0  0.0                0.0
+     H  0.0 -1.095664024353027 -1.045576810836792
+     H  0.0  1.095664024353027 -1.045576810836792
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title spin-flip excitation energies of SiH2
+  excitations
+    lowest 20
+  end
+  forcealda
+  basis
+    type TZ2P
+  end
+  sftddft
+  spinpolarization 2
+  tda
+  unrestricted
+EndEngine
+eor
+
+# In this example, the lowest 20 spin-flip excitation energies of SiH2 are
+# calculated in a spin-unrestricted TDDFT calculation.
+
+# In this case an excited state is used as reference, which means that there can
+# also be a negative excitation energy, which is indeed the case. The electron
+# configuration used in the SCF is (a1)^1 (b1)^1, with Sz=1, thus a ^3B_1
+# state, which is an excited state. The ^1A_1 state with electron configuration
+# (a1)^2 is lower in energy, and is the ground state.
+
+# There is also an excited 1A1 state with electron configuration (b1)^2. The
+# transition from the ground 1A1 state to the excited 1A1 state is an excitation
+# from the electron configuration (a1)^2 to (b1)^2. This transition is actually
+# a double excitation, which means that some double excitations can be reached
+# using spin-flip TDDFT with carefully selected reference states.
+
+# In the MO -> MO transitions part for the excitations of the output file, the
+# spin of each molecular orbitals are also specified to help assign the spin
+# state of the excited states. Note that in these spin-flip calculations the
+# transitions are always from alpha spin-orbital to beta or from beta spin-
+# orbital to alpha spin-orbital.
+
+# For open-shell molecules, spin-flip transition can result in transition to the
+# ground state with a different Sz value, while the symmetry of the transition
+# density is A1. The excitation energy of this transition should be zero and
+# this can be used to test the reliability of spin-flip TDDFT. Indeed the
+# calculation of the spin-flip excitation energies of SiH2 shows one value which
+# is close to zero and has a transition density of A1 symmetry.
+
+# The 1A1 state with electron configuration (a1)^2 can also be used in the
+# calculation of the excitation energies. This is a closed shell configuration,
+# in which case we do not need the spin-flip method.
+
+
+AMS_JOBNAME=Excitation $AMSBIN/ams <<eor
+System
+  atoms
+     Si 0.0  0.0                0.0
+     H  0.0 -1.095664024353027 -1.045576810836792
+     H  0.0  1.095664024353027 -1.045576810836792
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title excitation energies of SiH2
+  excitations
+    lowest 20
+  end
+  basis
+    type TZ2P
+  end
+EndEngine
+
+eor
+
+# The transition from the ground ^1A_1 state to the excited ^1A_1 state, which
+# is an excitation from the electron configuration (a1)^2 to (b1)^2, can not be
+# reached in this calculation, since it has mainly double excitation character.
+# Of course, other excited ^1A_1 states can be reached.

@@ -1,0 +1,599 @@
+#!/bin/sh
+
+
+# == Expert Option ==
+
+# The electron transfer calculation of a water dimer radical cation in this
+# example is aimed at:
+
+# - calculate site energies and couplings of FDE-derived charge-localized states
+# - calculate the charge-transfer excitation energy from a two-state model that
+#   includes the two charge-localized states involved in the calculation
+# - the output also includes a rough evaluation of the error introduced by the
+#   density fitting on the site energies and coupling
+
+
+# First the isolated neutral fragments are obtained. Symmetry NOSYM is used.
+# Next in the first FDE calculation the localized state D+A is calculated, which
+# means that the first water molecule has charge +1, and the second water
+# molecule is neutral. The resulting adf.rkf files must be renamed to fragA1.t21
+# and fragA2.t21. In the second FDE calculation the localized state DA+ is
+# calculated, now the second water molecule has charge +1, and the first water
+# molecule is neutral. The resulting adf.rkf files must be renamed to fragB1.t21
+# and fragB2.t21. The FDE freeze and thaw cycle is done manually, and a spin-
+# unrestricted calculation is performed.
+
+# The electron transfer calculation is next. The files fragA1.t21, fragA2.t21,
+# fragB1.t21, and fragB2.t21 must exist and must have these names. The program
+# must be execute in serial mode. Hybrids are not supported. NumericalQuality
+# good is needed for accuracy.
+
+
+# == The output of this example is discussed here ==
+
+
+# ============  Electron Transfer RESULTS ===================
+
+# Electronic Coupling =         0.000000 eV
+# Electronic Coupling =        -0.000006 cm-1
+# H11-H22             =        -1.396836 eV
+# Excitation Energy   =         1.396836 eV
+# Overlap             =         0.000000
+# H11 H22 H12 =  -152.443044906236  -152.391712133030  -151.743951196449 Eh
+# S11 S22 S12 =     0.981761438554     0.980941502465    -0.000000000038
+
+
+# =========== END Electron Transfer RESULTS ================
+
+# Due to symmetry, the overlap is almost diagonal (Overlap = 0.00), thus the
+# transition density is evaluated with one less electron as explained in Ref.
+# [JCP 138 (2013) 054101, https://doi.org/10.1063/1.4789418].
+
+# The electronic coupling between the state with a positive charge localized on
+# one water molecule and another with the charge localized on the other water
+# molecule is given by 'Electronic Coupling' and is reported in eV and cm^-1.
+
+# 'H11-H22' is the difference of the site energies in eV. Values of the site
+# energies are given by the first two values of 'H11 H22 H12' in atomic units.
+
+# 'Excitation Energy' reports the value of the transfer excitation energy as
+# calculated by diagonalization of the 2X2 generalized eigenvalue problem in
+# the basis of the charge-localized states, see Refs. 
+# [JCP 135 (2011) 234103, https://doi.org/10.1063/1.3666005] and 
+# [JCP 138 (2013) 054101, https://doi.org/10.1063/1.4789418].
+
+# 'S11 S22 S12' are the values of the non-normalized overlaps.
+
+
+# ==================================================
+#           OBTAIN ISOLATED FRAGMENTS
+# ==================================================
+
+
+AMS_JOBNAME=Iso1 $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000
+     H        -0.9358409558         .2646136961      0.0000000000
+     H        -0.0304663436       -0.9828924420      0.0000000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  basis
+    core None
+    type TZP
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 90
+  end
+  symmetry NOSYM
+  title Isolated water molecule 1
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+
+mv Iso1.results/adf.rkf t21.iso.rho1
+
+AMS_JOBNAME=Iso2 $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000       -2.9053396088        0.0000000000
+     H        -0.4092227596       -3.3374838250       -0.7701260000
+     H        -0.4092227596       -3.3374838250        0.7701260000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  basis
+    core None
+    type TZP
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 90
+  end
+  symmetry NOSYM
+  title isolated water molecule 2
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+mv ams.results prev.results
+
+mv Iso2.results/adf.rkf t21.iso.rho2
+
+# ==================================================
+#   FIRST FDE CALCULATION: STATE D+A
+#   note: the freeze and thaw is done manually
+#         as we have open-shell fragments
+# ==================================================
+
+
+AMS_JOBNAME=Emb1 $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000   adf.f=rho1
+     H        -0.9358409558         .2646136961      0.0000000000   adf.f=rho1
+     H        -0.0304663436       -0.9828924420      0.0000000000   adf.f=rho1
+     O         0.0000000000       -2.9053396088      0.0000000000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250     -0.7701260000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250      0.7701260000   adf.f=rho2
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    ggapotcfd pw91c
+    ggapotxfd pw91x
+    pw91k
+  end
+  fragments
+     rho1 t21.iso.rho1
+     rho2 t21.iso.rho2 type=fde
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 90
+  end
+  spinpolarization 1
+  symmetry NOSYM
+  title MODCO: Fragment no.          1; (polarized)
+  unrestricted
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+
+mv Emb1.results/adf.rkf t21.emb.rho1
+
+AMS_JOBNAME=Emb2 $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000   adf.f=rho1
+     H        -0.9358409558         .2646136961      0.0000000000   adf.f=rho1
+     H        -0.0304663436       -0.9828924420      0.0000000000   adf.f=rho1
+     O         0.0000000000       -2.9053396088      0.0000000000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250     -0.7701260000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250      0.7701260000   adf.f=rho2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    ggapotcfd pw91c
+    ggapotxfd pw91x
+    pw91k
+  end
+  fragments
+     rho1 t21.emb.rho1 subfrag=active type=fde
+     rho2 t21.iso.rho2
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 90
+  end
+  symmetry NOSYM
+  title MODCO: Fragment no.          2; (polarized)
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+
+mv Emb2.results/adf.rkf t21.emb.rho2
+
+
+AMS_JOBNAME=Emb1r $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000   adf.f=rho1
+     H        -0.9358409558         .2646136961      0.0000000000   adf.f=rho1
+     H        -0.0304663436       -0.9828924420      0.0000000000   adf.f=rho1
+     O         0.0000000000       -2.9053396088      0.0000000000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250     -0.7701260000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250      0.7701260000   adf.f=rho2
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+EngineRestart t21.emb.rho1
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    ggapotcfd pw91c
+    ggapotxfd pw91x
+    pw91k
+  end
+  fragments
+     rho1 t21.iso.rho1
+     rho2 t21.emb.rho2 subfrag=active type=fde
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 90
+  end
+  spinpolarization 1
+  symmetry NOSYM
+  title MODCO: Fragment no.          1; relaxed
+  unrestricted
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+
+mv Emb1r.results/adf.rkf t21.emb.rho1
+
+AMS_JOBNAME=Emb2r $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000   adf.f=rho1
+     H        -0.9358409558         .2646136961      0.0000000000   adf.f=rho1
+     H        -0.0304663436       -0.9828924420      0.0000000000   adf.f=rho1
+     O         0.0000000000       -2.9053396088      0.0000000000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250     -0.7701260000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250      0.7701260000   adf.f=rho2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    ggapotcfd pw91c
+    ggapotxfd pw91x
+    pw91k
+  end
+  fragments
+     rho1 t21.emb.rho1 subfrag=active type=fde
+     rho2 t21.emb.rho2 subfrag=active
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 90
+  end
+  symmetry NOSYM
+  title MODCO: Fragment no.          2; relaxed
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+
+mv Emb2.results/adf.rkf t21.emb.rho2
+
+mv t21.emb.rho1 fragA1.t21
+mv t21.emb.rho2 fragA2.t21
+
+
+# ==================================================
+#   SECOND FDE CALCULATION: STATE DA+
+#   note: the freeze and thaw is done manually
+#         as we have open-shell fragments
+#   note: now rho1 is the second fragment 
+#         as rho2 is the cation
+# ==================================================
+
+
+AMS_JOBNAME=Emb2p $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000   adf.f=rho1
+     H        -0.9358409558         .2646136961      0.0000000000   adf.f=rho1
+     H        -0.0304663436       -0.9828924420      0.0000000000   adf.f=rho1
+     O         0.0000000000       -2.9053396088      0.0000000000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250     -0.7701260000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250      0.7701260000   adf.f=rho2
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    ggapotcfd pw91c
+    ggapotxfd pw91x
+    pw91k
+  end
+  fragments
+     rho1 t21.iso.rho1 type=fde
+     rho2 t21.iso.rho2
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 90
+  end
+  spinpolarization 1
+  symmetry NOSYM
+  title MODCO: Fragment no.          2; (polarized)
+  unrestricted
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+
+mv Emb2p.results/adf.rkf t21.emb.rho2
+
+
+AMS_JOBNAME=Emb1p $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000   adf.f=rho1
+     H        -0.9358409558         .2646136961      0.0000000000   adf.f=rho1
+     H        -0.0304663436       -0.9828924420      0.0000000000   adf.f=rho1
+     O         0.0000000000       -2.9053396088      0.0000000000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250     -0.7701260000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250      0.7701260000   adf.f=rho2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    ggapotcfd pw91c
+    ggapotxfd pw91x
+    pw91k
+  end
+  fragments
+     rho1 t21.iso.rho1
+     rho2 t21.emb.rho2 subfrag=active type=fde
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 90
+  end
+  symmetry NOSYM
+  title MODCO: Fragment no.          1; (polarized)
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+
+mv Emb1p.results/adf.rkf t21.emb.rho1
+
+AMS_JOBNAME=Emb2pr $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000   adf.f=rho1
+     H        -0.9358409558         .2646136961      0.0000000000   adf.f=rho1
+     H        -0.0304663436       -0.9828924420      0.0000000000   adf.f=rho1
+     O         0.0000000000       -2.9053396088      0.0000000000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250     -0.7701260000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250      0.7701260000   adf.f=rho2
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+EngineRestart t21.emb.rho2
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    ggapotcfd pw91c
+    ggapotxfd pw91x
+    pw91k
+  end
+  fragments
+     rho1 t21.emb.rho1 subfrag=active type=fde
+     rho2 t21.iso.rho2
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 90
+  end
+  spinpolarization 1
+  symmetry NOSYM
+  title MODCO: Fragment no.          2; relaxed
+  unrestricted
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+
+mv Emb2pr.results/adf.rkf t21.emb.rho2
+
+AMS_JOBNAME=Embp1r $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000   adf.f=rho1
+     H        -0.9358409558         .2646136961      0.0000000000   adf.f=rho1
+     H        -0.0304663436       -0.9828924420      0.0000000000   adf.f=rho1
+     O         0.0000000000       -2.9053396088      0.0000000000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250     -0.7701260000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250      0.7701260000   adf.f=rho2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  allow PARTIALSUPERFRAGS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    ggapotcfd pw91c
+    ggapotxfd pw91x
+    pw91k
+  end
+  fragments
+     rho1 t21.emb.rho1 subfrag=active
+     rho2 t21.emb.rho2 subfrag=active type=fde
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 90
+  end
+  symmetry NOSYM
+  title MODCO: Fragment no.          1; relaxed
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+
+mv Embp1r.results/adf.rkf t21.emb.rho1
+
+# ======================================
+# NOW THE adf.rkf FILES MUST BE RENAMED
+# 
+#  TO: fragA1.t21, fragA2.t21 
+#      .... up to a max of fragA999.t21
+# AND: fragB1.t21, fragB2.t21 
+#      .... up to a max of fragB999.t21 
+# ======================================
+
+mv t21.emb.rho1 fragB1.t21
+mv t21.emb.rho2 fragB2.t21
+
+# ======================================
+# Electron Transfer calculation is next
+#
+# 1) note the ELECTRONTRANSFER block keyword
+# 2) the program must be execute in 
+#    serial mode (parallel mode not 
+#    supported)
+# 3) hybrids not supported
+# 4) NumericalQuality good is 
+#    needed for accuracy
+# ======================================
+
+AMS_JOBNAME=ET $AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000   adf.f=rho1
+     H        -0.9358409558         .2646136961      0.0000000000   adf.f=rho1
+     H        -0.0304663436       -0.9828924420      0.0000000000   adf.f=rho1
+     O         0.0000000000       -2.9053396088      0.0000000000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250     -0.7701260000   adf.f=rho2
+     H        -0.4092227596       -3.3374838250      0.7701260000   adf.f=rho2
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  electrontransfer
+    numfrag 2
+  end
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fragments
+     rho1 t21.iso.rho1
+     rho2 t21.iso.rho2
+  end
+  noprint BAS FUNCTIONS
+  Relativity Level=None
+  numericalquality good
+  scf
+    iterations 0
+  end
+  spinpolarization 1
+  symmetry nosym
+  title ElectronTransfer calculation
+  unrestricted
+  xc
+    gga PW91
+  end
+EndEngine
+eor

@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# Calculation of the spin-orbit (SO) coupled excitation energies of H2O using the 
+# Hybrid Diagonal Approximation (HDA).
+# Relevant in case hybrid XC functionals are used.
+# For HDA icw SO symmetry NOSYM is required.
+# For speed reasons one should not use a too large value for HDA_CutOff.
+
+AMS_JOBNAME=H2O_SO $AMSBIN/ams << eor
+System
+  atoms
+     O   0.000000    0.000000    0.000000
+     H   0.000000    0.759062   -0.587729
+     H   0.000000   -0.759062   -0.587729
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  Basis
+   Type TZP
+  End
+
+  Symmetry NOSYM
+
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+
+  XC
+    Hybrid B3LYP
+  End
+
+  Excitations
+    lowest 50
+    HDA
+    HDA_CutOff 40.0
+  END
+EndEngine
+eor

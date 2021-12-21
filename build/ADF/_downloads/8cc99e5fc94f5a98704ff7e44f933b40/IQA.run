@@ -1,0 +1,120 @@
+#! /bin/sh
+
+
+# An IQA/QTAIM analysis is performed to analyze selected interactions
+# in formic acid dimer
+
+AMS_JOBNAME=IQA $AMSBIN/ams <<eor
+System
+  atoms
+     C      -4.777280616716      -2.237679070420       0.027134922119
+     O      -4.316098016052      -1.091055032354      -0.045982864295
+     O      -4.095233471752      -3.376211708158      -0.036303239453
+     H      -5.858352595246      -2.416180987684       0.158163319700
+     H      -3.096816965327      -3.182195213950      -0.161436385033
+     C      -1.043719708731      -1.744256936204      -0.434121365892
+     O      -1.505389993838      -2.890945383925      -0.365122472158
+     O      -1.725417179069      -0.605694491898      -0.367592891810
+     H      -2.724119170709      -0.799847829461      -0.245243925045
+     H       0.037480148811      -1.565749121998      -0.563863149179
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title IQA Analysis for (HCOOH)2
+  IQA
+    Enabled True
+    atomstodo 2 5 7 9
+    print Normal
+  end
+  basis
+    type TZP
+    core None
+  end
+  symmetry NOSYM
+  xc
+    dispersion Grimme3
+    gga BLYP
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+
+eor
+
+# Another IQA analysis for a halogen bonded complex: F-Cl...NH3
+# All interactions are calculated - Details printed (verbose mode)
+
+AMS_JOBNAME=IQA2 $AMSBIN/ams <<eor
+System
+  atoms
+     F       0.000001582319       0.000000000000      -3.410515944395
+     Cl      0.000001582319       0.000000000000      -1.623156530960
+     N       0.000001582319       0.000000000000       0.662184762067
+     H      -0.482577891417       0.835852167201       0.991662308171
+     H      -0.482577891417      -0.835852167201       0.991662308171
+     H       0.965160529792       0.000000000000       0.991662308171
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title IQA Analysis for F-Cl...NH3
+  IQA
+    Enabled True
+    print Verbose
+  end
+  basis
+    type TZ2P
+    core None
+  end
+  symmetry NOSYM
+  xc
+    dispersion Grimme3
+    gga BLYP
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+
+eor
+
+
+# IQA analysis for PF5
+
+AMS_JOBNAME=IQA3 "$AMSBIN/ams" << eor
+
+Task SinglePoint
+System
+    Atoms
+        P  0.0            0.0            0.0 
+        F  0.0            0.0           -1.59029681775
+        F  1.56093864075  0.0            0.0 
+        F -0.78046932037  1.35181251664  0.0 
+        F  0.0            0.0            1.59029681775
+        F -0.78046932037 -1.35181251664  0.0 
+    End
+End
+
+Engine ADF
+  Title IQA Analysis PF5
+  Basis
+      Type DZP
+      Core None
+  End
+  Symmetry NOSYM
+  IQA
+      Enabled Yes
+      Print Verbose
+      AtomsToDo 1 3 
+  End
+  Relativity
+    Level None
+  End
+EndEngine
+eor

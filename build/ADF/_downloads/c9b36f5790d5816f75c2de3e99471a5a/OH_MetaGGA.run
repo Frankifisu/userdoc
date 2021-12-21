@@ -1,0 +1,364 @@
+#! /bin/sh
+
+
+AMS_JOBNAME=TPSSh $AMSBIN/ams <<eor
+System
+  atoms
+     O     0.000000    0.000000    0.108786
+     H     0.000000    0.000000   -0.870284
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title OH radical, C*v symm. MP2(full)/6-31G* Geom. MP2=-75.5232063
+  dependency
+    bas 1.0e-4
+  end
+  irrepoccupations
+     A1 3 // 3
+     A2 0 // 0
+     B1 1 // 1
+     B2 1 // 0
+  end
+  metagga
+  basis
+    type ET/ET-QZ3P
+  end
+  noprint BAS FIT FUNCTIONS SFO
+  numericalquality VeryGood
+  spinpolarization 1
+  symmetry C(2V)
+  unrestricted
+  xc
+    metahybrid TPSSh
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=TPSS $AMSBIN/ams <<eor
+System
+  atoms
+     O     0.000000    0.000000    0.108786
+     H     0.000000    0.000000   -0.870284
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title OH radical, C*v symm. MP2(full)/6-31G* Geom. MP2=-75.5232063
+  dependency
+    bas 1.0e-4
+  end
+  hartreefock
+  irrepoccupations
+     A1 3 // 3
+     A2 0 // 0
+     B1 1 // 1
+     B2 1 // 0
+  end
+  metagga
+  basis
+    type ET/ET-QZ3P
+  end
+  noprint BAS FIT FUNCTIONS SFO
+  numericalquality VeryGood
+  spinpolarization 1
+  symmetry C(2V)
+  unrestricted
+  xc
+    metagga SCF TPSS
+  end
+EndEngine
+eor
+
+$AMSBIN/dirac -n1 < $AMSRESOURCES/Dirac/H
+mv TAPE12 t12.rel
+
+AMS_JOBNAME=H_HF $AMSBIN/ams <<eor
+System
+  Atoms
+    H 0.0 0.0 0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create H file=$AMSRESOURCES/ADF/ET/ET-QZ3P/H
+  hartreefock
+  xc
+    gga PBE
+  end
+  corepotentials t12.rel
+     H 1
+  end
+EndEngine
+eor
+
+$AMSBIN/dirac -n1 < $AMSRESOURCES/Dirac/O
+mv TAPE12 t12.rel
+
+
+AMS_JOBNAME=O_HF $AMSBIN/ams <<eor
+System
+  Atoms
+    O 0.0 0.0 0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create O file=$AMSRESOURCES/ADF/ET/ET-QZ3P/O
+  hartreefock
+  xc
+    gga PBE
+  end
+  corepotentials t12.rel
+     O 1
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=H_HF_unr $AMSBIN/ams <<eor
+System
+  atoms
+     H     0.0    0.0    0.0
+  End
+End
+
+Task SinglePoint
+
+Engine ADF
+  title H unrestricted correction
+  fragments
+     H H_HF.results/adf.rkf
+  end
+  hartreefock
+  metagga
+  numericalquality VeryGood
+  spinpolarization 1
+  unrestricted
+  xc
+    gga PBE
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=O_HF_unr $AMSBIN/ams <<eor
+System
+  atoms
+     O     0.0    0.0    0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title O unrestricted correction
+  fragments
+     O O_HF.results/adf.rkf
+  end
+  hartreefock
+  irrepoccupations
+     sigma  3 // 3
+     pi     2 // 0
+  end
+  metagga
+  numericalquality VeryGood
+  spinpolarization 2
+  symmetry C(lin)
+  unrestricted
+  xc
+    gga PBE
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=OH_HF $AMSBIN/ams <<eor
+System
+  atoms
+     O     0.000000    0.000000    0.108786
+     H     0.000000    0.000000   -0.870284
+  end
+end
+Task SinglePoint
+
+Engine ADF
+  title OH radical, C*v symm. MP2(full)/6-31G* Geom. MP2=-75.5232063
+  dependency
+    bas 1.0e-4
+  end
+  energyfrag
+     O  O_HF_unr.results/adf.rkf
+     H  H_HF_unr.results/adf.rkf
+  end
+  fragments
+     O  O_HF.results/adf.rkf
+     H  H_HF.results/adf.rkf
+  end
+  hartreefock
+  irrepoccupations
+     A1 3 // 3
+     A2 0 // 0
+     B1 1 // 1
+     B2 1 // 0
+  end
+  metagga
+  noprint BAS FIT FUNCTIONS SFO
+  numericalquality VeryGood
+  spinpolarization 1
+  symmetry C(2V)
+  unrestricted
+  xc
+    gga PBE
+  end
+EndEngine
+eor
+
+$AMSBIN/dirac -n1 < $AMSRESOURCES/Dirac/H
+mv TAPE12 t12.rel
+
+
+AMS_JOBNAME=H_OLYP $AMSBIN/ams <<eor
+System
+  atoms
+     H     0.0    0.0    0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create H file=$AMSRESOURCES/ADF/ET/ET-QZ3P/H
+  hartreefock
+  xc
+    gga OLYP
+  end
+  corepotentials t12.rel
+     H 1
+  end
+EndEngine
+eor
+
+$AMSBIN/dirac -n1 < $AMSRESOURCES/Dirac/O
+mv TAPE12 t12.rel
+
+AMS_JOBNAME=O_OLYP $AMSBIN/ams <<eor
+System
+  atoms
+     O     0.0    0.0    0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create O file=$AMSRESOURCES/ADF/ET/ET-QZ3P/O
+  hartreefock
+  xc
+    gga OLYP
+  end
+  corepotentials t12.rel
+     O 1
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=H_OLYP_unr $AMSBIN/ams <<eor
+System
+  atoms
+     H     0.0    0.0    0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H unrestricted correction
+  fragments
+     H H_OLYP.results/adf.rkf
+  end
+  hartreefock
+  metagga
+  numericalquality VeryGood
+  spinpolarization 1
+  unrestricted
+  xc
+    gga OLYP
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=O_OLYP_unr $AMSBIN/ams <<eor
+System
+  atoms
+     O     0.0    0.0    0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title O unrestricted correction
+  fragments
+     O O_OLYP.results/adf.rkf
+  end
+  hartreefock
+  irrepoccupations
+     sigma  3 // 3
+     pi     2 // 0
+  end
+  metagga
+  numericalquality VeryGood
+  spinpolarization 2
+  symmetry C(lin)
+  unrestricted
+  xc
+    gga OLYP
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=OH_OLYP $AMSBIN/ams <<eor
+System
+  atoms
+     O     0.000000    0.000000    0.108786
+     H     0.000000    0.000000   -0.870284
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title OH radical, C*v symm. MP2(full)/6-31G* Geom. MP2=-75.5232063
+  dependency
+    bas 1.0e-4
+  end
+  energyfrag
+     O  O_OLYP_unr.results/adf.rkf
+     H  H_OLYP_unr.results/adf.rkf
+  end
+  fragments
+     O  O_OLYP.results/adf.rkf
+     H  H_OLYP.results/adf.rkf
+  end
+  hartreefock
+  irrepoccupations
+     A1 3 // 3
+     A2 0 // 0
+     B1 1 // 1
+     B2 1 // 0
+  end
+  metagga
+  noprint BAS FIT FUNCTIONS SFO
+  numericalquality VeryGood
+  spinpolarization 1
+  symmetry C(2V)
+  unrestricted
+  xc
+    gga OLYP
+  end
+EndEngine
+eor

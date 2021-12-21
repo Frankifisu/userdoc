@@ -1,0 +1,193 @@
+Working with Parameter Interfaces
+=================================
+
+The following features mainly work with :ref:`parameter interfaces`.
+
+Active Parameter Search
+-----------------------
+
+.. currentmodule:: scm.params.experimental.parametersearch
+
+This class allows to reduce the dimensionality of the parameter search space by performing a
+sensitivity analysis on each active parameter individually, or in a small set.
+
+.. rubric:: Synopsis
+
+>>> ff      = {Reax}('path/to/ffield.ff')
+>>> ds      = {CF}('path/to/data_set.yml')
+>>> jc      = {JC}('path/to/jobcol.yml')
+>>> aps     = ActiveParameterSearch(ff, ds, jc)
+>>> ids, fx = aps.scan(steps=[1.1], dim=1, verbose=True)
+>>> results = aps.get_results()
+>>> ff.is_active = aps.get_is_active(n=20)
+
+
+
+---------------------------------------
+
+
+
+:meth:`~ActiveParameterSearch.scan`
+returns the scanned ids of the `active` subset, and the respective
+loss function values.
+
+
+.. code-block:: Python
+
+  >>> # Set only the first three parameters to active:
+  >>> ff.is_active = len(ff)*[False]
+  >>> for i in range(3):
+  >>>  ff[i].is_active = True
+  >>> len(ff.active)
+  3
+  >>> aps = ActiveParameterSearch(ff, ds, jc)
+  >>> aps.scan()
+  (array([[0],
+          [1],
+          [2]]), array([[[-0.16769481]],
+          [[ 0.33069672]],
+          [[-0.09795433]]]))
+
+
+The first return value are the scanned `ids`, the second one an array of loss
+function values.
+
+The parameter search can also scan a subset of active parameters, rather than
+scanning every one individually:
+
+.. code-block:: Python
+
+  >>> aps.scan(dim=2)
+  (array([[0, 1],
+          [0, 2],
+          [1, 2]]), array([[-0.28081611],
+          [ 0.02706811],
+          [-0.2683532 ]]))
+
+
+The step size and number can be set with the `steps` argument.
+Each entry is a multiplier to the initial parameters, generating
+a new set from
+:math:`\boldsymbol{x}_\mathrm{scaled} = scale*\boldsymbol{x}_0`.
+
+.. code-block:: Python
+
+  >>> aps.scan(steps=[0.9,1.2])
+  (array([[0],
+          [1],
+          [2]]), array([[-0.55754578, -0.26966971],
+          [-0.21234735, -0.19213127],
+          [-0.16746101, -0.19213127]]))
+
+
+
+The results are also stored in the attributes `fx0`, `ids` and `fx`
+after :meth:`~ActiveParameterSearch.scan` has been called:
+
+.. code-block:: Python
+
+  >>> aps.ids
+  array([[0],
+         [1],
+         [2]])
+  >>> aps.fx
+  array([[[-0.55754578, -0.26966971]],
+         [[-0.21234735, -0.19213127]],
+         [[-0.16746101, -0.19213127]]])
+
+
+For relative sensitivities, use the :attr:`fx0` attribute:
+
+>>> rel_fx = aps.fx[:,:,ds_id] / aps.fx0[ds_id]
+
+
+
+--------------
+
+:meth:`~ActiveParameterSearch.get_results` returns a dictionary with ranked (sorted) results.
+
+.. code-block:: python
+
+   >>> results = aps.get_results(data_set_id=0, mode='highest_absolute', tol=1e-8)
+   >>> print(results)
+   {
+   'failed_parameter_combinations_in_active': array([[0]]),
+   'loss_per_step': array([[9364.07969285], [9364.26884909]]),
+   'n_failed_parameter_combinations': 1,
+   'parameter_combinations_in_active': array([[1], [2]]),
+   'relative_loss_per_step': array([[0.65549032], [0.65550357]]),
+   'score': array([4921.53116177, 4921.34200554]),
+   'sorted_parameter_names': ['H:eta_i;;24,25;;EEM hardness', 'O:eta_i;;24,25;;EEM hardness'], 'n_parameter_combinations': 2,
+   'sorted_parameter_names_with_effect': ['H:eta_i;;24,25;;EEM hardness', 'O:eta_i;;24,25;;EEM hardness']
+   'sorted_parameters_in_active': array([1, 2]),
+   }
+
+In the above examples, 3 parameters were scanned with ``dim=1``. One of the calculations failed, and two succeeded. The keys of this dictionary are
+
+* ``failed_parameter_combinations_in_active``: a 2D array with shape ``(nfailed, dim)``. At least one calculation failed when those parameters were scaled (perhaps to physically unreasonable values). The indices refer to the parameters that can be accessed by ``parameter_interface.active[index]``.
+
+* ``loss_per_step``: a 2D array with shape  ``(nsuccess, dim)``. The evaluated loss function for every scaled parameter combination.
+
+* ``n_failed_parameter_combinations``: an integer ``nfailed``
+
+* ``parameter_combinations_in_active``: a 2D array with shape ``(nsuccess, dim)``. The successful parameter combinations.
+
+* ``relative_loss_per_step``: a 2D array with shape ``(nsuccess, dim)``. The values of ``loss_per_step`` divided by the original loss function for unscaled parameters (``fx0``).
+
+* ``score``: a 1D array with shape ``(nsuccess,)``. The score used for ranking parameter combinations.
+
+* ``sorted_parameter_names``: a 1D list. If ``dim==1`` each parameter name corresponds to the corresponding score. If ``dim>1``, then if for example the combination ``[4,5]`` received the highest score, then the first element of ``sorted_parameter_names`` will correspond to parameter 4 and the second element to parameter 5.
+
+* ``sorted_parameter_names_with_effect``: Only applicable if ``dim==1``. A sorted list of parameter names for which the score is greater than ``tol``. (Failed parameters are not included)
+
+* ``sorted_parameters_in_active``: Same as ``sorted_parameter_names`` but with the parameter IDs in the active subset instead.
+
+
+--------------
+
+Once a scan is complete, :meth:`~ActiveParameterSearch.get_is_active`
+will return an array of bools, that can be assigned to the parameter
+interface's :attr:`is_active` attribute:
+
+>>> ff.is_active = aps.get_is_active(n=20)
+
+
+
+--------------
+
+
+
+
+Multiple Data Sets can be evaluated with one Parameter Search instance, provided
+they all can be calculated with the same Job Collection.
+To do so, a list of data sets can be passed when instantiating.
+This results in the attribute shapes ``fx0.shape == (len(ds))`` and
+``fx.shape == (len(ff.active), len(ids), len(ds))``.
+
+.. code-block:: Python
+
+  >>> aps = ActiveParameterSearch(ff, [ds1, ds2], jc)
+  >>> ids, fx = aps.scan()
+  >>> fx_ds1 = fx[:,:,0] # select scanned results of the first  data set
+  >>> fx_ds2 = fx[:,:,1] # select scanned results of the second data set
+
+In such cases :meth:`~ActiveParameterSearch.get_is_active` method's `data_set_id` argument
+can be passed to specify which data set results to use for the evaluation:
+
+.. code-block:: Python
+
+  >>> aps = ActiveParameterSearch(ff, [ds1, ds2], jc)
+  >>> ids, fx = aps.scan()
+  >>> active_based_on_ds1 = aps.get_is_active(10, data_set_id=0)
+  >>> active_based_on_ds2 = aps.get_is_active(10, data_set_id=1)
+
+
+
+--------------
+
+
+
+.. rubric:: API
+
+.. autoclass:: ActiveParameterSearch
+  :exclude-members: __weakref__

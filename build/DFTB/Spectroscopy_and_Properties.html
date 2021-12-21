@@ -1,0 +1,1580 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Spectroscopy and properties &mdash; DFTB 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="DFTB 2021.1 documentation" href="index.html"/>
+        <link rel="next" title="Electronic transport (NEGF)" href="NEGF.html"/>
+        <link rel="prev" title="Model Hamiltonians" href="DFTB_Model_Hamiltonian.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="keywords.html">Keywords</a>
+           
+           
+           <a href="genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search DFTB" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-DFTB" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#what-s-new-in-dftb">What’s new in DFTB?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2022-1">New in DFTB2022.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2021-1">New in DFTB2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2020">New in DFTB2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2019-3">New in DFTB2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2019-1">New in DFTB2019.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="General.html#new-in-dftb2018">New in DFTB2018</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="General.html#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="General.html#ams-a-new-driver-program">AMS: a new driver program</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AMSdriver_tasks_and_properties.html">AMS driver’s tasks and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AMSdriver_tasks_and_properties.html#geometry-system-definition">Geometry, System definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMSdriver_tasks_and_properties.html#tasks-exploring-the-pes">Tasks: exploring the PES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMSdriver_tasks_and_properties.html#properties-in-the-ams-driver">Properties in the AMS driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DFTB_Model_Hamiltonian.html">Model Hamiltonians</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#slater-koster-based-dftb">Slater-Koster based DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#model-hamiltonian">Model Hamiltonian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#dispersion-correction">Dispersion correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#solvation-gbsa">Solvation (GBSA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#scc-details-and-spin-polarization">SCC details and spin-polarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#k-space-integration">k-space integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#xtb-specific-keywords">xTB specific keywords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFTB_Model_Hamiltonian.html#technical-options">Technical options</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spectroscopy and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#electronic-structure-of-periodic-systems">Electronic structure of periodic systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#excited-states-with-time-dependent-dftb">Excited states with time-dependent DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#excited-state-gradients">Excited state gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#frequencies-phonons-vcd">Frequencies, phonons, VCD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vibrationally-resolved-electronic-spectra">Vibrationally resolved electronic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stress-tensor-elasticity">Stress tensor, Elasticity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#charges-bond-orders-dipole-moment-polarizability">Charges, Bond Orders, Dipole Moment, Polarizability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fragment-orbital-analysis">Fragment orbital analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nbo-analysis">NBO analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NEGF.html">Electronic transport (NEGF)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#transport-with-negf-in-a-nutshell">Transport with NEGF in a nutshell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#simulations-work-flow">Simulations work flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#conductance-input-options">Conductance input options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NEGF.html#miscellaneous-remarks-on-dftb-negf">Miscellaneous remarks on DFTB-NEGF</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Charge_transfer_integrals.html">Charge transport (transfer integrals)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Charge_transfer_integrals.html#charge-transfer-integrals-direct-method">Charge transfer integrals direct method</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#model-hamiltonians">Model Hamiltonians</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_aspirin_SCC.html">Example: SCC-DFTB aspirin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_aspirin_fermi.html">Example: Smeared Fermi-Dirac occupations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_aspirin_GP_SCC.html">Example: Periodic aspirin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_CG_aspirin_SCC.html">Example: GO aspirin DFTB-SCC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_CH3COOminus_3rdOrder.html">Example: DFTB3 CH3COO-</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_dispersion.html">Example: DFTB3 dispersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_dispersion_periodic.html">Example: DFTB3 dispersion periodic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_Cyclobutadiene_triplet_spin.html">Example: Unpaired electrons cyclobutadiene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_o2_spin.html">Example: Spin polarized O2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_CH_spin_ldep.html">Example: Orbital dependent spin-polarized CH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/NaCl_natural.html">Example: NaCl fractional coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_NaClSlab_SCC.html">Example: NaCl slab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_OHminus_noSCC.html">Example: OH- noSCC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_OHminus_SCC.html">Example: OH- SCC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_H2_MOF.html">Example: Single Point H2 MOF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_COF5.html">Example: Single point COF5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_COF5_2D.html">Example: Single point COF5, 2D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_COF5_3D.html">Example: Single point COF5, 3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_Hplus.html">Example: H+</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GBSA_solvation.html">Example: geometry optimizations in solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/KSpace_sampling.html">Example: Precision: k-space integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_extpotential.html">Example: External potential at nuclei</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_DFTB_restart.html">Example: Restart DFTB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/TECH_systeminput.html">Example: System input from file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#geometry-optimization">Geometry Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_formaldehyde_noSCC.html">Example: GO formaldehyde noSCC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_formaldehyde_SCC.html">Example: GO formaldehyde SCC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_SCMGO_aspirin_SCC.html">Example: GO aspirin SCMGO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_CH3COOminus_3rdOrder.html">Example: GO H3COO- DFTB3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_cyclobutadiene_spin_fermi.html">Example: GO cyclobutadiene spin-polarized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_cyclobutadiene_unpairedelectrons.html">Example: GO cyclobutadiene unpaired electrons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_ethane.html">Example: GO ethane 0D, 1D, 2D, 3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_PEChain.html">Example: GO poly-ethyleen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_restart.html">Example: Restarting a geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/constraints.html">Example: GO with constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_restraints.html">Example: GO with restraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SCMGO_BakerSet.html">Example: GO BakerSet SCMGO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SCMGO_PE.html">Example: GO polyethylene SCMGO plams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/DFTBAutomations.html">Example: geometry optimizations: automations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_LR-TDDFTB_benzene.html">Example: Geometry optimization for an excited state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_LR-TDDFTB_CO_eigenfollow.html">Example: Geometry optimization following a specific excited state</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#pesscan-linear-transit-transition-state-neb">PESScan, Linear Transit, Transition State, NEB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/LinearTransit_periodic.html">Example: Linear Transit periodic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/PESScan.html">Example: PESScan ethane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and transition state search for H2 on graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/TS_ethane.html">Example: Transition state search Ethane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/TS_H2O_on_frozen_MgO.html">Example: TS H2O on frozen MgO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/TS_partial_Hessian.html">Example: TS partial Hessian and constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#electronic-structure-of-periodic-systems">Electronic structure of periodic systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_EffectiveMass.html">Example: Effective mass</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#excited-states">Excited States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_LR-TDDFTB_fullerene.html">Example: Fullerene excitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_LR-TDDFTB_irppy3.html">Example: Excitations Ir(ppy)3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_LR-TDDFTB_Davidson.html">Example: Excitations Davidson algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_LR-TDDFTB_Davidson_onthefly.html">Example: Excitations transition charges on the fly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_LR-TDDFTB_exact.html">Example: Excitations exact diagonalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_LR-TDDFTB_gradients.html">Example: Excited state gradients: plams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_LR-TDDFTB_grimmefilter.html">Example: Excitations SOT filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_LR-TDDFTB_ldep.html">Example: Orbital dependent DFTB: Excitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_LR-TDDFTB_tbe.html">Example: Excitations benchmark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_LR-TDDFTB_betacarotene.html">Example: Test parallelization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#vibrations-ir-spectra-normal-modes-vcd">Vibrations, IR spectra, Normal Modes, VCD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GOFREQ_aspirin_SCC.html">Example: GO and frequencies aspirin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/FREQ_aspirin_SCC.html">Example: Normal modes (frequencies) for aspirin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/FREQ_H2O.html">Example: Frequencies H2O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/FREQ_OHminus.html">Example: Frequencies OH-</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/FREQ_H2Slab.html">Example: Frequencies H2 slab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GOFREQ_C60.html">Example: GO and frequencies C60</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/FREQ_LR-TDDFTB_benzene.html">Example: Excited states frequencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GOFREQ_LR-TDDFTB_anthracene_S0S1fcf.html">Example: Vibration resolved electronic spectrum: plams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/FREQ_HNDT_VCD.html">Example: Vibrational circular dichroism</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#phonons">Phonons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Phonons_Graphene.html">Example: Phonons graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Phonons_Isotopes.html">Example: Phonons with isotopes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Diamond_under_pressure.html">Example: Diamond under pressure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#stress-tensor-elasticity">Stress tensor, Elasticity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_stresstensor.html">Example: Stress tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/GO_Analytical_Ewald_Urea.html">Example: Analytical stress tensor Urea</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/ElasticTensor.html">Example: Elastic tensor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#molecular-dynamics">Molecular Dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/MD_aspirin.html">Example: Molecular dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/MD_ethylene_graphene.html">Example: MD ethylene graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/MD_hydrogen.html">Example: MD hydrogen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/MD_hydrogen_longrun.html">Example: MD hydrogen long run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/MD_periodic.html">Example: MD periodic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#electronic-transport-negf">Electronic transport, NEGF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/conductance.html">Example: Electronic transport with NEGF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/TransferIntegrals_dimer_Alq3.html">Example: Charge transfer integrals Alq3 dimer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_bondorders.html">Example: Bond orders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Fragment_Orbitals.html">Example: Fragment Orbital analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/DFTB_NAO.html">Example: 3D fields on a grid, QTAIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/Li_BZPlot.html">Example: Band structure with user-defined BZ path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples/SP_DFTBNBO.html">Example: NBO analyse H2O</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Parameter_files.html">Parameterizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Parameter_files.html#parameter-meta-info">Parameter meta-info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Parameter_files.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Parameter_files.html#available-parameter-sets">Available parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#dftb-org">DFTB.org</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#quasinano">QUASINANO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#dresden">Dresden</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Parameter_files.html#files-in-the-resources-directory">Files in the resources directory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#slater-koster-files">Slater-Koster files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#additional-yaml-files">Additional .yaml files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Parameter_files.html#basis-function-information-in-rkf-files">Basis function information in .rkf files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Parameter_files.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#parameter-references">Parameter references</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="References.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="References.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="References.html#general-description">General Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#parameter-sets">Parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="References.html#quasinano2013-1">QUASINANO2013.1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#quasinano2015">QUASINANO2015</a></li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#dresden">Dresden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="References.html#dftb-org">DFTB.org</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">DFTB</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="DFTB.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">DFTB</a>/</li>
+      
+    <li class="orange-text">Spectroscopy and properties</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="spectroscopy-and-properties">
+<h1>Spectroscopy and properties<a class="headerlink" href="#spectroscopy-and-properties" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="electronic-structure-of-periodic-systems">
+<h2>Electronic structure of periodic systems<a class="headerlink" href="#electronic-structure-of-periodic-systems" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-0"></span><div class="highlight-none notranslate" id="dftb-key-periodic"><div class="highlight"><pre><span></span>Periodic
+   EffectiveMass
+      Enabled Yes/No
+      KPointCoord float_list
+      NumAbove integer
+      NumBelow integer
+      StepSize float
+   End
+   BandStructure
+      Automatic Yes/No
+      DeltaK float
+      Enabled Yes/No
+      FatBands Yes/No
+      UseSymmetry Yes/No
+   End
+   BZPath
+      Path # Non-standard block. See details.
+         ...
+      End
+   End
+   DOS
+      EMax float
+      EMin float
+      Enabled Yes/No
+      NSteps integer
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Periodic</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Block that sets various details of the calculation only relevant for periodic systems.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">EffectiveMass</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">In a semi-conductor, the mobility of electrons and holes is related to the curvature of the bands at the top of the valence band and the bottom of the conduction band.
+
+With the effective mass option, this curvature is obtained by numerical differentiation.
+
+The estimation is done with the specified step size, and twice the specified step size, and both results are printed to give a hint on the accuracy. By far the most convenient way to use this key is without specifying any options.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Effective mass</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">In a semi-conductor, the mobility of electrons and holes is related to the curvature of the bands at the top of the valence band and the bottom of the conduction band.
+
+With the effective mass option, this curvature is obtained by numerical differentiation.
+
+The estimation is done with the specified step size, and twice the specified step size, and both results are printed to give a hint on the accuracy. By far the most convenient way to use this key is without specifying any options.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">KPointCoord</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">1/Bohr</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Recurring:</th><td class="field-body">True</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">At K-point</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Coordinate of the k-points for which you would like to compute the effective mass.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NumAbove</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Include N bands above</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Number of bands to take into account above the Fermi level.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NumBelow</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Include N bands below</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Number of bands to take into account below the Fermi level.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">StepSize</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.001</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Size of the step taken in reciprocal space to perform the numerical differentiation</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">BandStructure</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options for band structure plotting. This has no effect on the calculated energy. [Warning: The band structure is only computed in case of k-space sampling, i.e. it is not computed for Gamma-only calculations (see: Periodic%KSpace).]</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Automatic</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Automatic generate path</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Generate and use the standard path through the Brillouin zone.
+
+If not, use the user defined path (set via Custom path in the GUI, or with the Periodic%BZPath keyword in the run script).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DeltaK</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">1/Bohr</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Interpolation delta-K</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Step size in reciprocal space for band structure interpolation. Using a smaller number will produce smoother band curves at an increased computational time.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Calculate band structure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Whether or not to calculate the band structure.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FatBands</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Calculate fatbands</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Control the computation of the fat bands (only when the bandstructure is calculated).
+
+The fat bands are the periodic equivalent of the Mulliken population analysis. The definition of the fat bands can be found in the Band Documentation.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">UseSymmetry</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">If set, only the irreducible wedge of the Wigner-Seitz cell is sampled. If not, the whole (inversion-unique) Wigner-Seitz cell is sampled.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">BZPath</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">If [BandStructure%Automatic] is disabled, DFTB will compute the band structure for the user-defined path in the [BZPath] block. You should define the vertices of your path in fractional coordinates (with respect to the reciprocal lattice vectors) in the [Path] sub-block. If you want to make a jump in your path, you need to specify a new [Path] sub-block.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Path</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Non-standard block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Recurring:</th><td class="field-body">True</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">A section of a k space path.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DOS</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The subkeys of [DOS] allow to customize the calculation of the density of states.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">EMax</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.75</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Upper end of the energy interval in which the density of states is calculated.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EMin</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">-0.75</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Lower end of the energy interval in which the density of states is calculated.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Calculate DOS</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Whether or not to calculate the DOS. Note that the DOS will always be calculated when also the band structure is calculated.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NSteps</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">300</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The number of energy intervals between [EMin] and [EMax] for which the density of states is calculated.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="excited-states-with-time-dependent-dftb">
+<span id="tddftb"></span><h2>Excited states with time-dependent DFTB<a class="headerlink" href="#excited-states-with-time-dependent-dftb" title="Permalink to this headline">¶</a></h2>
+<p>DFTB allows for excited state calculations on molecular systems by means of single orbital transitions as well as time-dependent DFTB as published by Niehaus et al. in <em>Phys. Rev. B</em> <strong>63</strong>, 085108 (2001).
+Singlet-singlet as well as singlet-triplet excitations can be calculated.
+DFTB also supports the calculation of excited state gradients, which allows geometry optimizations and vibrational frequency calculations for excited states.</p>
+<p>The TD-DFTB implementation uses the PRIMME library (PReconditioned Iterative MultiMethod Eigensolver) by Andreas Stathopoulos and James R. McCombs,  <a class="reference external" href="http://www.cs.wm.edu/~andreas/publications/primmeTOMS.pdf">PRIMME: PReconditioned Iterative MultiMethod Eigensolver</a>:  <a class="reference external" href="https://doi.org/10.1145/1731022.1731031">Methods and software description ACM Transaction on Mathematical Software Vol. 37, No. 2, (2010), 21:1–21:30</a>.</p>
+<p>DFTB excited state calculations are controlled by the following keywords:</p>
+<div class="highlight-none notranslate" id="dftb-key-properties"><div class="highlight"><pre><span></span>Properties
+   Excitations
+      SingleOrbTrans
+         Enabled Yes/No
+         Filter
+            OSMin float
+            dEMax float
+            dEMin float
+         End
+         PrintLowest integer
+      End
+      TDDFTB
+         Calc [None | Singlet | Triplet]
+         DavidsonConfig
+            ATCharges [Precalc | OnTheFly]
+            SafetyMargin integer
+            Tolerance float
+         End
+         Diagonalization [Auto | Davidson | Exact]
+         Lowest integer
+         Print string
+         ScaleKernel float
+         UpTo float
+      End
+      TDDFTBGradients
+         Eigenfollow Yes/No
+         Excitation integer_list
+      End
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Properties</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">DFTB can calculate various properties of the simulated system. This block configures which properties will be calculated.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Excitations</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Contains all options related to the calculation of excited states, either as simple single orbitals transitions or from a TD-DFTB calculation.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">SingleOrbTrans</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The simplest approximation to the true excitations are the single orbital transitions (sometimes called Kohn-Sham transitions), that is transitions where a single electron is excited from an occupied Kohn-Sham orbital into a virtual orbital. The calculation of these transitions is configured in this section. Note that the SingleOrbTrans section is optional even though the single orbital transitions are also needed for TD-DFTB calculations. If the section is not present all single orbital transitions will still be calculated and used in a subsequent TD-DFTB calculation, but no output will be produced.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Single orbital transisitions: Calculate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Calculate the single orbital transitions.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Filter</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This section allows to remove single orbital transitions based on certain criteria. All filters are disabled by default.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">OSMin</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Minimum oscillator strength</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Removes single orbital transitions with an oscillator strength smaller than this threshold.
+
+A typical value to start (if used at all) would be 1.0e-3.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dEMax</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Removes single orbital transitions with an orbital energy difference larger than this threshold.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dEMin</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Removes single orbital transitions with an orbital energy difference smaller than this threshold.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PrintLowest</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">10</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The number of single orbital transitions that are printed to the screen and written to disk.
+
+If not a TD-DFTB calculation, the default is to print the 10 lowest single orbital transitions.
+
+In case of a TD-DFTB calculation it is assumed that the single orbital transitions are only used as an input for TD-DFTB and nothing will be printed unless PrintLowest is specified explicitly.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TDDFTB</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Calculations with time-dependent DFTB can be configured in the TDDFTB section and should in general give better results than the raw single orbital transitions. TD-DFTB calculates the excitations in the basis of the single orbital transitions, whose calculation is configured in the SingleOrbTrans section. Using a filter in SingleOrbTrans can therefore be used to reduce the size of the basis for TD-DFTB. One possible application of this is to accelerate the calculation of electronic absorption spectra by removing single orbital transitions with small oscillator strengths from the basis. Note that the entire TDDFTB section is optional. If no TDDFTB section is found, the behavior depends on the existence of the SingleOrbTrans section: If no SingleOrbTrans section is found (the Excitations section is completely empty then) a TD-DFTB calculation with default parameters will be performed. If only the SingleOrbTrans section is present no TD-DFTB calculation will be done.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Calc</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[None, Singlet, Triplet]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Type of excitations</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Specifies the multiplicity of the excitations to be calculated.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DavidsonConfig</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This section contains a number of keywords that can be used to override various internals of the Davidson eigensolver. The default values should generally be fine.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ATCharges</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Precalc</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[Precalc, OnTheFly]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Transition charges</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Select whether the atomic transition charges are precalculated in advance or reevaluated during the iterations of the Davidson solver.
+
+Precalculating the charges will improve the performance, but requires additional storage.
+
+The default is to precalculate the atomic transition charges, but the precalculation may be disabled if not not enough memory is available.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SafetyMargin</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">4</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The number of eigenvectors the Davidson method will calculate in addition to the ones requested by the user. With the Davidson eigensolver it is generally a good idea to calculate a few more eigenvectors than needed, as depending on the initial guess for the eigenvectors it can happen that the found ones are not exactly the lowest ones. This problem is especially prominent if one wants to calculate only a small number of excitations for a symmetric molecule, where the initial guesses for the eigenvectors might have the wrong symmetry. Note that the additionally calculated excitations will neither be written to the result file nor be visible in the output.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1e-09</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Convergence criterion for the norm of the residual.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Diagonalization</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Auto</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[Auto, Davidson, Exact]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Method</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Select the method used to solve the TD-DFTB eigenvalue equation.
+
+The most straightforward procedure is a direct diagonalization of the matrix from which the excitation energies and oscillator strengths are obtained. Since the matrix grows quickly with system size (number of used single orbital transitions squared), this option is possible only for small molecules.
+
+The alternative is the iterative Davidson method, which finds a few of the lowest excitations within an error tolerance without ever storing the full matrix.
+
+The default is to make this decision automatically based on the system size and the requested number of excitations.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Lowest</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">10</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Number of excitations</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Specifies the number of excitations that are calculated.
+
+Note that in case of the exact diagonalization all excitations are calculated, but only the lowest ones are printed to screen and written to the output file.
+
+Also note that if limited both by number and by energy, (lowest and upto), DFTB will always use whatever results in the smaller number of calculated excitations.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Print</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Specifies whether to print details on the contribution of the individual single orbital transitions to the calculated excitations.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ScaleKernel</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Set the scaling parameter of the response kernel.
+
+A scaling approach can be used to identify plasmons in molecules. While single-particle excitations are only slightly affected by scaling of the response kernel, plasmonic excitations are sensitive to variations in the scaling parameter. Default no scaling is used (scaling parameter = 1.0)</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">UpTo</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Excitations up to</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Set the maximum excitation energy.
+
+Attempts to calculate all excitations up to a given energy by calculating a number of excitations equal to the number of single orbital transitions in this window. This is only approximately correct, so one should always add some safety margin.
+
+Note that if limited both by number and by energy, (lowest and upto), DFTB will always use whatever results in the smaller number of calculated excitations.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TDDFTBGradients</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">This block configures the calculation of analytical gradients for the TD-DFTB excitation energies, which allows the optimization of excited state geometries and the calculation of vibrational frequencies in excited states (see J. Comput. Chem., 28: 2589-2601). If the gradients are calculated, they will automatically be used for geometry optimizations or vibrational frequency calculations, if the corresponding Task is selected and only 1 excitation is selected. Vibrationally resolved UV/Vis spectroscopy (Franck-Condon Factors) can be calculated in combination with the FCF program or using the Vibrational Analysis Tools in AMS. See the ADF documentation on Vibrationally resolved electronic spectra or the AMS documentation for the Vibrational Analysis Tools.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Eigenfollow</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Follow initial excitation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">If this option is set, DFTB uses the transition density in atomic orbital basis to follow the initially selected excited state during a geometry optimization. This is useful if excited state potential energy surfaces cross each other and you want to follow the surface you started on.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Excitation</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Excitation number</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Select which excited states to calculate the gradients for.
+
+Gradients can only be calculated for an excited states that has been calculated using TD-DFTB. Make sure that enough excitations are calculated.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<span class="target" id="index-2"></span><span class="target" id="index-3"></span><span class="target" id="index-4"></span><span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><span class="target" id="index-8"></span><span class="target" id="index-9"></span><span class="target" id="index-10"></span></div>
+<div class="section" id="excited-state-gradients">
+<span id="index-11"></span><h2>Excited state gradients<a class="headerlink" href="#excited-state-gradients" title="Permalink to this headline">¶</a></h2>
+<p>Excited state gradients can be calculated with TD-DFTB, see the section <a class="reference internal" href="#tddftb"><span class="std std-ref">Excited states with time-dependent DFTB</span></a>.</p>
+</div>
+<div class="section" id="frequencies-phonons-vcd">
+<h2>Frequencies, phonons, VCD<a class="headerlink" href="#frequencies-phonons-vcd" title="Permalink to this headline">¶</a></h2>
+<p>Frequencies, phonons, and VCD and can be computed via numerical differentiation by the AMS driver.
+Several thermodynamic properties, such as zero-point energy, internal energy, entropy, free energy and specific heat are computed by default when calculating phonons.</p>
+<ul class="simple">
+<li><a class="reference external" href="../AMS/Vibrational_Spectroscopy.html">AMS manual: Vibrational Analysis</a><ul>
+<li><a class="reference external" href="../AMS/Vibrational_Spectroscopy.html#irfrequencies">AMS manual: Infrared (IR) spectra / Normal Modes</a></li>
+<li><a class="reference external" href="../AMS/Vibrational_Spectroscopy.html#phonons">AMS manual: Phonons</a></li>
+<li><a class="reference external" href="../AMS/Vibrational_Spectroscopy.html#thermodynamics">AMS manual: Thermodynamic properties</a></li>
+<li><a class="reference external" href="../AMS/Vibrational_Spectroscopy.html#vcd">AMS manual: VCD (Vibrational Circular Dichroism)</a></li>
+</ul>
+</li>
+</ul>
+<span class="target" id="index-12"></span><span class="target" id="index-13"></span><span class="target" id="index-14"></span></div>
+<div class="section" id="vibrationally-resolved-electronic-spectra">
+<span id="index-15"></span><h2>Vibrationally resolved electronic spectra<a class="headerlink" href="#vibrationally-resolved-electronic-spectra" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="../AMS/Vibrationally_resolved_electronic_spectra.html">AMS manual: Vibrationally resolved electronic spectra</a>.<ul>
+<li><a class="reference external" href="../AMS/Utilities/FCF_module.html">AMS manual: AH-FC Adiabatic Hessian Franck-Condon</a>.</li>
+<li><a class="reference external" href="../AMS/Utilities/FCF_module.html">AMS manual: VG-FC Vertical Gradient Franck-Condon</a>.</li>
+</ul>
+</li>
+</ul>
+<span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span></div>
+<div class="section" id="stress-tensor-elasticity">
+<span id="index-19"></span><h2>Stress tensor, Elasticity<a class="headerlink" href="#stress-tensor-elasticity" title="Permalink to this headline">¶</a></h2>
+<p>The stress tensor and elastic tensor (and related elastic properties such as bulk modulus, shear modulus and young modulus) can be computed via numerical differentiation by AMS.</p>
+<ul class="simple">
+<li><a class="reference external" href="../AMS/Gradients_Stress_Elasticity.html#stresstensor">AMS manual: Stress tensor</a></li>
+<li><a class="reference external" href="../AMS/Gradients_Stress_Elasticity.html#elastictensor">AMS manual: Elastic tensor</a></li>
+</ul>
+</div>
+<div class="section" id="charges-bond-orders-dipole-moment-polarizability">
+<h2>Charges, Bond Orders, Dipole Moment, Polarizability<a class="headerlink" href="#charges-bond-orders-dipole-moment-polarizability" title="Permalink to this headline">¶</a></h2>
+<p>Charges, Mayer bond orders, Dipole Moment, and Polarizability can be requested to the DFTB engine in the AMS driver’s input:</p>
+<ul class="simple">
+<li><a class="reference external" href="../AMS/Properties.html#charges">AMS manual: Atomic charges</a></li>
+<li><a class="reference external" href="../AMS/Properties.html#bondorders">AMS manual: Bond orders</a></li>
+<li><a class="reference external" href="../AMS/Properties.html#dipolemoment">AMS manual: Dipole Moment</a></li>
+<li><a class="reference external" href="../AMS/Properties.html#dipolegradients">AMS manual: Dipole Gradients</a></li>
+</ul>
+</div>
+<div class="section" id="fragment-orbital-analysis">
+<span id="fragments"></span><span id="properties"></span><h2>Fragment orbital analysis<a class="headerlink" href="#fragment-orbital-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The fragment orbital analysis is not available for periodic systems calculated with multiple K-points.</p>
+<p>A Mulliken population analysis based on the elementary atomic basis functions can be calculated with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Properties</span>
+   <span class="n">Fragments</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>For an atomic Mulliken population one should not specify any subkey <code class="docutils literal notranslate"><span class="pre">File</span></code> in Properties%Fragments.</p>
+<p>A Mulliken population analysis based on orbitals coming from larger fragments, that may consist of more than 1 atom, can be calculated if one includes the binary dftb.rkf result files of the calculated fragments in the input, for example, like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Properties</span>
+   <span class="n">Fragments</span>
+      <span class="n">File</span> <span class="n">frag1</span><span class="o">.</span><span class="n">results</span><span class="o">/</span><span class="n">dftb</span><span class="o">.</span><span class="n">rkf</span>
+      <span class="n">File</span> <span class="n">frag2</span><span class="o">.</span><span class="n">results</span><span class="o">/</span><span class="n">dftb</span><span class="o">.</span><span class="n">rkf</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>Note that the nuclear coordinates of the atoms in the fragments should be at the exact same position as in the whole system.
+In addition, each atom of the whole system should be present exactly once in one of the fragment dftb.rkf files.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Properties
+   Fragments
+      Analysis Yes/No
+      EMax float
+      Emin float
+      File string
+      TIDegeneracyThreshold float
+      TransferIntegrals Yes/No
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Properties</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Fragments</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Fragment files</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Analysis</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Fragment analysis</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Mulliken population analysis in terms of fragment orbitals.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EMax</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.25</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Upper end of the energy interval for which the orbitals are analyzed.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Emin</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">-0.75</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Hartree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Lower end of the energy interval for which the orbitals are analyzed.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">File</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Recurring:</th><td class="field-body">True</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Path (either absolute or relative) of fragment file</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TIDegeneracyThreshold</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">eV</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">If the orbital energy of the fragment MO is within this threshold with fragment HOMO or LUMO energy, then this fragment MO is included in the calculation of the transfer integrals. Relevant in case there is (near) degeneracy.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TransferIntegrals</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">: Charge transfer integrals (for transport properties)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Calculate the charge transfer integrals, spatial overlap integrals and site energies.
+
+Charge transfer integrals can be used in models that calculate transport properties.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="nbo-analysis">
+<h2>NBO analysis<a class="headerlink" href="#nbo-analysis" title="Permalink to this headline">¶</a></h2>
+<p>An input for the GENNBO program of Prof. Weinholds Natural Bond Orbital (NBO) package, by E. Glendening et al. can be made, using the key Properties%NBOInput.
+Not available for periodic systems.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Properties
+   NBOInput Yes/No
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Properties</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">NBOInput</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether or not an input file for the NBO program is written to disk as nboInput.FILE47. The input file follows the FILE47 format as described in the NBO6 manual available on nbo6.chem.wisc.edu. By default, only the calculation of the natural bond orbitals and the natural localized molecular orbitals is enabled, but the nboInput.FILE47 file can be edited by hand to enable other analysis models. Please refer to the NBO6 manual for details.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The GENNBO executable is included in the AMS distribution.
+The GENNBO program can be called with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/sh
+$AMSBIN/gennbo6 ams.results/dftb-nboInput.FILE47
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="NEGF.html" class="btn btn-neutral float-right" title="Electronic transport (NEGF)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="DFTB_Model_Hamiltonian.html" class="btn btn-neutral" title="Model Hamiltonians" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

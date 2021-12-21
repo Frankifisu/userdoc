@@ -1,0 +1,1034 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>scm.plams.core.jobrunner &mdash; PLAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/sphinx_tabs/tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="PLAMS 2021.1 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Module code" href="../../../index.html"/> 
+
+  
+  <script src="../../../../_static/js/jquery.min.js"></script>
+  <script src="../../../../_static/js/bootstrap.min.js"></script>
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/plams_logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search PLAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-scripting" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../intro.html#what-is-plams">What is PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../intro.html#what-can-be-done-with-plams">What can be done with PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../intro.html#simple-example">Simple example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../intro.html#what-plams-is-not">What PLAMS is <em>not</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../intro.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#library-contents">Library contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#installing-plams">Installing PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#updating-plams">Updating PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#running-plams">Running PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#defaults-file">Defaults file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../started.html#the-launch-script">The launch script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../started.html#working-folder-location">Working folder location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../started.html#passing-variables">Passing variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../started.html#importing-past-jobs">Importing past jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../started.html#restarting-failed-script">Restarting failed script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../started.html#multiple-input-scripts">Multiple input scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/components.html">Components overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/settings.html">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/settings.html#tree-like-structure">Tree-like structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/settings.html#dot-notation">Dot notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/settings.html#case-sensitivity">Case sensitivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/settings.html#global-settings">Global settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/settings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/jobs.html">Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobs.html#preparing-a-job">Preparing a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#contents-of-job-settings">Contents of job settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#default-settings">Default settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobs.html#running-a-job">Running a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#name-conflicts">Name conflicts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#prerun-and-postrun-methods">Prerun and postrun methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#preview-mode">Preview mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobs.html#job-api">Job API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobs.html#single-jobs">Single jobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#subclassing-singlejob">Subclassing SingleJob</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobs.html#multijobs">Multijobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/jobs.html#using-multijob">Using MultiJob</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/results.html">Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/results.html#files-in-the-job-folder">Files in the job folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/results.html#synchronization-of-parallel-job-executions">Synchronization of parallel job executions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/results.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/results.html#cleaning-job-folder">Cleaning job folder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/results.html#cleaning-for-multijobs">Cleaning for multijobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/results.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/runners.html">Job runners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/runners.html#local-job-runner">Local job runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/runners.html#remote-job-runner">Remote job runner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/jobmanager.html">Job manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobmanager.html#rerun-prevention">Rerun prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobmanager.html#pickling">Pickling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobmanager.html#restarting-scripts">Restarting scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/jobmanager.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/functions.html">Public functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/functions.html#logging">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/functions.html#binding-decorators">Binding decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/molecule.html">Molecule</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/mol_api.html">Molecule</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/mol_api.html#atom-labeling">Atom labeling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/atombond.html">Atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/atombond.html#bond">Bond</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/mol_rdkit.html">RDKit interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/mol_ase.html">ASE interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/utils.html">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/utils.html#periodic-table">Periodic Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/utils.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/utils.html#geometry-tools">Geometry tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/utils.html#file-format-conversion-tools">File format conversion tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../components/trajectories.html">Trajectories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/xyz.html">XYZ trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/xyz.html#xyz-history-files">XYZ history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/rkf.html">RKF trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../components/rkf.html#rkf-history-files">RKF history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../components/dcd.html">DCD trajectory files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../interfaces/interfaces.html">Interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../interfaces/amssuite.html">Amsterdam Modeling Suite</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/ams.html">AMS driver and engines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/ams.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/ams.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/ams.html#molecule-handling">Molecule handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/ams.html#amsjob-api">AMSJob API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/ams.html#amsresults-api">AMSResults API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/amsworker.html">AMS worker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/amsworker.html#amsworker-api">AMSWorker API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/amsworker.html#amsworkerresults-api">AMSWorkerResults API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/amsworker.html#amsworkerpool-api">AMSWorkerPool API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/postadf.html">Analysis tools: Densf, FCF, analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/kffiles.html">KF files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/crs.html">COSMO-RS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#settings-with-multiple-compound">Settings with multiple compound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#adf-and-crsjob">ADF and CRSJob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#cosmo-rs-parameters">COSMO-RS Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#data-analyses-and-plotting">Data analyses and plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crs.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/adf.html">ADF (pre-2020 version)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/adf.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/adf.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/adf.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/reaxff.html">ReaxFF (pre-2019 version)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../interfaces/thirdparty.html">Other programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/cp2k.html">CP2K</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/cp2k.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/cp2k.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/cp2k.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/cp2k.html#molecule-loading">Molecule loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/cp2k.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/crystal.html">Crystal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crystal.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crystal.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crystal.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crystal.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/crystal.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/dftbplus.html">DFTB+</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dftbplus.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dftbplus.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dftbplus.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dftbplus.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/dirac.html">Dirac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dirac.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dirac.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/dirac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/mopac.html">MOPAC (standalone program)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/mopac.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/mopac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/orca.html">ORCA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/orca.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../interfaces/raspa.html">RASPA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/raspa.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/raspa.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/raspa.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../interfaces/raspa.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/examples.html#id1">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/He2DissociationCurve.html">Helium dimer dissociation curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/WaterOptimization.html">Geometry optimization of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/ManyJobsInParallel.html">Many jobs in parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/BasisSetBenchmark.html">Benchmark accuracy of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/ExcitationsWorkflow.html">Workflow: filtering molecules based on excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/ChargeTransferIntegralsADF.html">Charge transfer integrals with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/gammascan.html">Tuning the range separation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/examples.html#pre-made-recipes">Pre-made recipes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/ams_crs.html">ADF and COSMO-RS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/adffragment.html">ADF fragment job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/ReorganizationEnergy.html">Reorganization Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/adfnbo.html">NBO with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/numgrad.html">Numerical gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/numhess.html">Numerical Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/molecule_gun.html">ReaxFF molecule gun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/global_minimum.html">Global Minimum Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/vibrationASE.html">Vibrational analysis with ASE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/vibrationASE.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/vibrationASE.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cookbook/cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cookbook/cookbook.html#settings-and-input">Settings and input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#create-an-input-block-with-an-header">Create an input block with an header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#create-an-empty-input-block">Create an empty input block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#convert-an-ams-text-input-into-an-ams-job">Convert an AMS text input into an AMS job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#convert-an-ams-text-input-into-settings-object">Convert an AMS text input into settings object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#convert-an-ams-run-file-into-an-amsjob">Convert an AMS .run file into an AMSJob</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#specify-paths-to-files-in-the-input">Specify paths to files in the input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#restart-from-a-previous-job">Restart from a previous job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cookbook/cookbook.html#molecules">Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#generate-a-molecule-from-a-smiles-string">Generate a molecule from a SMILES string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#counting-rings">Counting rings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cookbook/cookbook.html#extracting-results">Extracting Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#directly-from-functions">Directly from Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#examples-total-energy-and-final-structure">Examples: Total Energy and Final Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#amsresults-api-functions">AMSResults API Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#from-the-rkf-interface">From the RKF Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#finding-section-variable-pairs">Finding Section/Variable Pairs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#from-python-directories">From Python Directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#kfbrowser">KFBrowser</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#from-molecular-dynamics-trajectories">From molecular dynamics trajectories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#general-md-properties">General MD properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../cookbook/cookbook.html#molecules-from-trajectories">Molecules from trajectories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cookbook/cookbook.html#accessing-old-jobs">Accessing Old Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#binding-native-plams-jobs">Binding Native PLAMS Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../cookbook/cookbook.html#binding-old-rkf-files">Binding old RKF Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../citations.html">Citations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">PLAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../PLAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../../../../index.html">PLAMS</a>/</li>
+      
+          <li><a href="../../../index.html">Module code</a>/</li>
+      
+    <li class="orange-text">scm.plams.core.jobrunner</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for scm.plams.core.jobrunner</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">join</span> <span class="k">as</span> <span class="n">opj</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">DEVNULL</span><span class="p">,</span> <span class="n">PIPE</span>
+
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="k">import</span> <span class="n">PlamsError</span>
+<span class="kn">from</span> <span class="nn">.functions</span> <span class="k">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">log</span>
+<span class="kn">from</span> <span class="nn">.private</span> <span class="k">import</span> <span class="n">saferun</span>
+<span class="kn">from</span> <span class="nn">.settings</span> <span class="k">import</span> <span class="n">Settings</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;JobRunner&#39;</span><span class="p">,</span> <span class="s1">&#39;GridRunner&#39;</span><span class="p">]</span>
+
+
+
+<div class="viewcode-block" id="_in_thread"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner._in_thread">[docs]</a><span class="k">def</span> <span class="nf">_in_thread</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decorator for an instance method. If ``parallel`` attribute of given instance is ``True``, run decorated method in a separate :class:`~threading.Thread`. This thread is usually a daemon thread, the decision is based on ``config.daemon_threads`` entry.&quot;&quot;&quot;</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;plamsthread&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="p">,)</span><span class="o">+</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">daemon_threads</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+<span class="k">def</span> <span class="nf">_in_limited_thread</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;More careful version of the ``in_thread`` decorator: a new job thread will only be launched if the currently active number of threads is below the ``maxthreads`` limit set in :meth:`~scm.plams.core.jobrunner.JobRunner.__init__`.&quot;&quot;&quot;</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;plamsthread&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="p">,)</span><span class="o">+</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">daemon_threads</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jobthread_limit</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jobthread_limit</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jobthread_limit</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jobthread_limit</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="n">e</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+
+<div class="viewcode-block" id="_limit"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner._limit">[docs]</a><span class="k">def</span> <span class="nf">_limit</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decorator for an instance method. If ``semaphore`` attribute of given instance is not ``None``, use this attribute to wrap decorated method via :ref:`with&lt;with-locks&gt;` statement.&quot;&quot;&quot;</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">semaphore</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">semaphore</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+<div class="viewcode-block" id="_MetaRunner"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner._MetaRunner">[docs]</a><span class="k">class</span> <span class="nc">_MetaRunner</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Metaclass for |JobRunner|. During an instance creation wrap the :meth:`~scm.plams.core.jobrunner.JobRunner.call` method with :func:`_limit` decorator which enforces a limit on the number of simultaneous :meth:`~scm.plams.core.jobrunner.JobRunner.call` calls.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="_MetaRunner.__new__"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner._MetaRunner.__new__">[docs]</a>    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
+        <span class="n">dct</span><span class="p">[</span><span class="s1">&#39;call&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_limit</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;call&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span></div></div>
+
+
+
+<span class="c1">#===========================================================================</span>
+<span class="c1">#===========================================================================</span>
+<span class="c1">#===========================================================================</span>
+
+
+
+<div class="viewcode-block" id="JobRunner"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.JobRunner">[docs]</a><span class="k">class</span> <span class="nc">JobRunner</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">_MetaRunner</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class defining the basic job runner interface. Instances of this class represent local job runners -- job runners that execute computational jobs on the current machine.</span>
+
+<span class="sd">    The goal of the job runner is to take care of two important things -- parallelization and runscript execution:</span>
+
+<span class="sd">    *   When the method |run| of any |Job| instance is executed, the control, after some initial preparations, is passed to a |JobRunner| instance. This |JobRunner| instance decides if a separate thread should be spawned for the job or if the execution should proceed in the current thread. This decision is based on the ``parallel`` attribute which can be set on |JobRunner| creation. There are no separate classes for serial and parallel job runner, both cases are covered by |JobRunner| depending on the ``parallel`` parameter.</span>
+<span class="sd">    *   If the executed job is an instance of |SingleJob|, it creates a runscript which contains most of the actual computational work (usually it&#39;s just an execution of some external binary). The runscript is then submitted to a |JobRunner| instance using its :meth:`call` method. This method executes the runscript as a separate subprocess and takes care of output and error streams handling, setting a proper working directory etc.</span>
+
+<span class="sd">    For a job runner with parallel execution enabled the number of simultaneously running jobs can be limited using the *maxjobs* parameter. If *maxjobs* is 0, no limit is enforced. If *parallel* is ``False``, *maxjobs* is ignored. If *parallel* is ``True`` and *maxjobs* is a positive integer, a :class:`BoundedSemaphore&lt;threading.BoundedSemaphore&gt;` of that size is used to limit the number of simultaneously running :meth:`call` methods.</span>
+
+<span class="sd">    For a parallel |JobRunner| the maximum amount of threads started is limited by the *maxthreads* argument. As each job is running in a separate thread, this number necessarily acts as an upper limit for the number of jobs that can run in parallel. If the limit is exhausted, running further jobs with this |JobRunner| instance will block execution until another already running job thread terminates. The ``maxthreads`` limit should be set as large as possible, but not so large as to exceed any limits imposed by the operating system.</span>
+
+<span class="sd">    A |JobRunner| instance can be passed to |run| with a keyword argument ``jobrunner``. If this argument is omitted, the instance stored in ``config.default_jobrunner`` is used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JobRunner.__init__"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.JobRunner.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">maxjobs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxthreads</span><span class="o">=</span><span class="mi">256</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="n">parallel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxjobs</span>  <span class="o">=</span> <span class="n">maxjobs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">semaphore</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">BoundedSemaphore</span><span class="p">(</span><span class="n">maxjobs</span><span class="p">)</span> <span class="k">if</span> <span class="n">maxjobs</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_jobthread_limit</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">BoundedSemaphore</span><span class="p">(</span><span class="n">maxthreads</span><span class="p">)</span> <span class="k">if</span> <span class="n">maxthreads</span> <span class="k">else</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="JobRunner.call"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.JobRunner.call">[docs]</a>    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runscript</span><span class="p">,</span> <span class="n">workdir</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">runflags</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;call(runscript, workdir, out, err, runflags)</span>
+<span class="sd">        Execute the *runscript* in the folder *workdir*. Redirect output and error streams to *out* and *err*, respectively.</span>
+
+<span class="sd">        Arguments *runscript*, *workdir*, *out* and *err* should be strings with paths to corresponding files or folders.</span>
+
+<span class="sd">        *runflags* is a |Settings| instance containing the `run` branch of running job&#39;s settings. The basic job runner defined here ignores them, but they can be useful in |JobRunner| subclasses (see :meth:`GridRunner.call`).</span>
+
+<span class="sd">        Returns an integer with the exit code returned by the *runscript*.</span>
+
+<span class="sd">        This method can be safely overridden in |JobRunner| subclasses. For example, in |GridRunner| it submits the runscript to a queueing system instead of executing it locally.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            This method is used automatically during |run| and should never be explicitly called in your script.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="p">(</span><span class="s1">&#39;Executing </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runscript</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;./&#39;</span><span class="o">+</span><span class="n">runscript</span><span class="p">]</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span> <span class="n">runscript</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">opj</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="n">err</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">opj</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="n">out</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">o</span><span class="p">:</span>
+                <span class="n">process</span> <span class="o">=</span> <span class="n">saferun</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">o</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">opj</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="n">err</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">process</span> <span class="o">=</span> <span class="n">saferun</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">log</span><span class="p">(</span><span class="s1">&#39;Execution of </span><span class="si">{}</span><span class="s1"> finished with returncode </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runscript</span><span class="p">,</span> <span class="n">process</span><span class="o">.</span><span class="n">returncode</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">returncode</span></div>
+
+
+<div class="viewcode-block" id="JobRunner.call_function"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.JobRunner.call_function">[docs]</a>    <span class="nd">@_limit</span>
+    <span class="k">def</span> <span class="nf">call_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute the function that needs to be scheduled by the jobrunner. </span>
+
+<span class="sd">        This is wrapped by the _limit() function, so that no more than maxjobs processes can run at the same time</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JobRunner._run_job"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.JobRunner._run_job">[docs]</a>    <span class="nd">@_in_limited_thread</span>
+    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">jobmanager</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_run_job(job, jobmanager)</span>
+<span class="sd">        This method aggregates the parts of :ref:`job-life-cycle` that are supposed to be run in a separate thread in case of parallel job execution. It is wrapped with :func:`_in_limited_thread` decorator.</span>
+
+<span class="sd">        This method should not be overridden.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">job</span><span class="o">.</span><span class="n">_prepare</span><span class="p">(</span><span class="n">jobmanager</span><span class="p">):</span>
+                <span class="n">job</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="n">job</span><span class="o">.</span><span class="n">_finalize</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jobthread_limit</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_jobthread_limit</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="JobRunner._run_job_with_args"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.JobRunner._run_job_with_args">[docs]</a>    <span class="nd">@_in_limited_thread</span>
+    <span class="k">def</span> <span class="nf">_run_job_with_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">jobmanager</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">args_fin</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_run_job(job, jobmanager)</span>
+<span class="sd">        This method aggregates the parts of :ref:`job-life-cycle` that are supposed to be run in a separate thread in case of parallel job execution. It is wrapped with :func:`_in_limited_thread` decorator.</span>
+
+<span class="sd">        This method should not be overridden.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">job</span><span class="o">.</span><span class="n">_prepare</span><span class="p">(</span><span class="n">jobmanager</span><span class="p">):</span>
+                <span class="n">exc</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+                <span class="n">job</span><span class="o">.</span><span class="n">_finalize</span><span class="p">(</span><span class="o">*</span><span class="n">args_fin</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jobthread_limit</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_jobthread_limit</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div></div>
+
+
+
+
+<span class="c1">#===========================================================================</span>
+<span class="c1">#===========================================================================</span>
+<span class="c1">#===========================================================================</span>
+
+
+
+<div class="viewcode-block" id="GridRunner"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.GridRunner">[docs]</a><span class="k">class</span> <span class="nc">GridRunner</span><span class="p">(</span><span class="n">JobRunner</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Subclass of |JobRunner| that submits the runscript to a queueing system instead of executing it locally. Besides two new keyword arguments (*grid* and *sleepstep*) it behaves and is meant to be used just like a regular |JobRunner|.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        The default value of the *parallel* argument is ``True``, unlike in the regular |JobRunner|.</span>
+
+<span class="sd">    There are many different queueing systems that are popular nowadays (for example: TORQUE, SLURM, OGE). Usually they use different commands for submitting jobs or checking the queue status. |GridRunner| class tries to build a common interface to these systems. The commands used to communicate with the queueing system are not hard-coded, but rather taken from a |Settings| instance. Thanks to that the user has almost full control over the behavior of a |GridRunner| instance and the behavior can be ajdusted dynamically.</span>
+
+<span class="sd">    The behavior of a |GridRunner| instance is determined by the contents of a |Settings| instance stored in its ``settings`` attribute. That |Settings| instance can be manually supplied by the user or taken from a collection of predefined instances stored as branches of ``GridRunner.config``. The adjustment is done with the *grid* parameter which should be a string or a |Settings| instance. If it&#39;s a string, it has to be a key occurring in ``GridRunner.config`` or ``&#39;auto&#39;`` for autodetection. For example, if ``grid=&#39;slurm&#39;`` is passed, ``GridRunner.config.slurm`` is used as settings. If ``grid=&#39;auto&#39;`` then entries present in ``GridRunner.config`` are tested and the first one that works (its submit command is present on your system) is chosen. When a |Settings| instance is passed as *grid*, it is directly used as ``settings``.</span>
+
+<span class="sd">    Currently two predefined schemes are available (see :ref:`plams-defaults`): ``slurm`` for SLURM and ``pbs`` for queueing systems following PBS syntax (PBS, TORQUE, Oracle Grid Engine etc.).</span>
+
+<span class="sd">    The settings of |GridRunner| should have the following structure:</span>
+
+<span class="sd">    *   ``output`` -- flag for specifying the output file path.</span>
+<span class="sd">    *   ``error`` -- flag for specifying the error file path.</span>
+<span class="sd">    *   ``workdir`` -- flag for specifying path to the working directory.</span>
+<span class="sd">    *   ``commands.submit`` -- submit command.</span>
+<span class="sd">    *   ``commands.check`` -- queue status check command.</span>
+<span class="sd">    *   ``commands.getid`` -- function extracting submitted job&#39;s ID from the output of the submit command.</span>
+<span class="sd">    *   ``commands.running`` -- function extracting a list of all running jobs from the output of queue check command</span>
+<span class="sd">    *   ``commands.special`` -- branch storing definitions of special |run| keyword arguments.</span>
+
+<span class="sd">    See :meth:`call` for more details and examples.</span>
+
+<span class="sd">    The *sleepstep* parameter defines how often the queue check is performed. It should be a numerical value telling how many seconds should the interval between two consecutive checks last.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Usually queueing systems are configured in such a way that output of your calculation is captured somewhere else and copied to the location indicated by the output flag only when the job is finished. Because of that it is not possible to have a peek at your output while your job is running (for example, to see if your calculation is going well). This limitation can be circumvented with ``myjob.settings.runscript.stdout_redirect`` flag. If set to ``True``, the output redirection will not be handled by the queueing system, but rather placed in the runscript using the shell redirection ``&gt;``. That forces the output file to be created directly in *workdir* and updated live as the job proceeds.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># GridRunner mechanism for testing if a job is finished:</span>
+    <span class="c1">#if [...].commands.finished exists it is used to check if the job is finished. It should be a function that takes a single string (job_id) as an argument and returns True or False</span>
+    <span class="c1">#otherwise [...].commands.check is combined with job_id, executed as a subprocess and returned exit code is tested (nonzero return code indicates that job has finished)</span>
+
+    <span class="k">def</span> <span class="nf">__slurm_get_jobid</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]):</span>
+            <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__slurm_running</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__pbs_get_jobid</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]]):</span>
+            <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__pbs_running</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+
+    <span class="c1"># Static config holding the preconfigured grids:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+    <span class="c1"># PBS</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">workdir</span> <span class="o">=</span> <span class="s1">&#39;-d&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">output</span>  <span class="o">=</span> <span class="s1">&#39;-o&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">error</span>   <span class="o">=</span> <span class="s1">&#39;-e&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">nodes</span>    <span class="o">=</span> <span class="s1">&#39;-l nodes=&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">walltime</span> <span class="o">=</span> <span class="s1">&#39;-l walltime=&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="s1">&#39;-l mem=&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">queue</span>    <span class="o">=</span> <span class="s1">&#39;-q &#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">submit</span>  <span class="o">=</span> <span class="s1">&#39;qsub&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">check</span>  <span class="o">=</span> <span class="s1">&#39;qstat&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">getid</span>   <span class="o">=</span> <span class="n">__pbs_get_jobid</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">pbs</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="n">__pbs_running</span>
+    <span class="c1"># Slurm</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">workdir</span> <span class="o">=</span> <span class="s1">&#39;-D&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">output</span>  <span class="o">=</span> <span class="s1">&#39;-o&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">error</span>   <span class="o">=</span> <span class="s1">&#39;-e&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">nodes</span>    <span class="o">=</span> <span class="s1">&#39;-N &#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">cores</span>    <span class="o">=</span> <span class="s1">&#39;-n &#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">walltime</span> <span class="o">=</span> <span class="s1">&#39;-t &#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="s1">&#39;--mem=&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">queue</span>    <span class="o">=</span> <span class="s1">&#39;-p &#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">submit</span>  <span class="o">=</span> <span class="s1">&#39;sbatch&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">check</span>  <span class="o">=</span> <span class="s1">&#39;squeue&#39;</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">getid</span>   <span class="o">=</span> <span class="n">__slurm_get_jobid</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">slurm</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="n">__slurm_running</span>
+
+
+<div class="viewcode-block" id="GridRunner.__init__"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.GridRunner.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">sleepstep</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">maxjobs</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">JobRunner</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="n">maxjobs</span><span class="o">=</span><span class="n">maxjobs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sleepstep</span> <span class="o">=</span> <span class="n">sleepstep</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_active_jobs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_active_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mainlock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Settings</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">grid</span>
+        <span class="k">elif</span> <span class="n">grid</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autodetect</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">grid</span> <span class="ow">in</span> <span class="n">GridRunner</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">GridRunner</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="n">grid</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">saferun</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">submit</span><span class="p">,</span> <span class="s1">&#39;--version&#39;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">DEVNULL</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">DEVNULL</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PlamsError</span><span class="p">(</span><span class="s1">&#39;GridRunner: </span><span class="si">{}</span><span class="s1"> command not found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">submit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PlamsError</span><span class="p">(</span><span class="s2">&quot;GridRunner: invalid &#39;grid&#39; argument. &#39;grid&#39; should be either a Settings instance (see documentations for details) or a string occurring in GridRunner.config or &#39;auto&#39; for autodetection&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GridRunner.call"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.GridRunner.call">[docs]</a>    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runscript</span><span class="p">,</span> <span class="n">workdir</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">runflags</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;call(runscript, workdir, out, err, runflags)</span>
+<span class="sd">        Submit *runscript* to the queueing system with *workdir* as the working directory. Redirect output and error streams to *out* and *err*, respectively. *runflags* stores varoius submit command options.</span>
+
+<span class="sd">        The submit command has the following structure::</span>
+
+<span class="sd">            &lt;commands.submit&gt;_&lt;workdir&gt;_{workdir}_&lt;error&gt;_{err}[_&lt;output&gt;_{out}][FLAGS]_{runscript}</span>
+
+<span class="sd">        Underscores denote spaces, parts in pointy brackets correspond to ``settings`` entries, parts in curly brackets to :meth:`call` arguments, square brackets contain optional parts. Output part is added if *out* is not ``None``. This is handled automatically based on ``runscript.stdout_redirect`` value in job&#39;s ``settings``.</span>
+
+<span class="sd">        ``FLAGS`` part is built based on *runflags* argument, which is a |Settings| instance storing |run| keyword arguments. For every *(key,value)* pair in *runflags* the string ``_-key_value`` is appended to ``FLAGS`` **unless** the *key* is a special key occurring in ``commands.special``. In that case ``_&lt;commands.special.key&gt;value`` is used (mind the lack of space in between). For example, a |Settings| instance defining interaction with SLURM has the following entries::</span>
+
+<span class="sd">            workdir = &#39;-D&#39;</span>
+<span class="sd">            output  = &#39;-o&#39;</span>
+<span class="sd">            error   = &#39;-e&#39;</span>
+<span class="sd">            special.nodes    = &#39;-N &#39;</span>
+<span class="sd">            special.walltime = &#39;-t &#39;</span>
+<span class="sd">            special.memory = &#39;--mem=&#39;</span>
+<span class="sd">            special.queue    = &#39;-p &#39;</span>
+<span class="sd">            commands.submit  = &#39;sbatch&#39;</span>
+<span class="sd">            commands.check  = &#39;squeue&#39;</span>
+
+<span class="sd">        The submit command produced by::</span>
+
+<span class="sd">            gr = GridRunner(parallel=True, maxjobs=4, grid=&#39;slurm&#39;)</span>
+<span class="sd">            j.run(jobrunner=gr, queue=&#39;short&#39;, nodes=2, J=&#39;something&#39;, O=&#39;&#39;)</span>
+
+<span class="sd">        will be:</span>
+
+<span class="sd">        .. code-block:: none</span>
+
+<span class="sd">            sbatch -D {workdir} -e {err} -o {out} -p short -N 2 -J something -O  {runscript}</span>
+
+<span class="sd">        In certain queueing systems some flags don&#39;t have a short form with semantics ``-key value``. For example, in SLURM the flag ``--nodefile=value`` has a short form ``-F value``, but the flag ``--export=value`` does not. One can still use such a flag using the special keys logic::</span>
+
+<span class="sd">            gr = GridRunner(parallel=True, maxjobs=4, grid=&#39;slurm&#39;)</span>
+<span class="sd">            gr.settings.special.export = &#39;--export=&#39;</span>
+<span class="sd">            j.run(jobrunner=gr, queue=&#39;short&#39;, export=&#39;value&#39;)</span>
+
+<span class="sd">        That results in the command::</span>
+
+<span class="sd">            sbatch -D {workdir} -e {err} -o {out} -p short --export=value {runscript}</span>
+
+<span class="sd">        The submit command is then executed and the output returned by it is used to determine the submitted job&#39;s ID. The value stored in ``commands.getid`` is used for that purpose. It should be a function taking a single string (the whole output of the submit command) and returning a string with job&#39;s ID.</span>
+
+<span class="sd">        The submitted job&#39;s ID is then added to ``_active_jobs`` dictionary, with the key being job&#39;s ID and the value being an instance of :class:`threading.Lock`. This lock is used to singal the fact that the job is finished and the thread handling it can continue. Then the :meth:`_check_queue` method starts the thread querying the queue and unlocking finished jobs.</span>
+
+<span class="sd">        Since it is difficult to automatically obtain job&#39;s exit code, the returned value is 0 (or 1, if the submit command failed). From |run| perspective it means that a job executed with |GridRunner| is *crashed* only if it never entered the queue (usually due to improper submit command).</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            This method is used automatically during |run| and should never be explicitly called in your script.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">s</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">submit</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">workdir</span><span class="p">,</span> <span class="n">workdir</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="n">err</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cmd</span> <span class="o">+=</span> <span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">s</span><span class="o">.</span><span class="n">output</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">out</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">runflags</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">special</span><span class="p">:</span>
+                <span class="n">cmd</span> <span class="o">+=</span> <span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">s</span><span class="o">.</span><span class="n">special</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cmd</span> <span class="o">+=</span> <span class="s1">&#39; -&#39;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">cmd</span> <span class="o">+=</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">opj</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span><span class="n">runscript</span><span class="p">)</span>
+
+        <span class="n">log</span><span class="p">(</span><span class="s1">&#39;Submitting </span><span class="si">{}</span><span class="s1"> with command </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runscript</span><span class="p">,</span> <span class="n">cmd</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">process</span> <span class="o">=</span> <span class="n">saferun</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
+        <span class="n">subout</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        <span class="n">log</span><span class="p">(</span><span class="s1">&#39;Output of </span><span class="si">{}</span><span class="s1"> submit command: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runscript</span><span class="p">,</span> <span class="n">subout</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">jobid</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">getid</span><span class="p">(</span><span class="n">subout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">jobid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log</span><span class="p">(</span><span class="s1">&#39;Submitting of </span><span class="si">{}</span><span class="s1"> failed. Stderr of submit command:</span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runscript</span><span class="p">,</span> <span class="n">process</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">()),</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="n">log</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> submitted successfully as job </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runscript</span><span class="p">,</span> <span class="n">jobid</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">event</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_active_lock</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_active_jobs</span><span class="p">[</span><span class="n">jobid</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_queue</span><span class="p">()</span>
+        <span class="n">event</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+        <span class="n">log</span><span class="p">(</span><span class="s1">&#39;Execution of </span><span class="si">{}</span><span class="s1"> finished&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runscript</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="GridRunner._check_queue"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.GridRunner._check_queue">[docs]</a>    <span class="nd">@_in_thread</span>
+    <span class="k">def</span> <span class="nf">_check_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Query the queueing system to obtain a list of currently running jobs. Check for active jobs that are not any more in the queue and release their locks. Repeat this procedure every ``sleepstep`` seconds until there are no more active jobs. The ``_mainlock`` lock ensures that there is at most one thread executing the main loop of this method at the same time.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mainlock</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="n">blocking</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_active_lock</span><span class="p">:</span>
+                        <span class="n">active_jobs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_active_jobs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+                    <span class="n">process</span> <span class="o">=</span> <span class="n">saferun</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">check</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
+                    <span class="n">output</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+                    <span class="n">running_jobs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">running</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+
+                    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_active_lock</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">jobid</span> <span class="ow">in</span> <span class="n">active_jobs</span> <span class="o">-</span> <span class="n">running_jobs</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_active_jobs</span><span class="p">[</span><span class="n">jobid</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+                            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_active_jobs</span><span class="p">[</span><span class="n">jobid</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_active_jobs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="k">return</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sleepstep</span><span class="p">)</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_mainlock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="GridRunner._autodetect"><a class="viewcode-back" href="../../../../components/runners.html#scm.plams.core.jobrunner.GridRunner._autodetect">[docs]</a>    <span class="k">def</span> <span class="nf">_autodetect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Try to autodetect the type of queueing system.</span>
+
+<span class="sd">        The autodetection mechanism is very simple. For each entry in ``GridRunner.config`` the submit command followed by ``--version`` is executed (for example ``qsub --version``). If the execution was successful (which is indicated by the exit code 0), that queueing system is present and it is chosen. Thus if there are multiple queueing systems installed, only one of them is picked -- the one which &quot;name&quot; (indicated by a key in ``GridRunner.config``) is first in the lexicographical order.</span>
+
+<span class="sd">        Returned value is one of ``GridRunner.config`` branches. If autodetection was not successful, an exception is raised.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">grid</span> <span class="ow">in</span> <span class="n">GridRunner</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">process</span> <span class="o">=</span> <span class="n">saferun</span><span class="p">([</span><span class="n">GridRunner</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="n">grid</span><span class="p">]</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">submit</span><span class="p">,</span> <span class="s1">&#39;--version&#39;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">DEVNULL</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">DEVNULL</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">process</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Grid type autodetected as &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">GridRunner</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="n">grid</span><span class="p">]</span>
+        <span class="k">raise</span> <span class="n">PlamsError</span><span class="p">(</span><span class="s1">&#39;GridRunner: Failed to autodetect grid type&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+      <script type="text/javascript" src="../../../../_static/sphinx_tabs/tabs.js"></script>
+      <script type="text/javascript" src="../../../../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

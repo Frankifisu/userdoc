@@ -1,0 +1,68 @@
+#! /bin/sh
+
+# This example tries to do the same as in the COSMO-RS GUI Tutorial: COSMO result files,
+# using scripts.
+#
+# In the first part of the example you will find how to use amsprep to construct 
+# an ADF COSMO results file.
+# The template ADFCRS will perform a gas phase geometry optimization (for water, in this case),
+# and next a COSMO calculation at the gas phase optimized geometry.
+# The result file adfwater.coskf, which is an ADF COSMO result file, can be used as input for
+# a COSMO-RS calculation. amsreport is used to extract data from the resulting .coskf file.
+
+echo "Results"
+
+rm -f water.xyz
+rm -f job.sh
+cat << eor > water.xyz
+3
+
+H       0.00000000       0.77121000       0.18071000
+O       0.00000000      -0.00000000      -0.36142000
+H       0.00000000      -0.77121000       0.18071000
+eor
+
+"$AMSBIN/amsprep" -t GO -runtype "COSMO-RS Compound" -m water.xyz -j adfwater >job.sh
+chmod +x job.sh
+./job.sh
+
+echo "ADF"
+"$AMSBIN/amsreport" adfwater.results geometry-a*
+cp adfwater.coskf adffile.coskf
+"$AMSBIN/amsreport" adffile.coskf energies
+
+# The template ADFCRS can also be used for generating an "average monomer" COSMO result file.
+# The calculation could take up quite some time.
+
+echo "POLYMER"
+$AMSBIN/amsprep -t GO -runtype "COSMO-RS Compound" -smiles "C{-}C{n+}(c1ccccc1)" -j adfpolystyrene >job3.sh
+grep -i coskfatoms job3.sh |wc -w
+
+
+# A MOPAC COSMO result file can also be constructed.
+# Note that the syntax for MOPAC is not the same as in ADF2018.
+# The template MOPAC-GO will perform a COSMO geometry optimization, 
+# if -g "mopac.solvation.enabled 1" -g "mopac.solvation.solvent.name CRS" is included.
+# If -g "mopac.solvation.nspa 362" is included the maximum number of COSMO surface points
+# is 362, which is more than the default 42.
+# The result file mopacwaterresults/mopac.coskf is a MOPAC COSMO result file,
+# which can be used as input for a COSMO-RS calculation.
+
+"$AMSBIN/amsprep" -t MOPAC-GO -m water.xyz -g "mopac.solvation.enabled 1" \
+                  -g "mopac.solvation.solvent.name CRS" -g "mopac.solvation.nspa 362" \
+                  -j mopacwater >job2.sh
+chmod +x job2.sh
+./job2.sh
+
+echo "MOPAC"
+"$AMSBIN/amsreport" mopacwater.results geometry-a*
+"$AMSBIN/amsreport" mopacwater.results/mopac.coskf energies
+
+# Fast Sigma can provide estimates of COSMO-RS sigma profiles in milliseconds.
+
+echo "FAST SIGMA"
+"$AMSBIN/fast_sigma" --smiles "CC(Cc1ccc(cc1)[C@@H](C(=O)O)C)C" -o ibuprofen.compkf
+"$AMSBIN/amsreport" ibuprofen.compkf formula
+"$AMSBIN/amsreport" ibuprofen.compkf energies
+
+echo "Ready"

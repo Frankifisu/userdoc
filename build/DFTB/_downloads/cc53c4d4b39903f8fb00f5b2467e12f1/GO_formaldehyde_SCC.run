@@ -1,0 +1,30 @@
+#!/bin/sh
+
+$AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=1.0e-5
+End
+
+System
+    Atoms [Bohr]
+      C     0.0  0.0  -1.00
+      O     0.0  0.0   1.247
+      H     0.0 -1.738 -2.097
+      H     0.0  1.738 -2.097
+    End
+End
+
+Engine DFTB
+    Model SCC-DFTB
+    ResourcesDir Dresden
+    SCC
+        Converge charge=1.0e-8
+    End
+    DispersionCorrection UFF
+EndEngine
+
+eor
+

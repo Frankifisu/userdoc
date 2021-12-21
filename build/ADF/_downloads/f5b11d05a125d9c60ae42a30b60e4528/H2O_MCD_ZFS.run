@@ -1,0 +1,46 @@
+#! /bin/sh
+
+
+# Example for the calculation of magnetic circular dichroism (MCD) including
+# zero-field splitting (ZFS). If the subkey MCD is included in the key
+# EXCITATIONS the MCD parameters of the calculated excitations are calculated (A
+# and B terms). The keys RELATIVISTIC ZORA and SOMCD are required for a
+# calculation of temperature-dependent C terms. The key ALLPOINTS is required
+# for an MCD calculation (if the molecule has symmetry). For zero-field
+# splitting (ZFS) the electron spin S<=1.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+    O            0.0000    0.0000    0.0000              
+    H            0.0000   -0.7071    0.7071
+    H            0.0000    0.7071    0.7071
+  end
+  charge 2
+end
+
+Task SinglePoint
+
+Engine ADF
+  title water MCD with zero-field zplitting
+  allpoints
+  excitations
+    lowest 20
+    mcd NMCDTERM=5 NODIRECT NTEMP=2 TMIN=1.0 TMAX=300.0 NBFIELD=2 BMIN=1.0 BMAX=8.0
+    onlysing
+  end
+  basis
+    type DZP
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  somcd
+  spinpolarization 2
+  unrestricted
+  zfs
+EndEngine
+eor
+

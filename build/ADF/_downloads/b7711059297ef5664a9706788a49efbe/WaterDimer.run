@@ -1,0 +1,53 @@
+#!/bin/sh
+
+
+# Example of Constrained Density Functional Theory (CDFT) for the charged Water
+# dimer, in which the charge is constrained to be on one of the waters. In this
+# case there is one constraint, with a total charge of 1.0 on the atoms 1-3.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     O         0.0000000000        0.0000000000      0.0000000000
+     H        -0.9358409558        0.2646136961      0.0000000000
+     H        -0.0304663436       -0.9828924420      0.0000000000
+     O         0.0000000000       -2.9053396088      0.0000000000
+     H        -0.4092227596       -3.3374838250     -0.7701260000
+     H        -0.4092227596       -3.3374838250      0.7701260000
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  title water dimer h2o+ ... h2o
+  
+  cdft
+    constraints 1.0
+    natomsperset 3
+    nconstraints 1
+    theatoms 1 2 3
+  end
+  
+  basis
+    core none
+    type TZP
+  end
+  
+  unrestricted
+  spinpolarization 1
+  
+  symmetry NOSYM
+  
+  xc
+    gga PW91
+  end
+  
+  noprint BAS FUNCTIONS
+  eprint
+    sfo NOEIG NOOVL NOORBPOP
+  end
+EndEngine
+
+eor

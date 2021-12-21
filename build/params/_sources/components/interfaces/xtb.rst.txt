@@ -1,0 +1,165 @@
+xTB
+===
+.. currentmodule:: scm.params.parameterinterfaces.xtb
+
+ParAMS provides an ``XTBParameters`` interface class to Grimme's first generation `xTB model <../../../DFTB/DFTB_Model_Hamiltonian.html#extended-tight-binding-xtb>`__, of which GFN1-xTB [#ref1]_ is the standard parameterization.
+
+The names of the parameters contained in the ``XTBParameters`` class closely follow the naming in the original GFN1-xTB article. All parameters use the GFN1-xTB value as the default and have a default range assigned already, which is centered around the GFN1-xTB parameter value (taking physical constraints into account). All parameters are inactive by default, meaning they will not be optimized unless explicitly enabled. The following example shows how to set up a re-parameterization of the GFN1-xTB repulsive potentials of lithium and fluoride.
+
+.. code:: python
+
+   # Make an interface to the xTB model in DFTB.
+   # This loads Grimme's GFN1-xTB parameterization by default.
+   interface = XTBParameters()
+
+   # Activate optimization of the repulsive potential of Li.
+   interface['Li:alpha'].is_active = True
+   interface['Li:Z'].is_active = True
+
+   # Activate optimization of the repulsive potential of F.
+   interface['F:alpha'].is_active = True
+   interface['F:Z'].is_active = True
+
+
+List of parameter names
+-----------------------
+
+The GFN1-xTB parameterization has 1492 parameters and covers all elements up to radon. The parameter files for GFN1-xTB can be found in ``$AMSRESOURCES/DFTB/GFN1-xTB``. The ``elements.xtbpar`` contains all element-specific parameters, except for the basis set definition. Their names start with the element symbol, followed by the parameter name from table S31 in the supplementary information of the GFN1-xTB article. As an example, these are the element specific parameter for carbon:
+
++-------------------------+---------------+------------------------+
+| Parameter name          | Default value | Default range          |
++=========================+===============+========================+
+| ``C:eta``               | 0.479988      | [0.159996, 1.439964]   |
++-------------------------+---------------+------------------------+
+| ``C:Gamma``             | 1.053856      | [1.553856, 0.553856]   |
++-------------------------+---------------+------------------------+
+| ``C:alpha``             | 1.281954      | [0.640977, 2.563908]   |
++-------------------------+---------------+------------------------+
+| ``C:Z``                 | 4.428763      | [2.2143815, 6.6431445] |
++-------------------------+---------------+------------------------+
+| ``C:k_XB``              | 0.0           | [0.0, 0.5]             |
++-------------------------+---------------+------------------------+
+| ``C:Electronegativity`` | 2.55          | [2.295, 2.805]         |
++-------------------------+---------------+------------------------+
+
+The basis set definition from table S31 of the SI is stored in the ``basis.xtbpar`` file. The corresponding parameter names start with ``Xx:Basis:nl``, where ``Xx`` is the element symbol, ``n`` the main quantum number and ``l`` the angular momentum quantum number (``s``, ``p`` or ``d``). As an example, these are the 8 basis set parameters for carbon:
+
++-----------------------+---------------+-------------------------+
+| Parameter name        | Default value | Default range           |
++=======================+===============+=========================+
+| ``C:Basis.2s.k_poly`` |  -7.08217     | [-17.08217, 2.91783]    |
++-----------------------+---------------+-------------------------+
+| ``C:Basis.2s.k_l``    |   0.0         | [-5.0, 5.0]             |
++-----------------------+---------------+-------------------------+
+| ``C:Basis.2s.H_l``    | -13.58721     | [-23.58721, -3.58721]   |
++-----------------------+---------------+-------------------------+
+| ``C:Basis.2s.zeta_l`` |   1.960324    | [0.4, 4.0]              |
++-----------------------+---------------+-------------------------+
+| ``C:Basis.2p.k_poly`` |   0.812216    | [-9.187784, 10.812216]  |
++-----------------------+---------------+-------------------------+
+| ``C:Basis.2p.k_l``    |  -0.471181    | [-5.471181, 4.528819]   |
++-----------------------+---------------+-------------------------+
+| ``C:Basis.2p.H_l``    | -10.052785    | [-20.052785, -0.052785] |
++-----------------------+---------------+-------------------------+
+| ``C:Basis.2p.zeta_l`` |   1.832096    | [0.4, 4.0]              |
++-----------------------+---------------+-------------------------+
+
+.. hint::
+
+   One could add d-functions to carbon atoms by editing the ``basis.xtbpar`` file and adding the corresponding 4 lines for e.g. a 3d set of functions with a guess for the parameter values. These new parameters would then also become available in the ``XTBParameters`` class (with a default range). It is not possible to add/remove basis functions from within the ``XTBParameters`` interface. The interface can only change the values of existing parameters, so you need to edit the files manually to create/remove parameters.
+
+.. warning::
+
+   It is not possible to have multiple sets of basis functions with the same l-value for one element, i.e. you can not have 2p and 3p functions at the same time. The one exception to this rule is hydrogen, which comes with both a 1s and 2s function in GFN1-xTB. However, the basis of hydrogen is hardcoded at the moment and **can not be changed** in our xTB implementation.
+
+In addition to the element-specific parameters, there are a couple of global parameters from table 2 of the article, which are stored in the ``globals.xtbpar`` file. These names of these parameters start with ``Globals``:
+
++-----------------------------+---------------+--------------------+
+| Parameter name              | Default value | Default range      |
++=============================+===============+====================+
+| ``Globals.k_s``             |  1.85         | [1.48, 2.22]       |
++-----------------------------+---------------+--------------------+
+| ``Globals.k_p``             |  2.25         | [1.8, 2.7]         |
++-----------------------------+---------------+--------------------+
+| ``Globals.k_d``             |  2.0          | [1.6, 2.4]         |
++-----------------------------+---------------+--------------------+
+| ``Globals.k_sp``            |  2.08         | [1.664, 2.496]     |
++-----------------------------+---------------+--------------------+
+| ``Globals.k_2sH``           |  2.85         | [2.28, 3.42]       |
++-----------------------------+---------------+--------------------+
+| ``Globals.k_EN``            | -0.007        | [-0.0056, -0.0084] |
++-----------------------------+---------------+--------------------+
+| ``Globals.kCN_s``           |  0.006        | [0.0048, 0.0072]   |
++-----------------------------+---------------+--------------------+
+| ``Globals.kCN_p``           | -0.003        | [-0.0024, -0.0036] |
++-----------------------------+---------------+--------------------+
+| ``Globals.kCN_d``           | -0.005        | [-0.004, -0.006]   |
++-----------------------------+---------------+--------------------+
+| ``Globals.kCN_d_early3d``   |  0.005        | [0.004, 0.006]     |
++-----------------------------+---------------+--------------------+
+| ``Globals.k2nd_g``          |  2.0          | [1.6, 2.4]         |
++-----------------------------+---------------+--------------------+
+| ``Globals.krep_f``          |  1.5          | [1.2, 1.78]        |
++-----------------------------+---------------+--------------------+
+| ``Globals.kXB_XR``          |  1.3          | [1.04, 1.56]       |
++-----------------------------+---------------+--------------------+
+| ``Globals.kXB_X2``          |  0.44         | [0.352, 0.528]     |
++-----------------------------+---------------+--------------------+
+| ``Globals.K_3d-3d``         |  1.1          | [0.88, 1.32]       |
++-----------------------------+---------------+--------------------+
+| ``Globals.K_4d5d4f-4d5d4f`` |  1.2          | [0.96, 1.44]       |
++-----------------------------+---------------+--------------------+
+
+The 4 parameters of the D3-BJ dispersion correction [#ref2]_ are stored in the ``additional_parameters.yaml`` file and prefixed with ``D3BJDispersion``:
+
++-----------------------+---------------+---------------+
+| Parameter name        | Default value | Default range |
++=======================+===============+===============+
+| ``D3BJDispersion.s6`` | 1.0           | [1.0, 1.0]    |
++-----------------------+---------------+---------------+
+| ``D3BJDispersion.s8`` | 2.4           | [0.5, 6.0]    |
++-----------------------+---------------+---------------+
+| ``D3BJDispersion.a1`` | 0.63          | [0.2, 2.0]    |
++-----------------------+---------------+---------------+
+| ``D3BJDispersion.a2`` | 5.0           | [2.0, 8.0]    |
++-----------------------+---------------+---------------+
+
+Finally GFN1-xTB has a small number of element pair-wise parameters. These are also stored in ``globals.xtbpar`` and have the names ``Globals.K_Xx-Yy``, where ``Xx`` and ``Yy`` are the symbols of the involved elements. These are all the element pair-wise parameters of GFN1-xTB:
+
++--------------------+---------------+----------------+
+| Parameter name     | Default value | Default range  |
++====================+===============+================+
+| ``Globals.K_H-H``  | 0.96          | [0.768, 1.152] |
++--------------------+---------------+----------------+
+| ``Globals.K_B-H``  | 0.95          | [0.76, 1.14]   |
++--------------------+---------------+----------------+
+| ``Globals.K_N-H``  | 1.04          | [0.832, 1.248] |
++--------------------+---------------+----------------+
+| ``Globals.K_P-B``  | 0.97          | [0.776, 1.164] |
++--------------------+---------------+----------------+
+| ``Globals.K_Si-N`` | 1.01          | [0.808, 1.212] |
++--------------------+---------------+----------------+
+| ``Globals.K_Ni-H`` | 0.9           | [0.72, 1.08]   |
++--------------------+---------------+----------------+
+| ``Globals.K_Re-H`` | 0.8           | [0.64, 0.96]   |
++--------------------+---------------+----------------+
+| ``Globals.K_Pt-H`` | 0.8           | [0.64, 0.96]   |
++--------------------+---------------+----------------+
+
+.. hint::
+
+   Additional element pairs can be added to the file, and will then be accessible via the ``XTBParameters`` class. A good default value is then ``1.0``, which is the implicit default in GFN1-xTB if no element-pair specific parameter is given. Note that the ordering of the elements is irrelevant, so adding ``K_Li-F`` is the same as adding ``K_F-Li`` and only one of them should be added.
+
+.. only:: html
+
+  .. rubric:: References
+
+.. [#ref1] S.\  Grimme, C. Bannwarth, P. Shushkov, *A Robust and Accurate Tight-Binding Quantum Chemical Method for Structures, Vibrational Frequencies, and Noncovalent Interactions of Large Molecular Systems Parametrized for All spd-Block Elements (Z = 1-86)*, `J. Chem. Theory Comput., 2017, 13 (5), pp 1989–2009 <https://doi.org/10.1021/acs.jctc.7b00118>`__
+
+.. [#ref2] S.\ Grimme, S.\ Ehrlich, L.\ Goerigk, *Effect of the damping function in dispersion corrected density functional theory*, `J. Comput. Chem. 32, 1456 (2011) <https://doi.org/10.1002/jcc.21759>`__
+
+
+XTBParameters API
+-----------------
+.. autoclass:: XTBParameters
+    :exclude-members: __weakref__

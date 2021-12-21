@@ -1,0 +1,156 @@
+#! /bin/sh
+
+
+# Calculation of the excitation energies of N2 using time-dependent Hartree-Fock
+# (TDHF). It also shows the possibility to use the Tamm-Dancoff approximation
+# (TDA). This examples consists of 4 calculations:
+
+# TDHF non-relativistic and spin-orbit coupled
+# TDA non-relativistic and spin-orbit coupled (CIS)
+
+
+# == TDHF non-relativistic ==
+
+
+AMS_JOBNAME=TDHF_NR $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     N 0 0 0
+     N 0 0 1.0977
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality Good
+  end
+  excitations
+    lowest 5
+  end
+  basis
+    core None
+    type DZ
+  end
+  xc
+    hartreefock
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+
+
+# == TDHF spin-orbit coupled ==
+
+
+AMS_JOBNAME=TDHF_SO $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     N 0 0 0
+     N 0 0 1.0977
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality Good
+  end
+  excitations
+    lowest 20
+  end
+  basis
+    core None
+    type DZ
+  end
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  xc
+    hartreefock
+  end
+EndEngine
+eor
+
+
+
+# == TDA non-relativistic ==
+
+
+AMS_JOBNAME=TDA_NR $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     N 0 0 0
+     N 0 0 1.0977
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality Good
+  end
+  excitations
+    lowest 5
+  end
+  basis
+    core None
+    type DZ
+  end
+  tda
+  xc
+    hartreefock
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+
+
+# == TDA spin-orbit coupled ==
+
+
+AMS_JOBNAME=TDA_SO $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     N 0 0 0
+     N 0 0 1.0977
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality Good
+  end
+  excitations
+    lowest 20
+  end
+  basis
+    core None
+    type DZ
+  end
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  tda
+  xc
+    hartreefock
+  end
+EndEngine
+eor

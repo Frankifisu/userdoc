@@ -1,0 +1,1901 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Example: FDE: H2O in water &mdash; ADF 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ADF 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="Examples.html"/>
+        <link rel="next" title="Example: FDE freeze-and-thaw: HeCO2" href="FDE_HeCO2_freezeandthaw.html"/>
+        <link rel="prev" title="Example: 3D-RISM: Glycine" href="3D-RISM.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search ADF" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-ADF" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General/General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General/Introduction.html">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#adf-is-an-ams-engine">ADF is an AMS Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#functionality">Functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#applicability">Applicability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#model-hamiltonian">Model Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#technical">Technical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#index-0">Fragments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../General/Introduction.html#basic-atoms">Basic atoms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Introduction.html#automatic-mode">Automatic mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Introduction.html#slater-type-basis-sets">Slater-type basis sets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Release.html">What’s new in ADF 2022.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#new-features">New features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Release.html#what-s-new-in-adf-2021-1">What’s new in ADF 2021.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#id1">New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#new-defaults">New Defaults</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Release.html#what-s-new-in-adf-2020-1">What’s new in ADF 2020.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#adf-is-an-ams-engine">ADF is an AMS Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#bug-adf2006-adf2020">Bug ADF2006 - ADF2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#id2">New Defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Release.html#id3">New features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/AMSification_of_ADF.html">AMSification of ADF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#restructuring-of-the-input">Restructuring of the input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#restructuring-of-input-keys">Restructuring of input keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#example-shell-script-changes">Example shell script changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#automatic-tool-for-conversion-of-adf2019-shell-scripts">Automatic tool for conversion of ADF2019 shell scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/AMSification_of_ADF.html#input-execution-and-output">Input, execution and output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/AMSification_of_ADF.html#adf-specific-files">ADF specific files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Feature_list.html">Feature List</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#model-hamiltonians">Model Hamiltonians</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#structure-and-reactivity">Structure and Reactivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#spectroscopic-properties">Spectroscopic properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#charge-transport-properties">Charge transport properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Feature_list.html#accuracy-and-efficiency">Accuracy and Efficiency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General/Remarks_terminology.html">Technical remarks, Terminology</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#density-functional-theory">Density functional theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#the-kohn-sham-mo-model">The Kohn-Sham MO model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#basis-functions-and-orbitals">Basis functions and orbitals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#cartesian-function-sets-spurious-components">Cartesian function sets, spurious components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#frozen-core-core-orbitals-and-core-functions">Frozen core: Core Orbitals and Core Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#index-6">Symmetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#orthonormal-basis">Orthonormal basis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#fragments">Fragments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#summary-of-functions-and-orbitals">Summary of functions and orbitals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General/Remarks_terminology.html#acronyms">Acronyms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#coulomb-potential-evaluation-density-fitting">Coulomb potential evaluation, density fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#three-step-build-up-of-the-bonding">Three-step build-up of the bonding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General/Remarks_terminology.html#transition-state-procedure">Transition State procedure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input/Input.html">Input, execution, and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_of_the_input.html">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Structure_of_the_input.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Structure_of_the_input.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Structure_of_the_input.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Structure_of_the_input.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Structure_of_the_input.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Structure_of_the_input.html#title-comment">Title, comment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Structure_of_the_input.html#amsification-of-adf-in-adf2020">Amsification of ADF in ADF2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Structure_of_the_input.html#input-parsing-changes-in-adf2018-and-later">Input parsing changes in ADF2018 and later</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Structure_of_the_input.html#new-syntax-for-a-few-keywords">New syntax for a few keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Structure_of_the_input.html#strict-parsing-of-input-file">Strict parsing of input file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_of_the_input.html#execution">Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_of_the_output.html">Structure of the Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Structure_of_the_output.html#job-characteristics-on-standard-output">Job Characteristics on standard Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Structure_of_the_output.html#log-file-adf-rkf-tape13">Log file, adf.rkf, TAPE13</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input/Coordinates_basis_fragments.html">Coordinates, Basis sets, Fragments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Atomic_coordinates.html">Atomic coordinates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Atomic_coordinates.html#cartesian">Cartesian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Atomic_coordinates.html#z-matrix">Z-Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Atomic_coordinates.html#orientation-of-local-atomic-coordinates">Orientation of Local Atomic Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Atomic_coordinates.html#symmetry-key">Symmetry Key</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Basis_sets_and_atomic_fragments.html">Basis sets and atomic fragments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Basis_sets_and_atomic_fragments.html#sto-basis-sets">STO basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Basis_sets_and_atomic_fragments.html#available-basis-sets">Available basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Basis_sets_and_atomic_fragments.html#the-basis-key">The Basis Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Basis_sets_and_atomic_fragments.html#automatic-mode">Automatic mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Basis_sets_and_atomic_fragments.html#create-mode">Create mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Basis_sets_and_atomic_fragments.html#ghost-atoms-non-standard-chemical-elements">Ghost Atoms, Non-standard Chemical Elements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Basis_sets_and_atomic_fragments.html#id9">Automatic mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Basis_sets_and_atomic_fragments.html#nuclear-model">Nuclear Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Molecular_fragments.html">Molecular fragments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Molecular_fragments.html#fragment-mode">Fragment mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Molecular_fragments.html#fragment-files">Fragment files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input/Model_Hamiltonians.html">Model Hamiltonians</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Electronic_Configuration.html">Electronic Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Electronic_Configuration.html#charge-and-spin">Charge and Spin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#spin-restricted-vs-unrestricted">Spin: restricted vs. unrestricted</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#unrestricted-and-spin-orbit-coupling">Unrestricted and Spin-Orbit Coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#net-charge">Net Charge</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Electronic_Configuration.html#orbital-occupations-electronic-configuration-excited-states">Orbital occupations: electronic configuration, excited states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#aufbau-smearing-freezing">Aufbau, smearing, freezing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#explicit-occupation-numbers">Explicit occupation numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#charge-and-spinpolarization-vs-irrepoccupations">CHARGE and SPINPOLARIZATION vs. IRREPOCCUPATIONS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#create-mode">Create mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Electronic_Configuration.html#frozen-core-approximation">Frozen core approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Electronic_Configuration.html#spin-polarized-start-up-potential">Spin-polarized start-up potential</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#spin-flip-method-for-broken-symmetries">Spin-flip method for broken symmetries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#modify-the-starting-potential">Modify the starting potential</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Electronic_Configuration.html#unrestricted-fragments">Unrestricted fragments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#prepared-for-bonding">Prepared for bonding</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Electronic_Configuration.html#simulated-unrestricted-fragments-with-key-fragoccupations">Simulated unrestricted fragments with key FRAGOCCUPATIONS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#id8">Prepared for bonding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Electronic_Configuration.html#fragoccupations">FRAGOCCUPATIONS</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Electronic_Configuration.html#remove-fragment-orbitals">Remove Fragment Orbitals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Electronic_Configuration.html#cdft-constrained-density-functional-theory">CDFT: Constrained Density Functional Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Density_Functional.html">Density Functionals (XC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#lda">LDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#gga">GGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#metagga">MetaGGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#hartree-fock">Hartree-Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#hybrid">Hybrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#meta-hybrid">Meta-Hybrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#range-separated-hybrids">Range separated hybrids</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#rangesep-xcfun-yukawa-range-separated-hybrids">RangeSep + XCFun: Yukawa-range separated hybrids</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#range-separated-hybrids-with-libxc">Range-separated hybrids with LibXC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#notes-on-hartree-fock-and-meta-hybrid-functionals">Notes on Hartree-Fock and (meta-)hybrid functionals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#post-scf-correlation-methods">Post-SCF correlation methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#double-hybrid">Double-Hybrid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#mp2-methods">MP2-methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#rpa-and-rpa-sossx">RPA and RPA + SOSSX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#notes-on-mp2-double-hybrid-functionals-and-rpa">Notes on MP2, double-hybrid functionals and RPA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#model-potentials">Model Potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#optimized-effective-potentials">Optimized effective potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#xcfun">XCFun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#libxc">LibXC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#dispersion-corrections">Dispersion corrections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#dft-d4-functionals">DFT-D4 functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#dft-d3-functionals">DFT-D3 functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#dft-d-functionals">DFT-D functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#ddsc-density-dependent-dispersion-correction">dDsC: density dependent dispersion correction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#dft-ulg">DFT-ulg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#dft-mbd-functionals">DFT-MBD functionals</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_Functional.html#post-scf-energy-functionals">Post-SCF energy functionals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#gga-energy-functionals">GGA energy functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#meta-gga-and-hybrid-energy-functionals">Meta-GGA and hybrid energy functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Density_Functional.html#post-hartree-fock-energy-functionals">Post Hartree-Fock energy functionals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Relativistic_effects.html">Relativistic effects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Relativistic_effects.html#pauli">Pauli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Relativistic_effects.html#zora">ZORA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Relativistic_effects.html#x2c-and-ra-x2c">X2C and RA-X2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Relativistic_effects.html#index-7">Spin-Orbit coupling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Solvents_and_other_environments.html">Solvents and other environments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/COSMO.html">COSMO: Conductor like Screening Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/SM12.html">SM12: Solvation Model 12</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Quild.html">Quild</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/DIM-QM.html">DIM/QM: Discrete Interaction Model/Quantum Mechanics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/DIM-QM.html#index-4">DRF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/DIM-QM.html#surface-enhanced-response-properties">Surface-enhanced response properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/DIM-QM.html#input-options">Input options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/DIM-QM.html#drf-atomic-parameters">DRF atomic parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/DIM-QM.html#dim-atomic-parameters">DIM atomic parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/FQ-QM.html">QM/FQ: Quantum Mechanics/Fluctuating Charges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/FQ-QM.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/FDE.html">FDE: Frozen Density Embedding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/FDE.html#fragment-specific-fde-options">Fragment-specific FDE options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/FDE.html#kinetic-energy-approximants">Kinetic energy approximants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/FDE.html#general-fde-options">General FDE options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/FDE.html#frozen-density-embedding-with-external-orthogonality">Frozen Density Embedding with External Orthogonality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/FDE.html#fde-and-localized-cosmo">FDE and (localized) COSMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/FDE.html#subsystem-tddft-coupled-fde">Subsystem TDDFT, coupled FDE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/FDE.html#restrictions-and-pitfalls">Restrictions and pitfalls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/SCRF.html">SCRF: Self-Consistent Reaction Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/VSCRF.html">VSCRF: Vertical Excitation Self-Consistent Reaction Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/3D-RISM.html">3D-RISM: 3D reference Interaction Site Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Electric_field.html">Electric Field: Homogeneous, Point Charges, Polarizability</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input/Structure_and_reactivity.html">Structure and Reactivity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#single-point-calculations">Single point calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#id1">Geometry optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#transition-state-search">Transition state search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#linear-transit-pes-scan">Linear Transit, PES scan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#nudged-elastic-band-neb">Nudged Elastic Band (NEB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#intrinsic-reaction-coordinate-irc">Intrinsic Reaction Coordinate (IRC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#excited-state-optimizations">Excited state optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#molecular-dynamics">Molecular dynamics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input/Structure_and_reactivity.html#gradients-hessian-thermodynamics">Gradients, Hessian, Thermodynamics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#gradients">Gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#hessian">Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#pes-point-character">PES point character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_and_reactivity.html#thermodynamics-gas-phase-gibbs-free-energy">Thermodynamics, gas phase Gibbs free energy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input/Spectroscopic_properties.html">Spectroscopic properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Vibrational_Spectroscopy.html">Vibrational Spectroscopy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Vibrational_Spectroscopy.html#ir-frequencies-and-normal-modes">IR frequencies and normal modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Vibrational_Spectroscopy.html#analytical-hessian">Analytical Hessian</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Vibrational_Spectroscopy.html#resonance-raman">(Resonance) Raman</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Vibrational_Spectroscopy.html#vroa-resonance-vibrational-raman-optical-activity">VROA: (Resonance) vibrational Raman optical activity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Vibrational_Spectroscopy.html#vcd-vibrational-circular-dichroism">VCD: Vibrational Circular Dichroism</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Time-dependent_DFT.html">Time-dependent DFT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Time-dependent_DFT.html#general-remarks-on-the-response-and-excitation-functionality">General remarks on the Response and Excitation functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Time-dependent_DFT.html#analysis-options-for-tddft-excitation-energies-and-polarizabilities">Analysis options for TDDFT (excitation energies and polarizabilities)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Time-dependent_DFT.html#time-dependent-current-dft">Time-dependent Current DFT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Time-dependent_DFT.html#magnetic-properties-within-tdcdft">Magnetic properties within TDCDFT</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Excitation_energies.html">Excitation energies: UV/Vis, X-ray, CD, MCD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#excitation-energies-uv-vis-spectra">Excitation energies, UV/Vis spectra</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#tamm-dancoff-approximation">Tamm-Dancoff approximation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#full-xc-kernel">Full XC kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#plasmons-in-molecules">Plasmons in Molecules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#transition-dipole-moments-between-excited-states">Transition dipole moments between excited states</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#accuracy-and-other-technical-parameters">Accuracy and other technical parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#excitation-energies-for-open-shell-systems">Excitation energies for open-shell systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#spin-flip-excitation-energies">Spin-flip excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#select-core-excitation-energies-x-ray-absorption">Select (core) excitation energies, X-ray absorption</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#state-selective-optimization-excitation-energies">State selective optimization excitation energies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#modify-range-of-excitation-energies">Modify range of excitation energies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#excitations-as-orbital-energy-differences">Excitations as orbital energy differences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#quadrupole-intensities-in-x-ray-spectroscopy">Quadrupole intensities in X-ray spectroscopy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#xes-x-ray-emission-spectroscopy">XES: X-ray emission spectroscopy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#excitation-energies-and-spin-orbit-coupling">Excitation energies and Spin-Orbit coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#perturbative-inclusion-of-spin-orbit-coupling">Perturbative inclusion of spin-orbit coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#self-consistent-spin-orbit-coupling">Self-consistent spin-orbit coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#highly-approximate-spin-orbit-coupled-excitation-energies-open-shell-molecule">Highly approximate spin-orbit coupled excitation energies open shell molecule</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#cv-n-dft-constricted-variational-dft">CV(n)-DFT: Constricted Variational DFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#hda-hybrid-diagonal-approximation">HDA: Hybrid Diagonal Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#td-dft-tb">TD-DFT+TB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#stda-stddft">sTDA, sTDDFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#cd-spectra">CD spectra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#mcd">MCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excitation_energies.html#analysis">Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#nto-natural-transition-orbitals">NTO: Natural Transition Orbitals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#sfo-analysis">SFO analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Excitation_energies.html#charge-transfer-descriptors">Charge-transfer descriptors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Excited_state_optimizations.html">Excited state (geometry) optimizations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Excited_state_optimizations.html#nuclear-gradients-only">Nuclear gradients only</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Vibrationally_resolved_el_spectra.html">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Vibrationally_resolved_el_spectra.html#ah-fc-adiabatic-hessian-franck-condon">AH-FC: Adiabatic Hessian Franck-Condon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Vibrationally_resolved_el_spectra.html#vg-fc-vertical-gradient-franck-condon">VG-FC: Vertical Gradient Franck-Condon</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Polarizabilities.html">(Hyper-)Polarizabilities, ORD, magnetizabilities, Verdet constants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Polarizabilities.html#response-hyper-polarizabilities-ord">RESPONSE: (Hyper-)Polarizabilities, ORD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#response-polarizabilities">RESPONSE: Polarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#response-accuracy-and-convergence">RESPONSE: Accuracy and convergence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#response-hyperpolarizabilities">RESPONSE: Hyperpolarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#response-optical-rotation-dispersion-ord">RESPONSE: Optical rotation dispersion (ORD)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Polarizabilities.html#aoresponse-lifetime-effects-hyper-polarizabilities-ord-magnetizabilities-verdet-constants">AORESPONSE: Lifetime effects, (Hyper-)polarizabilities, ORD, magnetizabilities, Verdet constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#aoresponse-polarizabilities">AORESPONSE: Polarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#aoresponse-technical-parameters-and-expert-options">AORESPONSE: Technical parameters and expert options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#aoresponse-damped-first-hyperpolarizabilities">AORESPONSE: Damped First Hyperpolarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#aoresponse-damped-second-hyperpolarizabilities">AORESPONSE: Damped Second Hyperpolarizabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#aoresponse-ord">AORESPONSE: ORD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#aoresponse-magnetizabilities-verdet-constants-faraday-b-term">AORESPONSE: magnetizabilities, Verdet constants, Faraday B term</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#aoresponse-raman">AORESPONSE: Raman</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#applications-of-aoresponse">Applications of AORESPONSE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Polarizabilities.html#poltddft-damped-complex-polarizabilities">POLTDDFT: Damped Complex Polarizabilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#uv-vis-spectra-cd-spectra">UV/Vis spectra, CD spectra</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#reduced-fit-set">Reduced fit set</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Polarizabilities.html#van-der-waals-dispersion-coefficients">Van der Waals dispersion coefficients</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Polarizabilities.html#disper-program-dispersion-coefficients">DISPER program: Dispersion Coefficients</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/LFDFT.html">Ligand Field and Density Functional Theory (LFDFT)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/LFDFT.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/LFDFT.html#input-description">Input description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/LFDFT.html#average-of-configuration-run">Average of Configuration run</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/LFDFT.html#lfdft-atomic-database">LFDFT atomic database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/LFDFT.html#lfdft-run">LFDFT run</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/LFDFT.html#epr-esr-g-tensor">EPR (ESR) g-tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/LFDFT.html#lfdft-intensities">LFDFT intensities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/LFDFT.html#mcd">MCD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/NMR.html">NMR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/NMR_chemical_shifts.html">NMR Chemical Shifts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/NMR_chemical_shifts.html#important-notes">Important notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/NMR_chemical_shifts.html#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/NMR_chemical_shifts.html#paramagnetic-nmr-chemical-shifts">Paramagnetic NMR Chemical Shifts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/NMR_spin-spin_coupling.html">NMR spin-spin coupling constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/NMR_spin-spin_coupling.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/NMR_spin-spin_coupling.html#input-file-for-cpl-adf-rkf">Input file for CPL: adf.rkf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/NMR_spin-spin_coupling.html#running-cpl">Running CPL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/NMR_spin-spin_coupling.html#practical-aspects">Practical Aspects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/ESREPR.html">ESR/EPR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/ESREPR.html#esr-epr-g-tensor-and-a-tensor">ESR/EPR g-tensor and A-tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/ESREPR.html#esr-epr-q-tensor">ESR/EPR Q-tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/ESREPR.html#esr-epr-zero-field-splitting-d-tensor">ESR/EPR Zero-field splitting (D-tensor)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/EFG.html">Nuclear Quadrupole Interaction (EFG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Mossbauer_spectroscopy.html">Mössbauer spectroscopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/GW.html">GW</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/GW.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/GW.html#levels-of-self-consistency">Levels of self-consistency</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/GW.html#eigenvalue-only-self-consistent-gw">Eigenvalue-only self-consistent GW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/GW.html#quasiparticle-self-consistent-gw">quasiparticle self-consistent GW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/GW.html#convergence">Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/GW.html#second-order-self-energy">Second-order self-energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/GW.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/GW.html#basis-sets">Basis sets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/GW.html#numerical-aspects">Numerical aspects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/GW.html#choosing-the-ks-reference">Choosing the KS reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/GW.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/GW.html#gw-key">GW key</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input/Transport.html">Transport properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Charge_transfer_integrals.html">Charge transfer integrals (transport properties)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Charge_transfer_integrals.html#charge-transfer-integrals-with-the-transferintegrals-key">Charge transfer integrals with the TRANSFERINTEGRALS key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Charge_transfer_integrals.html#charge-transfer-integrals-with-fde">Charge transfer integrals with FDE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/GREEN.html">GREEN: Non-self-consistent Green’s function calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/GREEN.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/GREEN.html#wide-band-limit">Wide-band-limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/GREEN.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/GREEN.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/GREEN.html#green-with-adf-gui">GREEN with ADF-GUI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input/Analysis.html">Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Molecules_from_fragments.html">Molecules built from fragments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Bond_energy_analysis.html">Bond energy analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Bond_energy_analysis.html#bond-energy-details">Bond energy details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Bond_energy_analysis.html#notes-on-double-hybrid-functionals-and-mp2">Notes on double-hybrid functionals and MP2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Bond_energy_analysis.html#total-energy-evaluation">Total energy evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Bond_energy_analysis.html#interacting-quantum-atoms-iqa">Interacting Quantum Atoms (IQA)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Localized_Molecular_Orbitals.html">Localized Molecular Orbitals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Localized_Molecular_Orbitals.html#perturbed-localized-molecular-orbitals">Perturbed Localized Molecular Orbitals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Advanced_analysis.html">Advanced charge density and bond order analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Advanced_analysis.html#charges-populations">Charges, Populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Advanced_analysis.html#bond-orders">Bond orders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Advanced_analysis.html#ets-nocv-natural-orbitals-for-chemical-valence">ETS-NOCV: Natural Orbitals for Chemical Valence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Advanced_analysis.html#adfnbo-gennbo-nbo-analysis">Adfnbo, gennbo: NBO analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Advanced_analysis.html#nbo-analysis-of-efg-nmr-chemical-shifts-nmr-spin-spin-coupling">NBO analysis of EFG, NMR chemical shifts, NMR spin-spin coupling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Advanced_analysis.html#qtaim-atoms-in-molecules">QTAIM: Atoms in Molecules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Advanced_analysis.html#local-atomic-and-non-local-properties">Local, atomic, and non-local properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Advanced_analysis.html#index-16">ADF2AIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Advanced_analysis.html#aromaticity-index-with-qtaim">Aromaticity index with QTAIM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Advanced_analysis.html#conceptual-dft">Conceptual DFT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Advanced_analysis.html#global-atomic-and-non-local-descriptors">Global, atomic, and non-local descriptors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Advanced_analysis.html#domains-of-the-dual-descriptor">Domains of the dual descriptor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Advanced_analysis.html#adf2damqt-damqt-interface">adf2damqt: DAMQT interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Advanced_analysis.html#fod-fractional-orbital-density">FOD: fractional orbital density</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Printed_Output.html">Controlling printed Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Printed_Output.html#print-noprint">Print / NoPrint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Printed_Output.html#debug">Debug</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Printed_Output.html#eprint">Eprint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Printed_Output.html#eprint-subkeys-vs-print-switches">Eprint subkeys vs. Print switches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Printed_Output.html#other-eprint-subkeys">Other Eprint subkeys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Printed_Output.html#reduction-of-output">Reduction of output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Results_Output.html">Results on Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Results_Output.html#electronic-configuration">Electronic Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Results_Output.html#mulliken-populations">Mulliken populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Results_Output.html#hirshfeld-charges-voronoi-deformation-density">Hirshfeld charges, Voronoi deformation density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Results_Output.html#multipole-derived-charges">Multipole derived charges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Results_Output.html#charge-model-5">Charge model 5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Results_Output.html#bond-order-analysis">Bond order analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Results_Output.html#dipole-moment-quadrupole-moment-electrostatic-potential">Dipole moment, Quadrupole moment, Electrostatic potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Results_Output.html#fragments-and-basis-functions">Fragments and Basis Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Results_Output.html#mo-analysis">MO analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Results_Output.html#bond-energy-analysis">Bond energy analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Densf.html">Densf: Volume Maps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Densf.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Densf.html#result-tape41">Result: TAPE41</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/DOS.html">Dos: Density of States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/DOS.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/DOS.html#mulliken-population-analysis">Mulliken population analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/DOS.html#density-of-states-analyses-based-on-mulliken-population-analysis">Density of states analyses based on Mulliken population analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/DOS.html#generalizations-of-opdos-gpdos-pdos">Generalizations of OPDOS, GPDOS, PDOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/DOS.html#input">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/VCDtools.html">VCD Analysis: VCDtools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/PyFrag.html">PyFrag: Activation Strain Model Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/PyFrag.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/PyFrag.html#running-pyfrag">Running PyFrag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/PyFrag.html#specifying-the-trajectory">Specifying the Trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/PyFrag.html#molecular-fragments">Molecular Fragments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/PyFrag.html#adf-options">ADF Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/PyFrag.html#analysis-options">Analysis Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input/Accuracy_and_efficiency.html">Accuracy and Efficiency</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Precision_and_Self-Consistency.html">Precision and Self-Consistency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/SCF.html">SCF</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/SCF.html#main-options">Main options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/SCF.html#energy-diis">Energy-DIIS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/SCF.html#augmented-roothaan-hall-arh">Augmented Roothaan-Hall (ARH)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Numerical_integration.html">Numerical Integration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Numerical_integration.html#becke-grid">Becke Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Numerical_integration.html#voronoi-grid-deprecated">Voronoi grid (deprecated)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Numerical_integration.html#atomic-radial-grid">Atomic radial grid</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Density_fitting.html">Density fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Hartree-Fock_RI.html">Hartree-Fock RI scheme</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/Hartree-Fock_RI.html#old-hartree-fock-ri-scheme">Old Hartree-Fock RI scheme</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/MBPT.html">MBPT scheme</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Input/MBPT.html#recommended-numerical-settings">Recommended numerical settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Dependency.html">Dependency (basis set, fit set)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/BSSE.html">Basis Set Superposition Error (BSSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Control_of_Program_Flow.html">Control of Program Flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Control_of_Program_Flow.html#limited-execution">Limited execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Control_of_Program_Flow.html#skipping">Skipping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Control_of_Program_Flow.html#ignore-checks">Ignore checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Technical_Settings.html">Technical Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Technical_Settings.html#memory-usage">Memory usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Technical_Settings.html#direct-scf-recalculation-of-data">Direct SCF: recalculation of data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Technical_Settings.html#vector-length">Vector length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Technical_Settings.html#tails-and-old-gradients">Tails and old gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Technical_Settings.html#index-2">Linearscaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Technical_Settings.html#all-points">All Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Technical_Settings.html#full-fock">Full Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input/Technical_Settings.html#save-info">Save info</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input/Restarts.html">Restarts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Restart_files.html">ADF Restart files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Restart_files.html#ams-restart-file">AMS restart file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/The_restart_key.html">The restart key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input/Structure_of_the_restart_file.html">Structure of the restart file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Rec_problems_questions/Rec_problems_questions.html">Recommendations and Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Rec_problems_questions/Recommendations.html">Recommendations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Precision.html">Precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Electronic_Configuration.html">Electronic Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Electronic_Configuration.html#spin-unrestricted-versus-spin-restricted-spin-states">Spin-unrestricted versus spin-restricted, Spin states</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html">What basis set should I use in ADF?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#zora-or-non-relativistic-calculation">ZORA or non-relativistic calculation?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#large-or-small-molecule">Large or small molecule?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#frozen-core-or-all-electron">Frozen core or all-electron?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#diffuse-functions-needed">Diffuse functions needed?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#normal-or-even-tempered-basis">Normal or even-tempered basis?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#recommendations-for-double-hybrids-and-mp2">Recommendations for Double-hybrids and MP2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/What_basis_set_should_I_use.html#what-accuracy-do-the-basis-sets-give">What accuracy do the basis sets give?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Relativistic_methods.html">Relativistic methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Rec_problems_questions/Trouble_shooting.html">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/License_file_corrupt.html">License file corrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Recover_from_Crash.html">Recover from Crash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Memory_Management.html">Memory Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/SCF.html">SCF Convergence Guidelines for ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Geometry_Optimization.html">Geometry Optimization troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Geometry_Optimization.html#very-short-bonds">Very short bonds</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Frequencies.html">Frequencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Frequencies.html#imaginary-frequencies">Imaginary Frequencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Rec_problems_questions/Frequencies.html#geometry-displacement-numbers-in-the-logfile-are-not-contiguous">Geometry-displacement numbers in the logfile are not contiguous</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Input_ignored.html">Input ignored</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/SFO_Populations.html">SFO Populations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Error_Aborts.html">Error Aborts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rec_problems_questions/Warnings.html">Warnings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendices/Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Basis_set_file_format.html">Basis set file format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Basis_set_file_format.html#sections">Sections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Basis_set_file_format.html#example-of-a-basis-set-file-calcium">Example of a basis set file: Calcium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Basis_set_file_format.html#extending-a-basis-set">Extending a basis set</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Elements_of_the_Periodic_Table.html">Elements of the Periodic Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Multiplet_states.html">Multiplet States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Multiplet_states.html#multiplet-energies">Multiplet energies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Dirac_program.html">Dirac program: relativistic core potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Symmetry.html">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Symmetry.html#schonfliess-symbols-and-symmetry-labels">Schönfliess symbols and symmetry labels</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/Symmetry.html#tddft-irrep-labels">TDDFT irrep labels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/Symmetry.html#molecular-orientation-requirements">Molecular orientation requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Binary_result_files.html">Binary result files, KF browser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/TAPE21.html">adf.rkf (TAPE21)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/TAPE21.html#ams-rkf">ams.rkf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/TAPE21.html#contents-of-adf-rkf">Contents of adf.rkf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Appendices/TAPE21.html#using-data-from-adf-rkf">Using Data from adf.rkf</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/TAPE13.html">TAPE13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices/KF_browser.html">KF browser</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Error_messages.html">Error messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices/Error_messages.html#warnings">Warnings</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#introduction">Introduction</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Examples.html#model-hamiltonians">Model Hamiltonians</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#special-exchange-correlation-functionals">Special exchange-correlation functionals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="CO_model.html">Example: Asymptotically correct XC potentials: CO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OH_MetaGGA.html">Example: Meta-GGA energy functionals: OH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HI_EFG.html">Example: Hartree-Fock: HI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="H2PO_B3LYP.html">Example: B3LYP: H2PO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LCY-BP_H2O.html">Example: Long-range corrected GGA functional LCY-BP: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CAMY-B3LYP_H2O.html">Example: Range-separated functional CAMY-B3LYP: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Water_MP2_AO.html">Example: Single point MP2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="WaterDimer_SOS-MP2_AO.html">Example: Water Dimer SOS-AO-PARI-MP2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Water_MeOH_B2GPPLYP.html">Example: Single point B2GPPLYP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Water_MeOH_DODSCAN.html">Example: Water-MeOH - DODSCAN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MP2_Li.html">Example: unrestricted MP2: Li</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RPA_H2O.html">Example: RPA&#64;PBE calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MM_Dispersion.html">Example: Grimme Molecular Mechanics dispersion-corrected functionals (DFT-D3-BJ)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="methane_dimer_dispersion.html">Example: Density-Dependent Dispersion Correction (dDsC): CH4-dimer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Benzene_dimer_tshaped.html">Example: DFT-ulg Dispersion Correction: Benzene dimer T-shaped</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#zora-and-spin-orbit-relativistic-effects">ZORA and spin-orbit Relativistic Effects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Au2_ZORA.html">Example: ZORA Relativistic Effects: Au2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SO_ZORA_Bi2.html">Example: Spin-Orbit coupling: Bi and Bi2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Tl_noncollinear.html">Example: Spin-Orbit unrestricted non-collinear: Tl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AuH_analyse_exciso.html">Example: Excitation energies including spin-orbit coupling: AuH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HgI2.html">Example: ZORA, X2C and RA-X2C: HgI2 = Hg + I2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#solvents-other-environments">Solvents, other environments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Solv_HCl.html">Example: COSMO: HCl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Acetamide_SM12.html">Example: solvation model SM12: Acetamide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Field_PtCO.html">Example: Electric Field: PtCO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Efield.PntQ_N2.html">Example: Electric Field, Point Charge: N2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="3D-RISM.html">Example: 3D-RISM: Glycine</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="Examples.html#fde-frozen-density-embedding">FDE: Frozen Density Embedding</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Example: FDE: H2O in water</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE_HeCO2_freezeandthaw.html">Example: FDE freeze-and-thaw: HeCO2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE_Energy_NH3-H2O.html">Example: FDE energy: NH3-H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE_Energy_H2O-Ne_unrestricted.html">Example: FDE energy: unrestricted fragments: Ne-H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GO_FDE_H2O-Li.html">Example: FDE geometry optimization: H2O-Li(+)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE_NMR_relax.html">Example: FDE NMR shielding: Acetonitrile in water</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FDE_CPL_NH3-H2O.html">Example: FDE NMR spin-spin coupling: NH3-H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SUBEXCI_dimer.html">Example: Subsystem TDDFT, coupled FDE excitation energies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LoCOSMO_H2O-NH3.html">Example: FDE and COSMO: H2O-NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LoCOSMO_H2O-NH3_TDDFT.html">Example: FDE and COSMO: H2O-NH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#qm-mm-calculations">QM/MM calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#quild-quantum-regions-interconnected-by-local-descriptions">Quild: Quantum-regions Interconnected by Local Descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#dim-qm-discrete-interaction-model-quantum-mechanics">DIM/QM: Discrete Interaction Model/Quantum Mechanics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_DRF_BE.html">Example: DRF: H2O and H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_DRF_Hyperpol.html">Example: DRF: hyperpolarizability H2O in water</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_DRF_plams.html">Example: DRF: scripting tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_DRF2.html">Example: DRF2: Polarizability N2 on Ag68 + H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_CPIM_Excitations.html">Example: CPIM: excitation energies N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_JACOBI.html">Example: CPIM: polarizability N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_LOCAL.html">Example: PIM: H2O on Ag2689</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_READLCLFLD.html">Example: PIM: Polarizability with local fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_Gradients.html">Example: PIM: optimization N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_PIM_Pol.html">Example: PIM: polarizability N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_Raman.html">Example: PIM: Raman scattering N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_SEROA.html">Example: PIM: SEROA calculation N2 on silver cluster Ag68</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DIMQM_PIM_CMM.html">Example: PIM: Multipole Method N2 on silver cluster Ag1415</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#qm-fq-quantum-mechanics-fluctuating-charges">QM/FQ: Quantum Mechanics/Fluctuating Charges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FQQM_scf.html">Example: QM/FQ: 2-Methyloxirane (QM) in Water (FQ)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FQQM_aoresponse.html">Example: QM/FQ: polarizability 2-Methyloxirane (AORESPONSE)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FQQM_response.html">Example: QM/FQ: polarizability 2-Methyloxirane (RESPONSE)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FQQM_td.html">Example: QM/FQ: excitations 2-Methyloxirane</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#structure-and-reactivity">Structure and Reactivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#geometry-optimizations">Geometry Optimizations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="GO_H2O.html">Example: Geometry Optimization: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GO_restraint.html">Example: Restraint Geometry Optimization: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GO_constraints.html">Example: Constraint Geometry Optimization: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="InitHess.html">Example: Initial Hessian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GO_LiF_Efield.html">Example: Geometry optimization with an external electric field or point charges: LiF</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#transition-states-linear-transits-intrinsic-reaction-coordinates">Transition States, Linear Transits, Intrinsic Reaction Coordinates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="HCN.html">Example: LT, Frequencies, TS, and IRC: HCN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TS_C2H6.html">Example: TS search using partial Hessian: C2H6 internal rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TS_CH4_HgCl2.html">Example: Relativistic ZORA TS search: CH4 + HgCl2 &lt;==&gt; CH3HgCl + HCl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TSRC_SN2.html">Example: TS reaction coordinate: F- + CH3Cl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Transit_H2O.html">Example: (non-)Linear Transit: H2O</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#total-energy-multiplet-states-s2-localized-hole-cebe">Total energy, Multiplet States, S2, Localized hole, CEBE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Energy_H2O.html">Example: Total Energy calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SD_CrNH3_6.html">Example: Multiplet States: [Cr(NH3)6]3+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CuH+_S-squared.html">Example: Calculation of S2: CuH+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ModStPot_N2+.html">Example: Localized Hole: N2+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Fe4S4_BrokenSymm.html">Example: Broken spin-symmetry: Fe4S4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CEBE_NNO.html">Example: Core-electron binding energies (CEBE): NNO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="WaterDimer.html">Example: Constrained DFT: H2O+ … H2O</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#spectroscopic-properties">Spectroscopic Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#ir-frequencies-resonance-raman-vroa-vcd">IR Frequencies, (resonance) Raman, VROA, VCD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Freq_NH3.html">Example: Numerical Frequencies: NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Freq_UF6.html">Example: Numerical Frequencies, spin-orbit coupled ZORA: UF6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="H2O_HF_freq.html">Example: Numerical Frequencies, accurate Hartree-Fock: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CN_SecDeriv.html">Example: Analytic Frequencies: CN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CH4_SecDeriv.html">Example: Analytic Frequencies: CH4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HI_SecDer_ZORA.html">Example: Analytic Frequencies: HI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MBH_Ethanol.html">Example: Mobile Block Hessian (MBH): Ethanol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MBH_CH4.html">Example: Mobile Block Hessian: CH4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Freq_NH3_RAMAN.html">Example: Raman: NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HI_Raman.html">Example: Raman: HI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HF_ResonanceRaman.html">Example: Resonance Raman, excited state finite lifetime: HF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VROA.html">Example: Vibrational Raman optical activity (VROA): H2O2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VROA_RESO.html">Example: Resonance VROA: H2O2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DFTB_modes_ADF_Raman_VROA.html">Example: Raman and VROA for approximate modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VCD_COG_NHDT.html">Example: Vibrational Circular Dichroism (VCD): NHDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VCD_CHFClBr_DZP.html">Example: unrestricted VCD: CHFClBr</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#excitation-energies-uv-vis-spectra-x-ray-absorption-cd-mcd">Excitation energies: UV/Vis spectra, X-ray absorption, CD, MCD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Au2_Resp.html">Example: Excitation energies and polarizability: Au2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CN_unr_exci.html">Example: Excitation energies open shell molecule: CN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SiH2_spinflip.html">Example: Spin-flip excitation energies: SiH2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="N2_TDHF.html">Example: TDHF excitation energies: N2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Pyridine_CAM-B3LYP.html">Example: excitation energies CAM-B3LYP: Pyridine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CAMY-B3LYP_TDDFT_H2O.html">Example: CAMY-B3LYP excitation energies: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="XCFUN_FULLKERNEL_TDDFT_H2O.html">Example: Full XC kernel in excitation energy calculation: H2O+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="XCFUN_TDDFT_H2O.html">Example: Use of xcfun in excitation energy calculations: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TiCl4_CoreExci.html">Example: Core excitation energies: TiCl4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TiCl4_XASXES.html">Example: X-Ray Absorption and Emission Quadrupole Oscillator strengths at the Cl K-edge: TiCl4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Ne_exciso.html">Example: (Core) Excitation energies including spin-orbit coupling: Ne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AgI_asoexcit.html">Example: Excitation energies perturbative spin-orbit coupling: AgI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PbF_excisou.html">Example: Excitation energies including spin-orbit coupling for open shell: PbF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DMO_CD.html">Example: Circular Dichroism (CD) spectrum: DMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Twist_Ethene_TDDFT.html">Example: CD spectrum, hybrid functional: Twisted ethene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="H2O_MCD.html">Example: MCD: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="H2O_MCD_ZFS.html">Example: MCD including zero-field splitting: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Formamide_CVnDFT.html">Example: CV(n)-DFT excitation energies: Formamide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NH3_HDA.html">Example: HDA excitation energies: NH3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="H2O_SO_HDA.html">Example: HDA spin-orbit coupled excitation energies: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TD-DFTB_betacarotene.html">Example: TD-DFT+TB excitation energies: beta-Carotene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Adenine_sTDA.html">Example: sTDA excitation energies: Adenine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Adenine_sTDDFT.html">Example: sTDDFT excitation energies: Adenine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Bimane_wB97X.html">Example: sTDA excitation energies RS functional: Bimane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TCNE-Benzene_wB97.html">Example: sTDA excitation energies wB97: TCNE-Benzene</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#excited-state-geometry-optimizations">Excited state (geometry) optimizations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="EGO_N2.html">Example: Excited state geometry optimization: N2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EGO_CH2O_trip_constr.html">Example: Excited state geometry optimization with a constraint: CH2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EGO_CH2_sf.html">Example: Spin-flip excited state geometry optimization: CH2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EGO_PH2.html">Example: Numerical Frequencies of an excited state: PH2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#vibrationally-resolved-electronic-spectra">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FranckCondon_NO2.html">Example: Franck-Condon Factors: NO2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Naphthalene_VST.html">Example: Vibronic-Structure Tracking: Naphthalene</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#hyper-polarizabilities-dispersion-coefficients-ord-magnetizabilities-verdet-constants">(Hyper-)Polarizabilities, dispersion coefficients, ORD, magnetizabilities, Verdet constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AgI_SO_Pol.html">Example: Polarizabilities including spin-orbit coupling: AgI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LiH_DampedBeta.html">Example: damped first hyperpolarizability: LiH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LiH_DampedGamma.html">Example: damped second hyperpolarizability: LiH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="H2O_Verdet.html">Example: Verdet constants: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Disper_HF.html">Example: Dispersion Coefficients: HF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DMO_ORD.html">Example: Optical Rotation Dispersion (ORD): DMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DMO_ORD_aoresponse.html">Example: ORD, lifetime effects (key AORESPONSE): DMO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ALPHA_DENSITY.html">Example: Polarizability: first order perturbed density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Hyperpol.html">Example: Hyperpolarizabilities of He and H2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DampedVerdet.html">Example: Damped Verdet constants: Propene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="H2O_magnet.html">Example: Static magnetizability: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="H2O_TD_magnet.html">Example: Dynamic magnetizability: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="C2H4_TDCDFT.html">Example: Time-dependent current-density-functional theory: C2H4:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Au10_POLTDDFT.html">Example: Damped complex polarizabilities with POLTDDFT: Au10</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NH3_POLTDDFT.html">Example: POLTDDFT with hybrid functional: NH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#ligand-field-dft-lfdft">Ligand Field DFT (LFDFT)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Co_LFDFT.html">Example: Ligand Field DFT: Co 2+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Pr_LFDFT.html">Example: Ligand Field DFT: f-d transitions in Pr 3+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Co_LFDFT_gtensor.html">Example: LFDFT: g-tensor of Co(acacen)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cu_LFDFT_gtensor.html">Example: LFDFT: g-tensor of Cu(H2O)6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Er_LFDFT_MCD.html">Example: LFDFT: XMCD 3d-4f transitions in Er 3+</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#nmr-chemical-shifts-and-spin-spin-coupling-constants">NMR chemical shifts and spin-spin coupling constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="HBr.html">Example: NMR Chemical Shifts: HBr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HgMeBr_pnr.html">Example: NMR Chemical Shifts: HgMeBr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CH4_SAOP.html">Example: NMR Chemical Shifts, SAOP potential: CH4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NMR_NICS.html">Example: NMR Nucleus-independent chemical shifts (NICS): PF3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NMR_B3LYP.html">Example: NMR with B3LYP: PF3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CPL_C2H2.html">Example: NMR Spin-spin coupling constants: C2H2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CPL_HF_hybrid.html">Example: NMR Spin-spin coupling constants, hybrid PBE0: HF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PbH4_finitenuc.html">Example: NMR Spin-spin coupling constants, finite nucleus: PbH4</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#esr-epr-g-tensor-a-tensor-q-tensor-zfs">ESR/EPR g-tensor, A-tensor, Q-tensor, ZFS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ESR_HfV.html">Example: ESR g-tensor, A-tensor, Q-tensor, D-tensor: HfV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VO_collinear.html">Example: ESR g-tensor, A-tensor, self consistent spin-orbit coupling: VO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ESR_HgF_2der.html">Example: ESR g-tensor, A-tensor, perturbative spin-orbit coupling: HgF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ESR_TiF3.html">Example: ESR spin-restricted and spin-unrestricted: TiF3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PdH_ESR_X2C.html">Example: ESR, X2C and RA-X2C: PdH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NH_ZFS.html">Example: Zero-field splitting (ZFS), ESR D-tensor: NH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Phenylnitrene_ZFS.html">Example: ZFS D tensor, including direct electron spin-spin part: Phenylnitrene</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#efg-mossbauer">EFG, Mössbauer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Mossbauer.html">Example: Mössbauer spectroscopy: Ferrocene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Hg_Mossbauer_X2C.html">Example: Mössbauer with X2C: Hg compounds</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#gw">GW</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="GW_H2O.html">Example: G<sub>0</sub>W<sub>0</sub>&#64;PBE calculation: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW_O3.html">Example: G<sub>0</sub>W<sub>0</sub>&#64;PBE0 calculation: O3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GW_Phenol.html">Example: G<sub>0</sub>W<sub>0</sub>&#64;PBE0 calculation: Phenol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evGW_H2O.html">Example: evGW&#64;M06-2X calculation: H2O</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#transport-properties">Transport properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#charge-transfer-integrals-transport-properties">Charge transfer integrals (transport properties)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AT_transferintegrals.html">Example: Charge transfer integrals: AT base pair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ElectronTransfer_FDE_H2O.html">Example: Charge transfer integrals with FDE: water dimer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ChargeSeparation_Toluene_TCNE.html">Example: Charge Recombination Calculation of Toluene and TCNE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="XCDFT_FDE_ET_ethylene.html">Example: XCDFT: Charge Separation of an ethylene dimer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#non-self-consistent-green-s-function-calculation">Non-self-consistent Green’s function calculation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="green_Al.html">Example: DOS and transmission: Aluminium</a></li>
+<li class="toctree-l4"><a class="reference internal" href="green_Au.html">Example: Gold electrodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="green_WBL.html">Example: Benzenedithiol junction: Wide-Band-Limit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="green_BDT.html">Example: Benzenedithiol junction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#fragment-orbitals-bond-energy-decomposition">Fragment orbitals, bond energy decomposition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Frags_NiCO4.html">Example: Compound Fragments: Ni(CO)4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Frags_PtCl4H2.html">Example: Fragments: PtCl4H2 2-</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UnrFrag_H2.html">Example: Spin-unrestricted Fragments: H2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PCCP_Unr_BondEnergy.html">Example: Bond Energy analysis open-shell fragments: PCCP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NaCl_ionicbonding.html">Example: Analysis of NaCl using ionic fragments: Na+ and Cl-</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NaCl_pairbonding.html">Example: Electron Pair bonding in NaCl: open shell fragments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EDA_meta_gga_hybrid.html">Example: Bond Energy analysis meta-GGA, (meta-)hybrids: Zn2, Cr2, CrH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EDA_Unr_C2H4_Cu_C2H4.html">Example: unrestricted EDA: Cu(C2H4)2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EDA_Unr_CH3I.html">Example: unrestricted fragments: CH3I</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TlH_SO_analysis.html">Example: Spin-Orbit SFO analysis: TlH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PyFrag.html">Example: Activation Strain Model Analysis using PyFrag</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#localized-orbitals-bond-orders-charge-analysis">Localized orbitals, bond orders, charge analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="LocMO_Resp.html">Example: (Perturbed) localized molecular orbitals in twisted Ethene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CM5_chargemodel.html">Example: Charge model 5 (CM5)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BondOrder.html">Example: Bond Orders</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#ets-nocv">ETS-NOCV</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Diimina_NOCV.html">Example: NOCV: ethylene – Ni-diimina</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Hplus_CO_etsnocv.html">Example: NOCV: H+ – CO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NOCV_CrCO5-CH2.html">Example: NOCV: CH2 – Cr(CO)5</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CH3_CH3_etsnocv.html">Example: NOCV: CH3 – CH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#qtaim">QTAIM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Bader.html">Example: QTAIM Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Bader_Reactivity.html">Example: QTAIM Reactivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IQA.html">Example: IQA/QTAIM analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Aromaticity.html">Example: QTAIM Aromaticity indices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#dos-density-of-states">DOS: Density of states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DOS_Cu4CO.html">Example: Density of States: Cu4CO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#third-party-analysis-software">Third party analysis software</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AIM_HF.html">Example: adf2aim: convert an ADF adf.rkf to WFN format (for Bader analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="H2O_ADFNBO.html">Example: NBO analysis: adfnbo, gennbo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AlCl3_efgnbo.html">Example: NBO analysis: EFG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CH4_nmrnbo.html">Example: NBO analysis: NMR chemical shift</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CPL_CH3OH_NBO.html">Example: NBO analysis: NMR spin-spin coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EGO_H2O_multi.html">Example: Multiple excited state gradients: H2O</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CalcOverlapOnly.html">Example: Calculation of overlap of primitive basis functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#accuracy-and-efficiency">Accuracy and Efficiency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#bsse-scf-convergence-frequencies">BSSE, SCF convergence, Frequencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BSSE_CrCO6.html">Example: Basis Set Superposition Error (BSSE): Cr(CO)5 +CO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SCF_Ti2O4.html">Example: Troubleshooting SCF convergence: Ti2O4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Freq_NH3_Scan.html">Example: Rescan frequencies: NH3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#speed">Speed</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Multiresolution_H2O.html">Example: Multiresolution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#scripting">Scripting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Examples.html#prepare-an-adf-job-and-generate-a-report">Prepare an ADF job and generate a report</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BakersetSP.html">Example: Single point for multiple xyz files: Bakerset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ConvergenceTestCH4.html">Example: Basis set and integration accuracy convergence test: Methane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LoopAtomsLigands.html">Example: amsprep: Replace atom with ligand</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#list-of-examples">List of Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#feature-references">Feature References</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#coordinates-basis-sets-fragments">Coordinates, basis sets, fragments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#geometry-optimizations-transition-states-and-reaction-paths">Geometry optimizations, transition states, and reaction paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#model-hamiltonians">Model Hamiltonians</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#relativistic-effects">Relativistic Effects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#solvents-and-other-environments">Solvents and other environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#frequencies-ir-intensities-raman-vcd">Frequencies, IR Intensities, Raman, VCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#time-dependent-dft">Time-Dependent DFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#lfdft">LFDFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#nmr">NMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#esr-epr">ESR/EPR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#gw">GW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#transport-properties-non-self-consistent-green-s-function">Transport properties: Non-self-consistent Green’s function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#accuracy-and-efficiency">Accuracy and efficiency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ADF</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../ADF.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">ADF</a>/</li>
+      
+          <li><a href="Examples.html">Examples</a>/</li>
+      
+    <li class="orange-text">Example: FDE: H2O in water</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="example-fde-h2o-in-water">
+<span id="example-fde-h2o-128"></span><h1>Example: FDE: H2O in water<a class="headerlink" href="#example-fde-h2o-in-water" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" download="" href="../_downloads/1c44c9bfa0a807ec43baf71b5e15e92f/FDE_H2O_128.run"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">FDE_H2O_128.run</span></code></a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#! /bin/sh</span>
+
+<span class="c1"># This example demonstrates how to use FDE in combination with a large</span>
+<span class="c1"># environment, that is modeled as a superposition of the densities of isolated</span>
+<span class="c1"># molecules. Here, the excitation energies of a water molecule surrounded by an</span>
+<span class="c1"># environment of 127 water molecules. For details, see also: C.R. Jacob, J.</span>
+<span class="c1"># Neugebauer, L. Jensen and L. Visscher, Comparison of frozen-density embedding</span>
+<span class="c1"># and discrete reaction field solvent models for molecular properties, Physical</span>
+<span class="c1"># Chemistry Chemical Physics 8, 2349 (2006)</span>
+
+<span class="c1"># This calculation consists of two steps:</span>
+<span class="c1"># - First a prototype water molecule is calculated.</span>
+<span class="c1"># - Next the embedding calculation of water in water is performed.</span>
+
+<span class="c1"># To reduce the amount of output the next lines are included in the adf</span>
+<span class="c1"># calculations:</span>
+<span class="c1">#   EPRINT</span>
+<span class="c1">#     SFO NOEIG NOOVL NOORBPOP</span>
+<span class="c1">#     SCF NOPOP</span>
+<span class="c1">#   END</span>
+<span class="c1">#   NOPRINT BAS FUNCTIONS</span>
+
+
+<span class="c1"># create atomic fragment files</span>
+
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>O <span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt;eor</span>
+<span class="s">System</span>
+<span class="s">  Atoms</span>
+<span class="s">    O 0.0 0.0 0.0</span>
+<span class="s">  End</span>
+<span class="s">End</span>
+<span class="s">Task SinglePoint</span>
+<span class="s">Engine ADF</span>
+<span class="s">  create O file=$AMSRESOURCES/ADF/DZP/O</span>
+<span class="s">  Relativity Level=None</span>
+<span class="s">EndEngine</span>
+<span class="s">eor</span>
+mv O.results/adf.rkf t21.DZP.O 
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>H <span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt;eor</span>
+<span class="s">System</span>
+<span class="s">  Atoms</span>
+<span class="s">    H 0.0 0.0 0.0</span>
+<span class="s">  End</span>
+<span class="s">End</span>
+<span class="s">Task SinglePoint</span>
+<span class="s">Engine ADF</span>
+<span class="s">  create H file=$AMSRESOURCES/ADF/DZP/H</span>
+<span class="s">  Relativity Level=None</span>
+<span class="s">EndEngine</span>
+<span class="s">eor</span>
+mv H.results/adf.rkf t21.DZP.H 
+
+
+<span class="c1"># First, a prototype water molecule is calculated. The density of this isolated</span>
+<span class="c1"># water molecules will afterwards be used to model the environment.</span>
+
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>H2O <span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt;eor</span>
+<span class="s">System</span>
+<span class="s">  atoms [bohr]</span>
+<span class="s">     O       -11.38048700000000    -11.81055300000000     -4.51522600000000</span>
+<span class="s">     H       -13.10476265095705    -11.83766918322447     -3.96954531282721</span>
+<span class="s">     H       -10.51089289290947    -12.85330720999229     -3.32020577897331</span>
+<span class="s">  end</span>
+<span class="s">end</span>
+
+<span class="s">Task SinglePoint</span>
+
+<span class="s">Engine ADF</span>
+<span class="s">  eprint</span>
+<span class="s">    scf NOPOP</span>
+<span class="s">    sfo NOEIG NOOVL NOORBPOP</span>
+<span class="s">  end</span>
+<span class="s">  fragments</span>
+<span class="s">     O  t21.DZP.O</span>
+<span class="s">     H  t21.DZP.H</span>
+<span class="s">  end</span>
+<span class="s">  noprint BAS FUNCTIONS</span>
+<span class="s">  numericalquality good</span>
+<span class="s">  scf</span>
+<span class="s">    converge 1.0e-6 1.0e-6</span>
+<span class="s">    diis</span>
+<span class="s">      cx 5.0</span>
+<span class="s">      cxx 10.0</span>
+<span class="s">      cyc 5</span>
+<span class="s">      n 10</span>
+<span class="s">      ok 0.5</span>
+<span class="s">    end</span>
+<span class="s">    iterations 50</span>
+<span class="s">    lshift 0.0</span>
+<span class="s">    mixing 0.2</span>
+<span class="s">  end</span>
+<span class="s">  symmetry NOSYM</span>
+<span class="s">  title Input generated by modco</span>
+<span class="s">  xc</span>
+<span class="s">    lda</span>
+<span class="s">  end</span>
+<span class="s">  Relativity Level=None</span>
+<span class="s">EndEngine</span>
+<span class="s">eor</span>
+
+mv H2O.results/adf.rkf t21.mol_1
+
+
+<span class="c1"># Afterwards, the FDE calculation is performed. In this FDE calculation, there</span>
+<span class="c1"># is one nonfrozen water molecule and the previously prepared water molecule is</span>
+<span class="c1"># included as a frozen fragment that is duplicated 127 times. For this frozen</span>
+<span class="c1"># fragment, the more efficient fitted density is used.</span>
+
+
+
+<span class="nv">AMS_JOBNAME</span><span class="o">=</span>FDE <span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt;eor</span>
+<span class="s">System</span>
+<span class="s">  atoms [Bohr]</span>
+<span class="s">     O         0.00000000000000      0.00000000000000      0.00000000000000</span>
+<span class="s">     H        -1.43014300000000      0.00000000000000      1.10739300000000</span>
+<span class="s">     H         1.43014300000000      0.00000000000000      1.10739300000000</span>
+<span class="s">     O       -11.38048700000000    -11.81055300000000     -4.51522600000000    adf.f=frag1|1</span>
+<span class="s">     H       -13.10476265095705    -11.83766918322447     -3.96954531282721    adf.f=frag1|1</span>
+<span class="s">     H       -10.51089289290947    -12.85330720999229     -3.32020577897331    adf.f=frag1|1</span>
+<span class="s">     O        -1.11635000000000      9.11918600000000     -3.23094800000000    adf.f=frag1|2</span>
+<span class="s">     H        -2.82271357869859      9.71703285239153     -3.18063201242303    adf.f=frag1|2</span>
+<span class="s">     H        -0.12378551814273     10.53819303003839     -2.70860866559857    adf.f=frag1|2</span>
+<span class="s">     O       -16.96901200000000     -3.65835300000000    -10.78571300000000    adf.f=frag1|3</span>
+<span class="s">     H       -15.70823656958949     -4.23996689198245     -9.62648920152293    adf.f=frag1|3</span>
+<span class="s">     H       -16.47814038897754     -4.36080868684451    -12.37857352487904    adf.f=frag1|3</span>
+<span class="s">     O       -10.76560800000000     -4.16357700000000      0.51803200000000    adf.f=frag1|4</span>
+<span class="s">     H        -9.16115845895954     -3.98623150326079     -0.29800688710696    adf.f=frag1|4</span>
+<span class="s">     H       -11.97483852095230     -3.79636551545084     -0.77600078745886    adf.f=frag1|4</span>
+<span class="s">     O        -6.55423300000000     -9.20297500000000    -11.23125400000000    adf.f=frag1|5</span>
+<span class="s">     H        -8.15301944239612     -9.65354271558258    -10.51536304076499    adf.f=frag1|5</span>
+<span class="s">     H        -6.90715220963067     -7.74998343249339    -12.24902957370683    adf.f=frag1|5</span>
+<span class="s">     O       -14.16713600000000     -6.55813200000000     -6.62957400000000    adf.f=frag1|6</span>
+<span class="s">     H       -13.74689800192609     -8.31204468643143     -6.76675830514850    adf.f=frag1|6</span>
+<span class="s">     H       -15.43294077464585     -6.49537593456625     -5.33906885435316    adf.f=frag1|6</span>
+<span class="s">     O        -1.01233800000000     -6.53737500000000    -20.63228300000000    adf.f=frag1|7</span>
+<span class="s">     H         0.51358895613388     -7.01674081354516    -19.78766204266023    adf.f=frag1|7</span>
+<span class="s">     H        -2.25846754637793     -6.48721751306148    -19.32222614537351    adf.f=frag1|7</span>
+<span class="s">     O        -7.97372300000000      4.33381600000000      8.85869700000000    adf.f=frag1|8</span>
+<span class="s">     H        -7.39209897744333      2.71703281820261      9.42381190837837    adf.f=frag1|8</span>
+<span class="s">     H        -7.34133495205587      4.47772485325760      7.17021271491547    adf.f=frag1|8</span>
+<span class="s">     O         1.68768000000000    -11.29316300000000     -2.87636700000000    adf.f=frag1|9</span>
+<span class="s">     H         1.52000307205134    -11.65999321781241     -4.63958827351129    adf.f=frag1|9</span>
+<span class="s">     H         0.92563970293820     -9.66478590395236     -2.67815953059656    adf.f=frag1|9</span>
+<span class="s">     O         1.09184600000000     -1.69811700000000    -18.81717100000000    adf.f=frag1|10</span>
+<span class="s">     H         2.07215988260319     -2.34326255514507    -20.19354345122146    adf.f=frag1|10</span>
+<span class="s">     H         0.13398919688371     -3.11903886392137    -18.23829710737747    adf.f=frag1|10</span>
+<span class="s">     O       -13.85258700000000     -1.51317200000000     -3.42847700000000    adf.f=frag1|11</span>
+<span class="s">     H       -13.34561409429037     -1.90947670800034     -5.11890601995987    adf.f=frag1|11</span>
+<span class="s">     H       -15.31887324674441     -2.53345289474331     -3.14451376182312    adf.f=frag1|11</span>
+<span class="s">     O         5.28960400000000     -6.81266800000000    -13.10585800000000    adf.f=frag1|12</span>
+<span class="s">     H         7.01709448187639     -6.62178372023976    -12.60488989024026    adf.f=frag1|12</span>
+<span class="s">     H         4.34671789396407     -5.97791594280375    -11.80749041866683    adf.f=frag1|12</span>
+<span class="s">     O       -11.47407200000000    -10.90708300000000     -9.44085000000000    adf.f=frag1|13</span>
+<span class="s">     H       -11.21611173248622    -12.45441460630369    -10.34132244308043    adf.f=frag1|13</span>
+<span class="s">     H       -11.17634020521638    -11.33593027595366     -7.70907363612158    adf.f=frag1|13</span>
+<span class="s">     O        -1.64592100000000    -11.43523300000000      1.48098000000000    adf.f=frag1|14</span>
+<span class="s">     H        -0.30557034252542    -10.47362907146570      0.73908565451392    adf.f=frag1|14</span>
+<span class="s">     H        -1.72993170289473    -12.94068698496448      0.48190338473989    adf.f=frag1|14</span>
+<span class="s">     O        -7.32468400000000     -5.01818100000000      4.38774900000000    adf.f=frag1|15</span>
+<span class="s">     H        -8.81838077448469     -4.73028985072788      3.40916949260461    adf.f=frag1|15</span>
+<span class="s">     H        -7.75923926090726     -6.38911120628163      5.48470646359115    adf.f=frag1|15</span>
+<span class="s">     O         5.20879700000000     -6.83850600000000      3.69146100000000    adf.f=frag1|16</span>
+<span class="s">     H         5.26579130261858     -6.68511818556767      1.89011343551333    adf.f=frag1|16</span>
+<span class="s">     H         6.39162739624924     -5.60718291987245      4.28841938067655    adf.f=frag1|16</span>
+<span class="s">     O         6.73749100000000     -0.26065600000000     -6.58850100000000    adf.f=frag1|17</span>
+<span class="s">     H         6.56301678911955     -2.04681439624047     -6.81394756463717    adf.f=frag1|17</span>
+<span class="s">     H         8.29925639010887      0.14828805200118     -7.40413401232653    adf.f=frag1|17</span>
+<span class="s">     O         5.30624300000000     -5.54309500000000     -6.43599300000000    adf.f=frag1|18</span>
+<span class="s">     H         3.81279050995479     -6.09072594663625     -7.29699777727678    adf.f=frag1|18</span>
+<span class="s">     H         6.65189674819999     -6.43527789528092     -7.25136362341575    adf.f=frag1|18</span>
+<span class="s">     O        -5.72214300000000     -7.59376400000000     -5.60989200000000    adf.f=frag1|19</span>
+<span class="s">     H        -5.63766272358672     -7.49959469188493     -7.41422690365166    adf.f=frag1|19</span>
+<span class="s">     H        -3.99734274429106     -7.51425600722341     -5.07105423295232    adf.f=frag1|19</span>
+<span class="s">     O        -4.96412100000000      4.32334900000000     -3.25899700000000    adf.f=frag1|20</span>
+<span class="s">     H        -6.26920382212011      5.55951483151335     -3.05829302735551    adf.f=frag1|20</span>
+<span class="s">     H        -3.43114054713299      5.22630232648312     -2.93303718111639    adf.f=frag1|20</span>
+<span class="s">     O       -10.94232600000000      0.55437900000000    -13.18244900000000    adf.f=frag1|21</span>
+<span class="s">     H        -9.99364526446256      2.08335246724114    -13.36649850073860    adf.f=frag1|21</span>
+<span class="s">     H       -12.25798450895047      0.68645755108753    -14.41662950801929    adf.f=frag1|21</span>
+<span class="s">     O        -9.29636700000000      5.39923600000000    -12.62463400000000    adf.f=frag1|22</span>
+<span class="s">     H        -7.78716246923940      5.39969899801535    -11.62767327349474    adf.f=frag1|22</span>
+<span class="s">     H        -8.71366631604628      5.57073538127912    -14.32835095341294    adf.f=frag1|22</span>
+<span class="s">     O         2.97641300000000    -12.44506100000000      3.62605000000000    adf.f=frag1|23</span>
+<span class="s">     H         3.66110125710447    -10.77090992621746      3.63307801290360    adf.f=frag1|23</span>
+<span class="s">     H         1.22148596207982    -12.21500271544869      3.25334655288432    adf.f=frag1|23</span>
+<span class="s">     O        -7.52033800000000     -2.70960600000000    -16.43185500000000    adf.f=frag1|24</span>
+<span class="s">     H        -8.54144292463491     -2.01657808726233    -15.10947598274278    adf.f=frag1|24</span>
+<span class="s">     H        -8.12619297191493     -1.91113986970532    -17.93750940057940    adf.f=frag1|24</span>
+<span class="s">     O        -1.69701700000000     -2.04382200000000     -8.20675700000000    adf.f=frag1|25</span>
+<span class="s">     H        -1.16935910005967     -0.43265303835196     -8.83710685355905    adf.f=frag1|25</span>
+<span class="s">     H        -0.63663168422293     -2.33781858979711     -6.77122484449879    adf.f=frag1|25</span>
+<span class="s">     O         5.30132200000000     -9.56047300000000      8.45223600000000    adf.f=frag1|26</span>
+<span class="s">     H         5.27386189469879     -8.61762538446407      6.90889108173823    adf.f=frag1|26</span>
+<span class="s">     H         4.55017557362690     -8.45544294990206      9.67137143822390    adf.f=frag1|26</span>
+<span class="s">     O         5.99489300000000     -5.84398700000000     -1.27866800000000    adf.f=frag1|27</span>
+<span class="s">     H         6.10499825242707     -5.94881824033588     -3.08103213209623    adf.f=frag1|27</span>
+<span class="s">     H         7.02298278120587     -4.42064928461433     -0.84422038296580    adf.f=frag1|27</span>
+<span class="s">     O        -8.49933400000000      6.30730300000000      1.26206900000000    adf.f=frag1|28</span>
+<span class="s">     H        -9.26414421853983      5.21634012956926      0.03875605345364    adf.f=frag1|28</span>
+<span class="s">     H        -9.84131776823032      6.72028388514297      2.40230140460829    adf.f=frag1|28</span>
+<span class="s">     O         1.42265800000000      7.15100500000000     -6.70245700000000    adf.f=frag1|29</span>
+<span class="s">     H         0.49123529007929      7.74531228135872     -5.27036768330312    adf.f=frag1|29</span>
+<span class="s">     H         2.87243479479048      6.33486591183760     -5.99276142000362    adf.f=frag1|29</span>
+<span class="s">     O         1.16572300000000    -15.86327300000000     -8.03011700000000    adf.f=frag1|30</span>
+<span class="s">     H        -0.43980652899404    -16.56646285956896     -8.47669081602252    adf.f=frag1|30</span>
+<span class="s">     H         1.27023658519214    -14.33069688850776     -8.98504681689730    adf.f=frag1|30</span>
+<span class="s">     O        -1.89194800000000    -10.63552100000000     -8.58469800000000    adf.f=frag1|31</span>
+<span class="s">     H        -2.78816305171149    -10.71751973024788    -10.15367983850320    adf.f=frag1|31</span>
+<span class="s">     H        -2.90779524204234    -11.59056143861734     -7.43250195607063    adf.f=frag1|31</span>
+<span class="s">     O         1.30322100000000     -6.54666700000000     -9.29066800000000    adf.f=frag1|32</span>
+<span class="s">     H         0.04144584195376     -7.80383112457906     -8.97588071525340    adf.f=frag1|32</span>
+<span class="s">     H         0.43997569188912     -4.97291783823648     -9.06767765025571    adf.f=frag1|32</span>
+<span class="s">     O        -4.10800400000000     -6.59387200000000    -16.43397700000000    adf.f=frag1|33</span>
+<span class="s">     H        -4.90090013771901     -8.11414568563407    -17.00992218470793    adf.f=frag1|33</span>
+<span class="s">     H        -5.44796070593591     -5.38061594011036    -16.36971704696261    adf.f=frag1|33</span>
+<span class="s">     O        -5.19983400000000    -12.82687600000000     -4.96878500000000    adf.f=frag1|34</span>
+<span class="s">     H        -6.70471369416354    -13.43327229448220     -5.76831602526536    adf.f=frag1|34</span>
+<span class="s">     H        -5.42955949756766    -11.03545071340780     -4.87067679172327    adf.f=frag1|34</span>
+<span class="s">     O        -4.89786700000000      5.50178800000000    -16.51771100000000    adf.f=frag1|35</span>
+<span class="s">     H        -4.96675000682788      7.30587317882606    -16.40743398906903    adf.f=frag1|35</span>
+<span class="s">     H        -3.22762417250174      5.07795982200470    -15.96792726530632    adf.f=frag1|35</span>
+<span class="s">     O       -17.57898700000000     -4.99346700000000     -2.97681500000000    adf.f=frag1|36</span>
+<span class="s">     H       -18.76387465651032     -3.84193458717524     -2.24085062321750    adf.f=frag1|36</span>
+<span class="s">     H       -17.39866900954461     -6.30611916234463     -1.74554195748830    adf.f=frag1|36</span>
+<span class="s">     O        -3.50776800000000    -17.32380200000000    -10.10442500000000    adf.f=frag1|37</span>
+<span class="s">     H        -4.40193812130934    -18.63309464188228    -10.97496609167801    adf.f=frag1|37</span>
+<span class="s">     H        -4.53952158473348    -16.94953791159138     -8.66671344522861    adf.f=frag1|37</span>
+<span class="s">     O       -10.81911600000000     -4.66640800000000    -11.14487100000000    adf.f=frag1|38</span>
+<span class="s">     H       -11.62185710527301     -4.88296610749300     -9.53852778505075    adf.f=frag1|38</span>
+<span class="s">     H       -10.60915967583231     -2.87735761828481    -11.30864113107593    adf.f=frag1|38</span>
+<span class="s">     O        -6.39205500000000      0.01793500000000     -6.73248500000000    adf.f=frag1|39</span>
+<span class="s">     H        -5.82125006722311      1.22625909145182     -5.51356587267281    adf.f=frag1|39</span>
+<span class="s">     H        -4.87489255123650     -0.72801711445480     -7.37542911048570    adf.f=frag1|39</span>
+<span class="s">     O       -11.30505500000000      0.46379700000000     -8.25065700000000    adf.f=frag1|40</span>
+<span class="s">     H        -9.64226007733910      0.80674572776125     -7.62685540050746    adf.f=frag1|40</span>
+<span class="s">     H       -11.19896085378185      0.79109534466454    -10.02638879504226    adf.f=frag1|40</span>
+<span class="s">     O         9.00392400000000      1.26046800000000    -13.97805200000000    adf.f=frag1|41</span>
+<span class="s">     H         8.87294935217592      1.02947962110145    -12.18888481086687    adf.f=frag1|41</span>
+<span class="s">     H         7.29424845398649      1.45338312957695    -14.53608144577292    adf.f=frag1|41</span>
+<span class="s">     O       -10.89041700000000      3.43422700000000     -2.58901500000000    adf.f=frag1|42</span>
+<span class="s">     H       -11.04828427051772      1.96350979597573     -3.63002318964871    adf.f=frag1|42</span>
+<span class="s">     H       -12.48348293054753      3.56267021936991     -1.74211071819919    adf.f=frag1|42</span>
+<span class="s">     O        -5.77532000000000     11.85364600000000     -3.10184700000000    adf.f=frag1|43</span>
+<span class="s">     H        -7.42098370181530     11.26896732951829     -2.63113365512790    adf.f=frag1|43</span>
+<span class="s">     H        -5.59494422717391     13.43644886209393     -2.24522382582680    adf.f=frag1|43</span>
+<span class="s">     O        -1.56797700000000      3.41013100000000     -9.46461500000000    adf.f=frag1|44</span>
+<span class="s">     H        -0.62647981010343      4.69229425860768     -8.60364482634544    adf.f=frag1|44</span>
+<span class="s">     H        -1.22975840621731      3.70013224540235    -11.21764410491830    adf.f=frag1|44</span>
+<span class="s">     O        -5.85114500000000      5.94789900000000     -8.75297600000000    adf.f=frag1|45</span>
+<span class="s">     H        -4.36435430864595      4.93739949116572     -8.95290949638818    adf.f=frag1|45</span>
+<span class="s">     H        -5.23356351746774      7.64390869587085     -8.63572496098009    adf.f=frag1|45</span>
+<span class="s">     O        -5.55413300000000     -7.92360000000000      0.25554800000000    adf.f=frag1|46</span>
+<span class="s">     H        -4.38326585687764     -9.28844448621082      0.45022435153192    adf.f=frag1|46</span>
+<span class="s">     H        -6.01769107687214     -7.47995835111906      1.94667176216252    adf.f=frag1|46</span>
+<span class="s">     O       -10.80147900000000      4.92460700000000    -18.42825600000000    adf.f=frag1|47</span>
+<span class="s">     H        -9.46772203676955      4.11444445205056    -19.34278223208070    adf.f=frag1|47</span>
+<span class="s">     H       -12.08285494971162      3.65684979597704    -18.27835293347214    adf.f=frag1|47</span>
+<span class="s">     O        11.84765600000000      6.04652000000000     -5.60335700000000    adf.f=frag1|48</span>
+<span class="s">     H        12.23822731048506      7.54282902057004     -4.66519785219186    adf.f=frag1|48</span>
+<span class="s">     H        10.14515882225660      6.29374114330687     -6.16191644024222    adf.f=frag1|48</span>
+<span class="s">     O         9.40177200000000     -2.16451100000000      0.06593400000000    adf.f=frag1|49</span>
+<span class="s">     H         9.99192042697073     -0.60334687050214     -0.63128950443925    adf.f=frag1|49</span>
+<span class="s">     H        10.90850263662718     -3.09972302317630      0.42194641911128    adf.f=frag1|49</span>
+<span class="s">     O        -3.83766900000000     11.00009100000000     -8.55948700000000    adf.f=frag1|50</span>
+<span class="s">     H        -3.74373964993300     10.83305937748681     -6.76090229682198    adf.f=frag1|50</span>
+<span class="s">     H        -4.87440105609424     12.45821519867243     -8.82531410042130    adf.f=frag1|50</span>
+<span class="s">     O        -8.92277200000000      7.51515500000000     -5.13005000000000    adf.f=frag1|51</span>
+<span class="s">     H        -7.64240242456374      6.79630036125453     -6.18623699995818    adf.f=frag1|51</span>
+<span class="s">     H        -9.98750814060132      6.11915279273326     -4.69517258001857    adf.f=frag1|51</span>
+<span class="s">     O        -0.32879900000000      4.85643700000000    -14.28493900000000    adf.f=frag1|52</span>
+<span class="s">     H        -0.20121901190276      6.61816864447670    -13.89551098390984    adf.f=frag1|52</span>
+<span class="s">     H         1.10559652418602      4.51955612567933    -15.33404544784882    adf.f=frag1|52</span>
+<span class="s">     O        -2.88119200000000    -21.16143900000000    -13.73773700000000    adf.f=frag1|53</span>
+<span class="s">     H        -1.09646919425263    -20.88154858029820    -13.82748709656689    adf.f=frag1|53</span>
+<span class="s">     H        -3.12787937393977    -22.76872743498338    -14.52980568926457    adf.f=frag1|53</span>
+<span class="s">     O         4.08430100000000    -17.32350200000000      4.72137100000000    adf.f=frag1|54</span>
+<span class="s">     H         4.02413151632988    -15.51826748869058      4.62578223161330    adf.f=frag1|54</span>
+<span class="s">     H         2.36935484299032    -17.81891859379031      5.01313401917970    adf.f=frag1|54</span>
+<span class="s">     O       -12.71856600000000      7.20558900000000      4.46079500000000    adf.f=frag1|55</span>
+<span class="s">     H       -14.45999505747860      7.69416069947355      4.47955006523861    adf.f=frag1|55</span>
+<span class="s">     H       -11.90975612966972      8.36888327939108      5.58515108034031    adf.f=frag1|55</span>
+<span class="s">     O         3.64630900000000     -5.77729500000000     11.93616900000000    adf.f=frag1|56</span>
+<span class="s">     H         4.69770672445712     -5.28069451760816     13.32165808553043    adf.f=frag1|56</span>
+<span class="s">     H         1.98018929821852     -5.85215747794930     12.63620066423870    adf.f=frag1|56</span>
+<span class="s">     O       -11.58290200000000     -8.00977000000000    -14.71744100000000    adf.f=frag1|57</span>
+<span class="s">     H       -11.15452934215944     -6.96177583707747    -13.30682612671804    adf.f=frag1|57</span>
+<span class="s">     H       -13.31014912674778     -7.60719902330076    -15.07262764680259    adf.f=frag1|57</span>
+<span class="s">     O       -22.69131900000000     -4.60206700000000    -11.33851100000000    adf.f=frag1|58</span>
+<span class="s">     H       -22.22272486043639     -6.12263420792208    -12.19869942051499    adf.f=frag1|58</span>
+<span class="s">     H       -21.13544211851963     -3.70468130859725    -11.12508740068061    adf.f=frag1|58</span>
+<span class="s">     O         4.56872600000000     15.36672100000000     -5.27290200000000    adf.f=frag1|59</span>
+<span class="s">     H         6.23209824653603     14.72493681821289     -5.57775451137379    adf.f=frag1|59</span>
+<span class="s">     H         4.56888064677390     17.00621625499974     -6.03687769799284    adf.f=frag1|59</span>
+<span class="s">     O       -19.42024500000000      0.10101200000000    -13.92810800000000    adf.f=frag1|60</span>
+<span class="s">     H       -18.31405236374814     -1.07169409540655    -13.10790833801040    adf.f=frag1|60</span>
+<span class="s">     H       -20.71321177209865      0.43336205711680    -12.70770480925147    adf.f=frag1|60</span>
+<span class="s">     O         4.02837000000000     -8.18071600000000    -24.03669300000000    adf.f=frag1|61</span>
+<span class="s">     H         5.65512609076238     -8.96585900909256    -24.13073712086871    adf.f=frag1|61</span>
+<span class="s">     H         3.08016870759219     -9.23647651818391    -22.91513710771192    adf.f=frag1|61</span>
+<span class="s">     O       -16.59841600000000    -12.07983100000000     -3.02725000000000    adf.f=frag1|62</span>
+<span class="s">     H       -16.86792190502099    -10.47849662259938     -2.23055432463633    adf.f=frag1|62</span>
+<span class="s">     H       -17.75928521418718    -12.09663441135308     -4.41422653012776    adf.f=frag1|62</span>
+<span class="s">     O        -7.26966600000000     11.01317800000000    -13.83432500000000    adf.f=frag1|63</span>
+<span class="s">     H        -8.50533384743054     11.78916627619676    -12.76540199703817    adf.f=frag1|63</span>
+<span class="s">     H        -5.99921818801193     12.28193782381027    -14.05299015201462    adf.f=frag1|63</span>
+<span class="s">     O        14.92607800000000      0.72989200000000     -0.88069200000000    adf.f=frag1|64</span>
+<span class="s">     H        14.68468379195669      0.44423157042895      0.88898485624517    adf.f=frag1|64</span>
+<span class="s">     H        13.43262120167169      1.60465761841764     -1.40602569068362    adf.f=frag1|64</span>
+<span class="s">     O       -10.24993000000000    -15.51193700000000    -12.56703500000000    adf.f=frag1|65</span>
+<span class="s">     H       -10.81569785539303    -16.80205979146874    -11.43252226892721    adf.f=frag1|65</span>
+<span class="s">     H        -8.81118264459048    -16.23360868276287    -13.39214081855071    adf.f=frag1|65</span>
+<span class="s">     O         6.15377400000000     -6.81034900000000    -18.37876400000000    adf.f=frag1|66</span>
+<span class="s">     H         5.66882347580422     -7.60131711703521    -16.82608191819916    adf.f=frag1|66</span>
+<span class="s">     H         7.80239299356986     -6.14232206320171    -18.05104612139325    adf.f=frag1|66</span>
+<span class="s">     O         3.76793000000000    -11.87319400000000    -12.00003600000000    adf.f=frag1|67</span>
+<span class="s">     H         5.53017998300823    -12.15041382890993    -12.29878904864723    adf.f=frag1|67</span>
+<span class="s">     H         3.52066686277755    -10.11552847274610    -12.34799636768586    adf.f=frag1|67</span>
+<span class="s">     O         4.23865500000000      2.16969600000000    -16.37654900000000    adf.f=frag1|68</span>
+<span class="s">     H         3.03592238765764      0.92692640056214    -16.90625382926868    adf.f=frag1|68</span>
+<span class="s">     H         5.02860305993563      2.71732123822040    -17.90876707954152    adf.f=frag1|68</span>
+<span class="s">     O       -14.68271000000000      0.72381400000000    -16.71344500000000    adf.f=frag1|69</span>
+<span class="s">     H       -15.14615918038738     -0.55817879758533    -17.90228415832504    adf.f=frag1|69</span>
+<span class="s">     H       -16.24034166467332      1.19193697588290    -15.92208663689043    adf.f=frag1|69</span>
+<span class="s">     O        -8.56171900000000     -1.14046300000000    -21.11237400000000    adf.f=frag1|70</span>
+<span class="s">     H        -7.24726382704255      0.10164744794682    -21.14397231666602    adf.f=frag1|70</span>
+<span class="s">     H        -7.96722618972135     -2.45668030593841    -22.20129726831652    adf.f=frag1|70</span>
+<span class="s">     O         3.09803900000000    -19.30437100000000     -4.72950400000000    adf.f=frag1|71</span>
+<span class="s">     H         4.47592822929893    -18.53926720940844     -3.84199812304267    adf.f=frag1|71</span>
+<span class="s">     H         2.31606384558652    -17.93639511851180     -5.61762585411266    adf.f=frag1|71</span>
+<span class="s">     O       -11.48197100000000     -2.62773000000000      8.98577000000000    adf.f=frag1|72</span>
+<span class="s">     H       -12.10181120734499     -1.96357292082485      7.42169752349214    adf.f=frag1|72</span>
+<span class="s">     H       -12.53715834883977     -4.05824316030399      9.32015800703900    adf.f=frag1|72</span>
+<span class="s">     O       -15.32683200000000      4.99378800000000      0.71520300000000    adf.f=frag1|73</span>
+<span class="s">     H       -16.28231903578986      3.62492951609735      1.41155075487152    adf.f=frag1|73</span>
+<span class="s">     H       -14.24707811603547      5.52532871717421      2.06546208560370    adf.f=frag1|73</span>
+<span class="s">     O         4.69924600000000     -3.09331300000000    -22.21218100000000    adf.f=frag1|74</span>
+<span class="s">     H         4.44004838777616     -3.02721933390031    -24.00105702850179    adf.f=frag1|74</span>
+<span class="s">     H         4.90782404353437     -4.85303119199437    -21.84956458183150    adf.f=frag1|74</span>
+<span class="s">     O         5.48125400000000    -14.87156900000000     -2.30008800000000    adf.f=frag1|75</span>
+<span class="s">     H         6.04793062228805    -15.53700673074120     -0.71651626102270    adf.f=frag1|75</span>
+<span class="s">     H         4.08123415431168    -13.81006617390298     -1.87025109596218    adf.f=frag1|75</span>
+<span class="s">     O         7.71692700000000      7.49170500000000     -0.28146900000000    adf.f=frag1|76</span>
+<span class="s">     H         7.15009959892487      7.47463483734514      1.43610036604224    adf.f=frag1|76</span>
+<span class="s">     H         6.70446411622425      6.23931957052779     -1.10490887468917    adf.f=frag1|76</span>
+<span class="s">     O        -0.09971700000000     10.17858400000000    -12.50337600000000    adf.f=frag1|77</span>
+<span class="s">     H         1.43320771620038     10.52645688573944    -11.60852657687974    adf.f=frag1|77</span>
+<span class="s">     H        -1.38648439654237     10.22688417289634    -11.23313966659599    adf.f=frag1|77</span>
+<span class="s">     O         0.17403100000000    -13.35840700000000    -17.21967600000000    adf.f=frag1|78</span>
+<span class="s">     H        -1.53885665094696    -13.32910704018195    -16.63934279586859    adf.f=frag1|78</span>
+<span class="s">     H         1.16036533522916    -13.51667655796879    -15.71179705645900    adf.f=frag1|78</span>
+<span class="s">     O       -12.87620000000000     -6.35854400000000      5.05140600000000    adf.f=frag1|79</span>
+<span class="s">     H       -11.96560105641672     -7.83983990822539      5.54960396913384    adf.f=frag1|79</span>
+<span class="s">     H       -12.07232354985510     -5.82614364999607      3.52106744189462    adf.f=frag1|79</span>
+<span class="s">     O        10.37496800000000      3.01364200000000     -1.65565900000000    adf.f=frag1|80</span>
+<span class="s">     H        10.56060903951036      4.59152033506358     -0.79109750165770    adf.f=frag1|80</span>
+<span class="s">     H        10.50573068374942      3.43968959450338     -3.40865305303111    adf.f=frag1|80</span>
+<span class="s">     O       -10.54672300000000     11.48736100000000     -1.14189100000000    adf.f=frag1|81</span>
+<span class="s">     H       -10.87795175377343      9.85135127695166     -1.83858958546889    adf.f=frag1|81</span>
+<span class="s">     H       -11.17355773718848     12.64365945215504     -2.38352527948959    adf.f=frag1|81</span>
+<span class="s">     O        16.77188300000000      5.46660900000000     -7.08505700000000    adf.f=frag1|82</span>
+<span class="s">     H        15.05944999981585      5.87188178668200     -6.66677909180415    adf.f=frag1|82</span>
+<span class="s">     H        17.62236540790539      5.39342341222859     -5.49040119833247    adf.f=frag1|82</span>
+<span class="s">     O         3.75457600000000     11.31207900000000     -9.30406600000000    adf.f=frag1|83</span>
+<span class="s">     H         3.86003631554596     12.75207030857270     -8.21460174023312    adf.f=frag1|83</span>
+<span class="s">     H         3.06160535139532     10.00588129699877     -8.26231611492555    adf.f=frag1|83</span>
+<span class="s">     O       -12.29225900000000      3.56799200000000     15.55877400000000    adf.f=frag1|84</span>
+<span class="s">     H       -11.55132238527440      2.03988079459175     14.93626432369441    adf.f=frag1|84</span>
+<span class="s">     H       -13.88471345817920      3.05255666747083     16.24435317034552    adf.f=frag1|84</span>
+<span class="s">     O        -6.10108600000000    -22.91748700000000     -8.30037600000000    adf.f=frag1|85</span>
+<span class="s">     H        -4.39703335260680    -23.51961699551631     -8.22775875933953    adf.f=frag1|85</span>
+<span class="s">     H        -6.81851364400339    -23.76013175020010     -9.73105799918286    adf.f=frag1|85</span>
+<span class="s">     O       -16.47411100000000    -10.06716200000000    -10.99026800000000    adf.f=frag1|86</span>
+<span class="s">     H       -16.57824909007337     -8.41061556718373    -11.70904362169910    adf.f=frag1|86</span>
+<span class="s">     H       -14.81816261652035    -10.64777696598199    -11.42881650898706    adf.f=frag1|86</span>
+<span class="s">     O       -19.79746500000000     -9.66763600000000     -6.29115500000000    adf.f=frag1|87</span>
+<span class="s">     H       -19.30039040153150     -9.92412834081941     -8.01125899188181    adf.f=frag1|87</span>
+<span class="s">     H       -20.69151106695596     -8.09537391433191     -6.30780271266956    adf.f=frag1|87</span>
+<span class="s">     O        -5.17342500000000    -12.71280800000000    -15.39516900000000    adf.f=frag1|88</span>
+<span class="s">     H        -6.29838943798551    -11.96053470711536    -16.59523946722675    adf.f=frag1|88</span>
+<span class="s">     H        -5.88688186704289    -12.30005902553624    -13.78513137150979    adf.f=frag1|88</span>
+<span class="s">     O        -0.98586800000000      2.69855900000000    -21.38983900000000    adf.f=frag1|89</span>
+<span class="s">     H        -2.77204881462932      2.96779943896921    -21.48309619116062    adf.f=frag1|89</span>
+<span class="s">     H        -0.80499110215822      1.20344697675802    -20.38807696838254    adf.f=frag1|89</span>
+<span class="s">     O        -6.03694100000000      3.69212200000000    -20.94210000000000    adf.f=frag1|90</span>
+<span class="s">     H        -6.14071267530565      5.16732160002454    -21.98356377744071    adf.f=frag1|90</span>
+<span class="s">     H        -5.38953086150776      4.29598484602752    -19.36481963241442    adf.f=frag1|90</span>
+<span class="s">     O         8.56921900000000     -3.79464900000000      6.33985500000000    adf.f=frag1|91</span>
+<span class="s">     H         9.50635468663971     -2.25984004884893      6.53419338664101    adf.f=frag1|91</span>
+<span class="s">     H         9.73243046417235     -5.09792887162821      6.80890110437856    adf.f=frag1|91</span>
+<span class="s">     O         1.62911600000000     13.17414900000000     -1.60348400000000    adf.f=frag1|92</span>
+<span class="s">     H         2.66594110342472     13.03446639023091     -0.12798012211089    adf.f=frag1|92</span>
+<span class="s">     H         2.66565709768483     14.04258475743428     -2.80473562652369    adf.f=frag1|92</span>
+<span class="s">     O        -1.79383000000000     17.03966900000000     -2.19674400000000    adf.f=frag1|93</span>
+<span class="s">     H        -0.53200588641356     15.75727680306069     -2.00993024293071    adf.f=frag1|93</span>
+<span class="s">     H        -1.42725302708876     17.80645974200545     -3.79338324012655    adf.f=frag1|93</span>
+<span class="s">     O        -7.66877400000000    -18.37494100000000     -6.40129600000000    adf.f=frag1|94</span>
+<span class="s">     H        -8.48426657117146    -18.61293045852318     -4.80443592340425    adf.f=frag1|94</span>
+<span class="s">     H        -7.09966518295817    -20.02669116913405     -6.86974035671357    adf.f=frag1|94</span>
+<span class="s">     O        10.40397100000000     -3.09718200000000    -22.16627000000000    adf.f=frag1|95</span>
+<span class="s">     H         8.72972380889992     -2.49326115967796    -21.84408188422351    adf.f=frag1|95</span>
+<span class="s">     H        11.11812043738098     -1.87363862919898    -23.29078579938355    adf.f=frag1|95</span>
+<span class="s">     O       -15.30392700000000      1.38087600000000      7.30094900000000    adf.f=frag1|96</span>
+<span class="s">     H       -14.62180203945480      2.68484739436449      8.35261118963587    adf.f=frag1|96</span>
+<span class="s">     H       -16.43220546537447      0.47060667386509      8.38261486369176    adf.f=frag1|96</span>
+<span class="s">     O         8.58612500000000     -8.60056200000000     -9.05727500000000    adf.f=frag1|97</span>
+<span class="s">     H         8.70489512259771     -9.81319946167069    -10.39407463523348    adf.f=frag1|97</span>
+<span class="s">     H         8.62856020038021     -9.58970781613463     -7.54354008582316    adf.f=frag1|97</span>
+<span class="s">     O        16.03912900000000      1.51573000000000    -10.24266300000000    adf.f=frag1|98</span>
+<span class="s">     H        15.15629413827772      2.19658252062845    -11.66697745696204    adf.f=frag1|98</span>
+<span class="s">     H        16.44244740848228      2.95789688018386     -9.22822101876796    adf.f=frag1|98</span>
+<span class="s">     O       -15.02490500000000      4.61696500000000     -7.22941300000000    adf.f=frag1|99</span>
+<span class="s">     H       -13.96280647503120      5.31092864978721     -8.51859506482347    adf.f=frag1|99</span>
+<span class="s">     H       -14.28853929511416      3.00824288473906     -6.85340464006069    adf.f=frag1|99</span>
+<span class="s">     O        -3.38051600000000    -15.91202400000000     -1.00061000000000    adf.f=frag1|100</span>
+<span class="s">     H        -4.22410184376431    -15.04185487754888     -2.34329307606914    adf.f=frag1|100</span>
+<span class="s">     H        -1.90382516434679    -16.61447063748981     -1.77362777442889    adf.f=frag1|100</span>
+<span class="s">     O       -15.26048000000000      6.49459500000000    -20.09531600000000    adf.f=frag1|101</span>
+<span class="s">     H       -13.52897204979343      6.24438887420643    -19.63607060457812    adf.f=frag1|101</span>
+<span class="s">     H       -15.47768447407662      5.50940621247909    -21.59659174135803    adf.f=frag1|101</span>
+<span class="s">     O       -18.03907100000000     -8.43103500000000      0.81066000000000    adf.f=frag1|102</span>
+<span class="s">     H       -19.83364526460744     -8.64920488317246      0.75120975933977    adf.f=frag1|102</span>
+<span class="s">     H       -17.60426054198021     -8.72510837516712      2.54157429534231    adf.f=frag1|102</span>
+<span class="s">     O        -1.66133700000000    -24.85433900000000     -7.59562300000000    adf.f=frag1|103</span>
+<span class="s">     H        -0.93912195987639    -26.25608107787563     -6.70953395077215    adf.f=frag1|103</span>
+<span class="s">     H        -2.16378824805376    -25.53854670810930     -9.19280994513164    adf.f=frag1|103</span>
+<span class="s">     O       -13.11411600000000      4.62406100000000     10.65633500000000    adf.f=frag1|104</span>
+<span class="s">     H       -12.77074621481150      4.11089532103550     12.35644893641187    adf.f=frag1|104</span>
+<span class="s">     H       -11.48603903104276      4.71705763077764      9.87382583582304    adf.f=frag1|104</span>
+<span class="s">     O       -12.41558900000000     11.84804700000000     -6.99447300000000    adf.f=frag1|105</span>
+<span class="s">     H       -11.30168153595745     10.44978337527290     -6.71933990939709    adf.f=frag1|105</span>
+<span class="s">     H       -12.47123642287374     12.03565896451106     -8.79261334416275    adf.f=frag1|105</span>
+<span class="s">     O        -6.99029300000000     15.09813200000000     -9.14840700000000    adf.f=frag1|106</span>
+<span class="s">     H        -8.45117315114006     15.70172502049625    -10.02768731357616    adf.f=frag1|106</span>
+<span class="s">     H        -7.14889401470228     15.78429001622505     -7.48238284738053    adf.f=frag1|106</span>
+<span class="s">     O       -12.34625400000000     10.56150500000000    -12.23873500000000    adf.f=frag1|107</span>
+<span class="s">     H       -11.44958979728050      8.99509889893791    -12.35703315867646    adf.f=frag1|107</span>
+<span class="s">     H       -12.49821882155289     11.12665028131793    -13.95020252415008    adf.f=frag1|107</span>
+<span class="s">     O        11.40803400000000     -1.03651800000000     -9.30311700000000    adf.f=frag1|108</span>
+<span class="s">     H        13.12420580954423     -0.46728539979694     -9.35167405119891    adf.f=frag1|108</span>
+<span class="s">     H        11.31625950576437     -2.30813269496276    -10.58615133000387    adf.f=frag1|108</span>
+<span class="s">     O        -5.11896700000000     -0.12253200000000     11.02394500000000    adf.f=frag1|109</span>
+<span class="s">     H        -3.92681627947473      1.22947829217064     10.87403152613883    adf.f=frag1|109</span>
+<span class="s">     H        -4.37657440580777     -1.48587544764282     10.09563930570322    adf.f=frag1|109</span>
+<span class="s">     O        -9.99475100000000     -0.33650000000000     13.26488800000000    adf.f=frag1|110</span>
+<span class="s">     H        -8.34486345702615      0.24573595608403     12.80608345859702    adf.f=frag1|110</span>
+<span class="s">     H       -10.59609456116402     -1.19896273277279     11.79310420533769    adf.f=frag1|110</span>
+<span class="s">     O        -2.30216800000000     10.69499300000000      2.99722800000000    adf.f=frag1|111</span>
+<span class="s">     H        -1.93606116560115     10.01830345774807      1.36025326914961    adf.f=frag1|111</span>
+<span class="s">     H        -4.04923519757226     11.15628108452666      2.91615338962990    adf.f=frag1|111</span>
+<span class="s">     O        13.02295800000000     -5.27441800000000      1.23847500000000    adf.f=frag1|112</span>
+<span class="s">     H        14.31033554297163     -4.63482922705865      0.14065238973499    adf.f=frag1|112</span>
+<span class="s">     H        13.91152105495786     -5.78567177035616      2.72866923628817    adf.f=frag1|112</span>
+<span class="s">     O         7.56659100000000      6.94211200000000     -9.52506900000000    adf.f=frag1|113</span>
+<span class="s">     H         8.22168391057836      5.87923316520027    -10.83379780356249    adf.f=frag1|113</span>
+<span class="s">     H         6.67225115956347      8.24497386381330    -10.40501831435555    adf.f=frag1|113</span>
+<span class="s">     O        -2.17755000000000      7.03555800000000      6.40129900000000    adf.f=frag1|114</span>
+<span class="s">     H        -2.96551413318437      5.65850851485069      5.53269295552737    adf.f=frag1|114</span>
+<span class="s">     H        -2.21627359256819      8.40062348976667      5.21525504034563    adf.f=frag1|114</span>
+<span class="s">     O         9.00788300000000     12.60897400000000     -5.62029800000000    adf.f=frag1|115</span>
+<span class="s">     H        10.26246081511818     11.86068291737544     -4.55365645678727    adf.f=frag1|115</span>
+<span class="s">     H         7.97453521284851     11.22086747860001     -6.14656429973985    adf.f=frag1|115</span>
+<span class="s">     O        -1.44785500000000     -3.72480700000000    -24.99109500000000    adf.f=frag1|116</span>
+<span class="s">     H         0.23683814213660     -4.37145767071870    -25.11471193705296    adf.f=frag1|116</span>
+<span class="s">     H        -1.92063360111663     -4.01890345598422    -23.27016756076567    adf.f=frag1|116</span>
+<span class="s">     O        -7.64825200000000     12.61552300000000      3.06517700000000    adf.f=frag1|117</span>
+<span class="s">     H        -7.81167293245439     14.38063407144895      3.42476805177055    adf.f=frag1|117</span>
+<span class="s">     H        -8.83689943470846     12.31223844466806      1.73598952764555    adf.f=frag1|117</span>
+<span class="s">     O         4.46933200000000     -0.50378800000000      2.21087700000000    adf.f=frag1|118</span>
+<span class="s">     H         4.27357465941304     -2.08510082915893      3.06688986215400    adf.f=frag1|118</span>
+<span class="s">     H         5.91907845739645     -0.73702803715971      1.15473407570514    adf.f=frag1|118</span>
+<span class="s">     O        -1.24895400000000     -6.97750900000000     -2.93109400000000    adf.f=frag1|119</span>
+<span class="s">     H        -2.37833578618925     -6.59579569242172     -1.57079221286929    adf.f=frag1|119</span>
+<span class="s">     H        -0.21288275291882     -5.50308282339477     -3.08674554325879    adf.f=frag1|119</span>
+<span class="s">     O        -5.92082900000000     -3.03107100000000     -2.51072800000000    adf.f=frag1|120</span>
+<span class="s">     H        -5.78071219226800     -4.56089081895937     -3.46553050415439    adf.f=frag1|120</span>
+<span class="s">     H        -6.21267678923423     -1.74791100910179     -3.75166671237991    adf.f=frag1|120</span>
+<span class="s">     O         1.14317500000000     -2.76826300000000     -3.93086600000000    adf.f=frag1|121</span>
+<span class="s">     H         2.94971664531870     -2.78102101161944     -3.84213191918490    adf.f=frag1|121</span>
+<span class="s">     H         0.62850650734009     -1.73939210305163     -2.53510649267729    adf.f=frag1|121</span>
+<span class="s">     O        -5.21546600000000     -0.71679400000000      1.97558900000000    adf.f=frag1|122</span>
+<span class="s">     H        -5.88193806317475     -1.35755002215181      0.42095852001025    adf.f=frag1|122</span>
+<span class="s">     H        -5.82594782496319     -1.86151827602300      3.23595476257813    adf.f=frag1|122</span>
+<span class="s">     O        -5.42031600000000      3.66296900000000      4.47881900000000    adf.f=frag1|123</span>
+<span class="s">     H        -6.47734991529745      4.75371897638942      3.49669222043088    adf.f=frag1|123</span>
+<span class="s">     H        -5.28387721038046      2.15431400285173      3.49041213110813    adf.f=frag1|123</span>
+<span class="s">     O         4.64978600000000      3.67542600000000     -3.78351700000000    adf.f=frag1|124</span>
+<span class="s">     H         5.30464821970122      2.16136749204504     -4.52541424890080    adf.f=frag1|124</span>
+<span class="s">     H         3.40016650933066      3.10039840282737     -2.60903925511290    adf.f=frag1|124</span>
+<span class="s">     O         1.38687600000000     -3.56100200000000      5.14710300000000    adf.f=frag1|125</span>
+<span class="s">     H         2.35586583709350     -2.84555947523344      6.49648430622687    adf.f=frag1|125</span>
+<span class="s">     H         2.25995224007779     -5.08706726956497      4.72228980076397    adf.f=frag1|125</span>
+<span class="s">     O        -3.30635200000000     -3.51075400000000      7.52143300000000    adf.f=frag1|126</span>
+<span class="s">     H        -1.82144215646564     -3.75776796826252      6.51860894948698    adf.f=frag1|126</span>
+<span class="s">     H        -4.64977283415043     -4.18421132786886      6.51481526117547    adf.f=frag1|126</span>
+<span class="s">     O         5.96480100000000      4.51370300000000      3.70332800000000    adf.f=frag1|127</span>
+<span class="s">     H         5.24291272273548      3.06620845434369      2.89384293177905    adf.f=frag1|127</span>
+<span class="s">     H         4.73614594944492      5.00201400735317      4.93765482424434    adf.f=frag1|127</span>
+<span class="s">  end</span>
+<span class="s">end</span>
+
+<span class="s">Task SinglePoint</span>
+
+<span class="s">Engine ADF</span>
+<span class="s">  eprint</span>
+<span class="s">    scf NOPOP</span>
+<span class="s">    sfo NOEIG NOOVL NOORBPOP</span>
+<span class="s">  end</span>
+<span class="s">  excitations</span>
+<span class="s">    lowest 5</span>
+<span class="s">    onlysing</span>
+<span class="s">  end</span>
+<span class="s">  fde</span>
+<span class="s">    pw91k</span>
+<span class="s">  end</span>
+<span class="s">  fragments</span>
+<span class="s">     O      t21.DZP.O</span>
+<span class="s">     H      t21.DZP.H</span>
+<span class="s">     frag1  t21.mol_1 type=fde &amp;</span>
+<span class="s">     fdedenstype SCFfitted</span>
+<span class="s">     SubEnd</span>
+<span class="s">  end</span>
+<span class="s">  noprint BAS FUNCTIONS</span>
+<span class="s">  numericalquality Good</span>
+<span class="s">  scf</span>
+<span class="s">    converge 1.0e-6 1.0e-6</span>
+<span class="s">    diis</span>
+<span class="s">      cx 5.0</span>
+<span class="s">      cxx 10.0</span>
+<span class="s">      cyc 5</span>
+<span class="s">      n 10</span>
+<span class="s">      ok 0.5</span>
+<span class="s">    end</span>
+<span class="s">    iterations 50</span>
+<span class="s">    lshift 0.0</span>
+<span class="s">    mixing 0.2</span>
+<span class="s">  end</span>
+<span class="s">  symmetry NOSYM</span>
+<span class="s">  title Input generated by modco</span>
+<span class="s">  xc</span>
+<span class="s">    model SAOP</span>
+<span class="s">  end</span>
+<span class="s">  Relativity Level=None</span>
+<span class="s">EndEngine</span>
+<span class="s">eor</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="FDE_HeCO2_freezeandthaw.html" class="btn btn-neutral float-right" title="Example: FDE freeze-and-thaw: HeCO2" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="3D-RISM.html" class="btn btn-neutral" title="Example: 3D-RISM: Glycine" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+XC Functionals and How to Tame Them
+***********************************
+
+Density functional theory (DFT) is the quantum chemical approximation central to ADF, BAND, and Quantum ESPRESSO.
+Within DFT there exist many different variants, approximations, and concepts and selecting the most appropriate method for a given problem can be difficult at times.
+This page aims to provide you with an overview of the functionals available in the Amsterdam Modeling Suite as well as a guide on their respective strengths and weaknesses.
+
+.. contents::
+   :local:
+
+.. note::
+
+   This guideline tutorial is still work in progress
+
+.. note::
+
+   The performance and accuracy of functionals can sometimes also be affected by more technical details like integration grids or basis sets used. We will address these issues at a later point in a separate guideline.
+
+Introduction
+============
+
+In short terms DFT is a reformulation of quantum mechanics. The combination of the Hohenberg-Kohn theorem and the Levy-Lieb principle allows one to express the total energy as a functional of the particle density :math:`\rho` (instead of a many-body wavefunction).
+The Kohn-Sham formalism then turns DFT into an effective mean-field approach (in terms of a single Slater determinant) and thereby makes this theory applicable to real systems like molecules and materials.
+The resulting eigenvalue equation for the KS orbitals :math:`\{\phi_{i}\}`
+
+.. math::
+
+   \left(-\frac{1}{2}\nabla^{2} + v_{\mathrm{ext}} + v_{\mathrm{H}} + \frac{\delta E_{\mathrm{XC}}[\rho]}{\delta\rho}\right)\phi_{i} = \varepsilon_{i}\phi_{i}
+
+can be readily cast into a numerical eigenvalue problem which allows for very efficient implementations in computer programs.
+In the above expression :math:`v_{\mathrm{H}}` and :math:`v_{\mathrm{ext}}` denote the classical Coulomb term and the (usually electrostatic) effects of the nuclear potential, respectively.
+The so-called exchange-correlation (XC) functional :math:`E_{\mathrm{XC}}` is introduced by KS as the terms describing all quantum mechanical many-body interactions.
+The exact XC functional is, however, unknown and its specific form needs to be approximated in practical applications.
+
+A plethora of different XC approximations has been suggested in the DFT community and a large variety of the most successful and popular XC functionals can be used to perform DFT calculations with ADF, BAND, and Quantum ESPRESSO.
+Their different strengths and weaknesses for the description of different physical properties and classes of quantum chemical systems shall be discussed in the following guide.
+
+Classes of Functionals
+======================
+For many practical applications :math:`E_{\mathrm{XC}}` is split into terms for exchange :math:`E_{\mathrm{X}}` and correlation interactions :math:`E_{\mathrm{C}}`, based on their respective scaling behaviors in terms of the density.
+Like :math:`E_{\mathrm{XC}}`, neither :math:`E_{\mathrm{X}}` nor :math:`E_{\mathrm{C}}` are known exactly.
+However, many of their respective properties are.
+The most important property is thereby the behavior of :math:`E_{\mathrm{X}}[\rho]` for the so-called homogeneous electron gas (HEG), a model system simply defined by :math:`\rho(\mathbf{r}) = const.`
+
+LDA -- Local Density Approximation
+  Applying these HEG results locally leads to the following exchange functional:
+
+  .. math::
+
+     E_{\mathrm{X}}^{LDA}[\rho] = - \frac{3}{4}\left(\frac{3}{\pi}\right)^{1/3}\!\!\int\!\rho(\mathbf{r})^{4/3}\,\mathrm{d}\mathbf{r}
+
+  Together with a corresponding correlation term parameterized on quantum Monte Carlo results, this yields the class of local density approximation (LDA) functionals, which in their general form read as:
+
+  .. math::
+
+     E_{\mathrm{XC}}^{LDA}[\rho] = \int\!\varepsilon_{\mathrm{XC}}^{LDA}(\rho(\mathbf{r}))\,\mathrm{d}\mathbf{r}
+
+  Note, that integrating the rather involved function :math:`\varepsilon_{\mathrm{C}}^{LDA}(\rho(\mathbf{r}))` as well as all subsequently functionals typically require numerical grids.
+  LDA functionals work relatively well given their simplicity and the usage of a local integral kernel like :math:`\varepsilon_{\mathrm{XC}}^{LDA}` also allows for relatively efficient implementations.
+
+GGA -- Generalized Gradient Approximations
+  The concept of a local integral kernel is retained in the next class functionals, which introduce also a dependency on the magnitude of the local gradient of the electron density.
+  However, attempts to derive a first principles formulation for :math:`\varepsilon_{\mathrm{X}}(\rho(\mathbf{r}),\,|\nabla\!\rho(\mathbf{r})|)` turned out unstable and more empirical forms for such kernel functions were used therefore.
+  These make up the class of GGA functionals:
+
+  .. math::
+
+     E_{\mathrm{XC}}^{GGA}[\rho] = \int\!\varepsilon_{\mathrm{XC}}^{GGA}(\rho(\mathbf{r}),\,|\nabla\!\rho(\mathbf{r})|)\,\mathrm{d}\mathbf{r}
+
+Meta-GGA -- Generalized Gradient Approximations with kinetic energy dependence
+  Functionals improving over GGAs would naturally involve the second derivatives of :math:`\rho` like the density Laplacian :math:`\Delta\rho`.
+  However, accurately representing this quantity on a numerical grid often requires very dense grid points and is thus associated with higher computational costs.
+  A simpler alternative is the usage of the kinetic energy density :math:`\tau(\mathbf{r})=\sum_{i}|\nabla\phi_{i}(\mathbf{r})|^{2}`, which results in meta-GGA functionals:
+
+  .. math::
+
+     E_{\mathrm{XC}}^{mGGA}[\rho] = \int\!\varepsilon_{\mathrm{XC}}^{mGGA}(\rho(\mathbf{r}),\,|\nabla\!\rho(\mathbf{r})|,\,\tau(\mathbf{r}))\,\mathrm{d}\mathbf{r}
+
+  Meta-GGA functionals introduce an explicit dependency on the KS orbitals.
+  While this puts most of their practical implementations formally outside of the KS formalism, this is of little consequence in practical applications.
+
+Hybrid DFT -- Combining DFT with Hartree-Fock
+  The forth class of DFT functionals pushes the usage of KS orbitals even further.
+  Hybrid XC functionals come with an additional scaled exchange term originating from Hartree-Fock theory:
+
+  .. math::
+
+     E_{\mathrm{XC}}^{hybrid}[\rho] &= E_{\mathrm{XC}}^{GGA/mGGA}[\rho] + E_{\mathrm{EXX}}[\{\phi_{i}\}]\\ &= \int\!\varepsilon_{\mathrm{XC}}^{GGA/mGGA}(\rho(\mathbf{r}),\,|\nabla\!\rho(\mathbf{r})|,\,\tau(\mathbf{r}))\,\mathrm{d}\mathbf{r} +\sum\limits_{ab}\!\iint\frac{\phi_{a}(\mathbf{r})\phi_{b}(\mathbf{r})\phi_{b}(\mathbf{r}^{\prime})\phi_{a}(\mathbf{r}^{\prime})}{|\mathbf{r}-\mathbf{r}^{\prime}|}\,\mathrm{d}\mathbf{r}\mathrm{d}\mathbf{r}^{\prime}
+
+  Adding :math:`E_{\mathrm{EXX}}` has similar implications as :math:`\tau`, however, due to their nonlocal form hybrid DFT methods are associated with much higher computational costs.
+  Nonetheless, the nonlocal exchange term often provides more accurate results or is even essential for achieving qualitatively correct results in some cases.
+
+  Different variations of hybrid DFT methods have been suggested as well.
+  Most widely in use are range-separated hybrid (RSH) approximations which vary the amount of exact exchange with the interelectronic distance.
+  RSH are either designed to provide a better long-range scaling behavior of the exchange part (e.g. ωB97X) or screen the long-range exchange part allowing to apply hybrid DFT calculations efficiently to larger molecules or crystalline materials.
+
+The last and even more demanding group of XC functionals include also dependencies on unoccupied (virtual) KS orbitals and usually involve a nonlocal correlation term.
+Examples of such approximations are random phase approximations (RPA) typically used in solid states calculations or double hybrid functionals which include an additional correlation term from many-body perturbation theory.
+
+.. math::
+
+   E_{\mathrm{XC}}^{doubleHybrid}[\rho] = E_{\mathrm{XC}}^{GGA/mGGA}[\rho] + E_{\mathrm{EXX}}[\{\phi_{i}\}] + E_{\mathrm{MP2}}[\{\phi_{i}\}]
+
+
+Empirical vs Non-Empirical
+--------------------------
+The approximations mentioned above can be further distinguished based on their construction principles.
+One approach consists in attempting to construct functionals which fulfill as many of the known properties of the exact XC functional as possible.
+LDA functionals, the GGA PBE, and the meta-GGA TPSS are the most known examples for such non-empirical approximations. 
+In contrast to that, most other approximations employ functionals with often many parameters which are then optimized to reproduce some empirical data, originating either from more accurate calculations or from experimental results.
+Such empirical functionals perform well for cases that are similar to the empirical reference data but may completely fail in situations they were not exposed to during their parameterization.
+Conversely, non-empirical approximations tend to be more reliable but may be less accurate in specific situations.
+
+
+Overview of Available Functionals
+=================================
+You can easily check whether a given functional is available in ADF or BAND is the GUI
+
+.. rst-class:: steps
+
+  \
+    | Start AMSjobs or AMSinput
+    | **SCM → New input**
+    | Click on **XC functional**
+    | Explore the dropdown lists in each category:
+
+.. figure:: ../Images/theory/XCFunctionalSelection.png
+   :align: center
+   :scale: 38
+
+.. +-----------------+-----------------+-------+-----------------+----------------------------------------------------------------------------------------------------------+-----------------+
+.. |                 | Type            | Term  | Availability    | Citation                                                                                                 | Remarks         |
+.. +=================+=================+=======+=================+==========================================================================================================+=================+
+.. | Xonly           | LDA             | X     | ADF             |                                                                                                          |                 |
+.. +-----------------+-----------------+-------+-----------------+----------------------------------------------------------------------------------------------------------+-----------------+
+.. | Xalpha          | LDA             | X     | ADF             |                                                                                                          |                 |
+.. +-----------------+-----------------+-------+-----------------+----------------------------------------------------------------------------------------------------------+-----------------+
+.. | VWN             | LDA             | X & C | ADF             | [`VWN`_]                                                                                                 |                 |
+.. +-----------------+-----------------+-------+-----------------+----------------------------------------------------------------------------------------------------------+-----------------+
+.. | VWN Stoll       | LDA             | X & C | ADF             | [`VWNStoll <https://doi.org/10.1007/BF00553794>`__]                                                      |                 |
+.. +-----------------+-----------------+-------+-----------------+----------------------------------------------------------------------------------------------------------+-----------------+
+.. | PW92            | LDA             | X & C | ADF             | [`PW92LDA <https://doi.org/10.1103/PhysRevB.45.13244>`__]                                                |                 |
+.. +-----------------+-----------------+-------+-----------------+----------------------------------------------------------------------------------------------------------+-----------------+
+.. | BP86            | GGA             | X & C | ADF             | [`B88 <https://doi.org/10.1103/PhysRevA.38.3098>`__, `P86 <https://doi.org/10.1103/PhysRevB.33.8822>`__] |                 |
+.. +-----------------+-----------------+-------+-----------------+----------------------------------------------------------------------------------------------------------+-----------------+
+
+.. _VWN: https://doi.org/10.1139/p80-159
+
+Properties -- Accuracy of Different Types of Functionals
+========================================================
+In the following we try to provide some general guidelines for the usage of different classes of density functionals for the computation of different properties.
+While the behavior of functionals in a given class often varies, some general behaviors can be extracted nonetheless.
+However, the reader is advised to start new projects with some initial testing in order to ensure that the chosen functional indeed delivers the desired accuracy for the problem at hand.
+
+Structures
+----------
+LDA
+  Despite their simplicity, LDA methods perform surprisingly well in the description of molecular and crystalline structures. [#Ziegler1991]_
+  LDA methods are known to underestimate most bond lengths slightly (typically 0.02 Å for main group elements) but provide more accurate results in this regard than Hartree-Fock or MP2 calculations. [#koch2001]_ [#Andzelm1992]_
+  This is especially the case for transition metal systems.
+GGA
+  GGA methods tend to more elongated, overestimated bond lengths which usually are less accurate than corresponding LDA results.
+  This is rationalized by the behavior of GGA exchange which favors more corrugated electron densities. [#Paier2007]_
+meta-GGA
+  The more complex meta-GGA methods are usually able to correct the GGA exchange with regard to the description of geometries.
+  In many cases meta-GGA approximations can be expected to be as accurate for structural properties as LDA functionals.
+Hybrid DFT
+  Hybrid DFT approaches tend to be more accurate than GGA or LDA, reducing errors by over 50% in the case of organic molecules. [#Rauhut1995]_
+  With Hartree-Fock underestimating and GGA overestimating bond lengths, a combination of the two can be expected to benefit from a fortuitous error cancellation.
+  However, the electronic structure description of hybrid DFT methods becomes unreliable for transition metal systems with too small band gaps or for radicals.
+Double Hybrid DFT
+  At the time of writing, the implementation of double hybrid functionals in ADF features single-point calculations only.
+
+**Suggestions:** For large systems that have be treated efficiently, GGA and meta-GGA methods like BLYP-D3 and TPSS-D3 are a good choice. For exploratory or test calculations -- say, when commencing a new project -- well-established non-empirical functionals like TPSS or even PBE should be used first before considering more accurate methods. When calculating closed-shell organic molecules, B3LYP is still a frequent choice, whereas ωB97X-D seems to deliver more accurate results and might be a more educated choice.
+
+Energetics
+----------
+LDA
+  Also in the case of quantities like atomization and reaction energies, barrier heights, isomerization energies etc. LDA was found more accurate than Hartree-Fock, albeit showing some tendency towards overbinding. However, LDA methods are nowadays rendered mostly obsolete by the more advanced functionals. [#koch2001]_
+GGA
+  GGA Functionals are known as efficient and generally applicable functionals. For closed-shell main group compounds like organic molecules, GGA methods are less accurate than more advanced functionals. However, GGA functionals can be considered as more reliable methods providing a reasonable across-the-board performance for all types of chemical systems. For tasks like transition state searches, GGA methods are also often a preferred choice due to their better description of left-right correlation effects e.g. during the dissociation of chemical bonds.
+meta-GGA
+  Regarding most energy-related properties, meta-GGA functionals can be expected to behave sligthly more accurate but overall largely similar to GGA methods.
+Hybrid DFT
+  For closed-shell main group compounds, hybrid DFT methods represent a consistent improvement over semi-local functionals for reaction energies and similar quantities.
+  In the case of barrier heights, it should be tested whether the chosen hybrid DFT approximation is able to deliver a proper description of the transition states under study before commencing large scale calculations.
+Double Hybrid DFT
+  Double hybrid DFT methods provide an often consistent improvement in accuracy for reaction energies.
+  This is most pronounced in the case of the relative energies of rotamers of organic molecules.
+
+Frequencies
+-----------
+LDA
+  In most cases the prediction of vibrational frequencies by LDA is superior than those from Hartree-Fock and MP2 calculations. This is especially true for transition metal compounds. [#koch2001]_ 
+GGA
+  GGA provide a consistent improvement over LDA regarding frequencies and should be the method of choice for cases where a hybrid DFT calculation is not feasible.
+meta-GGA
+  Early meta-GGA functionals were in some cases reported to lead to slightly less accurate frequencies than GGA methods. [#Adamo2000]_  
+Hybrid DFT
+  Hybrid functionals are a popular choice for the calculation of vibrational frequencies of main group molecule and deliver an acceptable accuracy in most cases.
+  Indeed, the most widely used hybrid functional, B3LYP, was initially developed as a better description of vibrational frequencies of organic molecules. [#Stephens1994]_
+Double Hybrid DFT
+  At the time of writing, the implementation of double hybrid functionals in ADF features single-point calculations only.
+
+Electronic Structure & Spectroscopy
+-----------------------------------
+LDA
+  The calculation of spectroscopic properties with LDA is generally not advised due to the self-interaction errors prevalent in these approximations.
+GGA
+  Although occasionally employed for this purpose, GGA are, for similar reasons as LDA methods, not an advisable choice for an accurate calculation of excitation energies.
+meta-GGA
+  meta-GGA can deliver properties like band structures with an acceptable accuracy.
+  These semi-local functionals are the preferred choice for e.g. solid state calculations, which require efficient approximations.
+  However, it is advised to test if a chosen method delivers an acceptable accuracy for a given problem as meta-GGA methods e.g. can be expected less accurate compared to non-local DFT methods for excited states phenomena.
+Hybrid DFT
+  Due to their non-local exchange term and the consequently more realistic representation of the exchange-correlation potential, hybrid DFT methods are well suited for the calculation of electronic excitations.
+  This is particularly true for RSH methods with a 100% of exact exchange in the limit of large electron-electron distances.
+Double Hybrid DFT
+  As of the time of writing, this aspect is still subject to testing.
+
+
+System Classes -- Applicability of Different Types of Functionals
+=================================================================
+
+Literature
+==========
+
+.. [#Ziegler1991] \T. Ziegler, *Approximate density functional theory as a practical tool in molecular energetics and dynamics*, `Chem. Rev. 91, 651 (1991) <https://doi.org/10.1021/cr00005a001>`__ 
+.. [#Koch2001] \W. Koch, M. C. Holthausen, *A Chemist’s Guide to Density Functional Theory, Second Edition*, Wiley-VCH Weinheim (2001)
+.. [#Andzelm1992] \J. Andzelm, E. Wimmer, *Density Functional Gaussian-Type-Orbital Approach to Molecular Geometries, Vibrations, and Reaction Energies*, `J. Chem. Phys. 96, 1280 (1992) <https://doi.org/10.1063/1.462165>`__
+.. [#Paier2007] \J. Paier, M. Marsman, G. Kresse, *Why does the B3LYP hybrid functional fail for metals?*, `Chem. Rev. 127, 024103 (2007) <https://doi.org/10.1063/1.2747249>`__ 
+.. [#Rauhut1995] \G. Rauhut, P. Pulay, *Transferable Scaling Factors for Density Functional Derived Vibrational Force Fields*, `J. Phys. Chem. 99, 3093 (1995) <https://doi.org/10.1021/j100010a019>`__
+.. [#Adamo2000]  C. Adamo, M. Ernzerhof, G.E. Scuseria, *The meta-GGA functional: Thermochemistry with a kinetic energy density dependent exchange-correlation functional*, `J. Chem. Phys. 112, 2643 (2000) <https://doi.org/10.1063/1.480838>`__
+.. [#Stephens1994]  P.J. Stephens, F.J. Devlin, C.F. Chabalowski, M.J. Frisch, *Ab Initio Calculation of Vibrational Absorption and Circular Dichroism Spectra Using Density Functional Force Fields*, `J. Phys. Chem. 98, 11623 (1994) <https://doi.org/10.1021/j100096a001>`__
+

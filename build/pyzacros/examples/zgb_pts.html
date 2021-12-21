@@ -1,0 +1,935 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Phase Transitions in the ZGB model. &mdash; pyZacros 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="pyZacros 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="examples.html"/>
+        <link rel="next" title="Phase Transitions in the ZGB model &amp; Steady-State Operation." href="zgb_ss.html"/>
+        <link rel="prev" title="The Ziff-Gulari-Barshad (ZGB) model." href="zgb.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search pyZacros" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-pyZacros" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-pyzacros">What is pyZacros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-can-be-done-with-pyzacros">What can be done with pyZacros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#simple-example">Simple example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../components/components.html">Components overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../components/species.html">Species / Species List</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/species.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/lattice.html">Lattice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/lattice.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/cluster.html">Cluster / Cluster Expansion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/cluster.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/mechanism.html">Elementary Reaction / Mechanism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/mechanism.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/latticestate.html">LatticeState</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/latticestate.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/settings.html">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/zacrosjob.html">ZacrosJob</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/zacrosjob.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/zacrosresults.html">ZacrosResults</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/zacrosresults.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples.html#simple-examples">Simple examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="o_pt111.html">KMC lattice from first principles. O+Pt(111)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="co_tutorial.html">Water-gas shift reaction on Pt(111).</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zgb.html">The Ziff-Gulari-Barshad (ZGB) model.</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#advanced-examples">Advanced examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Phase Transitions in the ZGB model.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zgb_ss.html">Phase Transitions in the ZGB model &amp; Steady-State Operation.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zgb_ss_pc.html">Phase Transitions in the ZGB model &amp; Steady-State Operation.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citations.html">Citations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">pyZacros</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../pyZacros.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">pyZacros</a>/</li>
+      
+          <li><a href="examples.html">Examples</a>/</li>
+      
+    <li class="orange-text">Phase Transitions in the ZGB model.</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="phase-transitions-in-the-zgb-model">
+<h1>Phase Transitions in the ZGB model.<a class="headerlink" href="#phase-transitions-in-the-zgb-model" title="Permalink to this headline">¶</a></h1>
+<p>This example is inspired in the seminal paper: Kinetic Phase Transitions in an Irreversible Surface-Reaction Model by
+Robert M. Ziff, Erdagon Gulari, and Yoav Barshad in 1986 (<a class="reference external" href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.56.2553">Phys. Rev. Lett. 56, 25</a>).
+This paper is the origin of the ZGB model we have been discussing above. While the model leaves out many important steps of the real system, it exhibits interesting steady-state off-equilibrium behavior and two types of phase transitions, which actually occur in real systems. Please refer to the original paper for more details. In this example, we will analyze the effect of changing the composition of the gas phase, namely partial pressures for O<sub>2</sub> and CO, in the CO<sub>2</sub> Turnover frequency (TOF).</p>
+<p>You can download the full example script following this link <a class="reference download internal" download="" href="../_downloads/a594421542c2bccecaa494f5ee93a7e5/ZiffGulariBarshad-PhaseTransitions.py"><code class="xref download docutils literal notranslate"><span class="pre">ZiffGulariBarshad-PhaseTransitions.py</span></code></a>.</p>
+<p>The first part of the script consists of the definition of the system (see <a class="reference internal" href="#code-def-sys"><span class="std std-ref">code</span></a>). Species, lattice,
+cluster expansion, and mechanisms are defined. This is identical to the <a class="reference internal" href="../components/components.html#use-case-model-zgb"><span class="std std-ref">use case system</span></a>
+described along the <a class="reference internal" href="../components/components.html#components-overview"><span class="std std-ref">Components overview section</span></a>. Thus, please refer to this section for details.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<span id="code-def-sys"></span><div class="code-block-caption"><span class="caption-number">Listing 1 </span><span class="caption-text"><strong>Code: Definition of the System</strong></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># Gas-species:</span>
+<span class="n">CO_gas</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="s2">&quot;CO&quot;</span><span class="p">)</span>
+<span class="n">O2_gas</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="s2">&quot;O2&quot;</span><span class="p">)</span>
+<span class="n">CO2_gas</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="s2">&quot;CO2&quot;</span><span class="p">,</span> <span class="n">gas_energy</span><span class="o">=-</span><span class="mf">2.337</span><span class="p">)</span>
+
+<span class="c1"># Surface species:</span>
+<span class="n">s0</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">CO_ads</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="s2">&quot;CO*&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">O_ads</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="s2">&quot;O*&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Lattice setup:</span>
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span> <span class="n">lattice_type</span><span class="o">=</span><span class="n">pz</span><span class="o">.</span><span class="n">Lattice</span><span class="o">.</span><span class="n">RECTANGULAR</span><span class="p">,</span>
+                          <span class="n">lattice_constant</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">repeat_cell</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="c1"># Cluster Expansion:</span>
+<span class="n">CO_point</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">Cluster</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="p">[</span><span class="n">CO_ads</span><span class="p">],</span> <span class="n">cluster_energy</span><span class="o">=-</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">O_point</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">Cluster</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="p">[</span><span class="n">O_ads</span><span class="p">],</span> <span class="n">cluster_energy</span><span class="o">=-</span><span class="mf">2.3</span><span class="p">)</span>
+
+<span class="n">cluster_expansion</span> <span class="o">=</span> <span class="p">[</span><span class="n">CO_point</span><span class="p">,</span> <span class="n">O_point</span><span class="p">]</span>
+
+<span class="c1"># Mechanism:</span>
+<span class="n">CO_adsorption</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">ElementaryReaction</span><span class="p">(</span><span class="n">initial</span><span class="o">=</span><span class="p">[</span><span class="n">s0</span><span class="p">,</span><span class="n">CO_gas</span><span class="p">],</span>
+                                      <span class="n">final</span><span class="o">=</span><span class="p">[</span><span class="n">CO_ads</span><span class="p">],</span>
+                                      <span class="n">reversible</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                      <span class="n">pre_expon</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+                                      <span class="n">activation_energy</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="n">O2_adsorption</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">ElementaryReaction</span><span class="p">(</span><span class="n">initial</span><span class="o">=</span><span class="p">[</span><span class="n">s0</span><span class="p">,</span><span class="n">s0</span><span class="p">,</span><span class="n">O2_gas</span><span class="p">],</span>
+                                      <span class="n">final</span><span class="o">=</span><span class="p">[</span><span class="n">O_ads</span><span class="p">,</span><span class="n">O_ads</span><span class="p">],</span>
+                                      <span class="n">neighboring</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span>
+                                      <span class="n">reversible</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                      <span class="n">pre_expon</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+                                      <span class="n">activation_energy</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="n">CO_oxidation</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">ElementaryReaction</span><span class="p">(</span><span class="n">initial</span><span class="o">=</span><span class="p">[</span><span class="n">CO_ads</span><span class="p">,</span> <span class="n">O_ads</span><span class="p">],</span>
+                                     <span class="n">final</span><span class="o">=</span><span class="p">[</span><span class="n">s0</span><span class="p">,</span> <span class="n">s0</span><span class="p">,</span> <span class="n">CO2_gas</span><span class="p">],</span>
+                                     <span class="n">neighboring</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span>
+                                     <span class="n">reversible</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                     <span class="n">pre_expon</span><span class="o">=</span><span class="mf">1.0e+20</span><span class="p">,</span>
+                                     <span class="n">activation_energy</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="n">mechanism</span> <span class="o">=</span> <span class="p">[</span><span class="n">CO_adsorption</span><span class="p">,</span> <span class="n">O2_adsorption</span><span class="p">,</span> <span class="n">CO_oxidation</span><span class="p">]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>The second part corresponds to the calculations settings (see <a class="reference internal" href="#code-settings"><span class="std std-ref">code</span></a>). It starts with the line <code class="docutils literal notranslate"><span class="pre">scm.pyzacros.init()</span></code>, which initializes the pyZacros and PLAMS environment. Then, in lines 3 to 7, we configure the parallel execution of the calculations. These lines mean running as many zacros jobs simultaneously as many CPUs are on the system. In particular, line 6 establishes that only one processor will be used for each zacros instance. Lines 9 to 18 are fundamentally the same used in the <a class="reference internal" href="../components/components.html#use-case-model-zgb"><span class="std std-ref">use case system</span></a> described along the <a class="reference internal" href="../components/components.html#components-overview"><span class="std std-ref">Components overview section</span></a>. Thus, please refer to this section for details.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<span id="code-settings"></span><div class="code-block-caption"><span class="caption-number">Listing 2 </span><span class="caption-text"><strong>Code: Calculation Settings</strong></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">scm</span><span class="o">.</span><span class="n">pyzacros</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="c1"># Parallel Settings: Run as many job simultaneously as there are cpu on the system</span>
+<span class="n">maxjobs</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+<span class="n">scm</span><span class="o">.</span><span class="n">plams</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">default_jobrunner</span> <span class="o">=</span> <span class="n">scm</span><span class="o">.</span><span class="n">plams</span><span class="o">.</span><span class="n">JobRunner</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">maxjobs</span><span class="o">=</span><span class="n">maxjobs</span><span class="p">)</span>
+<span class="n">scm</span><span class="o">.</span><span class="n">plams</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">runscript</span><span class="o">.</span><span class="n">nproc</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Running up to {} jobs in parallel simultaneously&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">maxjobs</span><span class="p">))</span>
+
+<span class="c1"># Calculation Settings:</span>
+<span class="n">sett</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">molar_fraction</span><span class="o">.</span><span class="n">CO</span> <span class="o">=</span> <span class="mf">0.45</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">molar_fraction</span><span class="o">.</span><span class="n">O2</span> <span class="o">=</span> <span class="mf">0.55</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">random_seed</span> <span class="o">=</span> <span class="mi">953129</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">500.0</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">pressure</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">snapshots</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">species_numbers</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">max_time</span> <span class="o">=</span> <span class="mf">10.0</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>The next block executes the zacros calculations  (see <a class="reference internal" href="#code-run"><span class="std std-ref">code</span></a>). Lines 1-2 define the grid of partial pressures of CO to study. In this case, from 0.2 up to 0.8. Line 4 defines the results list, initially empty. From lines 5 up to 14, we have the loop that submits one zacros calculation for each value of CO partial pressure. First, we establish the composition in the settings object by selecting the partial pressure of CO and O<sub>2</sub> (<code class="docutils literal notranslate"><span class="pre">sett.molar_fraction.CO</span></code> and <code class="docutils literal notranslate"><span class="pre">sett.molar_fraction.O2</span></code> respectively. Notice that we assumed that the gas phase is composed only of CO and O<sub>2</sub>. Thus, x<sub>CO`+x:sub:`O_2`=1). Lines 9 to 12 initialize the ZacrosJob, and line 14 collects the corresponding results into the ``results`</sub> list. <code class="docutils literal notranslate"><span class="pre">job.run()</span></code> will return a <code class="docutils literal notranslate"><span class="pre">ZacrosResults</span></code> object. The full loop will execute all jobs in groups of <code class="docutils literal notranslate"><span class="pre">maxjobs</span></code> jobs.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<span id="code-run"></span><div class="code-block-caption"><span class="caption-number">Listing 3 </span><span class="caption-text"><strong>Code: Running the Calculations</strong></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">dx</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">x_CO</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="n">dx</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_CO</span><span class="p">:</span>
+   <span class="n">sett</span><span class="o">.</span><span class="n">molar_fraction</span><span class="o">.</span><span class="n">CO</span> <span class="o">=</span> <span class="n">x</span>
+   <span class="n">sett</span><span class="o">.</span><span class="n">molar_fraction</span><span class="o">.</span><span class="n">O2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">x</span>
+
+   <span class="n">job</span> <span class="o">=</span> <span class="n">pz</span><span class="o">.</span><span class="n">ZacrosJob</span><span class="p">(</span> <span class="n">settings</span><span class="o">=</span><span class="n">sett</span><span class="p">,</span>
+                        <span class="n">lattice</span><span class="o">=</span><span class="n">lattice</span><span class="p">,</span>
+                        <span class="n">mechanism</span><span class="o">=</span><span class="n">mechanism</span><span class="p">,</span>
+                        <span class="n">cluster_expansion</span><span class="o">=</span><span class="n">cluster_expansion</span> <span class="p">)</span>
+
+   <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Now we move to analyze the results (see <a class="reference internal" href="#code-results"><span class="std std-ref">code</span></a>). Lines 1 to 3 defines vectors to store important results. Specifically, the average coverage of O and CO species on the surface (<code class="docutils literal notranslate"><span class="pre">cf_O</span></code> and <code class="docutils literal notranslate"><span class="pre">cf_CO</span></code> respectively) and the turnover frequency (TOF) of CO2 (<code class="docutils literal notranslate"><span class="pre">TOF_CO2</span></code>). The loop starting at line 5 fill these vectors by iterating through each element of <code class="docutils literal notranslate"><span class="pre">x_CO</span></code>. Line 6 is crucial because it forces to wait for the job to finish and checks if the status is successful. Only if both conditions are successful can it proceed to access the results.</p>
+<p>Lines 5 to 11, calculate the coverage fractions using the last five lattice states, and line 13 calculates the TOFs by utilizing the function <code class="docutils literal notranslate"><span class="pre">get_TOFs()</span></code>. Roughly, the TOF is the slope of the regression line for the number of molecules produced as a function of time (we will go in deeper about this concept in the next example). Lines 15 to 17 just save the calculated values into the results vectors, and line 19 waits for all threads to finish and clean the pyZacros and PLAMS environment. Finally, lines 21 to 26 print the results nicely to standard output.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<span id="code-results"></span><div class="code-block-caption"><span class="caption-number">Listing 4 </span><span class="caption-text"><strong>Code: Getting the Results</strong></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">cf_O</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">cf_CO</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">TOF_CO2</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x_CO</span><span class="p">):</span>
+   <span class="k">if</span><span class="p">(</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ok</span><span class="p">()</span> <span class="p">):</span>
+      <span class="n">acf</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;O*&quot;</span><span class="p">:</span><span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;CO*&quot;</span><span class="p">:</span><span class="mf">0.0</span> <span class="p">}</span>
+      <span class="k">for</span> <span class="n">lattice_state</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lattice_states</span><span class="p">(</span><span class="n">last</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+         <span class="n">fractions</span> <span class="o">=</span> <span class="n">lattice_state</span><span class="o">.</span><span class="n">coverage_fractions</span><span class="p">()</span>
+         <span class="n">acf</span><span class="p">[</span><span class="s2">&quot;O*&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">fractions</span><span class="p">[</span><span class="s2">&quot;O*&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">5</span>
+         <span class="n">acf</span><span class="p">[</span><span class="s2">&quot;CO*&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">fractions</span><span class="p">[</span><span class="s2">&quot;CO*&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">5</span>
+
+      <span class="n">TOFs</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_TOFs</span><span class="p">()</span>
+
+      <span class="n">cf_O</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">acf</span><span class="p">[</span><span class="s2">&quot;O*&quot;</span><span class="p">]</span> <span class="p">)</span>
+      <span class="n">cf_CO</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">acf</span><span class="p">[</span><span class="s2">&quot;CO*&quot;</span><span class="p">]</span> <span class="p">)</span>
+      <span class="n">TOF_CO2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">TOFs</span><span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="n">scm</span><span class="o">.</span><span class="n">pyzacros</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;----------------------------------------------&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%4s</span><span class="s2">&quot;</span><span class="o">%</span><span class="s2">&quot;cond&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%8s</span><span class="s2">&quot;</span><span class="o">%</span><span class="s2">&quot;x_CO&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%10s</span><span class="s2">&quot;</span><span class="o">%</span><span class="s2">&quot;acf_O&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%10s</span><span class="s2">&quot;</span><span class="o">%</span><span class="s2">&quot;acf_CO&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%10s</span><span class="s2">&quot;</span><span class="o">%</span><span class="s2">&quot;TOF_CO2&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;----------------------------------------------&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x_CO</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%4d</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;</span><span class="si">%8.2f</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">x_CO</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;</span><span class="si">%10.6f</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">cf_O</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;</span><span class="si">%10.6f</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">cf_CO</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;</span><span class="si">%10.6f</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">TOF_CO2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>If the script work successfully, you would see the following output:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<span id="code-output"></span><div class="code-block-caption"><span class="caption-number">Listing 5 </span><span class="caption-text"><strong>Execution: Output</strong></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$ amspython ZiffGulariBarshad-PhaseTransitions.py
+[26.11|12:15:51] PLAMS working folder: /home/user/pyzacros/examples/plams_workdir
+Running up to 8 jobs in parallel simultaneously
+[26.11|12:15:51] JOB plamsjob STARTED
+[26.11|12:15:51] JOB plamsjob STARTED
+[26.11|12:15:51] Renaming job plamsjob to plamsjob.002
+[26.11|12:15:51] JOB plamsjob STARTED
+[26.11|12:15:51] Renaming job plamsjob to plamsjob.003
+[26.11|12:15:51] JOB plamsjob STARTED
+[26.11|12:15:51] JOB plamsjob RUNNING
+[26.11|12:15:51] Renaming job plamsjob to plamsjob.004
+[26.11|12:15:51] JOB plamsjob STARTED
+[26.11|12:15:51] JOB plamsjob.002 RUNNING
+...
+[26.11|12:16:08] JOB plamsjob.057 SUCCESSFUL
+[26.11|12:16:08] JOB plamsjob.056 SUCCESSFUL
+[26.11|12:16:08] JOB plamsjob.058 SUCCESSFUL
+[26.11|12:16:08] JOB plamsjob.059 SUCCESSFUL
+[26.11|12:16:09] JOB plamsjob.060 SUCCESSFUL
+[26.11|12:16:09] JOB plamsjob.061 SUCCESSFUL
+[26.11|12:16:09] JOB plamsjob.062 SUCCESSFUL
+[26.11|12:39:42] PLAMS run finished. Goodbye
+-----------------------------------------
+    x_CO      acf_O     acf_CO    TOF_CO2
+-----------------------------------------
+    0.20   0.998000   0.000000   0.040744
+    0.21   0.999520   0.000000   0.036692
+    0.22   1.000000   0.000000   0.042709
+    0.23   0.998400   0.000000   0.041491
+    0.24   0.997360   0.000000   0.051405
+    0.25   0.993360   0.000000   0.074524
+    0.26   0.998400   0.000000   0.059448
+    0.27   0.997280   0.000000   0.075712
+    0.28   0.997440   0.000000   0.085320
+    0.29   0.993440   0.000080   0.102368
+    0.30   0.993120   0.000000   0.114813
+    0.31   0.995040   0.000000   0.120510
+    0.32   0.991120   0.000000   0.150822
+    0.33   0.988640   0.000000   0.150280
+    0.34   0.986640   0.000000   0.210519
+    0.35   0.974160   0.000080   0.266200
+    0.36   0.961360   0.000240   0.301795
+    0.37   0.956160   0.000320   0.341076
+    0.38   0.933280   0.000400   0.383555
+    0.39   0.925680   0.000320   0.511855
+    0.40   0.897760   0.000880   0.551203
+    0.41   0.862640   0.002160   0.619353
+    0.42   0.867040   0.001280   0.737965
+    0.43   0.820560   0.001680   0.881659
+    0.44   0.815760   0.002160   0.979467
+    0.45   0.743920   0.003680   1.266927
+    0.46   0.719840   0.006320   1.311960
+    0.47   0.653200   0.011520   1.495406
+    0.48   0.648240   0.009360   1.712626
+    0.49   0.602320   0.016240   1.847959
+    0.50   0.561440   0.020480   2.107661
+    0.51   0.540320   0.025440   2.248969
+    0.52   0.450880   0.057120   2.500418
+    0.53   0.396160   0.078080   2.759625
+    0.54   0.073440   0.708800   2.168947
+    0.55   0.019040   0.896560   1.873619
+    0.56   0.000000   0.998720   0.879270
+    0.57   0.000000   1.000000   0.358375
+    0.58   0.000000   1.000000   0.225387
+    0.59   0.000000   1.000000   0.148030
+    0.60   0.000000   1.000000   0.132571
+    0.61   0.000000   1.000000   0.085284
+    0.62   0.000000   1.000000   0.064224
+    0.63   0.000000   1.000000   0.040768
+    0.64   0.000000   1.000000   0.036527
+    0.65   0.000000   1.000000   0.029231
+    0.66   0.000000   1.000000   0.028916
+    0.67   0.000000   1.000000   0.022165
+    0.68   0.000000   1.000000   0.015293
+    0.69   0.000000   1.000000   0.012087
+    0.70   0.000000   1.000000   0.011946
+    0.71   0.000000   1.000000   0.010444
+    0.72   0.000000   1.000000   0.007646
+    0.73   0.000000   1.000000   0.006830
+    0.74   0.000000   1.000000   0.006555
+    0.75   0.000000   1.000000   0.004735
+    0.76   0.000000   1.000000   0.004933
+    0.77   0.000000   1.000000   0.003422
+    0.78   0.000000   1.000000   0.002669
+    0.79   0.000000   1.000000   0.003086
+    0.80   0.000000   1.000000   0.002969
+    0.81   0.000000   1.000000   0.002624
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>The above results are the final aim of the calculation. However, one can take advantage of python libraries to visualize them. Here, we use matplotlib. Please check the matplotlib documentation for more details at <a class="reference external" href="https://matplotlib.org">https://matplotlib.org</a>. The following lines of code allow visualizing the effect of changing the CO partial pressure on the average coverage of O and CO and the production rate of CO<sub>2</sub>.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<span id="code-plot-cov-tof-results"></span><div class="code-block-caption"><span class="caption-number">Listing 6 </span><span class="caption-text"><strong>Code: Visualizing the Coverage and TOF Results</strong></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># Coverage and TOF plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Partial Pressure CO&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Coverage Fraction (%)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_CO</span><span class="p">,</span> <span class="n">cf_O</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-.&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_CO</span><span class="p">,</span> <span class="n">cf_CO</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;TOF (mol/s/site)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_CO</span><span class="p">,</span> <span class="n">TOF_CO2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.37</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;CO$_2$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<a class="reference internal image-reference" href="../_images/example_ZGB-PhaseTransitions.png" id="figure-cov-tof-results"><img alt="../_images/example_ZGB-PhaseTransitions.png" class="align-center" id="figure-cov-tof-results" src="../_images/example_ZGB-PhaseTransitions.png" style="width: 384.0px; height: 288.0px;" /></a>
+<p>This model assumes that when gas-phase molecules of CO and O<sub>2</sub> are adsorbed immediately on empty sites,
+and when the 0 and CO occupy adjacent sites, they react immediately. This model is intrinsically irreversible
+because the molecules are sticky to their original sites and remain stationary until they are removed by a reaction.
+The last figure shows three regions:</p>
+<ol class="arabic simple">
+<li>Oxygen poisoned state, x<sub>CO</sub> &lt;0.32.</li>
+<li>Reactive state 0.32&lt;x<sub>CO</sub> &lt;0.55.</li>
+<li>CO poisoned state x<sub>CO</sub> &gt;0.55.</li>
+</ol>
+<p>The first transition at x<sub>CO</sub> =0.32 is continuous, and therefore it is of the second order. The second transition at x<sub>CO</sub> =0.55 occurs abruptly, implying that this is of a first-order transition. As you increase the KMC simulation time, the transition becomes more abrupt. We will discuss this effect in the next example.</p>
+<p>pyZacros also offers some predefined plot functions that use matplotlib as well. For example, it is possible to see a typical reactive state configuration (x<sub>CO</sub> =0.54) and one in the process of being poisoned by CO (x<sub>CO</sub> =0.55). Just get the last lattice state with the <code class="docutils literal notranslate"><span class="pre">last_lattice_state()</span></code> function and visualize it with <code class="docutils literal notranslate"><span class="pre">plot()</span></code>. See the code and figures below. The state at x<sub>CO</sub> =0.54 is a prototypical steady-state, contrary to the one at x<sub>CO</sub> =0.55, which is otherwise a good example where we can see the two phases coexisting.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<span id="code-plot-coverage"></span><div class="code-block-caption"><span class="caption-number">Listing 7 </span><span class="caption-text"><strong>Code: Visualizing coverage results</strong></span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># Lattice states for x_CO=0.54 and CO=0.55</span>
+<span class="n">results</span><span class="p">[</span><span class="mi">33</span><span class="p">]</span><span class="o">.</span><span class="n">last_lattice_state</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">results</span><span class="p">[</span><span class="mi">34</span><span class="p">]</span><span class="o">.</span><span class="n">last_lattice_state</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<table border="1" class="docutils" id="id8">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text"><strong>Views of the Catalyst Surface</strong></span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><a class="reference internal" href="../_images/example_ZGB-PhaseTransitions-ls1.png"><img alt="latticeState1" src="../_images/example_ZGB-PhaseTransitions-ls1.png" style="width: 384.0px; height: 288.0px;" /></a></th>
+<th class="head"><a class="reference internal" href="../_images/example_ZGB-PhaseTransitions-ls2.png"><img alt="latticeState2" src="../_images/example_ZGB-PhaseTransitions-ls2.png" style="width: 384.0px; height: 288.0px;" /></a></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>A view of the catalyst surface at <br> partial pressure of CO = 0.54. Steady-state.</td>
+<td>A view of the catalyst surface at <br> partial pressure of CO = 0.55. Non-steady-state.</td>
+</tr>
+</tbody>
+</table>
+<p>In the previous paragraph, we introduced the concept of steady-state. However, let’s define it slightly more formally. For our study system, the steady-state for a given composition is characterized when the derivative of the CO2 production (TOF) with respect to time is zero and remains so:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d}{dt}TOF_{\text{CO}_2} = 0, \,\,\text{for all present and future}\,\, t\]</div>
+<p>pyZacros also offers the function <code class="docutils literal notranslate"><span class="pre">plot_molecule_numbers()</span></code> to visualize the molecule numbers and its first derivative as a function of time. See code and figures below:</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<span id="code-plot-mol-num"></span><div class="code-block-caption"><span class="caption-number">Listing 8 </span><span class="caption-text"><strong>Code: Visualizing Molecule Numbers and Its First Derivative</strong></span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># Molecule numbers for x_CO=0.54 and CO=0.55</span>
+<span class="n">results</span><span class="p">[</span><span class="mi">33</span><span class="p">]</span><span class="o">.</span><span class="n">plot_molecule_numbers</span><span class="p">(</span> <span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">],</span> <span class="n">normalize_per_site</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="mi">34</span><span class="p">]</span><span class="o">.</span><span class="n">plot_molecule_numbers</span><span class="p">(</span> <span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">],</span> <span class="n">normalize_per_site</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+
+<span class="c1"># First Derivative. Molecule numbers for x_CO=0.54 and CO=0.55</span>
+<span class="n">results</span><span class="p">[</span><span class="mi">33</span><span class="p">]</span><span class="o">.</span><span class="n">plot_molecule_numbers</span><span class="p">(</span> <span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">],</span> <span class="n">normalize_per_site</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">derivative</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="mi">34</span><span class="p">]</span><span class="o">.</span><span class="n">plot_molecule_numbers</span><span class="p">(</span> <span class="p">[</span><span class="s2">&quot;CO2&quot;</span><span class="p">],</span> <span class="n">normalize_per_site</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">derivative</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<table border="1" class="docutils" id="id10">
+<span id="figure-mol-numbers"></span><caption><span class="caption-number">Table 2 </span><span class="caption-text"><strong>Molecule Numbers and Its First Derivative</strong></span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><a class="reference internal" href="../_images/example_ZGB-PhaseTransitions-mn1.png"><img alt="molnum1" src="../_images/example_ZGB-PhaseTransitions-mn1.png" style="width: 384.0px; height: 288.0px;" /></a> <br> <a class="reference internal" href="../_images/example_ZGB-PhaseTransitions-dmn1.png"><img alt="dmolnum1" src="../_images/example_ZGB-PhaseTransitions-dmn1.png" style="width: 384.0px; height: 288.0px;" /></a></th>
+<th class="head"><a class="reference internal" href="../_images/example_ZGB-PhaseTransitions-mn2.png"><img alt="molnum2" src="../_images/example_ZGB-PhaseTransitions-mn2.png" style="width: 384.0px; height: 288.0px;" /></a> <br> <a class="reference internal" href="../_images/example_ZGB-PhaseTransitions-dmn2.png"><img alt="dmolnum2" src="../_images/example_ZGB-PhaseTransitions-dmn2.png" style="width: 384.0px; height: 288.0px;" /></a></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>A view of the catalyst surface at <br> partial pressure of CO = 0.54</td>
+<td>A view of the catalyst surface at <br> partial pressure of CO = 0.55</td>
+</tr>
+</tbody>
+</table>
+<p>From the figures above, it is clear that we have reached a steady-state for x<sub>CO</sub> =0.54 we have reached a steady state. Notice that the first derivative is approximately constant at 0.027 mol/s/site within a tolerance of 0.05. mol/s/site. Contrary, this is not the case of x<sub>CO</sub> =0.55, where the first derivative is continuously going down.</p>
+<p>In the next example, we will modify the script presented here to reach a steady-state configuration for every composition.</p>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zgb_ss.html" class="btn btn-neutral float-right" title="Phase Transitions in the ZGB model &amp; Steady-State Operation." accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zgb.html" class="btn btn-neutral" title="The Ziff-Gulari-Barshad (ZGB) model." accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

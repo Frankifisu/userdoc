@@ -1,0 +1,827 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Job runners &mdash; PLAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PLAMS 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Components overview" href="components.html"/>
+        <link rel="next" title="Job manager" href="jobmanager.html"/>
+        <link rel="prev" title="Results" href="results.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/plams_logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search PLAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-scripting" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-plams">What is PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-can-be-done-with-plams">What can be done with PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#simple-example">Simple example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-plams-is-not">What PLAMS is <em>not</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#library-contents">Library contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#installing-plams">Installing PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#updating-plams">Updating PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#running-plams">Running PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#defaults-file">Defaults file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#the-launch-script">The launch script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#working-folder-location">Working folder location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#passing-variables">Passing variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#importing-past-jobs">Importing past jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#restarting-failed-script">Restarting failed script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#multiple-input-scripts">Multiple input scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="components.html">Components overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#tree-like-structure">Tree-like structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#dot-notation">Dot notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#case-sensitivity">Case sensitivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#global-settings">Global settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jobs.html">Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jobs.html#preparing-a-job">Preparing a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="jobs.html#contents-of-job-settings">Contents of job settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jobs.html#default-settings">Default settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="jobs.html#running-a-job">Running a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="jobs.html#name-conflicts">Name conflicts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jobs.html#prerun-and-postrun-methods">Prerun and postrun methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jobs.html#preview-mode">Preview mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="jobs.html#job-api">Job API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jobs.html#single-jobs">Single jobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="jobs.html#subclassing-singlejob">Subclassing SingleJob</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="jobs.html#multijobs">Multijobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="jobs.html#using-multijob">Using MultiJob</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="results.html">Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="results.html#files-in-the-job-folder">Files in the job folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="results.html#synchronization-of-parallel-job-executions">Synchronization of parallel job executions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="results.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="results.html#cleaning-job-folder">Cleaning job folder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="results.html#cleaning-for-multijobs">Cleaning for multijobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="results.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Job runners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#local-job-runner">Local job runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remote-job-runner">Remote job runner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jobmanager.html">Job manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jobmanager.html#rerun-prevention">Rerun prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jobmanager.html#pickling">Pickling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jobmanager.html#restarting-scripts">Restarting scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jobmanager.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Public functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#logging">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#binding-decorators">Binding decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="molecule.html">Molecule</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mol_api.html">Molecule</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mol_api.html#atom-labeling">Atom labeling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="atombond.html">Atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atombond.html#bond">Bond</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mol_rdkit.html">RDKit interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mol_ase.html">ASE interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#periodic-table">Periodic Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#geometry-tools">Geometry tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#file-format-conversion-tools">File format conversion tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html">XYZ trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#xyz-history-files">XYZ history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rkf.html">RKF trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rkf.html#rkf-history-files">RKF history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dcd.html">DCD trajectory files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interfaces/interfaces.html">Interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/amssuite.html">Amsterdam Modeling Suite</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/ams.html">AMS driver and engines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/ams.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/ams.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/ams.html#molecule-handling">Molecule handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/ams.html#amsjob-api">AMSJob API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/ams.html#amsresults-api">AMSResults API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/amsworker.html">AMS worker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/amsworker.html#amsworker-api">AMSWorker API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/amsworker.html#amsworkerresults-api">AMSWorkerResults API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/amsworker.html#amsworkerpool-api">AMSWorkerPool API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/postadf.html">Analysis tools: Densf, FCF, analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/kffiles.html">KF files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/crs.html">COSMO-RS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#settings-with-multiple-compound">Settings with multiple compound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#adf-and-crsjob">ADF and CRSJob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#cosmo-rs-parameters">COSMO-RS Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#data-analyses-and-plotting">Data analyses and plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/adf.html">ADF (pre-2020 version)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/adf.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/adf.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/adf.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/reaxff.html">ReaxFF (pre-2019 version)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/thirdparty.html">Other programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/cp2k.html">CP2K</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/cp2k.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/cp2k.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/cp2k.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/cp2k.html#molecule-loading">Molecule loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/cp2k.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/crystal.html">Crystal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crystal.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crystal.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crystal.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crystal.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crystal.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/dftbplus.html">DFTB+</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dftbplus.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dftbplus.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dftbplus.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dftbplus.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/dirac.html">Dirac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dirac.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dirac.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dirac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/mopac.html">MOPAC (standalone program)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/mopac.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/mopac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/orca.html">ORCA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/orca.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/raspa.html">RASPA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/raspa.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/raspa.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/raspa.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/raspa.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#id1">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/He2DissociationCurve.html">Helium dimer dissociation curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/WaterOptimization.html">Geometry optimization of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ManyJobsInParallel.html">Many jobs in parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/BasisSetBenchmark.html">Benchmark accuracy of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ExcitationsWorkflow.html">Workflow: filtering molecules based on excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ChargeTransferIntegralsADF.html">Charge transfer integrals with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/gammascan.html">Tuning the range separation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#pre-made-recipes">Pre-made recipes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ams_crs.html">ADF and COSMO-RS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adffragment.html">ADF fragment job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ReorganizationEnergy.html">Reorganization Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adfnbo.html">NBO with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numgrad.html">Numerical gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numhess.html">Numerical Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/molecule_gun.html">ReaxFF molecule gun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/global_minimum.html">Global Minimum Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vibrationASE.html">Vibrational analysis with ASE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook/cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#settings-and-input">Settings and input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#create-an-input-block-with-an-header">Create an input block with an header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#create-an-empty-input-block">Create an empty input block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-text-input-into-an-ams-job">Convert an AMS text input into an AMS job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-text-input-into-settings-object">Convert an AMS text input into settings object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#convert-an-ams-run-file-into-an-amsjob">Convert an AMS .run file into an AMSJob</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#molecules">Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#generate-a-molecule-from-a-smiles-string">Generate a molecule from a SMILES string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#counting-rings">Counting rings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#extracting-results">Extracting Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#directly-from-functions">Directly from Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#examples-total-energy-and-final-structure">Examples: Total Energy and Final Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#amsresults-api-functions">AMSResults API Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#from-the-rkf-interface">From the RKF Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#finding-section-variable-pairs">Finding Section/Variable Pairs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#from-python-directories">From Python Directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#kfbrowser">KFBrowser</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#from-molecular-dynamics-trajectories">From molecular dynamics trajectories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#general-md-properties">General MD properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/cookbook.html#molecules-from-trajectories">Molecules from trajectories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/cookbook.html#accessing-old-jobs">Accessing Old Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#binding-native-plams-jobs">Binding Native PLAMS Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cookbook/cookbook.html#binding-old-rkf-files">Binding old RKF Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citations.html">Citations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PLAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../PLAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">PLAMS</a>/</li>
+      
+          <li><a href="components.html">Components overview</a>/</li>
+      
+    <li class="orange-text">Job runners</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="job-runners">
+<span id="id1"></span><h1>Job runners<a class="headerlink" href="#job-runners" title="Permalink to this headline">¶</a></h1>
+<p>Job runners have already been mentioned in previous chapters about jobs and results.
+Here we sum up all that information and introduce a basic <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> object together with its subclass <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner" title="scm.plams.core.jobrunner.GridRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">GridRunner</span></code></a> which is meant for interacting with queueing systems that manage resources on computer clusters.</p>
+<p>Job runners in PLAMS are very simple objects, both from user’s perspective and in terms of internal architecture.
+They have no methods that are meant to be called in your scripts, apart from constructors.
+Job runners are supposed to be created (with some parameters adjusting their behavior) and passed to the <a class="reference internal" href="jobs.html#scm.plams.core.basejob.Job.run" title="scm.plams.core.basejob.Job.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method as parameters (or placed as <code class="docutils literal notranslate"><span class="pre">config.default_jobrunner</span></code>).</p>
+<div class="section" id="local-job-runner">
+<h2>Local job runner<a class="headerlink" href="#local-job-runner" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.plams.core.jobrunner.JobRunner">
+<em class="property">class </em><code class="descname">JobRunner</code><span class="sig-paren">(</span><em>parallel=False</em>, <em>maxjobs=0</em>, <em>maxthreads=256</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#JobRunner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.JobRunner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class defining the basic job runner interface. Instances of this class represent local job runners – job runners that execute computational jobs on the current machine.</p>
+<p>The goal of the job runner is to take care of two important things – parallelization and runscript execution:</p>
+<ul class="simple">
+<li>When the method <a class="reference internal" href="jobs.html#scm.plams.core.basejob.Job.run" title="scm.plams.core.basejob.Job.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> of any <a class="reference internal" href="jobs.html#scm.plams.core.basejob.Job" title="scm.plams.core.basejob.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">Job</span></code></a> instance is executed, the control, after some initial preparations, is passed to a <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> instance. This <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> instance decides if a separate thread should be spawned for the job or if the execution should proceed in the current thread. This decision is based on the <code class="docutils literal notranslate"><span class="pre">parallel</span></code> attribute which can be set on <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> creation. There are no separate classes for serial and parallel job runner, both cases are covered by <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> depending on the <code class="docutils literal notranslate"><span class="pre">parallel</span></code> parameter.</li>
+<li>If the executed job is an instance of <a class="reference internal" href="jobs.html#scm.plams.core.basejob.SingleJob" title="scm.plams.core.basejob.SingleJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleJob</span></code></a>, it creates a runscript which contains most of the actual computational work (usually it’s just an execution of some external binary). The runscript is then submitted to a <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> instance using its <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner.call" title="scm.plams.core.jobrunner.JobRunner.call"><code class="xref py py-meth docutils literal notranslate"><span class="pre">call()</span></code></a> method. This method executes the runscript as a separate subprocess and takes care of output and error streams handling, setting a proper working directory etc.</li>
+</ul>
+<p>For a job runner with parallel execution enabled the number of simultaneously running jobs can be limited using the <em>maxjobs</em> parameter. If <em>maxjobs</em> is 0, no limit is enforced. If <em>parallel</em> is <code class="docutils literal notranslate"><span class="pre">False</span></code>, <em>maxjobs</em> is ignored. If <em>parallel</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and <em>maxjobs</em> is a positive integer, a <a class="reference external" href="https://docs.python.org/3.6/library/threading.html#threading.BoundedSemaphore" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BoundedSemaphore</span></code></a> of that size is used to limit the number of simultaneously running <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner.call" title="scm.plams.core.jobrunner.JobRunner.call"><code class="xref py py-meth docutils literal notranslate"><span class="pre">call()</span></code></a> methods.</p>
+<p>For a parallel <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> the maximum amount of threads started is limited by the <em>maxthreads</em> argument. As each job is running in a separate thread, this number necessarily acts as an upper limit for the number of jobs that can run in parallel. If the limit is exhausted, running further jobs with this <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> instance will block execution until another already running job thread terminates. The <code class="docutils literal notranslate"><span class="pre">maxthreads</span></code> limit should be set as large as possible, but not so large as to exceed any limits imposed by the operating system.</p>
+<p>A <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> instance can be passed to <a class="reference internal" href="jobs.html#scm.plams.core.basejob.Job.run" title="scm.plams.core.basejob.Job.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> with a keyword argument <code class="docutils literal notranslate"><span class="pre">jobrunner</span></code>. If this argument is omitted, the instance stored in <code class="docutils literal notranslate"><span class="pre">config.default_jobrunner</span></code> is used.</p>
+<dl class="method">
+<dt id="scm.plams.core.jobrunner.JobRunner.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>parallel=False</em>, <em>maxjobs=0</em>, <em>maxthreads=256</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#JobRunner.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.JobRunner.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.core.jobrunner.JobRunner.call">
+<code class="descname">call</code><span class="sig-paren">(</span><em>runscript</em>, <em>workdir</em>, <em>out</em>, <em>err</em>, <em>runflags</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#JobRunner.call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.JobRunner.call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the <em>runscript</em> in the folder <em>workdir</em>. Redirect output and error streams to <em>out</em> and <em>err</em>, respectively.</p>
+<p>Arguments <em>runscript</em>, <em>workdir</em>, <em>out</em> and <em>err</em> should be strings with paths to corresponding files or folders.</p>
+<p><em>runflags</em> is a <a class="reference internal" href="settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance containing the <cite>run</cite> branch of running job’s settings. The basic job runner defined here ignores them, but they can be useful in <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> subclasses (see <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner.call" title="scm.plams.core.jobrunner.GridRunner.call"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GridRunner.call()</span></code></a>).</p>
+<p>Returns an integer with the exit code returned by the <em>runscript</em>.</p>
+<p>This method can be safely overridden in <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> subclasses. For example, in <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner" title="scm.plams.core.jobrunner.GridRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">GridRunner</span></code></a> it submits the runscript to a queueing system instead of executing it locally.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method is used automatically during <a class="reference internal" href="jobs.html#scm.plams.core.basejob.Job.run" title="scm.plams.core.basejob.Job.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> and should never be explicitly called in your script.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.core.jobrunner.JobRunner.call_function">
+<code class="descname">call_function</code><span class="sig-paren">(</span><em>function</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#JobRunner.call_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.JobRunner.call_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the function that needs to be scheduled by the jobrunner.</p>
+<p>This is wrapped by the _limit() function, so that no more than maxjobs processes can run at the same time</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.core.jobrunner.JobRunner._run_job">
+<code class="descname">_run_job</code><span class="sig-paren">(</span><em>job</em>, <em>jobmanager</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#JobRunner._run_job"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.JobRunner._run_job" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method aggregates the parts of <a class="reference internal" href="jobs.html#job-life-cycle"><span class="std std-ref">Running a job</span></a> that are supposed to be run in a separate thread in case of parallel job execution. It is wrapped with <code class="xref py py-func docutils literal notranslate"><span class="pre">_in_limited_thread()</span></code> decorator.</p>
+<p>This method should not be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.core.jobrunner.JobRunner._run_job_with_args">
+<code class="descname">_run_job_with_args</code><span class="sig-paren">(</span><em>job</em>, <em>jobmanager</em>, <em>args</em>, <em>args_fin</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#JobRunner._run_job_with_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.JobRunner._run_job_with_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>_run_job(job, jobmanager)
+This method aggregates the parts of <a class="reference internal" href="jobs.html#job-life-cycle"><span class="std std-ref">Running a job</span></a> that are supposed to be run in a separate thread in case of parallel job execution. It is wrapped with <code class="xref py py-func docutils literal notranslate"><span class="pre">_in_limited_thread()</span></code> decorator.</p>
+<p>This method should not be overridden.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition important">
+<p class="first admonition-title">Technical</p>
+<p>Similarly to the <a class="reference internal" href="results.html#scm.plams.core.results.Results" title="scm.plams.core.results.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">Results</span></code></a> class, the proper behavior of <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> and its subclasses (also the ones defined by the user) is ensured using a metaclass.
+For the sake of completeness we present here a brief specification of all involved elements:</p>
+<dl class="class">
+<dt id="scm.plams.core.jobrunner._MetaRunner">
+<em class="property">class </em><code class="descname">_MetaRunner</code><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#_MetaRunner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner._MetaRunner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Metaclass for <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a>. During an instance creation wrap the <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner.call" title="scm.plams.core.jobrunner.JobRunner.call"><code class="xref py py-meth docutils literal notranslate"><span class="pre">call()</span></code></a> method with <a class="reference internal" href="#scm.plams.core.jobrunner._limit" title="scm.plams.core.jobrunner._limit"><code class="xref py py-func docutils literal notranslate"><span class="pre">_limit()</span></code></a> decorator which enforces a limit on the number of simultaneous <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner.call" title="scm.plams.core.jobrunner.JobRunner.call"><code class="xref py py-meth docutils literal notranslate"><span class="pre">call()</span></code></a> calls.</p>
+<dl class="staticmethod">
+<dt id="scm.plams.core.jobrunner._MetaRunner.__new__">
+<em class="property">static </em><code class="descname">__new__</code><span class="sig-paren">(</span><em>meta</em>, <em>name</em>, <em>bases</em>, <em>dct</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#_MetaRunner.__new__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner._MetaRunner.__new__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and return a new object.  See help(type) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="scm.plams.core.jobrunner._limit">
+<code class="descname">_limit</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#_limit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner._limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for an instance method. If <code class="docutils literal notranslate"><span class="pre">semaphore</span></code> attribute of given instance is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, use this attribute to wrap decorated method via <a class="reference external" href="https://docs.python.org/3.6/library/threading.html#with-locks" title="(in Python v3.6)"><span class="xref std std-ref">with</span></a> statement.</p>
+</dd></dl>
+
+<dl class="last function">
+<dt id="scm.plams.core.jobrunner._in_thread">
+<code class="descname">_in_thread</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#_in_thread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner._in_thread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for an instance method. If <code class="docutils literal notranslate"><span class="pre">parallel</span></code> attribute of given instance is <code class="docutils literal notranslate"><span class="pre">True</span></code>, run decorated method in a separate <a class="reference external" href="https://docs.python.org/3.6/library/threading.html#threading.Thread" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></a>. This thread is usually a daemon thread, the decision is based on <code class="docutils literal notranslate"><span class="pre">config.daemon_threads</span></code> entry.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="remote-job-runner">
+<h2>Remote job runner<a class="headerlink" href="#remote-job-runner" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.plams.core.jobrunner.GridRunner">
+<em class="property">class </em><code class="descname">GridRunner</code><span class="sig-paren">(</span><em>grid='auto'</em>, <em>sleepstep=5</em>, <em>parallel=True</em>, <em>maxjobs=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#GridRunner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.GridRunner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclass of <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a> that submits the runscript to a queueing system instead of executing it locally. Besides two new keyword arguments (<em>grid</em> and <em>sleepstep</em>) it behaves and is meant to be used just like a regular <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The default value of the <em>parallel</em> argument is <code class="docutils literal notranslate"><span class="pre">True</span></code>, unlike in the regular <a class="reference internal" href="#scm.plams.core.jobrunner.JobRunner" title="scm.plams.core.jobrunner.JobRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobRunner</span></code></a>.</p>
+</div>
+<p>There are many different queueing systems that are popular nowadays (for example: TORQUE, SLURM, OGE). Usually they use different commands for submitting jobs or checking the queue status. <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner" title="scm.plams.core.jobrunner.GridRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">GridRunner</span></code></a> class tries to build a common interface to these systems. The commands used to communicate with the queueing system are not hard-coded, but rather taken from a <a class="reference internal" href="settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance. Thanks to that the user has almost full control over the behavior of a <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner" title="scm.plams.core.jobrunner.GridRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">GridRunner</span></code></a> instance and the behavior can be ajdusted dynamically.</p>
+<p>The behavior of a <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner" title="scm.plams.core.jobrunner.GridRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">GridRunner</span></code></a> instance is determined by the contents of a <a class="reference internal" href="settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance stored in its <code class="docutils literal notranslate"><span class="pre">settings</span></code> attribute. That <a class="reference internal" href="settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance can be manually supplied by the user or taken from a collection of predefined instances stored as branches of <code class="docutils literal notranslate"><span class="pre">GridRunner.config</span></code>. The adjustment is done with the <em>grid</em> parameter which should be a string or a <a class="reference internal" href="settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance. If it’s a string, it has to be a key occurring in <code class="docutils literal notranslate"><span class="pre">GridRunner.config</span></code> or <code class="docutils literal notranslate"><span class="pre">'auto'</span></code> for autodetection. For example, if <code class="docutils literal notranslate"><span class="pre">grid='slurm'</span></code> is passed, <code class="docutils literal notranslate"><span class="pre">GridRunner.config.slurm</span></code> is used as settings. If <code class="docutils literal notranslate"><span class="pre">grid='auto'</span></code> then entries present in <code class="docutils literal notranslate"><span class="pre">GridRunner.config</span></code> are tested and the first one that works (its submit command is present on your system) is chosen. When a <a class="reference internal" href="settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance is passed as <em>grid</em>, it is directly used as <code class="docutils literal notranslate"><span class="pre">settings</span></code>.</p>
+<p>Currently two predefined schemes are available (see <a class="reference internal" href="../started.html#plams-defaults"><span class="std std-ref">Defaults file</span></a>): <code class="docutils literal notranslate"><span class="pre">slurm</span></code> for SLURM and <code class="docutils literal notranslate"><span class="pre">pbs</span></code> for queueing systems following PBS syntax (PBS, TORQUE, Oracle Grid Engine etc.).</p>
+<p>The settings of <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner" title="scm.plams.core.jobrunner.GridRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">GridRunner</span></code></a> should have the following structure:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">output</span></code> – flag for specifying the output file path.</li>
+<li><code class="docutils literal notranslate"><span class="pre">error</span></code> – flag for specifying the error file path.</li>
+<li><code class="docutils literal notranslate"><span class="pre">workdir</span></code> – flag for specifying path to the working directory.</li>
+<li><code class="docutils literal notranslate"><span class="pre">commands.submit</span></code> – submit command.</li>
+<li><code class="docutils literal notranslate"><span class="pre">commands.check</span></code> – queue status check command.</li>
+<li><code class="docutils literal notranslate"><span class="pre">commands.getid</span></code> – function extracting submitted job’s ID from the output of the submit command.</li>
+<li><code class="docutils literal notranslate"><span class="pre">commands.running</span></code> – function extracting a list of all running jobs from the output of queue check command</li>
+<li><code class="docutils literal notranslate"><span class="pre">commands.special</span></code> – branch storing definitions of special <a class="reference internal" href="jobs.html#scm.plams.core.basejob.Job.run" title="scm.plams.core.basejob.Job.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> keyword arguments.</li>
+</ul>
+<p>See <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner.call" title="scm.plams.core.jobrunner.GridRunner.call"><code class="xref py py-meth docutils literal notranslate"><span class="pre">call()</span></code></a> for more details and examples.</p>
+<p>The <em>sleepstep</em> parameter defines how often the queue check is performed. It should be a numerical value telling how many seconds should the interval between two consecutive checks last.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Usually queueing systems are configured in such a way that output of your calculation is captured somewhere else and copied to the location indicated by the output flag only when the job is finished. Because of that it is not possible to have a peek at your output while your job is running (for example, to see if your calculation is going well). This limitation can be circumvented with <code class="docutils literal notranslate"><span class="pre">myjob.settings.runscript.stdout_redirect</span></code> flag. If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the output redirection will not be handled by the queueing system, but rather placed in the runscript using the shell redirection <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>. That forces the output file to be created directly in <em>workdir</em> and updated live as the job proceeds.</p>
+</div>
+<dl class="method">
+<dt id="scm.plams.core.jobrunner.GridRunner.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>grid='auto'</em>, <em>sleepstep=5</em>, <em>parallel=True</em>, <em>maxjobs=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#GridRunner.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.GridRunner.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.core.jobrunner.GridRunner.call">
+<code class="descname">call</code><span class="sig-paren">(</span><em>runscript</em>, <em>workdir</em>, <em>out</em>, <em>err</em>, <em>runflags</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#GridRunner.call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.GridRunner.call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit <em>runscript</em> to the queueing system with <em>workdir</em> as the working directory. Redirect output and error streams to <em>out</em> and <em>err</em>, respectively. <em>runflags</em> stores varoius submit command options.</p>
+<p>The submit command has the following structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">commands</span><span class="o">.</span><span class="n">submit</span><span class="o">&gt;</span><span class="n">_</span><span class="o">&lt;</span><span class="n">workdir</span><span class="o">&gt;</span><span class="n">_</span><span class="p">{</span><span class="n">workdir</span><span class="p">}</span><span class="n">_</span><span class="o">&lt;</span><span class="n">error</span><span class="o">&gt;</span><span class="n">_</span><span class="p">{</span><span class="n">err</span><span class="p">}[</span><span class="n">_</span><span class="o">&lt;</span><span class="n">output</span><span class="o">&gt;</span><span class="n">_</span><span class="p">{</span><span class="n">out</span><span class="p">}][</span><span class="n">FLAGS</span><span class="p">]</span><span class="n">_</span><span class="p">{</span><span class="n">runscript</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Underscores denote spaces, parts in pointy brackets correspond to <code class="docutils literal notranslate"><span class="pre">settings</span></code> entries, parts in curly brackets to <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner.call" title="scm.plams.core.jobrunner.GridRunner.call"><code class="xref py py-meth docutils literal notranslate"><span class="pre">call()</span></code></a> arguments, square brackets contain optional parts. Output part is added if <em>out</em> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>. This is handled automatically based on <code class="docutils literal notranslate"><span class="pre">runscript.stdout_redirect</span></code> value in job’s <code class="docutils literal notranslate"><span class="pre">settings</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FLAGS</span></code> part is built based on <em>runflags</em> argument, which is a <a class="reference internal" href="settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance storing <a class="reference internal" href="jobs.html#scm.plams.core.basejob.Job.run" title="scm.plams.core.basejob.Job.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> keyword arguments. For every <em>(key,value)</em> pair in <em>runflags</em> the string <code class="docutils literal notranslate"><span class="pre">_-key_value</span></code> is appended to <code class="docutils literal notranslate"><span class="pre">FLAGS</span></code> <strong>unless</strong> the <em>key</em> is a special key occurring in <code class="docutils literal notranslate"><span class="pre">commands.special</span></code>. In that case <code class="docutils literal notranslate"><span class="pre">_&lt;commands.special.key&gt;value</span></code> is used (mind the lack of space in between). For example, a <a class="reference internal" href="settings.html#scm.plams.core.settings.Settings" title="scm.plams.core.settings.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance defining interaction with SLURM has the following entries:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">workdir</span> <span class="o">=</span> <span class="s1">&#39;-D&#39;</span>
+<span class="n">output</span>  <span class="o">=</span> <span class="s1">&#39;-o&#39;</span>
+<span class="n">error</span>   <span class="o">=</span> <span class="s1">&#39;-e&#39;</span>
+<span class="n">special</span><span class="o">.</span><span class="n">nodes</span>    <span class="o">=</span> <span class="s1">&#39;-N &#39;</span>
+<span class="n">special</span><span class="o">.</span><span class="n">walltime</span> <span class="o">=</span> <span class="s1">&#39;-t &#39;</span>
+<span class="n">special</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="s1">&#39;--mem=&#39;</span>
+<span class="n">special</span><span class="o">.</span><span class="n">queue</span>    <span class="o">=</span> <span class="s1">&#39;-p &#39;</span>
+<span class="n">commands</span><span class="o">.</span><span class="n">submit</span>  <span class="o">=</span> <span class="s1">&#39;sbatch&#39;</span>
+<span class="n">commands</span><span class="o">.</span><span class="n">check</span>  <span class="o">=</span> <span class="s1">&#39;squeue&#39;</span>
+</pre></div>
+</div>
+<p>The submit command produced by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gr</span> <span class="o">=</span> <span class="n">GridRunner</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">maxjobs</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="s1">&#39;slurm&#39;</span><span class="p">)</span>
+<span class="n">j</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jobrunner</span><span class="o">=</span><span class="n">gr</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="s1">&#39;short&#39;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="s1">&#39;something&#39;</span><span class="p">,</span> <span class="n">O</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will be:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sbatch -D {workdir} -e {err} -o {out} -p short -N 2 -J something -O  {runscript}
+</pre></div>
+</div>
+<p>In certain queueing systems some flags don’t have a short form with semantics <code class="docutils literal notranslate"><span class="pre">-key</span> <span class="pre">value</span></code>. For example, in SLURM the flag <code class="docutils literal notranslate"><span class="pre">--nodefile=value</span></code> has a short form <code class="docutils literal notranslate"><span class="pre">-F</span> <span class="pre">value</span></code>, but the flag <code class="docutils literal notranslate"><span class="pre">--export=value</span></code> does not. One can still use such a flag using the special keys logic:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gr</span> <span class="o">=</span> <span class="n">GridRunner</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">maxjobs</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="s1">&#39;slurm&#39;</span><span class="p">)</span>
+<span class="n">gr</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">export</span> <span class="o">=</span> <span class="s1">&#39;--export=&#39;</span>
+<span class="n">j</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jobrunner</span><span class="o">=</span><span class="n">gr</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="s1">&#39;short&#39;</span><span class="p">,</span> <span class="n">export</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>That results in the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sbatch</span> <span class="o">-</span><span class="n">D</span> <span class="p">{</span><span class="n">workdir</span><span class="p">}</span> <span class="o">-</span><span class="n">e</span> <span class="p">{</span><span class="n">err</span><span class="p">}</span> <span class="o">-</span><span class="n">o</span> <span class="p">{</span><span class="n">out</span><span class="p">}</span> <span class="o">-</span><span class="n">p</span> <span class="n">short</span> <span class="o">--</span><span class="n">export</span><span class="o">=</span><span class="n">value</span> <span class="p">{</span><span class="n">runscript</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The submit command is then executed and the output returned by it is used to determine the submitted job’s ID. The value stored in <code class="docutils literal notranslate"><span class="pre">commands.getid</span></code> is used for that purpose. It should be a function taking a single string (the whole output of the submit command) and returning a string with job’s ID.</p>
+<p>The submitted job’s ID is then added to <code class="docutils literal notranslate"><span class="pre">_active_jobs</span></code> dictionary, with the key being job’s ID and the value being an instance of <a class="reference external" href="https://docs.python.org/3.6/library/threading.html#threading.Lock" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Lock</span></code></a>. This lock is used to singal the fact that the job is finished and the thread handling it can continue. Then the <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner._check_queue" title="scm.plams.core.jobrunner.GridRunner._check_queue"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_check_queue()</span></code></a> method starts the thread querying the queue and unlocking finished jobs.</p>
+<p>Since it is difficult to automatically obtain job’s exit code, the returned value is 0 (or 1, if the submit command failed). From <a class="reference internal" href="jobs.html#scm.plams.core.basejob.Job.run" title="scm.plams.core.basejob.Job.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> perspective it means that a job executed with <a class="reference internal" href="#scm.plams.core.jobrunner.GridRunner" title="scm.plams.core.jobrunner.GridRunner"><code class="xref py py-class docutils literal notranslate"><span class="pre">GridRunner</span></code></a> is <em>crashed</em> only if it never entered the queue (usually due to improper submit command).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method is used automatically during <a class="reference internal" href="jobs.html#scm.plams.core.basejob.Job.run" title="scm.plams.core.basejob.Job.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> and should never be explicitly called in your script.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.core.jobrunner.GridRunner._check_queue">
+<code class="descname">_check_queue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#GridRunner._check_queue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.GridRunner._check_queue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query the queueing system to obtain a list of currently running jobs. Check for active jobs that are not any more in the queue and release their locks. Repeat this procedure every <code class="docutils literal notranslate"><span class="pre">sleepstep</span></code> seconds until there are no more active jobs. The <code class="docutils literal notranslate"><span class="pre">_mainlock</span></code> lock ensures that there is at most one thread executing the main loop of this method at the same time.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.plams.core.jobrunner.GridRunner._autodetect">
+<code class="descname">_autodetect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scm/plams/core/jobrunner.html#GridRunner._autodetect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scm.plams.core.jobrunner.GridRunner._autodetect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to autodetect the type of queueing system.</p>
+<p>The autodetection mechanism is very simple. For each entry in <code class="docutils literal notranslate"><span class="pre">GridRunner.config</span></code> the submit command followed by <code class="docutils literal notranslate"><span class="pre">--version</span></code> is executed (for example <code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">--version</span></code>). If the execution was successful (which is indicated by the exit code 0), that queueing system is present and it is chosen. Thus if there are multiple queueing systems installed, only one of them is picked – the one which “name” (indicated by a key in <code class="docutils literal notranslate"><span class="pre">GridRunner.config</span></code>) is first in the lexicographical order.</p>
+<p>Returned value is one of <code class="docutils literal notranslate"><span class="pre">GridRunner.config</span></code> branches. If autodetection was not successful, an exception is raised.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="jobmanager.html" class="btn btn-neutral float-right" title="Job manager" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="results.html" class="btn btn-neutral" title="Results" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

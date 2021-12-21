@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# Here we perform an optimization under external stress using the 
+# UpdateReferenceCell option. When using this option the energy during 
+# the geometry optimization will not necessairly go down, but the final 
+# stress will match the ExternalStress with much hihger accuracy. 
+
+AMS_JOBNAME=go $AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+System
+
+    Atoms
+        C 0.0           0.0          0.0
+        C 1.23647204352 0.7138774661 0.0
+    End
+    Lattice
+        1.23647204352 -2.1416324015 0.0
+        1.23647204352  2.1416324015 0.0
+    End
+End
+
+UseSymmetry no
+
+EngineAddons
+    ExternalStress 
+        StressTensorVoigt 0.01 0.02 0.003 
+        UpdateReferenceCell Yes
+    End
+End
+
+GeometryOptimization
+    Method SCMGO
+    OptimizeLattice Yes
+    Convergence Gradients=1.0E-4
+End
+
+Engine DFTB
+    Model SCC-DFTB
+    ResourcesDir DFTB.org/pbc-0-3
+    KSpace Quality=Normal
+EndEngine
+eor
+
+# Here we compute the stress tensor at the optimized geometry to validate
+# the optimization under stress
+
+AMS_JOBNAME=sp $AMSBIN/ams << eor
+
+Task SinglePoint
+
+LoadSystem 
+    File go.results/ams.rkf
+End
+
+UseSymmetry no
+
+Properties
+    StressTensor Yes
+End
+
+LoadEngine go.results/dftb.rkf
+eor
+
+echo "Resulting final stress tensor:"
+$AMSBIN/amsreport sp.results/dftb.rkf -r "AMSResults%StressTensor#12.6f##2"

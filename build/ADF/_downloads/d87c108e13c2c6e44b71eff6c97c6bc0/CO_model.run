@@ -1,0 +1,88 @@
+#!/bin/sh
+
+
+# For property calculations, XC potentials with asymptotically correct (-1/r)
+# behavior outside the molecule, the results tend to be superior to regular LDA
+# or GGA calculations. This is especially true for small molecules and for
+# properties that depend heavily on the proper description of the outer region
+# of the molecule. In the example, all-electron basis sets are used. This is
+# mandatory for the SAOP potential.
+
+# In the first example, excitation energies are calculated with the GRACLB
+# potential. This potential requires one number as argument: the experimental
+# ionization potential in atomic units. This number can be either based on an
+# experimental value, or on previous GGA total energy calculations.
+
+
+AMS_JOBNAME=GRACLB $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     O  0             0   0
+     C  1.128205364   0   0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title CO excitations grac potential
+  beckegrid
+    quality good
+  end
+  excitations
+    lowest 10
+    onlysing
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  xc
+    model GRACLB 0.515
+  end
+EndEngine
+
+eor
+
+
+# The same calculation with the SAOP XC potential would differ in the XC block
+# only:
+
+
+AMS_JOBNAME=SAOP $AMSBIN/ams <<eor
+System
+  symmetrize
+  atoms
+     O  0             0   0
+     C  1.128205364   0   0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title CO excitations SAOP
+  beckegrid
+    quality good
+  end
+  excitations
+    lowest 10
+    onlysing
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  xc
+    model SAOP
+  end
+EndEngine
+
+eor
+
+
+# SAOP depends on the orbitals which makes it more expensive to evaluate than
+# GRAC for large molecules, but is much easier to use, since it does not require
+# an ionization potential parameter as input.
+

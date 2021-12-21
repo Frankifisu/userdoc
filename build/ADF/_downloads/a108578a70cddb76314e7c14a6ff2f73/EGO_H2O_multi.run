@@ -1,0 +1,60 @@
+#! /bin/sh
+
+
+# Basic example of TDDFT calculation with different number of singlets and triplets (LOWEST 10 8) 
+# and multiple gradient calculation (SING_GRADS, TRIP_GRADS)
+# Could be useful for external programs like SHARC.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     O     0.0000000    0.0000000   -0.0668805
+     H    -0.7658756    0.0000000    0.5307937
+     H     0.7658756    0.0000000    0.5307937
+  end
+end
+
+Task SinglePoint
+Properties
+  Gradients True
+End
+
+Engine ADF
+  title H2O TDDFT Multiple Gradients
+  excitations
+    lowest 10 8
+  end
+  excitedgo
+    sing_grads
+       A1 1 2
+       A2 1
+       B1 1
+    end
+    trip_grads
+       A1 1 2 3
+       A2 1
+       B1 3
+       B2 1
+    end
+  end
+  basis
+    type SZ
+    core None
+    CreateOutput Yes
+  end
+  numericalquality Good
+  print SOMATRIX
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  sopert
+     gscorr True
+  end
+  symmetry C(2v)
+  tda
+  xc
+    gga BP86
+  end
+EndEngine
+eor

@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# Starting from hexagonal graphite we optimize the crystal
+# under the influence of a non-uniform stress tensor.
+# The system will undergo a phase transition to a diamond structure
+AMS_JOBNAME=Graphite2Diamond $AMSBIN/ams << eor
+
+Task GeometryOptimization
+EngineAddons
+    ExternalStress
+        StressTensorVoigt 0 0 0.01 0 -0.0003 0
+    End
+End
+System
+    Atoms
+        C  0.0000   0.0000   1.6507
+        C  0.0000   0.0000  -1.6507
+        C  0.0000  -1.4225   1.6507
+        C  0.0000   1.4225  -1.6507
+    End
+    Lattice
+        1.2319  -2.1338   0.0000
+        1.2319   2.1338   0.0000
+        0.0000   0.0000   6.6029
+    End
+End
+GeometryOptimization
+    MaxIterations 300
+    OptimizeLattice Yes
+    Convergence
+        Energy 1.0e-6
+        Gradients 1.0e-5
+        Step 1.0e-4
+    End
+End
+UseSymmetry No
+Engine DFTB
+    Model SCC-DFTB
+    ResourcesDir DFTB.org/3ob-3-1
+    DispersionCorrection D3-BJ
+    KSpace
+        Quality Basic
+    End
+EndEngine
+
+eor
+
+# The diamond structure is still compressed under the influence of the external stress.
+# We now disable this term and relax the unit cell with the same DFTB model
+AMS_JOBNAME=DiamondRelaxation $AMSBIN/ams << eor
+
+Task GeometryOptimization
+LoadSystem 
+    File Graphite2Diamond.results/ams.rkf
+End
+GeometryOptimization
+    MaxIterations 300
+    OptimizeLattice Yes
+    Convergence
+        Energy 1.0e-6
+        Gradients 1.0e-5
+        Step 1.0e-4
+    End
+End
+UseSymmetry No
+LoadEngine Graphite2Diamond.results/dftb.rkf
+
+eor

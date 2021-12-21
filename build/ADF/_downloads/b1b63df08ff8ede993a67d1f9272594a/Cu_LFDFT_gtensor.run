@@ -1,0 +1,77 @@
+#!/bin/sh
+
+# Application of the Ligand Field DFT approach for the calculation
+# of the g-tensor. The g-tensor is only calculated for doublet states.
+# This example calculates the g-tensor of the ground and excited doublet states
+# of [Cu(H2O)6]^2+ with a Cu^2+ d^9 electron configuration.
+
+# First an average of configuration calculation (AOC) is performed, where 9
+# electrons are equally distributed over the 5 orbitals that have the most
+# dominant Cu 3d character. Depending on the electron configuration this might
+# be a non-trivial task. Symmetry NOSYM should be specified.
+
+
+SCM_LFDFT="$AMSHOME/examples/adf/Cu_LFDFT_gtensor/LFDFT"
+export SCM_LFDFT
+
+$AMSBIN/ams <<eor
+System
+  Atoms
+   Cu        0.000000    0.000000    0.000000
+   O         0.000000    0.000000    2.325873
+   O         0.000000    0.000000   -2.325873
+   O        -2.004009    0.000000    0.000000
+   O         2.004009    0.000000    0.000000
+   O         0.000000   -2.004009    0.000000
+   O         0.000000    2.004009    0.000000
+   H         0.000000    0.773171   -2.924278
+   H         0.000000   -0.773171   -2.924278
+   H        -0.794410    2.570047    0.000000
+   H         0.794410    2.570047    0.000000
+   H        -2.570047    0.000000   -0.794410
+   H        -2.570047    0.000000    0.794410
+   H         0.794410   -2.570047    0.000000
+   H        -0.794410   -2.570047    0.000000
+   H         2.570047    0.000000   -0.794410
+   H         2.570047    0.000000    0.794410
+   H         0.000000   -0.773171    2.924278
+   H         0.000000    0.773171    2.924278
+  End
+  Charge 2
+End
+
+task SinglePoint
+
+Engine adf
+  Symmetry NOSYM
+  IrrepOccupations
+    A 78 1.8 1.8 1.8 1.8 1.8
+  End
+  basis
+     Core None
+     Type TZP
+  End
+  XC
+    GGA PBE
+  End
+EndEngine
+eor
+
+# When the AOC calculation is ready, you need to make sure that indeed the
+# partially occupied orbitals are dominantly d orbitals. In the ADF output you
+# can find the character of the MOs in the list of all MOs, ordered by energy,
+# with the most significant SFO gross populations.
+
+# Next the LFDFT calculation is performed including spin-orbit coupling (soc 1),
+# which is needed for the g-tensor calculation. In this case there is 1
+# shell, and the nlval for 3d is '3 2'. The MO indices should be the
+# fractionally occupied levels of the AOC calculation (in this case 40 41 42 43 44).
+
+$AMSBIN/lfdft << eor
+ adffile ams.results/adf.rkf
+ nshel 1
+ nlval 3 2
+ MOind 40 41 42 43 44
+ soc 1.0
+ DegeneracyThreshold 1.0E-5
+eor

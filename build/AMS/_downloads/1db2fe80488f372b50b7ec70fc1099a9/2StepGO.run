@@ -1,0 +1,88 @@
+#!/bin/sh
+
+# Preoptimization with DFTB and calculation of the Hessian
+# ========================================================
+#
+# We will reuse the geometry optimized at the DFTB level as a starting point for
+# the DFT geometry optimization. We will also calculate the real Hessian with
+# DFTB and use that as the initial Hessian for the Quasi-Newton based
+# optimization at the DFT level. DFTB is so fast compared to DFT, that all of
+# this is basically instantaneous. Our goal here is really just to reduce the
+# number of steps in the DFT geometry optimization. If we save just a single
+# step there, the initial DFTB calculation will already have paid for itself ...
+
+AMS_JOBNAME=dftb_preopt $AMSBIN/ams << EOF
+
+   # Specify the system geometry: Aspirin
+   System
+       Atoms
+           C         0.000000  0.000000  0.000000
+           C         1.402231  0.000000  0.000000
+           C         2.091015  1.220378  0.000000
+           C         1.373539  2.425321  0.004387
+           C        -0.034554  2.451759  0.016301
+           C        -0.711248  1.213529  0.005497
+           O        -0.709522  3.637718  0.019949
+           C        -2.141910  1.166077 -0.004384
+           O        -2.727881  2.161939 -0.690916
+           C        -0.730162  4.530447  1.037168
+           C        -0.066705  4.031914  2.307663
+           H        -0.531323 -0.967191 -0.007490
+           H         1.959047 -0.952181 -0.004252
+           H         3.194073  1.231720 -0.005862
+           H         1.933090  3.376356 -0.002746
+           O        -2.795018  0.309504  0.548870
+           H        -2.174822  2.832497 -1.125018
+           O        -1.263773  5.613383  0.944221
+           H        -0.337334  4.693941  3.161150
+           H         1.041646  4.053111  2.214199
+           H        -0.405932  3.005321  2.572927
+       End
+   End
+
+   # Do a geometry optimization.
+   Task GeometryOptimization
+
+   # Also compute the Hessian at the optimized geometry.
+   Properties
+      Hessian True
+   End
+
+   # Settings for the DFTB engine:
+   Engine DFTB
+      Model DFTB3
+      ResourcesDir DFTB.org/3ob-3-1
+   EndEngine
+
+EOF
+
+
+# Geometry optimization with DFT
+# ==============================
+
+AMS_JOBNAME=dft_opt $AMSBIN/ams << EOF
+
+   # Start from the geometry that is already optimized at the DFTB level.
+   LoadSystem
+      File dftb_preopt.results/dftb.rkf
+   End
+   # (equivalent to loading the system from dftb_preopt.results/ams.rkf)
+
+   Task GeometryOptimization
+
+   GeometryOptimization
+      InitialHessian
+         # Load the DFTB Hessian as the initial Hessian for the
+         # Quasi-Newton based optimizer.
+         Type FromFile
+         File dftb_preopt.results
+      End
+   End
+
+   # Settings for the BAND engine:
+   Engine BAND
+      Basis Type=TZP
+      XC GGA=PBE
+   EndEngine
+
+EOF

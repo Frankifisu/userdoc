@@ -1,0 +1,1062 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5.6.1. ResultsImporter overview &mdash; ParAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ParAMS 2021.1 documentation" href="../../index.html"/>
+        <link rel="up" title="5.6. Results Importer" href="results_importer.html"/>
+        <link rel="next" title="5.6.2. AMS, VASP and Quantum ESPRESSO reference data" href="reference_codes.html"/>
+        <link rel="prev" title="5.6. Results Importer" href="results_importer.html"/> 
+
+  
+  <script src="../../_static/js/jquery.min.js"></script>
+  <script src="../../_static/js/bootstrap.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/params_logo_compact.svg" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search ParAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-ParAMS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro.html#parameter-fitting-a-lennard-jones-example">1.1. Parameter Fitting: A Lennard-Jones Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro.html#general-application">1.2. General Application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">2. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#first-steps-with-params">2.1. First Steps with ParAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#unit-tests">2.2. Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/examples.html">3. Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/intro_to_params.html">3.1. Introduction to parametrization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/intro_to_params.html#training-data">3.1.1. Training data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html">3.2. Lennard-Jones Potential for Argon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#lennard-jones-parameters-engine-and-interface">3.2.1. Lennard-Jones Parameters, Engine, and Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#files">3.2.2. Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#run-the-example">3.2.3. Run the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#the-best-parameter-values">3.2.4. The best parameter values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#input-files">3.2.5. Input files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#the-parameter-interface-yaml-file">3.2.5.1. The parameter_interface.yaml file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#the-job-collection-yaml-file">3.2.5.2. The job_collection.yaml file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#the-training-set-yaml-file">3.2.5.3. The training_set.yaml file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#the-params-conf-py-file">3.2.5.4. The params.conf.py file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#creation-of-the-input-files">3.2.5.5. Creation of the input files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#output-files">3.2.6. Output files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#summary-txt">3.2.6.1. summary.txt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#detailed-results-correlation-plots-summary-statistics">3.2.6.2. Detailed results: correlation plots, summary statistics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html">3.3. Calculate reference values in training_set.yaml</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#prerequisites">3.3.1. Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#the-input-files">3.3.2. The input files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#training-set-yaml">3.3.2.1. training_set.yaml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#reference-engines-yaml">3.3.2.2. reference_engines.yaml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#job-collection-yaml">3.3.2.3. job_collection.yaml</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#calculate-reference-values-with-params-genref">3.3.3. Calculate reference values with <code class="docutils literal notranslate"><span class="pre">params</span> <span class="pre">genref</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#the-reference-cache-folder">3.3.3.1. The reference.cache folder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#the-training-set-ref-yaml-file">3.3.3.2. The training_set.ref.yaml file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/lj_ar/lj_ar_validation_set.html">3.4. Training and validation sets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_validation_set.html#an-explicit-validation-set-validation-set-yaml">3.4.1. An explicit validation set: <code class="docutils literal notranslate"><span class="pre">validation_set.yaml</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_validation_set.html#run-the-optimization">3.4.1.1. Run the optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_validation_set.html#training-and-validation-set-results">3.4.1.2. Training and validation set results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_validation_set.html#random-split-of-a-data-set-into-training-and-validation-sets">3.4.2. Random split of a data_set into training and validation sets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/lj_ar/lj_ar_restart.html">3.5. Restarting (continuing) an optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_restart.html#restarting-with-the-cmaoptimizer">3.5.1. Restarting with the CMAOptimizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_restart.html#run-the-first-100-iterations">3.5.1.1. Run the first 100 iterations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_restart.html#continue-for-another-100-iterations-with-a-restart-file">3.5.1.2. Continue for another 100 iterations with a restart file</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_restart.html#restart-with-other-optimizers-e-g-nelder-mead-from-scipy">3.5.2. Restart with other optimizers (e.g. Nelder-Mead from Scipy)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/lj_ar/lj_ar_python.html">3.6. The params Python library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_python.html#run-an-optimization-with-the-python-library">3.6.1. Run an optimization with the Python library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_python.html#calculate-reference-values">3.6.2. Calculate reference values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_python.html#training-and-validation-sets-with-the-python-library">3.6.3. Training and validation sets with the Python library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/results_importer/results_importer.html">3.7. Create training sets with a ResultsImporter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#run-a-reference-job">3.7.1. Run a reference job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#water-molecule-reference-data">3.7.2. Water molecule reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#initialize-the-resultsimporter">3.7.3. Initialize the ResultsImporter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#add-a-singlepoint-calculation-on-the-optimized-geometry">3.7.4. Add a singlepoint calculation on the optimized geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#add-a-geometry-optimization-job-extracting-the-bond-length-and-bond-angle">3.7.5. Add a geometry optimization job extracting the bond length and bond angle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#add-a-trajectory">3.7.6. Add a trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#add-a-reaction-energy">3.7.7. Add a reaction energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#training-set-validation-set-and-other-data-sets">3.7.8. Training set, validation set, and other data sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#exit-plams">3.7.9. Exit PLAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#save-to-disk">3.7.10. Save to disk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#more-resultsimporters">3.7.11. More ResultsImporters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html">3.8. SCC-DFTB repulsive potential for ZnO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#job-collection-yaml-and-training-set-yaml">3.8.1. job_collection.yaml and training_set.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#background-znorg-0-1">3.8.2. Background: znorg-0-1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#parameter-interface">3.8.3. Parameter interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#run-the-parametrization">3.8.4. Run the parametrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#results">3.8.5. Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#modify-the-analytical-repulsive-potential">3.8.6. Modify the analytical repulsive potential</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/reaxff_water.html">3.9. Parameterization of a Water Force Field with ReaxFF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/reaxff_water.html#complete-example-script">3.9.1. Complete Example Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/reaxff_water.html#changing-the-example-script">3.9.2. Changing the Example Script</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html">3.10. Parameterization of a Simple Force Field with ReaxFF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html#calculate-the-reference-data">3.10.1. Calculate the reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html#import-the-reference-data-into-params">3.10.2. Import the reference data into ParAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html#set-the-parameters-to-optimize">3.10.3. Set the parameters to optimize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html#run-the-reaxff-parametrization">3.10.4. Run the ReaxFF parametrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html#visualize-the-results">3.10.5. Visualize the results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/hf_acks2.html">3.11. Refitting HF Charges with the ACKS2 Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/hf_acks2.html#the-config-file">3.11.1. The Config File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/hf_acks2.html#preparing-the-yaml-files-from-input">3.11.2. Preparing the YAML Files from Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/hf_acks2.html#running-the-optimization">3.11.3. Running the Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/hf_acks2.html#comparing-the-new-parameters">3.11.4. Comparing the new parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/hf_acks2.html#playing-with-the-example">3.11.5. Playing with the example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/convert_old_reaxff_format.html">3.12. Convert old ReaxFF training sets to ParAMS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/convert_old_reaxff_format.html#convert-geo-to-job-collection-yaml">3.12.1. Convert <code class="docutils literal notranslate"><span class="pre">geo</span></code> to <code class="docutils literal notranslate"><span class="pre">job_collection.yaml</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/convert_old_reaxff_format.html#convert-trainset-in">3.12.2. Convert <code class="docutils literal notranslate"><span class="pre">trainset.in</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/convert_old_reaxff_format.html#convert-the-old-params-file">3.12.3. Convert the old <code class="docutils literal notranslate"><span class="pre">params</span></code> file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mainscript/mainscript.html">4. ParAMS Main Script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mainscript/mainscript.html#the-configuration-file">4.1. The Configuration File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../mainscript/mainscript.html#generate-a-template-config-file">4.1.1. Generate a template config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mainscript/mainscript.html#list-of-variables-in-params-conf-py">4.1.2. List of variables in <code class="docutils literal notranslate"><span class="pre">params.conf.py</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../components.html">5. Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../architecture/architecture.html">5.1. Architecture Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../collections/collections.html">5.2. Job and Engine Collections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../collections/collections.html#job-collection">5.2.1. Job Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#adding-jobs">5.2.1.1. Adding Jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#lookup">5.2.1.2. Lookup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#removing-entries">5.2.1.3. Removing Entries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#renaming-entries">5.2.1.4. Renaming Entries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#comparison">5.2.1.5. Comparison</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#saving-and-loading">5.2.1.6. Saving and loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#generating-amsjobs">5.2.1.7. Generating AMSJobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#running-collection-jobs">5.2.1.8. Running Collection Jobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../collections/collections.html#engine-collection">5.2.2. Engine Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections/collections.html#collections-api">5.2.3. Collections API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#jcentry">5.2.3.1. JCEntry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#jobcollection">5.2.3.2. JobCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#engine">5.2.3.3. Engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#enginecollection">5.2.3.4. EngineCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#collection-base-class">5.2.3.5. Collection Base Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data_set/data_set.html">5.3. Data Set</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#an-example-dataset">5.3.1. An example DataSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#load-or-store-dataset">5.3.2. Load or store DataSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#adding-entries">5.3.3. Adding entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#demonstration-working-with-a-dataset">5.3.4. Demonstration: Working with a DataSet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#add-an-entry">5.3.4.1. Add an entry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#datasetentry-attributes">5.3.4.2. DataSetEntry attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#accessing-the-dataset-entries">5.3.4.3. Accessing the DataSet entries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#delete-a-dataset-entry">5.3.4.4. Delete a DataSet entry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#split-a-dataset-into-subsets">5.3.4.5. Split a DataSet into subsets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#dataset-header">5.3.4.6. DataSet header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#save-the-data-set">5.3.4.7. Save the data set</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#calculating-and-adding-reference-data-with-ams">5.3.5. Calculating and Adding Reference Data with AMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#calculating-the-loss-function-value">5.3.6. Calculating the Loss Function Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#checking-for-consistency-with-a-given-job-collection">5.3.7. Checking for Consistency with a given Job Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#sigma-vs-weight-what-is-the-difference">5.3.8. Sigma vs. weight: What is the difference?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#data-set-entry-api">5.3.9. Data Set Entry API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#data-set-api">5.3.10. Data Set API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data_set/extractors.html">5.4. Extractors and Comparators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/extractors.html#available-extractors">5.4.1. Available Extractors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#angle">5.4.1.1. Angle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#average-distance">5.4.1.2. Average distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#bulk-modulus">5.4.1.3. Bulk modulus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#cell-angles">5.4.1.4. Cell angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#cell-lengths">5.4.1.5. Cell lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#cell-volume">5.4.1.6. Cell volume</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#charges">5.4.1.7. Charges</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#dihedral">5.4.1.8. Dihedral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#distance">5.4.1.9. Distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#distance-vector">5.4.1.10. Distance vector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#energy">5.4.1.11. Energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#forces">5.4.1.12. Forces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#hessian">5.4.1.13. Hessian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#pes">5.4.1.14. PES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#pes-compared">5.4.1.15. PES compared</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#pesscan-angle">5.4.1.16. PESScan angle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#pesscan-dihedral">5.4.1.17. PESScan dihedral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#pesscan-distance">5.4.1.18. PESScan distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#rmsd">5.4.1.19. RMSD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#shear-modulus">5.4.1.20. Shear modulus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor">5.4.1.21. Stress tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-1d">5.4.1.22. Stress tensor 1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-2d">5.4.1.23. Stress tensor 2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-3d">5.4.1.24. Stress tensor 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-diagonal-2d">5.4.1.25. Stress tensor diagonal 2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-diagonal-3d">5.4.1.26. Stress tensor diagonal 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-off-diagonal-2d">5.4.1.27. Stress tensor off-diagonal 2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-off-diagonal-3d">5.4.1.28. Stress tensor off-diagonal 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#vibrational-frequencies">5.4.1.29. Vibrational frequencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#young-modulus">5.4.1.30. Young modulus</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/extractors.html#custom-extractors">5.4.2. Custom Extractors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/extractors.html#supported-data-structures">5.4.3. Supported Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/extractors.html#custom-comparators">5.4.4. Custom Comparators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data_set/data_set_evaluator.html">5.5. Data Set Evaluator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set_evaluator.html#datasetevaluator-class">5.5.1. DataSetEvaluator class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set_evaluator.html#example-datasetevaluator-calculate-reference">5.5.1.1. Example: DataSetEvaluator.calculate_reference()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set_evaluator.html#example-datasetevaluator-run">5.5.1.2. Example: DataSetEvaluator.run()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set_evaluator.html#example-load-a-saved-datasetevaluator">5.5.1.3. Example: Load a saved DataSetEvaluator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set_evaluator.html#datasetevaluator-api">5.5.2. DataSetEvaluator API</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="results_importer.html">5.6. Results Importer</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">5.6.1. ResultsImporter overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#resultsimporter-summary">5.6.1.1. ResultsImporter summary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resultsimporter-settings">5.6.1.2. ResultsImporter settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#training-set-validation-set-etc">5.6.1.3. Training set, validation set, etc.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#save-and-load-from-disk">5.6.1.4. Save and load from disk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-singlejob">5.6.1.5. add_singlejob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-trajectory-singlepoints">5.6.1.6. add_trajectory_singlepoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-reaction-energy">5.6.1.7. add_reaction_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-pesscan-singlepoints">5.6.1.8. add_pesscan_singlepoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-neb-singlepoints">5.6.1.9. add_neb_singlepoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-pesexploration-singlepoints">5.6.1.10. add_pesexploration_singlepoints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reference_codes.html">5.6.2. AMS, VASP and Quantum ESPRESSO reference data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference_codes.html#ams">5.6.2.1. AMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference_codes.html#vasp">5.6.2.2. VASP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference_codes.html#quantum-espresso">5.6.2.3. Quantum ESPRESSO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html">5.6.3. ResultsImporters API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/interfaces.html">5.7. Parameter Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#available-parameter-interfaces">5.7.1. Available Parameter Interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/xtb.html">5.7.1.1. xTB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/reaxff.html">5.7.1.2. ReaxFF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dftbsplinerep.html">5.7.1.3. SCC-DFTB repulsive potential</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/lennardjones.html">5.7.1.4. Lennard Jones</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#parameter-interface-basics">5.7.2. Parameter Interface Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#working-with-parameters">5.7.3. Working with Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#the-active-parameters-subset">5.7.4. The Active Parameters Subset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#storage">5.7.5. Storage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/interfaces.html#lossless-storage">5.7.5.1. Lossless Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#relation-to-plams-settings">5.7.6. Relation to PLAMS Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#parameter-api">5.7.7. Parameter API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#interface-base-class-api">5.7.8. Interface Base Class API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizers/optimizers.html">5.8. Optimizers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/cmaes.html">5.8.1. CMA-ES</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../optimizers/cmaes.html#list-of-valid-cmasettings">5.8.1.1. List of valid <cite>cmasettings</cite></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../optimizers/cmaes.html#references">5.8.1.2. References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/scipy.html">5.8.2. Scipy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/nevergrad.html">5.8.3. Nevergrad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/armc.html">5.8.4. Adaptive Rate MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/grid.html">5.8.5. Simple Grid Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/base.html">5.8.6. Optimizer Base Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../optimizers/base.html#baseoptimizer-api">5.8.6.1. BaseOptimizer API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../optimizers/base.html#minimizeresult-api">5.8.6.2. MinimizeResult API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runner/runner.html">5.9. Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runner/runner.html#optimization-setup">5.9.1. Optimization Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runner/runner.html#optimization-api">5.9.2. Optimization API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runner/parallellevels.html">5.10. Parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constraints/constraints.html">5.11. Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../callbacks/callbacks.html">5.12. Callbacks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#default-callbacks">5.12.1. Default callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#logger">5.12.2. Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#timeout">5.12.3. Timeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#target-value">5.12.4. Target Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#maximum-iterations">5.12.5. Maximum Iterations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#early-stopping">5.12.6. Early Stopping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#stopfile">5.12.7. Stopfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#time-per-evaluation">5.12.8. Time per Evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#load-average">5.12.9. Load Average</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#user-defined-callbacks">5.12.10. User-Defined Callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/callbacks.html#callback-api">5.12.11. Callback API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../lossfunctions/lossfunctions.html">5.13. Loss Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#specifying-the-loss-function">5.13.1. Specifying the loss function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#technical-information">5.13.2. Technical information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#sum-of-squares-error">5.13.3. Sum of Squares Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#sum-of-absolute-errors">5.13.4. Sum of Absolute Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#mean-absolute-error">5.13.5. Mean Absolute Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#root-mean-square-error">5.13.6. Root-Mean-Square Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#loss-function-api">5.13.7. Loss Function API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/utilities.html">5.14. Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/converters.html">5.14.1. ParAMS Converters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/converters.html#ams-job-to-settings">5.14.1.1. AMS Job to Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/converters.html#ams-job-to-engine">5.14.1.2. AMS Job to Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/history.html">5.14.2. Optimization History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/plotting.html">5.14.3. Plotting Funcitons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/public_helpers.html">5.14.4. Helper functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/weights_schemes.html">5.14.5. Weights schemes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/weights_schemes.html#types-of-weights-schemes">5.14.5.1. Types of weights schemes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/weights_schemes.html#examples-of-weight-schemes">5.14.5.2. Examples of weight schemes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/weights_schemes.html#weights-schemes-api">5.14.5.3. Weights schemes API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../experimental/experimental.html">5.15. Experimental Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../experimental/parameter_interfaces.html">5.15.1. Working with Parameter Interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../experimental/parameter_interfaces.html#active-parameter-search">5.15.1.1. Active Parameter Search</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../experimental/data_set.html">5.15.2. Working with Data Sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../experimental/data_set.html#data-set-sensitivity">5.15.2.1. Data Set Sensitivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experimental/data_set.html#normalization-of-data-set-weights">5.15.2.2. Normalization of Data Set Weights</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cite.html">6. Required Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">7. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">8. Frequently Asked Questions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">ParAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../ParAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../../index.html">ParAMS</a>/</li>
+      
+          <li><a href="../components.html">5. Components</a>/</li>
+      
+          <li><a href="results_importer.html">5.6. Results Importer</a>/</li>
+      
+    <li class="orange-text">5.6.1. ResultsImporter overview</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="resultsimporter-overview">
+<h1>5.6.1. ResultsImporter overview<a class="headerlink" href="#resultsimporter-overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="resultsimporter-summary">
+<h2>5.6.1.1. ResultsImporter summary<a class="headerlink" href="#resultsimporter-summary" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsImporter</span></code> class is convenient for setting up the <a class="reference internal" href="../collections/collections.html#job-collection"><span class="std std-ref">Job Collection</span></a>, <a class="reference internal" href="../data_set/data_set.html#data-set"><span class="std std-ref">Data Set</span></a>, and <a class="reference internal" href="../collections/collections.html#engine-collection"><span class="std std-ref">Engine Collection</span></a> from
+finished reference calculations.  A <em>results importer</em> typically affects all three of those classes
+with a single method (see <a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstration"><span class="std std-ref">Create training sets with a ResultsImporter</span></a>)</p>
+<p>Most ResultsImporters work on <strong>finished reference jobs</strong>, coming from one of these <a class="reference internal" href="reference_codes.html#resultsimporterreferencecodes"><span class="std std-ref">computational chemistry programs</span></a>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Program</th>
+<th class="head">Required results files</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>AMS (ADF, BAND, DFTB, ReaxFF, …)</td>
+<td><code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code> (and sometimes <code class="docutils literal notranslate"><span class="pre">engine.rkf</span></code>)</td>
+</tr>
+<tr class="row-odd"><td>VASP</td>
+<td><code class="docutils literal notranslate"><span class="pre">OUTCAR</span></code> (and optionally <code class="docutils literal notranslate"><span class="pre">INCAR</span></code>)</td>
+</tr>
+<tr class="row-even"><td>Quantum ESPRESSO</td>
+<td>Standard output file (often ending in <code class="docutils literal notranslate"><span class="pre">.out</span></code>).</td>
+</tr>
+</tbody>
+</table>
+<p>The ResultsImporter</p>
+<ul class="simple">
+<li><strong>reads the input and output</strong> from the reference job,</li>
+<li><strong>creates a reference engine</strong> in the <a class="reference internal" href="../collections/collections.html#engine-collection"><span class="std std-ref">Engine Collection</span></a> if it does not already exist,</li>
+<li><strong>adds one or more jobs</strong> to the <a class="reference internal" href="../collections/collections.html#job-collection"><span class="std std-ref">Job Collection</span></a> using one or more systems from the reference job, if they do not already exist</li>
+<li><strong>adds one or more entries</strong> to the <a class="reference internal" href="../data_set/data_set.html#data-set"><span class="std std-ref">Data Set</span></a></li>
+</ul>
+<p>The <a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstration"><span class="std std-ref">Create training sets with a ResultsImporter</span></a> gives an example on how to use ResultsImporters.</p>
+<p>All ResultsImporters are summarized in the below table, where SP stands for SinglePoint, GO for GeometryOptimization, MD for MolecularDynamics, and QE for Quantum ESPRESSO.</p>
+<table border="1" class="docutils" id="resultsimporterslist">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">ResultsImporter name</th>
+<th class="head"><a class="reference internal" href="#resultsimporteraddsinglejob"><span class="std std-ref">add_singlejob</span></a></th>
+<th class="head"><a class="reference internal" href="#resultsimporteraddtrajectory"><span class="std std-ref">add_trajectory_singlepoints</span></a></th>
+<th class="head"><a class="reference internal" href="#resultsimporteraddreactionenergy"><span class="std std-ref">add_reaction_energy</span></a></th>
+<th class="head"><a class="reference internal" href="#resultsimporteraddpesscan"><span class="std std-ref">add_pesscan_singlepoints</span></a></th>
+<th class="head"><a class="reference internal" href="#resultsimporteraddneb"><span class="std std-ref">add_neb_singlepoints</span></a></th>
+<th class="head"><a class="reference internal" href="#resultsimporteraddpesexploration"><span class="std std-ref">add_pesexploration_singlepoints</span></a></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Reference job type</td>
+<td>any</td>
+<td>GO or MD</td>
+<td>SP, GO, or None <a class="footnote-reference" href="#jobtype-none" id="id1">[1]</a></td>
+<td>PESScan</td>
+<td>NEB</td>
+<td>PESExploration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="reference_codes.html#resultsimporterreferencecodes"><span class="std std-ref">Reference program</span></a></td>
+<td>AMS/VASP/QE</td>
+<td>AMS/VASP/QE</td>
+<td>AMS/VASP/QE</td>
+<td>AMS</td>
+<td>AMS</td>
+<td>AMS</td>
+</tr>
+<tr class="row-even"><td># jobs added</td>
+<td>1</td>
+<td>any</td>
+<td>1 per species</td>
+<td>any</td>
+<td>any</td>
+<td>any</td>
+</tr>
+<tr class="row-odd"><td>Default task</td>
+<td>SP</td>
+<td>SP</td>
+<td>SP</td>
+<td>SP</td>
+<td>SP</td>
+<td>SP</td>
+</tr>
+<tr class="row-even"><td>Allowed tasks</td>
+<td>any</td>
+<td>SP</td>
+<td>SP or GO</td>
+<td>SP</td>
+<td>SP</td>
+<td>SP</td>
+</tr>
+<tr class="row-odd"><td>Systems</td>
+<td>final frame <a class="footnote-reference" href="#system-add-singlejob" id="id2">[2]</a></td>
+<td>any</td>
+<td>final frames</td>
+<td>converged points</td>
+<td>converged points</td>
+<td>minima and transition states</td>
+</tr>
+<tr class="row-even"><td># data_set entries</td>
+<td>any</td>
+<td>any</td>
+<td>1</td>
+<td>any</td>
+<td>any</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Properties</td>
+<td>all <a class="reference internal" href="../data_set/extractors.html#availableextractors"><span class="std std-ref">extractors</span></a></td>
+<td>traj. prop. <a class="footnote-reference" href="#trajectory-properties" id="id3">[3]</a></td>
+<td>None</td>
+<td>energy/relative_energies/stresstensor*</td>
+<td>energy/relative_energies</td>
+<td>energy/relative_energies</td>
+</tr>
+<tr class="row-even"><td>API docs</td>
+<td><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_singlejob" title="scm.params.core.results_importer.ResultsImporter.add_singlejob"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_singlejob()</span></code></a></td>
+<td><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_trajectory_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_trajectory_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_trajectory_singlepoints()</span></code></a></td>
+<td><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_reaction_energy" title="scm.params.core.results_importer.ResultsImporter.add_reaction_energy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_reaction_energy()</span></code></a></td>
+<td><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_pesscan_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_pesscan_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_pesscan_singlepoints()</span></code></a></td>
+<td><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_neb_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_neb_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_neb_singlepoints()</span></code></a></td>
+<td><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_pesexploration_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_pesexploration_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_pesexploration_singlepoints()</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="jobtype-none" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>add_reaction_energy can also be used without reference jobs, only the atomic coordinates are needed.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="system-add-singlejob" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>add_singlejob takes the “main molecule”, unless the reference job is a PESScan (then the input molecule is used).</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="trajectory-properties" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Trajectory properties: energy, relative_energies, forces, stresstensor</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="resultsimporter-settings">
+<span id="resultsimportersettings"></span><h2>5.6.1.2. ResultsImporter settings<a class="headerlink" href="#resultsimporter-settings" title="Permalink to this headline">¶</a></h2>
+<p>When initializing a <code class="docutils literal notranslate"><span class="pre">ResultsImporter</span></code>, you can pass a <code class="docutils literal notranslate"><span class="pre">settings</span></code> argument, that is
+either a string pointing to a <code class="docutils literal notranslate"><span class="pre">results_importer_settings.yaml</span></code> file, or which is a
+PLAMS Settings instance.</p>
+<p>Example:</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results_importer_settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">results_importer_settings</span><span class="o">.</span><span class="n">trim_settings</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">results_importer_settings</span><span class="o">.</span><span class="n">default_go_settings</span><span class="o">.</span><span class="n">MaxIterations</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">results_importer_settings</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="s1">&#39;kcal/mol&#39;</span>
+
+<span class="n">ri</span> <span class="o">=</span> <span class="n">ResultsImporter</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">results_importer_settings</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For a detailed description of the available settings, see <a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.__init__" title="scm.params.core.results_importer.ResultsImporter.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</div>
+<div class="section" id="training-set-validation-set-etc">
+<span id="resultsimporterdatasets"></span><h2>5.6.1.3. Training set, validation set, etc.<a class="headerlink" href="#training-set-validation-set-etc" title="Permalink to this headline">¶</a></h2>
+<p>See the tutorial: <a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstrationdatasets"><span class="std std-ref">Training set, validation set, and other data sets</span></a>.</p>
+</div>
+<div class="section" id="save-and-load-from-disk">
+<h2>5.6.1.4. Save and load from disk<a class="headerlink" href="#save-and-load-from-disk" title="Permalink to this headline">¶</a></h2>
+<p>The job collection, engine collection, data_set(s), and shortcut settings can be
+stored for later retrieval with the <a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.store" title="scm.params.core.results_importer.ResultsImporter.store"><code class="xref py py-meth docutils literal notranslate"><span class="pre">store()</span></code></a> method.</p>
+<p>To load them from files, pass the paths to the files as arguments to
+<a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.__init__" title="scm.params.core.results_importer.ResultsImporter.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+<p>For an example, see the tutorial: <a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstrationsavetodisk"><span class="std std-ref">Save to disk</span></a>.</p>
+</div>
+<div class="section" id="add-singlejob">
+<span id="resultsimporteraddsinglejob"></span><h2>5.6.1.5. add_singlejob<a class="headerlink" href="#add-singlejob" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_singlejob" title="scm.params.core.results_importer.ResultsImporter.add_singlejob"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_singlejob()</span></code></a> adds 1 job to the job collection, together with an arbitrary number of entries in the data_set.</p>
+<p>For how to use it, see the <a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstration"><span class="std std-ref">Create training sets with a ResultsImporter</span></a>, in particular</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstrationaddsinglejobsinglepoint"><span class="std std-ref">Add a singlepoint calculation on the optimized geometry</span></a></li>
+<li><a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstrationaddsinglejobgeometryoptimization"><span class="std std-ref">Add a geometry optimization job extracting the bond length and bond angle</span></a></li>
+</ul>
+<p>See also the API docs: <a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_singlejob" title="scm.params.core.results_importer.ResultsImporter.add_singlejob"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_singlejob()</span></code></a></p>
+<p>Each entry in the data_set must be an <a class="reference internal" href="../data_set/extractors.html#availableextractors"><span class="std std-ref">extractor</span></a> acting on the job.</p>
+<p>Adding for example <code class="docutils literal notranslate"><span class="pre">'distance(0,1)'</span></code> to the <code class="docutils literal notranslate"><span class="pre">properties</span></code> argument will add a data_set entry with the expression <code class="docutils literal notranslate"><span class="pre">distance('jobname',0,1)</span></code>.</p>
+<p>Example:</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ri</span> <span class="o">=</span> <span class="n">ResultsImporter</span><span class="p">()</span>
+<span class="n">ri</span><span class="o">.</span><span class="n">add_singlejob</span><span class="p">(</span><span class="s1">&#39;/path/to/ams.rkf&#39;</span><span class="p">,</span>
+                 <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;distance(0,1)&#39;</span><span class="p">],</span>
+                 <span class="n">task</span><span class="o">=</span><span class="s1">&#39;GeometryOptimization&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-trajectory-singlepoints">
+<span id="resultsimporteraddtrajectory"></span><h2>5.6.1.6. add_trajectory_singlepoints<a class="headerlink" href="#add-trajectory-singlepoints" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_trajectory_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_trajectory_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_trajectory_singlepoints()</span></code></a> extracts given number of frames from a trajectory file.
+The <code class="docutils literal notranslate"><span class="pre">properties</span></code> must be one or more of the following: <code class="docutils literal notranslate"><span class="pre">energy</span></code>,
+<code class="docutils literal notranslate"><span class="pre">relative_energies</span></code>, <code class="docutils literal notranslate"><span class="pre">forces</span></code>, or <code class="docutils literal notranslate"><span class="pre">stresstensor</span></code>.</p>
+<p>For how to use it, see <a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstration"><span class="std std-ref">Create training sets with a ResultsImporter</span></a>, in particular</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstrationaddtrajectory"><span class="std std-ref">Add a trajectory</span></a></li>
+</ul>
+<p>See also the API docs: <a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_trajectory_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_trajectory_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_trajectory_singlepoints()</span></code></a></p>
+<p>Example:</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ri</span> <span class="o">=</span> <span class="n">ResultsImporter</span><span class="p">()</span>
+
+<span class="c1"># extract every 10 frames</span>
+<span class="n">ri</span><span class="o">.</span><span class="n">add_trajectory_singlepoints</span><span class="p">(</span><span class="s1">&#39;/path/to/ams.rkf&#39;</span><span class="p">,</span>
+                  <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;forces&#39;</span><span class="p">,</span> <span class="s1">&#39;relative_energies&#39;</span><span class="p">],</span>
+                  <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                  <span class="n">step</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># extract 20 frames</span>
+<span class="n">ri</span><span class="o">.</span><span class="n">add_trajectory_singlepoints</span><span class="p">(</span><span class="s1">&#39;/path/to/ams.rkf&#39;</span><span class="p">,</span>
+                  <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;forces&#39;</span><span class="p">,</span> <span class="s1">&#39;relative_energies&#39;</span><span class="p">],</span>
+                  <span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-reaction-energy">
+<span id="resultsimporteraddreactionenergy"></span><h2>5.6.1.7. add_reaction_energy<a class="headerlink" href="#add-reaction-energy" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_reaction_energy" title="scm.params.core.results_importer.ResultsImporter.add_reaction_energy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_reaction_energy()</span></code></a> calculates and adds a reaction energy to the
+data_set.  The reaction is automatically balanced: only the reactants and
+products need to specified, not the stoichiometric coefficients.
+The coefficients are normalized according to the <code class="docutils literal notranslate"><span class="pre">normalization</span></code> and <code class="docutils literal notranslate"><span class="pre">normalization_value</span></code> arguments.</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">normalization='r0'</span></code> will set the coefficient for the first reactant
+to <code class="docutils literal notranslate"><span class="pre">normalization_value</span></code>. <code class="docutils literal notranslate"><span class="pre">normalization='r1'</span></code> would correspond to the
+second reactant, etc. <code class="docutils literal notranslate"><span class="pre">normalization='p0'</span></code> would correspond to the first
+product, etc.</p>
+<p>add_reaction_energy can also be used with PLAMS molecules instead of reference
+jobs. In that case one should specify the reference value with the
+<code class="docutils literal notranslate"><span class="pre">reference</span></code> keyword.</p>
+<p>For how to use it, see <a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstration"><span class="std std-ref">Create training sets with a ResultsImporter</span></a>, in particular</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../examples/results_importer/results_importer.html#resultsimporterdemonstrationaddreactionenergy"><span class="std std-ref">Add a reaction energy</span></a></li>
+</ul>
+<p>See also the API docs: <a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_reaction_energy" title="scm.params.core.results_importer.ResultsImporter.add_reaction_energy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_reaction_energy()</span></code></a></p>
+<p>Simple example:</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ri</span> <span class="o">=</span> <span class="n">ResultsImporter</span><span class="p">()</span>
+
+<span class="c1"># from reference jobs</span>
+<span class="n">ri</span><span class="o">.</span><span class="n">add_reaction_energy</span><span class="p">(</span><span class="n">reactants</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;/reactant1/ams.rkf&#39;</span><span class="p">,</span> <span class="s1">&#39;/reactant2/ams.rkf&#39;</span><span class="p">],</span>
+                       <span class="n">products</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;/product1/ams.rkf&#39;</span><span class="p">,</span> <span class="s1">&#39;/product2/ams.rkf&#39;</span><span class="p">],</span>
+                       <span class="n">normalization</span><span class="o">=</span><span class="s1">&#39;r0&#39;</span><span class="p">,</span>
+                       <span class="n">normalization_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># from Molecule instances. mol_1 etc. need to be PLAMS Molecules</span>
+<span class="n">ri</span><span class="o">.</span><span class="n">add_reaction_energy</span><span class="p">(</span><span class="n">reactants</span><span class="o">=</span><span class="p">[</span><span class="n">mol_1</span><span class="p">,</span> <span class="n">mol_2</span><span class="p">],</span>
+                       <span class="n">products</span><span class="o">=</span><span class="p">[</span><span class="n">mol_3</span><span class="p">,</span> <span class="n">mol_4</span><span class="p">],</span>
+                       <span class="n">normalization</span><span class="o">=</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span>
+                       <span class="n">normalization_value</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+                       <span class="n">reference</span><span class="o">=</span><span class="mf">12.34</span><span class="p">,</span>
+                       <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-pesscan-singlepoints">
+<span id="resultsimporteraddpesscan"></span><h2>5.6.1.8. add_pesscan_singlepoints<a class="headerlink" href="#add-pesscan-singlepoints" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_pesscan_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_pesscan_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_pesscan_singlepoints()</span></code></a> extracts a given number of (converged) frames from an AMS PESScan reference job, and adds them as single point calculations to the job collection.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">If you want to add a job with <code class="docutils literal notranslate"><span class="pre">Task</span> <span class="pre">PESScan</span></code> to the job collection, do not
+use this shortcut but instead <a class="reference internal" href="#resultsimporteraddsinglejob"><span class="std std-ref">add_singlejob</span></a>.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Adding singlepoint calculations from a PESScan with
+<code class="docutils literal notranslate"><span class="pre">add_pesscan_singlepoints(job,</span> <span class="pre">properties='relative_energies')</span></code> will give
+a much faster parametrization than using <code class="docutils literal notranslate"><span class="pre">add_singlejob(job,</span>
+<span class="pre">properties='pes',</span> <span class="pre">task='PESScan')</span></code>. However, we in general recommend to use
+<code class="docutils literal notranslate"><span class="pre">add_singlejob</span></code> instead, since it will give a more accurate
+parametrization of the potential energy surface.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">properties</span></code> must be one or more of the following: <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">relative_energies</span></code>, <code class="docutils literal notranslate"><span class="pre">stresstensor*</span></code> (<code class="docutils literal notranslate"><span class="pre">stresstensor</span></code>, <code class="docutils literal notranslate"><span class="pre">stresstensor_2d</span></code>, etc., see <a class="reference internal" href="../data_set/extractors.html#available-extractors"><span class="std std-ref">Available Extractors</span></a>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Extracting the stress tensor from an energy-volume scan will only work if
+CalcPropertiesAtPESPoints was set when running the job, i.e. if the files
+<code class="docutils literal notranslate"><span class="pre">PESPoint(1).rkf</span></code> etc. exist in the same directory as <code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code>.</p>
+</div>
+<p>See the API docs for details: <a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_pesscan_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_pesscan_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_pesscan_singlepoints()</span></code></a></p>
+<p>Example:</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ri</span> <span class="o">=</span> <span class="n">ResultsImporter</span><span class="p">()</span>
+
+<span class="n">ri</span><span class="o">.</span><span class="n">add_pesscan_singlepoints</span><span class="p">(</span><span class="s1">&#39;/path/to/ams.rkf&#39;</span><span class="p">,</span>  <span class="c1"># ams.rkf from a PESScan job</span>
+               <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;relative_energies&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-neb-singlepoints">
+<span id="resultsimporteraddneb"></span><h2>5.6.1.9. add_neb_singlepoints<a class="headerlink" href="#add-neb-singlepoints" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_neb_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_neb_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_neb_singlepoints()</span></code></a> extracts the converged frames from an AMS NEB reference job, and adds them as single point calculations to the job collection.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">If you want to add a job with <code class="docutils literal notranslate"><span class="pre">Task</span> <span class="pre">NEB</span></code> to the job collection, do not use this shortcut but instead <a class="reference internal" href="#resultsimporteraddsinglejob"><span class="std std-ref">add_singlejob</span></a>.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">properties</span></code> must be one or more of the following: <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">relative_energies</span></code>.</p>
+<p>See the API docs for details: <a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_neb_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_neb_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_neb_singlepoints()</span></code></a></p>
+<p>Example:</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ri</span> <span class="o">=</span> <span class="n">ResultsImporter</span><span class="p">()</span>
+
+<span class="n">ri</span><span class="o">.</span><span class="n">add_neb_singlepoints</span><span class="p">(</span><span class="s1">&#39;/path/to/ams.rkf&#39;</span><span class="p">,</span>  <span class="c1"># ams.rkf from a NEB job</span>
+           <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;relative_energies&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-pesexploration-singlepoints">
+<span id="resultsimporteraddpesexploration"></span><h2>5.6.1.10. add_pesexploration_singlepoints<a class="headerlink" href="#add-pesexploration-singlepoints" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_pesexploration_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_pesexploration_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_pesexploration_singlepoints()</span></code></a> extracts a given list of states an AMS
+PESExploration reference job, and adds them as single point calculations to the
+job collection.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">If you want to add a job with <code class="docutils literal notranslate"><span class="pre">Task</span> <span class="pre">PESExploration</span></code> to the job collection
+(although you probably do not because of how computationally demanding such
+jobs are), do not use this shortcut but instead <a class="reference internal" href="#resultsimporteraddsinglejob"><span class="std std-ref">add_singlejob</span></a>.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">properties</span></code> must be one or more of the following: <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">relative_energies</span></code>.</p>
+<p>See the API docs for details: <a class="reference internal" href="api.html#scm.params.core.results_importer.ResultsImporter.add_pesexploration_singlepoints" title="scm.params.core.results_importer.ResultsImporter.add_pesexploration_singlepoints"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_pesexploration_singlepoints()</span></code></a></p>
+<p>Example:</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ri</span> <span class="o">=</span> <span class="n">ResultsImporter</span><span class="p">()</span>
+
+<span class="n">ri</span><span class="o">.</span><span class="n">add_pesexploration_singlepoints</span><span class="p">(</span><span class="s1">&#39;/path/to/ams.rkf&#39;</span><span class="p">,</span>  <span class="c1"># ams.rkf from a PESExploration job</span>
+                      <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;relative_energies&#39;</span><span class="p">],</span>
+                      <span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span> <span class="c1"># state numbers (start with 1)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="reference_codes.html" class="btn btn-neutral float-right" title="5.6.2. AMS, VASP and Quantum ESPRESSO reference data" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="results_importer.html" class="btn btn-neutral" title="5.6. Results Importer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+<!-- https://stackoverflow.com/questions/2454577/sphinx-restructuredtext-show-hide-code-snippets/25543713 -->
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(200);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

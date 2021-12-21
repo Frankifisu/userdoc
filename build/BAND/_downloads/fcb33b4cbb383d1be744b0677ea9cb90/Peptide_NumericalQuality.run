@@ -1,0 +1,67 @@
+#! /bin/sh
+
+# This example shows how to tune the numerical quality of the calculation. This
+# will influence both efficiency and accuracy of the calculation.
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   ATOMS 
+      C  -2.543276676    0.646016253   -0.226282061
+      C  -1.380007216   -0.349821933   -0.099968062
+      C   1.066549862   -0.581911934   -0.064823014
+      C   2.223931363    0.423839954   -0.118070453
+      N  -0.149937993    0.193000383   -0.179010633
+      N   3.452833267   -0.128914507   -0.101813389
+      O  -1.589886979   -1.564606357    0.062390357
+      O   2.010772661    1.647347397   -0.186192833
+      H  -2.480330907    1.422845016    0.554868474
+      H   3.629655835   -1.142731500   -0.018098016
+      H  -2.511564496    1.180719545   -1.193540463
+      H   0.024515371    1.206808884   -0.244500253
+      H   1.160598100   -1.320381370   -0.884522980
+      H   1.071343640   -1.136930542    0.888913220
+   END
+   Lattice
+      7.211585775    0.000000000    0.000000000
+   End
+End
+
+Engine Band 
+   TITLE Quality
+
+   NumericalQuality Normal
+
+   ZlmFit
+      Quality Normal
+   End
+
+   BeckeGrid
+      Quality Basic
+   End
+
+   KSpace
+      Quality Basic
+   End
+
+   SoftConfinement
+      Quality VeryGood
+   End
+
+   Basis
+      Type DZ
+      Core Large
+   End
+
+   Relativity Level=None
+
+   XC
+      GGA PBE
+   END
+EndEngine
+eor
+
+
+

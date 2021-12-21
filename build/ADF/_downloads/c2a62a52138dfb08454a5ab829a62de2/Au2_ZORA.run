@@ -1,0 +1,68 @@
+#! /bin/sh
+
+
+# A relativistic geometry optimization with the ZORA formalism. Both a scalar
+# relativistic geometry optimization, as well as a spin-orbit coupled
+# relativistic geometry optimization are performed. Spin-orbit effects on the
+# geometry are often not so large for closed shell molecules, but takes
+# typically a factor 4 times as much as a scalar relativistic calculation.
+
+AMS_JOBNAME=Au2_GO_scalar $AMSBIN/ams <<eor
+System
+  atoms
+     Au  0.0  0.0 -1.250
+     Au  0.0  0.0  1.250
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=1E-4
+End
+
+Engine ADF
+  basis
+    type TZ2P
+    core Small
+    CreateOutput Yes
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=Au2_GO_spinorbit $AMSBIN/ams <<eor
+System
+  atoms
+     Au  0.0  0.0 -1.250
+     Au  0.0  0.0  1.250
+  end
+end
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=1E-4
+End
+
+Engine ADF
+  basis
+    type TZ2P
+    core Small
+    CreateOutput Yes
+  end
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+EndEngine
+
+eor

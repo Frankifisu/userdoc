@@ -1,0 +1,64 @@
+#! /bin/sh
+
+
+# The aromaticity indices Iring and MCI can be calculated with ADF. Calculation
+# of these aromaticity indices invokes the QTAIM analysis automatically and uses
+# its results so all accuracy considerations for the QTAIM key are also valid
+# here. The rings should be specified using the AROMATICITY input block, one
+# line per ring. The atoms must be listed in the order they are connected in the
+# ring. Note that although a partial QTAIM analysis is performed, its results 
+# are not printed to the output file.
+# Relativistic hamiltonian cannot be used when computing AROMATICITY.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C      -0.000000000000      -1.402840000000      -1.219800000000
+     C       0.000000000000      -0.698820000000      -2.427560000000
+     C       0.000000000000       0.698820000000      -2.427560000000
+     C       0.000000000000       1.402840000000      -1.219800000000
+     C       0.000000000000       0.708650000000      -0.000000000000
+     C      -0.000000000000      -0.708650000000       0.000000000000
+     C      -0.000000000000      -1.402840000000       1.219800000000
+     C      -0.000000000000      -0.698820000000       2.427560000000
+     C      -0.000000000000       0.698820000000       2.427560000000
+     C       0.000000000000       1.402840000000       1.219800000000
+     H      -0.000000000000      -2.486200000000      -1.238920000000
+     H      -0.000000000000      -1.237890000000      -3.366130000000
+     H       0.000000000000       1.237890000000      -3.366130000000
+     H       0.000000000000       2.486200000000      -1.238920000000
+     H      -0.000000000000      -2.486200000000       1.238920000000
+     H      -0.000000000000      -1.237890000000       3.366130000000
+     H       0.000000000000       1.237890000000       3.366130000000
+     H       0.000000000000       2.486200000000       1.238920000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  aromaticity
+     1 2 3 4 5 6
+     5 6 7 8 9 10
+  end
+  basis
+    core None
+    type TZP
+  end
+  xc
+    gga PBE
+  end
+  Relativity Level=None
+EndEngine
+
+eor
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,156 @@
+#! /bin/sh
+
+
+# This example uses the relativistic spin-orbit coupled X2C method. By default
+# in ADF the electron density at the nuclei is calculated, no input key is
+# required. The electron density at the nuclei could be used for the
+# interpretation of isomer shifts in Mossbauer spectroscopy. Typically one needs
+# to perform a fit of the experimentally measured isomer shifts versus the
+# calculated electron densities. The absolute electron density at a nucleus
+# heavily depends on the accuracy of the basis set in the core region of this
+# nucleus, especially if relativistic effects are included. Important is to use
+# the same basis set, same exchange correlation functional, same numerical
+# accuracy, if electron densities at nuclei in different molecules are compared.
+# For the calculation of Mossbauer qadrupole splittings the key QTENS is
+# required This example calculates the compounds Hg, HgF, HgF2, HgF4, and HgCl2.
+
+
+AMS_JOBNAME=Hg_X2C $AMSBIN/ams <<eor
+System
+  atoms
+     Hg 0 0 0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  exactdensity
+  basis
+    core None
+    type ZORA/DZ
+  end
+  nuclearmodel gaussian
+  numericalquality good
+  relativity
+    level spin-orbit
+    formalism X2C
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=HgF_X2C $AMSBIN/ams <<eor
+System
+  atoms
+     Hg 0 0 0
+     F  0 0 2.007
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  exactdensity
+  basis
+    core None
+    type ZORA/DZ
+  end
+  nuclearmodel gaussian
+  numericalquality good
+  qtens
+  relativity
+    Level spin-orbit
+    Formalism X2C
+    SpinOrbitMagnetization NonCollinear
+  end
+  symmetry nosym
+  unrestricted
+EndEngine
+eor
+
+
+AMS_JOBNAME=HgF2_X2C $AMSBIN/ams <<eor
+System
+  atoms
+     Hg 0 0  0
+     F  0 0  1.914
+     F  0 0 -1.914
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  exactdensity
+  basis
+    core None
+    type ZORA/DZ
+  end
+  nuclearmodel gaussian
+  numericalquality good
+  qtens
+  relativity
+    level spin-orbit
+    formalism X2C
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=HgF4_X2C $AMSBIN/ams <<eor
+System
+  atoms
+     Hg  0     0     0
+     F   0    -1.885 0
+     F   0     1.885 0
+     F  -1.885 0     0
+     F   1.885 0     0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  exactdensity
+  basis
+    core None
+    type ZORA/DZ
+  end
+  nuclearmodel gaussian
+  numericalquality good
+  qtens
+  relativity
+    level spin-orbit
+    formalism X2C
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=HgCl2_X2C $AMSBIN/ams <<eor
+System
+  atoms
+     Hg 0 0  0
+     Cl 0 0  2.252
+     Cl 0 0 -2.252
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  exactdensity
+  basis
+    core None
+    type ZORA/DZ
+  end
+  nuclearmodel gaussian
+  numericalquality good
+  qtens
+  relativity
+    level spin-orbit
+    formalism X2C
+  end
+EndEngine
+eor

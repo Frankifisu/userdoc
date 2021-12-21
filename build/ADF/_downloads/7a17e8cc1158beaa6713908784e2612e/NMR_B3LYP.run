@@ -1,0 +1,160 @@
+#!/bin/sh
+
+
+# This example shows how to do hybrid calculation of NMR chemical shifts.
+
+# One needs of course a hybrid functional in the XC block key in ADF. One should
+# also use SAVE TAPE10, such that it is an input file in the nmr module.
+
+# In the input for the nmr module one can add the key ZSOAO2007 to approximate
+# the effect of spin on the nucleus in the spin-orbit coupled calculations.
+
+# In the last example spin-orbit coupling is included. Symmetry should be NOSYM.
+
+
+AMS_JOBNAME=NR $AMSBIN/ams <<eor
+System
+  atoms
+     P       0.00000000       0.00000000       1.00000000
+     F      -0.71283358       1.23466398       1.81325568
+     F      -0.71283358      -1.23466398       1.81325568
+     F       1.42566716       0.00000000       1.81325568
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title PF3-NMR-B3LYP
+  basis
+    core None
+    type DZP
+  end
+  noprint sfo
+  numericalquality Good
+  save TAPE10
+  xc
+    hybrid B3LYP
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+$AMSBIN/nmr <<eor
+adffile NR.results/adf.rkf
+tape10file NR.results/TAPE10
+NMR
+  U1K  BEST
+  Out  TENS
+  Nuc  1  2
+  SCF 1.0e-4
+End
+eor
+
+rm logfile
+
+AMS_JOBNAME=SR $AMSBIN/ams <<eor
+System
+  atoms
+     P       0.00000000       0.00000000       1.00000000
+     F      -0.71283358       1.23466398       1.81325568
+     F      -0.71283358      -1.23466398       1.81325568
+     F       1.42566716       0.00000000       1.81325568
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title PF3-NMR-B3LYP ZORA SCALAR
+  basis
+    core None
+    type DZP
+  end
+  noprint sfo
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  save TAPE10
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor
+
+$AMSBIN/nmr <<eor
+adffile SR.results/adf.rkf
+tape10file SR.results/TAPE10
+NMR
+  U1K  BEST
+  Out  TENS
+  Nuc  1  2
+  SCF 1.0e-4
+End
+eor
+
+rm logfile
+
+AMS_JOBNAME=SO $AMSBIN/ams <<eor
+System
+  atoms
+     P         1.000000    0.000000    0.000000
+     F         1.813256    1.425667    0.000000
+     F         1.813256   -0.712834    1.234664
+     F         1.813256   -0.712834   -1.234664
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title PF3-NMR-B3LYP ZORA SPINORBIT
+  basis
+    core None
+    type DZP
+  end
+  noprint sfo
+  numericalquality Good
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  rihartreefock
+    fitsetquality Normal
+  end
+  save TAPE10
+  symmetry nosym
+  xc
+    hybrid B3LYP
+  end
+EndEngine
+eor
+
+$AMSBIN/nmr <<eor
+adffile SO.results/adf.rkf
+tape10file SO.results/TAPE10
+NMR
+  USE  SO1C
+  U1K  BEST
+  Out  TENS
+  Nuc  1  2
+  SCF 1.0e-4
+End
+eor
+rm logfile TAPE15
+
+$AMSBIN/nmr <<eor
+adffile SO.results/adf.rkf
+tape10file SO.results/TAPE10
+NMR
+  U1K  BEST
+  Out  TENS
+  Nuc  1  2
+  SCF 1.0e-4
+End
+eor
+rm logfile TAPE15

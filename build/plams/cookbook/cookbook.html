@@ -1,0 +1,1236 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cookbook &mdash; PLAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PLAMS 2021.1 documentation" href="../index.html"/>
+        <link rel="next" title="Citations" href="../citations.html"/>
+        <link rel="prev" title="Vibrational analysis with ASE" href="../examples/vibrationASE.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/plams_logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search PLAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-scripting" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-plams">What is PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-can-be-done-with-plams">What can be done with PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#simple-example">Simple example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-plams-is-not">What PLAMS is <em>not</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#library-contents">Library contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#installing-plams">Installing PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#updating-plams">Updating PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#running-plams">Running PLAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#defaults-file">Defaults file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../started.html#the-launch-script">The launch script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#working-folder-location">Working folder location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#passing-variables">Passing variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#importing-past-jobs">Importing past jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#restarting-failed-script">Restarting failed script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../started.html#multiple-input-scripts">Multiple input scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../components/components.html">Components overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../components/settings.html">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#tree-like-structure">Tree-like structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#dot-notation">Dot notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#case-sensitivity">Case sensitivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#global-settings">Global settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/settings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/jobs.html">Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#preparing-a-job">Preparing a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#contents-of-job-settings">Contents of job settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#default-settings">Default settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#running-a-job">Running a job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#name-conflicts">Name conflicts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#prerun-and-postrun-methods">Prerun and postrun methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#preview-mode">Preview mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#job-api">Job API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#single-jobs">Single jobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#subclassing-singlejob">Subclassing SingleJob</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobs.html#multijobs">Multijobs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/jobs.html#using-multijob">Using MultiJob</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/results.html">Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#files-in-the-job-folder">Files in the job folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#synchronization-of-parallel-job-executions">Synchronization of parallel job executions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/results.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#cleaning-job-folder">Cleaning job folder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/results.html#cleaning-for-multijobs">Cleaning for multijobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/results.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/runners.html">Job runners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/runners.html#local-job-runner">Local job runner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/runners.html#remote-job-runner">Remote job runner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/jobmanager.html">Job manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#rerun-prevention">Rerun prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#pickling">Pickling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#restarting-scripts">Restarting scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/jobmanager.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/functions.html">Public functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/functions.html#logging">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/functions.html#binding-decorators">Binding decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/molecule.html">Molecule</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_api.html">Molecule</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/mol_api.html#atom-labeling">Atom labeling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/atombond.html">Atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/atombond.html#bond">Bond</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_rdkit.html">RDKit interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/mol_ase.html">ASE interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/utils.html">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#periodic-table">Periodic Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#geometry-tools">Geometry tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/utils.html#file-format-conversion-tools">File format conversion tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/trajectories.html">Trajectories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../components/xyz.html">XYZ trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/xyz.html#xyz-history-files">XYZ history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/rkf.html">RKF trajectory files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../components/rkf.html#rkf-history-files">RKF history files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/dcd.html">DCD trajectory files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interfaces/interfaces.html">Interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/amssuite.html">Amsterdam Modeling Suite</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/ams.html">AMS driver and engines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/ams.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/ams.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/ams.html#molecule-handling">Molecule handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/ams.html#amsjob-api">AMSJob API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/ams.html#amsresults-api">AMSResults API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/amsworker.html">AMS worker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/amsworker.html#amsworker-api">AMSWorker API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/amsworker.html#amsworkerresults-api">AMSWorkerResults API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/amsworker.html#amsworkerpool-api">AMSWorkerPool API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/postadf.html">Analysis tools: Densf, FCF, analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/kffiles.html">KF files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/crs.html">COSMO-RS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#settings-with-multiple-compound">Settings with multiple compound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#adf-and-crsjob">ADF and CRSJob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#cosmo-rs-parameters">COSMO-RS Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#data-analyses-and-plotting">Data analyses and plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crs.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/adf.html">ADF (pre-2020 version)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/adf.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/adf.html#preparing-runscript">Preparing runscript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/adf.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/reaxff.html">ReaxFF (pre-2019 version)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/thirdparty.html">Other programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/cp2k.html">CP2K</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/cp2k.html#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/cp2k.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/cp2k.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/cp2k.html#molecule-loading">Molecule loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/cp2k.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/crystal.html">Crystal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crystal.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crystal.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crystal.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crystal.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/crystal.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/dftbplus.html">DFTB+</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dftbplus.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dftbplus.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dftbplus.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dftbplus.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/dirac.html">Dirac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dirac.html#preparing-a-calculation">Preparing a calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dirac.html#results-extraction">Results extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dirac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/mopac.html">MOPAC (standalone program)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/mopac.html#preparing-input">Preparing input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/mopac.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/orca.html">ORCA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/orca.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/raspa.html">RASPA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/raspa.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/raspa.html#molecule-parsing">Molecule parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/raspa.html#loading-jobs">Loading jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/raspa.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#id1">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/He2DissociationCurve.html">Helium dimer dissociation curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/WaterOptimization.html">Geometry optimization of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ManyJobsInParallel.html">Many jobs in parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/BasisSetBenchmark.html">Benchmark accuracy of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ExcitationsWorkflow.html">Workflow: filtering molecules based on excitation energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ChargeTransferIntegralsADF.html">Charge transfer integrals with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/gammascan.html">Tuning the range separation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/examples.html#pre-made-recipes">Pre-made recipes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ams_crs.html">ADF and COSMO-RS workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adffragment.html">ADF fragment job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/ReorganizationEnergy.html">Reorganization Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/adfnbo.html">NBO with ADF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numgrad.html">Numerical gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/numhess.html">Numerical Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/molecule_gun.html">ReaxFF molecule gun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/global_minimum.html">Global Minimum Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vibrationASE.html">Vibrational analysis with ASE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/vibrationASE.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#settings-and-input">Settings and input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-an-input-block-with-an-header">Create an input block with an header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-an-empty-input-block">Create an empty input block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-an-ams-text-input-into-an-ams-job">Convert an AMS text input into an AMS job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-an-ams-text-input-into-settings-object">Convert an AMS text input into settings object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-an-ams-run-file-into-an-amsjob">Convert an AMS .run file into an AMSJob</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#specify-paths-to-files-in-the-input">Specify paths to files in the input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restart-from-a-previous-job">Restart from a previous job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#molecules">Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generate-a-molecule-from-a-smiles-string">Generate a molecule from a SMILES string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#counting-rings">Counting rings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extracting-results">Extracting Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#directly-from-functions">Directly from Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#examples-total-energy-and-final-structure">Examples: Total Energy and Final Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amsresults-api-functions">AMSResults API Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#from-the-rkf-interface">From the RKF Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-section-variable-pairs">Finding Section/Variable Pairs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#from-python-directories">From Python Directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kfbrowser">KFBrowser</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#from-molecular-dynamics-trajectories">From molecular dynamics trajectories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-md-properties">General MD properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#molecules-from-trajectories">Molecules from trajectories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-old-jobs">Accessing Old Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#binding-native-plams-jobs">Binding Native PLAMS Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binding-old-rkf-files">Binding old RKF Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citations.html">Citations</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PLAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../PLAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">PLAMS</a>/</li>
+      
+    <li class="orange-text">Cookbook</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cookbook">
+<h1>Cookbook<a class="headerlink" href="#cookbook" title="Permalink to this headline">¶</a></h1>
+<p>This is a collection of code snippets showing how to perform recurrent PLAMS tasks.</p>
+<div class="section" id="settings-and-input">
+<h2>Settings and input<a class="headerlink" href="#settings-and-input" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-an-input-block-with-an-header">
+<h3>Create an input block with an header<a class="headerlink" href="#create-an-input-block-with-an-header" title="Permalink to this headline">¶</a></h3>
+<p>This settings</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sett</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">SomeInputBlock</span><span class="p">[</span><span class="s1">&#39;_h&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;MyHeader&#39;</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">SomeInputBlock</span><span class="o">.</span><span class="n">SomeOption</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>will generate the following text input when used as setting for an <a class="reference internal" href="../interfaces/ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SomeInputBlock</span> <span class="n">MyHeader</span>
+    <span class="n">SomeOption</span> <span class="mi">2</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-an-empty-input-block">
+<h3>Create an empty input block<a class="headerlink" href="#create-an-empty-input-block" title="Permalink to this headline">¶</a></h3>
+<p>This settings</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sett</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">SomeInputBlock</span>
+</pre></div>
+</div>
+<p>will generate the following text input when used as setting for an <a class="reference internal" href="../interfaces/ams.html#scm.plams.interfaces.adfsuite.ams.AMSJob" title="scm.plams.interfaces.adfsuite.ams.AMSJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AMSJob</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SomeInputBlock</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-an-ams-text-input-into-an-ams-job">
+<h3>Convert an AMS text input into an AMS job<a class="headerlink" href="#convert-an-ams-text-input-into-an-ams-job" title="Permalink to this headline">¶</a></h3>
+<p>Note that the below function does not set the <code class="docutils literal notranslate"><span class="pre">job.molecule</span></code> attribute. If
+you set <code class="docutils literal notranslate"><span class="pre">job.molecule</span></code>, you will overwrite the <code class="docutils literal notranslate"><span class="pre">System</span></code> read from the text
+input.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">AMSJob</span><span class="o">.</span><span class="n">from_input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;jobname&#39;</span><span class="p">,</span> <span class="n">text_input</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">Task SinglePoint</span>
+<span class="s1">System</span>
+<span class="s1">    Atoms</span>
+<span class="s1">        H 0. 0. 0.</span>
+<span class="s1">        H 0. 0. 1.</span>
+<span class="s1">    End</span>
+<span class="s1">End</span>
+<span class="s1">Engine Band</span>
+<span class="s1">    Basis</span>
+<span class="s1">        Type DZ</span>
+<span class="s1">        Core None</span>
+<span class="s1">    End</span>
+<span class="s1">EndEngine</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-an-ams-text-input-into-settings-object">
+<h3>Convert an AMS text input into settings object<a class="headerlink" href="#convert-an-ams-text-input-into-settings-object" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="n">AMSJob</span><span class="o">.</span><span class="n">from_input</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Task SinglePoint</span>
+<span class="s2">Engine Band</span>
+<span class="s2">    Basis</span>
+<span class="s2">        Type DZ</span>
+<span class="s2">        Core None</span>
+<span class="s2">    End</span>
+<span class="s2">EndEngine</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">settings</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-an-ams-run-file-into-an-amsjob">
+<h3>Convert an AMS .run file into an AMSJob<a class="headerlink" href="#convert-an-ams-run-file-into-an-amsjob" title="Permalink to this headline">¶</a></h3>
+<p>Convert a .run file generated by the AMS GUI into a PLAMS AMSJob.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function does not work on PLAMS-generated .run files. You can instead use the PLAMS-generated .in file.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">AMSJob</span><span class="o">.</span><span class="n">from_runfile</span><span class="p">(</span><span class="s1">&#39;/path/to/job.run&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;jobname&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specify-paths-to-files-in-the-input">
+<h3>Specify paths to files in the input<a class="headerlink" href="#specify-paths-to-files-in-the-input" title="Permalink to this headline">¶</a></h3>
+<p>With PLAMS, you cannot specify relative paths to input files, because every PLAMS job launches in a new directory, which makes the relative paths invalid. To specify an absolute path, use <code class="docutils literal notranslate"><span class="pre">os.path.abspath</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">sett</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">reaxff</span><span class="o">.</span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../my-forcefield.ff&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="restart-from-a-previous-job">
+<h3>Restart from a previous job<a class="headerlink" href="#restart-from-a-previous-job" title="Permalink to this headline">¶</a></h3>
+<p>To use restart features in AMS, for example the <code class="docutils literal notranslate"><span class="pre">EngineRestart</span></code>, or to read the <code class="docutils literal notranslate"><span class="pre">InitialVelocities</span></code> from the final velocities of a previous molecular dynamics run, you can use a convenient shortcut and simply assign the job to the corresponding settings entry:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sett</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">EngineRestart</span> <span class="o">=</span> <span class="p">(</span><span class="n">previous_ams_job</span><span class="p">,</span> <span class="s1">&#39;engine&#39;</span><span class="p">)</span> <span class="c1"># resolves to the engine.rkf</span>
+
+<span class="n">sett2</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett2</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">MolecularDynamics</span><span class="o">.</span><span class="n">InitialVelocities</span><span class="o">.</span><span class="n">Type</span> <span class="o">=</span> <span class="s1">&#39;FromFile&#39;</span>
+<span class="n">sett2</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">MolecularDynamics</span><span class="o">.</span><span class="n">InitialVelocities</span><span class="o">.</span><span class="n">File</span> <span class="o">=</span> <span class="n">previous_ams_job</span> <span class="c1"># resolves to ams.rkf</span>
+</pre></div>
+</div>
+<p>Alternatively, call the <code class="docutils literal notranslate"><span class="pre">rkfpath()</span></code> method on the previous job’s AMSResults:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sett</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">EngineRestart</span> <span class="o">=</span> <span class="n">previous_ams_job</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">rkfpath</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;engine&#39;</span><span class="p">)</span>
+
+<span class="n">sett2</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+<span class="n">sett2</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">MolecularDynamics</span><span class="o">.</span><span class="n">InitialVelocities</span><span class="o">.</span><span class="n">Type</span> <span class="o">=</span> <span class="s1">&#39;FromFile&#39;</span>
+<span class="n">sett2</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">MolecularDynamics</span><span class="o">.</span><span class="n">InitialVelocities</span><span class="o">.</span><span class="n">File</span> <span class="o">=</span> <span class="n">previous_ams_job</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">rkfpath</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="molecules">
+<h2>Molecules<a class="headerlink" href="#molecules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generate-a-molecule-from-a-smiles-string">
+<h3>Generate a molecule from a SMILES string<a class="headerlink" href="#generate-a-molecule-from-a-smiles-string" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute 10 conformers, optimize with UFF and pick the lowest in energy.</span>
+<span class="n">ethane</span> <span class="o">=</span> <span class="n">from_smiles</span><span class="p">(</span><span class="s1">&#39;C-C&#39;</span><span class="p">,</span> <span class="n">nconfs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s1">&#39;uff&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="counting-rings">
+<h3>Counting rings<a class="headerlink" href="#counting-rings" title="Permalink to this headline">¶</a></h3>
+<p>Rings inside molecules can be counted in various ways, which are not all giving the same results.
+With the help of the RDKit library, a vast variety of ring counting approaches is readily available.
+The general approach to using these functions in a PLAMS scripts is to convert your PLAMS molecule into an RDKit molecule. This is how one searches for the smallest set of rings in a molecule:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import RDKit</span>
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="c1"># create a PLAMS molecule and convert it to an RDKit Mol</span>
+<span class="n">dicyclopentadiene</span> <span class="o">=</span> <span class="n">from_smiles</span><span class="p">(</span><span class="s1">&#39;C1C=CC2C1C3CC2C=C3&#39;</span><span class="p">)</span>
+<span class="n">rdmol</span> <span class="o">=</span> <span class="n">to_rdmol</span><span class="p">(</span><span class="n">dicyclopentadiene</span><span class="p">)</span>
+
+<span class="c1"># Calculate smalles set of rings</span>
+<span class="k">for</span> <span class="n">atoms</span> <span class="ow">in</span> <span class="n">Chem</span><span class="o">.</span><span class="n">GetSymmSSSR</span><span class="p">(</span><span class="n">rdmol</span><span class="p">):</span>
+     <span class="k">print</span> <span class="p">([</span><span class="n">atom_id</span> <span class="k">for</span> <span class="n">atom_id</span> <span class="ow">in</span> <span class="n">atoms</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>For more information see also the <a class="reference external" href="https://www.rdkit.org/docs/GettingStartedInPython.html#ring-information">RDKit manual</a>.</p>
+</div>
+</div>
+<div class="section" id="extracting-results">
+<h2>Extracting Results<a class="headerlink" href="#extracting-results" title="Permalink to this headline">¶</a></h2>
+<p>You can use the following snippets to retrieve results after running the required calculations:</p>
+<div class="section" id="directly-from-functions">
+<h3>Directly from Functions<a class="headerlink" href="#directly-from-functions" title="Permalink to this headline">¶</a></h3>
+<p>Results can be either red from previous calculations (see <a class="reference internal" href="#accessing-old-jobs"><span class="std std-ref">Accessing Old Jobs</span></a>) or from an AMSResults instance of a computation just executed within the same workflow.
+In either case an AMSResults object should be present at runtime:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myAMSJob</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">myAMSResults</span> <span class="o">=</span> <span class="n">myAMSJob</span><span class="o">.</span><span class="n">results</span> <span class="k">if</span> <span class="n">myAMSJob</span><span class="o">.</span><span class="n">ok</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="admonition danger">
+<p class="first admonition-title">Warning</p>
+<p class="last">Access to any results data should only occur under the condition that <cite>AMSJob.ok()</cite> indicate a successful termination of the computation</p>
+</div>
+<div class="section" id="examples-total-energy-and-final-structure">
+<h4>Examples: Total Energy and Final Structure<a class="headerlink" href="#examples-total-energy-and-final-structure" title="Permalink to this headline">¶</a></h4>
+<p>Multiple functions of the AMSResults API allow for simple access of the most common results</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myAMSEnergy</span> <span class="o">=</span> <span class="n">myAMSResults</span><span class="o">.</span><span class="n">get_energy</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;au&#39;</span><span class="p">)</span>
+
+<span class="n">myAMSStructure</span> <span class="o">=</span> <span class="n">myAMSResults</span><span class="o">.</span><span class="n">get_main_molecule</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="amsresults-api-functions">
+<h4>AMSResults API Functions<a class="headerlink" href="#amsresults-api-functions" title="Permalink to this headline">¶</a></h4>
+<p>The following members of an AMSResults instance can be used as shown in the above examples to read results</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="25%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Function</th>
+<th class="head">Return Type</th>
+<th class="head">Details</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Structure</td>
+<td><cite>get_molecule(section)</cite></td>
+<td><cite>Molecule</cite></td>
+<td>Structure from <cite>section</cite></td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td><cite>get_input_molecule()</cite></td>
+<td><cite>Molecule</cite></td>
+<td>Input structure</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td><cite>get_main_molecule()</cite></td>
+<td><cite>Molecule</cite></td>
+<td>Final structure from any AMS task</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td><cite>get_history_molecule(step)</cite></td>
+<td><cite>Molecule</cite></td>
+<td>Structure from history section at step # <cite>step</cite></td>
+</tr>
+<tr class="row-even"><td>Energy</td>
+<td><cite>get_energy()</cite></td>
+<td><cite>Float</cite></td>
+<td>Final energy</td>
+</tr>
+<tr class="row-odd"><td>Gradients</td>
+<td><cite>get_gradients()</cite></td>
+<td><cite>Array</cite> (numpy)</td>
+<td>Gradients from engine calculation</td>
+</tr>
+<tr class="row-even"><td>Stress tensor</td>
+<td><cite>get_stresstensor()</cite></td>
+<td><cite>Array</cite> (numpy)</td>
+<td>Stress tensor from periodic engine calculation</td>
+</tr>
+<tr class="row-odd"><td>Hessian</td>
+<td><cite>get_hessian()</cite></td>
+<td><cite>Array</cite> (numpy)</td>
+<td>Hessian from frequency calculation (AMS/engine)</td>
+</tr>
+<tr class="row-even"><td>Elastic tensor</td>
+<td><cite>get_elastictensor()</cite></td>
+<td><cite>Array</cite> (numpy)</td>
+<td>Elastic tensor from periodic calculation</td>
+</tr>
+<tr class="row-odd"><td>Frequencies</td>
+<td><cite>get_frequencies()</cite></td>
+<td><cite>Array</cite> (numpy)</td>
+<td>Vibrational frequencies</td>
+</tr>
+<tr class="row-even"><td>Atomic Charges</td>
+<td><cite>get_charges()</cite></td>
+<td><cite>Array</cite> (numpy)</td>
+<td>Atomic partial charges</td>
+</tr>
+<tr class="row-odd"><td>Dipole vector</td>
+<td><cite>get_dipolemoment()</cite></td>
+<td><cite>Array</cite> (numpy)</td>
+<td>Electric dipole moment</td>
+</tr>
+<tr class="row-even"><td>Nuclear gradients of dipole vector</td>
+<td><cite>get_dipolegradients()</cite></td>
+<td><cite>Array</cite> (numpy)</td>
+<td>Nuclear Gradients of Electric dipole moment</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="from-the-rkf-interface">
+<h3>From the RKF Interface<a class="headerlink" href="#from-the-rkf-interface" title="Permalink to this headline">¶</a></h3>
+<p>Other properties not listed in the table above should be retrieved as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myProperty</span> <span class="o">=</span> <span class="n">myAMSResults</span><span class="o">.</span><span class="n">readrkf</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is the responsibility of the user to provide the correct names for <cite>section</cite> and <cite>variable</cite> under which the required result is stored in the rkf file.</p>
+</div>
+<div class="section" id="finding-section-variable-pairs">
+<h3>Finding Section/Variable Pairs<a class="headerlink" href="#finding-section-variable-pairs" title="Permalink to this headline">¶</a></h3>
+<p>Looking up the names of the needed sections and variable within rkf files is typically needed for more intricate properties when writing a new PLAMS workflow.
+There are two main approaches to search for this information.</p>
+<div class="section" id="from-python-directories">
+<h4>From Python Directories<a class="headerlink" href="#from-python-directories" title="Permalink to this headline">¶</a></h4>
+<p>The AMSResults member function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">get_rkf_skeleton</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>returns a dictionary containing the available sections as keys and the containing varible names as values</p>
+</div>
+<div class="section" id="kfbrowser">
+<h4>KFBrowser<a class="headerlink" href="#kfbrowser" title="Permalink to this headline">¶</a></h4>
+<p>KFBrowser is a GUI module used to inspect rkf files.</p>
+<dl class="steps docutils">
+<dt></dt>
+<dd><div class="first last line-block">
+<div class="line"><strong>1.</strong> Open KFBrowser in the GUI via <strong>SCM → KFBrowser</strong></div>
+<div class="line"><strong>2.</strong> By default KFBrowser opens the <cite>ams.rkf</cite> file. Where neccessary, switch to <strong>File → open → &lt;engine&gt;.rkf</strong></div>
+<div class="line"><strong>3.</strong> Press <strong>ctrl + e</strong> or select <strong>File → Expert Mode</strong> to display the stored file contents</div>
+<div class="line"><strong>4.</strong> Find the entry of interest. While this is a sometimes not trivial step, most often the required variable is found in either the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> or <code class="docutils literal notranslate"><span class="pre">AMSresults</span></code> sections.</div>
+<div class="line"><strong>5.</strong> Once found, the names for <cite>section</cite> and <cite>variable</cite> listed in the rkf file directly corresponds to the <cite>section</cite>/<cite>variable</cite> pair to be used in the <cite>readrkf</cite> function as shown above.</div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>When reading results from a different rkf file than <cite>ams.rkf</cite> the filename has to be specified as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myEngineProperty</span> <span class="o">=</span> <span class="n">myAMSResults</span><span class="o">.</span><span class="n">readrkf</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">file</span><span class="o">=&lt;</span><span class="n">engine</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="last">whereas <cite>&lt;engine&gt;</cite> corresponds to the file <cite>&lt;engine&gt;.rkf</cite> present in the calculation directory.</p>
+</div>
+</div>
+</div>
+<div class="section" id="from-molecular-dynamics-trajectories">
+<h3>From molecular dynamics trajectories<a class="headerlink" href="#from-molecular-dynamics-trajectories" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="general-md-properties">
+<h4>General MD properties<a class="headerlink" href="#general-md-properties" title="Permalink to this headline">¶</a></h4>
+<p>The KFHistory class can be used to iterate through the History or MDHistory of a trajectory.
+In this example the energy, temperature and pressure per frame are read and printed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># use the KF reader to read from the ams.rkf binary output file</span>
+<span class="n">kf</span> <span class="o">=</span> <span class="n">KFReader</span><span class="p">(</span><span class="n">mdjob</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;ams.rkf&#39;</span><span class="p">])</span>
+<span class="n">hist</span> <span class="o">=</span> <span class="n">KFHistory</span><span class="p">(</span><span class="n">kf</span><span class="p">,</span> <span class="s2">&quot;History&quot;</span><span class="p">)</span>
+<span class="n">mdhist</span> <span class="o">=</span> <span class="n">KFHistory</span><span class="p">(</span><span class="n">kf</span><span class="p">,</span> <span class="s2">&quot;MDHistory&quot;</span><span class="p">)</span>
+
+<span class="n">frame</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">E</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s2">&quot;Energy&quot;</span><span class="p">),</span> <span class="n">mdhist</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s2">&quot;Temperature&quot;</span><span class="p">),</span> <span class="n">mdhist</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s2">&quot;Pressure&quot;</span><span class="p">)):</span>
+    <span class="n">frame</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Frame: {} Energy: {} Temperature: {} Pressure: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Properties that can be iterated in this way are</p>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">General properties in section History</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Return type</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Coords</td>
+<td>List of float</td>
+<td>bohr</td>
+</tr>
+<tr class="row-odd"><td>nLatticeVectors</td>
+<td>Int</td>
+<td>n.a.</td>
+</tr>
+<tr class="row-even"><td>LatticeVectors</td>
+<td>List of float</td>
+<td>bohr</td>
+</tr>
+<tr class="row-odd"><td>Energy</td>
+<td>Float</td>
+<td>hartree</td>
+</tr>
+<tr class="row-even"><td>Gradients</td>
+<td>List of float</td>
+<td>hartree/bohr</td>
+</tr>
+<tr class="row-odd"><td>StressTensor</td>
+<td>List of float</td>
+<td>atomic units</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For AMS MD simulations you must set
+<code class="docutils literal notranslate"><span class="pre">MolecularDynamics%Trajectory%WriteGradients</span> <span class="pre">=</span> <span class="pre">True</span></code> to store the
+gradients on the ams.rkf file.</p>
+</div>
+<table border="1" class="docutils" id="id3">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">General MD properties in section MDHistory</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Return type</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Step</td>
+<td>Integer</td>
+<td>n.a.</td>
+</tr>
+<tr class="row-odd"><td>Time</td>
+<td>Float</td>
+<td>fs</td>
+</tr>
+<tr class="row-even"><td>TotalEnergy</td>
+<td>Float</td>
+<td>Hartree</td>
+</tr>
+<tr class="row-odd"><td>PotentialEnergy</td>
+<td>Float</td>
+<td>Hartree</td>
+</tr>
+<tr class="row-even"><td>KineticEnergy</td>
+<td>Float</td>
+<td>Hartree</td>
+</tr>
+<tr class="row-odd"><td>Temperature</td>
+<td>Float</td>
+<td>Kelvin</td>
+</tr>
+<tr class="row-even"><td>ConservedEnergy</td>
+<td>Float</td>
+<td>Hartree</td>
+</tr>
+<tr class="row-odd"><td>Velocities</td>
+<td>List of float</td>
+<td>bohr/fs</td>
+</tr>
+<tr class="row-even"><td>Charges</td>
+<td>List of float</td>
+<td>n.a.</td>
+</tr>
+<tr class="row-odd"><td>PressureTensor</td>
+<td>List of float</td>
+<td>hartree/bohr3</td>
+</tr>
+<tr class="row-even"><td>Pressure</td>
+<td>Float</td>
+<td>hartree/bohr3</td>
+</tr>
+<tr class="row-odd"><td>Density</td>
+<td>Float</td>
+<td>dalton/bohr3</td>
+</tr>
+<tr class="row-even"><td>Number of molecules</td>
+<td>Float</td>
+<td>n.a.</td>
+</tr>
+</tbody>
+</table>
+<p>To read a single property into a numpy array, you can run</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="c1"># mdjob is a finished AMSJob</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">mdjob</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_history_property</span><span class="p">(</span><span class="s1">&#39;Coords&#39;</span><span class="p">,</span> <span class="n">history_section</span><span class="o">=</span><span class="s1">&#39;History&#39;</span><span class="p">)</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># in bohr</span>
+<span class="k">print</span><span class="p">(</span><span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">history_section='MDHistory'</span></code> to read from the MDHistory section.</p>
+</div>
+<div class="section" id="molecules-from-trajectories">
+<h4>Molecules from trajectories<a class="headerlink" href="#molecules-from-trajectories" title="Permalink to this headline">¶</a></h4>
+<p>The coordinates of an MD trajectory can efficiently be obtained by creating an <a class="reference internal" href="../components/rkf.html#scm.plams.trajectories.rkffile.RKFTrajectoryFile" title="scm.plams.trajectories.rkffile.RKFTrajectoryFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">RKFTrajectoryFile</span></code></a>.
+To create an instance of RKFTrajectoryFile, simply pass the according ams.rkf file to it. In this example, the atomic coordinates and lattice vectors are read via RKFTrajectoryFile while the PLAMS Molecule function <a class="reference internal" href="../components/mol_api.html#scm.plams.mol.molecule.Molecule.get_center_of_mass" title="scm.plams.mol.molecule.Molecule.get_center_of_mass"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_center_of_mass()</span></code></a> to calculate the center of mass for every frame.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an instance of the RKFTrajectory class</span>
+<span class="n">rkf</span> <span class="o">=</span> <span class="n">RKFTrajectoryFile</span><span class="p">(</span><span class="n">mdjob</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;ams.rkf&#39;</span><span class="p">])</span>
+
+<span class="c1"># extracts a PLAMS molecule object from the RKF file</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">rkf</span><span class="o">.</span><span class="n">get_plamsmol</span><span class="p">()</span>
+
+<span class="c1"># loop through all frames of the trajectory</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rkf</span><span class="o">.</span><span class="n">get_length</span><span class="p">()):</span>
+    <span class="n">crd</span><span class="p">,</span><span class="n">cell</span> <span class="o">=</span> <span class="n">rkf</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">molecule</span><span class="o">=</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">crd</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">get_get_mass</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>It is also possible to iterate through the History section of trajectory file. This can be useful in cases were the numbers of atoms is changing per frame or the coordinates per single molecule are needed.
+Here’s an example where the molecule types present in that particular frame are read for every frame:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># use the KF reader to read from the ams.rkf binary output file</span>
+<span class="n">kf</span> <span class="o">=</span> <span class="n">KFReader</span><span class="p">(</span><span class="n">mdjob</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;ams.rkf&#39;</span><span class="p">])</span>
+<span class="n">mdhist</span> <span class="o">=</span> <span class="n">KFHistory</span><span class="p">(</span><span class="n">kf</span><span class="p">,</span> <span class="s2">&quot;MDHistory&quot;</span><span class="p">)</span>
+<span class="n">hist</span> <span class="o">=</span> <span class="n">KFHistory</span><span class="p">(</span><span class="n">kf</span><span class="p">,</span> <span class="s2">&quot;History&quot;</span><span class="p">)</span>
+
+<span class="c1"># molecule types are found in section Molecules</span>
+<span class="n">number_of_molecules</span> <span class="o">=</span> <span class="n">kf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;Molecules&#39;</span><span class="p">,</span><span class="s1">&#39;Num molecules&#39;</span><span class="p">)</span>
+<span class="c1"># store sum formulas in dict</span>
+<span class="n">molecules</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_molecules</span><span class="p">):</span>
+    <span class="n">molecules</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">kf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;Molecules&#39;</span><span class="p">,</span><span class="s1">&#39;Molecule name &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># iterate through History and MDHistory entries</span>
+<span class="k">for</span> <span class="n">mols</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span> <span class="n">hist</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s2">&quot;Mols.Type&quot;</span><span class="p">),</span> <span class="n">mdhist</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s2">&quot;Step&quot;</span><span class="p">)):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;{:8d} &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+    <span class="c1"># iterate through unique entries in mols</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">+=</span> <span class="s2">&quot;{:s} &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">molecules</span><span class="p">[</span><span class="n">mols</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">mols</span><span class="p">):</span> <span class="n">line</span> <span class="o">+=</span> <span class="s2">&quot;{:s} &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">molecules</span><span class="p">[</span><span class="n">mol</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="accessing-old-jobs">
+<span id="id1"></span><h2>Accessing Old Jobs<a class="headerlink" href="#accessing-old-jobs" title="Permalink to this headline">¶</a></h2>
+<p>The following illustrate how to load data from previously executed jobs:</p>
+<div class="section" id="binding-native-plams-jobs">
+<h3>Binding Native PLAMS Jobs<a class="headerlink" href="#binding-native-plams-jobs" title="Permalink to this headline">¶</a></h3>
+<div class="admonition danger">
+<p class="first admonition-title">Warning</p>
+<p class="last">The jobs should be loaded with a version of PLAMS that is consistent with the version originally used to run the jobs.</p>
+</div>
+<p>From an existing PLAMS working directory with the contents</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>OLDDIR/
+├── OLDJOB1/
+|   ├── ams.log
+|   ├── ams.rkf
+|   ├── OLDJOB1.dill
+|   ├── OLDJOB1.err
+|   ├── OLDJOB1.in
+|   ├── OLDJOB1.out
+|   ├── OLDJOB1.run
+|   ├── engine.rkf
+|   ├── output.xyz
+├── input
+└── logfile
+</pre></div>
+</div>
+<p>we can bind an instance of the AMSJob class by making use of the <cite>.dill</cite> file.
+The AMSJob object in turn contains a results object, which gives access to the data previously calculated.
+This can be achieved with the following snippet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path</span>       <span class="o">=</span> <span class="s2">&quot;OLDDIR/OLDJOB1/OLDJOB1.dill&quot;</span>
+<span class="n">single_JOB</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>                                       <span class="c1"># AMSJob instance</span>
+<span class="k">if</span> <span class="n">single_JOB</span><span class="o">.</span><span class="n">ok</span><span class="p">():</span>
+   <span class="n">energy</span>     <span class="o">=</span> <span class="n">single_JOB</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_energy</span><span class="p">()</span>               <span class="c1"># load the desired properties</span>
+   <span class="n">structure</span>  <span class="o">=</span> <span class="n">single_JOB</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_main_molecule</span><span class="p">()</span>
+   <span class="n">propertyX</span>  <span class="o">=</span> <span class="n">single_JOB</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">readrkf</span><span class="p">(</span><span class="s1">&#39;AMSResults&#39;</span><span class="p">,</span> <span class="s1">&#39;DipoleMoment&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;engine&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>More often than not, the working directory will include multiple individual subdirectories, each containing individual PLAMS job.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>OLDDIR/
+├── OLDJOB1/
+|   ├── ams.log
+|   ├── ams.rkf
+|   ├── OLDJOB1.dill
+|   ├── OLDJOB1.err
+|   ├── OLDJOB1.in
+|   ├── OLDJOB1.out
+|   ├── OLDJOB1.run
+|   ├── engine.rkf
+|   ├── output.xyz
+├── OLDJOB2/
+|   ├── ams.log
+|   ├── ams.rkf
+|   ├── OLDJOB2.dill
+|   ├── OLDJOB2.err
+|   ├── OLDJOB2.in
+|   ├── OLDJOB2.out
+|   ├── OLDJOB2.run
+|   ├── engine.rkf
+|   ├── output.xyz
+├── OLDJOB3/
+|   ├── ams.log
+|   ├── ams.rkf
+|   ├── OLDJOB3.dill
+|   ├── OLDJOB3.err
+|   ├── OLDJOB3.in
+|   ├── OLDJOB3.out
+|   ├── OLDJOB3.run
+|   ├── engine.rkf
+|   ├── output.xyz
+├── input
+└── logfile
+</pre></div>
+</div>
+<p>These can be loaded using the <cite>load_all</cite> function and by providing only the path to the top-level directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path</span>       <span class="o">=</span> <span class="s2">&quot;OLDDIR&quot;</span>
+<span class="n">all_JOBS</span>   <span class="o">=</span> <span class="n">load_all</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that <cite>load_all</cite> wraps the <cite>load</cite> function used above and therefore requires existing <cite>.dill</cite> files in each of the loaded subdirectories.
+The <cite>load_all</cite> function yields a dictionary with the paths of the <cite>.dill</cite> files as keys and the corresponding job object as values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">all_JOBS</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;/home/user/OLDDIR/OLDJOB1/OLDJOB1.dill&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">scm</span><span class="o">.</span><span class="n">plams</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">adfsuite</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">AMSJob</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f0baad340b8</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/user/OLDDIR/OLDJOB2/OLDJOB2.dill&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">scm</span><span class="o">.</span><span class="n">plams</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">adfsuite</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">AMSJob</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f0baacf24a8</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="s1">&#39;/home/user/OLDDIR/OLDJOB3/OLDJOB3.dill&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">scm</span><span class="o">.</span><span class="n">plams</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">adfsuite</span><span class="o">.</span><span class="n">ams</span><span class="o">.</span><span class="n">AMSJob</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f0baad06cf8</span><span class="o">&gt;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>We can now access these AMSJob instances:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">this_JOB</span> <span class="ow">in</span> <span class="n">all_JOBS</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+   <span class="k">if</span> <span class="n">this_JOB</span><span class="o">.</span><span class="n">ok</span><span class="p">():</span>
+      <span class="n">energy</span>     <span class="o">=</span> <span class="n">this_JOB</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_energy</span><span class="p">()</span>
+      <span class="n">structure</span>  <span class="o">=</span> <span class="n">this_JOB</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_main_molecule</span><span class="p">()</span>
+      <span class="n">propertyX</span>  <span class="o">=</span> <span class="n">this_JOB</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">readrkf</span><span class="p">(</span><span class="s1">&#39;AMSResults&#39;</span><span class="p">,</span> <span class="s1">&#39;DipoleMoment&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;engine&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="binding-old-rkf-files">
+<h3>Binding old RKF Files<a class="headerlink" href="#binding-old-rkf-files" title="Permalink to this headline">¶</a></h3>
+<p>In cases where the <cite>.dill</cite> files are not available any more, it is still possible to load the contents of previously generated <cite>.rkf</cite> files into a PLAMS workflow:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path</span>       <span class="o">=</span> <span class="s2">&quot;OLDDIR/OLDJOB1/&quot;</span>
+<span class="n">ext_JOB</span>    <span class="o">=</span> <span class="n">AMSJob</span><span class="o">.</span><span class="n">load_external</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">ext_JOB</span><span class="o">.</span><span class="n">ok</span><span class="p">():</span>
+   <span class="n">energy</span>     <span class="o">=</span> <span class="n">ext_JOB</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_energy</span><span class="p">()</span>
+   <span class="n">structure</span>  <span class="o">=</span> <span class="n">ext_JOB</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_main_molecule</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If the <cite>.rkf</cite> file does originate from some other source than any of the direct AMS engines, also an instance of the more generic <cite>SingleJob</cite> class can be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path</span>       <span class="o">=</span> <span class="s2">&quot;OLDDIR/OLDJOB1/ams.rkf&quot;</span>
+<span class="n">ext_JOB</span>    <span class="o">=</span> <span class="n">SingleJob</span><span class="o">.</span><span class="n">load_external</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The downside of this latter approach is that the accessibility to the data is very limited and has to be implemented mostly in terms of pattern-matching searches in the output files.</p>
+<p>An alternative way is to make use of the <cite>KFReader</cite> class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path</span>       <span class="o">=</span> <span class="s2">&quot;OLDDIR/OLDJOB1/ams.rkf&quot;</span>
+<span class="n">rkf_reader</span> <span class="o">=</span> <span class="n">KFReader</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="n">n_steps</span>    <span class="o">=</span> <span class="n">rkf_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;History&quot;</span><span class="p">,</span> <span class="s2">&quot;nEntries&quot;</span><span class="p">)</span>
+<span class="n">energy</span>     <span class="o">=</span> <span class="n">rkf_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;History&quot;</span><span class="p">,</span> <span class="s2">&quot;Energy(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_steps</span><span class="p">))</span>
+<span class="n">structure</span>  <span class="o">=</span> <span class="n">rkf_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;History&quot;</span><span class="p">,</span> <span class="s2">&quot;Coords(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_steps</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Note that also the KFReader class lacks most of the shortcut functions of a proper <cite>AMSResults</cite> object so that the access to the data has to be specified manually.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../citations.html" class="btn btn-neutral float-right" title="Citations" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../examples/vibrationASE.html" class="btn btn-neutral" title="Vibrational analysis with ASE" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

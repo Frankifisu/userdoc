@@ -1,0 +1,125 @@
+#! /bin/sh
+
+# In this example the Hessian from a DFTB and a MOPAC calculation is used as a
+# starting guess for the Hessian in an ADF geometry optimization of Isobutane.
+# This example consist of 4 calculations:
+# - MOPAC frequency calculation
+# - DFTB frequency calculation
+# - ADF geometry optimization with initial MOPAC Hessian
+# - ADF geometry optimization with initial DFTB Hessian
+
+
+# ======================
+# Generate MOPAC Hessian
+# ======================
+
+
+AMS_JOBNAME=mopac_hessian $AMSBIN/ams << eor 
+
+Task SinglePoint
+
+Properties
+    NormalModes Yes
+End
+
+System
+    Symmetrize
+    Atoms 
+        C      -3.01417223      -2.81892970       0.27443080
+        C      -2.32560254      -1.48669854      -0.04099291
+        C      -0.81033566      -1.60274167       0.15652441
+        H      -2.65505660      -3.61825489      -0.40916512
+        H      -4.11459952      -2.71726364       0.16084942
+        H      -2.80179295      -3.12071121       1.32226630
+        H      -2.71211792      -0.71788031       0.66394035
+        C      -2.65045192      -1.03659727      -1.46944155
+        H      -0.32255475      -0.62449394      -0.04145480
+        H      -0.38172118      -2.36329425      -0.53112669
+        H      -0.58228356      -1.89634208       1.20336328
+        H      -2.17532684      -0.05436369      -1.67852390
+        H      -3.74843413      -0.92249496      -1.59450083
+        H      -2.28021380      -1.77910197      -2.20888365
+    End
+End
+
+Engine Mopac
+EndEngine
+eor
+
+
+# =======================
+# Generate a dftb Hessian
+# =======================
+
+
+AMS_JOBNAME=dftb_hessian $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+Properties
+   NormalModes True
+End
+
+System
+    Symmetrize
+    Atoms
+     C      -3.014172230000      -2.818929700000       0.274430800000    
+     C      -2.325602540000      -1.486698540000      -0.040992910000    
+     C      -0.810335660000      -1.602741670000       0.156524410000    
+     H      -2.655056600000      -3.618254890000      -0.409165120000    
+     H      -4.114599520000      -2.717263640000       0.160849420000    
+     H      -2.801792950000      -3.120711210000       1.322266300000    
+     H      -2.712117920000      -0.717880310000       0.663940350000    
+     C      -2.650451920000      -1.036597270000      -1.469441550000    
+     H      -0.322554750000      -0.624493940000      -0.041454800000    
+     H      -0.381721180000      -2.363294250000      -0.531126690000    
+     H      -0.582283560000      -1.896342080000       1.203363280000    
+     H      -2.175326840000      -0.054363690000      -1.678523900000    
+     H      -3.748434130000      -0.922494960000      -1.594500830000    
+     H      -2.280213800000      -1.779101970000      -2.208883650000    
+    End
+
+    Charge 0
+End
+
+Engine DFTB
+    Model SCC-DFTB
+    ResourcesDir DFTB.org/mio-1-1
+    SCC
+    End
+EndEngine
+eor
+
+# Use the MOPAC Hessian generated earlier for ADF optimization
+
+AMS_JOBNAME=adf_mopachessian "$AMSBIN/ams" <<eor
+LoadSystem
+   File mopac_hessian.results/ams.rkf
+End
+Task GeometryOptimization
+GeometryOptimization
+   InitialHessian
+      Type FromFile
+      File mopac_hessian.results/mopac.rkf
+   End
+End
+Engine ADF
+EndEngine
+eor
+
+# Use the DFTB Hessian generated earlier for ADF optimization
+
+AMS_JOBNAME=adf_dftbhessian "$AMSBIN/ams" <<eor
+LoadSystem
+   File dftb_hessian.results/ams.rkf
+End
+Task GeometryOptimization
+GeometryOptimization
+   InitialHessian
+      Type FromFile
+      File dftb_hessian.results/dftb.rkf
+   End
+End
+Engine ADF
+EndEngine
+eor

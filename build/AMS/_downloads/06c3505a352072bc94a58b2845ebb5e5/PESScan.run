@@ -1,0 +1,202 @@
+#!/bin/sh
+
+
+echo "=============="
+echo "Ethane torsion"
+echo "=============="
+echo
+
+AMS_JOBNAME=ethane_torsion $AMSBIN/ams << EOF
+
+   Task PESScan
+
+   System
+      Atoms
+         C   0.0          0.0          0.76576
+         C   0.0          0.0         -0.76576
+         H  -0.88668938   0.51193036   1.16677
+         H   0.88668938   0.51193036   1.16677
+         H   0.0         -1.02386071   1.16677
+         H   0.0          1.02386071  -1.16677
+         H  -0.88668938  -0.51193036  -1.16677
+         H   0.88668938  -0.51193036  -1.16677
+      End
+   End
+
+   PESScan
+      # First scan coordinate: C--C bond distance
+      ScanCoordinate
+         nPoints 5
+         Distance  1 2  1.3 1.7
+      End
+      # Second scan coordinate: One of the H--C--C--H dihedral angles (others will follow naturally)
+      ScanCoordinate
+         nPoints 21
+         Dihedral  3 1 2 6  60.0 0.0
+      End
+   End
+
+   GeometryOptimization
+      Convergence Step=1.0e-3
+   End
+
+   Engine DFTB
+      Model DFTB3
+      ResourcesDir DFTB.org/3ob-3-1
+      DispersionCorrection D3-BJ
+   EndEngine
+
+EOF
+
+
+echo "=============="
+echo "Ethene torsion"
+echo "=============="
+echo
+
+AMS_JOBNAME=ethene_torsion $AMSBIN/ams << EOF
+
+   Task PESScan
+
+   System
+      Atoms
+         C   0.0   0.0       0.66687
+         C   0.0   0.0      -0.66687
+         H   0.0   0.92974  -1.23912
+         H   0.0   0.92974   1.23912
+         H   0.0  -0.92974   1.23912
+         H   0.0  -0.92974  -1.23912
+      End
+   End
+
+   PESScan
+      # First scan coordinate: C--C bond distance
+      ScanCoordinate
+         nPoints 5
+         Distance  1 2  1.1 1.8
+      End
+      # Second scan coordinate: Two of the H--C--C--H dihedrals
+      ScanCoordinate
+         nPoints 21
+         Dihedral  4 1 2 3  0.0 60.0
+         Dihedral  5 1 2 6  0.0 60.0
+      End
+   End
+
+   GeometryOptimization
+      Convergence Step=1.0e-3
+   End
+
+   Engine DFTB
+      Model DFTB3
+      ResourcesDir DFTB.org/3ob-3-1
+      DispersionCorrection D3-BJ
+   EndEngine
+
+EOF
+
+
+
+# Below are more technical examples, demonstrating the PES scan gap filling.
+# The QUASINANO2015 parameter set shows some discontinuities in the PES, 
+# which leads to problems with convergence. The first job leaves the 
+# non-converged steps as is while the second job instructs AMS to 
+# attept a second optimization for non-converged point starting from 
+# a different initial geometry.
+
+echo "============================="
+echo "Ethane gap filling test (1/2)"
+echo "============================="
+echo
+
+AMS_JOBNAME=ethane_nofillgaps $AMSBIN/ams << EOF
+
+   Task PESScan
+
+   System
+      Atoms
+         C  -2.333834610464788   -2.268837915270455  -0.2417723425321957
+         C  -0.8081611038872945  -2.334371994724881  -0.04271045326758349
+         H  -0.2505615773096904  -1.473443563856088  -0.38077110593546
+         H  -0.3249814761083244  -3.235478579439597  -0.3904810245975267
+         H  -0.583247370537557   -2.349691649662279   1.013499336841977
+         H  -2.817014238243758   -1.367731330555738   0.1059982287977475
+         H  -2.891434137042391   -3.129766346139247   0.09628831013568076
+         H  -2.558748343814525   -2.253518260333056  -1.297982132641757
+      End
+   End
+
+   GeometryOptimization
+      CoordinateType Cartesian
+      Convergence Step=1.0e-3
+   End
+
+   PESScan
+      FillUnconvergedGaps False
+      CalcPropertiesAtPESPoints True
+      ScanCoordinate
+         nPoints 10
+         Distance 1 2  1.4 1.7
+      End
+      ScanCoordinate
+         nPoints 10
+         Distance 7 1  1.0 1.2
+         Dihedral 7 1 2 3  60.0 180.0
+      End
+   End
+
+   Engine DFTB
+      Model SCC-DFTB
+      ResourcesDir QUASINANO2015
+   EndEngine
+
+EOF
+
+
+echo "============================="
+echo "Ethane gap filling test (2/2)"
+echo "============================="
+echo
+
+AMS_JOBNAME=ethane_fillgaps $AMSBIN/ams << EOF
+
+   Task PESScan
+
+   System
+      Atoms
+         C  -2.333834610464788   -2.268837915270455  -0.2417723425321957
+         C  -0.8081611038872945  -2.334371994724881  -0.04271045326758349
+         H  -0.2505615773096904  -1.473443563856088  -0.38077110593546
+         H  -0.3249814761083244  -3.235478579439597  -0.3904810245975267
+         H  -0.583247370537557   -2.349691649662279   1.013499336841977
+         H  -2.817014238243758   -1.367731330555738   0.1059982287977475
+         H  -2.891434137042391   -3.129766346139247   0.09628831013568076
+         H  -2.558748343814525   -2.253518260333056  -1.297982132641757
+      End
+   End
+
+   GeometryOptimization
+      CoordinateType Cartesian
+      Convergence Step=1.0e-3
+   End
+
+   PESScan
+      FillUnconvergedGaps True
+      CalcPropertiesAtPESPoints True
+      ScanCoordinate
+         nPoints 10
+         Distance 1 2  1.4 1.7
+      End
+      ScanCoordinate
+         nPoints 10
+         Distance 7 1  1.0 1.2
+         Dihedral 7 1 2 3  60.0 180.0
+      End
+   End
+
+   Engine DFTB
+      Model SCC-DFTB
+      ResourcesDir QUASINANO2015
+   EndEngine
+
+EOF

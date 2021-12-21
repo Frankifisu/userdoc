@@ -1,0 +1,74 @@
+#! /bin/sh
+
+
+# Calculation of the excitation energies of Bimane using the simplified Tamm-
+# Dancoff (sTDA) method by Grimme, for a range-separated function. This method
+# is meant for hybrid functionals or range-separated functionals during the SCF.
+# In this example the range-separated functional wB97X is used during the SCF.
+# In the the calculation of the excitation energies the sTDA method is used
+# in which the required integrals are approximated. For range-separated
+# functional one needs to set the parameters manually. Note that the alpha and
+# beta parameters for sTDA for range separated functionals in the Risthaus paper
+# (dx.doi.org/10.1039/C3CP54517B) are mixed up. A TZP or TZ2P basis set is
+# recommended for this method.
+# To use the wB97X range-separated functional LibXC is needed. Symmetry NOSYM is
+# required. The sTDA parameters should be set with the subkeys GRIMMEAEX,
+# GRIMMEALPHA, and GRIMMEBETA of the key MODIFYEXCITATION.
+
+
+$AMSBIN/ams <<eor
+
+  Task SinglePoint
+
+  System
+    Atoms
+     C      1.331698   -1.879605   -0.108603
+     C      2.132097   -0.654088   -0.003948
+     C      1.302873    0.426430   -0.104903
+     C     -1.300787    0.433951   -0.101824
+     C     -2.136017   -0.641707    0.001280
+     C     -1.342993   -1.871870   -0.104659
+     N     -0.000534   -0.021248   -0.324354
+     N     -0.004568   -1.403598   -0.331622
+     O     -1.679176   -3.039253   -0.043168
+     O      1.661467   -3.048960   -0.049039
+     C     -1.615093    1.891323   -0.058117
+     C     -3.618641   -0.678771    0.170347
+     C      1.626055    1.881942   -0.064754
+     C      3.614962   -0.700043    0.160744
+     H     -4.049414    0.325596    0.200326
+     H     -3.887430   -1.197656    1.097229
+     H     -4.086348   -1.233771   -0.650635
+     H     -1.173280    2.374317    0.820379
+     H     -2.696603    2.026980   -0.008719
+     H     -1.243008    2.407629   -0.949030
+     H      2.707594    2.010775   -0.000483
+     H      1.174301    2.373283    0.803861
+     H      1.270709    2.395192   -0.964373
+     H      4.079173   -1.241294   -0.671464
+     H      3.883147   -1.237421    1.077108
+     H      4.049818    0.301869    0.208419
+    End
+  End
+
+  Engine ADF 
+    Basis 
+      Type DZ
+      Core None
+    End
+    Symmetry nosym
+    Excitations
+      STDA
+      OnlySing
+    end
+    XC
+      LibXC wB97X
+    End
+    ModifyExcitation
+      GRIMMEPERTC
+      GRIMMEAEX   0.56
+      GRIMMEALPHA 4.51
+      GRIMMEBETA  8.00
+    end
+  EndEngine
+eor

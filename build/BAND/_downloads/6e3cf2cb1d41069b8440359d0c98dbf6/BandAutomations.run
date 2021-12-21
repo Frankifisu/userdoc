@@ -1,0 +1,107 @@
+#!/bin/bash
+
+# the System is extremely artificial but the calculation points out something useful
+
+# The system has two CO molecules, one of which is compressed.
+# We freeze the coordinates of the compressed CO molecules
+
+# We define a gradient dependent electronic temperature (excluding the gradient of the constrained atoms)
+# When far from convergence a higher value is used to ease SCF convergence (not relevant to this system)
+# When the gradients become small the temperature is lowered, so that is will have negligible influence on the energy
+
+# Here we let on purpose not converge the geometry optimization
+# The final calculation should be performed as a normal single point and we explicitly set in band the ElectronicTemperature to 0.001
+
+report=report.txt
+
+echo "We use a gradient dependent KT value (finite electronic temperature)" > $report
+
+printf "\nThe value of kT gets progressively lower during the optimization\n\n" >> $report
+
+printf "\nFor two optimizers we do 3 steps and they do not converge. Yet the last single point should be done at KTlow=0.001\n\n" >> $report
+
+for optim in Quasi-Newton FIRE
+do
+
+export AMS_JOBNAME=test.optim=$optim
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams<<EOF
+
+log
+  debug AutomationInteractionModule
+end
+
+Task GeometryOptimization
+
+GeometryOptimization 
+    Method $optim
+    MaxIterations 5
+
+    EngineAutomations
+     Gradient variable=Convergence%ElectronicTemperature InitialValue=0.01 FinalValue=0.001 HighGradient=0.1 LowGradient=1.0e-3
+     Iteration variable=Convergence%Criterion InitialValue=1.0e-3 FinalValue=1.0e-6 FirstIteration=0 LastIteration=1
+     Iteration variable=SCF%Iterations InitialValue=1 FinalValue=300 FirstIteration=0 LastIteration=1
+    End
+end
+
+Constraints
+    Atom 3
+    Atom 4
+End
+
+System
+
+  Atoms
+     C 0.0 0.0 0.0
+     O 1.13 0.0 0.0
+     C 0.0 5.0 0.0
+     O 1.0 5.0 0.0
+  End
+End
+
+
+Engine Band
+    Basis Type=DZ
+
+	Convergence 
+        ElectronicTemperature 0.001
+
+		NumBoltz 100
+	end
+
+    NumericalQuality Basic
+
+EndEngine
+
+EOF
+
+echo "kT series for optimizer: $optim" >> $report
+grep "temperature kT" $AMS_JOBNAME.results/ams.log | awk '{print $NF}' >> $report
+echo "(the last kT should be 0.001)" >> $report
+echo "">>$report
+
+
+echo "">>$report
+echo "scf converge series for optimizer: $optim" >> $report
+grep "automated value for Convergence%Criterion" $AMS_JOBNAME.results/ams.log | awk '{print $NF}' >> $report
+echo "">>$report
+
+
+tmp='.0'
+echo "">>$report
+echo "scf max Iterations series for optimizer: $optim" >> $report
+echo "  (converted to a real number to be able to catch a diff)" >> $report
+grep "automated value for SCF%Iterations" $AMS_JOBNAME.results/ams.log | awk '{print $NF ".0"}' >> $report
+echo "">>$report
+
+
+
+
+
+done
+
+echo "begin report"
+cat $report
+echo "end report"

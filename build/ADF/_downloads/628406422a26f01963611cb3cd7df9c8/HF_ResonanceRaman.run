@@ -1,0 +1,49 @@
+#! /bin/sh
+
+# Example shows a calculation of the Resonance Raman spectrum (RRS) of HF. In
+# this example the RRS is calculated from the geometrical derivatives of the
+# frequency-dependent polarizability, including a finite lifetime.
+
+# In the AMS input one then needs to request 'Raman' in the 'Properties' block 
+# and specify 'IncidentFrequency' and 'LifeTime' in the Raman Block
+
+# Note that used basis set is too small to get accurate results.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     H 0.0000 0.0000 0.0000
+     F 0.0000 0.0000 0.9170
+  end
+end
+
+Task SinglePoint
+Properties
+   Raman True
+End
+NormalModes
+  Displacements Symmetric
+  SymmetricDisplacements
+     Type InfraredAndRaman
+  End
+End
+Raman
+  IncidentFrequency 0.52362 [Hartree]
+  LifeTime 0.0034
+  FreqRange 0.0 5000.0
+End
+
+Engine ADF
+  title HF ao-raman
+  basis
+    Type DZP
+    Core None
+    CreateOutput Yes
+  end
+  noprint SFO
+  numericalquality Good
+  Relativity
+    Level None
+  End
+EndEngine
+eor

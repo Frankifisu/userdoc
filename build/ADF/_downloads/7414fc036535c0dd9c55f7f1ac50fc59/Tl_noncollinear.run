@@ -1,0 +1,182 @@
+#! /bin/sh
+
+
+# Application of the Spin-Orbit relativistic option (using double-group
+# symmetry, in this case NOSYM) to Tl using the collinear and non-collinear
+# approximation for unrestricted Spin-Orbit calculations
+
+# Note: For the collinear and the non-collinear approximation one should use
+# symmetry NOSYM and use the key UNRESTRICTED.
+
+# == Tl scalar restricted ==
+
+AMS_JOBNAME=Scalar $AMSBIN/ams <<eor
+System
+  atoms
+     Tl 0 0 0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Tl scalar restricted
+  beckegrid
+    quality good
+  end
+  basis
+    PerAtomType Symbol=Tl File=ZORA/TZ2P/Tl.4f
+    CreateOutput Yes
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga Becke Perdew
+  end
+EndEngine
+
+eor
+
+# == Tl spinorbit restricted ==
+
+AMS_JOBNAME=SpinOrbit_Restricted $AMSBIN/ams <<eor
+System
+  atoms
+     Tl 0 0 0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Tl spinorbit restricted
+  beckegrid
+    quality good
+  end
+  eprint
+    sfo eig
+  end
+  fragments
+     Tl Scalar.results/adf.rkf
+  end
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  xc
+    gga becke perdew
+  end
+EndEngine
+
+eor
+
+# == Tl spinorbit collinear z-axis ==
+
+AMS_JOBNAME=SpinOrbit_Collinear $AMSBIN/ams <<eor
+System
+  atoms
+     Tl 0 0 0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Tl spinorbit collinear z-axis
+  beckegrid
+    quality good
+  end
+  eprint
+    sfo eig
+  end
+  fragments
+     Tl Scalar.results/adf.rkf
+  end
+  relativity
+    level spin-orbit
+    formalism ZORA
+    spinorbitmagnetization collinear
+  end
+  symmetry nosym
+  unrestricted
+  xc
+    gga becke perdew
+  end
+EndEngine
+
+eor
+
+# == Tl spinorbit noncollinear ==
+
+AMS_JOBNAME=SpinOrbit_NonCollinear $AMSBIN/ams <<eor
+System
+  atoms
+     Tl 0 0 0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Tl spinorbit noncollinear
+  beckegrid
+    quality good
+  end
+  eprint
+    sfo eig
+  end
+  fragments
+     Tl Scalar.results/adf.rkf
+  end
+  relativity
+    level spin-orbit
+    formalism ZORA
+    spinorbitmagnetization noncollinear
+  end
+  symmetry nosym
+  unrestricted
+  xc
+    gga becke perdew
+  end
+EndEngine
+
+eor
+
+# == Tl spinorbit noncollinear ==
+
+AMS_JOBNAME=SpinOrbit_SOUEXACT $AMSBIN/ams <<eor
+System
+  atoms
+     Tl 0 0 0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Tl spinorbit noncollinear
+  beckegrid
+    quality good
+  end
+  eprint
+    sfo eig
+  end
+  fragments
+     Tl Scalar.results/adf.rkf
+  end
+  relativity
+    level spin-orbit
+    formalism ZORA
+    spinorbitmagnetization noncollinear
+    souexact
+  end
+  symmetry nosym
+  unrestricted
+  xc
+    gga becke perdew
+  end
+EndEngine
+
+eor

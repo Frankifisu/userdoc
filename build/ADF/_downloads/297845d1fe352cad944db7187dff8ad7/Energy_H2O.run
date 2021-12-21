@@ -1,0 +1,182 @@
+#! /bin/sh
+
+
+# If the TOTALENERGY is included the total energy will be calculated.
+
+# This example performs single point runs for H2 O with PBE/DZP with frozen
+# cores and all-electron and B3LYP/DZP with all-electron and HARTREEFOCK/DZP
+# with all-electron The tests run in C(2v) symmetry. Integration quality is good
+# which should give total energies accurate at least up to 10^-4 atomic units.
+# The key EXACTDENSITY is used for higher accuracy of the results.
+
+# Note that only energy difference comparisons are meaningful. These are the
+# only energies that play a role in chemistry of course, and for this one does
+# not need total energies.
+
+
+# ----------------------------
+# H2O PBE/DZP with frozen core
+# ----------------------------
+
+AMS_JOBNAME=FrozenCore $AMSBIN/ams <<eor
+System
+  atoms
+     O        0.00000        0.00000        0.00000
+     H        0.00000       -0.68944       -0.57851
+     H        0.00000        0.68944       -0.57851
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2O PBE/DZP (frozen core) single point calculation
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    core Small
+    type DZP
+  end
+  noprint BAS FUNCTIONS
+  nototen
+  numericalquality Good
+  totalenergy
+  xc
+    gga PBE
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+
+# ------------------------
+# H2O PBE/DZP all-electron
+# ------------------------
+
+AMS_JOBNAME=AllElectron $AMSBIN/ams <<eor
+System
+  atoms
+     O        0.00000        0.00000        0.00000
+     H        0.00000       -0.68944       -0.57851
+     H        0.00000        0.68944       -0.57851
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2O PBE/DZP (all-electron) single point calculation
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    core None
+    type DZP
+  end
+  noprint BAS FUNCTIONS
+  nototen
+  numericalquality Good
+  totalenergy
+  xc
+    gga PBE
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+# --------------------------
+# H2O B3LYP/DZP all-electron
+# --------------------------
+
+AMS_JOBNAME=B3LYP $AMSBIN/ams <<eor
+System
+  atoms
+     O        0.00000        0.00000        0.00000
+     H        0.00000       -0.68944       -0.57851
+     H        0.00000        0.68944       -0.57851
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2O B3LYP/DZP (all-electron) single point calculation
+  beckegrid
+    quality good
+  end
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    core None
+    type DZP
+  end
+  noprint BAS FUNCTIONS
+  nototen
+  totalenergy
+  xc
+    hybrid B3LYP
+  end
+  zlmfit
+    quality good
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+# --------------------------------
+# H2O HARTREEFOCK/DZP all-electron
+# --------------------------------
+
+AMS_JOBNAME=HF $AMSBIN/ams <<eor
+System
+  atoms
+     O        0.00000        0.00000        0.00000
+     H        0.00000       -0.68944       -0.57851
+     H        0.00000        0.68944       -0.57851
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title H2O HARTREEFOCK/DZP (all-electron) single point calculation
+  beckegrid
+    quality good
+  end
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    core None
+    type DZP
+  end
+  noprint BAS FUNCTIONS
+  nototen
+  totalenergy
+  xc
+    hartreefock
+  end
+  zlmfit
+    quality good
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor

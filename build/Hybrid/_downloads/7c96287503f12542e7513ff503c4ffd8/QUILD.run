@@ -1,0 +1,219 @@
+#!/bin/sh
+
+hybridenginename=hybrid     # this is a temporary hack
+report=report.txt
+
+echo "Start of the report" > $report
+
+
+echo "------------------------------" >> $report
+echo "Start of the region names test" >> $report
+echo "------------------------------" >> $report
+
+export AMS_JOBNAME=regionnamestest
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+Properties Gradients=yes
+
+System
+  Atoms
+     C 0.0  0.0 0.0  region=a
+     O 1.13 0.0 0.0  region=A
+     O -1.13 0.0 0.0 region=B
+  End
+  BondOrders
+       1 2 2.0
+       1 3 2.0
+  End
+End
+
+Engine Hybrid
+   Energy
+      Term factor=1.0   region=*     engineID=ForceField
+      Term factor=1.0   region=A       engineID=dftB-2
+      Term factor=-1.0  region=a       engineID=ForceField
+   End
+
+   Capping
+      AllowHighBondOrders True # Because we cut through double bonds here ...
+      AtomicInfoForCappingAtom ForceField.Type=H_   # Remove ForceField.Charge because we do not specify charges for other atoms
+   End
+
+   Engine ForceField
+   EndEngine
+   Engine dftb dftb-1
+     Model GFN1-xTB
+   EndEngine
+   Engine dftb dFtb-2
+     Model SCC-DFTB
+     ResourcesDir QUASINANO2015
+   EndEngine
+   Engine mopac
+   EndEngine
+
+EndEngine
+eor
+
+echo "Energy for region names test" >> $report
+$AMSBIN/amsreport $AMS_JOBNAME.results/$hybridenginename.rkf -k "AMSResults%Energy"   >> $report
+
+echo "----------------------------" >> $report
+echo "End of the region names test" >> $report
+echo "----------------------------" >> $report
+
+
+
+echo "--------------------------" >> $report
+echo "Start of the gradient test" >> $report
+echo "--------------------------" >> $report
+
+# strange capitalization is on purpose
+
+for capping in fractionAl fiXed
+do
+
+for num in true false
+do
+
+export AMS_JOBNAME=gradtest.capping=$capping.num=$num
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+
+Properties Gradients=yes
+
+EngineDebugging IgnoreGradientsRequest=$num NeverQuiet=false
+
+NumericalDifferentiation NuclearStepSize=1.0e-4
+
+System
+  Atoms
+     C 0.0  0.0 0.0  region=a
+     O 1.13 0.0 0.0  region=a
+     O -1.13 0.0 0.0 region=b
+  End
+  BondOrders
+       1 2 2.0
+       1 3 2.0
+  End
+End
+
+Engine Hybrid
+   Capping
+      Option $capping
+      AllowHighBondOrders True # Because we cut through double bonds here ...
+      AtomicInfoForCappingAtom ForceField.Type=H_   # Remove ForceField.Charge because we do not specify charges for other atoms
+   End
+   Energy
+      Term factor=1.0   region=*     engineID=ForceField
+      Term factor=1.0   region=a       engineID=dftb-2
+      Term factor=-1.0  region=a       engineID=ForceField
+   End
+
+   Engine ForceField
+   EndEngine
+   Engine dftb dftb-1
+     Model GFN1-xTB
+   EndEngine
+   Engine dftb dftb-2
+     Model SCC-DFTB
+     ResourcesDir QUASINANO2015
+   EndEngine
+   Engine mopac
+   EndEngine
+
+EndEngine
+
+
+eor
+
+echo "gradients for capping=$capping num=$num:" >> $report
+$AMSBIN/amsreport $AMS_JOBNAME.results/$hybridenginename.rkf -k "AMSResults%Gradients##3"   >> $report
+
+done
+done
+
+echo "------------------------" >> $report
+echo "End of the gradient test" >> $report
+echo "------------------------" >> $report
+
+
+
+echo "---------------------------" >> $report
+echo "Start of the singleton test" >> $report
+echo "---------------------------" >> $report
+
+echo "Calculate the same system twice with the same engine but with different settings. The energy should be non-zero" >> $report
+
+for engine in dftb band adf mopac
+do
+export AMS_JOBNAME=testsingleton.engine.$engine
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+   GeometryFile $AMSHOME/atomicdata/Molecules/TestMols/Acetamide.xyz
+End
+
+Engine Hybrid
+   AllowSanityCheckWarnings true
+   Energy
+      Term factor=1.0   region=*       engineID=$engine-1
+      Term factor=-1.0  region=*       engineID=$engine-2
+   End
+
+   Engine band band-1
+      xc gga=pbe
+   EndEngine
+   Engine band band-2
+      basis type=SZ
+   EndEngine
+   Engine adf adf-1
+      xc gga=pbe
+   EndEngine
+   Engine adf adf-2
+      basis type=SZ
+   EndEngine
+   Engine mopac mopac-1
+      Model PM6
+   EndEngine
+   Engine mopac mopac-2
+      Model PM7
+   EndEngine
+   Engine DFTB dftb-1
+      Model GFN1-xTB
+   EndEngine
+   Engine DFTB dftb-2
+      Model SCC-DFTB
+      ResourcesDIR QUASINANO2015
+   EndEngine
+
+EndEngine
+
+eor
+
+
+echo "Hopfully nonzero energy for engine=$engine" >> $report
+$AMSBIN/amsreport $AMS_JOBNAME.results/$hybridenginename.rkf -k "AMSResults%Energy"   >> $report
+
+done
+
+echo "-------------------------" >> $report
+echo "End of the singleton test" >> $report
+echo "-------------------------" >> $report
+
+
+cat $report

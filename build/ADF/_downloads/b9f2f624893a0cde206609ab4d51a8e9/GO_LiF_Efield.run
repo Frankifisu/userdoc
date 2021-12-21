@@ -1,0 +1,76 @@
+#! /bin/sh
+
+
+# In the first example a geometry optimization is performed with an external
+# homogeneous electric field. In the second example a geometry optimization is
+# performed with an external point charges
+
+# Note that SYMMETRY NOSYM should be used. In case of point charges it is
+# important to use the QPNEAR subkeyword of the BECKEGRID key with a large
+# enough value that would include some of the point charges.
+
+
+AMS_JOBNAME=Efield $AMSBIN/ams <<eor
+System
+  Atoms
+     F    0.000000     0.800000     0.000000
+     Li   0.000000    -0.800000     0.000000
+  End
+  ElectrostaticEmbedding
+    ElectricField 0.0 0.0 0.01 [a.u.]
+  End
+End
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=1E-5 Step=1E-3
+End
+
+Engine ADF
+  Title LiF Geometry Optimization in the presence of electric field
+  Basis
+    type DZP
+  End
+  Symmetry NoSym
+EndEngine
+eor
+
+
+AMS_JOBNAME=PointCharges $AMSBIN/ams <<eor
+System
+  Atoms
+     F    0.000000     0.800000     0.000000
+     Li   0.000000    -0.800000     0.000000
+  End
+  ElectrostaticEmbedding
+    MultipolePotential
+      Coordinates
+         0.0 0.0  5.3  0.5
+         0.0 0.0 -5.3 -0.5
+      End
+    End
+  End
+End
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=1E-5 Step=1E-3
+End
+
+RigidMotions
+  AllowTranslations None
+End
+
+Engine ADF
+  Title LiF Geometry Optimization in the presence of point charges
+  BeckeGrid
+    QPnear 20
+  End
+  Basis
+    type DZP
+  End
+  Symmetry NoSym
+EndEngine
+eor

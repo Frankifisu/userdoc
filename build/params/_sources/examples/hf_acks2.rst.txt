@@ -1,0 +1,197 @@
+Refitting HF Charges with the ACKS2 Model
+=========================================
+
+This example demonstrates the use of the :ref:`ParAMS Main Script` and will assume that the reader is already familiar with this section.
+Following the paper `Atom-condensed Kohn-Sham DFT approximated to second order <https://doi.org/10.1063/1.4791569>`_ (ACKS2) by Verstraelen *et al.*,
+we will show how to refit the ReaxFF charges model, specifically for the atoms :math:`\mathrm{H}` and :math:`\mathrm{F}`.
+
+Looking inside the `$AMSHOME/scripting/scm/params/examples/HF_ACKS2` directory, you should find the following structure:
+
+::
+
+  HF_ACKS2
+  ├── inputs
+  │   ├── CHONSMgPNaFBLi-e.ff
+  │   └── reference.dat
+  ├── params.conf.py
+  └── run.py
+
+Inside the `inputs` folder is the force field that will be parameterized.
+The file `reference.dat` is holding the reference data that we will be fitting to: Partial charge at the Hydrogen as a function of the H-F distance.
+The reference data has been extracted from the `publication's Fig. 3a <https://doi.org/10.1063/1.4791569>`_.
+
+The Config File
+----------------------
+As explained in the :ref:`main script section <The Configuration File>`, all further settings regarding a parameterization are
+saved in the `params.conf.py` file.
+Taking a look at the first lines, we will see the following:
+
+.. literalinclude:: /../../examples/HF_ACKS2/params.conf.py
+  :lines: 1-19
+
+While ``interface`` variable is simply pointing to the force field file,
+note the following lines.
+From the name of the force field it is clear that there are many
+more atomic parameters present than just the ones for Hydrogen and Fluorine.
+In this case, however, we explicitly want to fit only the ones that are related to the two atoms,
+and more specifically to the ACKS2 model.
+We therefore only select the parameters that are included in the ``active_params`` variable
+(for naming conventions, see the :ref:`ReaxFF` section).
+The last three lines are making use of the parameter interfaces API to conveniently switch relevant
+parameters on, and the remaining ones off (for more information about the functionality of the parameter interfaces,
+see the respective :ref:`Parameter Interfaces` section).
+
+
+Preparing the YAML Files from Input
+-----------------------------------
+
+As noted in the :ref:`main script section <ParAMS Main Script>`, the only additional files needed for the optimization are
+the two YAML files `job_collection.yaml` and `training_set.yaml`.
+
+Execute the following in a terminal:
+
+.. code-block:: sh
+
+  >>> ./run.py prep
+  Preparing files from inputs/*
+  Storing 'outputs/job_collection.yaml'
+  Storing 'outputs/training_set.yaml'
+  Preparations done!
+
+  You can now run 'params optimize'.
+
+We encourage you to open and inspect the created YAML files in a text editor.
+
+
+Running the Optimization
+------------------------
+We have now generated a :ref:`Job Collection` and :ref:`Data Set` from the `reference.dat` in our inputs.
+Typing ``params optimize`` will start the optimization:
+
+>>> params optimize
+Reading ParAMS config ...
+eRaxFF, will enable related parameters.
+Number of active parameters to optimize: 9
+Loading job collection from outputs/job_collection.yaml ... done.
+Loading data set from outputs/training_set.yaml ... done.
+No reference engines used.
+Checking project for consistency ...
+No issues found.
+Starting parameter optimization.
+Initial f(x)=2.952e+00
+Plotting functionality not guaranteed: Matplotlib appears to be out of date. Consider upgrading.
+Initial f(x) = 1.754e-01
+At CMA Iteration: 0001. Best f(x)=1.507e-01.
+At CMA Iteration: 0002. Best f(x)=1.056e-01.
+At CMA Iteration: 0003. Best f(x)=1.056e-01.
+...
+Callback: MaxIter
+Fitness function value is f(x) = 8.177e-02 after 0:02:01
+Parameter optimization successful!
+
+The optimization should finish after about two minutes with the above messages,
+the folder structure should now be as follows:
+
+::
+
+  HF_ACKS2
+  ├── inputs
+  │   ├── CHONSMgPNaFBLi-e.ff
+  │   └── reference.dat
+  ├── optimization  << Created by `params optimize`
+  │   ├── training_set_best_params
+  │   ├── training_set_history.dat
+  │   ├── cmadata
+  │   ├── plams_workdir
+  │   └── data
+  ├── outputs  << Created by `./run.py prep`
+  │   ├── training_set.yaml
+  │   └── job_collection.yaml
+  ├── params.conf.py
+  └── run.py
+
+An optimized force field has been saved in `optimization/training_set_best_params`.
+Before comparing the old and new force fields, we will take a closer look
+into the `optimization` directory.
+
+
+We can check the course of the parameterization by plotting the `training_set_history.dat`
+Inside the `optimization/` directory call ``params plot . --yscale log`` to plot the
+loss function value as a function of the evaluation number:
+
+.. image:: /_static/example_HF_history.png
+    :width: 650px
+    :align: center
+
+The plot shows the fitness function value for every parameter set that has
+been considered by the :ref:`optimizer<Optimizers>` as a function of the
+evaluation number.
+
+
+-----------------------
+
+
+`*.dat` files in the `optimization/data/predictions/training_set` directory contain
+the reference and predicted values of each training set entry for every improved parameter set.
+A correlation plot of every predictions file can be created with ``params plot``.
+
+
+--------------------------
+
+
+Finally, the `optimization/data/contributions/training_set` directory
+contains the contributions of every data set entry to the the overall loss function value.
+This makes it easy to detect possible outliers.
+A plotted version of any contributions file looks as follows:
+
+.. image:: /_static/example_HF_contr.png
+    :width: 350px
+    :align: center
+
+
+Comparing the new parameters
+----------------------------
+A final comparison between old and new parameters will likely be different for every application.
+In this example, we provide a simple evaluation with (make sure the `matplotlib` module up to date):
+
+>>> ./run.py plot
+Running jobs ...
+Plotting ...
+Done.
+
+This part of the script will run all structures contained in `inputs/reference.dat` with both, the original and
+optimized force fields and plot the Hydrogen partial charges as a function of the interatomic distance.
+The plot can be found in `outputs/results.png` and should look similar to the following figure.
+
+.. image:: /_static/example_HF_results.png
+    :width: 650px
+    :align: center
+
+
+Running ``./run.py clean`` will revert the directory to it's original state, deleting all created files.
+
+
+Playing with the example
+------------------------
+Below are suggestions on how the existing example can be easily modified to produce different results:
+
+Take a look at the callbacks section in the `params.conf.py`:
+
+.. literalinclude:: /../../examples/HF_ACKS2/params.conf.py
+  :lines: 73-80
+
+The example is limited to 300 evaluations. Set it to a higher number (or set a `Timeout` callback instead)
+to see if the resulting parameters can be improved further.
+
+
+------------------------------------------------
+
+
+Take a look at the ``optimization_kwargs`` in the `params.conf.py`:
+
+.. literalinclude:: /../../examples/HF_ACKS2/params.conf.py
+  :lines: 83-93
+
+To allow a `validation set <https://en.wikipedia.org/wiki/Training,_validation,_and_test_sets>`_, uncomment the
+respective line (also see the :ref:`Optimization` sections for more information about
+the keyword arguments).

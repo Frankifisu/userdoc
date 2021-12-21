@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MCFF Optimizer: Monte Carlo force field parameter optimizer &mdash; Old Standalone ReaxFF 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Old Standalone ReaxFF 2021.1 documentation" href="index.html"/>
+        <link rel="up" title="FF Optimizer: framework for force field parameter optimization" href="FFOptimizer.html"/>
+        <link rel="next" title="CMA-ES Force-field Optimizer" href="CMAESFFOptimizer.html"/>
+        <link rel="prev" title="Control parameters common for all optimizers" href="ffopt_Control_parameters.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search Old Standalone ReaxFF" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-Old Standalone ReaxFF" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General.html#what-s-new-in-reaxff-2019">What’s new in ReaxFF 2019</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Ensembles.html">Ensembles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Ensembles.html#nose-hoover-chains-nvt-ensemble">Nose-Hoover chains NVT ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ensembles.html#ah-and-prh-npt-ensemble-with-nhc">AH and PRH NPT ensemble with NHC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ensembles.html#berendsen-nvt-with-separate-damping-for-translational-rotational-and-vibrational-degrees-of-freedom">Berendsen NVT with separate damping for translational, rotational, and vibrational degrees of freedom</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eReaxFF.html">eReaxff: classical treatment of the explicit electron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Properties.html">Properties and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#vibrational-frequencies">Vibrational Frequencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#per-atoms-stress-tensor">Per-atoms Stress Tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#nemd-methods-for-thermal-conductivity">NEMD Methods for Thermal Conductivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#temperature-profile-along-coordinate-axis">Temperature Profile along Coordinate Axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#local-atomic-temperature">Local Atomic Temperature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#adsorption-analysis">Adsorption Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#on-the-fly-analysis-of-reaction-events">On-the-fly Analysis of Reaction Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html#trajectory-analysis">Trajectory Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ChemTraYzer.html">ChemTraYzer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ChemTraYzer.html#general-information">General information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ChemTraYzer.html#command-line-execution">Command line execution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ChemTraYzer.html#results">Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ChemTraYzer.html#very-large-trajectories">Very large trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="travis.html">TRAVIS: A Trajectory Analyzer and Visualizer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="FFOptimizer.html">FF Optimizer: framework for force field parameter optimization</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ffopt_Input_files.html">Input files common for all optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ffopt_Control_parameters.html">Control parameters common for all optimizers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MCFF Optimizer: Monte Carlo force field parameter optimizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-files">Input files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control-parameters">Control parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-time-control">Run-time control</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CMAESFFOptimizer.html">CMA-ES Force-field Optimizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CMAESFFOptimizer.html#input-files">Input files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMAESFFOptimizer.html#control-parameters">Control parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CMAESFFOptimizer.html#results">Results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MDAcceleration.html">Accelerating Molecule Dynamics and Other Related Methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GCMC.html">Grand Canonical Monte Carlo (GCMC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#general-info">General info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#code-details">Code Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fbMC.html">Force-bias Monte Carlo (fbMC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CVHD.html">CVHD: Collective Variable-Driven Hyperdynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molgun.html">The Molecule Gun</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BondBoost.html">Bond Boost Method</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Miscellaneous.html">Other new features and fixes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#repeating-the-unit-cells">Repeating the unit cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#molecular-charges">Molecular charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#external-electric-fields">External electric fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#elastic-wall-restraint">Elastic wall restraint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#acks2-atom-condensed-kohn-sham-dft-approximated-to-second-order">ACKS2: Atom-condensed Kohn-Sham DFT approximated to second order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#correction-for-small-bond-orders">Correction for small bond orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#correction-for-torsion-angles-asymptotics">Correction for torsion angles asymptotics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#lg-dispersion">LG dispersion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Miscellaneous.html#the-rxffutil-utility">The rxffutil utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Miscellaneous.html#reformat">reformat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Miscellaneous.html#minmax">minmax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Miscellaneous.html#pdist">pdist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Miscellaneous.html#params">params</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Troubleshooting.html#geometry-optimization">Geometry optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ReaxFFEngine.html">ReaxFF as an AMS engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Technical.html">Technical Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Technical.html#hybrid-parallelism">Hybrid parallelism</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Error_messages.html">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Included_Forcefields.html">Included Forcefields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Included_Forcefields_Trunk.html">Included Forcefields (development)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ffield_descrp.html">The Force Field File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ffield_descrp.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ffield_descrp.html#equation-reference">Equation Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trainset_descrp.html">trainset.in</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trainset_descrp.html#description-of-the-trainset-in-file">Description of the trainset.in file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trainset_descrp.html#sections-format">Sections format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trainset_descrp.html#format-description">Format description</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#general-references">General References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#feature-references">Feature References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Old Standalone ReaxFF</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="Old Standalone ReaxFF.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">Old Standalone ReaxFF</a>/</li>
+      
+          <li><a href="FFOptimizer.html">FF Optimizer: framework for force field parameter optimization</a>/</li>
+      
+    <li class="orange-text">MCFF Optimizer: Monte Carlo force field parameter optimizer</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mcff-optimizer-monte-carlo-force-field-parameter-optimizer">
+<h1>MCFF Optimizer: Monte Carlo force field parameter optimizer<a class="headerlink" href="#mcff-optimizer-monte-carlo-force-field-parameter-optimizer" title="Permalink to this headline">¶</a></h1>
+<p>The MCFF Optimizer uses a Monte Carlo approach to finding the best fit force field for the given training set.  It is based on the paper by  <a class="reference external" href="https://doi.org/10.1002/jcc.23246">E. Iype et. al.</a>  In the following sections, the input and output of the MCFF Optimizer are described.</p>
+<p>A worked out example on building a training set and optimizing a ReaxFF force field with MCFF is on our <a class="reference external" href="https://www.scm.com/adf-modeling-suite/adf-hands-on-workshops/advanced-2-day-reaxff-workshop/">workshop pages</a>.</p>
+<div class="section" id="input-files">
+<h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h2>
+<p>In addition to files specified in the FF Optimizer section the following files must be present in the directory where the reaxff program is executed.</p>
+<ul class="simple">
+<li><em>iopt</em> - file containing a single text line with 4 on it. This will instruct reaxff to perform a Monte-Carlo force-field optimization.</li>
+</ul>
+<p>The mcffopt_water example in the examples/reaxff directory demonstrates the use of the MCFFOptimizer.  Note however that this example is not physically meaningful. For example, many atomic force-field  parameters are allowed to vary in a very broad range, which is the same for all elements. In practice,  you will want to set the range for each element separately.</p>
+</div>
+<div class="section" id="control-parameters">
+<h2>Control parameters<a class="headerlink" href="#control-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The following control parameters are related to MCFFOptimizer. The default value for each parameter  is given in parentheses.</p>
+<ul class="simple">
+<li><em>mcffit</em> - number of MC iterations (10000). Since the Monte-Carlo method does not have any notion of convergence the optimization is stopped after mcffit iterations.</li>
+<li><em>mcbeta</em> - initial MC beta parameter in the acceptance probability calculation <span class="math notranslate nohighlight">\(P=exp(-\beta \Delta E)\)</span> (0.0). Here, <span class="math notranslate nohighlight">\(\Delta E\)</span> is a difference in the error function between the current and the best step so far. If the current step is the best, it is always accepted. Otherwise, the acceptance probability is calculated using the formula above and it is calculated with a random number from the (0,1) range. The optimal value of beta depends on values of the error function. If absent or set to 0, it will be calculated after the first step as <span class="math notranslate nohighlight">\(\beta_0 = \sqrt{\frac{N_{par}}{2}} \frac{1}{E_0})\)</span>, where <span class="math notranslate nohighlight">\(N_{par}\)</span> and <span class="math notranslate nohighlight">\(E_0\)</span> are the number of variable parameters and the initial error function value, respectively.</li>
+<li><em>mcdbet</em> - simulated annealing: increase the beta parameter by this value at each step (0.0). A positive mcdbet value means that the probability to take a step that increases the error function will decrease over time. This has the same effect as decreasing the temperature in the classical molecular Monte-Carlo method.</li>
+<li><em>mcbsca</em> - simulated annealing: divide the beta parameter by this value at each step (1.0). A value of mcbsca less than 1.0 has an effect similar to positive mcdbet. If mcbsca is set to 0, it will be calculated after the first step as <span class="math notranslate nohighlight">\(\frac{\beta_n}{\beta_{n+1}} = \sqrt[N_{step}]{\frac{5}{E_0}}\)</span>, where <span class="math notranslate nohighlight">\(N_{step}\)</span> and <span class="math notranslate nohighlight">\(E_0\)</span> are the number of steps and the initial error function value, respectively.</li>
+<li><em>mcacpf</em> - probability to vary a variable at each step (0.2). To avoid taking very large steps only some of the variables are varied at each step (selected randomly).</li>
+<li><em>mcrxdd</em> - number of intervals to divide the parameter range between ffield_min and ffield_max into (100).</li>
+<li><em>mcstep</em> - initial max step size in units of range/mcrxdd, where range = difference between ffield_max and ffield_min values (1.0).</li>
+<li><em>mcmxst</em> - maximum allowed value of max step size (100);</li>
+<li><em>mcscps</em> - factor to scale max step size to satisfy acceptance tolerance (1.1);</li>
+<li><em>mctart</em> - target acceptance rate, percent (30.0);</li>
+<li><em>mcmart</em> - max acceptance rate, percent (70.0);</li>
+<li><em>mcmini</em> - if not 0, minimize the best force-field parameter set after so many iterations (0). The optimization is performed only if the best set has changed since the previous minimization. The minimization employed here is gradient-free and relatively slow so it should not be used too frequently.</li>
+<li><em>replic</em> - number of replicas to try at each step (1). At each step, replic Monte-Carlo steps are done and the one with the lowest error is selected for the next iteration.</li>
+</ul>
+<p><strong>Relation between mcrxdd, mcstep, mcmxst, and mcscps</strong>. When the parameter ranges are given via ffield_max and ffield_min files, the range for each parameter is divided into mcrxdd intervals. The step taken is a uniformly distributed random value in the range <span class="math notranslate nohighlight">\((-\Delta x, \Delta x)\)</span>, where <span class="math notranslate nohighlight">\(\Delta x = mcstep*(Xmax-Xmin)/mcrxdd\)</span>. Here,  Xmax and Xmin are values of this parameter from ffield_max and ffield_min, respectively. When the parameter range is given via a params file then <span class="math notranslate nohighlight">\(\Delta x = mcstep*delta\)</span>, where <em>delta</em> corresponds the first real number in the params file. When performing optimization, the program keeps track of the average acceptance rate and adjusts  mcstep up or down by the mcscps factor to keep the acceptance rate close to mctart. If the acceptance rate is too low the step size is decreased to allow searching for a smaller  parameter space. The mcstep value can never be larger than mcmxst.</p>
+<p>It should be noted that the value of the MC step size (and thus all the parameters discussed  in this section) applies to all force-field parameters to the same extent, which means that it is very important to select the min and max parameter values very carefully. The rule of thumb  here is that the range should be as small as possible covering only the physically meaningful values.</p>
+</div>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>Main results of the MCFFOptimizer are saved in the following files:</p>
+<ul class="simple">
+<li>ffield_best - force-field file corresponding to the lowest error value</li>
+<li>ffield_last - the most recent accepted force-filed</li>
+<li>MCFFOptimizer.log - summary of iterations including the error function value, number of changed and  bounded force-field parameters, cumulative number of accepted and rejected steps at each step. Also the  current MC parameters such as the <span class="math notranslate nohighlight">\(\beta\)</span> value and the acceptance rate, are shown, as well as the elapsed  time in seconds.</li>
+<li>fort.99 - the error function breakdown for the latest step</li>
+<li>fort.90 - if fort90 is set in the control file, geo file with optimized geometries corresponding to the current best parameter set</li>
+</ul>
+</div>
+<div class="section" id="run-time-control">
+<h2>Run-time control<a class="headerlink" href="#run-time-control" title="Permalink to this headline">¶</a></h2>
+<p>The progress of the force-field optimization can be controlled by changing parameters in the  <em>istop</em> file present in the calculation directory. The file is read every 10 iterations. The parameters are explained below:</p>
+<ul class="simple">
+<li>StopKey - replace 0 with 1 to stop the calculation</li>
+<li>Beta - the current <span class="math notranslate nohighlight">\(\beta\)</span> value corresponding to the <em>mcbeta</em> control parameter</li>
+<li>Command - one of: NONE, WALK, JUMPWALK, MINIMIZE, JUMPMINI:</li>
+<li>NONE - no change in the procedure</li>
+<li>WALK - switch to Monte-Carlo steps (the default);</li>
+<li>MINIMIZE - switch to gradient-free minimization of the latest accepted force-field;</li>
+<li>JUMPWALK - take the best force-field so far and start the Monte-Carlo procedure from there;</li>
+<li>JUMPMINI - take the best force-field so far and minimize it.</li>
+<li>ScaleFactor - change the current step size corresponding to the <em>mcstep</em> control parameter</li>
+<li>ActiveParameterFraction - set the fraction of force-field parameters changed at each step (<em>mcacpf</em>)</li>
+<li>deltaBeta - change the current value of the <em>mcdbet</em> control parameter</li>
+<li>BetaScaling - change the current value of the <em>mcbsca</em> control parameter</li>
+<li>ScaleParSpace - change the current value of the <em>mcscps</em> control parameter</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CMAESFFOptimizer.html" class="btn btn-neutral float-right" title="CMA-ES Force-field Optimizer" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ffopt_Control_parameters.html" class="btn btn-neutral" title="Control parameters common for all optimizers" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

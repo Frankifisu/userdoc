@@ -1,0 +1,404 @@
+#! /bin/sh
+
+# This example tries to do the same as COSMO-RS GUI Tutorial: Properties, using scripts.
+
+echo "Results"
+
+# This example starts with copying 4 coskf files to the current directory,
+# and modifying the benzene.coskf file such that the number of ring atoms is 6,
+# like in the previous example.
+
+rm -f job.sh
+cp $AMSHOME/examples/COSMO-RS/Parameters_and_Analysis/benzene.coskf .
+cp $AMSHOME/examples/COSMO-RS/Parameters_and_Analysis/ethanol.coskf .
+cp $AMSHOME/examples/COSMO-RS/Parameters_and_Analysis/methanol.coskf .
+cp $AMSHOME/examples/COSMO-RS/Parameters_and_Analysis/water.coskf .
+
+"$AMSBIN/crsprep" -c benzene.coskf -nring 6 -savecompound
+
+# Step 2: Vapor pressure
+# ----------------------
+
+# In step 2 of the example the vapor pressure of methanol is calculated at the
+# default temperature of 298.15 K (result file step2a.crskf),
+# and next for a series of temperatures ranging from 273.15 K to 373.15 K
+# in 10 steps (result file step2b.crskf).
+
+
+touch job.sh
+chmod +x job.sh
+"$AMSBIN/crsprep" -t PUREVAPORPRESSURE -j step2a \
+                  -c methanol.coskf > job.sh
+"$AMSBIN/crsprep" -t PUREVAPORPRESSURE -temperature 273.15 -temperature 373.15 -j step2b \
+                  -c methanol.coskf >> job.sh
+./job.sh
+echo "Step 2a"
+"$AMSBIN/amsreport" step2a.crskf temperature
+"$AMSBIN/amsreport" step2a.crskf pressure
+"$AMSBIN/amsreport" step2a.crskf enthalpy-vaporization
+echo "Step 2b"
+"$AMSBIN/amsreport" step2b.crskf temperature
+"$AMSBIN/amsreport" step2b.crskf pressure
+"$AMSBIN/amsreport" step2b.crskf enthalpy-vaporization
+
+
+# Step 3: Boiling point
+# ---------------------
+
+# In step 3 of the example the boiling point of a mixture of methanol and ethanol
+# is calculated, for a series of pressures ranging from 0.101325 to 1.01325 bar
+# in 10 steps (result file step3.crskf).
+# This mixture consist of 50% mole fraction methanol and 50% mole fraction ethanol.
+
+"$AMSBIN/crsprep" -t BOILINGPOINT -pressure 0.101325 -pressure 1.01325 -j step3 \
+                  -c methanol.coskf -frac1 0.5 \
+                  -c ethanol.coskf -frac1 0.5 > job.sh
+./job.sh
+echo "Step 3"
+"$AMSBIN/amsreport" step3.crskf temperature
+"$AMSBIN/amsreport" step3.crskf pressure
+
+
+# Step 4: Flash point
+# -------------------
+
+# In step 4 of the example the flash point of a mixture of ethanol and water
+# is calculated (result file step4.crskf).
+# This mixture consist of 44.2% mass fraction methanol and 55.8% mass fraction ethanol.
+# For a flash point calculation the pure compound flash points are needed as input,
+# since COSMO-RS does not predict pure compound flash points.
+# For pure ethanol a flash point of 286 K is saved in the file ethanol.coskf.
+
+
+"$AMSBIN/crsprep" -c ethanol.coskf -flashpoint 286 -savecompound
+
+"$AMSBIN/crsprep" -t FLASHPOINT -massfraction -j step4 \
+                  -c ethanol.coskf -frac1 0.442 \
+                  -c water.coskf -frac1 0.558 > job.sh
+./job.sh
+echo "Step 4 flash point"
+$AMSBIN/amsreport step4.crskf temperature
+
+# Step 5: Activity coefficients, Henry coefficients, Solvation free energies
+# --------------------------------------------------------------------------
+
+# In step 5 of the example the infinite diluted solutes benzene, methanol,and
+# ethanol are calculated in the solvent water (result file step5.crskf).
+# Activity coefficients, Henry coefficients and solvation free energies
+# will be calculated.
+# One one should include -s flag for water, since it is the solvent,
+# and considered here to be a special compound.
+
+
+"$AMSBIN/crsprep" -t ACTIVITYCOEF -j step5 \
+                  -s water.coskf \
+                  -c benzene.coskf -c ethanol.coskf -c methanol.coskf > job.sh
+./job.sh
+echo "Step 5 Activity coefficients, Henry's law constants, Solvation energy"
+"$AMSBIN/amsreport" step5.crskf Activity-Coefficient
+"$AMSBIN/amsreport" step5.crskf Henry
+"$AMSBIN/amsreport" step5.crskf Gibbs-energy-solvation
+
+# Step 6: Partition coefficients (log P)
+# --------------------------------------
+
+# In step 6 of the example the partition coefficients of infinitely diluted
+# solutes in a mixture of two immiscible solvents are calculated.
+# In step 6a the default Octanol/Water partition coefficients are calculated
+# (default -preset 2) (result file step6a.crskf).
+# In step 6b a user defined (-preset 0) Benzene/Water partition coefficients
+# are calculated (result file step6b.crskf).
+# In this case one should include -s flag for benzene and water, since these
+# are the two immiscible solvents, and considered here to be the special compounds.
+# The order of the compounds benzene and water is important, because the
+# molar volume of phase 1 (benzene) divided by the the molar volume of phase 2
+# (water) is given with the flag -volumequotient.
+
+
+"$AMSBIN/crsprep" -t LOGP -j step6a \
+                  -c benzene.coskf -c ethanol.coskf -c methanol.coskf > job.sh
+"$AMSBIN/crsprep" -t LOGP -preset 0 -volumequotient 4.93 -j step6b \
+                  -s benzene.coskf -s water.coskf \
+                  -c ethanol.coskf -c methanol.coskf >> job.sh
+./job.sh
+echo "Step 6a octanol/water"
+"$AMSBIN/amsreport" step6a.crskf logp
+echo "Step 6b benzene/water"
+"$AMSBIN/amsreport" step6b.crskf logp
+
+# Step 7: Solubility
+# ------------------
+
+# In step 7 of the example the solubility of a compound is calculated.
+# The solute can either be a liquid, solid, or gas.
+# First some pure compound properties for benzene are set: the melting point,
+# enthalpy of fusion, and the boiling point (file benzene.coskf).
+
+
+"$AMSBIN/crsprep" -c benzene.coskf -meltingpoint 278.7 -hfusion 2.37 -savecompound
+"$AMSBIN/crsprep" -c benzene.coskf -tvap 353.3 -pvap 1.01325 -savecompound
+
+# In step 7a the solubility of benzene in water is calculated for a range of
+# temperatures ranging from 273.15 K to 373.15 K in 10 steps (result file step7a.crskf).
+# If the template PURESOLUBILITY is used, the special compound is the solute,
+# benzene in this case.
+# Below 278.7 K, benzene is a solid. This will be taken into account, since the
+# melting point and enthalpy of fusion are present on the file benzene.coskf.
+# At higher temperatures benzene is assumed to be a liquid.
+# Note that tn this calcuation above the normal boiling point of benzene
+# the vapor pressure of benzene will be higher than 1.01325 bar.
+
+"$AMSBIN/crsprep" -t PURESOLUBILITY -temperature 273.15 -temperature 373.15 -j step7a \
+                  -s benzene.coskf \
+                  -c water.coskf > job.sh
+
+# In step 7b again the solubility of benzene in water is calculated for a (different)
+# range of temperatures (result file step7b.crs) using the template SOLUBILITY.
+# If the template SOLUBILITY is used, the special compound is the solvent,
+# water in this case.
+# For the density of the solvent water 1.0 kg/L is used.
+# Below 278.7 K benzene is a solid. This will be taken into account, since the melting
+# point and enthalpy of fusion are present on the file benzene.coskf.
+# At higher temperatures benzene is assumed to be a liquid.
+
+"$AMSBIN/crsprep" -t SOLUBILITY -temperature 273.15 -temperature 283.15 \
+                   -densitysolvent 1.0 -j step7b \
+                  -s water.coskf \
+                  -c benzene.coskf >> job.sh
+# In step 7c again the solubility of benzene in water is calculated for a range
+# of temperatures above the boiling point of benzene (result file step7c.crs)
+# using the template SOLUBILITY.
+# If the template SOLUBILITY is used, the special compound is the solvent,
+# water in this case.
+# For the density of water 1.0 kg/L is used.
+# For the vapor pressure of benzene 1.01325 bar is used.
+
+"$AMSBIN/crsprep" -t SOLUBILITY -temperature 353.3 -temperature 373.15 \
+                  -densitysolvent 1.0 -solphase Gas -pressure 1.01325 -j step7c \
+                  -s water.coskf \
+                  -c benzene.coskf >> job.sh
+
+# The solubility of a gas in a solvent can also be calculated using Henry's law,
+# which is valid for ideal dilute solutions.
+# Henry coefficients can be calculated with the template ACTIVITYCOEF.
+# In step 7d of the example the infinite diluted solutes benzene is calculated
+# in the solvent water (result file step7d.crskf)
+# at a temperature of 363.15 K.
+# If the template ACTIVITYCOEF is used, the special compound is the solvent,
+# water in this case.
+# For the density of water 1.0 kg/L is used.
+
+"$AMSBIN/crsprep" -t ACTIVITYCOEF -temperature 363.15 -densitysolvent 1.0 -j step7d \
+                  -s water.coskf \
+                  -c benzene.coskf >> job.sh
+
+# Next the job.sh is run which will produce the crskf files,
+# and a report is made for all calculations in step 7.
+
+./job.sh
+echo "Step 7a"
+"$AMSBIN/amsreport" step7a.crskf solubility-x
+echo "Step 7b"
+"$AMSBIN/amsreport" step7b.crskf solubility-g
+echo "Step 7c"
+"$AMSBIN/amsreport" step7c.crskf solubility-m
+echo "Step 7d"
+"$AMSBIN/amsreport" step7d.crskf henry
+
+
+# Step 8: Binary mixtures VLE/LLE
+# -------------------------------
+
+# In step 8 phase diagrams of a mixture of two components are be calculated
+# with the template BINMIXCOEF.
+# Exactly two compound should be given.
+# In step 8a of the example a binary mixture of water and methanol
+# is calculated at 298.14 K (result file step8a.crskf).
+
+"$AMSBIN/crsprep" -t BINMIXCOEF -temperature 298.14 -j step8a \
+                  -s water.coskf \
+                  -s methanol.coskf > job.sh
+
+# In step 8b of the example a binary mixture of water and ethanol is calculated
+# at 322.45 K (result file step8b.crskf).
+# Pure compound vapor pressures are given with -tvap (temperature in K)
+# and -pvap (vapor pressure in bar).
+# Preferably both -tvap and -pvap should be included for both compounds.
+# If only one -tvap and one -pvap is given, it is assumed to be for the first compound.
+# Note that these pure compound values are not saved to water.coskf or
+# ethanol.coskf in this case.
+
+
+"$AMSBIN/crsprep" -t BINMIXCOEF -temperature 322.45 -j step8b \
+                  -s water.coskf -tvap 322.45 -pvap 0.123416 \
+                  -s ethanol.coskf -tvap 322.45 -pvap 0.294896 >> job.sh
+
+# In step 8c of the example a binary mixture of water and benzene
+# is calculated at 323.15 K (result file step8c.crskf).
+# Water and benzene do not mix very well. In this case a
+# liquid-liquid equilibrium (LLE) will be calculated.
+# The number of mixtures for which the binary mixture is calculated should be not too small,
+# otherwise the properties of the 2 immiscible liquid phases will not be so accurate.
+# In this case for the number of mixtures 100 is chosen.
+# The actual number of mixtures is 5 more, thus 105 in this case.
+
+"$AMSBIN/crsprep" -t BINMIXCOEF -temperature 323.15 -n 100 -j step8c \
+                  -s water.coskf \
+                  -s benzene.coskf >> job.sh
+
+# In step 8d of the example a binary mixture of methanol and ethanol is calculated
+# at a constant total vapor pressure (-iso isobar) of 1.01325 bar (result file step8d.crskf).
+# Pure compound vapor pressures are given with -tvap (temperature in K)
+# and -pvap (vapor pressure in bar).
+# Preferably both -tvap and -pvap should be included for both compounds.
+# If only one -tvap and one -pvap is given, it is assumed to be for the first compound.
+# Note that these pure compound values are not saved to methanol.coskf
+# or ethanol.coskf in this case.
+
+"$AMSBIN/crsprep" -t BINMIXCOEF -iso isobar -pressure 1.01325 -j step8d \
+                  -s methanol.coskf -tvap 338 -pvap 1.01325 \
+                  -s ethanol.coskf -tvap 351 -pvap 1.01325 >> job.sh
+
+# Next the job.sh is run which will produce the crskf files,
+# and a report is made for all calculations in step 8.
+
+./job.sh
+echo "Step 8a"
+"$AMSBIN/amsreport" step8a.crskf molar-fraction
+"$AMSBIN/amsreport" step8a.crskf excess-g
+"$AMSBIN/amsreport" step8a.crskf excess-h
+echo "Step 8b"
+"$AMSBIN/amsreport" step8b.crskf vapor-pressure
+echo "Step 8c"
+"$AMSBIN/amsreport" step8c.crskf miscibility-gap
+"$AMSBIN/amsreport" step8c.crskf miscibility-gap-x
+"$AMSBIN/amsreport" step8c.crskf miscibility-gap-a
+echo "Step 8d"
+"$AMSBIN/amsreport" step8d.crskf temperature
+
+
+# Step 9: Ternary mixtures VLE/LLE
+# --------------------------------
+# 
+# In step 9 phase diagrams of a mixture of three components are be calculated
+# with the template TERNARYMIX.
+# Exactly three compound should be given.
+# For convenience first some pure compound properties (normal boiling points)
+# are saved to the .coskf files.
+
+
+"$AMSBIN/crsprep" -c water.coskf    -tvap 373.15 -pvap 1.01325 -savecompound
+"$AMSBIN/crsprep" -c methanol.coskf -tvap 338    -pvap 1.01325 -savecompound
+"$AMSBIN/crsprep" -c ethanol.coskf  -tvap 351    -pvap 1.01325 -savecompound
+"$AMSBIN/crsprep" -c benzene.coskf  -tvap 353.3  -pvap 1.01325 -savecompound
+
+# In step 9a of the example a ternary mixture of methanol, ethanol, and benzene
+# is calculated at 343.15 K (result file step9a.crskf).
+# In step 9b of the example a ternary mixture of water, ethanol, and benzene is calculated
+# at a constant total vapor pressure (-iso isobar) of 1.01325 bar (result file step9b.crskf).
+# In step 9b a miscibility gap of the ternary mixture will be calculated.
+# In this case, within the miscibility gap there are two immiscible phases of
+# the liquid in equilibrium.
+# The composition of the two phases, which are in equilibrium,
+# can be found at the end points of the tie lines, that are calculated.
+
+"$AMSBIN/crsprep" -t TERNARYMIX -temperature 343.15 -j step9a \
+                  -s methanol.coskf -s ethanol.coskf -s benzene.coskf  > job.sh
+"$AMSBIN/crsprep" -t TERNARYMIX -iso isobar -pressure 1.01325 -j step9b \
+                  -s water.coskf -s ethanol.coskf -s benzene.coskf >> job.sh
+./job.sh
+echo "Step 9a"
+"$AMSBIN/amsreport" step9a.crskf molar-fraction
+"$AMSBIN/amsreport" step9a.crskf pressure
+"$AMSBIN/amsreport" step9a.crskf miscibility-gap
+echo "Step 9b"
+"$AMSBIN/amsreport" step9b.crskf miscibility-gap
+echo "First 4 tie-lines"
+"$AMSBIN/amsreport" step9b.crskf -r "TERNARYMIX%xll#1:24#12.4f##6"
+"$AMSBIN/amsreport" step9b.crskf temperature
+
+# Note that for printing all tie-lines that are calculated in step9b one can simply use
+# "$AMSBIN/amsreport" step9b.crskf tie-lines-x
+# instead of the more complicated
+# "$AMSBIN/amsreport" step9b.crskf -r "TERNARYMIX%xll#1:24#12.4f##6"
+# which also only reports the first 4 tie-lines
+
+# Step 10: A composition line between solvents s1 and s2
+# ------------------------------------------------------
+
+# In step 10 a phase diagram of a mixture of two solvents, which both are mixtures,
+# is calculated with the template COMPOSITIONLINE.
+# In this step one of the tie lines of the ternary mixture of water, ethanol, and benzene
+# of step 9b will be investigated in more detail.
+# Note that here the .coskf files are used in which the normal boiling points were saved to (in step 9).
+# The mixture will be calculated for a list of molar (or mass) fractions of the solvents
+# between zero and one, and the compositions of solvent 1 and solvent 2 are linearly interpolated.
+# In this case solvent 1 consists of 0.3 molar fraction ethanol and 0.7 molar fraction benzene, and
+# solvent 2 consists of 0.9 molar fraction water and 0.1 molar fraction ethanol.
+# In step 10a of the example this mixture is calculated at a constant total vapor pressure (-iso isobar)
+# of 1.01325 bar (result file step10a.crskf).
+# In step 10b of the example this mixture is calculated at 341.05 K (result file step10b.crskf).
+# Why this temperature was chosen can be found in step 10 of COSMO-RS GUI Tutorial: Properties.
+
+"$AMSBIN/crsprep" -t COMPOSITIONLINE -iso isobar -pressure 1.01325 -n 100 -j step10a \
+                  -s water.coskf   -frac1 0.0 -frac2 0.9 \
+                  -s ethanol.coskf -frac1 0.3 -frac2 0.1 \
+                  -s benzene.coskf -frac1 0.7 -frac2 0.0 > job.sh
+"$AMSBIN/crsprep" -t COMPOSITIONLINE -temperature 341.05 -n 100 -j step10b \
+                  -s water.coskf   -frac1 0.0 -frac2 0.9 \
+                  -s ethanol.coskf -frac1 0.3 -frac2 0.1 \
+                  -s benzene.coskf -frac1 0.7 -frac2 0.0 >> job.sh
+./job.sh
+echo "Step 10a"
+$AMSBIN/amsreport step10a.crskf ncomp
+$AMSBIN/amsreport step10a.crskf frac1
+$AMSBIN/amsreport step10a.crskf frac2
+$AMSBIN/amsreport step10a.crskf solvent-fraction
+$AMSBIN/amsreport step10a.crskf molar-fraction
+$AMSBIN/amsreport step10a.crskf activity-coefficient
+
+echo "Step 10b"
+$AMSBIN/amsreport step10b.crskf Gibbs-energy-mixing
+
+# Step 11: Pure Compound Properties
+# ---------------------------------
+
+# In step 11 a QSPR (Quantitative Structure-Property Relationship) method is used
+# to estimate some pure compound properties. 
+# This QSPR method needs a SMILES string as input.
+
+echo "Step 11"
+"$AMSBIN"/prop_prediction --smiles "c1ccccc1" --boilingpoint -d
+
+# Step 12: Solvent Optimizations: Optimize Solubility
+# ---------------------------------------------------
+
+# In this step a solvent is optimized in order to maximize or minimize
+# the mole fraction solubility of a solid solute in the liquid mixture.
+
+echo "Step 12"
+"$AMSBIN"/solvent_opt -t SOLUBILITY -method COSMO-RS -temperature 273.15 -max \
+                      -c "benzene.coskf" -solute -meltingpoint 278.7 -hfusion 2.37 \
+                      -c "ethanol.coskf" -c "methanol.coskf" -c "water.coskf" -d > max_solubility
+grep benzene.coskf max_solubility
+grep " ethanol.coskf" max_solubility
+"$AMSBIN"/solvent_opt -t SOLUBILITY -method COSMO-RS -temperature 273.15 -min \
+                      -c "benzene.coskf" -solute -meltingpoint 278.7 -hfusion 2.37 \
+                      -c "ethanol.coskf" -c "methanol.coskf" -c "water.coskf" -d > min_solubility
+grep benzene.coskf min_solubility
+grep water.coskf min_solubility
+
+# Step 13: Solvent Optimizations: Optimize Liquid-Liquid Extraction
+# -----------------------------------------------------------------
+
+# In this step a mixture of immiscible solvents is optimized in order to maximize or minimize
+# the distribution ratio (D) of two solutes between the two liquid phases. 
+
+"$AMSBIN"/solvent_opt -t LLEXTRACTION -method COSMO-RS -multistart 5 -temperature 298.15 -max -warmstart \
+                      -c "ethanol.coskf" -solute  -c "methanol.coskf" -solute \
+                      -c "benzene.coskf" -c "water.coskf" -d > max_lle
+
+echo "Step 13"
+"$AMSBIN/amsreport" CRSKF -r "OPT_LLEXTRACTION%obj#8.3f"
+
+echo "Ready"

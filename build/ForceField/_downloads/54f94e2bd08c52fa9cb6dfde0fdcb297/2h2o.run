@@ -1,0 +1,54 @@
+#! /bin/sh
+
+AMS_JOBNAME=amber95 $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+  Atoms
+       O      0.0000     0.0000     0.0000      ForceField.Type=OW         ForceField.Charge=-0.8340
+       H     -0.5220     0.2660    -0.7570      ForceField.Type=HW         ForceField.Charge=0.4170
+       H     -0.5220     0.2660     0.7570      ForceField.Type=HW         ForceField.Charge=0.4170
+       O      0.0000    -3.2000     0.0000      ForceField.Type=OW         ForceField.Charge=-0.8340
+       H      0.0570    -2.2440     0.0000      ForceField.Type=HW         ForceField.Charge=0.4170
+       H      0.9110    -3.4950     0.0000      ForceField.Type=HW         ForceField.Charge=0.4170
+  End
+  BondOrders
+        1  2  1.0
+        1  3  1.0
+        4  5  1.0
+        4  6  1.0
+  End
+End
+
+Engine ForceField
+  Type Amber95
+EndEngine
+eor
+
+
+AMS_JOBNAME=tripos5.2 $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+  Atoms
+       O      0.0000     0.0000     0.0000      ForceField.Type=O.3       ForceField.Charge=-0.8340
+       H     -0.5220     0.2660    -0.7570      ForceField.Type=H         ForceField.Charge=0.4170
+       H     -0.5220     0.2660     0.7570      ForceField.Type=H         ForceField.Charge=0.4170
+       O      0.0000    -3.2000     0.0000      ForceField.Type=O.3       ForceField.Charge=-0.8340
+       H      0.0570    -2.2440     0.0000      ForceField.Type=H         ForceField.Charge=0.4170
+       H      0.9110    -3.4950     0.0000      ForceField.Type=H         ForceField.Charge=0.4170
+  End
+  BondOrders
+        1  2  1.0
+        1  3  1.0
+        4  5  1.0
+        4  6  1.0
+  End
+End
+
+Engine ForceField
+  Type Tripos5.2
+EndEngine
+eor

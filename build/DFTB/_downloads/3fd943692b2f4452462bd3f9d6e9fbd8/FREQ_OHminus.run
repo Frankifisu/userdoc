@@ -1,0 +1,28 @@
+#! /bin/sh
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   NormalModes true
+End
+
+System
+  Atoms [Bohr]
+    O     0.00000000     0.00000000     10.07360092
+    H     0.00000000     0.00000000     11.92639908
+  End
+  Charge -1
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir Dresden
+   Repulsion
+       forcePolynomial true
+   End
+EndEngine
+
+eor
+

@@ -1,0 +1,127 @@
+#! /bin/sh
+
+# An effective mass calculation is about the curvature of band at the top of the
+# valence band and the bottom of the conduction band. This is obtained by
+# numerical differentiation.
+
+# It can be done for systems with 1D, 2D, or 3D translational symmetry.
+
+# The easiest way to use this feature is to specify an empty EffectiveMass key
+# block (so leave out the NumAbove, NumBelow, and UniqueKPoints).
+
+# == Example 1D ==
+
+echo "example 1D"
+
+AMS_JOBNAME=EffectiveMass1D $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  Atoms
+     Al 0.0 0.0 0.0
+  END
+  Lattice
+     2.12440502 0.0 0.0
+  End
+End
+
+Engine Band
+  TITLE 1D Al Chain
+
+  EffectiveMass
+    Enabled True
+    KPointCoord -0.783
+    StepSize 0.001
+    NumAbove 4
+    NumBelow 2
+  End
+
+  Basis
+     Type DZ
+     Core Large
+  End
+EndEngine
+eor
+
+
+# == Example 2D ==
+
+echo "example 2D"
+
+AMS_JOBNAME=EffectiveMass2D $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  Atoms 
+     Mo     -1.626960686     0.313108730     0.000000000
+     S       0.000000000     1.252434919     1.547040825
+     S       0.000000000     1.252434919    -1.547040825
+  End
+
+  Lattice
+     1.626960686    -2.817978569     0.000000000
+     1.626960686     2.817978569     0.000000000
+  End
+End
+
+Engine Band
+  TITLE MoS2Slab
+
+  EffectiveMass
+    Enabled True
+  End
+
+  Basis
+     Type DZ
+     Core Large
+  End
+EndEngine
+
+eor
+
+# == Example 3D ==
+
+echo "example 3D"
+
+AMS_JOBNAME=EffectiveMass3D $AMSBIN/ams <<eor
+
+Task SinglePoint 
+System
+  Atoms
+     Zn  1.625 0.9381941876 0.0
+     Zn  1.625 -0.9381941878 2.615
+     O   1.625 0.9381941876 1.96125
+     O   1.625 -0.9381941878 4.57625
+  END
+  Lattice
+     1.625 -2.814582562 0.000000
+     1.625 2.814582562 0.000000
+     0.000000 0.000000 5.23
+  End
+End
+
+Engine Band
+  TITLE ZnO
+
+  NumericalQuality Basic
+
+  KSpace
+    Quality Normal
+  End
+  tails bas=1e-8
+
+  EffectiveMass
+    Enabled True
+    NumAbove 1
+    NumBelow 1
+  End
+
+  Basis
+     Type DZ
+     Core Large
+  End
+EndEngine
+
+eor

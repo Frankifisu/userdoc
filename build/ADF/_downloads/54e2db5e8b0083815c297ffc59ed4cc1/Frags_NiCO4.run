@@ -1,0 +1,130 @@
+#! /bin/sh
+
+
+# An illustration of the fragment feature of ADF.
+
+# A transition metal complex is built from a Nickel atom and four CO fragments.
+# The outcomes allows for an analysis (of molecular orbitals and the Bonding
+# energy) in terms of the fragment properties. It is a Single Point calculation.
+# Geometry optimization would not have been possible in this set-up because an
+# optimization requires that only single-atom fragments are used.
+
+# The three atoms are created first: C, O, and Ni. For Carbon and Oxygen a type-
+# DZ basis set is used (double-zeta) using the Basis key, while Ni gets a type-
+# TZP basis (triple-zeta plus polarization).
+
+
+# == CO ==
+
+
+# The CO molecule, to serve as a fragment template in Ni(CO)4 , is computed from
+# the atomic fragments C and O. The coordinate values (atoms) are in bohr,
+# rather than in Angstrom because the unit-of-length is redefined by the key
+# units with subkey length.
+
+# The key scf is used to specify a somewhat tighter convergence criterion than
+# the default, just to illustrate how to do this (normal settings are quite
+# adequate).
+
+$AMSBIN/dirac -n1 < $AMSRESOURCES/Dirac/Ni.2p
+mv TAPE12 t12.rel
+
+AMS_JOBNAME=Ni $AMSBIN/ams <<eor > tmp
+System
+  Atoms
+    Ni 0.0 0.0 0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create Ni  $AMSRESOURCES/ADF/ZORA/TZP/Ni.2p
+  corepotentials t12.rel
+     Ni 1
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=CO $AMSBIN/ams <<eor
+System
+  atoms [bohr]
+     C   0  0  0
+     O   0  0  2.15617844
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title CO (as fragment for NiCO4)
+  eprint
+    sfo eig ovl
+  end
+  basis
+    core Small
+    type DZ
+  end
+  scf
+    converge 1e-8
+  end
+EndEngine
+eor
+
+
+# One needs to include the subkey SFO of the key EPRINT with arguments eig and
+# ovl in order to get the SFO MO coefficients and SFO overlap matrix printed on
+# standard output.
+
+
+# == Main calculation ==
+
+
+# Apart from the title, the input contains comment. This does not specify
+# computational parameters but is only echoed in the output header, similar to
+# the title. Contrary to the title, however, such comments are not preserved,
+# apart from their echo in output and they are not written to adf.rkf or any
+# other result file.
+
+# The atomic coordinates (atoms) are given in bohr (Units). To supply the
+# numerical values use is made of user-defined constants (define): 2.0053211 and
+# 3.2501913. This is convenient and it prevents typing errors when several
+# coordinate values are identical, in particular when they carry a lot of
+# decimal places.
+
+# The Atoms records contain also a specification of the fragments to which the
+# respective atoms belong: four different CO fragments. No fragment is specified
+# for the Ni atom, which implies that it is a fragment on its own.
+
+# The numbers at the very left of the records (1 through 9, with (optionally) a
+# period after them), have no relevance. You can set them for ease of reference
+# or counting.
+
+
+AMS_JOBNAME=NiCO4 $AMSBIN/ams <<eor
+System
+  atoms [bohr]
+     Ni   0.0          0.0           0.0
+     C    2.0053211    2.0053211     2.0053211     adf.f=CO|1
+     C   -2.0053211   -2.0053211     2.0053211     adf.f=CO|2
+     C    2.0053211   -2.0053211    -2.0053211     adf.f=CO|3
+     C   -2.0053211    2.0053211    -2.0053211     adf.f=CO|4
+     O    3.2501913    3.2501913     3.2501913     adf.f=CO|1
+     O   -3.2501913   -3.2501913     3.2501913     adf.f=CO|2
+     O    3.2501913   -3.2501913    -3.2501913     adf.f=CO|3
+     O   -3.2501913    3.2501913    -3.2501913     adf.f=CO|4
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ni(CO)4,  from fragments Ni and CO
+  eprint
+    sfo eig ovl
+  end
+  fragments
+     CO  CO.results/adf.rkf
+     Ni  Ni.results/adf.rkf
+  end
+EndEngine
+eor

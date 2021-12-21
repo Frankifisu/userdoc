@@ -1,0 +1,154 @@
+#!/bin/sh
+
+# This example demonstrates the usage of vibronic-structure tracking
+# on the pyrene molecule. Excited state calculations are performed within AMS and
+# at the DFTB level
+
+# 1. Ground state optimization with DFTB
+#---------------------------------------
+
+AMS_JOBNAME=GroundState $AMSBIN/ams << eor
+
+System
+    Atoms
+        C      -0.01654981       1.36506537       0.00802668
+        C       0.00281590      -0.06808050       0.00051978
+        C       1.19835953       2.08859192       0.00127327
+        C      -1.25056871       2.05539572       0.02157814
+        C       1.23682878      -0.75840671      -0.01375673
+        C      -1.21209870      -0.79160461       0.00671225
+        C       2.44308841       1.35898462      -0.01256813
+        C       1.16450680       3.48665407       0.00772934
+        C      -2.47512291       1.29231475       0.02824995
+        C      -1.25452039       3.45386389       0.02759561
+        C       2.46138768       0.00467142      -0.01984509
+        C       1.24076149      -2.15686407      -0.02209661
+        C      -2.45682219      -0.06199957       0.02121310
+        C      -1.17826305      -2.18965609      -0.00177638
+        C      -0.05432386       4.15935390       0.02049748
+        C       0.04055488      -2.86234799      -0.01620562
+        H       3.36596464       1.93801392      -0.01731234
+        H       2.09583666       4.04986513       0.00239299
+        H      -3.41330596       1.84611463       0.03902307
+        H      -2.20073438       3.99162601       0.03767421
+        H       3.39957176      -0.54912830      -0.03053168
+        H       2.18696724      -2.69462025      -0.03320657
+        H      -3.37969722      -0.64102946       0.02611688
+        H      -2.10959908      -2.75286422       0.00274662
+        H      -0.06904859       5.24837501       0.02503968
+        H       0.05526108      -3.95135857      -0.02284989
+    End
+End
+
+Task GeometryOptimization
+
+Engine DFTB
+    Model DFTB3
+    ResourcesDir DFTB.org/3ob-freq-1-2
+EndEngine
+
+eor
+
+# 2. Get lowest singlet-singlet excitation of pyrene and
+# compute the excited state gradient at the optimized GS geometry
+#----------------------------------------------------------------
+
+AMS_JOBNAME=ExcitedState $AMSBIN/ams << eor
+
+Task SinglePoint
+LoadSystem
+   File ./GroundState.results/dftb.rkf
+End
+
+Properties
+    Gradients yes
+End
+
+Engine DFTB
+    Model DFTB3
+    ResourcesDir DFTB.org/3ob-freq-1-2
+    Properties
+        Excitations
+            TDDFTB
+                Calc Singlet
+                Lowest 1
+            End
+            TDDFTBGradients
+                Excitation 1
+            End
+        End
+    End
+EndEngine
+
+eor
+
+# 3. Vibronic-structure tracking for this excitation
+# --------------------------------------------------
+
+AMS_JOBNAME=VibronicStructure $AMSBIN/ams << eor
+
+LoadSystem
+   File ./GroundState.results/dftb.rkf
+End
+
+Task VibrationalAnalysis
+
+VibrationalAnalysis
+   Type VibronicStructureTracking
+   ExcitationSettings
+      ExcitationInputFormat File
+      ExcitationFile ./ExcitedState.results/dftb.rkf
+      Singlet
+        A 1
+      End
+   End
+   AbsorptionSpectrum
+      AbsorptionRange -500.0 4000.0
+      LineWidth 100
+      FrequencyGridPoints 181
+   End
+End
+
+Engine DFTB
+    Model DFTB3
+    ResourcesDir DFTB.org/3ob-freq-1-2
+EndEngine
+
+eor
+
+# 4. Restart the VST run from the previous one
+# We have changed our mind and we want
+# the peaks to be a little sharper
+# ---------------------------------------------------------
+
+AMS_JOBNAME=VibronicStructureRestart $AMSBIN/ams << eor
+
+LoadSystem
+   File ./GroundState.results/dftb.rkf
+End
+
+Task VibrationalAnalysis
+
+VibrationalAnalysis
+   Type VibronicStructureTracking
+   ExcitationSettings
+      ExcitationInputFormat File
+      ExcitationFile ./ExcitedState.results/dftb.rkf
+      Singlet
+        A 1
+      End
+   End
+   VSTRestartFile ./VibronicStructure.results/ams.rkf
+   AbsorptionSpectrum
+      AbsorptionRange -500.0 4000.0
+      LineWidth 50
+      FrequencyGridPoints 181
+   End
+End
+
+Engine DFTB
+    Model DFTB3
+    ResourcesDir DFTB.org/3ob-freq-1-2
+EndEngine
+
+eor

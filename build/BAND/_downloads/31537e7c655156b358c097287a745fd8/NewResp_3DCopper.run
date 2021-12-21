@@ -1,0 +1,54 @@
+#! /bin/sh
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Lattice :: FCC
+      0     1.805 1.805
+      1.805 0     1.805
+      1.805 1.805 0
+   End
+
+   Atoms
+      Cu  0.00  0.00  0.00
+   End
+End
+
+Engine Band 
+   Title NewResponse of Cu within ALDA  
+
+   NumericalQuality basic
+
+   KSpace
+     Regular
+       NumberOfPoints 5 5 5
+     End
+   End
+
+   NewResponse
+      nfreq         10
+      freqLow       0.1
+      freqHigh      10.0
+      activeEspace  10
+   END
+
+   NewResponseSCF
+      Criterion       0.1
+      LowFreqAlgo     true
+      COApproach      true
+      COApproachBoost true
+   End
+
+   NewResponseKSPACE
+      subsimp       5
+   End
+
+   Basis
+      Type TZ2P
+      Core Large
+   End
+EndEngine
+
+eor

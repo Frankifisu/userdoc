@@ -1,0 +1,29 @@
+We optimize the lattice and test several distances
+
+We divide the system in such a way that there are two equivalent, and hence neutral regions.
+
+Here are the distances (Angstrom) as obtained with a QM and an MM method
+  distance         qm         mm    err(mm)
+       B-H      1.182      1.181     -0.001
+       N-H      1.007      1.041      0.034
+       B-N      1.431      1.498      0.067
+
+Of course the force field results do not exactly match the QM results, the error displayed in the last column
+
+Now we try the hybrid engine, can we improve the bonds in the QM region?
+
+We start from the geometry calculated with the (cheap) forcefield
+
+In this table we show the errors in bond lengths (in the QM region) of the hybrid method with respect to the QM method
+
+      embedding         capping          energy             B-H             N-H             B-N
+     mechanical           fixed       -6.845015           0.004          -0.007          -0.049
+     mechanical      fractional       -6.746367           0.013          -0.006          -0.034
+  electrostatic           fixed       -6.748753           0.002          -0.004          -0.040
+  electrostatic      fractional       -6.652196           0.010          -0.003          -0.024
+
+Here are some observations
+     * the B-H distance is a bit worse than with a plain forcefield, especially with fractional capping
+     * the N-H distance is much better than with the plain forcefield 
+     * the B-N distance is a bit better than with the plain forcefield, now too short. Fractional capping works best.
+     * Electrostatic embedding is doing slightly better than mechanical embedding, the biggest improvement is on the B-N bond

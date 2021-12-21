@@ -1,0 +1,121 @@
+#!/bin/sh
+
+
+# This example calculates the ESR g-tensor and A-tensor for HgF. In this example
+# first spin-orbit coupling is taken into account perturbatively.
+
+# Note that an all-electron calculation is carried out. This is relevant for the
+# computation of the A-tensor, the nuclear magnetic dipole hyperfine
+# interaction, where an accurate value of the spin-polarization density at the
+# nucleus is important. For the g-tensor this plays a minor role. However, for
+# the g-tensor calculation that includes spin-orbit coupling perturbatively, all
+# electron basis sets are necessary.
+
+# In the first example the module nmr calculates the g-tensor (subkey GFACTORS)
+# using spin-orbit coupling and the external magnetic field as perturbation.
+
+
+AMS_JOBNAME=HgF $AMSBIN/ams <<eor
+System
+  atoms
+     Hg        0.0 0.0 0.0
+     F         0.0 0.0 2.804
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality verygood
+  end
+  basis
+    core None
+    type TZ2P
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  save TAPE21 TAPE10
+  scf
+    converge 1e-7 1e-7
+    iterations 500
+  end
+  spinpolarization 1
+  symmetry NoSym
+  unrestricted
+  usespcode
+  xc
+    gga PBE
+  end
+EndEngine
+eor
+
+$AMSBIN/nmr <<eor
+  tape10file HgF.results/TAPE10
+  adffile HgF.results/adf.rkf
+  nmr
+   gfactors 
+   u1k best
+   out iso tens 
+  end
+eor
+
+# In the second example the module cpl calculates the A-tensor (key HYPERFINE)
+# using spin-orbit coupling and the nuclear magnetic field as perturbation. Note
+# that one needs to set the SCF convergence criterium to a small value. For an
+# accurate calculation of the A-tensor one needs a very large basis set in the
+# core region (especially tight s-functions), especially for heavy nuclei. If
+# one has such a large basis set in the core region, one can also see an effect
+# of using a finite size of the nucleus instead of a point nucleus. Such large
+# basis sets can be found for some elements in $AMSRESOURCES/ADF/ZORA/jcpl, which
+# are basis sets especially designed for ESR A-tensor and NMR spin-spin coupling
+# calculations.
+
+
+AMS_JOBNAME=HgF_jcpl $AMSBIN/ams <<eor
+System
+  atoms
+     Hg        0.0 0.0 0.0
+     F         0.0 0.0 2.804
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  beckegrid
+    quality verygood
+  end
+  basis
+    PerAtomType Symbol=Hg File=ZORA/jcpl/Hg
+    PerAtomType Symbol=F  File=ZORA/jcpl/F
+  end
+  nuclearmodel Gaussian
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  scf
+    converge 1e-7 1e-7
+    iterations 500
+  end
+  spinpolarization 1
+  symmetry NoSym
+  unrestricted
+  usespcode
+  xc
+    gga PBE
+  end
+EndEngine
+eor
+
+$AMSBIN/cpl <<eor
+  adffile HgF_jcpl.results/adf.rkf
+  gga
+  hyperfine
+   atoms 1 2 :: calculates A-tensor for atom 1 and 2, input order
+   SCF Converge=1e-7
+  end
+eor

@@ -1,0 +1,82 @@
+#!/bin/sh
+
+# Neutral O2 singlet state
+# ========================
+
+AMS_JOBNAME=O2_singlet $AMSBIN/ams << EOF
+
+Task GeometryOptimization
+
+Properties 
+   NormalModes Yes
+End
+
+System
+   Atoms
+      O 1.5 0.0 0.0
+      O 0.0 0.0 0.0
+   End
+End
+
+Engine MOPAC
+EndEngine
+EOF
+
+echo "O2 bond distance (singlet)"
+$AMSBIN/amsreport O2_singlet.results/ams.rkf distance#1#2
+
+
+# O2+ doublet state
+# =================
+
+AMS_JOBNAME=O2+_doublet $AMSBIN/ams << EOF
+
+Task GeometryOptimization
+
+Properties 
+   NormalModes Yes
+End
+
+System
+   Atoms
+      O 1.5 0.0 0.0
+      O 0.0 0.0 0.0
+   End
+   Charge 1
+End
+
+Engine MOPAC
+   UnpairedElectrons 1
+EndEngine
+EOF
+
+echo "O2 bond distance (doublet, charged)"
+$AMSBIN/amsreport O2+_doublet.results/ams.rkf distance#1#2
+
+
+# Neutral O2 triplet state
+# ========================
+
+AMS_JOBNAME=O2_triplet $AMSBIN/ams << EOF
+
+Task GeometryOptimization
+
+Properties 
+   NormalModes Yes
+End
+
+System
+   Atoms
+      O 1.5 0.0 0.0
+      O 0.0 0.0 0.0
+   End
+End
+
+Engine MOPAC
+   UnpairedElectrons 2
+EndEngine
+EOF
+
+echo "O2 bond distance (triplet)"
+$AMSBIN/amsreport O2_triplet.results/ams.rkf distance#1#2
+

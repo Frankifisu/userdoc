@@ -1,0 +1,134 @@
+#! /bin/sh
+
+# A bulk crystal computation for Sodium Chloride (common salt), with a
+# subsequent DOS analysis, using a Restart facility to use the results from a
+# preceding calculation.
+
+# The BAND input follows slightly different conventions from the ADF input, for
+# historical reasons.
+
+# Since there are 3 data records in the Lattice block, the calculation will
+# assume 3-dimensional periodicity, with lattice vectors as indicated. Note that
+# lattice vectors are undefined up to linear combinations among themselves.
+# Internally, the program will recombine the input vectors so as to minimize the
+# size of the actually used vectors.
+
+# The input line FractionalCoords True means that atomic positions are input as
+# coefficients in terms of the lattice vectors, rather than as absolute
+# (Cartesian) coordinate values.
+
+AMS_JOBNAME=NaCl $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+  FractionalCoords True
+
+  Atoms
+    Na 0.0 0.0 0.0
+    Cl 0.5 0.5 0.5 
+  End
+
+  Lattice    
+    0.0   2.75   2.75   
+    2.75  0.0    2.75   
+    2.75  2.75   0.0    
+  End
+End
+
+Engine Band
+  Title NaCl
+
+  Kspace
+    Symmetric KInteg=3
+  End
+
+  Basis
+    Type SZ
+    Core None
+  End
+
+  Print AtomicChargesDetails
+
+EndEngine
+
+eor
+
+# The next run has largely the same input and provides a restart of the previous
+# run.
+
+# The key DOS in the block Restart tells the program to pick up the indicated
+# file as restart file and to use it for DOS analysis purposes.
+
+# The DOS key block details the energy grid (and range) and the file to write
+# the data to. The optional keys GROSSPOPULATIONS and OverlapPopulations invoke
+# the computation of, respectively, gross populations and overlap populations
+# (i.e. for each of these the density-of-states values in the user-defined
+# energy grid).
+
+AMS_JOBNAME=NaCl-restart $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+LoadSystem
+  File NaCl.results/ams.rkf
+  Section InputMolecule
+End
+
+Engine Band
+  Title NaCl DOS analysis (restart)
+
+  Kspace
+    Symmetric KInteg=3
+  End
+
+  Basis
+    Type SZ
+    Core None
+  End
+
+  Restart
+    File NaCl.results/band.rkf
+    SCF
+  End
+
+  DOS
+    CalcPDos  True
+    File      NaCl.dos
+    Energies  1000
+    Min      -0.5
+    Max       0.5
+  End
+
+  GrossPopulations
+   FRAG 1
+   FRAG 2
+   SUM
+     1 0
+     2 0
+   ENDSUM
+  End
+
+  OverlapPopulations
+  Left
+   FRAG 1
+  Right
+   FRAG 2
+  Left
+    1 0
+    1 1
+  Right
+    2 0
+    2 1
+  End
+
+  Print AtomicChargesDetails
+EndEngine
+eor
+
+# Finally, we copy the contents of the DOS result file to standard output
+
+echo ""
+echo Contents of DOS file
+cat NaCl.dos
+echo "The End"

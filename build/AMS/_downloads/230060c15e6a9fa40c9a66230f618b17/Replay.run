@@ -1,0 +1,272 @@
+#!/bin/sh
+
+
+# 1. Replay of PES scans
+# ======================
+
+AMS_JOBNAME=pesscan "$AMSBIN/ams" << eor
+
+Task PESScan
+
+PESScan
+    ScanCoordinate
+        nPoints 6
+        Dihedral 5 1 2 6 0.0 50
+        Dihedral 4 1 2 3 0.0 50
+    End
+    ScanCoordinate
+        nPoints 7
+        Distance 1 2 1.2 1.5
+    End
+End
+
+System
+    Atoms
+        C 0.0 -0.0 0.66687
+        C 0.0 -0.0 -0.33313
+        H 0.0 0.92974 -0.90538
+        H 0.0 0.92974 1.23912
+        H 0.0 -0.92974 1.23912
+        H 0.0 -0.92974 -0.90538
+    End
+End
+
+Engine ForceField
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=replay_pesscan "$AMSBIN/ams" << eor
+
+Task Replay
+Replay
+   File pesscan.results
+   StoreAllResultFiles Yes
+End
+
+Properties
+   Gradients True
+End
+
+Engine DFTB
+EndEngine
+
+eor
+
+
+echo "Start extracting data from ams.rkf ..."
+echo "Number of frames on file:"
+$AMSBIN/amsreport replay_pesscan.results/ams.rkf -r 'History%nEntries'
+frame=1
+while [ $frame -le 42 ]; do   
+   echo "Frame: $frame"
+   $AMSBIN/amsreport replay_pesscan.results/ams.rkf -r "History%Energy($frame)"
+   $AMSBIN/amsreport replay_pesscan.results/ams.rkf -r "History%Gradients($frame)"
+   frame=$(expr $frame + 1)
+   
+
+done
+echo "Data in PESScan section:"
+$AMSBIN/amsreport replay_pesscan.results/ams.rkf -r 'PESScan%PESCoords'
+$AMSBIN/amsreport replay_pesscan.results/ams.rkf -r 'PESScan%PES'
+$AMSBIN/amsreport replay_pesscan.results/ams.rkf -r 'PESScan%HistoryIndices'
+echo "Data extracted."
+
+
+# 2. Replay of NEB calculations
+# =============================
+
+AMS_JOBNAME=neb "$AMSBIN/ams" << eor
+
+Task NEB
+
+NEB
+    Images 16
+End
+
+GeometryOptimization
+   Convergence
+      Energy 1.0e-4
+      Gradients 1.0e-2
+   End
+End
+
+System
+    Atoms
+        C -0.04837097189972882 0.002828754545985427 1.099927275387085
+        C -0.7231327687579711 -1.264630955508361 1.591341080262239
+        C -0.7174118987979032 1.275587203448819 1.585489846719994
+        H -1.758221225827696 -1.294861009536393 1.215612210647893
+        H -0.7536609466556244 -1.286949469754588 2.689737906089842
+        H 0.02700743800283175 0.0001348498227195367 0.004547638456250216
+        H -0.7481941882345999 1.302956664081095 2.683766567353197
+        H -0.1880537663322776 2.167332127899618 1.228056629315197
+        H -1.752232117403696 1.308927696210993 1.209290912745431
+        H -0.1979764470101184 -2.160385916691095 1.237731888775011
+        Cl 1.710726893919094 4.005547128448699e-05 1.649098041095717
+    End
+End
+System final
+    Atoms
+        C -0.8173023574499557 -0.01408167289928656 0.8544841004283144
+        C -1.086263680920393 -1.14724517989661 1.518039806717775
+        C -0.8990221290639472 1.362120508644236 1.43231282384412
+        H -1.018446188967536 -2.121649215821082 1.03173453221026
+        H -1.404982357822256 -1.129945575549278 2.563696578967125
+        H -0.5085933307712909 -0.08344191227560969 -0.1948268157146379
+        H -1.210244367762068 1.342173382164807 2.485525533439326
+        H 0.07413947140246446 1.873805664554979 1.364278897383801
+        H -1.616521025856608 1.9769362830809 0.8657976784252567
+        H 1.044986335480545 -0.9543604705303219 1.922869894354733
+        Cl 2.292729632733364 -1.053331811482705 2.350686966791855
+    End
+End
+
+Engine DFTB
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=replay_neb "$AMSBIN/ams" << eor
+
+Task Replay
+Replay File=neb.results/ams.rkf
+
+Engine ADF
+   NumericalQuality Basic
+EndEngine
+
+eor
+
+
+echo "Start extracting data from ams.rkf ..."
+echo "Number of frames on file:"
+$AMSBIN/amsreport replay_neb.results/ams.rkf -r 'History%nEntries'
+frame=1
+while [ $frame -le 16 ]; do
+   echo "Frame: $frame"      
+   $AMSBIN/amsreport replay_neb.results/ams.rkf -r "History%Energy($frame)"
+   frame=$(expr $frame + 1)
+done
+echo "Data in NEB section:"
+$AMSBIN/amsreport replay_neb.results/ams.rkf -r 'NEB%nebIterations'
+$AMSBIN/amsreport replay_neb.results/ams.rkf -r 'NEB%historyIndex@dim'
+$AMSBIN/amsreport replay_neb.results/ams.rkf -r 'NEB%historyIndex'
+$AMSBIN/amsreport replay_neb.results/ams.rkf -r 'NEB%energy'
+$AMSBIN/amsreport replay_neb.results/ams.rkf -r 'NEB%highestIndex'
+$AMSBIN/amsreport replay_neb.results/ams.rkf -r 'NEB%LeftBarrier'
+$AMSBIN/amsreport replay_neb.results/ams.rkf -r 'NEB%RightBarrier'
+$AMSBIN/amsreport replay_neb.results/ams.rkf -r 'NEB%ReactionEnergy'
+echo "Data extracted."
+
+
+# 3. Replay of generic history (e.g. MD)
+# ======================================
+
+AMS_JOBNAME=md "$AMSBIN/ams" << eor
+
+Task MolecularDynamics
+
+MolecularDynamics
+   nSteps 1000
+   InitialVelocities Type=Zero
+   Trajectory SamplingFreq=10
+End
+
+System
+   Atoms
+      O       5.84400000       0.31970000       0.89540000
+      H       1.17000000       0.12750000      -2.13090000
+      H      -0.61000000      -1.28280000      -1.84810000
+      H      -0.57930000      -0.70680000       1.15800000
+      C      -3.12520000       0.09550000       0.94430000
+      C      -3.19980000      -1.42460000       1.23360000
+      C      -2.05280000       0.23760000      -0.14210000
+      C      -1.27100000       1.53130000      -0.13370000
+      C      -0.13080000       1.46490000      -1.14670000
+      C      -2.05030000      -2.08490000       0.42320000
+      C      -1.08120000      -0.91390000       0.20520000
+      C       0.72590000       0.20890000      -1.09890000
+      C      -0.07070000      -1.07000000      -0.90020000
+      C       1.91880000       0.37840000      -0.17010000
+      C       2.85070000       1.44940000      -0.76420000
+      C       4.06090000       1.66070000       0.14280000
+      C       0.79940000      -2.27110000      -0.66800000
+      C       2.70610000      -0.90160000      -0.05510000
+      C       4.70630000       0.33980000       0.46480000
+      C       2.06470000      -2.18950000      -0.28730000
+      C       4.02370000      -0.86790000       0.26480000
+      C       1.49560000       0.82380000       1.22970000
+      C      -2.72010000       0.03450000      -1.50220000
+      C      -4.44990000       0.59620000       0.43260000
+      O      -5.21170000      -0.16370000      -0.11570000
+      C      -4.82510000       2.04560000       0.60460000
+      H      -2.82710000       0.64000000       1.83720000
+      H      -3.05600000      -1.60950000       2.29900000
+      H      -4.16120000      -1.82340000       0.91220000
+      H      -1.95080000       2.35390000      -0.41170000
+      H      -0.90510000       1.74180000       0.87040000
+      H      -0.54560000       1.56290000      -2.16020000
+      H       0.51310000       2.34310000      -1.00320000
+      H      -1.56740000      -2.86790000       1.01220000
+      H      -2.40770000      -2.48600000      -0.52040000
+      H       3.18420000       1.11610000      -1.74960000
+      H       2.30420000       2.38610000      -0.86930000
+      H       4.79290000       2.28810000      -0.38330000
+      H       3.77550000       2.17310000       1.05860000
+      H       0.36740000      -3.25490000      -0.82120000
+      H       2.63690000      -3.09890000      -0.14660000
+      H       4.55990000      -1.80060000       0.37040000
+      H       0.83020000       0.07700000       1.66290000
+      H       2.37890000       0.93230000       1.85900000
+      H       0.97580000       1.77970000       1.16520000
+      H      -3.42010000       0.84890000      -1.68870000
+      H      -1.95890000       0.02380000      -2.28240000
+      H      -3.25700000      -0.91410000      -1.50550000
+      H      -4.48270000       2.61460000      -0.25970000
+      H      -5.90820000       2.13270000       0.69120000
+      H      -4.35580000       2.43770000       1.50690000
+   End
+End
+
+Engine ReaxFF
+   ForceField CHON-2019.ff
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=replay_md "$AMSBIN/ams" << eor
+
+Task Replay
+Replay
+   File md.results/
+   Frames 1:101:10
+End
+
+Properties
+   Gradients True
+   BondOrders True
+End
+
+Engine DFTB
+EndEngine
+
+eor
+
+
+echo "Start extracting data from ams.rkf ..."
+echo "Number of frames on file:"
+$AMSBIN/amsreport replay_md.results/ams.rkf -r 'History%nEntries'
+frame=1
+while [ $frame -le 11 ]; do   
+   echo "Frame: $frame"
+   $AMSBIN/amsreport replay_md.results/ams.rkf -r "History%Energy($frame)"
+   $AMSBIN/amsreport replay_md.results/ams.rkf -r "History%Bonds.Index($frame)"
+   $AMSBIN/amsreport replay_md.results/ams.rkf -r "History%Bonds.Atoms($frame)"
+   $AMSBIN/amsreport replay_md.results/ams.rkf -r "History%Bonds.Orders($frame)"
+   frame=$(expr $frame + 1)
+done
+echo "Data extracted."

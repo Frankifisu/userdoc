@@ -1,0 +1,97 @@
+#!/bin/bash
+
+# the System is extremely artificial but the calculation points out something useful
+
+# The system has two CO molecules, one of which is compressed.
+# We freeze the coordinates of the compressed CO molecules
+
+# We define a gradient dependent electronic temperature (excluding the gradient of the constrained atoms)
+# When far from convergence a higher value is used to ease SCF convergence (not relevant to this system)
+# When the gradients become small the temperature is lowered, so that is will have negligible influence on the energy
+
+# Here we let on purpose not converge the geometry optimization
+# The final calculation should be performed as a normal single point and we explicitly set in band the ElectronicTemperature to 0.001
+
+report=report.txt
+
+echo "We use a gradient dependent KT value (finite electronic temperature)" > $report
+
+printf "\nThe value of kT gets progressively lower during the optimization\n\n" >> $report
+
+printf "\nFor two optimizers we do 3 steps and they do not converge. Yet the last single point should be done at KTlow=0.001\n\n" >> $report
+
+targetKT=0.001
+
+system=test
+
+for optim in Quasi-Newton FIRE
+do
+
+for automation in yes
+do
+
+export AMS_JOBNAME=$system.optim=$optim.automation=$automation
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams<<EOF
+
+EngineDebugging NeverQuiet=yes
+
+# log
+#   debug AutomationInteractionModule
+# end
+
+Task GeometryOptimization
+
+GeometryOptimization 
+    Method $optim
+    MaxIterations 2
+
+    EngineAutomations
+       Enabled $automation
+       Gradient variable=Occupation%KT InitialValue=0.01 FinalValue=$targetKT HighGradient=0.1 LowGradient=1.0e-3
+       Iteration variable=SCC%Converge%Charge InitialValue=1.0e-3 FinalValue=1.0e-8 FirstIteration=0 LastIteration=1
+    End
+end
+
+
+Constraints
+    Atom 3
+    Atom 4
+End
+
+System
+
+  Atoms
+     C 0.0 0.0 0.0
+     O 1.13 0.0 0.0
+     C 0.0 5.0 0.0
+     O 1.0 5.0 0.0
+  End
+End
+
+
+Engine DFTB
+   Occupation kT=$targetKT
+EndEngine
+
+EOF
+
+echo "kT series for optimizer: $optim" >> $report
+grep "temperature kT" $AMS_JOBNAME.results/ams.log | awk '{print $NF}' >> $report
+echo "(the last kT should be 0.001)" >> $report
+echo "">>$report
+
+
+echo "Converge%charge for optimizer: $optim" >> $report
+grep "setting SCC%Converge%Charge to" $AMS_JOBNAME.results/ams.log | awk '{print $NF}' >> $report
+# echo "(the last value should be 1.0e-8)" >> $report
+echo "">>$report
+
+done
+done
+
+echo "begin report"
+cat $report
+echo "end report"

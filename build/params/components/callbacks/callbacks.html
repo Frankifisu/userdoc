@@ -1,0 +1,1048 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5.12. Callbacks &mdash; ParAMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ParAMS 2021.1 documentation" href="../../index.html"/>
+        <link rel="up" title="5. Components" href="../components.html"/>
+        <link rel="next" title="5.13. Loss Functions" href="../lossfunctions/lossfunctions.html"/>
+        <link rel="prev" title="5.11. Constraints" href="../constraints/constraints.html"/> 
+
+  
+  <script src="../../_static/js/jquery.min.js"></script>
+  <script src="../../_static/js/bootstrap.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/params_logo_compact.svg" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search ParAMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-ParAMS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro.html#parameter-fitting-a-lennard-jones-example">1.1. Parameter Fitting: A Lennard-Jones Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro.html#general-application">1.2. General Application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">2. Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#first-steps-with-params">2.1. First Steps with ParAMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#unit-tests">2.2. Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/examples.html">3. Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html">3.1. Lennard-Jones Potential for Argon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#lennard-jones-parameters-engine-and-interface">3.1.1. Lennard-Jones Parameters, Engine, and Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#files">3.1.2. Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#run-the-example">3.1.3. Run the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#the-best-parameter-values">3.1.4. The best parameter values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#input-files">3.1.5. Input files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#the-job-collection-yaml-file">3.1.5.1. The job_collection.yaml file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#the-training-set-yaml-file">3.1.5.2. The training_set.yaml file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#the-params-conf-py-file">3.1.5.3. The params.conf.py file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#creation-of-the-input-files">3.1.5.4. Creation of the input files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#output-files">3.1.6. Output files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#summary-txt">3.1.6.1. summary.txt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar.html#detailed-results-correlation-plots-summary-statistics">3.1.6.2. Detailed results: correlation plots, summary statistics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html">3.2. Calculate reference values in training_set.yaml</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#prerequisites">3.2.1. Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#the-input-files">3.2.2. The input files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#training-set-yaml">3.2.2.1. training_set.yaml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#reference-engines-yaml">3.2.2.2. reference_engines.yaml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#job-collection-yaml">3.2.2.3. job_collection.yaml</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#calculate-reference-values-with-params-genref">3.2.3. Calculate reference values with <code class="docutils literal notranslate"><span class="pre">params</span> <span class="pre">genref</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#the-reference-cache-folder">3.2.3.1. The reference.cache folder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_no_reference_data.html#the-training-set-ref-yaml-file">3.2.3.2. The training_set.ref.yaml file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/lj_ar/lj_ar_validation_set.html">3.3. Training and validation sets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_validation_set.html#an-explicit-validation-set-validation-set-yaml">3.3.1. An explicit validation set: <code class="docutils literal notranslate"><span class="pre">validation_set.yaml</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_validation_set.html#run-the-optimization">3.3.1.1. Run the optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_validation_set.html#training-and-validation-set-results">3.3.1.2. Training and validation set results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_validation_set.html#random-split-of-a-data-set-into-training-and-validation-sets">3.3.2. Random split of a data_set into training and validation sets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/lj_ar/lj_ar_restart.html">3.4. Restarting (continuing) an optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_restart.html#restarting-with-the-cmaoptimizer">3.4.1. Restarting with the CMAOptimizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_restart.html#run-the-first-100-iterations">3.4.1.1. Run the first 100 iterations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/lj_ar/lj_ar_restart.html#continue-for-another-100-iterations-with-a-restart-file">3.4.1.2. Continue for another 100 iterations with a restart file</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_restart.html#restart-with-other-optimizers-e-g-nelder-mead-from-scipy">3.4.2. Restart with other optimizers (e.g. Nelder-Mead from Scipy)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/lj_ar/lj_ar_python.html">3.5. The params Python library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_python.html#run-an-optimization-with-the-python-library">3.5.1. Run an optimization with the Python library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_python.html#calculate-reference-values">3.5.2. Calculate reference values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/lj_ar/lj_ar_python.html#training-and-validation-sets-with-the-python-library">3.5.3. Training and validation sets with the Python library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/results_importer/results_importer.html">3.6. Create training sets with a ResultsImporter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#run-a-reference-job">3.6.1. Run a reference job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#water-molecule-reference-data">3.6.2. Water molecule reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#initialize-the-resultsimporter">3.6.3. Initialize the ResultsImporter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#add-a-singlepoint-calculation-on-the-optimized-geometry">3.6.4. Add a singlepoint calculation on the optimized geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#add-a-geometry-optimization-job-extracting-the-bond-length-and-bond-angle">3.6.5. Add a geometry optimization job extracting the bond length and bond angle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#add-a-trajectory">3.6.6. Add a trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#add-a-reaction-energy">3.6.7. Add a reaction energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#training-set-validation-set-and-other-data-sets">3.6.8. Training set, validation set, and other data sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#exit-plams">3.6.9. Exit PLAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#save-to-disk">3.6.10. Save to disk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/results_importer/results_importer.html#more-resultsimporters">3.6.11. More ResultsImporters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html">3.7. SCC-DFTB repulsive potential for ZnO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#job-collection-yaml-and-training-set-yaml">3.7.1. job_collection.yaml and training_set.yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#background-znorg-0-1">3.7.2. Background: znorg-0-1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#parameter-interface">3.7.3. Parameter interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#run-the-parametrization">3.7.4. Run the parametrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#results">3.7.5. Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/dftb_zno/dftb_zno.html#modify-the-analytical-repulsive-potential">3.7.6. Modify the analytical repulsive potential</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/reaxff_water.html">3.8. Parameterization of a Water Force Field with ReaxFF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/reaxff_water.html#complete-example-script">3.8.1. Complete Example Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/reaxff_water.html#changing-the-example-script">3.8.2. Changing the Example Script</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html">3.9. Parameterization of a Simple Force Field with ReaxFF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html#calculate-the-reference-data">3.9.1. Calculate the reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html#import-the-reference-data-into-params">3.9.2. Import the reference data into ParAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html#set-the-parameters-to-optimize">3.9.3. Set the parameters to optimize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html#run-the-reaxff-parametrization">3.9.4. Run the ReaxFF parametrization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/new_reaxff_water/new_reaxff_water.html#visualize-the-results">3.9.5. Visualize the results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/hf_acks2.html">3.10. Refitting HF Charges with the ACKS2 Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/hf_acks2.html#the-config-file">3.10.1. The Config File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/hf_acks2.html#preparing-the-yaml-files-from-input">3.10.2. Preparing the YAML Files from Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/hf_acks2.html#running-the-optimization">3.10.3. Running the Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/hf_acks2.html#comparing-the-new-parameters">3.10.4. Comparing the new parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/hf_acks2.html#playing-with-the-example">3.10.5. Playing with the example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/convert_old_reaxff_format.html">3.11. Convert old ReaxFF training sets to ParAMS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/convert_old_reaxff_format.html#convert-geo-to-job-collection-yaml">3.11.1. Convert <code class="docutils literal notranslate"><span class="pre">geo</span></code> to <code class="docutils literal notranslate"><span class="pre">job_collection.yaml</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/convert_old_reaxff_format.html#convert-trainset-in">3.11.2. Convert <code class="docutils literal notranslate"><span class="pre">trainset.in</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/convert_old_reaxff_format.html#convert-the-old-params-file">3.11.3. Convert the old <code class="docutils literal notranslate"><span class="pre">params</span></code> file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mainscript/mainscript.html">4. ParAMS Main Script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mainscript/mainscript.html#the-configuration-file">4.1. The Configuration File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../mainscript/mainscript.html#generate-a-template-config-file">4.1.1. Generate a template config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mainscript/mainscript.html#list-of-variables-in-params-conf-py">4.1.2. List of variables in <code class="docutils literal notranslate"><span class="pre">params.conf.py</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../components.html">5. Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../architecture/architecture.html">5.1. Architecture Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../collections/collections.html">5.2. Job and Engine Collections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../collections/collections.html#job-collection">5.2.1. Job Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#adding-jobs">5.2.1.1. Adding Jobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#lookup">5.2.1.2. Lookup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#removing-entries">5.2.1.3. Removing Entries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#renaming-entries">5.2.1.4. Renaming Entries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#comparison">5.2.1.5. Comparison</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#saving-and-loading">5.2.1.6. Saving and loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#generating-amsjobs">5.2.1.7. Generating AMSJobs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#running-collection-jobs">5.2.1.8. Running Collection Jobs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../collections/collections.html#engine-collection">5.2.2. Engine Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections/collections.html#collections-api">5.2.3. Collections API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#jcentry">5.2.3.1. JCEntry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#jobcollection">5.2.3.2. JobCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#engine">5.2.3.3. Engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#enginecollection">5.2.3.4. EngineCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../collections/collections.html#collection-base-class">5.2.3.5. Collection Base Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data_set/data_set.html">5.3. Data Set</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#an-example-dataset">5.3.1. An example DataSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#load-or-store-dataset">5.3.2. Load or store DataSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#adding-entries">5.3.3. Adding entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#demonstration-working-with-a-dataset">5.3.4. Demonstration: Working with a DataSet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#add-an-entry">5.3.4.1. Add an entry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#datasetentry-attributes">5.3.4.2. DataSetEntry attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#accessing-the-dataset-entries">5.3.4.3. Accessing the DataSet entries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#delete-a-dataset-entry">5.3.4.4. Delete a DataSet entry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#split-a-dataset-into-subsets">5.3.4.5. Split a DataSet into subsets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#dataset-header">5.3.4.6. DataSet header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set.html#save-the-data-set">5.3.4.7. Save the data set</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#calculating-and-adding-reference-data-with-ams">5.3.5. Calculating and Adding Reference Data with AMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#calculating-the-loss-function-value">5.3.6. Calculating the Loss Function Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#checking-for-consistency-with-a-given-job-collection">5.3.7. Checking for Consistency with a given Job Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#sigma-vs-weight-what-is-the-difference">5.3.8. Sigma vs. weight: What is the difference?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#data-set-entry-api">5.3.9. Data Set Entry API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set.html#data-set-api">5.3.10. Data Set API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data_set/extractors.html">5.4. Extractors and Comparators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/extractors.html#available-extractors">5.4.1. Available Extractors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#angle">5.4.1.1. Angle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#average-distance">5.4.1.2. Average distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#bulk-modulus">5.4.1.3. Bulk modulus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#cell-angles">5.4.1.4. Cell angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#cell-lengths">5.4.1.5. Cell lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#cell-volume">5.4.1.6. Cell volume</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#charges">5.4.1.7. Charges</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#dihedral">5.4.1.8. Dihedral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#distance">5.4.1.9. Distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#distance-vector">5.4.1.10. Distance vector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#energy">5.4.1.11. Energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#forces">5.4.1.12. Forces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#hessian">5.4.1.13. Hessian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#pes">5.4.1.14. PES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#pes-compared">5.4.1.15. PES compared</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#pesscan-angle">5.4.1.16. PESScan angle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#pesscan-dihedral">5.4.1.17. PESScan dihedral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#pesscan-distance">5.4.1.18. PESScan distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#rmsd">5.4.1.19. RMSD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#shear-modulus">5.4.1.20. Shear modulus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor">5.4.1.21. Stress tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-1d">5.4.1.22. Stress tensor 1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-2d">5.4.1.23. Stress tensor 2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-3d">5.4.1.24. Stress tensor 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-diagonal-2d">5.4.1.25. Stress tensor diagonal 2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-diagonal-3d">5.4.1.26. Stress tensor diagonal 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-off-diagonal-2d">5.4.1.27. Stress tensor off-diagonal 2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#stress-tensor-off-diagonal-3d">5.4.1.28. Stress tensor off-diagonal 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#vibrational-frequencies">5.4.1.29. Vibrational frequencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/extractors.html#young-modulus">5.4.1.30. Young modulus</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/extractors.html#custom-extractors">5.4.2. Custom Extractors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/extractors.html#supported-data-structures">5.4.3. Supported Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/extractors.html#custom-comparators">5.4.4. Custom Comparators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data_set/data_set_evaluator.html">5.5. Data Set Evaluator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set_evaluator.html#datasetevaluator-class">5.5.1. DataSetEvaluator class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set_evaluator.html#example-datasetevaluator-calculate-reference">5.5.1.1. Example: DataSetEvaluator.calculate_reference()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set_evaluator.html#example-datasetevaluator-run">5.5.1.2. Example: DataSetEvaluator.run()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data_set/data_set_evaluator.html#example-load-a-saved-datasetevaluator">5.5.1.3. Example: Load a saved DataSetEvaluator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../data_set/data_set_evaluator.html#datasetevaluator-api">5.5.2. DataSetEvaluator API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../results_importer/results_importer.html">5.6. Results Importer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/overview.html">5.6.1. ResultsImporter overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/overview.html#resultsimporter-summary">5.6.1.1. ResultsImporter summary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/overview.html#resultsimporter-settings">5.6.1.2. ResultsImporter settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/overview.html#training-set-validation-set-etc">5.6.1.3. Training set, validation set, etc.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/overview.html#save-and-load-from-disk">5.6.1.4. Save and load from disk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/overview.html#add-singlejob">5.6.1.5. add_singlejob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/overview.html#add-trajectory-singlepoints">5.6.1.6. add_trajectory_singlepoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/overview.html#add-reaction-energy">5.6.1.7. add_reaction_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/overview.html#add-pesscan-singlepoints">5.6.1.8. add_pesscan_singlepoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/overview.html#add-neb-singlepoints">5.6.1.9. add_neb_singlepoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/overview.html#add-pesexploration-singlepoints">5.6.1.10. add_pesexploration_singlepoints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/reference_codes.html">5.6.2. AMS, VASP and Quantum ESPRESSO reference data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/reference_codes.html#ams">5.6.2.1. AMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/reference_codes.html#vasp">5.6.2.2. VASP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../results_importer/reference_codes.html#quantum-espresso">5.6.2.3. Quantum ESPRESSO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../results_importer/api.html">5.6.3. ResultsImporters API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/interfaces.html">5.7. Parameter Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#available-parameter-interfaces">5.7.1. Available Parameter Interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/xtb.html">5.7.1.1. xTB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/reaxff.html">5.7.1.2. ReaxFF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/dftbsplinerep.html">5.7.1.3. SCC-DFTB repulsive potential</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/lennardjones.html">5.7.1.4. Lennard Jones</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#parameter-interface-basics">5.7.2. Parameter Interface Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#working-with-parameters">5.7.3. Working with Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#the-active-parameters-subset">5.7.4. The Active Parameters Subset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#storage">5.7.5. Storage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../interfaces/interfaces.html#lossless-storage">5.7.5.1. Lossless Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#relation-to-plams-settings">5.7.6. Relation to PLAMS Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#parameter-api">5.7.7. Parameter API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interfaces/interfaces.html#interface-base-class-api">5.7.8. Interface Base Class API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizers/optimizers.html">5.8. Optimizers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/cmaes.html">5.8.1. CMA-ES</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../optimizers/cmaes.html#list-of-valid-cmasettings">5.8.1.1. List of valid <cite>cmasettings</cite></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../optimizers/cmaes.html#references">5.8.1.2. References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/scipy.html">5.8.2. Scipy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/nevergrad.html">5.8.3. Nevergrad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/armc.html">5.8.4. Adaptive Rate MC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/grid.html">5.8.5. Simple Grid Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/base.html">5.8.6. Optimizer Base Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../optimizers/base.html#baseoptimizer-api">5.8.6.1. BaseOptimizer API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../optimizers/base.html#minimizeresult-api">5.8.6.2. MinimizeResult API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runner/runner.html">5.9. Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runner/runner.html#optimization-setup">5.9.1. Optimization Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runner/runner.html#optimization-api">5.9.2. Optimization API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runner/parallellevels.html">5.10. Parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constraints/constraints.html">5.11. Constraints</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.12. Callbacks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-callbacks">5.12.1. Default callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logger">5.12.2. Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timeout">5.12.3. Timeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#target-value">5.12.4. Target Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maximum-iterations">5.12.5. Maximum Iterations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#early-stopping">5.12.6. Early Stopping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stopfile">5.12.7. Stopfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#time-per-evaluation">5.12.8. Time per Evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-average">5.12.9. Load Average</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-defined-callbacks">5.12.10. User-Defined Callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#callback-api">5.12.11. Callback API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../lossfunctions/lossfunctions.html">5.13. Loss Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#specifying-the-loss-function">5.13.1. Specifying the loss function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#technical-information">5.13.2. Technical information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#sum-of-squares-error">5.13.3. Sum of Squares Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#sum-of-absolute-errors">5.13.4. Sum of Absolute Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#mean-absolute-error">5.13.5. Mean Absolute Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#root-mean-square-error">5.13.6. Root-Mean-Square Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lossfunctions/lossfunctions.html#loss-function-api">5.13.7. Loss Function API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/utilities.html">5.14. Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/converters.html">5.14.1. ParAMS Converters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/converters.html#ams-job-to-settings">5.14.1.1. AMS Job to Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/converters.html#ams-job-to-engine">5.14.1.2. AMS Job to Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/history.html">5.14.2. Optimization History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/plotting.html">5.14.3. Plotting Funcitons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/public_helpers.html">5.14.4. Helper functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/weights_schemes.html">5.14.5. Weights schemes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/weights_schemes.html#types-of-weights-schemes">5.14.5.1. Types of weights schemes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/weights_schemes.html#examples-of-weight-schemes">5.14.5.2. Examples of weight schemes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/weights_schemes.html#weights-schemes-api">5.14.5.3. Weights schemes API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../experimental/experimental.html">5.15. Experimental Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../experimental/parameter_interfaces.html">5.15.1. Working with Parameter Interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../experimental/parameter_interfaces.html#active-parameter-search">5.15.1.1. Active Parameter Search</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../experimental/data_set.html">5.15.2. Working with Data Sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../experimental/data_set.html#data-set-sensitivity">5.15.2.1. Data Set Sensitivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experimental/data_set.html#normalization-of-data-set-weights">5.15.2.2. Normalization of Data Set Weights</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cite.html">6. Required Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">7. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">8. Frequently Asked Questions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">ParAMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../ParAMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../../index.html">ParAMS</a>/</li>
+      
+          <li><a href="../components.html">5. Components</a>/</li>
+      
+    <li class="orange-text">5.12. Callbacks</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="callbacks">
+<h1>5.12. Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this headline">¶</a></h1>
+<p>Callbacks allow for further interaction with a running <a class="reference internal" href="../runner/runner.html#optimization"><span class="std std-ref">Optimization</span></a> class.
+A useful callback could, for example, signal the optimization to stop after a certain time, or when overfitting.</p>
+<p>Callback instances can be passed when a <a class="reference internal" href="../runner/runner.html#scm.params.core.parameteroptimization.Optimization" title="scm.params.core.parameteroptimization.Optimization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimization</span></code></a> instance is created:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">callbacks</span>       <span class="o">=</span> <span class="p">[</span><span class="n">Timeout</span><span class="p">(</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="p">),</span> <span class="n">Logger</span><span class="p">()]</span>
+<span class="n">my_optimization</span> <span class="o">=</span> <span class="n">Optimization</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="default-callbacks">
+<h2>5.12.1. Default callbacks<a class="headerlink" href="#default-callbacks" title="Permalink to this headline">¶</a></h2>
+<p>The Logger and Stopfile callbacks are always present. To have custom settings
+for the Logger or Stopfile, add instances of those to the callbacks.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="logger">
+<h2>5.12.2. Logger<a class="headerlink" href="#logger" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.params.core.callbacks.Logger">
+<em class="property">class </em><code class="descname">Logger</code><span class="sig-paren">(</span><em>path=None</em>, <em>every_n_iter=None</em>, <em>group_by=None</em>, <em>iteration_digits=6</em>, <em>sort_stats_by='contribution'</em><span class="sig-paren">)</span><a class="headerlink" href="#scm.params.core.callbacks.Logger" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This callback is always included in an optimization, when running the ParAMS
+<a class="reference internal" href="../../mainscript/mainscript.html#params-main-script"><span class="std std-ref">main script</span></a>.</p>
+</div>
+<p>Logs and saves the following data produced during an Optimization to disk
+for every Data Set provided:</p>
+<ul class="simple">
+<li><cite>history/</cite>  : Same as <cite>latest/*</cite> but stored every <cite>history</cite> iterations.</li>
+<li><cite>best/*</cite>: Same as <cite>latest/*</cite> but for the iteration with the lowest loss function</li>
+<li><cite>latest/active_parameters.txt</cite>: iteration and list of current parameter values.</li>
+<li><cite>latest/data_set_evaluator.pkl</cite>: pickled DataSetEvaluator instance that was used to generate the <cite>latest_prediction_*.txt</cite> and <cite>latest_stats.txt</cite> files</li>
+<li><cite>latest/disk_representation[.txt]</cite>: Current disk representation (e.g. ffield file in the case of ReaxFF optimization)</li>
+<li><cite>latest/evaluation.txt</cite>: Current iteration number</li>
+<li><cite>latest/predictions_*.txt</cite>: Current predictions per extractor or grouped as defined by the group_by attribute.</li>
+<li><cite>latest/stats.txt</cite>: Current MAE and RMSE per extractor or grouped as defined by the group_by attribute</li>
+<li><cite>running_loss.txt</cite>: iteration and loss function value. Plottable with <code class="docutils literal notranslate"><span class="pre">params</span> <span class="pre">plot</span></code></li>
+<li><cite>running_stats.txt</cite>: mae and rmse per extractor or grouped as defined by the group_by attirbute.</li>
+<li><cite>running_active_parameters.txt</cite>: The values of the (active) parameters, stored every ‘parameters’ iterations</li>
+</ul>
+<p>The files are stored in a directory called <cite>data_setname_results</cite>, e.g. <cite>training_set_results</cite>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The output to screen and to _history.dat files may not always
+be strictly increasing with respect to the “step”. This can happen
+if you run the parametrization in parallel and frequently write
+the output.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>path <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>Base name of the path where the data should be written to. <br>
+Defaults to the <a class="reference internal" href="../runner/runner.html#scm.params.core.parameteroptimization.Optimization" title="scm.params.core.parameteroptimization.Optimization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimization</span></code></a> workdir.</dd>
+<dt>every_n_iter <span class="classifier-delimiter">:</span> <span class="classifier">int OR dict of dict</span></dt>
+<dd><p class="first">If an integer, will correspond to setting the ‘general’ option (see below) to that value for all data_sets</p>
+<p>Dictionary with keys like ‘training_set’, ‘validation_set’, ‘data_set03’ etc.</p>
+<p>Each key is another dictionary, e.g.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">every_n_iter</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;training_set&#39;</span><span class="p">:{</span>
+        <span class="s1">&#39;general&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s1">&#39;history&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s1">&#39;flush&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Where the numbers give how often to write the output.</p>
+<ul class="last simple">
+<li>‘general’: writing to stdout, running_loss and running_stats and all <cite>latest/</cite> and <cite>best/</cite> files</li>
+<li>‘parameters’: how often to write running_active_parameters.txt</li>
+<li>‘history’: store individual stats, disk_representations, active_parameters, or predictions every N steps</li>
+<li>‘flush’: how often to flush the output streams</li>
+</ul>
+</dd>
+<dt>group_by <span class="classifier-delimiter">:</span> <span class="classifier">tuple of strings</span></dt>
+<dd><p class="first">A tuple in the same format as accepted by DataSetEvaluator.group_by().</p>
+<p>Examples</p>
+<div class="code last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">group_by</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Extractor&#39;</span><span class="p">,</span> <span class="s1">&#39;Expression&#39;</span><span class="p">)</span> <span class="c1"># default</span>
+<span class="n">group_by</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span><span class="p">,</span> <span class="s1">&#39;SubGroup&#39;</span><span class="p">)</span> <span class="c1"># requires that the data_set entries have Group and SubGroup metadata</span>
+</pre></div>
+</div>
+</dd>
+<dt>iteration_digits <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first">Number of digits to print the iteration number to file names and latest/evaluation.txt,
+running_loss.txt, and running_stats.txt.</p>
+<p>Example: iteration_digits == 6 will print the first iteration as 000001</p>
+<p class="last">Example: iteration_digits == None will print the first iteration as 1</p>
+</dd>
+<dt>sort_stats_by <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first">Sort the <cite>latest/stats.txt</cite> and related files.</p>
+<p>‘contribution’: sort by contribution to loss function value</p>
+<p>‘rmse’: sort by rmse</p>
+<p>‘mae’: sort by mae</p>
+<p class="last">None: do not sort (use the same order as in the original DataSet)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="timeout">
+<h2>5.12.3. Timeout<a class="headerlink" href="#timeout" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.params.core.callbacks.Timeout">
+<em class="property">class </em><code class="descname">Timeout</code><span class="sig-paren">(</span><em>timeout_seconds</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#scm.params.core.callbacks.Timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the optimization after <cite>timeout_seconds</cite> seconds.
+If <cite>verbose</cite>, prints a message when invoked.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="target-value">
+<h2>5.12.4. Target Value<a class="headerlink" href="#target-value" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.params.core.callbacks.TargetValue">
+<em class="property">class </em><code class="descname">TargetValue</code><span class="sig-paren">(</span><em>min_fx</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#scm.params.core.callbacks.TargetValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the optimization when the training set loss
+is less or equal to <cite>min_fx</cite>.
+If <cite>verbose</cite>, prints a message when invoked.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="maximum-iterations">
+<h2>5.12.5. Maximum Iterations<a class="headerlink" href="#maximum-iterations" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.params.core.callbacks.MaxIter">
+<em class="property">class </em><code class="descname">MaxIter</code><span class="sig-paren">(</span><em>max_iter</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#scm.params.core.callbacks.MaxIter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the optimization after <cite>max_iter</cite> evaluations.
+If <cite>verbose</cite>, prints a message when invoked.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="early-stopping">
+<h2>5.12.6. Early Stopping<a class="headerlink" href="#early-stopping" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.params.core.callbacks.EarlyStopping">
+<em class="property">class </em><code class="descname">EarlyStopping</code><span class="sig-paren">(</span><em>patience=0</em>, <em>watch='training_set'</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#scm.params.core.callbacks.EarlyStopping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the optimization if the data set defined in <cite>watch</cite> does not improve
+after <cite>patience</cite> iterations.
+If <cite>verbose</cite>, prints a message when invoked.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="stopfile">
+<h2>5.12.7. Stopfile<a class="headerlink" href="#stopfile" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.params.core.callbacks.Stopfile">
+<em class="property">class </em><code class="descname">Stopfile</code><span class="sig-paren">(</span><em>frequency=1</em>, <em>fname='STOP'</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#scm.params.core.callbacks.Stopfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Every <cite>frequency</cite> evaluations, check if a file named <cite>fname</cite> exists and stop the optimization
+if it does.
+Note that paths will be relative to the optimization directory.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="time-per-evaluation">
+<h2>5.12.8. Time per Evaluation<a class="headerlink" href="#time-per-evaluation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.params.core.callbacks.TimePerEval">
+<em class="property">class </em><code class="descname">TimePerEval</code><span class="sig-paren">(</span><em>printfrequency=100</em>, <em>watch=None</em>, <em>moving_average=100</em><span class="sig-paren">)</span><a class="headerlink" href="#scm.params.core.callbacks.TimePerEval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the average evaluation time of a new parameter set <cite>x</cite>
+every <cite>printfrequency</cite> iterations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>printfrequency <span class="classifier-delimiter">:</span> <span class="classifier">int &gt; 0</span></dt>
+<dd>Print the average evaluation time every <cite>n</cite> iterations</dd>
+<dt>watch <span class="classifier-delimiter">:</span> <span class="classifier">List[str]</span></dt>
+<dd>List of data set names to watch. Defaults to all data sets</dd>
+<dt>moving_average <span class="classifier-delimiter">:</span> <span class="classifier">int &gt;= 0</span></dt>
+<dd>Only consider the last <cite>n</cite> evaluations for the average time</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="load-average">
+<h2>5.12.9. Load Average<a class="headerlink" href="#load-average" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.params.core.callbacks.LoadAvg">
+<em class="property">class </em><code class="descname">LoadAvg</code><span class="sig-paren">(</span><em>fname='loads.dat'</em>, <em>frequency=20</em><span class="sig-paren">)</span><a class="headerlink" href="#scm.params.core.callbacks.LoadAvg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper around
+<a class="reference external" href="https://psutil.readthedocs.io/en/latest/#psutil.getloadavg">psutil.getloadavg()</a>,
+printing the otput to <cite>fname</cite>.
+Requires <cite>psutil</cite> version &gt;= 5.6.2. <br>
+Note that when using relative file paths, the location will be relative to the
+optimization direvtory.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="user-defined-callbacks">
+<h2>5.12.10. User-Defined Callbacks<a class="headerlink" href="#user-defined-callbacks" title="Permalink to this headline">¶</a></h2>
+<p>The abstract <a class="reference internal" href="#scm.params.core.callbacks.Callback" title="scm.params.core.callbacks.Callback"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callback</span></code></a> class allows the user to define custom optimization hooks.
+We will demonstrate the implementation of <a class="reference internal" href="#scm.params.core.callbacks.EarlyStopping" title="scm.params.core.callbacks.EarlyStopping"><code class="xref py py-class docutils literal notranslate"><span class="pre">EarlyStopping</span></code></a> as an example below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scm.params</span> <span class="kn">import</span> <span class="n">Callback</span>
+
+<span class="k">class</span> <span class="nc">EarlyStopping</span><span class="p">(</span><span class="n">Callback</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="s1">&#39;training_set&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">watch</span>    <span class="o">=</span> <span class="n">watch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">patience</span> <span class="o">=</span> <span class="n">patience</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span>    <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fxmin</span>    <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evaluator_return</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Callbacks operate on **ALL** Data Sets that are evaluated at every optimization step,</span>
+<span class="sd">        meaning there could be more than one Data Set involved: This is for example the case when splitting</span>
+<span class="sd">        into a training and a validation set.</span>
+<span class="sd">        A named tuple `evaluator_return` will always be passed to the `__call__` method.</span>
+<span class="sd">        See below or the `Callback` class API to see how it unpacks.</span>
+
+<span class="sd">        You can filter which Data Sets the callback operates on by checking the passed `name` argument,</span>
+<span class="sd">        which is always unique per Optimization instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fx</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">ncalled</span><span class="p">,</span> <span class="n">interface</span><span class="p">,</span> <span class="n">data_set</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">contrib</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">evaluator_return</span>
+        <span class="c1"># the tuple&#39;s contents can also be accessed through the respective attribute, i.e. `evaluator_return.fx`</span>
+
+        <span class="c1"># Only apply to the set to watch</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">watch</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">fx</span><span class="p">):</span> <span class="c1"># nan is a special placeholder and means no evaluation of this DataSet for this call</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">fx</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fxmin</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Reset the counter if we improved</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fxmin</span> <span class="o">=</span> <span class="n">fx</span> <span class="c1"># Adjust the best fx value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># Patience counter</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">patience</span> <span class="c1"># True if we need to stop</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Implementation of this method makes the instance re-usable for multiple Optimizations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fxmin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_end</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># This method will be called once the Optimization is complete. Implement as needed</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="callback-api">
+<h2>5.12.11. Callback API<a class="headerlink" href="#callback-api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scm.params.core.callbacks.Callback">
+<em class="property">class </em><code class="descname">Callback</code><a class="headerlink" href="#scm.params.core.callbacks.Callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract base class for callbacks</p>
+<dl class="method">
+<dt id="scm.params.core.callbacks.Callback.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>evalret: scm.params.core.opt_components.EvaluatorReturn</em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#scm.params.core.callbacks.Callback.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will be called by the optimizer at the end of every step.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>evalret <span class="classifier-delimiter">:</span> <span class="classifier">EvaluatorReturn (named tuple)</span></dt>
+<dd><p class="first">A named tuple returned by <cite>scm.params.core.opt_components.EvaluatorReturn</cite>.
+The tuple unpacks to
+<code class="docutils literal notranslate"><span class="pre">(fx,</span> <span class="pre">x,</span> <span class="pre">name,</span> <span class="pre">ncalled,</span> <span class="pre">interface,</span> <span class="pre">data_set,</span> <span class="pre">residuals,</span> <span class="pre">contrib,</span> <span class="pre">time)</span></code>.
+The names above also double as instance variables (<cite>e.g., fx</cite> can be accessed with <cite>evalret.fx</cite>).</p>
+<dl class="last docutils">
+<dt>fx <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Loss function value of <cite>x</cite></dd>
+<dt>x <span class="classifier-delimiter">:</span> <span class="classifier">Sequence[float]</span></dt>
+<dd>The current set of parameters suggested by the optimizer. (real, not scaled)</dd>
+<dt>name <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>Name of the Date Set as set by the <a class="reference internal" href="../runner/runner.html#scm.params.core.parameteroptimization.Optimization" title="scm.params.core.parameteroptimization.Optimization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimization</span></code></a> class.
+Can be ‘training_set’, ‘validation_set’ and ‘data_setXX’ (wherte XX is an int) by default</dd>
+<dt>ncalled <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>The number of times this Data Set has been evaluated</dd>
+<dt>interface <span class="classifier-delimiter">:</span> <span class="classifier">BaseParameters subclass</span></dt>
+<dd>The interface that was used for this evaluation of the data set</dd>
+<dt>data_set <span class="classifier-delimiter">:</span> <span class="classifier">DataSet</span></dt>
+<dd>A tuple of <code class="xref py py-class docutils literal notranslate"><span class="pre">DataSet</span></code> and the last evaluation’s (non flattened) residuals vector</dd>
+<dt>residuals <span class="classifier-delimiter">:</span> <span class="classifier">Lisd[1d-array]</span></dt>
+<dd>A list of 1d numpy arrays holding the residuals to each data set entry such that <span class="math notranslate nohighlight">\(r=y-\hat{y}\)</span>.
+See <a class="reference internal" href="../data_set/data_set.html#data-set"><span class="std std-ref">Data Set</span></a> for more information.</dd>
+<dt>contrib <span class="classifier-delimiter">:</span> <span class="classifier">List</span></dt>
+<dd>List of per entry contributions to the loss function value (see also <code class="xref py py-meth docutils literal notranslate"><span class="pre">scm.params.core.data_set.DataSet.evaluate()</span></code>).</dd>
+<dt>time <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Wall time (in seconds) this evaluation took</dd>
+</dl>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Any value other than <cite>None</cite> will be interpreted by the <a class="reference internal" href="../optimizers/optimizers.html#optimizers"><span class="std std-ref">optimizer</span></a> as a signal to stop the optimization process.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.params.core.callbacks.Callback.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scm.params.core.callbacks.Callback.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method should re-initialize the callback and will be called when a new <a class="reference internal" href="../runner/runner.html#scm.params.core.parameteroptimization.Optimization" title="scm.params.core.parameteroptimization.Optimization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimization</span></code></a> instance
+is created containing this callback.
+It should reset the callback to it’s initial state, making the same instance available for multiple <a class="reference internal" href="../runner/runner.html#scm.params.core.parameteroptimization.Optimization" title="scm.params.core.parameteroptimization.Optimization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimization</span></code></a> instances
+(e.g.: In case of <a class="reference internal" href="#scm.params.core.callbacks.Timeout" title="scm.params.core.callbacks.Timeout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Timeout</span></code></a> a reset of the same instance is necessary to reset the timer).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scm.params.core.callbacks.Callback.on_end">
+<code class="descname">on_end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scm.params.core.callbacks.Callback.on_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will be called once the optimization is complete</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../lossfunctions/lossfunctions.html" class="btn btn-neutral float-right" title="5.13. Loss Functions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../constraints/constraints.html" class="btn btn-neutral" title="5.11. Constraints" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+<!-- https://stackoverflow.com/questions/2454577/sphinx-restructuredtext-show-hide-code-snippets/25543713 -->
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(200);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

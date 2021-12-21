@@ -1,0 +1,94 @@
+A simple ReaxFF force field for water
+====================================================
+
+This example shows how to fit a ReaxFF force field to reproduce a DFT-calculated H--OH bond dissociation curve of a water molecule in the gas phase.
+
+The ReaxFF force field *Water2017.ff* (DOI: `10.1021/acs.jpcb/7b02548 <http://dx.doi.org/10.1021/acs.jpcb.7b02548>`__) is used as a starting point for the parametrization.
+
+.. note::
+
+    The Water2017.ff force field was originally optimized for liquid water, not gasphase water.
+
+The following steps are covered:
+
+* Calculation of the DFT reference data 
+* Importing the results to ParAMS (creating the files ``job_collection.yaml``, ``trainingset_set.yaml``)
+* Running the parametrization
+* Visualizing the results
+
+This tutorial documents the example in
+``$AMSHOME/scripting/scm/params/examples/new_ReaxFF_water``. The first two
+steps are done in the file ``generate_input_files.py``. In the example directory, the files
+``job_collection.yaml`` and ``training_set.yaml`` already exist, if you want to
+skip generating them (then jump to :ref:`Run the ReaxFF parametrization`).
+
+Calculate the reference data
+--------------------------------
+
+The reference data will be a bond scan of one of the H--OH bonds in gasphase water. The easiest way to set up such a calculation is as follows:
+
+.. rst-class:: steps
+
+  \
+   | **1.** Open AMSinput with the ADF panel active. (If you do not have an ADF license, you can use a different reference engine).
+   | **2.** Draw a water molecule, or use the search box to search for water
+   | **3.** Task → PES Scan, and click the arrow icon to the right.
+   | **4.** Select the O atom and one of the H atoms
+   | **5.** Click the + icon next to ``O(1) H(2) distance``
+   | **6.** Set the number of scan points for SC-1 to ``11``
+   | **7.** Set the range minimum to ``0.85`` angstrom, and the maximum to ``1.35`` angstrom.
+   | **8.** Save and run
+
+Alternatively, the function ``run_reference()`` in ``generate_input_files.py``
+runs such a job with PLAMS.
+
+Import the reference data into ParAMS
+------------------------------------------
+
+**GUI**: In the ParAMS GUI, select **Jobs → Add Job**, and browse to the **ams.rkf** results file from the previous calculation. In the popup window, choose the **pes** extractor.
+
+**Scripting**: The following lines set up a :ref:`Results Importer` with **kcal/mol** energy units, import the results, and store the ``training_set.yaml`` and ``job_collection.yaml`` files. It also illustrates the use of a :ref:`weights scheme <Weights Schemes>`, in which the weights depend on the reference values. Run the script with ``$AMSBIN/amspython generate_input_files.py``.
+
+.. literalinclude:: ../../../../examples/new_ReaxFF_water/mainscript_version/generate_input_files.py
+    :pyobject: import_results
+
+.. seealso::
+
+    :ref:`ResultsImporterDemonstration`
+
+Set the parameters to optimize
+---------------------------------
+
+In this case, we will optimize all O-H bond parameters of the ReaxFF force field.
+
+**GUI**: Select all parameters (Ctrl-A), and **untick** the Active. In the bottom search box, type ``H.O:``, select the first 16 parameters (for which the **block** is **BND**), and **tick** Active.
+
+**Scripting**: The following function in ``generate_input_files.py`` initializes a :ref:`ReaxFF Parameter interface <Parameter Interfaces>` based on the parameters in ``Water2017.ff``. The ``bounds_scale=1.2`` arguments means that the minimum and maximum allowed values will be within 20% of the original value for all optimized parameters. Only the O-H bond parameters become active. The interface is stored inthe file ``parameter_interface.yaml``.
+
+.. literalinclude:: ../../../../examples/new_ReaxFF_water/mainscript_version/generate_input_files.py
+    :pyobject: create_parameter_interface
+
+
+Run the ReaxFF parametrization
+------------------------------------
+
+The ``params.conf.py`` file contains:
+
+.. literalinclude:: ../../../../examples/new_ReaxFF_water/mainscript_version/params.conf.py
+
+Here, the ``max_evaluations = 100`` keyword means that the optimization will stop after 100 iterations.
+
+
+Visualize the results
+---------------------------------------
+
+**GUI**: On the Graphs tab, select **Best H2O_pesscan_relative_to_3**.
+
+**Scripting**: In the directory
+``optimization/training_set_results/best/pes_predictions``, there is a file
+``H2O_pesscan_relative_to_3.txt``. The *relative_to_3* means that the energies
+along the bond scan are calculated with respect to the 4th point (the indexing
+starts with 0).  Use ``params plot H2O_pesscan_relative_to_3.txt`` to generate
+an image like the following:
+
+

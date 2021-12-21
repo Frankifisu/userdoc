@@ -1,0 +1,39 @@
+#! /bin/sh
+
+
+# Example for calculating overlaps of primitive basis functions for almost
+# coinciding nuclear coordinates, using the key CALCOVERLAPONLY. ADF will stop
+# after the calculation of these overlaps. The overlap is printed in the output,
+# but is also present on TAPE15 in binary format in Matrices%Smat.
+# Could be useful for external programs like SHARC.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C     0.1662008   -0.0114225   0.0220295  region=one
+     S     1.7387976    0.003246   -0.0021948  region=one
+     H    -0.3207087    0.9655128  -0.0963368  region=one
+     H    -0.479404    -0.9324828  -0.0963367  region=one
+     C     0.167746    -0.0109425   0.0203042  region=two 
+     S     1.7382268    0.002927   -0.0020154  region=two 
+     H    -0.329981     0.9728265  -0.0893183  region=two 
+     H    -0.4704213   -0.9353924  -0.088502   region=two
+  end
+  # Prevents AMS from stopping in case of almost-coinciding nuclei
+  AllowCloseAtoms True
+end
+
+Task SinglePoint
+
+Engine ADF
+  Title CH2S overlap of near identical geometries
+  CalcOverlapOnly
+  Basis
+    Type DZP
+    Core None
+  End
+  Print SMAT
+  Save TAPE15
+EndEngine
+
+eor

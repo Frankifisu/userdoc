@@ -1,0 +1,101 @@
+#! /bin/sh
+
+
+# Calculation of the (core) excitation energies of Ne including spin-orbit
+# coupling.
+
+# The state selective method (key SELECTEXCITATION) can be used to reduce the
+# computational costs of, for example, core excitation energies. In this scheme
+# a guess vector for the orbital transition has to be provided. It should be
+# used in combination with the davidson method to calculate excitation energies.
+# An overlap criterion is used to follow the wanted eigenvector. This key can
+# also be used in case of spin-orbit coupling. The use of the key
+# SELECTEXCITATION is similar as the use of the key MODIFYEXCITATION. However,
+# the key SELECTEXCITATION can not be used in combination with the key
+# MODIFYEXCITATION. In the state selective method (key SELECTEXCITATION) the
+# one-electron excited state configuration space remains complete, whereas it is
+# reduced in case the scheme with the MODIFYEXCITATION key.
+
+
+AMS_JOBNAME=Frag $AMSBIN/ams <<eor
+System
+  atoms
+     Ne .0000  .0000  0.0000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ne
+  excitations
+    lowest 8
+  end
+  basis
+    type QZ4P
+    CreateOutput Yes
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  symmetry d(8h)
+  xc
+    model SAOP
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=Excitations $AMSBIN/ams <<eor
+System
+  atoms
+     Ne .0000  .0000  0.0000  adf.f=Frag
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Ne spin-orbit
+  excitations
+    alsorestricted
+    lowest 8
+  end
+  fragments
+     Frag Frag.results/adf.rkf
+  end
+  numericalquality Good
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  stcontrib
+  symmetry d(8h)
+  xc
+    model SAOP
+  end
+EndEngine
+eor
+
+
+# The difference between the core excitation calculation and the standard
+# excitation is the extra subkey MODIFYEXCITATION or SELECTEXCITATION in the
+# core excitation calculation (in italic).
+
+# ADF can not handle ATOM and linear symmetries in excitation calculations.
+# Therefore a subsymmetry is used, in this case symmetry d(8h).
+
+# A relatively large QZ4P basis set is used, which is still insufficient for
+# excitations to Rydberg-like orbitals, one needs more diffuse functions.
+
+# The key STCONTRIB is used, which will give a composition of the spin-orbit
+# coupled excitation in terms of singlet-singlet and singlet-triplet scalar
+# relativistic excitations. In order to use the key STCONTRIB the scalar
+# relativistic fragment should be the complete molecule.
+
+# In this case the key MODIFYEXCITATION or SELECTEXCITATION takes care that only
+# excitations from the occupied 1s-orbital (spinor) are included. In symmetry
+# d(8H) the 1s-orbital (spinor) is of A1.g (E1/2.g) symmetry.
+

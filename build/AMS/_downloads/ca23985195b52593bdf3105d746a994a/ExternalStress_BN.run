@@ -1,0 +1,101 @@
+#!/bin/sh
+
+# Some (fairly arbitrary) external stress in atomic units:
+external_stress='0.001 0.0003 -0.0007 0.0005 0.0004 0.001'
+
+# The external stress applied here will result in pretty large deformations.
+# Since the external stress energy term becomes more and more approximate the 
+# larger the deformation from the initial cell is, after the first optimization, 
+# one should run a second geometry optimization starting from the converged 
+# results of the first one.
+
+# It is always good practice to validate the optimization under external stress
+# by computing the stress tensor of the final optimized geometry: the stress 
+# tensor at the optimized geometry should match the external stress applied during
+# the optimization, but with reversed signs.
+
+AMS_JOBNAME=first_go $AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+System
+    Atoms
+        B 0.0 0.0 0.0
+        N 0.905 0.905 0.905
+    End
+    Lattice
+        0.0 1.81 1.81
+        1.81 0.0 1.81
+        1.81 1.81 0.0
+    End
+    SuperCell 2 2 2
+End
+
+GeometryOptimization
+    OptimizeLattice Yes
+    # The convergence threshold should be samller than the applied external stress:
+    Convergence Gradients=1.0E-4
+End
+
+# We want the external stress to break the symmetry:
+UseSymmetry No
+
+EngineAddons
+    ExternalStress
+        StressTensorVoigt $external_stress
+    End
+End
+
+Engine ForceField
+EndEngine
+eor
+
+# The second geometry optimization starting from the results of the first one:
+
+AMS_JOBNAME=second_go $AMSBIN/ams << eor
+
+Task GeometryOptimization
+
+LoadSystem 
+    File first_go.results/ams.rkf
+End
+
+GeometryOptimization
+    OptimizeLattice Yes
+    Convergence Gradients=1.0E-5
+End
+
+UseSymmetry No
+
+EngineAddons
+    ExternalStress
+        StressTensorVoigt $external_stress
+    End
+End
+
+LoadEngine first_go.results/forcefield.rkf
+eor
+
+# In the final calculation we simply compute the stress tensor of the final 
+# geometry, which should be the opposite of the external stress tensor applied 
+# during the optimization.
+
+AMS_JOBNAME=sp $AMSBIN/ams << eor
+
+Task SinglePoint
+
+LoadSystem 
+    File second_go.results/ams.rkf
+End 
+
+UseSymmetry No
+
+Properties StressTensor=Yes
+
+LoadEngine first_go.results/forcefield.rkf
+eor
+
+echo "Applied external stress tensor (order: xx,yy,zz,yz,xz,xy):"
+echo $external_stress
+echo "Resulting final stress tensor:"
+$AMSBIN/amsreport sp.results/forcefield.rkf -r "AMSResults%StressTensor#12.6f##3"

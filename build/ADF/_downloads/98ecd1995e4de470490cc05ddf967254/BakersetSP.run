@@ -1,0 +1,24 @@
+#! /bin/sh
+
+
+# In this example you will find how to use amsprep to run a particular job (a
+# single point calculation in this case) for all molecules in the Baker set. The
+# molecules are simply xyz files and contain no ADF specific information.
+# amsreport is used to collect the resulting bonding energies.
+
+
+rm -f runset
+for f in $AMSHOME/examples/adf/BakersetSP/Bakerset/*.xyz
+do
+    "$AMSBIN/amsprep" -t SP -i 2.5 -b DZ -c Large -r None -m "$f" -j `basename $f .xyz`>> runset
+done
+
+chmod +x runset
+./runset
+
+echo Results
+ls -t -1 *.results/adf.rkf | while read f
+do
+    "$AMSBIN/amsreport" "$f" BondingEnergy
+done
+echo Ready

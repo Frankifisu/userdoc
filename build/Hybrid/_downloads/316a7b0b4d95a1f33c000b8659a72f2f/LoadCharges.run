@@ -1,0 +1,182 @@
+#!/bin/sh
+
+# Here we treat H3O+ as qm and OH- as the MM region (Optimizing without regions gives two H2O molecules)
+# We do this with a QUILD setup (mechanical embedding) and electrostatic embedding (QMMM)
+# We obtain the charges from a DFTB calculation
+# In this case the results (QUILD vs. QMMM) are quite similar as apparently the OH does not polarize the QM region much
+
+report=report.txt
+
+echo "method distance charges" > $report
+
+
+# first we do two DFTB calculations on the two fragments
+
+export AMS_JOBNAME=H2O+.dftb
+
+rm -rf $AMS_JOBNAME.results
+
+"$AMSBIN/ams" << eor
+
+Task SinglePoint
+
+Properties Charges=yes
+
+GeometryOptimization
+  Convergence Gradients=1.0e-6
+End
+
+System
+    Atoms
+        O -1.527946410885647 -0.2107366711137158 -0.0008116899510243671
+        H -0.8459142126057956 0.3517312394359257 0.4094504676540848    
+        H -1.834953147575289 0.1051014241823828 -0.8704652381864062    
+        H -1.328032016244278 -1.164422847242489 0.02894848344144469    
+    End
+    Charge 1.0
+    GuessBonds True
+End
+
+Engine DFTB
+EndEngine
+    
+
+eor
+
+export AMS_JOBNAME=OH-.dftb
+
+rm -rf $AMS_JOBNAME.results
+
+"$AMSBIN/ams" << eor
+
+Task SinglePoint
+
+Properties Charges=yes
+
+GeometryOptimization
+  Convergence Gradients=1.0e-6
+End
+
+System
+    Atoms
+        O 0.6370858511871781 -0.3378071707560572 -0.0006181020627287671
+        H 1.318474396634582 0.2241299231185073 0.4092568796869673      
+    End
+    Charge -1.0
+    GuessBonds True
+End
+
+Engine DFTB
+EndEngine
+    
+
+eor
+
+# Now we run it in a QUILD-like setup (mechanical embedding)
+
+export AMS_JOBNAME=quild
+
+rm -rf $AMS_JOBNAME.results
+
+"$AMSBIN/ams" << eor
+
+Task GeometryOptimization
+
+Properties Charges=yes
+
+GeometryOptimization
+  Convergence Gradients=1.0e-6
+End
+
+System
+    Atoms
+        O -1.527946410885647 -0.2107366711137158 -0.0008116899510243671 region=QM
+        H -0.8459142126057956 0.3517312394359257 0.4094504676540848     region=QM
+        H -1.834953147575289 0.1051014241823828 -0.8704652381864062     region=QM
+        H -1.328032016244278 -1.164422847242489 0.02894848344144469     region=QM
+        O 0.6370858511871781 -0.3378071707560572 -0.0006181020627287671 region=MM
+        H 1.318474396634582 0.2241299231185073 0.4092568796869673       region=MM
+    End
+    GuessBonds True
+
+    LoadForceFieldCharges region=QM file=H2O+.dftb.results
+    LoadForceFieldCharges region=MM file=OH-.dftb.results
+End
+
+Engine Hybrid
+    Energy
+       Term Factor=1.0  Region=*  EngineID=ForceField
+       Term Factor=-1.0 Region=QM EngineID=ForceField     Charge=1.0
+       Term Factor=1.0  Region=QM EngineID=DFTB           Charge=1.0
+    End
+
+    Engine DFTB
+        Model GFN1-xTB
+    EndEngine
+    
+    Engine ForceField
+    EndEngine
+EndEngine
+
+eor
+
+
+ddd=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#1#5`
+eee=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -k AMSResults%Charges#5.3f`
+
+echo "quild  $charge $ddd $eee" >> $report
+
+# Now we run it in a QMMM-like setup
+
+
+export AMS_JOBNAME=qmmm
+
+rm -rf $AMS_JOBNAME.results
+
+"$AMSBIN/ams" << eor
+
+Properties Charges=yes
+
+Task GeometryOptimization
+
+GeometryOptimization
+  Convergence Gradients=1.0e-6
+End
+
+System
+    Atoms
+        O -1.527946410885647 -0.2107366711137158 -0.0008116899510243671 region=QM
+        H -0.8459142126057956 0.3517312394359257 0.4094504676540848     region=QM
+        H -1.834953147575289 0.1051014241823828 -0.8704652381864062     region=QM
+        H -1.328032016244278 -1.164422847242489 0.02894848344144469     region=QM
+        O 0.6370858511871781 -0.3378071707560572 -0.0006181020627287671 region=MM
+        H 1.318474396634582 0.2241299231185073 0.4092568796869673       region=MM
+    End
+    GuessBonds True
+
+    LoadForceFieldCharges region=QM file=H2O+.dftb.results
+    LoadForceFieldCharges region=MM file=OH-.dftb.results
+End
+
+Engine Hybrid
+    QMMM QMRegion=QM QMEngineID=DFTB MMEngineID=ForceField QMCharge=1.0 MMCharge=-1.0
+
+    Engine DFTB
+        Model GFN1-xTB
+    EndEngine
+    
+    Engine ForceField
+    EndEngine
+EndEngine
+
+eor
+
+ddd=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#1#5`
+eee=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -k AMSResults%Charges#5.3f`
+
+echo "qmmm   $charge $ddd $eee" >> $report
+
+
+echo "start of report"
+cat $report
+echo "end of report"

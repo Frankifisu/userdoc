@@ -1,0 +1,50 @@
+#! /bin/sh
+
+
+# Calculation of normal modes is requested by specifying in the AMS input:
+# Properties
+#   NormalModes Yes
+# End
+# ADF will compute the Hessian analytically if possible.
+# If the Hessian cannot be computed analytically, numerical differentiation
+# will atuomatically be used.
+
+# A good quality is specified for the numerical Becke integration to be sure of
+# reliable results. In general, it seems advisable to use high accuracy for
+# heavy nuclei at the moment, whereas default integration accuracy is usually
+# sufficient for light atoms. The precision of the fit may be improved with the
+# ZlmFit block keyword.
+
+
+$AMSBIN/ams <<eor
+System
+  Symmetrize
+  atoms
+     N  -1.3  0.0   0.0
+     C   0.0  0.0   0.0
+  end
+  charge -1
+end
+
+Task SinglePoint
+
+Properties
+  NormalModes Yes
+End
+
+Engine ADF
+  title CN
+  beckegrid
+    quality good
+  end
+  basis
+    type DZ
+    core None
+    CreateOutput Yes
+  end
+  xc
+    lda Xonly
+  end
+EndEngine
+
+eor

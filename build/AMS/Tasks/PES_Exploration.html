@@ -1,0 +1,2042 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Automated PES Exploration &mdash; AMS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="AMS 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Structure and Reactivity, Molecular Dynamics" href="TOC.html"/>
+        <link rel="next" title="Gradients, Hessian, Stress tensor, Elasticity" href="../Gradients_Stress_Elasticity.html"/>
+        <link rel="prev" title="Grand Canonical Monte Carlo (GCMC)" href="GCMC.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search AMS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-AMS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#what-s-new-in-the-ams-driver">What’s new in the AMS driver?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2021-3">New in AMS2021.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2021-1">New in AMS2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2020-1">New in AMS2020.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2019-3">New in AMS2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-ams2019-1">New in AMS2019.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#motivation-and-progress">Motivation and progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#input-execution-and-output">Input, execution and output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Input_Output.html">Input, execution and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#tasks">Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#properties">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#blocks">Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#including-an-external-file">Including an external file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#units">Units</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#execution">Execution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#shell-script">Shell script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#interactive-input-file">Interactive input file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#running-ams-on-compute-clusters">Running AMS on compute clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#output">Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#index-13">Results directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#logfile-ams-log">Logfile ams.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#binary-output-files">Binary output files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#standard-output">Standard output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#optimized-geometry-in-xyz-format">Optimized geometry in xyz format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-environment-variables">AMS environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#driver-level-parallelism">Driver level parallelism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#python-interface">Python interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Input_Output.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Pipe_protocol.html">AMSPipe protocol specification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#low-level-message-encoding">Low-level message encoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#return-messages-and-error-handling">Return messages and error handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pipe_protocol.html#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-as-a-pipe-master">AMS as a pipe master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Input_Output.html#ams-as-a-pipe-worker">AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../System.html">Geometry, System definition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#geometry-lattice">Geometry, Lattice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#modifying-the-geometry">Modifying the geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#symmetry">Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#regions">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#charge-atomic-masses-input-bond-orders">Charge, atomic masses, input bond orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#homogeneous-electric-field-and-multipole-charges">Homogeneous electric field and multipole charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#load-a-system-from-file">Load a System from file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#atom-attributes">Atom attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../System.html#force-field-related-extensions">Force field related extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#load-charges-for-a-forcefield-into-regions">Load charges for a forcefield into regions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../System.html#load-forcefield-atom-types">Load forcefield atom types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="TOC.html">Structure and Reactivity, Molecular Dynamics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Single_Point.html">Single point calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bond_Energy.html">Bond energy calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#ground-state-energy">Ground state energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#formation-energy">Formation energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#atomization-energies">Atomization energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#chemisorption-energies">Chemisorption energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#atomic-corrections">Atomic corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#open-shell-systems">Open shell systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bond_Energy.html#impurities">Impurities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry_Optimization.html">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Geometry_Optimization.html#constrained-optimization">Constrained optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#restraints">Restraints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry_Optimization.html#optimization-under-pressure-external-stress">Optimization under pressure / external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry_Optimization.html#optimization-methods">Optimization methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#quasi-newton">Quasi-Newton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#fire">FIRE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#index-17">SCMGO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#limited-memory-bfgs">Limited-memory BFGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#conjugate-gradients">Conjugate gradients</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry_Optimization.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#failure-to-converge">Failure to converge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry_Optimization.html#restarting-a-geometry-optimization">Restarting a geometry optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Transition_State_Search.html">Transition state search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PES_Scan.html">Linear Transit, PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#distance-angle-and-dihedral-angle-coordinates">Distance, angle, and dihedral angle coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#joint-scan-coordinates">Joint scan coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#multidimensional-pes-scan">Multidimensional PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#lattice-scan-coordinates-for-periodic-systems">Lattice scan coordinates for periodic systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#isotropic-scaling-of-the-unit-cell-volume-or-area">Isotropic scaling of the unit cell volume or area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#scaling-of-the-lattice-vector-lengths">Scaling of the lattice vector lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#strain-matrix-in-voigt-notation">Strain matrix in Voigt notation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PES_Scan.html#scan-arbitrary-lattices">Scan arbitrary lattices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#calculate-properties-for-all-pes-points">Calculate properties for all PES points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PES_Scan.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="NEB.html">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html#frozen-atom-constraints">Frozen atom constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html#optimizations-and-convergence-criteria">Optimizations and convergence criteria</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NEB.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="IRC.html">Intrinsic Reaction Coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="IRC.html#method-details">Method details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IRC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IRC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Excited_State_Optimizations.html">Excited state optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Molecular_Dynamics.html">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#constrained-molecular-dynamics">Constrained molecular dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#re-starting-a-simulation">(Re-)Starting a simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#thermostats-and-barostats">Thermostats and barostats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#temperature-and-pressure-regimes">Temperature and pressure regimes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#trajectory-sampling-and-output">Trajectory sampling and output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#lattice-deformations-volume-regimes">Lattice deformations (volume regimes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#molecule-gun-adding-molecules-during-simulation">Molecule Gun: adding molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#removing-molecules-during-simulation">Removing molecules during simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#accelerated-dynamics">Accelerated dynamics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#the-plumed-library-support-in-ams">The PLUMED library support in AMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#metadynamics-for-conformer-rotamer-ensemble-sampling-crest-mtd">Metadynamics for Conformer-Rotamer Ensemble Sampling (CREST-MTD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#collective-variable-driven-hyperdynamics-cvhd">Collective Variable-driven HyperDynamics (CVHD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#temperature-replica-exchange">Temperature Replica Exchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#bond-boost-method">Bond Boost Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#force-bias-monte-carlo-fbmc">Force bias Monte Carlo (fbMC)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Molecular_Dynamics.html#non-equilibrium-md-nemd">Non-equilibrium MD (NEMD)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Molecular_Dynamics.html#t-nemd-for-thermoconductivity-heat-exchange">T-NEMD for thermoconductivity: heat exchange</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TrajectoryReplay.html">Trajectory replay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GCMC.html">Grand Canonical Monte Carlo (GCMC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#general-info">General info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#method-details">Method Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCMC.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Automated PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#job-selection-and-main-options">Job selection and main options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results-the-energy-landscape">Results: the “Energy Landscape”</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#results-on-the-text-output">Results on the text output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#continue-a-pes-exploration-from-a-previous-calculation">Continue a PES exploration from a previous calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structure-comparison">Structure comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#process-search-job">Process Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#input-options">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#saddle-search-job">Saddle Search job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#basin-hopping-job">Basin Hopping job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#landscape-refinement">Landscape Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimizer">Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binding-sites">Binding Sites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id12">Input options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Gradients_Stress_Elasticity.html">Gradients, Hessian, Stress tensor, Elasticity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#nuclear-gradients">Nuclear gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#index-3">Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#pes-point-character">PES point character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#thermodynamics-gas-phase-gibbs-free-energy">Thermodynamics, gas phase Gibbs free energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#stress-tensor">Stress tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#elastic-tensor">Elastic tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Gradients_Stress_Elasticity.html#numerical-differentiation-options">Numerical differentiation options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Vibrational_Spectroscopy.html">Vibrational Spectroscopy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#general">General</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#where-are-the-results">Where are the results?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#ir-frequencies-and-normal-modes">IR frequencies and normal modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#all-vibrational-modes">All vibrational Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#rescanning-imaginary-modes">Rescanning Imaginary modes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#symmetric-displacements">Symmetric Displacements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mobile-block-hessian-mbh">Mobile Block Hessian (MBH)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-scanning">Mode Scanning</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-refinement">Mode Refinement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id4">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id5">Input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#mode-tracking">Mode Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id8">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id11">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-tracking-methods">Input: Tracking methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-selecting-modes">Input: Selecting modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#input-convergence">Input: Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#selecting-modes">Selecting modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#thermodynamics-ideal-gas">Thermodynamics (ideal gas)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#gibbs-free-energy-change-for-a-gas-phase-reaction">Gibbs free energy change for a gas phase reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#moments-of-inertia">Moments of inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#partial-vibrational-spectra-pvdos">Partial Vibrational Spectra (PVDOS)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#phonons">Phonons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman">(Resonance) Raman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id19">Raman</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman-excited-state-finite-lifetime">Resonance Raman: excited-state finite lifetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#resonance-raman-vg-fc">Resonance Raman: VG-FC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id22">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Vibrational_Spectroscopy.html#id24">Input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#vroa-resonance-vibrational-raman-optical-activity">VROA: (Resonance) vibrational Raman optical activity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#engine-adf">Engine ADF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Vibrational_Spectroscopy.html#vcd-vibrational-circular-dichroism">VCD: Vibrational Circular Dichroism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#atomic-polar-tensor-apt-model">Atomic polar tensor (APT) model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Vibrational_Spectroscopy.html#analytical-vcd-in-adf">Analytical VCD in ADF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Vibrationally_resolved_electronic_spectra.html">Vibrationally resolved electronic spectra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/FCF_module.html">AH-FC: Adiabatic Hessian Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-module-franck-condon-factors">FCF module: Franck-Condon Factors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#theory">Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#algorithm">Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/FCF_module.html#result-tape61">Result: TAPE61</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-example-absorption-and-fluorescence">FCF example absorption and fluorescence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/FCF_module.html#fcf-example-phosphorescence">FCF Example phosphorescence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html">VG-FC: Vertical Gradient Franck-Condon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory">Theory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-tracking">Theory: Vibronic-Structure Tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-vibronic-structure-refinement">Theory: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#theory-adiabatic-excitation-energy">Theory: Adiabatic excitation energy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-all-modes">Input: Vibronic-Structure all modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-tracking">Input: Vibronic-Structure Tracking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-restarting-vst">Input: Restarting VST</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-vibronic-structure-refinement">Input: Vibronic-Structure Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-excited-state">Input: Excited State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="VibrationalAnalysis/Vibrationally_resolved_electronic_spectra.html#input-producing-the-spectrum">Input: Producing the spectrum</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Properties.html">Dipole moment, Polarizability, Bond orders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Properties.html#charges-dipole-moment-polarizability">Charges, Dipole Moment, Polarizability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Properties.html#bond-orders-molecule-detection">Bond orders &amp; Molecule detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Engines.html">Engines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#index-2">Available engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#summary-of-engine-capabilities">Summary of engine capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#external-programs-as-engines">External programs as engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#toy-engines">Toy engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Engines.html#engine-add-ons">Engine add-ons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#dispersion-corrections">Dispersion corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#pressure">Pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#non-isotropic-external-stress">Non-isotropic external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#atom-energies">Atom energies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#restraints">Restraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Engines.html#wall-potential">Wall potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Utilities/TOC.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/ChemTraYzer.html">ChemTraYzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#general-information">General information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#graphical-user-interface">Graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#command-line-execution">Command line execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer.html#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/ChemTraYzer2.html">ChemTraYzer2 (beta version)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#using-chemtrayzer2-via-the-graphical-user-interface">Using ChemTraYzer2 via the graphical user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#minimal-input">Minimal input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/ChemTraYzer2.html#ouput">Ouput</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html">Trajectory Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#radial-distribution-function-rdf">Radial Distribution Function (RDF)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#histogram">Histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#autocorrelation-functions">Autocorrelation Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#id2">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#id3">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/TrajectoryAnalysis.html#diffusion-coefficient">Diffusion Coefficient</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Utilities/VCDtools.html">VCD Analysis: VCDtools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#general-theory">General Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#general-coupled-oscillator-analysis">General Coupled Oscillator Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Utilities/VCDtools.html#available-options">Available options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#geometry-optimization">Geometry optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/GO_formaldehyde_noSCC.html">Example: Simple geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/2StepGO.html">Example: Two-stage geometry optimization with initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Diamond_under_pressure.html">Example: Periodic lattice optimization under pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Diamond_from_pressure.html">Example: Phase Transition Due To External Nonuniform Stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ExternalStress_BN.html">Example: Boron nitride optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ExternalStress_graphene.html">Example: Graphene optimization under external stress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/constraints.html">Example: Constrained optimizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#transition-state-search">Transition state search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/COChainFreqTS.html">Example: TS search starting from initial Hessian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and TS search for H2 on graphene</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#nudged-elastic-band-neb">Nudged Elastic Band (NEB)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/NEB.html">Nudged Elastic Band (NEB) Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NEB.html#hcn-isomerization-reaction-with-neb">HCN isomerization reaction with NEB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NEB.html#h2-dissociation-on-graphene">H2 dissociation on graphene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Examples/NEB.html#running-multiple-neb-calculations-using-plams">Running multiple NEB calculations using PLAMS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#intrinsic-reaction-coordinate-irc">Intrinsic reaction coordinate (IRC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/IRC_HCN.html">Example: IRC for HCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/TS_and_IRC_Claisen.html">Example: TS and IRC for Claisen reaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-scan">PES scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PESScan.html">Example: 2D PES scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/PESScan_lattice.html">Example: PES scan for lattice degrees of freedom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-exploration">PES Exploration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BasinHopping_Ar13.html">Example: Basin Hopping for Ar 13 cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ProcessSearch_alanine.html">Example: PES Exploration, Process Search for alanine with PLAMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/BindingSites_O+Pt111.html">Example: PES Exploration, Binding Sites for O on Pt 111</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#molecular-dynamics">Molecular dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/MD_hydrogen_longrun.html">Example: Simple MD for H2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/H2O_nreac.html">Example: MD for a box of water</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/MD_Deformation.html">Example: Lattice deformations in MD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#trajectory-replay">Trajectory replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/TrajectoryReplay.html">Example: Trajectory replays for PES scans, NEB and MD calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#vibrational-analysis">Vibrational analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/VATools_dydrogesterone.html">Example: Mode Refinement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/VATools_cyclohexanone.html">Example: Mode Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/VST_pyrene.html">Example: Vibronic-Structure Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pes-point-properties">PES point properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Phonons_Graphene.html">Example: Phonons for graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Phonons_Isotopes.html">Example: Phonons with isotopes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Phonons_UserBZPath.html">Example: User-defined Brillouin zone for phonon dispersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/ElasticTensor.html">Example: Elastic tensor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pipe-interface">Pipe interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Pipe_ASEWorker.html">Example: ASE calculator as a pipe worker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Examples/Pipe_AMSonAMS.html">Example: AMS as a pipe worker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendices.html">Appendices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#extended-xyz-file-format">Extended XYZ file format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#developer-options">Developer options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendices.html#symmetry">Symmetry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices.html#schonfliess-symbols-and-symmetry-labels">Schönfliess symbols and symmetry labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendices.html#molecular-orientation-requirements">Molecular orientation requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#feature-references">Feature references</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#frequencies-ir-intensities-raman-vcd">Frequencies, IR Intensities, Raman, VCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Required_citations.html#pes-exploration">PES Exploration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">AMS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../AMS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">AMS</a>/</li>
+      
+          <li><a href="TOC.html">Structure and Reactivity, Molecular Dynamics</a>/</li>
+      
+    <li class="orange-text">Automated PES Exploration</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="eon"></span><span class="target" id="index-0"></span><div class="section" id="automated-pes-exploration">
+<span id="index-1"></span><h1>Automated PES Exploration<a class="headerlink" href="#automated-pes-exploration" title="Permalink to this headline">¶</a></h1>
+<p>In chemistry and materials science, two types of Potential Energy Surface (PES) critical points are of particular interest: local minima and (first-order) saddle points.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">PESExploration</span></code> task consists of a set of algorithms (which we will refer to as <em>jobs</em>) that will automatically explore the PES of a given system, looking for local minima and saddle points.</p>
+<p>The available PES exploration jobs are:</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="#processsearch"><span class="std std-ref">Process Search</span></a></dt>
+<dd>A composite method for finding escape mechanisms from a state. This will find both local minima and saddle points.</dd>
+<dt><a class="reference internal" href="#basinhopping"><span class="std std-ref">Basin Hopping</span></a></dt>
+<dd>A Monte Carlo method for finding local minima.</dd>
+<dt><a class="reference internal" href="#saddlesearch"><span class="std std-ref">Saddle Search</span></a></dt>
+<dd>A single-ended method for finding nearby saddle points.</dd>
+<dt><a class="reference internal" href="#landscaperefinement"><span class="std std-ref">Landscape Refinement</span></a></dt>
+<dd>Given a pre-calculated Energy Landscape, re-optimize local minima and saddle points using a different computational engine/settings.</dd>
+<dt><a class="reference internal" href="#bindingsites"><span class="std std-ref">Binding Sites</span></a></dt>
+<dd>Given a pre-calculated Energy Landscape, compute the binding sites.</dd>
+</dl>
+<p>The AMS driver links to the client program of the <a class="reference external" href="http://theory.cm.utexas.edu/eon/index.html">EON software package</a> <a class="footnote-reference" href="#eon-paper" id="id1">[1]</a> and uses its implementation of the dimer method.
+EON is developed by the University of Texas at Austin and the University of Iceland.
+See also the <a class="reference internal" href="../Required_citations.html#required-citations"><span class="std std-ref">Required citations</span></a> section.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li>PES Exploration GUI tutorials:<ul>
+<li><a class="reference external" href="../../Tutorials/StructureAndReactivity/PESExpHydrohalogenation.html">Automated reaction pathway discovery for hydrohalogenation</a></li>
+<li><a class="reference external" href="../../Tutorials/StructureAndReactivity/PESExpClusterGrowthCo8.html">Cluster Growth: Cobalt Clusters</a></li>
+<li><a class="reference external" href="../../Tutorials/StructureAndReactivity/PESExpWaterDissociationOnZnO.html">Water dissociation on an oxide surface</a></li>
+</ul>
+</li>
+<li>Examples:<ul>
+<li><a class="reference internal" href="../Examples/BasinHopping_Ar13.html#example-basinhopping-ar13"><span class="std std-ref">Example: Basin Hopping for Ar 13 cluster</span></a></li>
+<li><a class="reference internal" href="../Examples/ProcessSearch_alanine.html#example-processsearch-alanine"><span class="std std-ref">Example: PES Exploration, Process Search for alanine with PLAMS</span></a></li>
+<li><a class="reference internal" href="../Examples/BindingSites_O+Pt111.html#example-bindingsites-o-pt111"><span class="std std-ref">Example: PES Exploration, Binding Sites for O on Pt 111</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>While many details of a PES exploration calculation depend on the specific <a class="reference internal" href="#main-pes-exp-input"><span class="std std-ref">job</span></a> selected, some aspects are common to all PES explorations jobs. Here we give a brief overview of a typical PES exploration, using a Process Search job as example.</p>
+<p>A PES exploration calculation generally consists of multiple <em>expeditions</em>, each with several <em>explorers</em>.</p>
+<p><em>Explorers</em> are given an initial structure, and their goal is to find a nearby critical point (a local minimum, a saddle point or both).
+The explorer moves around the PES by modifying the atomic positions of the system and by using the specified <a class="reference internal" href="../Engines.html#engines"><span class="std std-ref">Engine</span></a> to compute energy and gradients.</p>
+<p>An <em>expedition</em> is a collection of <em>explorers</em> all starting from the same point on the PES.</p>
+<p>Before setting off for the first expedition, the input structure is optimized and added to the <em>Energy Landscape</em>, which is the database of all interesting points found during the exploration (see the section <a class="reference internal" href="#energylandscape"><span class="std std-ref">Results: the “Energy Landscape”</span></a> for more details).</p>
+<p>Starting from this initial structure, a number of PES explorers (3 in the diagram below) will set off in random directions exploring the potential energy surface and looking for nearby critical points.</p>
+<a class="reference internal image-reference" href="../_images/PESExplorationCartoon1.png"><img alt="../_images/PESExplorationCartoon1.png" class="align-center" src="../_images/PESExplorationCartoon1.png" style="width: 85%;" /></a>
+<p>Explorers have “stop conditions” (e.g. a maximum number of steps or a maximum energy above the starting point) so in general not all explorers will successfully find a critical point. In this case, only one of the explorers found relevant critical points: a saddle point and a local minimum. These newly found critical points are added to the Energy Landscape.</p>
+<p>After the first expedition is over, the program will start with the second expedition. The starting point for the next expedition will be a randomly chosen local minimum from the list of minima present in the Energy Landscape (the possible starting points for an exploration are called <em>seed states</em>. See also the <a class="reference internal" href="#main-pes-exp-input"><span class="std std-ref">DynamicSeedStates</span></a> option).</p>
+<p>In this example, the starting point of the second expedition is the new local minimum found during the first expedition. A new set of explorers will set off in random directions from this point.</p>
+<a class="reference internal image-reference" href="../_images/PESExplorationCartoon2.png"><img alt="../_images/PESExplorationCartoon2.png" class="align-center" src="../_images/PESExplorationCartoon2.png" style="width: 85%;" /></a>
+<p>In the diagram above, one of the explorer found a saddle point that was already found in a previous exploration. This structure will not be added to Energy Landscape since it was already <em>seen</em> before (see the <a class="reference internal" href="#pesexpstructurecomparison"><span class="std std-ref">Structure comparison</span></a> section for more details). The newly found critical points are added to the Energy Landscape.</p>
+<p>Usually, many expeditions and/or many explorers are needed to map the PES, but you should keep in mind that the computation time of the calculation will roughly be proportional to the product <code class="docutils literal notranslate"><span class="pre">NumExpeditions</span> <span class="pre">x</span> <span class="pre">NumExplorers</span></code>.</p>
+<p>By having many explorers you will have a higher chance of comprehensively mapping the PES near the starting point of each expedition. By having many expeditions, you will have a higher chance of traveling further away from the initial structure.</p>
+<p>It should be emphasized that the PES exploration task is stochastic in nature, as it uses random numbers to perform initial-displacements. This means that if you run the same calculation twice you might find different critical points.</p>
+</div>
+<div class="section" id="job-selection-and-main-options">
+<span id="main-pes-exp-input"></span><h2>Job selection and main options<a class="headerlink" href="#job-selection-and-main-options" title="Permalink to this headline">¶</a></h2>
+<p>To use one of the PES Exploration procedures you should set the <a class="reference internal" href="../Input_Output.html#ams-key-task"><span class="std std-ref">Task</span></a> to <code class="docutils literal notranslate"><span class="pre">PESExploration</span></code> and specify one of the jobs in the <code class="docutils literal notranslate"><span class="pre">PESExploration%Job</span></code> key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">PESExploration</span>
+
+<span class="n">PESExploration</span>
+   <span class="n">Job</span> <span class="p">[</span><span class="n">ProcessSearch</span> <span class="o">|</span> <span class="n">BasinHopping</span> <span class="o">|</span> <span class="n">SaddleSearch</span> <span class="o">|</span> <span class="n">LandscapeRefinement</span> <span class="o">|</span> <span class="n">BindingSites</span><span class="p">]</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>The input options for the various jobs are described in the corresponding sections: <a class="reference internal" href="#processsearch"><span class="std std-ref">Process Search</span></a>,
+<a class="reference internal" href="#basinhopping"><span class="std std-ref">Basin Hopping</span></a>, <a class="reference internal" href="#saddlesearch"><span class="std std-ref">Saddle Search</span></a>, <a class="reference internal" href="#landscaperefinement"><span class="std std-ref">Landscape Refinement</span></a>, <a class="reference internal" href="#bindingsites"><span class="std std-ref">Binding Sites</span></a>.</p>
+<p>It is then important pick an appropriate number of expeditions and explorers. Having many expeditions and explorers will result in a more comprehensive PES exploration, but since the computation time will roughly be proportional to the product <code class="docutils literal notranslate"><span class="pre">NumExpeditions</span> <span class="pre">x</span> <span class="pre">NumExplorers</span></code> you’ll need to find an appropriate balance.</p>
+<div class="highlight-none notranslate" id="ams-key-pesexploration"><div class="highlight"><pre><span></span>PESExploration
+   NumExpeditions integer
+   NumExplorers integer
+   DynamicSeedStates Yes/No
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PESExploration</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures details of the automated PES exploration methods.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">NumExpeditions</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Sets the number of subsequent expeditions our job will consist of. Larger values result in a more comprehensive exploration of the potential energy surface, but will take more computational time.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NumExplorers</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Sets the number of independent PES explorers dispatched as part of each expedition. Larger values will result in a more comprehensive exploration of the potential energy surface, but will take more computational time. By default an appropriate number of explorers are executed in parallel.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DynamicSeedStates</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Whether subsequent expeditions may start from states discovered by previous expeditions. This should lead to a more comprehensive exploration of the potential energy surface. Disabling this will focus the PES exploration around the initial seed states.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The following miscellaneous input option generally apply to most PES exploration calculations:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PESExploration
+   WriteHistory [None | Converged | All]
+   Temperature float
+   FiniteDifference float
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PESExploration</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures details of the automated PES exploration methods.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">WriteHistory</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Converged</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[None, Converged, All]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">When to write the molecular geometry (and possibly other properties) to the history on the ams.rkf file. The default is to only write the converged geometries to the history. Can be changed to write no frames at all to the history, or write all frames (should only be used when testing because of the performance impact). Note that for parallel calculations, only the first group of processes writes to ams.rkf.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Temperature</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">300.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Kelvin</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The temperature that the job will run at. This may be used in different ways depending on the job, e.g. acceptance probabilities for Monte-Carlo based jobs, thermostatting for dynamics based jobs, kinetic prefactors for jobs that find transition states. Some jobs may not use this temperature at all.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FiniteDifference</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.01</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The finite difference distance to use for Dimer, Hessian, Lanczos, and optimization methods.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="results-the-energy-landscape">
+<span id="energylandscape"></span><h2>Results: the “Energy Landscape”<a class="headerlink" href="#results-the-energy-landscape" title="Permalink to this headline">¶</a></h2>
+<p>The results of a PES Exploration are the structures and energies of the critical points found.
+There are multiple ways for you to inspect the results:</p>
+<ul class="simple">
+<li>The energy landscape can be visualized using the <code class="docutils literal notranslate"><span class="pre">AMSMovie</span></code> GUI module (In AMSMovie: <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">→</span> <span class="pre">Open</span></code> and select the <code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code> file of your calculation). See the GUI tutorials (e.g. <a class="reference external" href="../../Tutorials/StructureAndReactivity/PESExpHydrohalogenation.html">Automated reaction pathway discovery for hydrohalogenation</a>) for more details.</li>
+<li>The results are printed to the text output under the header <code class="docutils literal notranslate"><span class="pre">Final</span> <span class="pre">Energy</span> <span class="pre">Landscape</span></code>, see <a class="reference internal" href="#energylandscapeontextoutput"><span class="std std-ref">below</span></a>.</li>
+<li>The results are stored on the <code class="docutils literal notranslate"><span class="pre">ams.rkf</span></code> binary results file in the section <code class="docutils literal notranslate"><span class="pre">EnergyLandscape</span></code></li>
+<li>In <a class="reference external" href="../../plams/index.html">PLAMS</a>, you can use the <a class="reference external" href="../../plams/interfaces/ams.html#scm.plams.interfaces.adfsuite.ams.AMSResults.get_energy_landscape">get_energy_landscape</a> method of the  <code class="docutils literal notranslate"><span class="pre">AMSResults</span></code> object to conveniently extract the results.</li>
+</ul>
+<div class="section" id="results-on-the-text-output">
+<span id="energylandscapeontextoutput"></span><h3>Results on the text output<a class="headerlink" href="#results-on-the-text-output" title="Permalink to this headline">¶</a></h3>
+<p>These are printed at the end of the text output under the header <code class="docutils literal notranslate"><span class="pre">Final</span> <span class="pre">Energy</span> <span class="pre">Landscape</span></code>. Here is an output example for a ProcessSearch job for the simple HCN molecule (computed with the DFTB engine):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>----------------------
+Final Energy Landscape
+----------------------
+
+      Id        Energy(a.u.)         RE(eV)   RE(kcal/mol)    Counts    Crit. point
+   --------------------------------------------------------------------------------
+       1           -5.782789        0.00000         0.0000         4            Min
+       2           -5.748792        0.92510        21.3334         4            Min
+       3           -5.689025        2.55143        58.8375         4             TS  1 &lt;--&gt; 2
+
+Number of configurations                             3
+Number of local minima                               2
+Number of transition states                          1
+Energy range (a.u.)                           0.093763
+Energy range (eV)                              2.55143
+Energy range (kcal/mol)                        58.8375
+
+Configurations
+--------------
+3
+Id 1 Energy(hartree)     -5.78278852 isTS=False
+H       -5.05604362312999       1.04394551246415       0.36836337958238
+C       -4.06812264817497       0.95005534859126      -0.01533183100739
+N       -3.00601476684712       0.84907755770632      -0.42810754191928
+3
+Id 2 Energy(hartree)     -5.74879169 isTS=False
+H       -4.01886309319822       1.09046314142766       1.01610923624838
+C       -4.06910389782095       0.79751242545583      -1.12016730790896
+N       -4.04221404713293       0.95510285187825       0.02898207831626
+3
+Id 3 Energy(hartree)     -5.68902502 isTS=True
+H       -4.51488871821561       1.04261603660424       0.52096081259126
+C       -4.32990923520194       0.88203060069718      -0.58636688911847
+N       -3.28538308473452       0.91843178146029      -0.00966991681712
+</pre></div>
+</div>
+<p>From this you can see that 3 critical points were found: 2 minima (<code class="docutils literal notranslate"><span class="pre">Id</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">Id</span> <span class="pre">2</span></code>) and 1 transition state (<code class="docutils literal notranslate"><span class="pre">Id</span> <span class="pre">3</span></code>) connecting the first two states (indicated by <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">&lt;--&gt;</span> <span class="pre">2</span></code>).</p>
+<p>Under <code class="docutils literal notranslate"><span class="pre">Counts</span></code> you can see how many times each state was encountered during the exploration (often the same state is found multiple times) See the <a class="reference internal" href="#pesexpstructurecomparison"><span class="std std-ref">Structure comparison</span></a> section for more details on how states are compared.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RE</span></code> is the “relative energy” with respect to the lowest-energy state found.</p>
+<p>Under the header <code class="docutils literal notranslate"><span class="pre">Configurations</span></code> you will find the XYZ geometries (in Angstrom) corresponding to the various critical points.</p>
+</div>
+</div>
+<div class="section" id="continue-a-pes-exploration-from-a-previous-calculation">
+<span id="loadenergylandscape"></span><h2>Continue a PES exploration from a previous calculation<a class="headerlink" href="#continue-a-pes-exploration-from-a-previous-calculation" title="Permalink to this headline">¶</a></h2>
+<p>You can load an Energy Landscape obtained from PES exploration calculation and use it as starting point for a new PES exploration. In this way you can extend your Energy Landscape, and potentially use different PES exploration algorithms.</p>
+<p>To load a previously computed energy landscape, use the <code class="docutils literal notranslate"><span class="pre">PESExploration%LoadEnergyLandscape%Path</span></code> option (note: you should still provide an input system in the <a class="reference internal" href="../System.html#systemdefinition"><span class="std std-ref">System</span></a> block even if you are loading a previous Energy Landscape. The input system will be optimized and added to the energy landscape as a minimum).</p>
+<p>It is often convenient to load only some of the states from a previous calculation; this can be done via the <code class="docutils literal notranslate"><span class="pre">Remove</span></code> or <code class="docutils literal notranslate"><span class="pre">KeepOnly</span></code> input options. Specify the seed states with the <code class="docutils literal notranslate"><span class="pre">SeedStates</span></code> option.</p>
+<p>These are all the input options related to the loading an Energy Landscape:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PESExploration
+   LoadEnergyLandscape
+      KeepOnly integer_list
+      Path string
+      Remove integer_list
+      SeedStates integer_list
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PESExploration</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">LoadEnergyLandscape</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options related to the loading of an Energy Landscape from a previous calculation.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">KeepOnly</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">List of states to keep</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Upon loading the Energy Landscape, only keep the states specified here. The states should be specified via a list of integers referring to the indices of the states you want to keep.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Path</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">Load energy landscape from</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">The path to load an energy landscape from. Accepts either AMS result folders, or <code class="docutils literal notranslate"><span class="pre">.con</span></code> files in the native EON format (only available through the text input file).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Remove</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">List of states to remove</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Upon loading the Energy Landscape, remove (i.e. do not load) the states specified here. The states should be specified via a list of integers referring to the indices of the states you want to remove (i.e. the states you don’t want to load).</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SeedStates</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer List</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GUI name:</th><td class="field-body">List of seed states</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">By default when you start a new PES Exploration from a loaded Energy Landscape, expeditions can start from any of the loaded minima. By using this input option, you can instruct the program to only use some of the states as ‘expedition starting point’. The states that serve as ‘expedition starting points’ should be specified via a list of integers referring to the indices of the states.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="troubleshooting">
+<span id="pesexptroubleshooting"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>The PES exploration in AMS is quite sensitive to noise on the potential energy surface.
+A too noisy PES may result in bad convergence of the individual explorers, or states being rejected because their <a class="reference internal" href="../Gradients_Stress_Elasticity.html#pespointcharacterization"><span class="std std-ref">PES point character</span></a> is not the expected one.</p>
+<p>In case of problems we therefore advise to set engine options that result in a smoother PES.
+Often this can be accomplished by setting the <code class="docutils literal notranslate"><span class="pre">NumericalQuality</span></code> keyword in the engine input.</p>
+<p>Especially the <a class="reference external" href="../../ReaxFF/ReaxFFEngine.html">ReaxFF</a> engine has a rather noisy PES by default, which may cause problems in a PES exploration job.
+Please refer to the ReaxFF manual for advice on how to smoothen the ReaxFF potential energy surface:</p>
+<ul class="simple">
+<li><a class="reference external" href="../../ReaxFF/ReaxFFEngine.html#smoothened-potential-energy-surface">ReaxFF manual: Smoothened potential energy surface</a></li>
+<li><a class="reference external" href="../../ReaxFF/Troubleshooting.html#troubleshooting-geoopt">ReaxFF manual: Geometry optimization issues</a></li>
+</ul>
+</div>
+<div class="section" id="structure-comparison">
+<span id="pesexpstructurecomparison"></span><h2>Structure comparison<a class="headerlink" href="#structure-comparison" title="Permalink to this headline">¶</a></h2>
+<p>During a PES exploration some critical points will most likely be encountered more than once.</p>
+<p>Whenever a critical point is found, the program will ask itself: is this a new structure, or have I already encountered this before?
+If the structure was not seen before (i.e. it’s a novel configuration), it will be added to the list of structures found during the exploration.
+If the structure was already found before, the program will simply increase a counter keeping track of how many times a specific structure was found during the PES exploration.</p>
+<p>When deciding if two structures are the same or not, the program will compare both the geometry and the energy of the two configurations. Several parameters and thresholds can be tweaked in the <code class="docutils literal notranslate"><span class="pre">PESExploration%StructureComparison</span></code> block to tell AMS under which conditions two systems should be considered equal.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PESExploration
+   StructureComparison
+      CheckRotation Yes/No
+      CheckSymmetry Yes/No
+      DistanceDifference float
+      EnergyDifference float
+      IndistinguishableAtoms Yes/No
+      NeighborCutoff float
+      RemoveTranslation Yes/No
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PESExploration</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">StructureComparison</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Settings for structure comparison.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">CheckRotation</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Rotates the system optimally before comparing structures. The default is to do this only for molecular systems when there are no fixed atom constraints.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CheckSymmetry</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Considers that two systems are equal if they are equivalent by symmetry.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DistanceDifference</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">If the distance between two mapped atoms is larger than this threshold, the two configurations are considered different structures.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EnergyDifference</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.01</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">eV</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">If the energy difference between two configurations is larger than this threshold, the two configurations are considered to be different structures.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">IndistinguishableAtoms</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Yes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">If yes, the order of the atoms does not affect the structural comparison. Atoms of the same element are then indistinguishable.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NeighborCutoff</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">3.3</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Atoms within this distance of each other are considered neighbors.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">RemoveTranslation</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Translates the system optimally before comparing structures. The default is to do this only when there are no fixed atom constraints.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<span class="target" id="processsearch"></span></div>
+<div class="section" id="process-search-job">
+<span id="index-2"></span><h2>Process Search job<a class="headerlink" href="#process-search-job" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Overview<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Process Search is a composite method for finding escape mechanisms from a state. Each PES explorer will perform the following steps:</p>
+<ul class="simple">
+<li>Starting from a minimum, a <a class="reference internal" href="#saddlesearch"><span class="std std-ref">SaddleSearch</span></a> calculation is performed to find a nearby saddle point</li>
+<li>If a saddle point is found, two images are placed on either side of the saddle along the min mode.</li>
+<li>The two images are then minimized; one of the images is expected to fall back into the original minimum, while the other image is expected to end up in the product state on the other side of the saddle. If this is case, the product, TS and reactant states are added to the energy landscape.</li>
+</ul>
+<p>The Process Search procedure will therefore not only find minima and saddle points, but it will also keep track of which minima each saddle point is connecting.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li>GUI tutorials <a class="reference external" href="../../Tutorials/StructureAndReactivity/PESExpHydrohalogenation.html">Automated reaction pathway discovery for hydrohalogenation</a> and <a class="reference external" href="../../Tutorials/StructureAndReactivity/PESExpWaterDissociationOnZnO.html">Water dissociation on an oxide surface</a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="input-options">
+<h3>Input options<a class="headerlink" href="#input-options" title="Permalink to this headline">¶</a></h3>
+<p>To perform a Process Search calculation you should specify:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">PESExploration</span>
+
+<span class="n">PESExploration</span>
+   <span class="n">Job</span> <span class="n">ProcessSearch</span>
+
+   <span class="n">ProcessSearch</span>
+      <span class="c1"># Options for the Process Search procedure. See description below.</span>
+   <span class="n">End</span>
+
+   <span class="n">SaddleSearch</span>
+      <span class="c1"># Options for the Saddle Search part of the Process Search procedure.</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>The options for the saddle search part of a Process Search job are described in the  <a class="reference internal" href="#saddlesearch"><span class="std std-ref">SaddleSearch</span></a> section.</p>
+<p>Options specific to the Process Search procedure can be specified in the <code class="docutils literal notranslate"><span class="pre">PESExploration%ProcessSearch</span></code> block:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PESExploration
+   ProcessSearch
+      MinimizationOffset float
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PESExploration</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ProcessSearch</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Input options specific to the process search procedure.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">MinimizationOffset</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.2</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">After a saddle is found, images are placed on either side of the saddle along the mode and minimized to ensure that the saddle is connected to the original minimum and to locate the product state. MinimizationOffset is the distance those images are displaced from the saddle.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<span class="target" id="saddlesearch"></span></div>
+</div>
+<div class="section" id="saddle-search-job">
+<span id="index-3"></span><h2>Saddle Search job<a class="headerlink" href="#saddle-search-job" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Overview<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Saddle Search is a single-ended method for finding nearby saddle points.</p>
+<p>In a Saddle Search calculation, each PES explorer starts by performing a random displacement from the initial geometry (or seed state). Then, starting from this point, the explorer searches for a nearby saddle point using a minimum-mode following method (the available min-mode following methods are dimer <a class="footnote-reference" href="#dimer-henkelman" id="id4">[3]</a> <a class="footnote-reference" href="#dimer-heyden" id="id5">[4]</a> <a class="footnote-reference" href="#dimer-kastner" id="id6">[5]</a> and Lanczos <a class="footnote-reference" href="#lanczos" id="id7">[6]</a>).</p>
+<p>If you already know which atoms are likely to be involved in the reactions, you can use the <code class="docutils literal notranslate"><span class="pre">DisplaceAtomsInRegion</span></code> option to nudge the Saddle Search procedure towards the right part of the PES (<a class="reference internal" href="../System.html#regions"><span class="std std-ref">regions</span></a> can be specified in the <a class="reference internal" href="../System.html#systemdefinition"><span class="std std-ref">system input block</span></a>, or via the “Model → Regions” panel in AMSinput).</p>
+</div>
+<div class="section" id="id8">
+<h3>Input options<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>To perform a Saddle Search calculation you should specify:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">PESExploration</span>
+
+<span class="n">PESExploration</span>
+   <span class="n">Job</span> <span class="n">SaddleSearch</span>
+
+   <span class="n">SaddleSearch</span>
+      <span class="c1"># Options for the Saddle Search procedure. See description below.</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>Options for the Saddle Search procedure can be specified in the <code class="docutils literal notranslate"><span class="pre">PESExploration%SaddleSearch</span></code> block.</p>
+<p>Note: these options also affect the Saddle Search part of <a class="reference internal" href="#processsearch"><span class="std std-ref">Process Search Jobs</span></a>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PESExploration
+   SaddleSearch
+      ConvergedForce float
+      DisplaceAtomsInRegion string
+      DisplaceMagnitude float
+      MaxEnergy float
+      MaxIterations integer
+      MinEnergyBarrier float
+      MinModeMethod [dimer | lanczos]
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PESExploration</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">SaddleSearch</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configuration for the Saddle Search procedure (used in SaddleSearch and ProcessSearch Jobs).</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ConvergedForce</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">-1.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">eV/Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Convergence threshold for nuclear gradients. Note: Special value of -1.0 means using the same convergence criterion as the PES explorer’s geometry optimizer.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DisplaceAtomsInRegion</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">A string corresponding to the name of a region. When performing the initial random displacement, only displace atoms in the specified region. This can help the Saddle Search procedure to start off in a desired region of the PES.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DisplaceMagnitude</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The standard deviation of the Gaussian displacement in each degree of freedom for the selected atoms.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MaxEnergy</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">20.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">eV</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The energy (relative to the starting point of the saddle search) at which a saddle search explorer considers the search bad and terminates it.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MaxIterations</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">400</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Maximum number of iterations for each saddle search run.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MinEnergyBarrier</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">eV</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Minimum energy barrier to accept a new transition state.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MinModeMethod</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">dimer</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[dimer, lanczos]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The minimum-mode following method to use.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="basin-hopping-job">
+<span id="basinhopping"></span><span id="index-4"></span><h2>Basin Hopping job<a class="headerlink" href="#basin-hopping-job" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id9">
+<h3>Overview<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>Basin hopping <a class="footnote-reference" href="#basin-hopping" id="id10">[2]</a> is an iterative Monte Carlo method for PES exploration and global minimization.</p>
+<p>An “iteration” in basin hopping consists of the following steps:</p>
+<ol class="arabic simple">
+<li>The atomic coordinates of the system are randomly perturbed (the details of this random perturbation can be configured via the keywords <code class="docutils literal notranslate"><span class="pre">Displacement</span></code>, <code class="docutils literal notranslate"><span class="pre">DisplacementDistribution</span></code>, <code class="docutils literal notranslate"><span class="pre">SingleAtomDisplace</span></code>, <code class="docutils literal notranslate"><span class="pre">SwapProbability</span></code>. See <a class="reference internal" href="#basin-hopping-input"><span class="std std-ref">below</span></a> for more details).</li>
+<li>A local optimization of the randomly perturbed structure is performed (see also the <a class="reference internal" href="#eonoptimizer"><span class="std std-ref">Optimizer</span></a> section)</li>
+<li>The new optimized structure is accepted or rejected based of its energy (if the energy of the newly optimized structure lower than the lowest energy so far, the new structure is readily accepted. Otherwise it is accepted with probability <span class="math notranslate nohighlight">\(e^{(-\Delta E / kT)}\)</span> where <span class="math notranslate nohighlight">\(\Delta E\)</span> is the difference between the energy at the previous iteration and the current energy, <span class="math notranslate nohighlight">\(T\)</span> is temperature specified in the <code class="docutils literal notranslate"><span class="pre">PESExploration%Temperature</span></code> keyword, see <a class="reference internal" href="#main-pes-exp-input"><span class="std std-ref">Job selection and main options</span></a>).</li>
+</ol>
+<p>By iteratively performing these steps, the basin hopping procedure explores the highly-dimensional configuration space of the system, looking for the global minimum and finding local minima along the way. The number of iteration can be specified via the <code class="docutils literal notranslate"><span class="pre">Steps</span></code> keywords (see <a class="reference internal" href="#basin-hopping-input"><span class="std std-ref">below</span></a> for more details).</p>
+<p>For a more comprehensive PES exploration, AMS can perform several expeditions (potentially with several explorers for each expedition) in a single calculation. See the <code class="docutils literal notranslate"><span class="pre">NumExpeditions</span></code> and <code class="docutils literal notranslate"><span class="pre">NumExplorers</span></code> keywords in the <a class="reference internal" href="#main-pes-exp-input"><span class="std std-ref">Job selection and main options</span></a> section for more details.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><a class="reference internal" href="../Examples/BasinHopping_Ar13.html#example-basinhopping-ar13"><span class="std std-ref">Example: Basin Hopping for Ar 13 cluster</span></a></li>
+<li>GUI tutorials <a class="reference external" href="../../Tutorials/StructureAndReactivity/PESExpClusterGrowthCo8.html">Cluster Growth: Cobalt Clusters</a> and <a class="reference external" href="../../Tutorials/StructureAndReactivity/PESExpWaterDissociationOnZnO.html">Water dissociation on an oxide surface</a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>Input options<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>To perform a Basin Hopping calculation you should specify:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">PESExploration</span>
+
+<span class="n">PESExploration</span>
+   <span class="n">Job</span> <span class="n">BasinHopping</span>
+
+   <span class="n">Temperature</span> <span class="nb">float</span>
+
+   <span class="n">BasinHopping</span>
+      <span class="c1"># Options for the Basin Hopping procedure. See description below.</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">PESExploration%Temperature</span></code> keyword is described in the <a class="reference internal" href="#main-pes-exp-input"><span class="std std-ref">Job selection and main options</span></a> section.</p>
+<p id="basin-hopping-input">The following input keywords are specific to Basin Hopping procedure:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PESExploration
+   BasinHopping
+      DisplaceAtomsInRegion string
+      Displacement float
+      PushApartDistance float
+      Steps integer
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PESExploration</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">BasinHopping</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures the details of the Basin Hopping subtask.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">DisplaceAtomsInRegion</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">If you specify a region name here, only the atoms belonging to this region will be displaced during the basin hopping procedure. For more details on regions, see the documentation on the System definition.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Displacement</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.5</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Displacement in each degree of freedom.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PushApartDistance</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.4</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Push atoms apart until no atoms are closer than this distance. This criterion is enforced for the initial structure and all those generated by random displacements.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Steps</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">20</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Number of displace &amp; optimize Monte-Carlo steps to take.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="landscape-refinement">
+<span id="landscaperefinement"></span><span id="index-5"></span><h2>Landscape Refinement<a class="headerlink" href="#landscape-refinement" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">LandscapeRefinement</span></code> Job can be used to re-optimize the critical points (local minima and saddle points) found in a previous PES exploration calculation using a different engine or different engine settings.</p>
+<p>Since PES exploration calculations can be computationally demanding, a possible strategy is to first perform a PES exploration using either a fast engine or computationally cheap settings for the engine of choice, and then to <em>refine</em> the energy landscape obtained using a more accurate (and computationally more expensive) method.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Check the <a class="reference external" href="../../Tutorials/StructureAndReactivity/PESExpHydrohalogenation.html#refining-an-energy-landscape-at-a-higher-level-of-theory">tutorial</a> on automated reaction pathway discovery for hydrohalogenation. There the landscape refinement is used to go from the DFTB level of theory to DFT.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">LandscapeRefinement</span></code> job needs a previously computed Energy Landscape. See the section <a class="reference internal" href="#loadenergylandscape"><span class="std std-ref">Continue a PES exploration from a previous calculation</span></a> for more details.</p>
+<p>To perform a Landscape Refinement calculation you should specify:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span> <span class="n">LandscapeRefinement</span>
+
+<span class="n">PESExploration</span>
+   <span class="n">Job</span> <span class="n">LandscapeRefinement</span>
+
+   <span class="n">LoadEnergyLandscape</span>
+     <span class="n">Path</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">previous</span><span class="o">/</span><span class="n">calculation</span><span class="o">/</span><span class="n">ams</span><span class="o">.</span><span class="n">results</span>
+   <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If you perform a LandscapeRefinement of an Energy Landscapes obtained with <a class="reference internal" href="#processsearch"><span class="std std-ref">ProcessSearch</span></a> job, the connections between TS and minima are <strong>NOT</strong> recomputed.</p>
+<p>Lets say, for example, that after a ProcessSearch calculation using DFTB we found a TS connecting minima with <code class="docutils literal notranslate"><span class="pre">Id</span></code> <code class="docutils literal notranslate"><span class="pre">3</span></code> and <code class="docutils literal notranslate"><span class="pre">4</span></code>. After a LandscapeRefinement using a different engine (for example ADF) it is no longer assured that the refined TS will still connect the same two minima.</p>
+<p class="last">When you visualize a refined energy landscape using AMSmovie, be aware that some of the connections might be incorrect.</p>
+</div>
+</div>
+<div class="section" id="optimizer">
+<span id="eonoptimizer"></span><span id="index-6"></span><h2>Optimizer<a class="headerlink" href="#optimizer" title="Permalink to this headline">¶</a></h2>
+<p>Geometry optimizations are performed for most PES Explorations job types. In the <code class="docutils literal notranslate"><span class="pre">PESExploration%Optimizer</span></code> block you may configure some of the parameters for these geometry optimizations:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PESExploration
+   Optimizer
+      ConvergedForce float
+      MaxIterations integer
+      Method [CG | QM | LBFGS | FIRE | SD]
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PESExploration</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Optimizer</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures the details of the geometry optimizers used by the PES explorers.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ConvergedForce</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">0.005</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">eV/Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Convergence threshold for nuclear gradients.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MaxIterations</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">400</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Maximum number of iterations allowed for optimizations.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Method</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">CG</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[CG, QM, LBFGS, FIRE, SD]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Select the method for geometry optimizations.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="binding-sites">
+<span id="bindingsites"></span><span id="index-7"></span><h2>Binding Sites<a class="headerlink" href="#binding-sites" title="Permalink to this headline">¶</a></h2>
+<p>Binding sites can be determined from an Energy Landscape.</p>
+<p>When computing binding sites you will first need to define a <strong>reference region</strong>, which typically will be a surface or a cluster (<a class="reference internal" href="../System.html#regions"><span class="std std-ref">regions</span></a> can be specified in the <a class="reference internal" href="../System.html#systemdefinition"><span class="std std-ref">system input block</span></a>, or via the “Model → Regions” panel in AMSinput). AMS will then go though all the local minima of Energy Landscape and mark as ‘binding sites’ the positions where an atom of an adsorbed molecule is neighboring atoms in the reference region.</p>
+<p>For instance, in <a class="reference internal" href="../Examples/BindingSites_O+Pt111.html#example-bindingsites-o-pt111"><span class="std std-ref">Example: PES Exploration, Binding Sites for O on Pt 111</span></a>, the platinum surface is the reference region, while the oxygen atom is the adsorbate. In the picture below, you can see the oxygen binding sites on the platinum 111 surface (the two different types of binding sites are marked by a blue square and a red triangle respectively).</p>
+<a class="reference internal image-reference" href="../_images/BindingSites.png"><img alt="../_images/BindingSites.png" class="align-center" src="../_images/BindingSites.png" style="width: 60%;" /></a>
+<p>Lines connecting the the binding sites will be drawn if 1) there is a transition state connecting two local minima associated to these binding-sites (notice that may there are multiple local minima associated with the same binding site), and 2) there is at least an atom (from the adsorbate region) that changes its position from the first binding site to the second one mediated by the same transition state described above. In this process, AMS will align as much as possible all local minima and transition states to the input’s file structure but ignoring the atoms in the region adsorbate trying to establish a common reference frame (see also the <code class="docutils literal notranslate"><span class="pre">StatesAlignment</span></code> input block below).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><a class="reference internal" href="../Examples/BindingSites_O+Pt111.html#example-bindingsites-o-pt111"><span class="std std-ref">Example: PES Exploration, Binding Sites for O on Pt 111</span></a></li>
+<li><a class="reference external" href="../../Tutorials/StructureAndReactivity/PESExpClusterGrowthCo8.html">Cluster Growth: Cobalt Clusters</a></li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h3>Input options<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>There are two distinct ways of triggering the computation of binding sites. You can either:</p>
+<p>compute the binding sites at the end of a <a class="reference internal" href="#processsearch"><span class="std std-ref">Process Search</span></a>, <a class="reference internal" href="#basinhopping"><span class="std std-ref">Basin Hopping</span></a> or <a class="reference internal" href="#landscaperefinement"><span class="std std-ref">Landscape Refinement</span></a> calculation by setting the <code class="docutils literal notranslate"><span class="pre">PESEXploration%BindingSites%Calculate</span></code> option to <code class="docutils literal notranslate"><span class="pre">yes</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PESEXploration</span>
+  <span class="n">Job</span> <span class="p">[</span><span class="n">ProcessSearch</span> <span class="o">|</span> <span class="n">BasinHopping</span> <span class="o">|</span> <span class="n">LandscapeRefinement</span><span class="p">]</span>
+
+  <span class="n">BindingSites</span>
+    <span class="n">Calculate</span> <span class="n">Yes</span>
+  <span class="n">End</span>
+
+  <span class="n">StatesAlignment</span>
+    <span class="n">ReferenceRegion</span> <span class="n">reference_region_name</span>
+  <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p><strong>or</strong></p>
+<p>compute the binding sites by setting the <code class="docutils literal notranslate"><span class="pre">PESExploration%Job</span></code> to <code class="docutils literal notranslate"><span class="pre">BindingSites</span></code> and load a previously computed Energy Landscape (see <a class="reference internal" href="../Examples/BindingSites_O+Pt111.html#example-bindingsites-o-pt111"><span class="std std-ref">Example: PES Exploration, Binding Sites for O on Pt 111</span></a>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PESEXploration</span>
+  <span class="n">Job</span> <span class="n">BindingSites</span>
+
+  <span class="n">LoadEnergyLandscape</span>
+    <span class="n">Path</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">previous</span><span class="o">/</span><span class="n">calculation</span><span class="o">/</span><span class="n">ams</span><span class="o">.</span><span class="n">results</span>
+  <span class="n">End</span>
+
+  <span class="n">StatesAlignment</span>
+    <span class="n">ReferenceRegion</span> <span class="n">reference_region_name</span>
+  <span class="n">End</span>
+<span class="n">End</span>
+</pre></div>
+</div>
+<p>The following input options are related to the calculation of binding sites:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PESExploration
+   BindingSites
+      AllowDisconnected Yes/No
+      Calculate Yes/No
+      DistanceDifference float
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PESExploration</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">BindingSites</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Options related to the calculation of binding sites.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">AllowDisconnected</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Allow disconnected binding sites.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Calculate</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Calculate binding sites at the end of a job. Not needed for Binding Sites job.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DistanceDifference</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">-1.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">If the distance between two mapped binding-sites is larger than this threshold, the binding-sites are considered different. If not specified, its value will set equal to [PESExploration%StructureComparison%DistanceDifference]</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The following input options are related to the definition of the reference region and alignment thereof:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PESExploration
+   StatesAlignment
+      DistanceDifference float
+      ReferenceRegion string
+   End
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">PESExploration</span></code></dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">StatesAlignment</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures details of how the energy landscape configurations are aligned respect to the main chemical system [System].</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">DistanceDifference</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">-1.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">If the distance between two mapped atoms is larger than this threshold, the configuration is considered not aligned. If not specified, its value will set equal to [PESExploration%StructureComparison%DistanceDifference]</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ReferenceRegion</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Defines the region that is considered as the reference for alignments. Atoms outside this region are ignored in the alignments. TODO: Description of which PES exploration jobs actually use this …</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="eon-paper" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Samuel T Chill, Matthew Welborn, Rye Terrell, Liang Zhang, Jean-Claude Berthet, Andreas Pedersen, Hannes Jónsson and Graeme Henkelman <em>EON: software for long time simulations of atomic scale systems</em>, <a class="reference external" href="https://doi.org/10.1088/0965-0393/22/5/055002">Modelling Simul. Mater. Sci. Eng. 22 055002 (2014)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="basin-hopping" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[2]</a></td><td>David J. Wales and Jonathan P. K. Doye <em>Global Optimization by Basin-Hopping and the Lowest Energy Structures of Lennard-Jones Clusters Containing up to 110 Atoms</em>, <a class="reference external" href="https://doi.org/10.1021/jp970984n">J. Phys. Chem. A 1997, 101, 28, 5111–5116</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="dimer-henkelman" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>G. Henkelman and H. Jónsson, <em>A dimer method for finding saddle points on high dimensional potential surfaces using only first derivatives</em>, <a class="reference external" href="http://dx.doi.org/10.1063/1.480097">J. Chem. Phys. 111, 7010-7022 (1999)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="dimer-heyden" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>A. Heyden, A.T. Bell, and F.J. Keil <em>Efficient methods for finding transition states in chemical reactions: Comparison of improved dimer method and partitioned rational function optimization method</em>, <a class="reference external" href="http://dx.doi.org/10.1063/1.2104507">J. Chem. Phys. 123, 224101 (2005)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="dimer-kastner" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[5]</a></td><td>J. Kästner and P. Sherwood <em>Superlinearly converging dimer method for transition state search</em>, <a class="reference external" href="http://dx.doi.org/10.1063/1.2815812">J. Chem. Phys. 128, 014106 (2008)</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="lanczos" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[6]</a></td><td>R. Malek and N. Mousseau, <em>Dynamics of Lennard-Jones clusters: A characterization of the activation-relaxation technique</em>, <a class="reference external" href="http://dx.doi.org/10.1103/PhysRevE.62.7723">Phys. Rev. E 62, 7723 (2000)</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Gradients_Stress_Elasticity.html" class="btn btn-neutral float-right" title="Gradients, Hessian, Stress tensor, Elasticity" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="GCMC.html" class="btn btn-neutral" title="Grand Canonical Monte Carlo (GCMC)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+#! /bin/sh
+
+# This example demonstrates calculation of NMR spin-spin couplings (J coupling)
+# in case of frozen density embedding (FDE). It performs single point runs for
+# H2O and NH3 with PBE/(ZORA/jcpl basis) (all-electron) and uses these fragments
+# in:
+# - an FDE embedding calculation calculation in which water in presence of a
+#   frozen ammonia is computed (first the electron density / KS orbitals with 
+#   ADF then the NMR J couplings with CPL (scalar code branch))
+# - a corresponding FDE freeze-thaw calculation followed by calculation of NMR J
+#   couplings with CPL scalar, then spin-orbit code branch
+
+# First NH3 with PBE and an all electron TZP basis set. No cpl calculation for
+# NH3, thus regular basis is OK. This is not shown. Next H2O with PBE and an all
+# electron ZORA/jcpl basis set:
+
+# NH3 PBE/TZP (no cpl calculation for NH3, thus regular basis is OK)
+
+AMS_JOBNAME=NH3 $AMSBIN/ams <<eor
+System
+  atoms
+     N       -1.39559       -0.02156        0.00004
+     H       -1.62981        0.96110       -0.10622
+     H       -1.86277       -0.51254       -0.75597
+     H       -1.83355       -0.33077        0.86231
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title NH3 PBE/TZP single point
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    core None
+    type TZP
+  end
+  noprint BAS FUNCTIONS
+  numericalquality Good
+  symmetry NOSYM
+  xc
+    gga PBE
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv NH3.results/adf.rkf t21.ammonia
+
+
+# H2O PBE/(ZORA/jcpl)
+
+
+AMS_JOBNAME=H2O $AMSBIN/ams <<eor
+System
+  atoms
+     O        1.56850        0.10589        0.00001
+     H        0.60674       -0.03396       -0.00063
+     H        1.94052       -0.78000        0.00022
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  basis
+    core None
+    type ZORA/jcpl
+  end
+  noprint BAS FUNCTIONS
+  numericalquality Good
+  symmetry NOSYM
+  title H2O PBE/(ZORA/jcpl) single point
+  xc
+    gga PBE
+  end
+  Relativity Level=None
+EndEngine
+
+eor
+mv H2O.results/adf.rkf t21.water
+
+
+# NH3-H2O: FDE calculation of H2O in presence of frozen NH3
+
+
+AMS_JOBNAME=FDE $AMSBIN/ams <<eor
+System
+  atoms
+     O        1.56850        0.10589        0.00001    adf.f=frag1
+     H        0.60674       -0.03396       -0.00063    adf.f=frag1
+     H        1.94052       -0.78000        0.00022    adf.f=frag1
+     N       -1.39559       -0.02156        0.00004    adf.f=frag2
+     H       -1.62981        0.96110       -0.10622    adf.f=frag2
+     H       -1.86277       -0.51254       -0.75597    adf.f=frag2
+     H       -1.83355       -0.33077        0.86231    adf.f=frag2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  fde
+    pw91k
+  end
+  fragments
+     frag1  t21.water
+     frag2  t21.ammonia type=FDE
+  end
+  noprint BAS FUNCTIONS
+  numericalquality Good
+  save TAPE10
+  symmetry NOSYM
+  title NH3-H2O PBE/PW91k/(ZORA/jcpl) FDE single point calculation (no freeze-thaw)
+  xc
+    gga PBE
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+
+# NH3-H2O CPL calculation J(O-H) in water H-bond donor
+
+
+"$AMSBIN/cpl" <<eor
+ tape10file FDE.results/TAPE10
+ adffile FDE.results/adf.rkf
+ GGA
+ NMRCoupling
+  fc
+  dso
+  pso 
+  AtomPert 1
+  AtomResp 2
+  scf iterations=15 converge=1.0e-05
+ End
+eor
+rm TAPE21 TAPE10 logfile
+
+
+# NH3-H2O FDE calculation (1 freeze-thaw cycle)
+
+
+AMS_JOBNAME=FDE1 $AMSBIN/ams <<eor
+System
+  atoms
+     O        1.56850        0.10589        0.00001    adf.f=frag1
+     H        0.60674       -0.03396       -0.00063    adf.f=frag1
+     H        1.94052       -0.78000        0.00022    adf.f=frag1
+     N       -1.39559       -0.02156        0.00004    adf.f=frag2
+     H       -1.62981        0.96110       -0.10622    adf.f=frag2
+     H       -1.86277       -0.51254       -0.75597    adf.f=frag2
+     H       -1.83355       -0.33077        0.86231    adf.f=frag2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  exactdensity
+  fde
+    pw91k
+    relaxcycles 1
+  end
+  fragments
+     frag1  t21.water
+     frag2  t21.ammonia type=FDE  &
+     fdeoptions RELAX
+     SubEnd
+  end
+  noprint BAS FUNCTIONS
+  numericalquality Good
+  save TAPE10
+  symmetry NOSYM
+  title NH3-H2O PBE/PW91k/(ZORA/jcpl) FDE single point calculation (1 freeze-thaw cycle)
+  xc
+    gga PBE
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+
+# NH3-H2O CPL calculation J(O-H) in water H-bond donor
+# tests scalar code branch (no sd term)
+
+
+"$AMSBIN/cpl" <<eor
+ tape10file FDE1.results/TAPE10
+ adffile FDE1.results/adf.rkf
+ GGA
+ NMRCoupling
+  fc
+  dso
+  pso 
+  AtomPert 1
+  AtomResp 2
+  scf iterations=15 converge=1.0e-05
+ End
+eor
+rm logfile
+
+
+# NH3-H2O CPL calculation J(O-H) in water H-bond donor
+# tests spin-orbit code branch (sd term)
+
+
+"$AMSBIN/cpl" <<eor
+ tape10file FDE1.results/TAPE10
+ adffile FDE1.results/adf.rkf
+ GGA
+ NMRCoupling
+  fc
+  sd
+  dso
+  pso 
+  AtomPert 1
+  AtomResp 2
+  scf iterations=15 converge=1.0e-05
+ End
+eor
+rm t21.H t21.N t21.O t21.water t21.ammonia

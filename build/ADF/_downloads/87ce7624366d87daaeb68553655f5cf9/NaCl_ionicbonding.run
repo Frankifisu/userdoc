@@ -1,0 +1,139 @@
+#! /bin/sh
+
+
+# This example illustrates advanced usage of the bond energy decomposition
+# scheme used in ADF.
+
+# This example shows the energy decomposition analysis of NaCl with
+# ionic fragments: Na+ and Cl-
+# See also the example with neutral fragments: Na and Cl, both open shell atoms
+#
+# If the key REMOVEALLFRAGORBITALS is used one can approximately
+# see what the electrostatic effect is on the fragment orbitals if one places
+# the two ions together.
+#
+# Another way to see what the electrostatic effect is on the fragment orbitals is
+# to use the key 'PRINT FMATSFO' in the full molecule calculation, where one can
+# look at the expectation value of the Fock matrix of a fragment orbital in the
+# presence of the other fragment.
+
+
+AMS_JOBNAME=Cl_min $AMSBIN/ams <<eor
+System
+  atoms
+     Cl  0.0 0.0 0.0
+  end
+  charge -1
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=Na_plus $AMSBIN/ams <<eor
+System
+  atoms
+     Na 0.0 0.0 0.0
+  end
+  charge 1
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type TZ2P
+    CreateOutput Yes
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=NaCl_es $AMSBIN/ams <<eor
+System
+  atoms
+     Na  0.0 0.0 0.0   adf.f=Na
+     Cl  0.0 0.0 2.361 adf.f=Cl
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    orbpop 20  20
+    end
+    sfo eig ovl
+  end
+  fragments
+     Na  Na_plus.results/adf.rkf
+     Cl  Cl_min.results/adf.rkf
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  removeallfragvirtuals
+  title ionic bonding
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor
+
+
+AMS_JOBNAME=NaCl $AMSBIN/ams <<eor
+System
+  atoms
+     Na 0.0 0.0 0.0 adf.f=Na
+     Cl  0.0 0.0 2.361 adf.f=Cl
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    orbpop 20  20
+    end
+    sfo eig ovl
+  end
+  fragments
+     Na  Na_plus.results/adf.rkf
+     Cl  Cl_min.results/adf.rkf
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  title ionic bonding
+  xc
+    gga BECKE PERDEW
+  end
+EndEngine
+eor

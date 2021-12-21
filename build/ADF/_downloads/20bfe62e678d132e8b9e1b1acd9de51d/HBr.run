@@ -1,0 +1,142 @@
+#! /bin/sh
+
+
+# Computation of the NMR chemical shifts for HBr.
+
+
+# == Non-relativistic ==
+
+
+AMS_JOBNAME=NR $AMSBIN/ams <<eor
+System
+  atoms
+     H   .0000  .0000  .0000
+     Br  .0000  .0000 1.4140
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis CreateOutput=Yes
+  save TAPE10
+  title HBr non-relativistic
+  xc
+    gga Becke Perdew
+  end
+  zlmfit
+    quality good
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+# The TAPE21 result file and TAPE10 of ADF must be present under those names for
+# the NMR calculation
+# The NMR program uses mostly only one input (block) key NMR. The subkeys
+# specify what output is produced (OUT) and for which Nuclei the NMR data are
+# computed and printed (NUC). See the ADF manual.
+
+$AMSBIN/nmr <<eor
+tape10file NR.results/TAPE10
+adffile NR.results/adf.rkf
+NMR
+  Out  TENS
+  Nuc  1  2
+End
+eor
+
+rm logfile TAPE15
+
+
+# == Scalar relativistic ZORA (default) ==
+
+
+AMS_JOBNAME=SR $AMSBIN/ams <<eor
+System
+  atoms
+     H   .0000  .0000  .0000
+     Br  .0000  .0000 1.4140
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis CreateOutput=Yes
+
+  save TAPE10
+  title HBr scalar relativistic ZORA
+  xc
+    gga Becke Perdew
+  end
+  zlmfit
+    quality good
+  end
+EndEngine
+eor
+
+$AMSBIN/nmr <<eor
+tape10file SR.results/TAPE10
+adffile SR.results/adf.rkf
+NMR
+  Out  TENS
+  Nuc  1  2
+End
+eor
+
+rm logfile TAPE15
+
+
+# == Relativistic spin-orbit ZORA ==
+
+
+# Using Spin-Orbit implies that NOSYM symmetry must be used in the ADF
+# calculation: the NMR program cannot handle symmetry calculations in
+# combination with spin-orbit terms and will stop with an error message if you
+# try to do so.
+
+
+AMS_JOBNAME=SO $AMSBIN/ams <<eor
+System
+  atoms
+     H   .0000  .0000  .0000
+     Br  .0000  .0000 1.4140
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis CreateOutput=Yes
+  relativity
+    level spin-orbit
+    formalism ZORA
+  end
+  save TAPE10
+  symmetry NoSYM
+  title HBr relativistic spinorbit ZORA
+  xc
+    gga Becke Perdew
+  end
+  zlmfit
+    quality good
+  end
+EndEngine
+eor
+
+
+$AMSBIN/nmr <<eor
+ tape10file SO.results/TAPE10
+ adffile SO.results/adf.rkf
+ NMR
+   U1K BEST
+   OUT TENS
+   NUC  1 2
+ End
+eor
+
+rm logfile TAPE15
+

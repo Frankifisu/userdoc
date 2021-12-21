@@ -1,0 +1,327 @@
+#!/bin/sh
+
+# This example demonstrates how a freeze-and-thaw FDE calculation can be
+# performed. As test system, a He-CO2 van der Waals complex is used. It will
+# further be shown how different exchange-correlation potential can be used for
+# different subsystems, and how different basis set expansions can be employed.
+# For details, see C.R. Jacob, T.A. Wesolowski, L. Visscher, J. Chem. Phys. 123
+# (2005), 174104. It should be stressed that the basis set and integration grid
+# used in this example are too small to obtain good results.
+
+# Summary:
+# - PW91 everywhere
+# - SAOP for He; PW91 for CO2
+# - FDE(s) calculation with PW91 everywhere
+
+# Important, this kind of FDE geometry optimization only works with the non-
+# default STO pair fitting method. This means that one has to include the key
+# STOFIT in the input for ADF. If one does not use the BASIS key, like in this
+# example, one should also include the key STOFIT in all fragment calculations
+# (also in the create runs).
+
+
+# Create atom
+
+
+AMS_JOBNAME=C $AMSBIN/ams <<eor
+System
+  Atoms
+    C 0.0 0.0 0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create C   $AMSRESOURCES/ADF/TZ2P/C
+  stofit
+  Relativity Level=None
+EndEngine
+eor
+mv C.results/adf.rkf t21.C
+
+AMS_JOBNAME=O $AMSBIN/ams <<eor
+System
+  Atoms
+    O 0.0 0.0 0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create O   $AMSRESOURCES/ADF/TZ2P/O
+  stofit
+  Relativity Level=None
+EndEngine
+eor
+mv O.results/adf.rkf t21.O
+
+AMS_JOBNAME=He $AMSBIN/ams <<eor
+System
+  Atoms
+    He 0.0 0.0 0.0
+  End
+End
+Task SinglePoint
+Engine ADF
+  create He    $AMSRESOURCES/ADF/TZ2P/He
+  stofit
+  Relativity Level=None
+EndEngine
+eor
+mv He.results/adf.rkf t21.He
+
+
+# == PW91 everywhere ==
+
+# In the first part, the PW91 functional will be used for both the He and the
+# CO2 subsystems. In this part, the FDE(m) basis set expansion is used, i.e.,
+# basis functions of the frozen subsystem are not included in the calculation of
+# the nonfrozen subsystem.
+
+# First, the CO2 molecule is prepared. In this calculation, the C2v symmetry of
+# the final complex is used, and the NOSYMFIT option has to be included because
+# this molecule will be rotated as a frozen fragment.
+
+
+############################
+# Preparation of frozen CO2
+############################
+
+AMS_JOBNAME=CO2 $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     C          0.000000  0.000000  0.000000
+     O         -2.192000  0.000000  0.000000
+     O          2.192000  0.000000  0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fragments
+     C  t21.C
+     O  t21.O
+  end
+  noprint BAS FUNCTIONS
+  nosymfit
+  numericalquality Good
+  stofit
+  symmetry C(2V)
+  title TEST 1 -- Preparation of frozen CO2
+  xc
+    gga pw91
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv CO2.results/adf.rkf t21.co2.0 
+
+
+# Afterwards, the FDE calculation is performed. In this calculation, the He atom
+# is the nonfrozen system, and the previously prepared CO2 molecule is used as
+# frozen fragment. For this frozen fragment the RELAX option is specified, so
+# that the density of this fragment is updated in freeze-and-thaw iteration (a
+# maximum number of three iteration is specified).
+
+########################
+# Embedding calculation
+########################
+
+
+AMS_JOBNAME=FDE $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     He   0.000000  0.000000  6.019000 adf.f=He
+     C    0.000000  0.000000  0.000000 adf.f=co2
+     O   -2.192000  0.000000  0.000000 adf.f=co2
+     O    2.192000  0.000000  0.000000 adf.f=co2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    fullgrid
+    pw91k
+    relaxcycles 3
+  end
+  fragments
+     He   t21.He
+     co2  t21.co2.0  type=fde   &
+     fdeoptions RELAX
+     SubEnd
+  end
+  noprint BAS FUNCTIONS
+  nosymfit
+  numericalquality Good
+  stofit
+  title TEST 1 -- Embedding calulation: He with frozen CO2 density -- freeze-and-thaw
+  xc
+    gga pw91
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+# == SAOP for He; PW91 for CO2 ==
+
+# In this second part, the above example is modified such that PW91 is employed
+# for the CO2 subsystem, while the SAOP potential is used for He. This can be
+# achieved by choosing SAOP in the XC key (this sets the functional that will be
+# used for the nonfrozen subsystem). Additionally, for the frozen fragment the
+# XC option is used to chose the PW91 functional for relaxing this fragment.
+# Furthermore, the PW91 functional is chosen for the nonadditive exchange-
+# correlation functional that is used in the embedding potential with the
+# GGAPOTXFD and GGAPOTCFD options in the FDE key.
+
+
+########################
+# Embedding calculation
+########################
+
+AMS_JOBNAME=FDE1 $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     He   0.000000  0.000000  6.019000 adf.f=He
+     C    0.000000  0.000000  0.000000 adf.f=co2
+     O   -2.192000  0.000000  0.000000 adf.f=co2
+     O    2.192000  0.000000  0.000000 adf.f=co2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    fullgrid
+    pw91k
+    relaxcycles 3
+    xcnadd PW91
+  end
+  fragments
+     He   t21.He
+     co2  t21.co2.0  type=fde   &
+     fdeoptions RELAX
+     XC         GGA PW91
+     SubEnd
+  end
+  noprint BAS FUNCTIONS
+  nosymfit
+  numericalquality Good
+  stofit
+  title TEST 2 -- Embedding calulation: He with frozen CO2 density -- freeze-and-thaw
+  xc
+    model SAOP
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+rm t21.co2.0
+
+
+# == FDE(s) calculation with PW91 everywhere ==
+
+# In this third part, the PW91 functional is applied for both subsystems again,
+# but in contrast to part 1, now the FDE(s) basis set expansion is used, i.e.,
+# the basis functions of the frozen subsystem are included in the calculation of
+# the nonfrozen subsystem. This can be achieved by employing the USEBASIS
+# option. This option can be combined with the RELAX option.
+
+
+############################
+# Preparation of frozen CO2
+############################
+
+
+AMS_JOBNAME=CO2_PW91 $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     C          0.000000  0.000000  0.000000
+     O         -2.192000  0.000000  0.000000
+     O          2.192000  0.000000  0.000000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fragments
+     C  t21.C
+     O  t21.O
+  end
+  noprint BAS FUNCTIONS
+  nosymfit
+  numericalquality Good
+  stofit
+  symmetry C(2V)
+  title TEST 3 -- Preparation of frozen CO2
+  xc
+    gga pw91
+  end
+  Relativity Level=None
+EndEngine
+eor
+
+mv CO2_PW91.results/adf.rkf t21.co2.0 
+
+########################
+# Embedding calculation
+########################
+
+AMS_JOBNAME=FDE_PW91 $AMSBIN/ams <<eor
+System
+  atoms [Bohr]
+     He   0.000000  0.000000  6.019000 adf.f=He
+     C    0.000000  0.000000  0.000000 adf.f=co2
+     O   -2.192000  0.000000  0.000000 adf.f=co2
+     O    2.192000  0.000000  0.000000 adf.f=co2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  eprint
+    scf NOPOP
+    sfo NOEIG NOOVL NOORBPOP
+  end
+  fde
+    fullgrid
+    pw91k
+    relaxcycles 3
+  end
+  fragments
+     He   t21.He
+     co2  t21.co2.0  type=fde   &
+     fdeoptions RELAX USEBASIS
+     SubEnd
+  end
+  noprint BAS FUNCTIONS
+  nosymfit
+  numericalquality Good
+  stofit
+  title TEST 3 -- Embedding calulation: He with frozen CO2 density -- freeze-and-thaw
+  xc
+    gga pw91
+  end
+  Relativity Level=None
+EndEngine
+eor

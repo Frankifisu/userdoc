@@ -1,0 +1,86 @@
+#! /bin/sh
+
+# both the following runs follow the same path through the BZ
+
+# first: automatic plot
+
+AMS_JOBNAME=Li_auto $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+        Li 0.0 0.0 0.0
+    End
+    Lattice
+        -1.745 1.745 1.745
+        1.745 -1.745 1.745
+        1.745 1.745 -1.745
+    End
+End
+
+Engine DFTB
+   ResourcesDir Demo
+   Model DFTB0
+   KSpace
+     Type Symmetric
+     Symmetric KInteg=5
+   End
+   Periodic
+       BandStructure enabled=yes automatic=yes fatbands=no
+   End
+EndEngine
+
+eor
+
+# second: user defined path
+
+AMS_JOBNAME=Li_user $AMSBIN/ams << eor
+
+Task SinglePoint
+
+System
+    Atoms
+        Li 0.0 0.0 0.0
+    End
+    Lattice
+        -1.745 1.745 1.745
+        1.745 -1.745 1.745
+        1.745 1.745 -1.745
+    End
+End
+
+Engine DFTB
+   ResourcesDir Demo
+   Model DFTB0
+   KSpace
+     Type Symmetric
+     Symmetric KInteg=5
+   End
+   Periodic
+       BandStructure enabled=yes automatic=no fatbands=no
+       BZPath
+           Path
+               0.0  0.0  0.0
+               0.5 -0.5  0.5
+               0.0  0.0  0.5
+               0.0  0.0  0.0
+               0.25 0.25 0.25
+               0.5 -0.5  0.5
+           End
+           Path
+               0.25 0.25 0.25
+               0.0  0.0  0.5
+           End
+       End
+   End
+EndEngine
+
+eor
+
+# The band structure is best visualized using the BandStructure GUI module.
+
+echo 'Extract the band_curves section from the rkf files:'
+$AMSBIN/dmpkf Li_auto.results/dftb.rkf 'band_curves'
+$AMSBIN/dmpkf Li_user.results/dftb.rkf 'band_curves'
+echo "Done"

@@ -1,0 +1,198 @@
+#!/bin/bash
+
+export NSCM=1
+
+# Here we show the role played by the  (ForceField.Type) atom attribute
+
+# on purpose we specify a strange type for the carbon atoms "C_2" (nonsensical for any of the regions)
+
+# we also show that capitalization does not matter for the keys ForceField.Charge and Type.
+# For the values, such as C_R the case matters
+
+
+# In the first run we specify in the input ForceField.Type
+# The result is that for all regions this will be used, and the type for C is always C-2
+# -------------------
+# region mol.  C-type
+# -------------------
+#  MM    CH3   C_2
+#  *     C2H6  C_2
+#  QM    CH4   C_2 
+#--------------------
+
+
+export AMS_JOBNAME=type=inp.cap=none
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+Properties Gradients=yes
+
+System
+    Atoms
+        C -1.559601 -1.234340  0.000641 region=QM forcefield.charge=-0.27  forcefield.type=C_2
+        H -1.898371 -0.303860  0.503021 region=QM ForceField.Charge=0.09   ForceField.Type=H_
+        H -2.034545 -2.108050  0.494609 region=QM ForceField.Charge=0.09   ForceField.Type=H_
+        H -1.869847 -1.205955 -1.065139 region=QM ForceField.Charge=0.09   ForceField.Type=H_
+        C -0.047661 -1.348892  0.094039 region=MM ForceField.Charge=-0.27  ForceField.Type=C_2
+        H  0.427282 -0.475182 -0.399929 region=MM ForceField.Charge=0.09   ForceField.Type=H_
+        H  0.291107 -2.279373 -0.408341 region=MM ForceField.Charge=0.09   ForceField.Type=H_
+        H  0.262583 -1.377277  1.159819 region=MM ForceField.Charge=0.09   ForceField.Type=H_
+    End
+    GuessBonds True
+End
+
+
+Engine Hybrid
+    QMMM qmRegion=QM qmEngineID=DFTB mmEngineID=ForceField
+    
+    Engine DFTB
+    EndEngine
+
+    Engine ForceField
+    EndEngine
+
+EndEngine
+
+eor
+
+#  Not specifying the types, they will be guessed independently for all regions
+
+# -------------------
+# region mol.  C-type
+# -------------------
+#  MM    CH3   C_R
+#  *     C2H6  C_3
+#  QM    CH4   C_3 
+#--------------------
+
+export AMS_JOBNAME=type=none.cap=none
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+Properties Gradients=yes
+
+System
+    Atoms
+        C -1.559601 -1.234340  0.000641 region=QM forcefield.charge=-0.27
+        H -1.898371 -0.303860  0.503021 region=QM ForceField.Charge=0.09 
+        H -2.034545 -2.108050  0.494609 region=QM ForceField.Charge=0.09 
+        H -1.869847 -1.205955 -1.065139 region=QM ForceField.Charge=0.09 
+        C -0.047661 -1.348892  0.094039 region=MM ForceField.Charge=-0.27
+        H  0.427282 -0.475182 -0.399929 region=MM ForceField.Charge=0.09 
+        H  0.291107 -2.279373 -0.408341 region=MM ForceField.Charge=0.09 
+        H  0.262583 -1.377277  1.159819 region=MM ForceField.Charge=0.09 
+    End
+    GuessBonds True
+End
+
+
+Engine Hybrid
+    QMMM qmRegion=QM qmEngineID=DFTB mmEngineID=ForceField
+    
+    Engine DFTB
+    EndEngine
+
+    Engine ForceField
+    EndEngine
+
+EndEngine
+
+eor
+
+
+# The last two runs are mostly a technical test
+# We change the capping setup, but that influences only the capping atom
+
+export AMS_JOBNAME=type=inp.cap=inp
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+Properties Gradients=yes
+
+System
+    Atoms
+        C -1.559601 -1.234340  0.000641 region=QM forcefield.charge=-0.27  forcefield.type=C_2
+        H -1.898371 -0.303860  0.503021 region=QM ForceField.Charge=0.09   ForceField.Type=H_
+        H -2.034545 -2.108050  0.494609 region=QM ForceField.Charge=0.09   ForceField.Type=H_
+        H -1.869847 -1.205955 -1.065139 region=QM ForceField.Charge=0.09   ForceField.Type=H_
+        C -0.047661 -1.348892  0.094039 region=MM ForceField.Charge=-0.27  ForceField.Type=C_2
+        H  0.427282 -0.475182 -0.399929 region=MM ForceField.Charge=0.09   ForceField.Type=H_
+        H  0.291107 -2.279373 -0.408341 region=MM ForceField.Charge=0.09   ForceField.Type=H_
+        H  0.262583 -1.377277  1.159819 region=MM ForceField.Charge=0.09   ForceField.Type=H_
+    End
+    GuessBonds True
+End
+
+
+Engine Hybrid
+    QMMM qmRegion=QM qmEngineID=DFTB mmEngineID=ForceField
+    
+    Engine DFTB
+    EndEngine
+
+    Engine ForceField
+    EndEngine
+
+    Capping
+        CappingElement Li
+        AtomicInfoForCappingAtom ForceField.Type=Li
+    End
+
+EndEngine
+
+eor
+
+export AMS_JOBNAME=type=none.cap=inp
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams <<eor
+
+Task GeometryOptimization
+
+Properties Gradients=yes
+
+System
+    Atoms
+        C -1.559601 -1.234340  0.000641 region=QM forcefield.charge=-0.27 
+        H -1.898371 -0.303860  0.503021 region=QM ForceField.Charge=0.09  
+        H -2.034545 -2.108050  0.494609 region=QM ForceField.Charge=0.09  
+        H -1.869847 -1.205955 -1.065139 region=QM ForceField.Charge=0.09  
+        C -0.047661 -1.348892  0.094039 region=MM ForceField.Charge=-0.27 
+        H  0.427282 -0.475182 -0.399929 region=MM ForceField.Charge=0.09  
+        H  0.291107 -2.279373 -0.408341 region=MM ForceField.Charge=0.09  
+        H  0.262583 -1.377277  1.159819 region=MM ForceField.Charge=0.09  
+    End
+    GuessBonds True
+End
+
+
+Engine Hybrid
+    QMMM qmRegion=QM qmEngineID=DFTB mmEngineID=ForceField
+    
+    Engine DFTB
+    EndEngine
+
+    Engine ForceField
+    EndEngine
+
+    Capping
+        CappingElement Li
+        AtomicInfoForCappingAtom ForceField.Type=Li
+    End
+
+EndEngine
+
+eor

@@ -1,0 +1,32 @@
+#/bin/sh
+
+for mol in $AMSRESOURCES/Molecules/Misc/baker*.xyz
+do
+job=$(basename $mol)
+
+AMS_JOBNAME=$job $AMSBIN/ams << eor 
+
+task GeometryOptimization
+
+GeometryOptimization
+  Method SCMGO
+  Convergence
+    Gradients 1.0E-4
+    Step 1.0e-3
+  end
+end
+
+system
+  GeometryFile $mol
+end
+
+engine dftb
+  Model SCC-DFTB
+  resourcesdir QUASINANO2015
+endengine
+eor
+
+echo 'Number of GO Steps '$mol "   " $($AMSBIN/amsreport $job.results/ams.rkf -r "History%nEntries")
+echo 'Final Energy '$mol "   " $($AMSBIN/amsreport $job.results/dftb.rkf -r "AMSResults%Energy")
+done
+

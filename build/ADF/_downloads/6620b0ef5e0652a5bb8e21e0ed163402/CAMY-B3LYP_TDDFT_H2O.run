@@ -1,0 +1,37 @@
+#! /bin/sh
+
+
+# Example for the range separated functional CAMY-B3LYP for the calculation of
+# excitation energies of water. Note that CAMY-B3LYP is not the same as CAM-
+# B3LYP.
+
+
+$AMSBIN/ams <<eor
+   Task SinglePoint
+   System
+      ATOMS
+         O     0.000000    0.000000    0.000000
+         H     0.000000    0.500000   -0.6         
+         H     0.000000   -0.500000   -0.6         
+      END
+   END
+   Engine ADF 
+      TITLE  H2O excitations with CAMY-B3LYP functional 
+      NOPRINT BAS FIT FUNCTIONS SFO
+      XC
+         HYBRID CAMY-B3LYP
+         xcfun
+         RANGESEP GAMMA=0.34
+      END
+      BeckeGrid
+         Quality good
+      End
+      EXCITATIONS
+         LOWEST 10
+         ONLYSING
+      END
+      basis
+         Type DZP
+      END
+   EndEngine
+eor

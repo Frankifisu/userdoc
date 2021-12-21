@@ -1,0 +1,707 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CRSprep: generate (multiple) COSMO-RS jobs &mdash; COSMO-RS 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="COSMO-RS 2021.1 documentation" href="index.html"/>
+        <link rel="up" title="Scripting with COSMO-RS" href="Scripting_with_COSMO-RS.html"/>
+        <link rel="next" title="AMSreport: generate report" href="AMSreport.html"/>
+        <link rel="prev" title="AMSprep: construct an ADF COSMO results file" href="AMSprep.html"/> 
+
+  
+  <script src="_static/js/jquery.min.js"></script>
+  <script src="_static/js/bootstrap.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
+  <script src="_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="keywords.html">Keywords</a>
+           
+           
+           <a href="genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search COSMO-RS" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-COSMO-RS" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#release-2021-1">Release 2021.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General.html#release-2020-1">Release 2020.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC.html">COSMO-RS, COSMO-SAC, UNIFAC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_theory.html">COSMO-RS theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_theory.html#cosmo-rs-combinatorial-term">COSMO-RS combinatorial term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_theory.html#fast-approximation-for-cosmo-rs-calculations">Fast approximation for COSMO-RS calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_theory.html#temperature-dependent-hydrogen-bond-interaction">Temperature dependent hydrogen bond interaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-SAC_2013-ADF.html">COSMO-SAC 2013-ADF, 2016-ADF, DHB-ADF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_theory.html">UNIFAC theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_theory.html#residual-term">Residual term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_theory.html#combinatorial-term">Combinatorial term</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Calculation_of_properties.html">Calculation of properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="COSMO_result_files.html">COSMO result files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ADF_COSMO_calculation.html">ADF COSMO calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#adf-cosmo-settings">ADF COSMO settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#atomic-cation-or-anion">Atomic cation or anion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#accuracy">Accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ADF_COSMO_calculation.html#cavity-construction">Cavity construction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_Databases.html">ADFCRS-2018 Database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_Databases.html#adfcrs-2010">ADFCRS-2010</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_Databases.html#adfcrs-il-2014">ADFCRS-IL-2014</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_Databases.html#adfcrs-polymers-2019-database">ADFCRS-POLYMERS-2019 Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html">Fast Sigma: a QSPR method to estimate COSMO sigma-profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#input-options">Input options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#gui-input">GUI Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Fast_Sigma_QSPR_COSMO_sigma-profiles.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MOPAC_COSMO_calculation.html">MOPAC COSMO calculation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="The_COSMO-RS_program.html">The COSMO-RS program</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Running_the_COSMO-RS_program.html">Running the COSMO-RS program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html">COSMO-RS and COSMO-SAC parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-rs-general-parameters">COSMO-RS general parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-rs-element-specific-parameters">COSMO-RS element specific parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-sac-general-parameters">COSMO-SAC general parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#cosmo-sac-element-specific-parameters">COSMO-SAC element specific parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="COSMO-RS_and_COSMO-SAC_parameters.html#technical-and-accuracy-parameters">Technical and accuracy parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Compounds.html">Compounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Temperature.html">Temperature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pressure.html">Pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Molar_fractions_and_mass_fraction.html">Molar fractions and mass fraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties.html">Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#vapor-pressure">Vapor pressure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#boiling-point">Boiling point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#solvent-flash-point">Solvent flash point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#partition-coefficients-logp">Partition coefficients (LogP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#activity-coefficients-solvent-and-solute">Activity coefficients solvent and solute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#solubility">Solubility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#binary-mixture-vle-lle">Binary mixture (VLE/LLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#ternary-mixture-vle-lle">Ternary mixture (VLE/LLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Properties.html#solvents-s1-s2-composition-line">Solvents s1 - s2 Composition Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Analysis.html">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Analysis.html#sigma-profile">Sigma profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Analysis.html#sigma-potential">Sigma potential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Polymers_With_COSMO-RS.html">Polymers with COSMO-RS(-SAC)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#additional-properties-units-for-polymer-systems">Additional properties/units for polymer systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#average-molecular-weight">Average molecular weight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#mole-fractions-of-the-monomers-and-polymers">Mole fractions of the monomers and polymers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Polymers_With_COSMO-RS.html#x-monomer">x(monomer)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Polymers_With_COSMO-RS.html#x-polymer">x(polymer)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#weight-and-volume-fraction-activity-coefficients">Weight- and volume-fraction activity coefficients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Polymers_With_COSMO-RS.html#flory-huggins-parameter">Flory-Huggins parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#modified-combinatorial-term">Modified combinatorial term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#general-application-guidelines-warnings">General application guidelines/warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#downloading-the-adfcrs-polymer-2019-database">Downloading the ADFCRS-POLYMER-2019 database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Polymers_With_COSMO-RS.html#tutorial-on-polymer-calculations">Tutorial on polymer calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="The_UNIFAC_program.html">The UNIFAC program</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_program/Input_formatting.html">Compound Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Input_formatting.html#basic-input">Basic Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Input_formatting.html#physical-property-input">Physical Property Input</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_program/General_options.html">Program Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/General_options.html#list-of-possible-input-flags">List of possible input flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/General_options.html#examples-of-general-program-flags">Examples of general program flags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#t">-t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#temperature">-temperature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#n">-n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UNIFAC_program/General_options.html#preset">-preset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UNIFAC_program/Templates.html">Templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#activitycoef">ACTIVITYCOEF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#logp">LOGP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#puresolubility">PURESOLUBILITY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#solubility">SOLUBILITY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#purevaporpressure">PUREVAPORPRESSURE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#vaporpressure">VAPORPRESSURE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#binmixcoef">BINMIXCOEF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UNIFAC_program/Templates.html#ternarymix">TERNARYMIX</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Property_Prediction.html">Pure compound property prediction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#available-properties">Available properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#running-the-property-prediction-program">Running the Property Prediction program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#index-of-property-keys">Index of property keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#general-warnings">General warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Property_Prediction.html#equations-for-temperature-dependent-properties">Equations for temperature-dependent properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Property_Prediction.html#vpm1-liquid-vapor-pressure"><strong>VPM1</strong>: liquid vapor pressure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Solvent_Optimization.html">Solvent Optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#problem-types">Problem types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#running-the-solvent-optimization-program">Running the Solvent Optimization program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Solvent_Optimization.html#solubility">Solubility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Solvent_Optimization.html#liquid-liquid-extraction">Liquid-liquid extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#guidelines-for-difficult-problems">Guidelines for difficult problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solvent_Optimization.html#differences-from-standard-implementations">Differences from standard implementations</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="Scripting_with_COSMO-RS.html">Scripting with COSMO-RS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html">Python scripting for COSMO-RS with PLAMS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#general-information">General Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#executing-the-code-from-the-command-line">Executing the code from the command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#specifying-a-problem-type">Specifying a problem type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#inputting-compounds">Inputting Compounds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#specifying-mole-fractions-temperatures-and-pressures">Specifying mole fractions, temperatures, and pressures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#running-jobs">Running jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#reading-the-results-of-a-job">Reading the results of a job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#plotting-results">Plotting results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#partition-coefficient">Partition coefficient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PLAMS_COSMO-RS_scripting.html#binary-mixture">Binary mixture</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AMSprep.html">AMSprep: construct an ADF COSMO results file</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CRSprep: generate (multiple) COSMO-RS jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AMSreport.html">AMSreport: generate report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html">KF utilities for COSMO-RS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html#kf-browser">KF browser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html#kf2cosmo-and-cosmo2kf">kf2cosmo and cosmo2kf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="KF_utilities_for_COSMO-RS.html#pkf-cpkf-dmpkf-udmpkf">pkf, cpkf, dmpkf, udmpkf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Scripting_Examples.html">Scripting Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-cosmo-result-files">Example: COSMO result files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-cosmo-rs-parameters-and-analysis">Example: COSMO-RS parameters and analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-cosmo-rs-properties">Example: COSMO-RS properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-the-cosmo-rs-compound-database">Example: The COSMO-RS compound database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-pka-values">Example: pKa values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Scripting_Examples.html#example-polymers">Example: Polymers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced_scripting.html">Advanced scripting examples with PLAMS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Changing_parameters.html">Changing the default parameters or re-parameterizing the COSMO-RS/-SAC methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Changing_parameters.html#python-code-cosmo-rs-parameters">Python code (COSMO-RS parameters)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Changing_parameters.html#python-code-cosmo-sac-parameters">Python code (COSMO-SAC parameters)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Sigma_profiles.html">Calculating and estimating sigma profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Sigma_profiles.html#python-code">Python code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Sigma_moments.html">Sigma Moments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Sigma_moments.html#python-code">Python code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Sigma_moments.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Cocrystal_screening.html">Screening for cocrystals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Cocrystal_screening.html#python-code">Python code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Cocrystal_screening.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Eutectics.html">Eutectic systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Eutectics.html#python-code">Python code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Eutectics.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/BinodalSpinodal.html">Binodal and Spinodal Curves</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/BinodalSpinodal.html#python-code-binary-mixture">Python code (Binary mixture)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/BinodalSpinodal.html#python-code-ternary-mixture">Python code (Ternary mixture)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_scripts/Multispecies_distribution.html">Distribution of species in multispecies calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_scripts/Multispecies_distribution.html#python-code-binary-mixture">Python code (Binary mixture)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Required_citations.html">Required Citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#general-references">General References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#solvent-optimizations">Solvent Optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Required_citations.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keywords.html">Keywords</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">COSMO-RS</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="COSMO-RS.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="index.html">COSMO-RS</a>/</li>
+      
+          <li><a href="Scripting_with_COSMO-RS.html">Scripting with COSMO-RS</a>/</li>
+      
+    <li class="orange-text">CRSprep: generate (multiple) COSMO-RS jobs</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="crsprep"></span><div class="section" id="crsprep-generate-multiple-cosmo-rs-jobs">
+<span id="index-0"></span><h1>CRSprep: generate (multiple) COSMO-RS jobs<a class="headerlink" href="#crsprep-generate-multiple-cosmo-rs-jobs" title="Permalink to this headline">¶</a></h1>
+<p>The module crsprep is intended to facilitate scripting: it makes it easier to construct proper jobs, from within a script.
+This module can be used, for example, to run the same type of COSMO-RS job on various compounds, or to change input settings.
+This module can also be used to put pure compound data on an ADF COSMO result file.</p>
+<p>In $AMSHOME/examples/crs one can find examples that follow the COSMO-RS GUI tutorials, which are also described in the section <a class="reference internal" href="Scripting_Examples.html#examples"><span class="std std-ref">Scripting Examples</span></a>.</p>
+<p>The most convenient way to see the options of crsprep is to run the crsprep command without arguments.
+You will get output very much alike the following description, but probably more up-to-date.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">crsprep</span> <span class="o">-</span><span class="n">h</span>
+
+<span class="n">CRSprepare</span> <span class="p">(</span><span class="n">crsprep</span><span class="p">)</span> <span class="n">saves</span> <span class="n">pure</span> <span class="n">compound</span> <span class="n">data</span> <span class="n">on</span> <span class="n">an</span> <span class="n">ADF</span> <span class="n">COSMO</span> <span class="n">result</span> <span class="n">file</span>
+<span class="ow">or</span> <span class="n">generates</span> <span class="n">a</span> <span class="n">job</span> <span class="n">script</span> <span class="k">for</span> <span class="n">COSMO</span><span class="o">-</span><span class="n">RS</span> <span class="n">calculations</span><span class="p">,</span>
+<span class="k">with</span> <span class="n">user</span> <span class="n">specified</span> <span class="n">changes</span> <span class="n">to</span> <span class="nb">input</span> <span class="n">options</span> <span class="o">/</span> <span class="n">method</span> <span class="o">/</span> <span class="n">system</span><span class="o">.</span>
+<span class="n">Required</span> <span class="ow">is</span> <span class="n">at</span> <span class="n">least</span> <span class="mi">1</span> <span class="n">compound</span> <span class="ow">and</span> <span class="o">-</span><span class="n">savecompound</span> <span class="ow">or</span> <span class="o">-</span><span class="n">t</span> <span class="n">template</span>
+
+<span class="n">Usage</span><span class="p">:</span>
+   <span class="n">crsprep</span> <span class="o">-</span><span class="n">savecompound</span> <span class="o">-</span><span class="n">s</span> <span class="n">compound</span><span class="o">.</span><span class="n">coskf</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">nring</span> <span class="n">nring</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">pvap</span> <span class="n">pvap</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">tvap</span> <span class="n">tvap</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">antoine</span> <span class="s2">&quot;A B C&quot;</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">meltingpoint</span> <span class="n">meltingpoint</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">hfusion</span> <span class="n">hfusion</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">cpfusion</span> <span class="n">cpfusion</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">flashpoint</span> <span class="n">flashpoint</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">density</span> <span class="n">density</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">scalearea</span> <span class="n">scalearea</span><span class="p">]</span>
+   <span class="n">crsprep</span> <span class="o">-</span><span class="n">t</span> <span class="n">template</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">compound</span><span class="o">.</span><span class="p">(</span><span class="n">coskf</span><span class="o">|</span><span class="n">compoundlist</span><span class="p">)]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">compound</span><span class="o">.</span><span class="p">(</span><span class="n">coskf</span><span class="o">|</span><span class="n">compoundlist</span><span class="p">)]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">nring</span> <span class="n">nring</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">pvap</span> <span class="n">pvap</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">tvap</span> <span class="n">tvap</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">antoine</span> <span class="s2">&quot;A B C&quot;</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">meltingpoint</span> <span class="n">meltingpoint</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">hfusion</span> <span class="n">hfusion</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">cpfusion</span> <span class="n">cpfusion</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">flashpoint</span> <span class="n">flashpoint</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">density</span> <span class="n">density</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">scalearea</span> <span class="n">scalearea</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">frac1</span> <span class="n">frac1</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">frac2</span> <span class="n">frac2</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">densitysolvent</span> <span class="n">densitysolvent</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">solphase</span> <span class="n">solphase</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">volumequotient</span> <span class="n">volumequotient</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">preset</span> <span class="n">preset</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">method</span> <span class="n">method</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">temperature</span> <span class="n">temperature</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">pressure</span> <span class="n">pressure</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">iso</span> <span class="n">iso</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">n</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">inputpurevap</span> <span class="n">inputpurevap</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">inputpuredensity</span> <span class="n">inputpuredensity</span><span class="p">]</span>
+          <span class="p">[</span><span class="o">-</span><span class="n">sigmax</span> <span class="n">sigmax</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">massfraction</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">file</span> <span class="n">filename</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">j</span> <span class="n">jobname</span><span class="p">]</span>
+
+<span class="n">SAVE</span> <span class="n">PURE</span> <span class="n">COMPOUND</span> <span class="n">DATA</span>
+<span class="o">-</span><span class="n">savecompound</span>
+    <span class="n">use</span> <span class="n">to</span> <span class="n">save</span> <span class="n">pure</span> <span class="n">compound</span> <span class="n">data</span> <span class="n">on</span> <span class="n">an</span> <span class="n">existing</span> <span class="n">ADF</span> <span class="n">COSMO</span> <span class="n">result</span> <span class="n">file</span>
+
+<span class="n">TEMPLATE</span>
+<span class="o">-</span><span class="n">t</span> <span class="n">template</span>
+    <span class="n">use</span> <span class="k">for</span> <span class="n">COSMO</span><span class="o">-</span><span class="n">RS</span> <span class="nb">property</span> <span class="n">calculation</span>
+    <span class="n">template</span> <span class="n">should</span> <span class="n">be</span> <span class="n">one</span> <span class="n">of</span><span class="p">:</span>
+        <span class="n">VAPORPRESSURE</span><span class="p">,</span> <span class="n">PUREVAPORPRESSURE</span><span class="p">,</span>
+        <span class="n">BOILINGPOINT</span><span class="p">,</span> <span class="n">PUREBOILINGPOINT</span><span class="p">,</span> <span class="n">FLASHPOINT</span><span class="p">,</span>
+        <span class="n">LOGP</span><span class="p">,</span> <span class="n">ACTIVITYCOEF</span><span class="p">,</span> <span class="n">SOLUBILITY</span><span class="p">,</span> <span class="n">PURESOLUBILITY</span><span class="p">,</span>
+        <span class="n">BINMIXCOEF</span><span class="p">,</span> <span class="n">TERNARYMIX</span><span class="p">,</span> <span class="n">COMPOSITIONLINE</span><span class="p">,</span>
+        <span class="n">SIGMAPROFILE</span><span class="p">,</span> <span class="n">PURESIGMAPROFILE</span><span class="p">,</span> <span class="n">SIGMAPOTENTIAl</span><span class="p">,</span> <span class="n">PURESIGMAPOTENTIAL</span>
+
+<span class="n">COMPOUNDS</span>
+    <span class="n">at</span> <span class="n">least</span> <span class="mi">1</span> <span class="n">compound</span> <span class="ow">is</span> <span class="n">required</span>
+<span class="o">-</span><span class="n">s</span> <span class="n">file</span><span class="p">:</span> <span class="n">the</span> <span class="n">special</span> <span class="n">compound</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">be</span> <span class="n">used</span><span class="p">,</span> <span class="n">should</span> <span class="n">be</span> <span class="n">a</span> <span class="o">.</span><span class="n">coskf</span> <span class="n">file</span><span class="p">,</span>
+    <span class="ow">or</span> <span class="n">a</span> <span class="o">.</span><span class="n">compoundlist</span> <span class="n">file</span><span class="o">.</span> <span class="n">The</span> <span class="o">-</span><span class="n">s</span> <span class="n">key</span> <span class="n">has</span> <span class="n">to</span> <span class="n">be</span> <span class="n">repeated</span> <span class="k">for</span> <span class="n">each</span> <span class="n">file</span>
+<span class="o">-</span><span class="n">c</span> <span class="n">file</span><span class="p">:</span> <span class="n">additional</span> <span class="n">compound</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">be</span> <span class="n">used</span><span class="p">,</span> <span class="n">should</span> <span class="n">be</span> <span class="n">a</span> <span class="o">.</span><span class="n">coskf</span> <span class="n">file</span><span class="p">,</span>
+    <span class="ow">or</span> <span class="n">a</span> <span class="o">.</span><span class="n">compoundlist</span> <span class="n">file</span><span class="o">.</span> <span class="n">The</span> <span class="o">-</span><span class="n">c</span> <span class="n">key</span> <span class="n">has</span> <span class="n">to</span> <span class="n">be</span> <span class="n">repeated</span> <span class="k">for</span> <span class="n">each</span> <span class="n">file</span>
+    <span class="n">the</span> <span class="n">order</span> <span class="n">of</span> <span class="n">the</span> <span class="n">compounds</span> <span class="ow">is</span><span class="p">:</span> <span class="n">first</span> <span class="nb">all</span> <span class="n">compound</span> <span class="n">defined</span> <span class="k">with</span> <span class="o">-</span><span class="n">s</span><span class="p">,</span>
+    <span class="n">then</span> <span class="n">those</span> <span class="k">with</span> <span class="o">-</span><span class="n">c</span>
+    <span class="n">LOGP</span><span class="p">,</span> <span class="n">ACTIVITYCOEF</span><span class="p">,</span> <span class="n">SOLUBILITY</span><span class="p">:</span> <span class="n">use</span> <span class="o">-</span><span class="n">s</span> <span class="k">for</span> <span class="n">the</span> <span class="n">solvent</span> <span class="ow">and</span> <span class="o">-</span><span class="n">c</span> <span class="k">for</span> <span class="n">the</span> <span class="n">solutes</span>
+    <span class="n">PURESOLUBILITY</span><span class="p">:</span> <span class="n">use</span> <span class="o">-</span><span class="n">s</span> <span class="k">for</span> <span class="n">the</span> <span class="n">solute</span> <span class="ow">and</span> <span class="o">-</span><span class="n">c</span> <span class="k">for</span> <span class="n">the</span> <span class="n">solvents</span>
+
+<span class="n">PURE</span> <span class="n">COMPOUND</span> <span class="n">DATA</span>
+<span class="o">-</span><span class="n">nring</span><span class="p">:</span> <span class="n">number</span> <span class="n">of</span> <span class="n">ring</span> <span class="n">atoms</span>
+<span class="o">-</span><span class="n">pvap</span><span class="p">:</span> <span class="n">pure</span> <span class="n">compound</span> <span class="n">vapor</span> <span class="n">pressure</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span> <span class="n">at</span> <span class="n">tvap</span>
+<span class="o">-</span><span class="n">tvap</span><span class="p">:</span> <span class="n">at</span> <span class="n">this</span> <span class="n">temperature</span> <span class="p">(</span><span class="n">Kelvin</span><span class="p">)</span> <span class="n">pure</span> <span class="n">compound</span> <span class="n">has</span> <span class="n">pressure</span> <span class="n">pvap</span>
+<span class="o">-</span><span class="n">antoine</span><span class="p">:</span> <span class="n">Antoine</span> <span class="n">coefficients</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="ow">and</span> <span class="n">C</span>
+<span class="o">-</span><span class="n">meltingpoint</span><span class="p">:</span> <span class="n">melting</span> <span class="n">point</span> <span class="p">(</span><span class="n">Kelvin</span><span class="p">)</span>
+<span class="o">-</span><span class="n">hfusion</span><span class="p">:</span> <span class="n">enthalpy</span> <span class="n">of</span> <span class="n">fusion</span> <span class="p">(</span><span class="n">kcal</span><span class="o">/</span><span class="n">mol</span><span class="p">)</span>
+<span class="o">-</span><span class="n">cpfusion</span><span class="p">:</span> <span class="n">heat</span> <span class="n">capacity</span> <span class="n">of</span> <span class="n">fusion</span> <span class="p">(</span><span class="n">kcal</span><span class="o">/</span><span class="p">(</span><span class="n">mol</span> <span class="n">K</span><span class="p">))</span>
+<span class="o">-</span><span class="n">flashpoint</span><span class="p">:</span> <span class="n">flash</span> <span class="n">point</span> <span class="p">(</span><span class="n">Kelvin</span><span class="p">)</span>
+<span class="o">-</span><span class="n">density</span><span class="p">:</span> <span class="n">liquid</span> <span class="n">density</span> <span class="p">(</span><span class="n">kg</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
+<span class="o">-</span><span class="n">scalearea</span><span class="p">:</span> <span class="n">COSMO</span> <span class="n">surface</span> <span class="n">area</span> <span class="n">scale</span> <span class="n">factor</span>
+    <span class="n">these</span> <span class="n">keys</span> <span class="n">can</span> <span class="n">be</span> <span class="n">repeated</span> <span class="k">for</span> <span class="n">each</span> <span class="n">compound</span><span class="p">,</span>
+    <span class="n">first</span> <span class="n">appearance</span> <span class="n">of</span> <span class="n">the</span> <span class="n">key</span> <span class="n">will</span> <span class="n">be</span> <span class="k">for</span> <span class="n">compound</span> <span class="mi">1</span><span class="p">,</span> <span class="n">second</span> <span class="k">for</span> <span class="n">compound</span> <span class="mi">2</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span>
+    <span class="n">note</span> <span class="n">the</span> <span class="n">order</span> <span class="n">of</span> <span class="n">the</span> <span class="n">compounds</span>
+
+<span class="n">SOLVENT</span>
+<span class="o">-</span><span class="n">frac1</span><span class="p">:</span> <span class="n">define</span> <span class="n">solvent</span>
+<span class="o">-</span><span class="n">frac2</span><span class="p">:</span> <span class="n">define</span> <span class="n">solvent</span> <span class="mi">2</span> <span class="p">(</span><span class="n">LogP</span><span class="p">,</span> <span class="n">composition</span> <span class="n">line</span><span class="p">)</span>
+    <span class="n">the</span> <span class="o">-</span><span class="n">frac1</span> <span class="ow">and</span> <span class="o">-</span><span class="n">frac2</span> <span class="n">key</span> <span class="n">have</span> <span class="n">to</span> <span class="n">be</span> <span class="n">repeated</span> <span class="k">for</span>
+    <span class="n">each</span> <span class="n">compound</span> <span class="n">that</span> <span class="n">should</span> <span class="n">have</span> <span class="n">a</span> <span class="n">non</span><span class="o">-</span><span class="n">default</span> <span class="n">value</span>
+    <span class="n">first</span> <span class="n">appearance</span> <span class="n">of</span> <span class="n">the</span> <span class="n">key</span> <span class="n">will</span> <span class="n">be</span> <span class="k">for</span> <span class="n">compound</span> <span class="mi">1</span><span class="p">,</span> <span class="n">second</span> <span class="k">for</span> <span class="n">compound</span> <span class="mi">2</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span>
+    <span class="n">note</span> <span class="n">the</span> <span class="n">order</span> <span class="n">of</span> <span class="n">the</span> <span class="n">compounds</span>
+<span class="o">-</span><span class="n">densitysolvent</span><span class="p">:</span> <span class="n">density</span> <span class="n">solvent</span> <span class="p">(</span><span class="n">kg</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
+<span class="o">-</span><span class="n">solphase</span><span class="p">:</span> <span class="n">pure</span> <span class="n">compound</span> <span class="n">phase</span> <span class="n">solute</span> <span class="ow">in</span> <span class="n">solubility</span> <span class="n">calculation</span>
+<span class="o">-</span><span class="n">volumequotient</span><span class="p">:</span> <span class="n">molar</span> <span class="n">volume</span> <span class="n">phase</span> <span class="mi">1</span><span class="o">/</span><span class="n">molar</span> <span class="n">volume</span> <span class="n">phase</span> <span class="mi">2</span> <span class="p">(</span><span class="n">LogP</span><span class="p">)</span>
+<span class="o">-</span><span class="n">preset</span><span class="p">:</span> <span class="n">LogP</span> <span class="n">preset</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span>
+     <span class="mi">0</span><span class="p">:</span> <span class="n">user</span> <span class="n">defined</span><span class="p">;</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Octanol</span><span class="o">/</span><span class="n">Water</span><span class="p">;</span> <span class="mi">3</span><span class="p">:</span> <span class="n">Benzene</span><span class="o">/</span><span class="n">Water</span><span class="p">;</span> <span class="mi">4</span><span class="p">:</span> <span class="n">Ether</span><span class="o">/</span><span class="n">Water</span><span class="p">;</span>
+     <span class="mi">5</span><span class="p">:</span> <span class="n">Hexane</span><span class="o">/</span><span class="n">Water</span>
+
+<span class="n">METHOD</span><span class="p">,</span> <span class="n">SYSTEM</span>
+<span class="o">-</span><span class="n">method</span><span class="p">:</span> <span class="n">COSMO</span><span class="o">-</span><span class="n">RS</span><span class="p">,</span> <span class="n">COSMOSAC2013</span><span class="p">,</span> <span class="n">COSMOSAC2016</span>
+<span class="o">-</span><span class="n">temperature</span><span class="p">:</span> <span class="n">temperature</span> <span class="p">(</span><span class="n">Kelvin</span><span class="p">)</span>
+    <span class="n">the</span> <span class="o">-</span><span class="n">temperature</span> <span class="n">key</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="n">twice</span> <span class="n">to</span> <span class="n">give</span> <span class="n">a</span> <span class="nb">range</span>
+<span class="o">-</span><span class="n">pressure</span><span class="p">:</span> <span class="n">pressure</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span>
+    <span class="n">the</span> <span class="o">-</span><span class="n">pressure</span> <span class="n">key</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="n">twice</span> <span class="n">to</span> <span class="n">give</span> <span class="n">a</span> <span class="nb">range</span>
+<span class="o">-</span><span class="n">iso</span><span class="p">:</span> <span class="n">isotherm</span><span class="p">,</span> <span class="n">isobar</span><span class="p">,</span> <span class="n">flashpoint</span>
+<span class="o">-</span><span class="n">n</span><span class="p">:</span> <span class="n">number</span> <span class="n">of</span> <span class="n">steps</span>
+<span class="o">-</span><span class="n">inputpurevap</span><span class="p">:</span> <span class="k">if</span> <span class="mi">1</span> <span class="n">use</span> <span class="nb">input</span> <span class="n">pure</span> <span class="n">compound</span> <span class="n">pvap</span> <span class="ow">and</span> <span class="n">tvap</span> <span class="ow">or</span> <span class="n">Antoine</span> <span class="n">equation</span>
+<span class="o">-</span><span class="n">inputpuredensity</span><span class="p">:</span> <span class="k">if</span> <span class="mi">1</span> <span class="n">use</span> <span class="nb">input</span> <span class="n">pure</span> <span class="n">compound</span> <span class="n">liquid</span> <span class="n">density</span>
+<span class="o">-</span><span class="n">sigmax</span><span class="p">:</span> <span class="n">maximum</span> <span class="n">value</span> <span class="n">sigma</span> <span class="p">(</span><span class="n">sigma</span> <span class="n">profile</span><span class="p">,</span> <span class="n">sigma</span> <span class="n">potential</span><span class="p">)</span>
+<span class="o">-</span><span class="n">massfraction</span><span class="p">:</span> <span class="n">use</span> <span class="n">mass</span> <span class="n">fractions</span>
+
+<span class="n">INPUT</span> <span class="n">FILE</span>
+<span class="o">-</span><span class="n">file</span><span class="p">:</span> <span class="n">content</span> <span class="n">of</span> <span class="n">the</span> <span class="n">file</span> <span class="n">will</span> <span class="n">be</span> <span class="n">added</span> <span class="n">at</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">the</span> <span class="nb">input</span> <span class="k">for</span> <span class="n">the</span>
+    <span class="n">COSMO</span><span class="o">-</span><span class="n">RS</span> <span class="n">calculation</span><span class="o">.</span> <span class="n">The</span> <span class="o">-</span><span class="n">file</span> <span class="n">key</span> <span class="n">has</span> <span class="n">to</span> <span class="n">be</span> <span class="n">repeated</span> <span class="k">for</span> <span class="n">each</span> <span class="n">file</span>
+
+<span class="n">OUTPUT</span>
+<span class="o">-</span><span class="n">j</span><span class="p">:</span> <span class="n">produce</span> <span class="n">a</span> <span class="n">fully</span> <span class="n">runnable</span> <span class="n">job</span> <span class="p">(</span><span class="k">as</span> <span class="n">the</span> <span class="o">.</span><span class="n">job</span> <span class="n">files</span> <span class="kn">from</span> <span class="nn">AMSjobs</span><span class="p">),</span>
+    <span class="n">using</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">jobname</span><span class="o">.</span> <span class="n">The</span> <span class="n">job</span> <span class="n">script</span> <span class="n">produces</span> <span class="n">files</span> <span class="n">like</span> <span class="n">jobname</span><span class="o">.</span><span class="n">out</span><span class="p">,</span>
+    <span class="n">jobname</span><span class="o">.</span><span class="n">crskf</span> <span class="n">etc</span><span class="o">.</span> <span class="n">Several</span> <span class="n">job</span> <span class="n">scripts</span> <span class="n">can</span> <span class="n">simply</span> <span class="n">be</span> <span class="n">concatenated</span><span class="p">,</span>
+    <span class="n">the</span> <span class="n">results</span> <span class="n">will</span> <span class="n">be</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">different</span> <span class="n">files</span> <span class="n">using</span> <span class="n">the</span> <span class="n">jobname</span> <span class="n">parameter</span>
+    <span class="n">the</span> <span class="n">default</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">simple</span> <span class="n">run</span> <span class="n">script</span>
+
+<span class="n">EXAMPLES</span>
+<span class="n">crsprep</span> <span class="o">-</span><span class="n">s</span> <span class="n">benzene</span><span class="o">.</span><span class="n">coskf</span> <span class="o">-</span><span class="n">nring</span> <span class="mi">6</span> <span class="o">-</span><span class="n">savecompound</span>
+<span class="n">crsprep</span> <span class="o">-</span><span class="n">t</span> <span class="n">VAPORPRESSURE</span> <span class="o">-</span><span class="n">temperature</span> <span class="mf">273.15</span> <span class="o">-</span><span class="n">temperature</span> <span class="mf">373.15</span> <span class="o">-</span><span class="n">s</span> <span class="n">methanol</span><span class="o">.</span><span class="n">coskf</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="AMSreport.html" class="btn btn-neutral float-right" title="AMSreport: generate report" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="AMSprep.html" class="btn btn-neutral" title="AMSprep: construct an ADF COSMO results file" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

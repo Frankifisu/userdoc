@@ -1,0 +1,38 @@
+#! /bin/sh
+
+
+# The zero-field splitting (ZFS) can be calculated for open shell molecules with
+# electron spin S<=1, using the key ZFS.
+
+# Only the spin-orbit contribution to ZFS is evaluated. Can be used in
+# combination with LDA and GGAs. RELATIVISTIC ZORA is also required.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     N         0.000000    0.000000    0.007767
+     H         0.000000    0.000000   -1.043445
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    type DZP
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 2.0
+  title NH Zero-field splitting
+  unrestricted
+  xc
+    gga BECKE PERDEW
+  end
+  zfs
+EndEngine
+eor

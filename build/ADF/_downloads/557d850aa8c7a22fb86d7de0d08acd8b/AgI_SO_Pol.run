@@ -1,0 +1,51 @@
+#! /bin/sh
+
+
+# Example shows an frequency-dependent ZORA calculation of complex linear
+# response of AgI including spin-orbit coupling.
+
+# The polarizability is calculated using the AORESPONSE key, in which spin-orbit
+# coupling is taken into account. In this case a spin-restricted calculation is
+# required, but, unlike the rest of AORESPONSE, also NOSYM. In this example
+# lifetime effects are included.
+
+
+"$AMSBIN/ams" <<eor
+
+  Task SinglePoint
+
+  System
+    ATOMS
+      Ag   0.0 0.0  1.2723
+      I    0.0 0.0 -1.2723
+    END
+  End
+
+  Engine ADF
+    TITLE AgI,SO-ZORA
+    basis
+      type TZ2P
+      core None
+    end
+    symmetry nosym
+    allpoints
+    BeckeGrid
+     quality good
+    End
+      linearscaling 9.0
+    End
+    xc
+      lda VWN
+    end
+    relativity
+      level spin-orbit
+    end
+    aoresponse
+      scf 
+      frequencies 0.085 [Hartree]
+      lifetime 0.007
+      ALDA
+      EL_DIPOLE_EL_DIPOLE
+    end
+  EndEngine
+eor

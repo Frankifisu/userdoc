@@ -1,0 +1,52 @@
+#!/bin/sh
+
+
+# Specify the subkey MAGOPTROT in the AORESPONSE key to calculate the Verdet
+# constant. Here it is specified together with the LIFETIME key, such that the
+# real and imaginary part of the damped Verdet constant will be calculated.
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C   0.867000     1.441800     3.000000
+     C   0.849400     2.777300     3.000000
+     C   2.115500     0.591200     3.000000
+     H  -0.088300     0.909000     3.000000
+     H  -0.085900     3.336500     3.000000
+     H   1.772400     3.363200     3.000000
+     H   2.737100     0.793300     2.115200
+     H   1.876900    -0.479100     3.000000
+     H   2.737100     0.793300     3.884800
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title Propene
+  allpoints
+  aoresponse
+    alda
+    frequencies 0.2 [Hartree]
+    giao
+    lifetime 0.007
+    magoptrot
+    scf converge 1d-5 iterations 25
+  end
+  beckegrid
+    quality good
+  end
+  basis
+    core None
+    type DZP
+  end
+  noprint sfo
+  symmetry nosym
+  xc
+    model SAOP
+  end
+EndEngine
+
+eor
+

@@ -1,0 +1,100 @@
+#!/bin/sh
+
+# As an example of a Franck-Condon calculation, lets look at the transition of
+# NO2 to NO2 - . NO2 is a small molecule with only three vibrational modes.
+# Putting an extra electron on the molecule will cause a big displacement,
+# resulting in large electron-phonon couplings.
+
+# In general, the larger the molecule, the smaller the displacement and hence
+# the electron-phonon couplings and Franck-Condon factors. Moreover, larger
+# molecules have more vibrational modes, meaning that the already smaller
+# displacement will generally be smeared out over more modes, resulting in an
+# additional decrease in electron-phonon couplings. This is fortunate, since the
+# number of Franck-Condon factors increases factorially with the number of
+# vibrational modes, making it prohibitively expensive to take more than a few
+# vibrational quanta into account for most molecules.
+
+# In order to calculate the Franck-Condon factors for Nitrite and Nitrogen
+# dioxide, the equilibrium positions of the nuclei and the vibrational modes
+# have to be obtained:
+
+
+AMS_JOBNAME=NO2 $AMSBIN/ams <<eor
+System
+  atoms
+     N         0.000000    0.000000   -0.016179
+     O         0.000000    1.098646   -0.492918
+     O         0.000000   -1.098646   -0.492918
+  end
+end
+
+Task GeometryOptimization
+GeometryOptimization
+  Convergence
+    Gradients 1.0e-5
+  End
+End
+Properties
+    NormalModes True
+End
+
+Engine ADF
+  basis
+    core NONE
+    type DZP
+  end
+  spinpolarization 1
+  title Nitrogen dioxide
+  unrestricted
+  xc
+    lda SCF VWN
+  end
+EndEngine
+eor
+
+# We are using an already optimized geometry for the second calculation but in a
+# real experiment one should run geometry optimization first
+
+AMS_JOBNAME=NO2_minus $AMSBIN/ams <<eor
+System
+  atoms
+     N         0.000000    0.000000    0.126041
+     O         0.000000    1.070642   -0.555172
+     O         0.000000   -1.070642   -0.555172
+  end
+  charge -1.0
+end
+
+Task SinglePoint
+Properties
+    NormalModes True
+End
+
+Engine ADF
+  basis
+    core NONE
+    type DZP
+  end
+  title Nitrite
+  xc
+    lda SCF VWN
+  end
+EndEngine
+
+eor
+
+
+# This runscript produces two adf.rkf files containing the frequencies and the
+# normal modes for both charge states. Lets first look at the ground state to
+# ground state overlap:
+
+
+$AMSBIN/fcf <<eor
+  STATE1 NO2.results/adf.rkf
+  STATE2 NO2_minus.results/adf.rkf
+  TRANSLATE
+  ROTATE
+eor
+
+rm TAPE61 logfile
+

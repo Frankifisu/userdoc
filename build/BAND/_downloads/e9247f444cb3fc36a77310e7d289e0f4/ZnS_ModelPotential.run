@@ -1,0 +1,95 @@
+#! /bin/sh
+
+# With the XC subkey model we invoke the so-called TB-mBJ model potential, which
+# increases band gaps for solids.
+
+
+
+AMS_JOBNAME=TB-mBJ $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   ATOMS
+      Zn  0.0000  0.0000  0.0000
+      S   1.3525  1.3525  1.3525
+   END
+
+   Lattice
+      0.000  2.705  2.705
+      2.705  0.000  2.705
+      2.705  2.705  0.000
+   End
+End
+
+Engine Band 
+   TITLE ZnS pot=TB-mBJ
+
+   XC
+      model TB-mBJ
+   END
+
+   Basis
+      Type DZ
+      Core Large
+   End
+EndEngine
+eor
+
+
+AMS_JOBNAME=GLLB-SC $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   ATOMS
+      Zn  0.0000  0.0000  0.0000
+      S   1.3525  1.3525  1.3525
+   END
+   Lattice
+      0.000  2.705  2.705
+      2.705  0.000  2.705
+      2.705  2.705  0.000
+   End
+End
+
+Engine Band 
+   TITLE ZnS pot=GLLB-SC
+
+   XC
+      model GLLB-SC
+   END
+
+   Basis
+      Type DZ
+      Core Large
+   End
+EndEngine
+eor
+
+
+AMS_JOBNAME=lb94 $AMSBIN/ams <<eor
+
+Task SinglePoint
+
+System
+   Atoms 
+   H       0.000000000     0.000000000    -0.370500000 
+   H       0.000000000     0.000000000     0.370500000 
+   End 
+End
+
+Engine Band 
+   Title H2 pot=lb94
+
+   XC
+    model lb94
+   end
+
+   Basis
+      Type TZP
+      Core Large
+   End
+EndEngine
+eor
+

@@ -1,0 +1,37 @@
+#! /bin/sh
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     O       2.698990442000       0.000000000000      -0.000314732000
+     H       1.927785302000       0.000000000000      -0.591074192000
+     H       3.470195581000       0.000000000000      -0.591074192000
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  dimpar
+     GROUP mol2
+     3
+     O      -0.801009558000       0.000000000000      -0.000314732000 pol=5.7494 char=-0.7134114435520156
+     H      -1.572214698000      -0.000000000000      -0.591074192000 pol=2.7927 char=0.3567057217727492
+     H      -0.029804419000      -0.000000000000      -0.591074192000 pol=2.7927 char=0.3567057217727492
+     SUBEND
+  end
+  dimqm
+     drf
+  end
+  basis
+    core Large
+    type TZP
+  end
+  symmetry NOSYM
+  Relativity 
+    Level None
+  End
+EndEngine
+
+eor

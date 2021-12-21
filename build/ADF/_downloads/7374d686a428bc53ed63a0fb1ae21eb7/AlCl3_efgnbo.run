@@ -1,0 +1,128 @@
+#! /bin/sh
+
+
+# Example shows an NBO analysis of an EFG calculation for AlCl3 .
+
+# In the ADF input one then needs to include the QTENS (EFG calculation) and
+# include the subkey EFG of the key AORESPONSE. The BeckeGrid quality is good,
+# which may be needed to accurately calculate core properties. Other keywords
+# are necessary because of the NBO analysis afterwards. Note that ADF, ADFNBO,
+# and GENNBO have to run several times.
+
+
+AMS_JOBNAME=first $AMSBIN/ams <<eor
+System
+  atoms
+     Al      0.000000      0.000000     -0.237368
+     Cl      1.808813      0.000000      0.807083
+     Cl      0.000000      0.000000     -2.326083
+     Cl     -1.808813      0.000000      0.807083
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  aomat2file
+  aoresponse
+    efg atom=1 nbo=true
+  end
+  beckegrid
+    quality good
+  end
+  fullfock
+  basis
+    core none
+    type TZP
+  end
+  qtens
+  save TAPE15
+  symmetry NOSYM
+  xc
+    gga revPBE
+    lda vwn
+  end
+  Relativity 
+    Level None
+  End
+EndEngine
+eor
+
+# end ADF, run gennbo
+# ===================
+
+
+$AMSBIN/adfnbo <<eor
+ adffile first.results/adf.rkf
+ TAPE15file first.results/TAPE15
+ write
+ spherical
+ fock
+ TESTJOB
+eor
+
+rm -f adfnbo.37 adfnbo.39 adfnbo.49 adfnbo.48
+
+$AMSBIN/gennbo6 FILE47
+
+$AMSBIN/adfnbo <<eor
+ adffile first.results/adf.rkf
+ TAPE15file first.results/TAPE15
+ copy
+ spherical
+ fock
+ TESTJOB
+eor
+
+$AMSBIN/adfnbo <<eor
+ adffile first.results/adf.rkf
+ TAPE15file first.results/TAPE15
+ read
+ spherical
+ fock
+ TESTJOB
+eor
+
+rm -f adfnbo.37 adfnbo.39 adfnbo.49 adfnbo.48
+
+# end gennbo, rerun ADF with NBO property analysis
+# ================================================
+
+AMS_JOBNAME=second  $AMSBIN/ams <<eor
+System
+  atoms
+     Al      0.000000      0.000000     -0.237368
+     Cl      1.808813      0.000000      0.807083
+     Cl      0.000000      0.000000     -2.326083
+     Cl     -1.808813      0.000000      0.807083
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  aoresponse
+    efg
+      atom 1
+      nbo true
+    end
+  end
+  beckegrid
+    quality good
+  end
+  basis
+    core none
+    type TZP
+  end
+  qtens
+  symmetry NOSYM
+  xc
+    gga revPBE
+    lda vwn
+  end
+  Relativity 
+    Level None
+  End
+EndEngine
+eor
+

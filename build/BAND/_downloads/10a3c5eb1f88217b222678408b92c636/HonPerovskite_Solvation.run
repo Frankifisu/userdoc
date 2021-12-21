@@ -1,0 +1,67 @@
+#! /bin/sh
+
+# We want to model H adsorption on a Perovskite surface in a solution, modeled
+# by a COSMO surface.
+
+# We create only the COSMO surface above the slab with the
+# RemovePointsWithNegativeZ option.
+
+$AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+   Atoms
+      H    0.0  0.000000000  0.900000000
+      Ca   0.0  0.000000000  0.000000000
+      Ca   0.0  3.535533906 -3.535533906
+      Ti  -2.5 -3.535533906  0.000000000
+      Ti  -2.5  0.000000000 -3.535533906
+      O    0.0 -3.535533906  0.000000000
+      O    2.5  1.767766953 -1.767766953
+      O    2.5 -1.767766953 -1.767766953
+   End
+   Lattice
+      5.0 0.000000000 0.0
+      0.0 7.071067812 0.0
+   End
+End
+
+Properties 
+   Gradients True
+End
+
+Engine Band
+   TITLE Hydrogen on Perovksite wit solvation
+
+   Solvation
+      Enabled True
+      Surf Delley
+      charge method=inver
+      Solvent
+         Eps 78.4
+         Rad 1.4
+      End
+   End
+
+   PeriodicSolvation
+      nstar 3
+      SymmetrizeSurfacePoints true
+      RemovePointsWithNegativeZ true
+   End
+
+   Screening
+      rmadel 30 ! to speed up the calculation
+   End
+
+   Convergence
+      Criterion 1.0e-4
+   End
+
+   Basis
+      Type SZ
+      Core Large
+   End
+EndEngine
+eor
+

@@ -1,0 +1,64 @@
+#! /bin/sh
+
+# This example tries to do the same as in the COSMO-RS GUI Tutorial: Polymers,
+# using scripts.
+
+# First some .coskf files are copied to the location where the scripts are running.
+# Some of the .coskf files are a sample of the full polymer database ADFCRS-POLYMERS-2019.
+# In the first part of the example crsprep is used to set pure compound parameters.
+# Pure compound densities are required for every species in a calculation involving any polymers.
+# For some pure compounds the VPM1 vapor pressure equation is set including vapor pressure coefficients.
+
+echo "Results"
+
+cp $AMSHOME/examples/COSMO-RS/Database/*coskf .
+cp $AMSHOME/examples/COSMO-RS/Polymers/*coskf .
+
+"$AMSBIN/crsprep" -c Benzene.coskf -density 0.876 -savecompound
+"$AMSBIN/crsprep" -c Water.coskf -density 1.0 -savecompound
+"$AMSBIN/crsprep" -c Methanol.coskf -density 0.792 -savecompound \
+                  -vp_equation VPM1 -vp_params "-7057.597287 -9.936895562 0.00608530790 77.10002032 0"
+"$AMSBIN/crsprep" -c Hexane.coskf -density 0.655 -savecompound \
+                  -vp_equation VPM1 -vp_params "-5575.417318 -6.612402250 0.00437376138 53.36969532 0"
+
+rm -f job.sh
+touch job.sh
+chmod +x job.sh
+
+"$AMSBIN/crsprep" -t ACTIVITYCOEF -j Polymers.1 \
+                  -s "Poly(ethylene).coskf" -frac1 0.5 -s Benzene.coskf -frac1 0.5 \
+                  -massfraction > job.sh
+./job.sh
+echo "Polymers.1"
+"$AMSBIN/amsreport" Polymers.1.crskf compounds-name Flory-Huggins WF-activity-coefficient
+
+"$AMSBIN/crsprep" -t VAPORPRESSURE -temperature 298.15 -temperature 398.15 -n 10 -j Polymers.2 \
+                  -s "Poly(dimethylsiloxane).coskf" -frac1 0.5 -s Methanol.coskf -frac1 0.25 \
+                  -s Hexane.coskf -frac1 0.25 \
+                  -massfraction > job.sh
+./job.sh
+echo "Polymers.2"
+"$AMSBIN/amsreport" Polymers.2.crskf compounds-name temperature pressure
+
+"$AMSBIN/crsprep" -t LOGP -preset 0 -j Polymers.3 \
+                  -s "Poly(ethylene).coskf" -s Water.coskf \
+                  -c Methanol.coskf > job.sh
+./job.sh
+echo "Polymers.3"
+"$AMSBIN/amsreport" Polymers.3.crskf logp
+
+"$AMSBIN/crsprep" -t PURESOLUBILITY -temperature 398.15 -temperature 498.15 -n 10 -j Polymers.4 \
+                  -s Hexane.coskf -solphase Gas -pressure 1.01325 \
+                  -c "Poly(styrene).coskf" > job.sh
+./job.sh
+echo "Polymers.4"
+"$AMSBIN/amsreport" Polymers.4.crskf solubility-g
+
+"$AMSBIN/crsprep" -t BINMIXCOEF -method COSMOSAC2013 -j Polymers.5 \
+                  -s "Poly(ethyl_ethylene).coskf" -s Benzene.coskf \
+                  -massfraction > job.sh
+./job.sh
+echo "Polymers.5"
+"$AMSBIN/amsreport" Polymers.5.crskf polymer-fraction Flory-Huggins
+
+echo "Ready"

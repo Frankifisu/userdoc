@@ -1,0 +1,136 @@
+#!/bin/sh
+
+intera1=1
+intera2=5
+
+intraa1=5
+intraa2=6
+
+report=adf.report
+
+echo "We compare for two weakly coupled systems an inter and intra bond length" > $report
+echo "using several methods" >> $report
+echo "" >> $report
+echo "method    d-inter   d-intra" >> $report
+
+bas=TZP
+
+system=AmmoniaN2
+
+export AMS_JOBNAME=$system.lda
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams<<EOF
+
+Task GeometryOptimization
+
+GeometryOptimization 
+    Convergence Gradients=1e-5
+end
+
+System
+  Atoms
+    N      -1.57871800      -0.04661100       0.00000000 region=one
+    H      -2.15862100       0.13639600      -0.80956500 region=one
+    H      -2.15862100       0.13639600       0.80956500 region=one
+    H      -0.84947100       0.65819300       0.00000000 region=one
+    N       1.57871800       0.04661100       0.00000000 region=two
+    N       1.03629999      -1.31580113      -0.10254699 region=two
+  End
+  GuessBonds True
+end
+
+
+Engine adf
+   Basis Type=$bas
+EndEngine
+
+
+EOF
+
+dInter=`$AMSBIN/amsreport $AMS_JOBNAME.results/adf.rkf -r distance#$intera1#$intera2`
+dIntra=`$AMSBIN/amsreport $AMS_JOBNAME.results/adf.rkf -r distance#$intraa1#$intraa2`
+
+echo "lda    $dInter $dIntra" >> $report
+
+
+
+export AMS_JOBNAME=$system.gga
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams<<EOF
+
+Task GeometryOptimization
+
+GeometryOptimization 
+    Convergence Gradients=1e-5
+end
+
+LoadSystem
+  File $system.lda.results/adf.rkf
+End
+
+
+Engine adf
+   xc gga=pbe       
+   Basis Type=$bas
+EndEngine
+
+
+EOF
+
+dInter=`$AMSBIN/amsreport $AMS_JOBNAME.results/adf.rkf -r distance#$intera1#$intera2`
+dIntra=`$AMSBIN/amsreport $AMS_JOBNAME.results/adf.rkf -r distance#$intraa1#$intraa2`
+
+echo "gga    $dInter $dIntra" >> $report
+
+
+
+export AMS_JOBNAME=$system.hybrid
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams<<EOF
+
+Task GeometryOptimization
+
+GeometryOptimization 
+    Convergence Gradients=1e-5
+end
+
+LoadSystem
+  File $system.lda.results/adf.rkf
+End
+
+Engine Hybrid
+    Energy
+        Term Factor=1.0   Region=*    EngineID=adf-lda
+        Term Factor=-1.0  Region=one  EngineID=adf-lda
+        Term Factor=1.0   Region=one  EngineID=adf-gga
+        Term Factor=-1.0  Region=two  EngineID=adf-lda
+        Term Factor=1.0   Region=two  EngineID=adf-gga
+    End
+        
+    Engine adf adf-lda
+        Basis Type=$bas
+    EndEngine
+
+    Engine adf adf-gga
+       xc gga=pbe       
+        Basis Type=$bas
+    EndEngine
+
+ EndEngine
+
+EOF
+
+dInter=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#$intera1#$intera2`
+dIntra=`$AMSBIN/amsreport $AMS_JOBNAME.results/hybrid.rkf -r distance#$intraa1#$intraa2`
+
+echo "hybrid $dInter $dIntra" >> $report
+
+echo "start of report"
+cat $report
+echo "end of report"

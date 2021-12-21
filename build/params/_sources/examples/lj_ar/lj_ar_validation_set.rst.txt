@@ -1,0 +1,139 @@
+.. _LJ_Ar_ValidationSet:
+
+Training and validation sets
+====================================================
+
+With ParAMS, you can include an arbitrary number of data_sets in the parametrization.
+It is common to use **two** data_sets: the **training** and **validation** sets.
+
+.. image:: /_static/LJ_Ar_validation_set_training_set_running_loss.png
+    :width: 90%
+    :align: center
+
+
+The optimizer will minimize the loss function on the **training set**. During
+the parametrization, you can also monitor the loss function on the **validation
+set**. This approach is used to prevent **overfitting**. As long as the loss
+function on the (*appropriately chosen*) validation set is decreasing similarly
+to the loss function on the training set, it means that there is *likely* no
+overfitting.
+
+There are two ways to include a validation set in ParAMS:
+
+#. :ref:`A .yaml file <LJ_Ar_ExplicitValidationSet>` with the same format as training_set.yaml, but called for example ``validation_set.yaml``
+
+#. Setting the ``validation`` option to some fraction (e.g. ``validation = 0.1``), which will :ref:`randomly split the original data_set into a training set and validation set <LJ_Ar_RandomValidationSet>`.
+
+
+.. _LJ_Ar_ExplicitValidationSet:
+
+An explicit validation set: ``validation_set.yaml``
+----------------------------------------------------
+
+**Download** :download:`LJ_Ar_validation_set.zip`, or make a copy of the
+directory ``$AMSHOME/scripting/scm/params/examples/LJ_Ar_validation_set``.
+
+The files are almost identical to the files in the :ref:`first tutorial
+<LJ_Ar_Tutorial>`. There is a new file, ``validation_set.yaml``, containing the
+data_set entry with the ``Expression: forces('Ar32_frame001')``. The
+corresponding expression has been removed from ``training_set.yaml``.
+
+.. note::
+
+    **There is only one job_collection.yaml file**. It is used for both the training
+    and validation sets. Here, the job ``Ar32_frame001`` is needed for both the
+    training and validation sets.
+
+    * ``energy('Ar32_frame001')-energy('Ar32_frame002')`` is part of ``training_set.yaml``
+
+    * ``forces('Ar32_frame001')`` is part of ``validation_set.yaml``
+
+The ``params.conf.py`` file now references both the ``training_set.yaml`` and
+``validation_set.yaml`` files. 
+
+.. literalinclude:: complete_example/LJ_Ar_validation_set/params.conf.py
+    :linenos:
+    :emphasize-lines: 2,14,17
+
+The last two lines set the ``logger_every`` and ``eval_every`` options.
+
+* ``logger_every=5`` means that information about the optimization is logged every 5 iterations (for the training **and** validation sets)
+
+* ``eval_every=5`` means that the **validation set** will only be evaluated every 5 iterations (the training set must by definition be evaluated every iteration).
+
+.. tip::
+
+    We recommend to set ``eval_every`` and ``logger_every`` to the same value.
+    If the validation set is very expensive to calculate, set ``eval_every`` to
+    a **multiple** of ``logger_every``, otherwise the validation error will not
+    be logged!
+
+
+Run the optimization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In a terminal, run
+
+.. code-block:: bash
+
+    "$AMSBIN/params" optimize
+
+Training and validation set results
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The results for the validation set enter a directory called ``validation_set_results``:
+
+::
+
+  optimization/
+  ├── settings_and_initial_data
+  ├── summary.txt
+  ├── training_set_results
+  ├── validation_set_results
+
+The layout is exactly the same as for ``training_set_results``. For example, you
+can generate a .png image with the loss function value vs. iteration with the
+``"$AMSBIN/params" plot running_loss.txt`` command, or plot the numbers in your
+favorite plotting program.
+
+.. figure:: /_static/LJ_Ar_validation_set_training_set_running_loss.png
+    :width: 90%
+    :align: center
+
+    Left: Training set loss. Right: Validation set loss.
+
+In this case, both the training set and validation set losses decrease, so
+there is **no sign of overfitting**.
+
+
+.. _LJ_Ar_RandomValidationSet:
+
+Random split of a data_set into training and validation sets
+----------------------------------------------------------------
+
+**Download** :download:`LJ_Ar_example.zip`, or make a copy of the directory
+``$AMSHOME/scripting/scm/params/examples/LJ_Ar``. These are the same files that
+were used in the :ref:`first tutorial <LJ_Ar_Tutorial>`.
+
+Modify ``params.conf.py`` by adding the following to the bottom of the file:
+
+.. code:: python
+
+    validation = 0.40 
+
+This will split the data_set such that roughly 40% of the data_set entries enter
+the validation set, and the remaining 60% enter the training set.
+
+You can then run the optimization as normal:
+
+.. code:: bash
+
+    "$AMSBIN/params" optimize
+
+To find out which data_set entries entered the validation set or training set, you can
+find this information in
+
+* the ``optimization/training_set_results/latest/predictions_*txt`` files (or similarly for ``validation_set_results``),
+
+* the ``optimization/settings_and_initial_data/data_sets`` directory contains two files ``training_set.pkl.gz`` and ``validation_set.pkl.gz``. You can load these files using :ref:`params as  Python library <LJ_Ar_Python>` with the help of the :ref:`Data Set` class.
+

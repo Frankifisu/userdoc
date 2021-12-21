@@ -1,0 +1,60 @@
+#!/bin/ksh
+
+. /home/belp/INSTALL/adf2018.107/adfbashrc.sh
+
+#export PYCD=/home/belp/pycubescd
+
+export SUBDIR=$PWD
+
+export SCM_TMPDIR=/tmp
+#export P4_GLOBMEMSIZE=8388608
+#export MPI_REMSH=rsh
+
+WRK=/tmp
+cd $WRK
+
+$ADFBIN/adf   <<eor   > XeAuF.out
+ATOMS
+Xe       0.000  0.000  -2.573
+Au       0.000  0.000   0.000
+F        0.000  0.000   1.921
+END
+
+BASIS     
+type TZ2P
+core Small
+createoutput None
+END
+
+XC
+GGA BLYP 
+END
+
+RELATIVISTIC Scalar ZORA
+NumericalQuality Good
+NOPRINT LOGFILE
+eor
+mv TAPE21 XeAuF.t21
+cp        XeAuF.t21   $SUBDIR 
+
+
+echo 'Densf maps Density XeAuF in cube format'
+
+$ADFBIN/densf << eor   
+INPUTFILE XeAuF.t21
+CUBINPUT
+Density SCF
+CUBOUTPUT  $WRK/destot
+grid
+-10.0 -10.0 -10.0
+100  100  100
+1.0 0.0 0.0 15.03
+0.0 1.0 0.0 15.03
+0.0 0.0 1.0 15.03
+end
+end input
+eor
+
+cp destot%SCF%Density.cub $SUBDIR/XeAuF.cub    
+cd $SUBDIR
+echo 'DONE'

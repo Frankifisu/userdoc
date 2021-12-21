@@ -1,0 +1,79 @@
+.. _Isomers_double_hybrids: 
+
+Double-hybrid calculation: isomers propyne and propadiene
+*********************************************************
+
+This tutorial will show you how to do calculate the energy difference between the structural isomers propyne and propadiene.
+
+In this example double-hybrids are used.
+Note that this example is an example in which double-hybrids typically improve over standard GGA or hybrid functionals.
+
+An all electron TZ2P basis set is used since that is the recommended choice in ADF for double hybrids.
+For reasons of numerical stability, it is also highly recommended not to use larger or more diffuse basis sets.
+The use of triple-zeta quality basis sets is usually necessary for accurate double-hybrid energies.
+In ADF one can only do single point calculations in case of double-hybrids.
+
+Step 1: Propyne
+===============
+
+.. rst-class:: steps
+
+  \ 
+    | Start a new AMSinput
+    | Copy-paste the following coordinates of propyne:
+
+::
+
+   C          0.00000000      0.00000000     -0.95122586
+   C          0.00000000      0.00000000      0.50451101
+   C          0.00000000      0.00000000      1.70543908
+   H         -0.51019468     -0.88368312     -1.34212552
+   H         -0.51019468      0.88368312     -1.34212552
+   H          1.02038937      0.00000000     -1.34212552
+   H          0.00000000      0.00000000      2.76765234
+
+.. rst-class:: steps
+
+  \ 
+    | XC functional: **Double Hybrids → rev-DOD-PBEP86-D4**.
+    | Basis set: **TZ2P**.
+    | Frozen core: **None**.
+    | Click on **File → Save As...** and give it the name "Propyne".
+    | Click on **File → Run**.
+    | Wait for the calculation to finish.
+
+.. image:: /Images/tadf/Isomers_Propyne.png
+
+Step 2: Propadiene
+==================
+
+.. rst-class:: steps
+
+  \ 
+    | Delete all atoms
+    | Copy-paste the following coordinates of propadiene:
+
+::
+
+   C          0.00000000      0.00000000      0.00000000
+   C          0.00000000      0.00000000     -1.30115735
+   C          0.00000000      0.00000000      1.30115735
+   H         -0.65550932     -0.65550932     -1.86483287
+   H          0.65550932      0.65550932     -1.86483287
+   H         -0.65550932      0.65550932      1.86483287
+   H          0.65550932     -0.65550932      1.86483287
+
+.. rst-class:: steps
+
+  \ 
+    | Click on **File → Save As...** and give it the name "Propadiene".
+    | Click on **File → Run**.
+    | Wait for the calculation to finish.
+
+.. image:: /Images/tadf/Isomers_Propadiene.png
+
+Step 3: Energy difference
+=========================
+
+If one compares the bond energy printed in Propyne.logfile with that of Propadiene.logfile, one finds that with the used double hybrid rev-DOD-PBEP86-D4
+propyne is around 1.9 kcal/mol lower in energy than propadiene.

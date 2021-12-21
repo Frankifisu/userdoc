@@ -1,0 +1,90 @@
+#!/bin/sh
+
+# This example shows how to restart the SCF and compute various properties, like
+# a density of states, and a band structure plot, or the effective mass.
+
+# =======================
+# polyethylene .xyz file:
+# =======================
+
+cat <<eor > polyethylene.xyz
+6 
+
+C      -0.623348981    -0.055000000     0.425969423
+C       0.633348981     0.015000000    -0.422636089
+H      -0.633348981     0.964974570     1.055290696
+H      -0.623348981    -0.914974570     1.055290696
+H       0.633348981     0.904974570    -1.051957363
+H       0.613348981    -0.914974570    -1.061957363
+VEC1    2.553395923     0.000000000     0.000000000
+eor
+
+# ===============================================
+# Simple single point calculation (no properties)
+# ===============================================
+
+AMS_JOBNAME=ToBeRestarted $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  GeometryFile polyethylene.xyz
+End
+
+Engine Band 
+  Unrestricted True
+EndEngine
+eor
+
+# ===================================
+# Restart and compute some properties 
+# ===================================
+
+AMS_JOBNAME=prop $AMSBIN/ams <<eor
+
+Task SinglePoint 
+
+System
+  GeometryFile polyethylene.xyz
+End
+
+Engine Band
+  Unrestricted True
+
+  Restart
+    SCF
+    File ToBeRestarted.results/band.rkf
+  End
+
+  DOS
+    CalcDOS True
+  End
+
+  BandStructure 
+    Enabled True
+    DeltaK 0.3
+    EnergyAboveFermi 10.0
+  End
+
+  EffectiveMass
+    Enabled True
+  End
+EndEngine 
+eor
+
+
+echo 'Extract some properties from the rkf file:'
+
+echo "Density of States:"
+$AMSBIN/amsreport prop.results/band.rkf -r 'DOS%Total DOS##1'
+
+echo "Band curve:"
+$AMSBIN/amsreport prop.results/band.rkf -r 'band_curves%Edge_1_bands##1'
+
+echo "Fab bands:"
+$AMSBIN/amsreport prop.results/band.rkf -r 'band_curves%Edge_1_fatBands##1'
+
+echo "Effective Mass:"
+$AMSBIN/amsreport prop.results/band.rkf -r 'EffectiveMass%EffectiveMasses##1'
+
+echo 'Done extracting properties'

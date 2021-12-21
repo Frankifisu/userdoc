@@ -1,0 +1,140 @@
+#! /bin/sh
+
+
+# Calculation of the 1s Cl core excitation energies of TiCl4. Both X-Ray
+# Emission (XES keyword) and X-Ray absorption (XAS keyword in EXCITATION key)
+# are calculated. The individual (zeroth and higher order) oscillator strength
+# components to the total oscillator strengths will be printed
+# (ALLXESQUADRUPOLE, ALLXASQUADRUPOLE).
+
+# In order to calculate a 1s-orbital that is localized on one of the Cl atoms, a
+# frozen core approach is used on the other Cl atoms, such that there is only
+# one Cl 1s-orbital, which will remain localized in the molecule.
+
+# In order to get information of the population analysis on all core orbitals, a
+# large negative value was included as argument for the orbpoper subkey of the
+# block key EPRINT. This orbital analysis shows that the 2 A1 orbital is indeed
+# the 1s Cl orbital, see subkey corehole of block key XES, and subkey
+# useoccupied of block key MODIFYEXCITATION.
+
+AMS_JOBNAME=XASXES $AMSBIN/ams <<eor
+System
+  symmetrize
+  symmetry C(3V)
+  atoms
+     Ti              0.0000    0.0000    0.0000
+     Cl              0.0000    0.0000    2.2930
+     Cl.1            1.0809   -1.8722   -0.7643
+     Cl.1           -2.1618    0.0000   -0.7643
+     Cl.1            1.0809    1.8722   -0.7643
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title TiCl4 X-Ray Absorption and Emission Quadrupole Oscillator strengths at the Cl K-edge
+  eprint
+    eigval 1000 1000
+    orbpoper -10000 100
+  end
+  excitations
+    allxasquadrupole
+    davidson
+    end
+    lowest 10
+    onlysing
+    xas
+  end
+  modifyexcitation
+    useoccupied
+       A1 2
+    end
+  end
+  basis
+    PerAtomType Symbol=Cl.1 File=$AMSRESOURCES/ADF/TZP/Cl.2p
+    core None
+    type TZP
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  scf
+    iterations 200
+  end
+  symmetry C(3V)
+  xc
+    gga Becke Perdew
+  end
+  xes
+    allxesquadrupole
+    corehole A1 2
+  end
+EndEngine
+
+eor
+
+
+# In the second example, to test gauge dependency, the molecule is shifted 100
+# Angstrom in the z-direction.
+
+AMS_JOBNAME=Gauge $AMSBIN/ams <<eor
+System
+  symmetrize
+  symmetry C(3V)
+  atoms
+     Ti              0.0000    0.0000    100.0000
+     Cl              0.0000    0.0000    102.2930
+     Cl.1            1.0809   -1.8722     99.2357
+     Cl.1           -2.1618    0.0000     99.2357
+     Cl.1            1.0809    1.8722     99.2357
+  end
+end
+
+Task SinglePoint
+
+EngineRestart XASXES.results/adf.rkf
+
+Engine ADF
+  title TiCl4 X-Ray Absorption and Emission Quadrupole Oscillator strengths at the Cl K-edge shifted 100Ang in z-direction
+  eprint
+    eigval 1000 1000
+    orbpoper -10000 100
+  end
+  excitations
+    allxasquadrupole
+    davidson
+    end
+    lowest 10
+    onlysing
+    xas
+  end
+  modifyexcitation
+    useoccupied
+       A1 2
+    end
+  end
+  basis
+    PerAtomType Symbol=Cl.1 File=$AMSRESOURCES/ADF/TZP/Cl.2p
+    core None
+    type TZP
+  end
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  scf
+    iterations 200
+  end
+  symmetry C(3V)
+  xc
+    gga Becke Perdew
+  end
+  xes
+    allxesquadrupole
+    corehole A1 2
+  end
+EndEngine
+
+eor

@@ -1,0 +1,252 @@
+.. currentmodule:: scm.params.parameterinterfaces.base
+
+Parameter Interfaces
+====================
+
+Any `AMS engine <../../../AMS/Engines.html#index-2>`_ that can be parameterized
+is represented by an Interface class (derived from |BaseParams|).
+This is mostly acting as a translation layer between the Optimizer and AMS.
+
+
+.. contents:: Contents of this Page
+  :local:
+
+-------------------
+
+
+Available Parameter Interfaces
+------------------------------
+
+Currently, the following engines can be parameterized:
+
+.. toctree::
+    :maxdepth: 3
+
+    xtb
+    reaxff
+    dftbsplinerep
+    lennardjones
+
+
+
+Parameter Interface Basics
+--------------------------
+The following examples showcase the use of the parameter interface to ReaxFF,
+however, the methods discussed are available to all other interfaces as well.
+The API is defined through the |BaseParams| base class.
+
+>>> # The initialization parameters might be different for every interface
+>>> # Here, we are reading the parameters from a force field file
+>>> interface = {Reax}('my_ffield.ff')
+
+A parameter interface behaves like a list. It stores instances of the |Parameter| class:
+
+>>> interface[0]
+Parameter(VALUE, "NAME", IS_ACTIVE, RANGE)
+>>> len(interface) # The total number of parameters in this instance
+42
+
+>>> # We can iterate over all stored parameters:
+>>> for parameter in interface:
+...   do_something(parameter)
+
+.. note::
+  Although the underlying data structure of the parameter interface is a `list`,
+  `dict`-like look-ups are also supported.
+  Instead of accessing an entry by its list index,
+  it can also be accessed by the parameter's name string:
+
+  >>> interface[121].name               # List-like behaviour, same as interface(121)
+  "parameter_name"
+  >>> interface["parameter_name"].name  # Dict-like behaviour
+  "parameter_name"
+
+  This works because name strings in the same interface are required to be unique,
+  but is slower than a genuine dictionary lookup.
+
+
+
+Working with Parameters
+-----------------------
+The user can interact with a single |Parameter| by its attributes  :attr:`name`, :attr:`value`, :attr:`range`, :attr:`is_active`:
+
+>>> interface[0]
+Parameter(50, "x_1", True, (10,100))
+>>> interface[0].value
+50
+>>> interface[0].name = 'y_1'
+>>> interface[0].name
+'y_1'
+>>> interface[0].is_active
+True
+>>> interface[0].range
+(10,100)
+
+
+In addition to single-parameter interactions, the user can interact with all parameters in an interface at once
+through the attributes :attr:`names`, :attr:`x`, :attr:`range`, :attr:`is_active`:
+
+>>> interface.x           # Returns the `Parameter.value` of every parameter in the interface
+>>> [50, 1.23, ..., 321]
+>>> interface.names       # Returns the `Parameter.name` of every parameter in the interface
+['y_1', 'x_2', ..., 'x_N']
+>>> interface.range       # Returns the `Parameter.range` of every parameter in the interface
+[(10, 100), ..., (0,1)]
+>>> interface.is_active   # Returns the `Parameter.is_active` of every parameter in the interface
+[True, False, ..., True]
+
+.. note::
+  The attributes :attr:`range`, :attr:`is_active` are present in both, |Parameter| and |BaseParams| classes.
+
+
+Any of the above attributes can be used as a setter, to change or set multiple parameter values at once:
+
+>>> interface.x
+[50, 1.23, ..., 321]
+>>> new_x = interface.x
+>>> new_x[0] = 1000.
+>>> interface.x = new_x
+>>> interface.x
+[1000., 1.23, ..., 321]
+>>>
+>>> interface.is_active = len(interface)*[False] # Sets all parameters to is_active=False
+>>> not all(interface.is_active)
+True
+
+.. note::
+  The above setters only work when the value they are being set to is of the same length as ``len(interface)``:
+
+  >>> len(interface)
+  100
+  >>> interface.x = [1,2]
+  ValueError: Len of passed values is not the same as size of this interface.
+
+
+
+The Active Parameters Subset
+----------------------------
+.. important::
+  During an optimization, only the `active` subset of parameters will be optimized.
+
+The dynamic :attr:`~scm.params.parameterinterfaces.base.BaseParameters.active` attribute returns a subset of
+all parameters that meet the  ``Parameter.is_active==True`` comparison:
+
+>>> len(interface)
+100
+>>> interface.is_active.count(True) # Number of is_active parameters
+50
+>>> len(interface.active)
+50
+>>> interface.is_active = len(interface)*[False]
+>>> len(interface.active)
+0
+
+This subset of a parameter interface behaves just
+like the main interface:
+
+>>> for active_param in interface.active:
+...   do_something(active_param)
+>>> interface.active.x     = new_x
+>>> interface.active.range = new_ranges
+>>> all(interface.active.is_active) # Obviously
+True
+
+
+Storage
+-------
+Each parameter interface has a
+:meth:`write() <BaseParameters.write>`
+method which will write the currently stored parameter values
+to disk in a format native to the associated engine and
+readable by AMS.
+For more information check out the
+:ref:`respective <Available Parameter Interfaces>`
+parameter interface documentation.
+
+Lossless Storage
+^^^^^^^^^^^^^^^^
+In most cases, storing an interface with the
+:meth:`write() <BaseParameters.write>`
+method will not preserve any information that might be
+relevant for future parameterizations.
+In such cases, the
+:meth:`pickle_dump() <BaseParameters.pickle_dump>` and
+:meth:`pickle_load() <BaseParameters.pickle_load>`
+methods can be used to store and load the complete instance
+in binary format.
+This preserves all additional parameter attributes such as
+:attr:`range` or :attr:`is_active`:
+
+>>> ljp1 = LennardJonesParameters()
+>>> ljp1[0].value = 42
+>>> ljp1[0].range = (0, 43)
+>>> ljp1.pickle_dump('ljp1.pkl')
+>>> ljp2 = LennardJonesParameters.pickle_load('ljp1.pkl')
+>>> ljp1 == ljp2
+True
+
+
+
+Relation to PLAMS Settings
+--------------------------
+Each parameter interface can be represented as a
+`PLAMS Settings <../../../plams/interfaces/ams.html>`_ instance.
+This happens through the :meth:`get_engine() <BaseParameters.get_engine>` method,
+which returns an intermediary :ref:`Engine` instance:
+
+>>> ljp    = LennardJonesParameters()
+>>> engine = ljp.get_engine()
+>>> print(engine)
+AMSInput: |
+   Engine lennardjones
+     eps 0.0003
+     rmin 3.0
+   EndEngine
+
+Engine instances are intended to be stored in :ref:`engine collections <Engine Collection>`
+whenever data needs to be reproduced or shared.
+The PLAMS Settings instance associated with each Engine instance can be accessed through the
+:attr:`Engine.settings` attribute:
+
+>>> print(engine.settings)
+input:
+      lennardjones:
+                   eps: 	0.0003
+                   rmin: 	3.0
+
+
+
+
+
+
+
+
+Parameter API
+-------------
+.. autoclass:: Parameter
+  :no-members:
+
+
+Interface Base Class API
+------------------------
+Base class from which all engine specific parameterizations should derive:
+
+.. autoclass:: BaseParameters
+  :no-members:
+
+  .. automethod:: __init__
+  .. autoattribute:: x
+  .. autoattribute:: names
+  .. autoattribute:: is_active
+  .. autoattribute:: range
+  .. autoattribute:: active
+  .. automethod:: get_engine
+  .. automethod:: write
+  .. automethod:: pickle_dump
+  .. automethod:: pickle_load
+  .. automethod:: __len__
+  .. automethod:: __iter__
+  .. automethod:: __getitem__
+  .. automethod:: __call__
+  .. automethod:: __eq__
+  .. automethod:: index

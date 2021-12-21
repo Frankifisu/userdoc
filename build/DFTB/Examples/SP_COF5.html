@@ -1,0 +1,1129 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+<META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Example: Single point COF5 &mdash; DFTB 2021.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme_tabs.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/panels-bootstrap.min.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="DFTB 2021.1 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="../Examples.html"/>
+        <link rel="next" title="Example: Single point COF5, 2D" href="SP_COF5_2D.html"/>
+        <link rel="prev" title="Example: Single Point H2 MOF" href="SP_H2_MOF.html"/> 
+
+  
+  <script src="../_static/js/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/app.js"></script>
+<script type="text/javascript">
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NCRWHZZ');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <!--STARTNOSOLR-->
+  <header class="site-header navbar-fixed-top compact">
+      <nav class="main navbar navbar-default">
+        <div class="headerbar_container">
+          <a role="button" href="/free-trial/" class="btn btn-sm btn-primary">Free trial</a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              <a class="logo" href="https://www.scm.com">
+                <img class="logo-small" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="Software for Chemistry &amp; Materials" />
+                <img class="logo-full" src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo.svg" alt="Software for Chemistry &amp; Materials" />
+              </a>
+            </div>
+          </div>
+          <div class="nav-wrapper">
+            <div class="collapse navbar-collapse">
+              <ul id="menu-primary-navigation" class="nav navbar-nav"><li id="menu-item-40077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40077"><a title="Applications" href="https://www.scm.com/applications/">Applications</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a title="Products" href="https://www.scm.com/amsterdam-modeling-suite/">Products</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a title="Support" href="https://www.scm.com/support/">Support</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a title="About us" href="https://www.scm.com/about-us/">About us</a></li>
+</ul>                           <span class="search"><a class="menu_search_link" href="https://www.scm.com/search.php"></a><span class="sr-only">Search</span></span>
+            </div>
+          </div>
+        </div>
+      </nav>
+ </header>
+    
+
+   
+  <div id="doc-wrapper">
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+          
+  <ul>
+      <li class="wy-breadcrumbs-aside">
+        
+           
+           <a class="keyword-spacing" href="../keywords.html">Keywords</a>
+           
+           
+           <a href="../genindex.html">Index</a>
+           
+        
+      </li>
+  </ul>
+ 
+<!--ENDNOSOLR-->
+             <!--STARTNOSOLR-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form search-docs-form" action="https://www.scm.com/search.php" method="get">
+  <div class="input-group">
+    <input type="text" name="search" placeholder="Search DFTB" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <input type="hidden" name="root" value="doctrunk" />
+
+
+    <input type="hidden" name="cat" value="doc-DFTB" />
+
+
+    <span class="input-group-btn">
+			<button type="submit" class="btn btn-primary"><span class="sr-only">Search</span><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+  </form>
+</div>
+<!--ENDNOSOLR-->
+          
+
+          
+        </div>
+<!--STARTNOSOLR-->
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../General.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General.html#what-s-new-in-dftb">What’s new in DFTB?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2022-1">New in DFTB2022.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2021-1">New in DFTB2021.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2020">New in DFTB2020</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2019-3">New in DFTB2019.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2019-1">New in DFTB2019.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../General.html#new-in-dftb2018">New in DFTB2018</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../General.html#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../General.html#ams-a-new-driver-program">AMS: a new driver program</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html">AMS driver’s tasks and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#geometry-system-definition">Geometry, System definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#tasks-exploring-the-pes">Tasks: exploring the PES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AMSdriver_tasks_and_properties.html#properties-in-the-ams-driver">Properties in the AMS driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html">Model Hamiltonians</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#slater-koster-based-dftb">Slater-Koster based DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#model-hamiltonian">Model Hamiltonian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#dispersion-correction">Dispersion correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#solvation-gbsa">Solvation (GBSA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#scc-details-and-spin-polarization">SCC details and spin-polarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#k-space-integration">k-space integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#xtb-specific-keywords">xTB specific keywords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DFTB_Model_Hamiltonian.html#technical-options">Technical options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Spectroscopy_and_Properties.html">Spectroscopy and properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#electronic-structure-of-periodic-systems">Electronic structure of periodic systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#excited-states-with-time-dependent-dftb">Excited states with time-dependent DFTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#excited-state-gradients">Excited state gradients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#frequencies-phonons-vcd">Frequencies, phonons, VCD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#vibrationally-resolved-electronic-spectra">Vibrationally resolved electronic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#stress-tensor-elasticity">Stress tensor, Elasticity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#charges-bond-orders-dipole-moment-polarizability">Charges, Bond Orders, Dipole Moment, Polarizability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#fragment-orbital-analysis">Fragment orbital analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Spectroscopy_and_Properties.html#nbo-analysis">NBO analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../NEGF.html">Electronic transport (NEGF)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#transport-with-negf-in-a-nutshell">Transport with NEGF in a nutshell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#simulations-work-flow">Simulations work flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#conductance-input-options">Conductance input options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NEGF.html#miscellaneous-remarks-on-dftb-negf">Miscellaneous remarks on DFTB-NEGF</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Charge_transfer_integrals.html">Charge transport (transfer integrals)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Charge_transfer_integrals.html#charge-transfer-integrals-direct-method">Charge transfer integrals direct method</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../Examples.html#model-hamiltonians">Model Hamiltonians</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="SP_aspirin_SCC.html">Example: SCC-DFTB aspirin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_aspirin_fermi.html">Example: Smeared Fermi-Dirac occupations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_aspirin_GP_SCC.html">Example: Periodic aspirin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_CG_aspirin_SCC.html">Example: GO aspirin DFTB-SCC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_CH3COOminus_3rdOrder.html">Example: DFTB3 CH3COO-</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_dispersion.html">Example: DFTB3 dispersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_dispersion_periodic.html">Example: DFTB3 dispersion periodic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_Cyclobutadiene_triplet_spin.html">Example: Unpaired electrons cyclobutadiene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_o2_spin.html">Example: Spin polarized O2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_CH_spin_ldep.html">Example: Orbital dependent spin-polarized CH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NaCl_natural.html">Example: NaCl fractional coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_NaClSlab_SCC.html">Example: NaCl slab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_OHminus_noSCC.html">Example: OH- noSCC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_OHminus_SCC.html">Example: OH- SCC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_H2_MOF.html">Example: Single Point H2 MOF</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example: Single point COF5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_COF5_2D.html">Example: Single point COF5, 2D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_COF5_3D.html">Example: Single point COF5, 3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_Hplus.html">Example: H+</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GBSA_solvation.html">Example: geometry optimizations in solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="KSpace_sampling.html">Example: Precision: k-space integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_extpotential.html">Example: External potential at nuclei</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_DFTB_restart.html">Example: Restart DFTB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TECH_systeminput.html">Example: System input from file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#geometry-optimization">Geometry Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GO_formaldehyde_noSCC.html">Example: GO formaldehyde noSCC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_formaldehyde_SCC.html">Example: GO formaldehyde SCC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_SCMGO_aspirin_SCC.html">Example: GO aspirin SCMGO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_CH3COOminus_3rdOrder.html">Example: GO H3COO- DFTB3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_cyclobutadiene_spin_fermi.html">Example: GO cyclobutadiene spin-polarized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_cyclobutadiene_unpairedelectrons.html">Example: GO cyclobutadiene unpaired electrons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_ethane.html">Example: GO ethane 0D, 1D, 2D, 3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_PEChain.html">Example: GO poly-ethyleen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_restart.html">Example: Restarting a geometry optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constraints.html">Example: GO with constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_restraints.html">Example: GO with restraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SCMGO_BakerSet.html">Example: GO BakerSet SCMGO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SCMGO_PE.html">Example: GO polyethylene SCMGO plams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DFTBAutomations.html">Example: geometry optimizations: automations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_LR-TDDFTB_benzene.html">Example: Geometry optimization for an excited state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_LR-TDDFTB_CO_eigenfollow.html">Example: Geometry optimization following a specific excited state</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#pesscan-linear-transit-transition-state-neb">PESScan, Linear Transit, Transition State, NEB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LinearTransit.html">Example: Linear transit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LinearTransit_periodic.html">Example: Linear Transit periodic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PESScan.html">Example: PESScan ethane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PESScan_and_TS_H2_on_Graphene.html">Example: PES scan and transition state search for H2 on graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TS_ethane.html">Example: Transition state search Ethane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TS_H2O_on_frozen_MgO.html">Example: TS H2O on frozen MgO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TS_partial_Hessian.html">Example: TS partial Hessian and constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#electronic-structure-of-periodic-systems">Electronic structure of periodic systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SP_EffectiveMass.html">Example: Effective mass</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#excited-states">Excited States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SP_LR-TDDFTB_fullerene.html">Example: Fullerene excitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_LR-TDDFTB_irppy3.html">Example: Excitations Ir(ppy)3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_LR-TDDFTB_Davidson.html">Example: Excitations Davidson algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_LR-TDDFTB_Davidson_onthefly.html">Example: Excitations transition charges on the fly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_LR-TDDFTB_exact.html">Example: Excitations exact diagonalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_LR-TDDFTB_gradients.html">Example: Excited state gradients: plams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_LR-TDDFTB_grimmefilter.html">Example: Excitations SOT filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_LR-TDDFTB_ldep.html">Example: Orbital dependent DFTB: Excitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_LR-TDDFTB_tbe.html">Example: Excitations benchmark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_LR-TDDFTB_betacarotene.html">Example: Test parallelization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#vibrations-ir-spectra-normal-modes-vcd">Vibrations, IR spectra, Normal Modes, VCD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GOFREQ_aspirin_SCC.html">Example: GO and frequencies aspirin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FREQ_aspirin_SCC.html">Example: Normal modes (frequencies) for aspirin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FREQ_H2O.html">Example: Frequencies H2O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FREQ_OHminus.html">Example: Frequencies OH-</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FREQ_H2Slab.html">Example: Frequencies H2 slab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GOFREQ_C60.html">Example: GO and frequencies C60</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FREQ_LR-TDDFTB_benzene.html">Example: Excited states frequencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GOFREQ_LR-TDDFTB_anthracene_S0S1fcf.html">Example: Vibration resolved electronic spectrum: plams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FREQ_HNDT_VCD.html">Example: Vibrational circular dichroism</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#phonons">Phonons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Phonons_Graphene.html">Example: Phonons graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Phonons_Isotopes.html">Example: Phonons with isotopes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Diamond_under_pressure.html">Example: Diamond under pressure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#stress-tensor-elasticity">Stress tensor, Elasticity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SP_stresstensor.html">Example: Stress tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GO_Analytical_Ewald_Urea.html">Example: Analytical stress tensor Urea</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ElasticTensor.html">Example: Elastic tensor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#molecular-dynamics">Molecular Dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MD_aspirin.html">Example: Molecular dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MD_ethylene_graphene.html">Example: MD ethylene graphene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MD_hydrogen.html">Example: MD hydrogen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MD_hydrogen_longrun.html">Example: MD hydrogen long run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MD_periodic.html">Example: MD periodic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#electronic-transport-negf">Electronic transport, NEGF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="conductance.html">Example: Electronic transport with NEGF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TransferIntegrals_dimer_Alq3.html">Example: Charge transfer integrals Alq3 dimer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SP_bondorders.html">Example: Bond orders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DFTB_NAO.html">Example: 3D fields on a grid, QTAIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Li_BZPlot.html">Example: Band structure with user-defined BZ path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SP_DFTBNBO.html">Example: NBO analyse H2O</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Parameter_files.html">Parameterizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Parameter_files.html#parameter-meta-info">Parameter meta-info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Parameter_files.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Parameter_files.html#available-parameter-sets">Available parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#dftb-org">DFTB.org</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#quasinano">QUASINANO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#dresden">Dresden</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Parameter_files.html#files-in-the-resources-directory">Files in the resources directory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#slater-koster-files">Slater-Koster files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#additional-yaml-files">Additional .yaml files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Parameter_files.html#basis-function-information-in-rkf-files">Basis function information in .rkf files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Parameter_files.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Required_citations.html">Required citations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#general-references">General references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Required_citations.html#parameter-references">Parameter references</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#slater-koster-based-dftb">Slater-Koster based DFTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#general-description">General Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#parameter-sets">Parameter sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../References.html#quasinano2013-1">QUASINANO2013.1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#quasinano2015">QUASINANO2015</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#dresden">Dresden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../References.html#dftb-org">DFTB.org</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#extended-tight-binding-xtb">Extended tight-binding (xTB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#external-programs-and-libraries">External programs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">Keywords</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#links-to-manual-entries">Links to manual entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keywords.html#summary-of-all-keywords">Summary of all keywords</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">DFTB</a>
+      </nav>
+<!--ENDNOSOLR-->
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        <!--STARTNOSOLR-->
+<div class="header" role="navigation" aria-label="breadcrumbs navigation">
+ 
+  <ul class="wy-breadcrumbs">
+    <li><a href="../DFTB.html/../../Documentation/index.html">Documentation</a>/</li>
+    <li><a href="../index.html">DFTB</a>/</li>
+      
+          <li><a href="../Examples.html">Examples</a>/</li>
+      
+    <li class="orange-text">Example: Single point COF5</li>
+  </ul>
+  <p>
+ 
+</div>
+<!--ENDNOSOLR-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="example-single-point-cof5">
+<span id="example-sp-cof5"></span><h1>Example: Single point COF5<a class="headerlink" href="#example-single-point-cof5" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" download="" href="../_downloads/630b579f41e1fdb284ab9e850cc08be5/SP_COF5.run"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">SP_COF5.run</span></code></a></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">$AMSBIN</span>/ams <span class="s">&lt;&lt; eor</span>
+
+<span class="s">Task SinglePoint</span>
+
+<span class="s">System</span>
+<span class="s">    Atoms</span>
+<span class="s">        B      38.63248800      32.59377000       0.91194600</span>
+<span class="s">        C      36.09458800      35.44149000       0.92444600</span>
+<span class="s">        C      34.85617800      34.77408000       0.92199600</span>
+<span class="s">        C      34.89652800      33.36791000       0.92484600</span>
+<span class="s">        C      36.09798800      32.67391000       0.92531600</span>
+<span class="s">        C      37.33626800      33.34130000       0.92419600</span>
+<span class="s">        C      37.29612800      34.74734000       0.92611600</span>
+<span class="s">        H      33.95059800      32.80183000       0.92439600</span>
+<span class="s">        H      36.08021800      31.57168000       0.92504600</span>
+<span class="s">        H      38.24223800      35.31352000       0.92657600</span>
+<span class="s">        H      36.11240200      36.54401000       0.92374600</span>
+<span class="s">        C      29.28170700      37.19760000       0.85329600</span>
+<span class="s">        C      29.97484700      35.99389000       0.87646600</span>
+<span class="s">        C      31.36465700      35.99214000       0.88762600</span>
+<span class="s">        C      32.06076700      37.19435000       0.87479600</span>
+<span class="s">        O      29.02497700      34.89896000       0.88401600</span>
+<span class="s">        O      32.31174700      34.89496000       0.91024600</span>
+<span class="s">        O      33.48383700      36.91940000       0.88909600</span>
+<span class="s">        O      27.85778700      36.92589000       0.84604600</span>
+<span class="s">        B      33.56100700      35.52326000       0.90899600</span>
+<span class="s">        C      37.29593700      52.17899000       0.86629600</span>
+<span class="s">        C      37.33667700      53.58514000       0.86421600</span>
+<span class="s">        C      36.09870700      54.25318000       0.86022600</span>
+<span class="s">        C      34.89691700      53.55963000       0.85949600</span>
+<span class="s">        C      34.85601700      52.15338000       0.86069600</span>
+<span class="s">        C      36.09417700      51.48538000       0.86332600</span>
+<span class="s">        H      36.08146700      55.35543000       0.85847600</span>
+<span class="s">        H      33.95121700      54.12617000       0.85664600</span>
+<span class="s">        H      36.11128700      50.38306000       0.86407600</span>
+<span class="s">        H      38.24167700      51.61260000       0.86954600</span>
+<span class="s">        C      31.87386700      44.15720700       0.79794600</span>
+<span class="s">        C      30.67636700      44.89542800       0.80012600</span>
+<span class="s">        C      29.47895800      44.15705700       0.79609600</span>
+<span class="s">        C      29.47894800      42.76949400       0.79519600</span>
+<span class="s">        C      30.67646700      42.03134900       0.79957600</span>
+<span class="s">        C      31.87388700      42.76958800       0.79849600</span>
+<span class="s">        H      28.51565800      44.69324600       0.79534600</span>
+<span class="s">        H      28.51578800      42.23324900       0.79376600</span>
+<span class="s">        H      32.83719700      42.23353100       0.80019600</span>
+<span class="s">        H      32.83738700      44.69300100       0.79887600</span>
+<span class="s">        C      31.36431700      50.93490000       0.87506600</span>
+<span class="s">        C      29.97459800      50.93282000       0.88854600</span>
+<span class="s">        C      29.28148800      49.72897000       0.87776600</span>
+<span class="s">        C      29.97798800      48.52647000       0.85291600</span>
+<span class="s">        C      31.36707700      48.52853000       0.83951600</span>
+<span class="s">        C      32.06050700      49.73297000       0.85087600</span>
+<span class="s">        O      27.85751800      50.00036000       0.89359600</span>
+<span class="s">        O      29.50464800      47.15628500       0.83719600</span>
+<span class="s">        O      33.48353700      50.00819000       0.84179600</span>
+<span class="s">        O      32.31147700      52.03219000       0.88159600</span>
+<span class="s">        O      31.84369700      47.15959500       0.81491600</span>
+<span class="s">        O      29.02457800      52.02737000       0.91129600</span>
+<span class="s">        B      49.48807800      51.39620000       0.91194600</span>
+<span class="s">        B      33.56072700      51.40425000       0.86106600</span>
+<span class="s">        B      30.67512700      46.39172500       0.81511600</span>
+<span class="s">        C      46.95017800      54.24392000       0.92444600</span>
+<span class="s">        C      45.71176800      53.57651000       0.92199600</span>
+<span class="s">        C      45.75211800      52.17034000       0.92484600</span>
+<span class="s">        C      46.95357800      51.47634000       0.92531600</span>
+<span class="s">        C      48.19185800      52.14373000       0.92419600</span>
+<span class="s">        C      48.15171800      53.54977000       0.92611600</span>
+<span class="s">        H      44.80618800      51.60426000       0.92439600</span>
+<span class="s">        H      46.93580800      50.37411000       0.92504600</span>
+<span class="s">        H      49.09782800      54.11595000       0.92657600</span>
+<span class="s">        H      46.96799200      55.34644000       0.92374600</span>
+<span class="s">        C      29.97819800      38.40024300       0.84009600</span>
+<span class="s">        C      40.13729700      56.00003000       0.85329600</span>
+<span class="s">        C      40.83043700      54.79632000       0.87646600</span>
+<span class="s">        C      42.22024700      54.79457000       0.88762600</span>
+<span class="s">        C      42.91635700      55.99678000       0.87479600</span>
+<span class="s">        C      31.36743700      38.39862600       0.85042600</span>
+<span class="s">        O      39.88056700      53.70139000       0.88401600</span>
+<span class="s">        O      43.16733700      53.69739000       0.91024600</span>
+<span class="s">        O      31.84405700      39.76748000       0.83267600</span>
+<span class="s">        O      29.50498800      39.77018800       0.81591600</span>
+<span class="s">        O      44.33942700      55.72183000       0.88909600</span>
+<span class="s">        O      38.71337700      55.72832000       0.84604600</span>
+<span class="s">        B      38.63298700      54.33249000       0.86504600</span>
+<span class="s">        B      30.67547700      40.53503300       0.81349600</span>
+<span class="s">        B      44.41659700      54.32569000       0.90899600</span>
+<span class="s">        C      48.15152700      33.37656000       0.86629600</span>
+<span class="s">        C      48.19226700      34.78271000       0.86421600</span>
+<span class="s">        C      46.95429700      35.45075000       0.86022600</span>
+<span class="s">        C      45.75250700      34.75720000       0.85949600</span>
+<span class="s">        C      45.71160700      33.35095000       0.86069600</span>
+<span class="s">        C      46.94976700      32.68295000       0.86332600</span>
+<span class="s">        H      46.93705700      36.55300000       0.85847600</span>
+<span class="s">        H      44.80680700      35.32374000       0.85664600</span>
+<span class="s">        H      46.96687700      31.58063000       0.86407600</span>
+<span class="s">        H      49.09726700      32.81017000       0.86954600</span>
+<span class="s">        H      41.62620000      58.78560000       4.00763000</span>
+<span class="s">        B      75.27970000      41.26000000       4.40091000</span>
+<span class="s">        O      76.44790000      47.88460000       4.40233000</span>
+<span class="s">        C      72.88540000      44.19030000       0.93922800</span>
+<span class="s">        C      72.88540000      42.80270000       0.93832800</span>
+<span class="s">        C      74.08290000      42.06460000       0.94270800</span>
+<span class="s">        O      73.62880000      52.75230000       4.49871000</span>
+<span class="s">        C      72.68820000      37.23080000       0.99642800</span>
+<span class="s">        C      73.38130000      36.02710000       1.01960000</span>
+<span class="s">        C      75.28040000      42.80280000       0.94162800</span>
+<span class="s">        C      42.21990700      32.13247000       0.87506600</span>
+<span class="s">        C      40.83018800      32.13039000       0.88854600</span>
+<span class="s">        C      40.13707800      30.92654000       0.87776600</span>
+<span class="s">        C      40.83357800      29.72404000       0.85291600</span>
+<span class="s">        C      42.22266700      29.72610000       0.83951600</span>
+<span class="s">        C      42.91609700      30.93054000       0.85087600</span>
+<span class="s">        O      38.71310800      31.19793000       0.89359600</span>
+<span class="s">        H      71.92210000      44.72650000       0.93847800</span>
+<span class="s">        O      44.33912700      31.20576000       0.84179600</span>
+<span class="s">        O      43.16706700      33.22976000       0.88159600</span>
+<span class="s">        H      71.92230000      42.26650000       0.93689800</span>
+<span class="s">        O      39.88016800      33.22494000       0.91129600</span>
+<span class="s">        B      60.34366800      32.59377000       0.91194600</span>
+<span class="s">        B      44.41631700      32.60182000       0.86106600</span>
+<span class="s">        C      63.66180000      58.00260000       4.03379000</span>
+<span class="s">        C      57.80576800      35.44149000       0.92444600</span>
+<span class="s">        C      56.56735800      34.77408000       0.92199600</span>
+<span class="s">        C      56.60770800      33.36791000       0.92484600</span>
+<span class="s">        C      57.80916800      32.67391000       0.92531600</span>
+<span class="s">        C      59.04744800      33.34130000       0.92419600</span>
+<span class="s">        C      59.00730800      34.74734000       0.92611600</span>
+<span class="s">        H      55.66177800      32.80183000       0.92439600</span>
+<span class="s">        H      57.79139800      31.57168000       0.92504600</span>
+<span class="s">        H      59.95341800      35.31352000       0.92657600</span>
+<span class="s">        H      57.82358200      36.54401000       0.92374600</span>
+<span class="s">        C      65.05090000      58.00470000       4.02039000</span>
+<span class="s">        C      50.99288700      37.19760000       0.85329600</span>
+<span class="s">        C      51.68602700      35.99389000       0.87646600</span>
+<span class="s">        C      53.07583700      35.99214000       0.88762600</span>
+<span class="s">        C      53.77194700      37.19435000       0.87479600</span>
+<span class="s">        C      76.66470000      50.45790000       4.43829000</span>
+<span class="s">        O      50.73615700      34.89896000       0.88401600</span>
+<span class="s">        O      54.02292700      34.89496000       0.91024600</span>
+<span class="s">        O      75.25050000      39.80070000       0.97580800</span>
+<span class="s">        H      75.92730000      34.70460000       1.96327000</span>
+<span class="s">        O      55.19501700      36.91940000       0.88909600</span>
+<span class="s">        O      49.56896700      36.92589000       0.84604600</span>
+<span class="s">        B      49.48857700      35.53006000       0.86504600</span>
+<span class="s">        H      40.42870000      58.09420000       0.56339100</span>
+<span class="s">        B      55.27218700      35.52326000       0.90899600</span>
+<span class="s">        C      59.00711700      52.17899000       0.86629600</span>
+<span class="s">        C      59.04785700      53.58514000       0.86421600</span>
+<span class="s">        C      57.80988700      54.25318000       0.86022600</span>
+<span class="s">        C      56.60809700      53.55963000       0.85949600</span>
+<span class="s">        C      56.56719700      52.15338000       0.86069600</span>
+<span class="s">        C      57.80535700      51.48538000       0.86332600</span>
+<span class="s">        H      57.79264700      55.35543000       0.85847600</span>
+<span class="s">        H      55.66239700      54.12617000       0.85664600</span>
+<span class="s">        H      57.82246700      50.38306000       0.86407600</span>
+<span class="s">        H      59.95285700      51.61260000       0.86954600</span>
+<span class="s">        C      53.58504700      44.15720700       0.79794600</span>
+<span class="s">        C      52.38754700      44.89542800       0.80012600</span>
+<span class="s">        C      51.19013800      44.15705700       0.79609600</span>
+<span class="s">        C      51.19012800      42.76949400       0.79519600</span>
+<span class="s">        C      52.38764700      42.03134900       0.79957600</span>
+<span class="s">        C      53.58506700      42.76958800       0.79849600</span>
+<span class="s">        H      50.22683800      44.69324600       0.79534600</span>
+<span class="s">        H      50.22696800      42.23324900       0.79376600</span>
+<span class="s">        H      54.54837700      42.23353100       0.80019600</span>
+<span class="s">        H      54.54856700      44.69300100       0.79887600</span>
+<span class="s">        C      53.07549700      50.93490000       0.87506600</span>
+<span class="s">        C      51.68577800      50.93282000       0.88854600</span>
+<span class="s">        C      50.99266800      49.72897000       0.87776600</span>
+<span class="s">        C      51.68916800      48.52647000       0.85291600</span>
+<span class="s">        C      53.07825700      48.52853000       0.83951600</span>
+<span class="s">        C      53.77168700      49.73297000       0.85087600</span>
+<span class="s">        O      49.56869800      50.00036000       0.89359600</span>
+<span class="s">        O      51.21582800      47.15628500       0.83719600</span>
+<span class="s">        O      55.19471700      50.00819000       0.84179600</span>
+<span class="s">        O      54.02265700      52.03219000       0.88159600</span>
+<span class="s">        O      53.55487700      47.15959500       0.81491600</span>
+<span class="s">        O      50.73575800      52.02737000       0.91129600</span>
+<span class="s">        B      71.19925800      51.39620000       0.91194600</span>
+<span class="s">        B      55.27190700      51.40425000       0.86106600</span>
+<span class="s">        B      52.38630700      46.39172500       0.81511600</span>
+<span class="s">        C      68.66135800      54.24392000       0.92444600</span>
+<span class="s">        C      67.42294800      53.57651000       0.92199600</span>
+<span class="s">        C      67.46329800      52.17034000       0.92484600</span>
+<span class="s">        C      68.66475800      51.47634000       0.92531600</span>
+<span class="s">        C      69.90303800      52.14373000       0.92419600</span>
+<span class="s">        C      69.86289800      53.54977000       0.92611600</span>
+<span class="s">        H      66.51736800      51.60426000       0.92439600</span>
+<span class="s">        H      68.64698800      50.37411000       0.92504600</span>
+<span class="s">        H      70.80900800      54.11595000       0.92657600</span>
+<span class="s">        H      68.67917200      55.34644000       0.92374600</span>
+<span class="s">        C      51.68937800      38.40024300       0.84009600</span>
+<span class="s">        C      61.84847700      56.00003000       0.85329600</span>
+<span class="s">        C      62.54161700      54.79632000       0.87646600</span>
+<span class="s">        C      63.93142700      54.79457000       0.88762600</span>
+<span class="s">        C      64.62753700      55.99678000       0.87479600</span>
+<span class="s">        C      53.07861700      38.39862600       0.85042600</span>
+<span class="s">        O      61.59174700      53.70139000       0.88401600</span>
+<span class="s">        O      64.87851700      53.69739000       0.91024600</span>
+<span class="s">        O      53.55523700      39.76748000       0.83267600</span>
+<span class="s">        O      51.21616800      39.77018800       0.81591600</span>
+<span class="s">        O      66.05060700      55.72183000       0.88909600</span>
+<span class="s">        O      60.42455700      55.72832000       0.84604600</span>
+<span class="s">        B      60.34416700      54.33249000       0.86504600</span>
+<span class="s">        B      52.38665700      40.53503300       0.81349600</span>
+<span class="s">        B      66.12777700      54.32569000       0.90899600</span>
+<span class="s">        C      69.86270700      33.37656000       0.86629600</span>
+<span class="s">        C      69.90344700      34.78271000       0.86421600</span>
+<span class="s">        C      68.66547700      35.45075000       0.86022600</span>
+<span class="s">        C      67.46368700      34.75720000       0.85949600</span>
+<span class="s">        C      67.42278700      33.35095000       0.86069600</span>
+<span class="s">        C      68.66094700      32.68295000       0.86332600</span>
+<span class="s">        H      68.64823700      36.55300000       0.85847600</span>
+<span class="s">        H      66.51798700      35.32374000       0.85664600</span>
+<span class="s">        H      68.67805700      31.58063000       0.86407600</span>
+<span class="s">        H      70.80844700      32.81017000       0.86954600</span>
+<span class="s">        O      71.26400000      50.03360000       1.03673000</span>
+<span class="s">        O      72.91110000      47.18950000       0.98032800</span>
+<span class="s">        O      76.89000000      50.04140000       0.98492800</span>
+<span class="s">        O      75.71790000      52.06540000       1.02473000</span>
+<span class="s">        H      40.29530000      28.78780000       0.84401700</span>
+<span class="s">        C      75.46720000      37.22760000       1.01793000</span>
+<span class="s">        H      42.76340000      28.79140000       0.82026900</span>
+<span class="s">        H      78.40770000      50.79390000       5.33228000</span>
+<span class="s">        H      77.19540000      36.89190000       1.94043000</span>
+<span class="s">        O      72.46180000      50.72530000       4.48101000</span>
+<span class="s">        C      63.93108700      32.13247000       0.87506600</span>
+<span class="s">        C      62.54136800      32.13039000       0.88854600</span>
+<span class="s">        C      61.84825800      30.92654000       0.87776600</span>
+<span class="s">        C      62.54475800      29.72404000       0.85291600</span>
+<span class="s">        C      63.93384700      29.72610000       0.83951600</span>
+<span class="s">        C      64.62727700      30.93054000       0.85087600</span>
+<span class="s">        O      60.42428800      31.19793000       0.89359600</span>
+<span class="s">        C      75.28060000      45.62040000       4.38754000</span>
+<span class="s">        O      66.05030700      31.20576000       0.84179600</span>
+<span class="s">        O      64.87824700      33.22976000       0.88159600</span>
+<span class="s">        C      73.38110000      50.96600000       1.03168000</span>
+<span class="s">        O      61.59134800      33.22494000       0.91129600</span>
+<span class="s">        B      66.12749700      32.60182000       0.86106600</span>
+<span class="s">        H      42.91950000      58.02730000       0.51287600</span>
+<span class="s">        O      75.25020000      47.19280000       0.95804800</span>
+<span class="s">        O      72.43100000      52.06060000       1.05443000</span>
+<span class="s">        H      28.73060000      50.75160000       3.43629000</span>
+<span class="s">        C      74.08320000      44.88200000       4.38351000</span>
+<span class="s">        B      71.19975700      35.53006000       0.86504600</span>
+<span class="s">        H      27.53310000      50.06030000      -0.00795049</span>
+<span class="s">        B      39.82995800      33.28513000       4.35618600</span>
+<span class="s">        C      37.29205800      36.13285000       4.36868600</span>
+<span class="s">        C      36.05364800      35.46544000       4.36623600</span>
+<span class="s">        C      36.09399800      34.05927000       4.36908600</span>
+<span class="s">        C      37.29545800      33.36527000       4.36955600</span>
+<span class="s">        C      38.53373800      34.03266000       4.36843600</span>
+<span class="s">        C      38.49359800      35.43870000       4.37035600</span>
+<span class="s">        H      35.14806800      33.49319000       4.36863600</span>
+<span class="s">        H      37.27768800      32.26304000       4.36928600</span>
+<span class="s">        H      39.43970800      36.00488000       4.37081600</span>
+<span class="s">        H      37.30987200      37.23537000       4.36798600</span>
+<span class="s">        C      30.47917700      37.88896000       4.29753600</span>
+<span class="s">        C      31.17231700      36.68525000       4.32070600</span>
+<span class="s">        C      32.56212700      36.68350000       4.33186600</span>
+<span class="s">        C      33.25823700      37.88571000       4.31903600</span>
+<span class="s">        O      30.22244700      35.59032000       4.32825600</span>
+<span class="s">        O      33.50921700      35.58632000       4.35448600</span>
+<span class="s">        O      34.68130700      37.61076000       4.33333600</span>
+<span class="s">        O      29.05525700      37.61725000       4.29028600</span>
+<span class="s">        B      34.75847700      36.21462000       4.35323600</span>
+<span class="s">        C      38.49340700      52.87035000       4.31053600</span>
+<span class="s">        C      38.53414700      54.27650000       4.30845600</span>
+<span class="s">        C      37.29617700      54.94454000       4.30446600</span>
+<span class="s">        C      36.09438700      54.25099000       4.30373600</span>
+<span class="s">        C      36.05348700      52.84474000       4.30493600</span>
+<span class="s">        C      37.29164700      52.17674000       4.30756600</span>
+<span class="s">        H      37.27893700      56.04679000       4.30271600</span>
+<span class="s">        H      35.14868700      54.81753000       4.30088600</span>
+<span class="s">        H      37.30875700      51.07442000       4.30831600</span>
+<span class="s">        H      39.43914700      52.30396000       4.31378600</span>
+<span class="s">        C      33.07133700      44.84856700       4.24218600</span>
+<span class="s">        C      31.87383700      45.58678800       4.24436600</span>
+<span class="s">        C      30.67642800      44.84841700       4.24033600</span>
+<span class="s">        C      30.67641800      43.46085400       4.23943600</span>
+<span class="s">        C      31.87393700      42.72270900       4.24381600</span>
+<span class="s">        C      33.07135700      43.46094800       4.24273600</span>
+<span class="s">        H      29.71312800      45.38460600       4.23958600</span>
+<span class="s">        H      29.71325800      42.92460900       4.23800600</span>
+<span class="s">        H      34.03466700      42.92489100       4.24443600</span>
+<span class="s">        H      34.03485700      45.38436100       4.24311600</span>
+<span class="s">        C      32.56178700      51.62626000       4.31930600</span>
+<span class="s">        C      31.17206800      51.62418000       4.33278600</span>
+<span class="s">        C      30.47895800      50.42033000       4.32200600</span>
+<span class="s">        C      31.17545800      49.21783000       4.29715600</span>
+<span class="s">        C      32.56454700      49.21989000       4.28375600</span>
+<span class="s">        C      33.25797700      50.42433000       4.29511600</span>
+<span class="s">        O      29.05498800      50.69172000       4.33783600</span>
+<span class="s">        O      30.70211800      47.84764500       4.28143600</span>
+<span class="s">        O      34.68100700      50.69955000       4.28603600</span>
+<span class="s">        O      33.50894700      52.72355000       4.32583600</span>
+<span class="s">        O      33.04116700      47.85095500       4.25915600</span>
+<span class="s">        O      30.22204800      52.71873000       4.35553600</span>
+<span class="s">        B      50.68554800      52.08756000       4.35618600</span>
+<span class="s">        B      34.75819700      52.09561000       4.30530600</span>
+<span class="s">        B      31.87259700      47.08308500       4.25935600</span>
+<span class="s">        C      48.14764800      54.93528000       4.36868600</span>
+<span class="s">        C      46.90923800      54.26787000       4.36623600</span>
+<span class="s">        C      46.94958800      52.86170000       4.36908600</span>
+<span class="s">        C      48.15104800      52.16770000       4.36955600</span>
+<span class="s">        C      49.38932800      52.83509000       4.36843600</span>
+<span class="s">        C      49.34918800      54.24113000       4.37035600</span>
+<span class="s">        H      46.00365800      52.29562000       4.36863600</span>
+<span class="s">        H      48.13327800      51.06547000       4.36928600</span>
+<span class="s">        H      50.29529800      54.80731000       4.37081600</span>
+<span class="s">        H      48.16546200      56.03780000       4.36798600</span>
+<span class="s">        C      31.17566800      39.09160300       4.28433600</span>
+<span class="s">        C      41.33476700      56.69139000       4.29753600</span>
+<span class="s">        C      42.02790700      55.48768000       4.32070600</span>
+<span class="s">        C      43.41771700      55.48593000       4.33186600</span>
+<span class="s">        C      44.11382700      56.68814000       4.31903600</span>
+<span class="s">        C      32.56490700      39.08998600       4.29466600</span>
+<span class="s">        O      41.07803700      54.39275000       4.32825600</span>
+<span class="s">        O      44.36480700      54.38875000       4.35448600</span>
+<span class="s">        O      33.04152700      40.45884000       4.27691600</span>
+<span class="s">        O      30.70245800      40.46154800       4.26015600</span>
+<span class="s">        O      45.53689700      56.41319000       4.33333600</span>
+<span class="s">        O      39.91084700      56.41968000       4.29028600</span>
+<span class="s">        B      39.83045700      55.02385000       4.30928600</span>
+<span class="s">        B      31.87294700      41.22639300       4.25773600</span>
+<span class="s">        B      45.61406700      55.01705000       4.35323600</span>
+<span class="s">        C      49.34899700      34.06792000       4.31053600</span>
+<span class="s">        C      49.38973700      35.47407000       4.30845600</span>
+<span class="s">        C      48.15176700      36.14211000       4.30446600</span>
+<span class="s">        C      46.94997700      35.44856000       4.30373600</span>
+<span class="s">        C      46.90907700      34.04231000       4.30493600</span>
+<span class="s">        C      48.14723700      33.37431000       4.30756600</span>
+<span class="s">        H      48.13452700      37.24436000       4.30271600</span>
+<span class="s">        H      46.00427700      36.01510000       4.30088600</span>
+<span class="s">        H      48.16434700      32.27199000       4.30831600</span>
+<span class="s">        H      50.29473700      33.50153000       4.31378600</span>
+<span class="s">        H      77.12510000      35.39640000       5.40756000</span>
+<span class="s">        H      75.92700000      52.31300000       0.12108900</span>
+<span class="s">        H      76.24370000      42.26670000       0.94332800</span>
+<span class="s">        H      27.54810000      36.86590000      -0.06063940</span>
+<span class="s">        H      28.74550000      37.55730000       3.38360000</span>
+<span class="s">        H      76.24390000      44.72620000       0.94200800</span>
+<span class="s">        H      41.49270000      29.47920000       4.28826000</span>
+<span class="s">        B      75.27940000      47.11670000       4.40253000</span>
+<span class="s">        H      62.00640000      28.78780000       0.84401700</span>
+<span class="s">        H      64.47460000      28.79140000       0.82026900</span>
+<span class="s">        C      43.41737700      32.82383000       4.31930600</span>
+<span class="s">        C      42.02765800      32.82175000       4.33278600</span>
+<span class="s">        C      41.33454800      31.61790000       4.32200600</span>
+<span class="s">        C      42.03104800      30.41540000       4.29715600</span>
+<span class="s">        C      43.42013700      30.41746000       4.28375600</span>
+<span class="s">        C      44.11356700      31.62190000       4.29511600</span>
+<span class="s">        O      39.91057800      31.88929000       4.33783600</span>
+<span class="s">        C      75.28030000      44.19040000       0.94107800</span>
+<span class="s">        O      45.53659700      31.89712000       4.28603600</span>
+<span class="s">        O      44.36453700      33.92112000       4.32583600</span>
+<span class="s">        C      74.58240000      39.12520000       4.42751000</span>
+<span class="s">        O      41.07763800      33.91630000       4.35553600</span>
+<span class="s">        B      61.54113800      33.28513000       4.35618600</span>
+<span class="s">        B      45.61378700      33.29318000       4.30530600</span>
+<span class="s">        C      74.77080000      50.96810000       1.01820000</span>
+<span class="s">        C      59.00323800      36.13285000       4.36868600</span>
+<span class="s">        C      57.76482800      35.46544000       4.36623600</span>
+<span class="s">        C      57.80517800      34.05927000       4.36908600</span>
+<span class="s">        C      59.00663800      33.36527000       4.36955600</span>
+<span class="s">        C      60.24491800      34.03266000       4.36843600</span>
+<span class="s">        C      60.20477800      35.43870000       4.37035600</span>
+<span class="s">        H      56.85924800      33.49319000       4.36863600</span>
+<span class="s">        H      58.98886800      32.26304000       4.36928600</span>
+<span class="s">        H      61.15088800      36.00488000       4.37081600</span>
+<span class="s">        H      59.02105200      37.23537000       4.36798600</span>
+<span class="s">        H      63.20390000      29.47920000       4.28826000</span>
+<span class="s">        C      52.19035700      37.88896000       4.29753600</span>
+<span class="s">        C      52.88349700      36.68525000       4.32070600</span>
+<span class="s">        C      54.27330700      36.68350000       4.33186600</span>
+<span class="s">        C      54.96941700      37.88571000       4.31903600</span>
+<span class="s">        H      65.67210000      29.48280000       4.26451000</span>
+<span class="s">        O      51.93362700      35.59032000       4.32825600</span>
+<span class="s">        O      55.22039700      35.58632000       4.35448600</span>
+<span class="s">        C      74.08280000      44.92860000       0.94325800</span>
+<span class="s">        C      73.88590000      37.92260000       4.44071000</span>
+<span class="s">        O      56.39248700      37.61076000       4.33333600</span>
+<span class="s">        O      50.76643700      37.61725000       4.29028600</span>
+<span class="s">        B      50.68604700      36.22142000       4.30928600</span>
+<span class="s">        C      74.57910000      36.71890000       4.46388000</span>
+<span class="s">        B      56.46965700      36.21462000       4.35323600</span>
+<span class="s">        C      60.20458700      52.87035000       4.31053600</span>
+<span class="s">        C      60.24532700      54.27650000       4.30845600</span>
+<span class="s">        C      59.00735700      54.94454000       4.30446600</span>
+<span class="s">        C      57.80556700      54.25099000       4.30373600</span>
+<span class="s">        C      57.76466700      52.84474000       4.30493600</span>
+<span class="s">        C      59.00282700      52.17674000       4.30756600</span>
+<span class="s">        H      58.99011700      56.04679000       4.30271600</span>
+<span class="s">        H      56.85986700      54.81753000       4.30088600</span>
+<span class="s">        H      59.01993700      51.07442000       4.30831600</span>
+<span class="s">        H      61.15032700      52.30396000       4.31378600</span>
+<span class="s">        C      54.78251700      44.84856700       4.24218600</span>
+<span class="s">        C      53.58501700      45.58678800       4.24436600</span>
+<span class="s">        C      52.38760800      44.84841700       4.24033600</span>
+<span class="s">        C      52.38759800      43.46085400       4.23943600</span>
+<span class="s">        C      53.58511700      42.72270900       4.24381600</span>
+<span class="s">        C      54.78253700      43.46094800       4.24273600</span>
+<span class="s">        H      51.42430800      45.38460600       4.23958600</span>
+<span class="s">        H      51.42443800      42.92460900       4.23800600</span>
+<span class="s">        H      55.74584700      42.92489100       4.24443600</span>
+<span class="s">        H      55.74603700      45.38436100       4.24311600</span>
+<span class="s">        C      54.27296700      51.62626000       4.31930600</span>
+<span class="s">        C      52.88324800      51.62418000       4.33278600</span>
+<span class="s">        C      52.19013800      50.42033000       4.32200600</span>
+<span class="s">        C      52.88663800      49.21783000       4.29715600</span>
+<span class="s">        C      54.27572700      49.21989000       4.28375600</span>
+<span class="s">        C      54.96915700      50.42433000       4.29511600</span>
+<span class="s">        O      50.76616800      50.69172000       4.33783600</span>
+<span class="s">        O      52.41329800      47.84764500       4.28143600</span>
+<span class="s">        O      56.39218700      50.69955000       4.28603600</span>
+<span class="s">        O      55.22012700      52.72355000       4.32583600</span>
+<span class="s">        O      54.75234700      47.85095500       4.25915600</span>
+<span class="s">        O      51.93322800      52.71873000       4.35553600</span>
+<span class="s">        B      72.39672800      52.08756000       4.35618600</span>
+<span class="s">        B      56.46937700      52.09561000       4.30530600</span>
+<span class="s">        B      53.58377700      47.08308500       4.25935600</span>
+<span class="s">        C      69.85882800      54.93528000       4.36868600</span>
+<span class="s">        C      68.62041800      54.26787000       4.36623600</span>
+<span class="s">        C      68.66076800      52.86170000       4.36908600</span>
+<span class="s">        C      69.86222800      52.16770000       4.36955600</span>
+<span class="s">        C      71.10050800      52.83509000       4.36843600</span>
+<span class="s">        C      71.06036800      54.24113000       4.37035600</span>
+<span class="s">        H      67.71483800      52.29562000       4.36863600</span>
+<span class="s">        H      69.84445800      51.06547000       4.36928600</span>
+<span class="s">        H      72.00647800      54.80731000       4.37081600</span>
+<span class="s">        H      69.87664200      56.03780000       4.36798600</span>
+<span class="s">        C      52.88684800      39.09160300       4.28433600</span>
+<span class="s">        C      63.04594700      56.69139000       4.29753600</span>
+<span class="s">        C      63.73908700      55.48768000       4.32070600</span>
+<span class="s">        C      65.12889700      55.48593000       4.33186600</span>
+<span class="s">        C      65.82500700      56.68814000       4.31903600</span>
+<span class="s">        C      54.27608700      39.08998600       4.29466600</span>
+<span class="s">        O      62.78921700      54.39275000       4.32825600</span>
+<span class="s">        O      66.07598700      54.38875000       4.35448600</span>
+<span class="s">        O      54.75270700      40.45884000       4.27691600</span>
+<span class="s">        O      52.41363800      40.46154800       4.26015600</span>
+<span class="s">        O      67.24807700      56.41319000       4.33333600</span>
+<span class="s">        O      61.62202700      56.41968000       4.29028600</span>
+<span class="s">        B      61.54163700      55.02385000       4.30928600</span>
+<span class="s">        B      53.58412700      41.22639300       4.25773600</span>
+<span class="s">        B      67.32524700      55.01705000       4.35323600</span>
+<span class="s">        C      71.06017700      34.06792000       4.31053600</span>
+<span class="s">        C      71.10091700      35.47407000       4.30845600</span>
+<span class="s">        C      69.86294700      36.14211000       4.30446600</span>
+<span class="s">        C      68.66115700      35.44856000       4.30373600</span>
+<span class="s">        C      68.62025700      34.04231000       4.30493600</span>
+<span class="s">        C      69.85841700      33.37431000       4.30756600</span>
+<span class="s">        H      69.84570700      37.24436000       4.30271600</span>
+<span class="s">        H      67.71545700      36.01510000       4.30088600</span>
+<span class="s">        H      69.87552700      32.27199000       4.30831600</span>
+<span class="s">        H      72.00591700      33.50153000       4.31378600</span>
+<span class="s">        O      72.43140000      34.93220000       1.02715000</span>
+<span class="s">        H      43.96090000      29.48280000       4.26451000</span>
+<span class="s">        C      74.08320000      43.49450000       4.38261000</span>
+<span class="s">        C      72.68800000      49.76220000       1.02090000</span>
+<span class="s">        O      74.10890000      47.88130000       4.42461000</span>
+<span class="s">        O      75.71820000      34.92820000       1.05338000</span>
+<span class="s">        O      78.08780000      50.73320000       4.42921000</span>
+<span class="s">        O      72.91150000      39.80340000       0.95904800</span>
+<span class="s">        O      76.89030000      36.95260000       1.03223000</span>
+<span class="s">        O      71.26430000      36.95910000       0.98917800</span>
+<span class="s">        C      65.12855700      32.82383000       4.31930600</span>
+<span class="s">        C      63.73883800      32.82175000       4.33278600</span>
+<span class="s">        C      63.04572800      31.61790000       4.32200600</span>
+<span class="s">        C      63.74222800      30.41540000       4.29715600</span>
+<span class="s">        C      65.13131700      30.41746000       4.28375600</span>
+<span class="s">        C      65.82474700      31.62190000       4.29511600</span>
+<span class="s">        O      61.62175800      31.88929000       4.33783600</span>
+<span class="s">        C      73.38450000      48.55970000       0.99604800</span>
+<span class="s">        O      67.24777700      31.89712000       4.28603600</span>
+<span class="s">        O      66.07571700      33.92112000       4.32583600</span>
+<span class="s">        C      74.77350000      48.56170000       0.98264800</span>
+<span class="s">        O      62.78881800      33.91630000       4.35553600</span>
+<span class="s">        B      67.32496700      33.29318000       4.30530600</span>
+<span class="s">        B      74.08190000      40.56820000       0.95662800</span>
+<span class="s">        C      63.85340000      57.31330000       0.57615000</span>
+<span class="s">        H      78.39320000      37.58370000       5.38472000</span>
+<span class="s">        H      61.92230000      58.22880000       0.41410100</span>
+<span class="s">        C      75.28070000      42.75630000       4.38699000</span>
+<span class="s">        B      72.39722700      36.22142000       4.30928600</span>
+<span class="s">        H      44.11700000      58.71860000       3.95712000</span>
+<span class="s">        C      75.46700000      49.76620000       0.99400800</span>
+<span class="s">        H      64.29970000      58.27030000       0.34965600</span>
+<span class="s">        H      77.21000000      50.10220000       1.88799000</span>
+<span class="s">        H      77.12480000      53.00480000       3.56537000</span>
+<span class="s">        C      76.47810000      43.49460000       4.38591000</span>
+<span class="s">        H      30.01230000      52.97920000       3.45566000</span>
+<span class="s">        H      28.81480000      52.28780000       0.01141710</span>
+<span class="s">        H      73.11990000      45.41820000       4.38276000</span>
+<span class="s">        H      73.12000000      42.95820000       4.38118000</span>
+<span class="s">        C      40.92710000      57.14440000       0.68893000</span>
+<span class="s">        C      42.31620000      57.14640000       0.67553000</span>
+<span class="s">        H      63.11980000      58.92010000       3.85833000</span>
+<span class="s">        H      77.44140000      42.95850000       4.38761000</span>
+<span class="s">        H      65.49720000      58.96170000       3.79392000</span>
+<span class="s">        B      74.08160000      46.42490000       0.95824800</span>
+<span class="s">        H      28.81530000      34.66350000       1.79076000</span>
+<span class="s">        H      30.01280000      35.35480000       5.23500000</span>
+<span class="s">        C      42.12450000      57.83570000       4.13317000</span>
+<span class="s">        C      43.51360000      57.83780000       4.11977000</span>
+<span class="s">        C      75.96890000      36.71710000       4.47504000</span>
+<span class="s">        C      76.66500000      37.91930000       4.46221000</span>
+<span class="s">        O      73.62920000      35.62390000       4.47143000</span>
+<span class="s">        O      76.91600000      35.61990000       4.49766000</span>
+<span class="s">        O      74.10920000      40.49520000       4.40333000</span>
+<span class="s">        O      78.08810000      37.64440000       4.47651000</span>
+<span class="s">        O      72.46200000      37.65090000       4.43346000</span>
+<span class="s">        C      75.97170000      39.12360000       4.43784000</span>
+<span class="s">        C      76.47810000      44.88220000       4.38536000</span>
+<span class="s">        O      76.44830000      40.49250000       4.42009000</span>
+<span class="s">        O      76.91570000      52.75720000       4.46901000</span>
+<span class="s">        C      62.46430000      57.31130000       0.58955000</span>
+<span class="s">        H      77.44160000      45.41800000       4.38629000</span>
+<span class="s">        C      75.96860000      51.65990000       4.46248000</span>
+<span class="s">        C      74.57880000      51.65780000       4.47596000</span>
+<span class="s">        C      73.38470000      38.43350000       0.98322800</span>
+<span class="s">        C      73.88570000      50.45390000       4.46518000</span>
+<span class="s">        C      74.58220000      49.25140000       4.44033000</span>
+<span class="s">        C      74.77390000      38.43180000       0.99355800</span>
+<span class="s">        C      75.97130000      49.25350000       4.42693000</span>
+<span class="s">        C      74.77110000      36.02540000       1.03076000</span>
+<span class="s">    End</span>
+<span class="s">End</span>
+
+<span class="s">Engine DFTB</span>
+<span class="s">   Model SCC-DFTB</span>
+<span class="s">   ResourcesDir DFTB.org/matsci-0-3</span>
+<span class="s">   SCC</span>
+<span class="s">       Iterations 200</span>
+<span class="s">   End</span>
+<span class="s">   DispersionCorrection UFF</span>
+<span class="s">EndEngine</span>
+
+<span class="s">eor</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <!--STARTNOSOLR-->
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SP_COF5_2D.html" class="btn btn-neutral float-right" title="Example: Single point COF5, 2D" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SP_H2_MOF.html" class="btn btn-neutral" title="Example: Single Point H2 MOF" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/> 
+
+<!-- start :: footer -->
+		<footer class="site-footer block">
+			<div class="container">
+				<div class="row">
+					<div class="footer-column" >
+	<ul>
+		<li id="nav_menu-2" class="widget widget_nav_menu "><h3>Application Areas</h3><div class="menu-application-areas-container"><ul id="menu-application-areas" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/batteries/">Batteries &#038; PVs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/chemical-bonding-analysis/">Bonding Analysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/catalysis/">Catalysis</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/heavy-elements/">Heavy Elements</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/inorganic-chemistry/">Inorganic Chemistry</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/pharma/">Life Sciences</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/materials-science/">Materials Science</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/nanotechnology/">Nanotechnology</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/oil-and-gas/">Oil and Gas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/organic-electronics/">Organic Electronics</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/polymers/">Polymers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/spectroscopy/">Spectroscopy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/applications/teaching/">Teaching</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-7" class="widget widget_nav_menu "><h3>Products</h3><div class="menu-product-navigation-container"><ul id="menu-product-navigation" class="menu">
+<li id="menu-item-40263" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40263"><a href="https://www.scm.com/product/ams/">AMS Driver</a></li>
+<li id="menu-item-7235" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7235"><a href="https://www.scm.com/product/adf/">ADF</a></li>
+<li id="menu-item-7236" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7236"><a href="https://www.scm.com/product/band_periodicdft/">BAND</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7237"><a href="https://www.scm.com/product/cosmo-rs/">COSMO-RS</a></li>
+<li id="menu-item-7238" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7238"><a href="https://www.scm.com/product/dftb/">DFTB</a></li>
+<li id="menu-item-7239" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7239"><a href="https://www.scm.com/product/gui/">GUI</a></li>
+<li id="menu-item-44383" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44383"><a href="https://www.scm.com/product/machine-learning-potentials/">MLPotential</a></li>
+<li id="menu-item-7240" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7240"><a href="https://www.scm.com/product/mopac/">MOPAC</a></li>
+<li id="menu-item-40262" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-40262"><a href="https://www.scm.com/product/plams/">PLAMS</a></li>
+<li id="menu-item-43701" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-43701"><a href="https://www.scm.com/product/quantum-espresso/">Quantum ESPRESSO</a></li>
+<li id="menu-item-7241" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-7241"><a href="https://www.scm.com/product/reaxff/">ReaxFF</a></li></ul></div></li><li id="nav_menu-26" class="widget widget_nav_menu "><div class="menu-licensing-container"><ul id="menu-licensing" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/">Pricing &#038; Licensing</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/">Price Quote</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/price-quote/calculate-your-price/">Price Calculator</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/consulting/">Scientific Consulting</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/adf-resellers/">Resellers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/scm-license-terms/">License Terms</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/pricing-licensing/ordering-procedure/">Ordering</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-6" class="widget widget_nav_menu "><h3>Support</h3><div class="menu-support-navigation-container"><ul id="menu-support-navigation" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/">Support Overview</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-installation-videos/">Installation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/ams-tutorials-and-manuals/">Documentation</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/doc/Tutorials/GUI_overview/GUI_overview_tutorials.html">GUI Tutorials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/downloads/">Downloads</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/faq/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/adf-discussion-list/">Discussion List</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/support/documentation-previous-versions/release-notes/">Release Notes</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/support/adf-teaching-materials/">Teaching Materials</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/adf-hands-on-workshops/">Workshops</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/web-presentations-by-adf-experts/">Webinars</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/videos-tutorials-and-web-presentations/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/amsterdam-modeling-suite/brochures/">Brochure</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/amsterdam-modeling-suite/research-papers-citing-adf/">Papers Citing ADF</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/highlights/">Literature Highlights</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+		<li id="nav_menu-28" class="widget widget_nav_menu "><h3>About Us</h3><div class="menu-about-us-container"><ul id="menu-about-us" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/eu-projects/">EU Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-authors/">Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/our-people/">The SCM Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/collaborations/">Collaborations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/careers/">Careers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/mission-vision/">Mission &#038; Vision</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/newsletters/">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.scm.com/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.scm.com/about-us/news-agenda/">Events</a></li>
+</ul></div></li>	</ul>
+</div><div class="footer-column" >
+	<ul>
+			</ul>
+</div>				</div>
+			</div>
+		</footer>
+		<footer class="disclaimer-footer">
+			<img src="https://www.scm.com/wp-content/themes/scm/images/logos/scm-logo-compact.svg" alt="">
+			<nav class="menu-service-navigation-container"><ul id="menu-service-navigation" class="menu-service navbar-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="https://www.scm.com/copyright/">Copyright</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://www.scm.com/terms-of-use/">Terms of Use</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-71"><a href="https://www.scm.com/privacy-policy/">Privacy Policy</a></li>
+</ul></nav></footer>	
+		<!-- end :: footer -->
+
+<!--ENDNOSOLR-->
+        </div>
+      </div>
+
+    </section>
+  </div>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2021.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCRWHZZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="../_static/../../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

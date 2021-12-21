@@ -1,0 +1,121 @@
+
+# The BN slab has a band gap
+# The bottom of the conduction band  (BOCB, 0.05 hartree above the fermi level)  consists of p_z orbitals on B
+# The top of the valence band (TOVB, 0.2 hartree under the fermi level)  consists of p_z oribtals on N
+
+# It is recommended to inspect BNSlab.results with amsbands
+# and BNSlab.ldos.tovb.results with amsview (and the same for bocb)
+
+system=BNSlab
+
+export AMS_JOBNAME=$system
+
+rm -rf $AMS_JOBNAME.results
+
+$AMSBIN/ams<<EOF
+
+Task SinglePoint
+
+System
+   Atoms
+		B      -0.615000000    -0.355070416     0.000000000
+		N       0.615000000     0.355070416     0.000000000
+    End
+	Lattice
+	     2.460000000     0.000000000     0.000000000
+	     1.230000000     2.130422493     0.000000000
+End
+
+End
+
+Engine Band
+	BandStructure Enabled=yes
+	Dos CalcPDOS=yes
+	kspace quality=good
+EndEngine
+
+EOF
+
+
+export AMS_JOBNAME=$system.ldos.bocb
+
+rm -rf $AMS_JOBNAME.results
+
+
+$AMSBIN/ams  --delete-old-results << EOF
+Task SinglePoint
+
+LoadSystem 
+    File $system.results/ams.rkf
+End
+
+Engine BAND
+Restart
+   File $system.results/band.rkf
+   DensityPlot
+End
+
+Grid
+   Type Coarse
+End
+
+DensityPlot
+   LDOS
+End
+
+LDOS
+   DeltaNeg 0.001
+   DeltaPos 0.05
+End
+EndEngine
+EOF
+
+
+
+export AMS_JOBNAME=$system.ldos.tovb
+
+rm -rf $AMS_JOBNAME.results
+
+
+$AMSBIN/ams  --delete-old-results << EOF
+Task SinglePoint
+
+LoadSystem 
+    File $system.results/ams.rkf
+End
+
+Engine BAND
+Restart
+   File $system.results/band.rkf
+   DensityPlot
+End
+
+Grid
+   Type Coarse
+End
+
+DensityPlot
+   LDOS
+End
+
+LDOS
+   DeltaNeg 0.2
+   DeltaPos 0.001
+End
+EndEngine
+EOF
+
+
+echo "Begin TOC of tape41 (tovb)"
+
+$AMSBIN/dmpkf -n 1 $system.ldos.tovb.results/TAPE41 --toc | grep LDOS
+
+echo "End TOC of tape41"
+
+
+echo "Begin TOC of tape41 (bocb)"
+
+$AMSBIN/dmpkf -n 1 $system.ldos.bocb.results/TAPE41 --toc | grep LDOS
+
+echo "End TOC of tape41"
+

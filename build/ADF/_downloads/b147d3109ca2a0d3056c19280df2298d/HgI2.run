@@ -1,0 +1,69 @@
+#! /bin/sh
+
+
+# The scalar relativistic ZORA, scalar relativistic X2C, and scalar relativistic
+# RA-X2C are compared in this example for the bond dissociation energy of HgI2
+# in Hg and I2. The division between scalar and spin-orbit relativistic effects
+# is somewhat arbitrary and depends on the method of separation. Thus the scalar
+# relativistic results of X2C and RA-X2C will be different even in the basis set
+# limit. However, the differences for bond energies are not so large. The
+# results for scalar relativistic ZORA are often closer to scalar relativistic
+# RA-X2C, than to scalar relativistic X2C.
+
+for f in "ZORA" "X2C" "RA-X2C"
+do
+
+AMS_JOBNAME=HgI2_$f $AMSBIN/ams <<eor
+System
+  atoms
+     Hg 0 0  0
+     I  0 0  2.554
+     I  0 0 -2.554
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type ZORA/DZ
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism $f
+  end
+  xc
+    gga bp86
+  end
+EndEngine
+eor
+
+AMS_JOBNAME=I2_$f $AMSBIN/ams <<eor
+System
+  atoms
+     I  0 0  1.333
+     I  0 0 -1.333
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    core None
+    type ZORA/DZ
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism $f
+  end
+  xc
+    gga bp86
+  end
+EndEngine
+eor
+
+done

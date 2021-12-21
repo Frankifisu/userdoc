@@ -1,0 +1,48 @@
+import os
+
+# This PLAMS script locates TS for several reactions using the Nudged Elastic Band (NEB) method. 
+# For each reaction two xyz files are required: one corresponding to the reactant state, called 
+# '{}_initial.xyz', and one corresponding to the product state, called '{}_final.xyz' (e.g. 
+# 'MyMolecule_initial.xyz' and 'MyMolecule_final.xyz')
+
+# The folder containing the xyz files:
+xyz_folder = os.path.join(os.environ['AMSHOME'],'examples','AMS','NEB_PLAMS','xyz')
+
+names = [name.rsplit('_initial.xyz')[0] for name in os.listdir(xyz_folder) if name.endswith('_initial.xyz')]
+
+# Settings for the AMS driver
+neb_sett = Settings()
+neb_sett.input.ams.Task = 'NEB'
+neb_sett.input.ams.Properties.NormalModes = 'Yes'
+neb_sett.input.ams.GeometryOptimization.Convergence.Step = 1.0e-3
+
+# Settings for the engine (here we use the DFTB engine with semiempirical GFN1-xTB method)
+engine_sett = Settings()
+engine_sett.input.DFTB.Model='GFN1-xTB'
+
+for name in sorted(names):
+
+	# For NEB we need two system blocks in the AMS input (the initial and final molecule). 
+	# In PLAMS you can have multiple system blocks by passing the the AMSJob a dictionary of molecules.
+	# The 'keys' of the dictionary will be used as the headers of the System block
+	mols = {}
+	# The initial molecule should be in the main 'System' block (the main system block has no header). 
+	# The key of the mols dictionary should therefore be an empty string
+	mols[''] = Molecule(os.path.join(xyz_folder,name+'_initial.xyz'))
+	# The final molecule should be specified in a system block with the header 'final'
+	mols['final'] = Molecule(os.path.join(xyz_folder,name+'_final.xyz'))
+
+	# Create and run the job:
+	job = AMSJob(molecule=mols, name=name, settings=neb_sett+engine_sett)
+	job.run()
+	
+	print('')
+	print("System name: {}".format(name))
+	if job.ok():
+		pes_point_character = job.results.readrkf('AMSResults', 'PESPointCharacter', file='NEB_TS_final')
+		print("NEB calculation converged. PES Point character: {}".format(pes_point_character))
+		print("Left  TS barrier: {0:.6f} [Hartree]".format(job.results.readrkf('NEB', 'LeftBarrier')))
+		print("Right TS barrier: {0:.6f} [Hartree]".format(job.results.readrkf('NEB', 'RightBarrier')))
+	else:
+		print("Unsuccesful NEB calculation")
+	print('')

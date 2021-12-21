@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# this test runs betacarotene in serial and in parallel
+# to check if the results are the same ...
+
+inputfile=$AMSHOME/examples/dftb/SP_LR-TDDFTB_betacarotene/inputfile
+
+AMS_JOBNAME=NSCM1 NSCM=1 $AMSBIN/ams < $inputfile
+AMS_JOBNAME=NSCM2 NSCM=2 $AMSBIN/ams < $inputfile
+AMS_JOBNAME=NSCM4 NSCM=4 $AMSBIN/ams < $inputfile

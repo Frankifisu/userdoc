@@ -1,0 +1,44 @@
+#!/bin/sh
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     Hg  0.0                 0.0                 0.0
+     Br  0.0                 0.0                -2.406
+     C   0.0                 0.0                 2.074
+     H   1.0289885545161663  0.0                 2.4628220089896287
+     H  -0.5144942772580832  0.8911302284144289  2.4628220089896287
+     H  -0.5144942772580832 -0.8911302284144289  2.4628220089896287
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title HgMeBr, scalar, ZORA
+  basis
+    core None
+    type DZ
+  end
+  numericalquality Good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  save TAPE10
+  xc
+    gga PW91
+  end
+EndEngine
+eor
+
+$AMSBIN/nmr  <<eor
+tape10file ams.results/TAPE10
+adffile ams.results/adf.rkf
+NMR
+  OUT ISO
+  U1K BEST
+  NUC 1 3
+END
+eor

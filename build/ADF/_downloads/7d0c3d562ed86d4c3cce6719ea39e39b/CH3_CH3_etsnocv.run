@@ -1,0 +1,192 @@
+#! /bin/sh
+
+
+# Example for calculation of ETS-NOCV for simulated unrestricted fragments. ETS-NOCV:
+# energy analysis using the Natural Orbitals for Chemical Valence. The ethane
+# molecule is built from two methyl radicals
+
+# First the two methyl fragments are calculated.
+# If the FRAGOCCUPATIONS keyword is used in ethane the fragments should be calculated
+# spin-restricted.
+
+
+AMS_JOBNAME=frag1 $AMSBIN/ams <<eor
+System
+  atoms
+     C         0.019664   -0.034069    0.009101
+     H         0.039672   -0.069395    1.109620
+     H         1.063205   -0.065727   -0.341092
+     H        -0.474230   -0.953693   -0.341621
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title CH3-CH3 built from CH3 radicals,  FULL electron calc.!
+  basis
+    Type DZP
+    Core None
+  end
+  scf
+    converge 1E-6
+  end
+  symmetry NOSYM
+  xc
+    gga becke perdew
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=frag2 $AMSBIN/ams <<eor
+System
+  atoms
+     C        -0.703210    1.217999   -0.497874
+     H        -0.723753    1.252869   -1.598316
+     H        -1.746567    1.250049   -0.147169
+     H        -0.208833    2.137544   -0.147653
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title CH3 radical
+  basis
+    Type DZP
+    Core None
+  end
+  scf
+    converge 1E-6
+  end
+  symmetry NOSYM
+  xc
+    gga becke perdew
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+
+eor
+
+# Next these fragments are used in the calculation of the molecule ethane, using
+# the key FRAGOCCUPATIONS to use an unrestricted fragment occupation for the
+# methyl radicals, such that they are prepared for bonding. In the one fragment
+# the singly occupied orbital will be an alpha-orbital, and in the other fragment
+# the singly occupied orbital will be a beta-orbital, such that the calculated
+# Pauli repulsion between the fragments will be small.
+
+# The block key ETSNOCV used here is in its single line form.
+# The symmetry must be NOSYM.
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C         0.019664   -0.034069    0.009101 adf.f=f1
+     H         0.039672   -0.069395    1.109620 adf.f=f1
+     H         1.063205   -0.065727   -0.341092 adf.f=f1
+     H        -0.474230   -0.953693   -0.341621 adf.f=f1
+     C        -0.703210    1.217999   -0.497874 adf.f=f2
+     H        -0.723753    1.252869   -1.598316 adf.f=f2
+     H        -1.746567    1.250049   -0.147169 adf.f=f2
+     H        -0.208833    2.137544   -0.147653 adf.f=f2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  title final [CH3]-[CH3], etsnocv activated by etsnocv
+  etsnocv
+    ekmin 1.5
+    enocv 0.05
+    rhokmin 1.e-3
+  end
+  fragments
+     f1 frag1.results/adf.rkf
+     f2 frag2.results/adf.rkf
+  end
+  fragoccupations
+     f1
+     A 5 // 4
+     subend
+     f2
+     A 4 // 5
+     subend
+  end
+  scf
+    converge 1E-6
+  end
+  symmetry NOSYM
+  xc
+    gga becke perdew
+  end
+  Relativity
+    Level None
+  End
+EndEngine
+eor
+
+# Next densf calculations, to view the natural orbitals in this method, see
+# also the the documentation for the densf analysis program and the ADF-GUI.
+# Input is the adf.rkf of the molecular calculation.
+
+$AMSBIN/densf <<eor
+  adffile ams.results/adf.rkf
+  Grid Medium
+  End
+  NOCV
+   Alpha
+     1
+     2
+     59
+     60
+   Beta
+     1
+     2
+     59
+     60
+  END
+eor
+mv TAPE41 nocv1.t41
+
+$AMSBIN/densf <<eor
+  adffile ams.results/adf.rkf
+  Grid Medium
+  End
+  NOCV
+    THRESH 0.01
+    RESTSUM
+  END
+eor
+mv TAPE41 nocv2.t41
+
+$AMSBIN/densf <<eor
+  adffile ams.results/adf.rkf
+  Grid Medium
+  End
+  NOCV
+    ALPHA
+      SUM 1
+    BETA
+      SUM 1
+    RESTSUM
+  END
+eor
+mv TAPE41 nocv3.t41
+
+$AMSBIN/densf <<eor
+  adffile ams.results/adf.rkf
+  Grid Medium
+  End
+  NOCV
+    SUMBELOW 0.5
+  END
+eor
+mv TAPE41 nocv4.t41

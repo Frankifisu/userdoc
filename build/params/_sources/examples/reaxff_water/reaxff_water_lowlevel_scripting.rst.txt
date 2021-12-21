@@ -1,0 +1,66 @@
+ReaxFF: gasphase H\ :sub:`2`\ O (low-level scripting version)
+=============================================================
+
+.. important::
+
+    First go through the :ref:`ReaxFF_Gasphase_Water` tutorial. The current
+    tutorial accomplishes the same goal in a different way, by using several
+    functions from the params python library. For beginning ParAMS users, we
+    recommend to follow the :ref:`previous tutorial <ReaxFF_Gasphase_Water>`.
+
+.. image:: /_static/reaxff_scripting_pes_results.png
+    :width: 80%
+    :align: center
+
+In this example a ReaxFF force field *Water2017.ff* will be reparameterized to describe the H--OH bond dissociation energy with
+with `ADF <../../ADF/index.html>`_ as the reference engine.
+The workflow script is stored in ``$AMSHOME/scripting/scm/params/examples/ReaxFF_water/scripting_version/run.py``,
+the complete script can also be viewed :ref:`below <scodereax>`.
+
+The script covers the following steps:
+  * Definition of a job collection entry in the job collection
+  * Construction of the training set
+  * Definition of an |EngineCollection| and the reference engine (DFT settings)
+  * Calculation of the reference data
+  * Parameterization with the |OptCMA|
+  * Generation of plots to evaluate the performance of the newly found parameters
+
+.. csv-table::
+    Comparison of the previous tutorial to the current one
+    :header-rows: 1
+
+    Action, Previous tutorial :ref:`(link) <ReaxFF_Gasphase_Water>`, This tutorial
+    Run reference job, PLAMS or GUI, :meth:`JobCollection.run() <scm.params.core.jobcollection.JobCollection.run>`
+    Import results, :ref:`Results Importer`, :meth:`DataSet.calculate_reference() <scm.params.core.dataset.DataSet.calculate_reference>`
+    Set max evaluations, ``max_evaluations = 100`` in :ref:`params.conf.py <ParAMS Main Script>`, ``callbacks=[MaxIter(100)]`` in the :class:`Optimization <scm.params.core.parameteroptimization.Optimization>` constructor
+    Final plot, xy file auto-generated (``params plot``), Python code
+
+.. _scodereax:
+
+Complete Example Script
+-----------------------
+
+Located in ``$AMSHOME/scripting/scm/params/examples/ReaxFF_Water/run.py``
+
+Copy the script to an empty folder, and run it with ``$AMSBIN/amspython run.py``.
+
+It will produce a png file plot_results.png (see picture above).
+
+Execute the script once again to clean up the example folder (deleting all files generated during the optimization).
+
+
+
+.. literalinclude:: /../../examples/ReaxFF_water/scripting_version/run.py
+
+
+
+Changing the Example Script
+---------------------------
+
+Based on the original script above, the user could try the following, in order to familiarize oneself with the ParAMS package:
+
+* Add more structures to the job collection
+* Fit other properties in addition to the PES
+* Experiment with different :ref:`CMA settings <cmasettings>`, especially ``sigma`` and ``popsize``.
+* Use a different reference engine
+* Add external reference values to the training set, instead of calculating them

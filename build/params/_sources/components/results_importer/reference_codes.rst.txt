@@ -1,0 +1,105 @@
+.. py:currentmodule:: scm.params.core.results_importer.ResultsImporter
+
+.. _ResultsImporterReferenceCodes:
+
+AMS, VASP and Quantum ESPRESSO reference data
+===================================================
+
+ResultsImporters can extract reference data from AMS, VASP, and Quantum ESPRESSO calculations.
+
+When using a shortcut with :ref:`VASP <ResultsImporterVASP>` or :ref:`Quantum ESPRESSO <ResultsImporterQE>` reference data, the outputs will automatically be converted to
+AMS format (files named ``ams.rkf`` and ``vasp.rkf`` or ``qe.rkf``) if such .rkf files do not already exist.
+
+.. note::
+
+   If you ran a VASP calculation with the `VASP via AMS GUI <../../../GUI/VASP_via_AMS.html>`__, this counts as an AMS job
+   since the ``ams.rkf`` file should already exist.
+
+.. important::
+
+   For VASP and Quantum ESPRESSO, the engine added to the engine collection
+   cannot be used to calculate new reference data. It only stores some settings from the original calculations.
+
+.. csv-table:: Supported ResultsImporters
+    :header: ResultsImporter, AMS, VASP, Quantum ESPRESSO
+
+    :meth:`add_neb_singlepoints`, ✔, ❌, ❌
+    :meth:`add_pesexploration_singlepoints`, ✔, ❌, ❌
+    :meth:`add_pesscan_singlepoints`, ✔, ❌, ❌
+    :meth:`add_reaction_energy`, ✔, ✔, ✔
+    :meth:`add_singlejob`, ✔, ✔, ✔
+    :meth:`add_trajectory_singlepoints`, ✔, ✔, ✔
+
+.. csv-table:: Supported properties
+    :header: Property, AMS, VASP, Quantum ESPRESSO
+
+    angle, ✔, ✔, ✔
+    charges, ✔, ❌, ❌
+    energy, ✔, ✔, ✔
+    dihedral, ✔, ✔, ✔
+    distance, ✔, ✔, ✔
+    forces, ✔, ✔, ✔
+    hessian, ✔, ❌, ❌
+    relative_energies, ✔, ✔, ✔
+    stress tensor, ✔, ✔, ✔
+
+
+.. _ResultsImporterAMS:
+
+AMS
+---------------
+
+The main results file from an AMS calculation is called ams.rkf. Set the path to a directory containing ams.rkf,
+*or* to the ams.rkf file:
+
+.. code:: ipython3
+
+   ri = ResultsImporter()
+   ri.add_singlejob('/path/to/directory_containing_ams_rkf', properties='forces')
+   # or
+   ri.add_singlejob('/path/to/ams.rkf', properties='energy')
+
+**Engine in the engine collection**: The reference calculation's engine settings will be copied to the shortcut's
+engine collection.
+
+.. _ResultsImporterVASP:
+
+VASP
+---------
+
+.. note::
+
+   If you ran a VASP calculation with the `VASP via AMS GUI <../../../GUI/VASP_via_AMS.html>`__, this counts as an :ref:`AMS job <ResultsImporterAMS>`
+   since the ``ams.rkf`` file should already exist.
+
+
+Set the path to a directory containing OUTCAR from a VASP job. Example:
+
+.. code:: ipython3
+
+   ri = ResultsImporter()
+   ri.add_singlejob('/path/to/directory_containing_OUTCAR', properties='forces')
+   # or
+   ri.add_singlejob('/path/to/OUTCAR', properties='energy')
+
+**Conversion to ams.rkf and engine.rkf**: A subdirectory **AMSJob** is created in the directory containing OUTCAR, and the ``ams.rkf`` and ``vasp.rkf`` files are placed in that directory.
+
+**Engine in the engine collection**: If the file INCAR exists in the same directory as OUTCAR, the contents of INCAR are copied to the engine collection. The default name
+for the engine is a condensed version of the INCAR contents. Note that this engine **CANNOT** be used to calculate new reference data.
+
+.. _ResultsImporterQE:
+
+Quantum ESPRESSO
+-------------------
+
+Set the path to the standard output file (often ending in ``.out``) from a Quantum ESPRESSO job. Example:
+
+.. code:: ipython3
+
+   ri = ResultsImporter()
+   ri.add_singlejob('/path/to/job.out', properties='forces')
+
+**Conversion to ams.rkf and engine.rkf**: If the name of the output file is ``jobname.out``, then *if* the directory ``jobname.results`` exists the **AMSJob** directory will be created inside ``jobname.results`` and ``ams.rkf`` and ``qe.rkf`` files will be placed in that directory. Otherwise, the directory will be called ``jobname.AMSJob``.
+
+
+**Engine in the engine collection**: No input settings are extracted from the Quantum ESPRESSO job. The reference engine will contain "Unknown Quantum ESPRESSO input". Note that this engine **CANNOT** be used to calculate new reference data.

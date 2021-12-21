@@ -1,0 +1,31 @@
+#!/bin/sh
+
+$AMSBIN/ams << eor
+
+Task SinglePoint
+
+Properties
+   Gradients True
+End
+
+System
+    Atoms
+        H        -0.500000      0.000000  0.000000
+        C         0.5           0.000000  0.000000
+    End
+End
+
+Engine DFTB
+   Model SCC-DFTB
+   ResourcesDir DFTB.org/mio-1-1
+   SCC
+       Iterations 100
+       Converge charge=1e-7
+       OrbitalDependent Yes
+       Unrestricted Yes
+   End
+   UnpairedElectrons 3
+EndEngine
+
+eor
+

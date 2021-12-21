@@ -1,0 +1,109 @@
+#!/bin/sh
+
+
+# An illustration of an unrestricted energy decomposition analysis (unrestricted EDA).
+
+# The open shell Cu atom forms a complex with 2 ethylene molecules.
+
+AMS_JOBNAME=Cu_A $AMSBIN/ams <<eor
+System
+  atoms
+     Cu  0.0 0.0 0.0
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    type DZ
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 1
+  unrestricted
+  xc
+    dispersion GRIMME4
+    gga BP86
+  end
+EndEngine
+
+eor
+
+
+AMS_JOBNAME=Ethylene $AMSBIN/ams <<eor
+System
+  atoms
+     C       0.000000000000       0.708069500374       1.888278754032
+     C       0.000000000000      -0.708069500374       1.888278754032
+     H       0.924242618139       1.263978729882       2.061097077561
+     H       0.924242618139      -1.263978729882       2.061097077561
+     H      -0.924242618139       1.263978729882       2.061097077561
+     H      -0.924242618139      -1.263978729882       2.061097077561
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  basis
+    type DZ
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  xc
+    dispersion GRIMME4
+    gga BP86
+  end
+EndEngine
+
+eor
+
+
+$AMSBIN/ams <<eor
+System
+  atoms
+     C       0.000000000000       0.708069500374       1.888278754032    adf.f=Ethylene|1
+     C       0.000000000000      -0.708069500374       1.888278754032    adf.f=Ethylene|1
+     H       0.924242618139       1.263978729882       2.061097077561    adf.f=Ethylene|1
+     H       0.924242618139      -1.263978729882       2.061097077561    adf.f=Ethylene|1
+     H      -0.924242618139       1.263978729882       2.061097077561    adf.f=Ethylene|1
+     H      -0.924242618139      -1.263978729882       2.061097077561    adf.f=Ethylene|1
+     Cu      0.000000000000       0.000000000000       0.000000000000    adf.f=Cu_A
+     C       0.000000000000       0.708069500374      -1.888278754032    adf.f=Ethylene|2
+     C       0.000000000000      -0.708069500374      -1.888278754032    adf.f=Ethylene|2
+     H       0.924242618139       1.263978729882      -2.061097077561    adf.f=Ethylene|2
+     H       0.924242618139      -1.263978729882      -2.061097077561    adf.f=Ethylene|2
+     H      -0.924242618139       1.263978729882      -2.061097077561    adf.f=Ethylene|2
+     H      -0.924242618139      -1.263978729882      -2.061097077561    adf.f=Ethylene|2
+  end
+end
+
+Task SinglePoint
+
+Engine ADF
+  fragments
+     Ethylene Ethylene.results/adf.rkf
+     Cu_A Cu_A.results/adf.rkf
+  end
+  numericalquality good
+  relativity
+    level scalar
+    formalism ZORA
+  end
+  spinpolarization 1
+  unrestricted
+  unrestrictedfragments
+  xc
+    dispersion GRIMME4
+    gga BP86
+  end
+EndEngine
+
+eor
