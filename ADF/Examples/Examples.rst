@@ -184,8 +184,8 @@ DIM/QM: Discrete Interaction Model/Quantum Mechanics
    DIMQM_PIM_CMM
 
 
-QM/FQ: Quantum Mechanics/Fluctuating Charges
-============================================
+QM/FQ(FMu): Quantum Mechanics / Fluctuating Charges (and Fluctuating Dipoles)
+=============================================================================
 
 .. toctree::
    :maxdepth: 1
