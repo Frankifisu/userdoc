@@ -1,7 +1,7 @@
 .. _example FQQM_response:
 
-Example: QM/FQ: polarizability 2-Methyloxirane (RESPONSE)
-=========================================================
+Example: QM/FQ(Fμ): polarizability 2-Methyloxirane (RESPONSE)
+=============================================================
 
 :download:`Download FQQM_response.run <../../../examples/adf/FQQM_response/FQQM_response.run>` 
 

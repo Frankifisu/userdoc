@@ -1,7 +1,7 @@
 .. _example FQQM_scf:
 
-Example: QM/FQ(Fμ): 2-Methyloxirane (QM) in Water (FQ and FQFμ)
-===============================================================
+Example: QM/FQ(Fμ): 2-Methyloxirane (QM) in Water
+=================================================
 
 :download:`Download FQQM_scf.run <../../../examples/adf/FQQM_scf/FQQM_scf.run>` 
 
