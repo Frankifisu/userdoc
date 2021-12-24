@@ -171,7 +171,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="../General/feature_list.html#analysis">Analysis</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../General/New_in_BAND.html">What’s new in Band 2021.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General/New_in_BAND.html">What’s new in Band 2022.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../General/New_in_BAND.html#what-s-new-in-band-2021-1">What’s new in Band 2021.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../General/New_in_BAND.html#what-s-new-in-band-2020">What’s new in Band 2020</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../General/input.html">Input</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../General/input.html#general-remarks-on-input-structure-and-parsing">General remarks on input structure and parsing</a></li>
@@ -239,6 +240,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#confinement-of-basis-functions">Confinement of basis functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#manually-specifying-atomtypes-expert-option">Manually specifying AtomTypes (expert option)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#basis-set-superposition-error-bsse">Basis Set Superposition Error (BSSE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Accuracy_and_Efficiency/Basis_Set.html#alternative-elements-virtual-crystal-approximation">Alternative elements / Virtual crystal approximation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Accuracy_and_Efficiency/K-Space_Integration.html">K-Space</a><ul>
@@ -317,6 +319,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#user-defined-path-in-the-brillouin-zone">User-defined path in the Brillouin zone</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#definition-of-the-fat-bands">Definition of the Fat Bands</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#band-gap">Band Gap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculation-of-the-fermi-surface">Calculation of the Fermi Surface</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Charges.html">Charges</a><ul>
@@ -808,6 +811,77 @@ and <span class="math notranslate nohighlight">\(\vec{k}\)</span> is a reciproca
 <tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>W. Setyawan and S. Curtarolo, <em>High-throughput electronic band structure calculations: Challenges and tools</em>, <a class="reference external" href="https://doi.org/10.1016/j.commatsci.2010.05.010">Computational Materials Science 49 (2010) 299–312</a>.</td></tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="calculation-of-the-fermi-surface">
+<span id="index-3"></span><h2>Calculation of the Fermi Surface<a class="headerlink" href="#calculation-of-the-fermi-surface" title="Permalink to this headline">¶</a></h2>
+<p>If the system has no band gap it is a metal, and that means that the Fermi surface is a complex shape in the Brillouin zone. As multiple bands may be crossing the fermi energy there may be multiple surfaces. In case of a spin unrestricted calculation both spins have a fermi surfrace of their own. For 2D systems the “surface” consists of one or more lines. The result can be viewed with the GUI module amsbands.</p>
+<div class="highlight-none notranslate" id="band-key-fermisurface"><div class="highlight"><pre><span></span>FermiSurface
+   Enabled Yes/No
+   KIntegForSymmetricKGrid integer
+   NMesh integer
+End
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">FermiSurface</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Calculation of the Fermi surface for metals</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">No</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">GUI name:</th><td class="field-body">Calculate Fermi surface</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">If True, the Fermi surface is calculated if the system has no band gap (i.e. is a metal). The result can be visualized with amsbands.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">KIntegForSymmetricKGrid</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">-1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">If the (default) regular k-grid is used, a symmetric one is created to determine the Fermi surface. If this key is not specified an automatic value of kInteg is used. Odd values trigger quadratic interpolation.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NMesh</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">7</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Improves the matching of the interpolated quadratic surface. For better results it makes more sense to increaes KIntegForSymmetricKGrid.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
 </div>
 </div>
 

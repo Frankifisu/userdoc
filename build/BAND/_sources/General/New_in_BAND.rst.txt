@@ -3,6 +3,7 @@ What's new in Band 2022.1
 * Mulliken analysis (including PDOS) with spin-orbit coupling
 * Alternative elements (model impurities, fractional site occupancies)
 * Electron energy density function
+* Fermi surface
 
 What's new in Band 2021.1
 *************************

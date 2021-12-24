@@ -319,6 +319,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="../Analysis/Band_Structure.html#user-defined-path-in-the-brillouin-zone">User-defined path in the Brillouin zone</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Analysis/Band_Structure.html#definition-of-the-fat-bands">Definition of the Fat Bands</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Analysis/Band_Structure.html#band-gap">Band Gap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Analysis/Band_Structure.html#calculation-of-the-fermi-surface">Calculation of the Fermi Surface</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Analysis/Charges.html">Charges</a><ul>
@@ -1221,19 +1222,16 @@ Normally, if you want to know the bonding energy of system A with system B you c
 <div class="section" id="alternative-elements-virtual-crystal-approximation">
 <span id="index-8"></span><h2>Alternative elements / Virtual crystal approximation<a class="headerlink" href="#alternative-elements-virtual-crystal-approximation" title="Permalink to this headline">¶</a></h2>
 <p>It is possible to define an alternative nuclear charge for an element. If a certain site in a crystal has, say, a 50% occupation of C (Z=6) and a 50% occupation of B (Z=5) you can use one alternative atom with Z=5.5</p>
-<blockquote>
-<div><p>Example:</p>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Atoms
    Si 0.0 0.0 0.0
    C  0.0 0.0 0.0 nuclear_charge=5.5   ! this site has a mixture of 50% C and B
 End
 </pre></div>
 </div>
-</div></blockquote>
 <p>In this example the basis set is taken from the C atom, but you could equally well specify the B atom here.  (In fact any atom type can be specified here, but why would you like to use an Au basis set for this situation.). Defining such an average element is in the spirit of the Virtual Crystal Approximation (VCA), however, the fractional nuclear charge approach does not work well when for instance the fractional z is near the value of a noble gas. For instance when mixing Si (Z=14) and C(Z=8) atoms you may get near Ne (Z=10), and the corresponding lattice will be way too diffuse.</p>
 <p>If you want to perform a scan it can be useful to use the ModifyAlternativeElement option</p>
-<blockquote>
-<div><p>Example:</p>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>System
    ModifyAlternativeElements true
 
@@ -1243,7 +1241,6 @@ End
    End
 </pre></div>
 </div>
-</div></blockquote>
 <p>In band an alternative element works well with the frozen core approximation, using a smaller or no core has little effect. The VCA relies on defining an average pseudopotential (commonly used in plane wave programs) and is not identical to the alternative element approach (defining an average nuclear charge).</p>
 </div>
 </div>

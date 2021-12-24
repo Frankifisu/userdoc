@@ -158,7 +158,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">General</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#release-2021-1">Release 2021.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-2022-1">Release 2022.1</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Set_up.html">Set up</a><ul>
@@ -559,64 +559,157 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>This document will provide background information for the Graphical User Interface, part of the AMS package.</p>
 <p>The purpose of this document is to give more detailed background information on how the GUI operates. It will not explain how to use it in detail. For that reason, we strongly suggest that before reading this document, you first check the <a class="reference external" href="../Tutorials/index.html">GUI tutorials</a>.</p>
 </div>
-<div class="section" id="release-2021-1">
-<h2>Release 2021.1<a class="headerlink" href="#release-2021-1" title="Permalink to this headline">¶</a></h2>
-<p>In comparison to AMS-GUI 2020.3, the 2021.1 release offers many bug fixes and the following new main functionality:</p>
+<div class="section" id="release-2022-1">
+<h2>Release 2022.1<a class="headerlink" href="#release-2022-1" title="Permalink to this headline">¶</a></h2>
+<p>In comparison to AMS-GUI 2021.1, the 2022.1 release offers many bug fixes and the following new main functionality:</p>
+<ul>
+<li><p class="first">General:</p>
 <ul class="simple">
-<li>General:<ul>
-<li>Windows menu (in SCM menu) to switch between any open GUI module (also from with other jobs)</li>
-<li>Easier to select a range of atoms in the Coordinates and Atom Details panels</li>
-<li>Atom Details window now has filter options</li>
-<li>Improve handling of Dark mode on MacOS</li>
-<li>Improve handling of displays with higher dpi or with larger fonts</li>
-<li>Replaced default file dialog on Linux by a more feature rich version. Can be reverted by setting SCM_DEFAULT_DIALOG to 1.</li>
+<li>All GUI modules transfer job to ParAMS GUI via menu command (cmd/ctrl-T)</li>
 </ul>
 </li>
-<li>AMSjobs:<ul>
-<li>(user) comments with jobs, savid in .pid files, including dynamic fields (which may for example show calculation results)</li>
-<li>Generate .xlxs spreadsheet with summary of results for selected jobs with default options using the Build Spreadsheet menu command, or with full control via Scripting menu</li>
-<li>Move jobs to a different directory via Jobs -&gt; Move To Directory… command</li>
-<li>Support Request Early Stop AMS feature (via the interactive.in file in the .results folder)</li>
+<li><p class="first">AMSinput:</p>
+<ul class="simple">
+<li>Open .run files</li>
+<li>AMS Lattice scan</li>
+<li>GFNFF engine</li>
+<li>Lennard-Jones engine</li>
+<li>FCF support updated</li>
+<li>GW support updated</li>
+<li>QTAIM / IQA support updated</li>
 </ul>
 </li>
-<li>AMSinput:<ul>
-<li>Multiple molecule UI improved, and added option to see all molecules superimposed or multiple views (synced cameras or not, use pulldown menu). New cmd/ctrl shift N shortcut for new molecule</li>
-<li>Opening an AMSinput where results are available with a new geometry: ask what to do with more options (update geo, update geo for new job, ignore, restarts).</li>
-<li>Remember window size and position</li>
-<li>Add ReaxFF charge constraints to Model menu</li>
-<li>Builder now offers the NLoop Packmol option</li>
-<li>XC menu now has rSCAN, r2SCAN, r2SCAN-D4, revSCAN and revSCAN0 libxc shortcuts</li>
-<li>Support Sinkbox and Safebox for MD</li>
-<li>Excitations panel now has same defaults as the AMS program (in particular, NTOs are not calculated any more by default)</li>
-<li>AMSinput POSCAR or AMSinput CONTCAR from the command line now imports those files (same as other file types that can be imported)</li>
-<li>Help balloons now show name of corresponding input key</li>
-<li>Generate .xlxs spreadsheet with summary of results at end of job  (details can be configured in a Details panel)</li>
-<li>Adjusting dihedrals: respect groups as defined by regions (just as when adjusting length and angle)</li>
-<li>Installing extra packages (lfdft, Quantum ESPRESSO, ML potentials) now uses AMSpackages, also available via SCM menu</li>
-<li>Improve symmetrize 3D system, it will no longer be converted to a primitive cell, this can be done separately</li>
-<li>Option to convert 2D systems to a conventional or primitive cell</li>
-<li>Atom Details properties can filled by pasting a list of values</li>
-<li>Support charged periodic BAND setup</li>
-<li>Support LFDFT_MCD</li>
-<li>Support FQ/QM</li>
-<li>Support PES Exploration (setting up jobs and using states or populating bindingsites from a previous exploration)</li>
+<li><p class="first">AMSspectra:</p>
+<ul class="simple">
+<li>Support for GW improved</li>
 </ul>
 </li>
-<li>AMSspectra:<ul>
-<li>Much faster when handling many conformers at one time (with Boltzmann averaged spectra)</li>
-<li>Zooming and double clicking in spectra improved</li>
-<li>Support LFDFT_MCD</li>
+<li><p class="first">AMSmovie:</p>
+<ul class="simple">
+<li>ChemTraYzer 2:<ul>
+<li>Input<ul>
+<li>setup input (based on json description and .def file</li>
+<li>AMSinput style unit changes and revert to default (right click)</li>
+<li>when opening the GUI, update the input fields with values as found in the chemtrayzer2/job file, if it exists</li>
 </ul>
 </li>
-<li>AMSmovie:<ul>
-<li>Support PES Exploration</li>
-<li>Improved performance for large trajectories in concatenated XYZ format</li>
-<li>Visualize regions that are added later (e.g. from a molecule gun)</li>
-<li>Option to always let the GUI guess bonds instead of using the bonds from the result file</li>
+<li>Running<ul>
+<li>run ChemTraYzer 2, job</li>
+<li>output and results are in chemtrayzer2 folder next to the ams.rkf file</li>
+<li>progress dialog while running, cancel button to interrupt</li>
+<li>errors from run are reported</li>
 </ul>
 </li>
-<li>AMSbands:<ul>
-<li>Improved performance and memory consumption when visualizing bands colored by character (“fatbands”)</li>
+<li>Output<ul>
+<li>automatically show the results in tables when available</li>
+<li>right bottom of table: button with name of table, click it to open by the OS (on MacOS open the .csv file in Numbers for example)</li>
+<li>tables can be sorted per column</li>
+<li>tables can be searched, with some advanced search options. use help balloon to get info on search syntax</li>
+<li>feedback on search in status line (number of items found, column searched)</li>
+<li>click, shift-click, control (or right) click to adjust selection in tables</li>
+<li>selection in upper table searches for matching evens in lower table</li>
+<li>selection in lower table shows corresponding atoms (hiding other atoms) in corresponding (first) frame in the Movie window</li>
+<li>left-right arrow keys to skip through movie frames</li>
+<li>up-down arrow keys to move selection up or down (thus go through different events for example)</li>
+<li>escape clears selection, or the search if it has focus</li>
+<li>if no selection, escape clears the search</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p class="first">ParAMS GUI:</p>
+<ul>
+<li><p class="first">General</p>
+<ul class="simple">
+<li>‘All’, ‘Jobs’, ‘Training Set’, ‘Validation Set’, ‘Engines’: table with training data</li>
+<li>Molecule window: show system for selected entries</li>
+<li>‘Info’: detailed info for any entry in job collection or training data</li>
+<li>‘Parameters’: table with parameters, ranges and other details to be optimized</li>
+<li>‘Params Configuration’: show and set up the ParAMS job details</li>
+<li>‘Graphs’: results of optimization in graphs</li>
+<li>‘Results’: text output files</li>
+<li>import old style reaxff geo/params files</li>
+<li>revert option to ditch changes due to editing or handling results</li>
+</ul>
+</li>
+<li><p class="first">Running</p>
+<ul class="simple">
+<li>run the ParAMS job via AMSjobs</li>
+<li>opening a ParAMS job will automatically read the results if available</li>
+<li>live update of the results</li>
+<li>running and live update also work for running on remote machines (as all other jobs in AMSjobs)</li>
+<li>restart a previous run when  using the CMA optimizer</li>
+</ul>
+</li>
+<li><p class="first">Training Data</p>
+<ul class="simple">
+<li>different tabs to show all of these or just one subset (‘All’, ‘Jobs’, Training Set’, ‘Validation Set’, ‘Engines’)</li>
+<li>filter by type of entries (Energies, Bonds, PES, Jobs, Engines, …)</li>
+<li>when multiple systems are relevant for an entry, use arrow left-right to move through them</li>
+<li>add jobs from inside the Params GUI, or via any other GUI module (cmd/ctrl - T)</li>
+<li>use the ParAMS importers to generate training set entries when importing a job</li>
+<li>select atoms to set the proper index when creating some expressions</li>
+<li>menu commands to add most common expressions in the training set</li>
+<li>edit all (non-output) items in all tables</li>
+<li>editing via AMSinput for jobs and engines</li>
+<li>smart editing of multiple items in many cases (expressions for multiple items like relative energies, or deactivate all selected parameters for example)</li>
+<li>tab-completion to quickly enter Job IDs</li>
+<li>energy expressions may be balanced automatically (as they correspond to a reaction typically)</li>
+<li>set up training set and validation set (manual or random)</li>
+<li>merge training sets / job collections</li>
+<li>edit all JobIDs at once: prefix or change</li>
+<li>when results are available the contribution to errors is shown with the matching item</li>
+<li>results are live-updating</li>
+</ul>
+</li>
+<li><p class="first">Parameters</p>
+<ul class="simple">
+<li>ReaxFF, xTB and Lennard-Jones parameters supported</li>
+<li>detailed information about meaning of parameter and optimization range etc</li>
+<li>adjust parameter optimization range Min and Max</li>
+<li>generate new ReaxFF blocks, initialize ReaxFF blocks</li>
+<li>parameters are live-updating</li>
+</ul>
+</li>
+<li><p class="first">ParAMS Configuration</p>
+<blockquote>
+<div><ul class="simple">
+<li>set up the params.conf.py file to use for running</li>
+<li>predefined common options via menus</li>
+<li>fully editable by user if desired</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Graphs</p>
+</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>relevant graphs are shown automatically when running</li>
+<li>graphs are live-updating</li>
+<li>validation and training set graphs together, compare with first iteration</li>
+<li>graphs of PES data (like energy vs distance or angle etc)</li>
+<li>interaction in graphs (click on an item to select matching training set entries, and select relevant atoms in molecule display if applicable)</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Results<ul>
+<li>show text output easily accessible via menus</li>
+<li>text is live-updating</li>
+</ul>
+</li>
+<li>Tables<ul>
+<li>tables can be sorted per column</li>
+<li>tables can be searched. use help balloon to get info on search syntax</li>
+<li>feedback on search in status line (number of items found, column searched)</li>
+<li>click, shift-click, control (or right) click to adjust selection in tables</li>
+<li>up-down arrow keys to move selection up or down</li>
+<li>escape clears selection, or the search if it has focus</li>
+<li>if no selection, escape clears the search</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

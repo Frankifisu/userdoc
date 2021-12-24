@@ -56,14 +56,14 @@ and non-optimized parameters for most other atoms.
 
 .. image:: /Images/DRF_and_QMFQ/drfinput.png
 
-QM/FQ
-=====
+QM/FQ(Fμ)
+=========
 
-To demonstrate how to set up a QM/FQ (Quantum Mechanics/Fluctuating Charges) calculation using AMSinput, we will use 2-methyloxirane in water as an example.
-QM/FQ is a QM/MM method in which the MM atoms interact with the QM region via induced charges.
-The FQ charges are determined self-consistently along with the ground-state QM density.
-QM/FQ also facilitates calculating the optical properties of molecules.
-Since the charges depend on the QM density, explicit terms also appear within response equations that are solved to simulate spectroscopic and excited-state properties of the QM system.
+To demonstrate how to set up a QM/FQ (Quantum Mechanics/Fluctuating Charges) or QM/FQFμ (if Fluctuating Dipoles are included) calculation using AMSinput, we will use 2-methyloxirane in water as an example.
+These are QM/MM methods in which the MM atoms interact with the QM region via induced charges and possibly dipoles.
+The MM charges and dipoles are determined self-consistently along with the ground-state QM density.
+QM/FQ(Fμ) also facilitates calculating the optical properties of molecules.
+Since the charges and dipoles depend on the QM density, explicit terms also appear within response equations that are solved to simulate spectroscopic and excited-state properties of the QM system.
 
 One should use the 'Single Point' Task.
 

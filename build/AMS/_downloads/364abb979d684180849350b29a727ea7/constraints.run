@@ -57,12 +57,17 @@ AMS_JOBNAME=dist "$AMSBIN/ams" << EOF
           H   0.994442  -0.037855   0.000000
           H  -0.298554   0.948531   0.000000
        End
+       BondOrders
+          1 2 1.0
+          1 3 1.0
+       End
    End
-
    Constraints
-      # Fix the O--H bond distances to 1.03 Angstrom.
-      Distance  1 2 1.03
-      Distance  1 3 1.03
+      # Fix the OH bond distances to 1.03 Angstrom, for which bonds need to be defined in the System block
+      All bonds O H to 1.03
+      # Alternatively you can list the distances one by one as follows
+      # Distance  1 2 1.03
+      # Distance  1 3 1.03
    End
 
    Engine DFTB

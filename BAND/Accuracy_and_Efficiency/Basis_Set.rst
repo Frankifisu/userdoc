@@ -278,31 +278,31 @@ Alternative elements / Virtual crystal approximation
 It is possible to define an alternative nuclear charge for an element. If a certain site in a crystal has, say, a 50% occupation of C (Z=6) and a 50% occupation of B (Z=5) you can use one alternative atom with Z=5.5
 
 
-      Example:
+Example:
 
-      ::
+::
 
-         Atoms
-            Si 0.0 0.0 0.0
-            C  0.0 0.0 0.0 nuclear_charge=5.5   ! this site has a mixture of 50% C and B
-         End
+   Atoms
+      Si 0.0 0.0 0.0
+      C  0.0 0.0 0.0 nuclear_charge=5.5   ! this site has a mixture of 50% C and B
+   End
 
 
 In this example the basis set is taken from the C atom, but you could equally well specify the B atom here.  (In fact any atom type can be specified here, but why would you like to use an Au basis set for this situation.). Defining such an average element is in the spirit of the Virtual Crystal Approximation (VCA), however, the fractional nuclear charge approach does not work well when for instance the fractional z is near the value of a noble gas. For instance when mixing Si (Z=14) and C(Z=8) atoms you may get near Ne (Z=10), and the corresponding lattice will be way too diffuse.
 
 If you want to perform a scan it can be useful to use the ModifyAlternativeElement option
 
-      Example:
+Example:
 
-      ::
+::
 
 
-        System
-           ModifyAlternativeElements true
+  System
+     ModifyAlternativeElements true
 
-           Atoms
-               Si 0.0 0.0 0.0
-               H  0.0 0.0 0.0 nuclear_charge=5.6   ! Element H is ignored and will be "rounded" to nearest atom (for the basis set) in this case C
-           End
+     Atoms
+         Si 0.0 0.0 0.0
+         H  0.0 0.0 0.0 nuclear_charge=5.6   ! Element H is ignored and will be "rounded" to nearest atom (for the basis set) in this case C
+     End
 
 In band an alternative element works well with the frozen core approximation, using a smaller or no core has little effect. The VCA relies on defining an average pseudopotential (commonly used in plane wave programs) and is not identical to the alternative element approach (defining an average nuclear charge).

@@ -27,7 +27,7 @@ The Amsterdam Modeling Suite implements the atomistic simulation part of this mu
    Each molecule's environment is taken into account in a polarizable QM/MM scheme using the `DRF model <../../ADF/Input/DIM-QM.html#DRF>`__.
 
 The output of the :ref:`Properties <OLEDProperties>` workflow is an :ref:`HDF5 file <OLEDPropertiesOutput>` containing a summary of the results for a material.
-This file can be opened in AMSview for a visualization of the results, but also directly imported into Simbeyond's `Bumblebee code <https://simbeyond.com/bumblebee>`__ to use it in simulations at the device level.
+This file can be opened in `AMSview <../../GUI/AMSview.html>`__ for a visualization of the results, but also directly imported into Simbeyond's `Bumblebee code <https://simbeyond.com/bumblebee>`__ to use it in simulations at the device level.
 
 This manual page describes the technical details and options of the OLED workflow scripts.
 For a more hands-on introduction, you may want to start with the GUI tutorial, that will guide you through the entire workflow using the hole transport material alpha-NPD as an example
@@ -53,7 +53,7 @@ The deposition workflow implements a series of mixed :ref:`molecular dynamics <M
 .. raw:: html
 
    <div class="figure align-right" style="width: 45%">
-      <video width="320" height="540" muted="true" controls src="https://nextcloud.scm.com/index.php/s/EfqQRLE5ZgxfDty/download"></video>
+      <video width="100%" muted controls src="https://nextcloud.scm.com/index.php/s/EfqQRLE5ZgxfDty/download"></video>
       <center>Deposition of <a class="reference external" href="https://pubchem.ncbi.nlm.nih.gov/compound/1_3-Bis_N-carbazolyl_benzene">mCP</a></center>
    </div>
 
@@ -100,7 +100,7 @@ Just like in the AMS driver, as an alternative to the ``System`` block, you an a
 .. _OLEDSystemBlock:
 
 The deposition workflow uses the `ForceField <../../ForceField/index.html>`__ engine for the :ref:`molecular dynamics <MolecularDynamics>` simulation of the physical vapor deposition.
-In order to also support the deposition of metal containing compounds, we use the UFF force field with the ``UFF4MOF-II`` parametrization [#ref1]_ for the deposition.
+In order to also support the deposition of metal containing compounds, we use the UFF force field with the `UFF4MOF-II <https://doi.org/10.1021/acs.jctc.6b00664>`__ parametrization for the deposition.
 As with any calculation with the `ForceField <../../ForceField/index.html>`__ engine you may manually provide (UFF4MOF-II) atom-types, atomic charges and bond orders in the input file::
 
    System
@@ -356,15 +356,77 @@ While this can be used to accomplish the same thing the ``--restart`` flag would
 Properties
 ----------
 
-.. scmautodoc:: oled-properties Embedding
-.. scmautodoc:: oled-properties JobRunner
-.. scmautodoc:: oled-properties LogProgressEvery
-.. scmautodoc:: oled-properties RestartWorkdir
-.. scmautodoc:: oled-properties NumAdditionalEnergies
-.. scmautodoc:: oled-properties NumExcitations
-.. scmautodoc:: oled-properties TransferIntegrals
-.. scmautodoc:: oled-properties OccupationSmearing
-.. scmautodoc:: oled-properties Relax
+The properties workflow is used to obtain distributions (and possibly spatial correlations) of molecular properties such as ionization potential, electron affinity and exciton energies from the morphology.
+To accomplish this, it will perform DFT calculations on all individual molecules from the morphology, taking their environment into account in QM/MM calculation.
+
+**The exact workflow (with all default settings) is as follows:**
+
+1. For each molecule in the box, do a quick DFT calculation with `LDA <../../ADF/Input/Density_Functional.html#lda>`__ and a `DZP basis <../../ADF/Input/Basis_sets_and_atomic_fragments.html>`__ and use the `MDC-D charge model <../../ADF/Input/Results_Output.html#multipole-derived-charges>`__ to determine atomic charges. These charges will be used for the electrostatic part of the embedding potential in the next step.
+
+.. raw:: html
+
+   <div class="figure align-right" style="width: 55%">
+      <video width="100%" muted loop controls src="https://nextcloud.scm.com/index.php/s/SzxtRSGqmfmzBMz/download"></video><br>
+      <center><a class="reference external" href="https://pubchem.ncbi.nlm.nih.gov/compound/1_3-Bis_N-carbazolyl_benzene">mCP</a> in 15 Å environment</center>
+   </div>
+
+2. For each molecule in the box:
+
+   * Determine which other molecules to consider as the environment. By default all molecules within 15 Å (atom-atom distance) are considered.
+   * Individually, for neutral molecule, cation, and anion:
+      * Optimize geometry of central QM molecule in frozen MM environment using `GFN1-xTB <../../DFTB/DFTB_Model_Hamiltonian.html#extended-tight-binding-xtb>`__ and UFF4MOF-II with `electrostatic embedding <../../Hybrid/EngineOptions.html#qm-mm>`__ in the `Hybrid engine <../../Hybrid/index.html>`__.
+      * Do a DFT single point on the optimized geometry using `PBE <../../ADF/Input/Density_Functional.html#gga>`__ and an all-electron `TZ2P basis <../../ADF/Input/Basis_sets_and_atomic_fragments.html>`__. The environment is taked into account using a polarizable `DRF embedding <../../ADF/Input/DIM-QM.html>`__. (For the neutral systems `exciton energies <../../ADF/Input/Excitation_energies.html>`__ and transition dipole moments are also computed with `TD-DFT <../../ADF/Input/Time-dependent_DFT.html>`__.)
+   * Calculate the (approximately) adiabatic ionization potential and electron affinity from the differences in total energy with respect to the neutral system.
+
+3. For all pairs of neighboring molecules (within 4 Å atom-atom distance of each other) calculate the electron and hole `charge transfer integrals with GFN1-xTB <../../DFTB/Charge_transfer_integrals.html#transferintegrals>`__.
+
+What is described above is the workflow with all default settings.
+Various aspects of this (such as the ranges) can be tweaked from the input, see the :ref:`Settings section <OLEDPropertiesInput>` below.
+
+Basic input
+^^^^^^^^^^^
+
+The simplest possible input for the ``oled-properties`` workflow script is just a single ``System`` block.
+
+.. code-block:: bash
+
+   #!/bin/sh
+
+   $AMSBIN/oled-properties << EOF
+
+   System
+      Atoms
+         ...
+      End
+      Lattice
+         ...
+      End
+     [BondOrders
+         ...
+      End]
+   End
+
+   EOF
+
+Obviously, the ``Atoms`` and ``Lattice`` blocks are required, while the ``BondOrders`` block is optional.
+If the bond orders are present, they will be used to determine which parts of the system are connected, which ultimately determines which sets of atoms are considered distinct molecules.
+If the ``BondOrders`` block is not present, the bonds will be guessed.
+Since we only care about which atoms are bonded at all, and not on details such as the bond order, this should work quite reliably.
+
+Nevertheless, if the morphology was obtained with the AMS :ref:`deposition workflow <OLEDDeposition>`, we can use the fact that it writes out the morphology as a ``.in`` file containing exactly the ``System`` block we need.
+Basically, we use the ``System`` block from e.g. the ``opt_box.in`` output file of the deposition as the input for the properties script.
+
+.. code-block:: bash
+
+   #!/bin/sh
+
+   $AMSBIN/oled-deposition << EOF
+      ... see oled-deposition manual page ...
+   EOF
+
+   $AMSBIN/oled-properties < deposition.workdir/opt_box.in
+
+This has the advantage that the bonds are guaranteed to be transferred without change between the two workflows.
 
 
 .. _OLEDPropertiesOutput:
@@ -372,7 +434,275 @@ Properties
 Output
 ^^^^^^
 
-TODO: Describe relevant section on the HDF5 file.
+Working directory
+~~~~~~~~~~~~~~~~~
+
+Running the ``oled-properties`` workflow script creates a single directory in which you can find all results of the calculation.
+By default this directory is named ``properties.workdir``, but in order to avoid name clashes, that location can be changed with the ``PROPERTIES_WORKDIR`` environment variable, similar to ``AMS_JOBNAME`` for the AMS driver. The example below will collect all results in the directory ``myMaterial.workdir``:
+
+.. code-block:: bash
+
+   #!/bin/sh
+
+   PROPERTIES_WORKDIR=myMaterial $AMSBIN/oled-properties << EOF
+   ...
+   EOF
+
+This will create the ``myMaterial.workdir`` directory with roughly the following internal structure::
+
+   myMaterial.workdir/
+   ├── logfile
+   ├── atomic_charges
+   │   ├── 0/
+   │   │   ├── adf.rkf
+   │   │   ├── ams.log
+   │   │   └── ...
+   │   ├── 1/
+   │   │   ├── adf.rkf
+   │   │   ├── ams.log
+   │   │   └── ...
+   │   └── .../
+   └── properties/
+       ├── relax_0/
+       │   ├── ams.rkf
+       │   ├── ams.log
+       │   └── ...
+       ├── 0/
+       │   ├── adf.rkf
+       │   ├── ams.log
+       │   └── ...
+       ├── relax_0_-1/
+       │   ├── ams.rkf
+       │   ├── ams.log
+       │   └── ...
+       ├── 0_-1/
+       │   ├── adf.rkf
+       │   ├── ams.log
+       │   └── ...
+       ├── relax_0_1/
+       │   ├── ams.rkf
+       │   └── ...
+       ├── 0_1/
+       │   ├── adf.rkf
+       │   ├── ams.log
+       │   └── ...
+       ├── .../
+       └── summary.hdf5
+
+The ``atomic_charges`` directory contains the results from the intial pass over all molecules, in which the atomic charges are determined with a quick DFT calculations.
+These charges are later be used for the electrostatic part of the embedding.
+The directory will be missing if you did not use ``DFT`` as the setting for the ``Embedding%Charges`` keyword.
+
+The ``properties`` directory contains the results from the second pass over all molecules.
+The first number in the name of the subdirectories is again the ID of the molecule (starting from zero).
+This is followed by the total charge for the calculations on the ions.
+The QM/MM geometry optimizations used to obtain approximate equilibrium structures follow the same naming scheme, with the added ``relax_`` prefix.
+If you choose not to relax (ion) geometries by setting the ``Relax`` keyword to ``None`` (or ``Neutral``), the ``relax_*`` folders (or at least some of them) may be missing.
+
+.. _OLEDPropertiesHDF5:
+
+Data on the HDF5 file
+~~~~~~~~~~~~~~~~~~~~~
+
+I addition to the full output of all individual calculations, you will also get a small `HDF5 file <https://en.wikipedia.org/wiki/Hierarchical_Data_Format>`__ called ``summary.hdf5`` containing a summary of the results of your calculations.
+These are generally just the results that are usually interesting for the design of OLED materials, such as site energies, exciton energies, (transition) dipole moments, etc.
+This file can be imported into Simbeyond's `Bumblebee code <https://simbeyond.com/bumblebee>`__ to use your calculated material in a device level kinetic Monte Carlo simulation.
+The following groups and datasets can be found on the HDF5 file.
+Note that all arrays on the HDF5 file are indexes starting from zero.
+
+The ``species`` group contains information about the different molecular species making up the morphology.
+There are two arrays in the ``species`` group whose size is equal to the number of different species (``numSpecies``):
+
+``species.name``
+   An array of human readable names identifying the molecular species making up the morphology. Currently this is just the molecular formula in `Hill notation <https://en.wikipedia.org/wiki/Chemical_formula#Hill_system>`__.
+
+``species.smiles``
+   An array of `SMILES <https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system>`__ strings for the different molecular species. May contain a dummy value in case the determination of the SMILES string from the 3D structure fails for a species.
+
+The ``molecules`` group contains the complete geometrical description of the morphology.
+It contains a number of arrays, (almost) all of which have the total number of molecules (``numMolecules``) as their size:
+
+``molecules.species``
+   An array of integers containing the species a molecule in for of an index into the arrays in the ``species`` group.
+
+``molecules.lattice``
+  (3 x 3) array containing the lattice vectors in Ångstrom.
+
+``molecules.position``
+  (``numMolecules`` x 3) array containing the center of mass positions of all molecules in Ångstrom. Note that all center of mass poisitions are within the parallelepiped spanned by the lattice vectors, i.e. all fractional coordinates are in the [0,1] range.
+
+``molecules.atoms``
+   This is an ``numMolecules`` sized 1D array, where each element itself is an array of ``string,float,float,float`` tuples representing ``symbol,x,y,z``. The x, y and z coordinates are given in Ångstrom.
+
+``molecules.bonds``
+   This is an ``numMolecules`` sized 1D array, where each element itself is an array of ``int,int,float`` tuples representing ``atom1,atom2,bondOrder``. Here ``atom1`` and ``atom2`` are indices into the corresponding element of the ``molecules.atoms`` array. The ``bondOrder`` is a floating point number, where the value of ``1.5`` is used to represent an aromatic bond.
+
+The site energies are contained in the ``energies`` group on the HDF5 file:
+
+``energies.IP``
+   A ``numMolecules`` sized array containing the first ionization potential for each molecule in eV.
+
+``energies.EA``
+   A ``numMolecules`` sized array containing the first electron affinity for each molecule in eV.
+
+``energies.HOMO``
+   A ``numMolecules`` sized array containing the Kohn-Sham orbital energy of the highest occupied orbital in eV. If requested via the ``NumAdditionalEnergies`` keyword in the :ref:`input <OLEDPropertiesInput>` of the properties workflow, more arrays of this type (``HOMO-1``, ``HOMO-2``, ...) may exist and contain the orbital energies of lower lying occupied orbitals.
+
+``energies.LUMO``
+   A ``numMolecules`` sized array containing the Kohn-Sham orbital energy of the lowest unoccupied orbital in eV. If requested via the ``NumAdditionalEnergies`` keyword in the :ref:`input <OLEDPropertiesInput>` of the properties workflow, more arrays of this type (``LUMO+1``, ``LUMO+2``, ...) may exist and contain the orbital energies of higher lying virtual orbitals.
+
+Similarly the exciton energies (in eV) can be found in the ``exciton_energies`` group. If the calculation of exciton energies was disabled by setting ``NumExcitations`` to ``0`` in the :ref:`input <OLEDPropertiesInput>`, this information is not present.
+
+``exciton_energies.S1``
+   Energies of the first excited singlet state (S1) with respect to the ground state. Higher singlet excitation energies may be found in more arrays of this type (``S2``, ``S3``, ...) if their calculation was requested by setting ``NumExcitations`` to a value larger ``1``.
+
+``exciton_energies.T1``
+   Energies of the first excited triplet state (T1) with respect to the ground state. Higher triplet excitation energies may be found in more arrays of this type (``T2``, ``T3``, ...) if their calculation was requested by setting ``NumExcitations`` to a value larger ``1``.
+
+Static dipole moments and transition dipole moments (in Debye) can be found in their respective groups:
+
+``static_multipole_moments.dipole_moment``
+  (``numMolecules`` x 3) array containing the dipole moment vectors for each molecule.
+
+``transition_dipole_moments.S1_S0``
+  (``numMolecules`` x 3) array containing the transition dipole moment vectors for the S0 → S1 transition for each molecule. Transition dipole moments for higher singlet excitations may be found in more arrays of this type (``S2_S0``, ``S3_S0``, ...) if their calculation was requested by setting ``NumExcitations`` to a value larger ``1``.
+
+If the calculation of transfer integrals is requested with the ``TransferIntegrals%Type`` key in the :ref:`input <OLEDPropertiesInput>`, the ``pairs`` and ``transfer_integrals`` groups will also be available on the HDF5 file, containing the following datasets:
+
+``pairs.indices``
+   A (``numPairs`` x 2) array of integers containing the molecule indices for all pairs of molecules that were considered close enough to trigger the calculation of transfer integrals between them.
+
+``transfer_integrals.electron``
+   A ``numPairs`` sized array containing the transfer integral (in eV) for electrons between each pair.
+
+``transfer_integrals.hole``
+   A ``numPairs`` sized array containing the transfer integral (in eV) for holes between each pair.
+
+Accessing the HDF5 file
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The easiest way to view the data from the HDF5 file is to open it in the GUI using the `AMSview <../../GUI/AMSview.html>`__ module.
+There you can easily plot histograms of all the calculated properties, but also visualize the spacial distribution of the properties.
+
+For more custom built analysis, the HDF5 file can easily be opened from Python using the `h5py <https://www.h5py.org/>`__ library, which is included in the `AMS Python Stack <../../Scripting/Python_Stack/Python_Stack.html>`__.
+The following code snippet shows how to calculate the mean and standard deviation of the ionization potential:
+
+.. code:: python
+
+   import h5py
+
+   with h5py.File("summary.hdf5", "r") as f:
+      IPs = f['energies']['IP'].value
+      print("IP = ", IPs.mean(), "±" , IPs.std())
+
+The above snippet is only suitable for calculations of pure compounds, as we are calculating the mean and standard deviation over *all* molecules, not taking their species into account.
+For :ref:`mixtures <OLEDMixtureDeposition>` calculating these properties *per species* would be much more useful.
+This can easily be accomplished by using an appropriate mask on the ``IPs`` array for the calculation of mean and standard deviation:
+
+.. code:: python
+
+   import h5py
+   import numpy as np
+
+   with h5py.File("summary.hdf5", "r") as f:
+      IPs        = f['energies']['IP'].value
+      speciesIDs = f['molecules']['species'].value
+
+      for specID, specName in enumerate(f['species']['name']):
+            mask = (speciesIDs==specID) & (~np.isnan(IPs))
+            print(specName)
+            print("IP = ", IPs[mask].mean(), "±" , IPs[mask].std())
+
+Note how we also use the mask to exclude all ``NaN`` elements in the array from the calculation of the mean and standard deviation.
+Occasional ``NaN`` values in the arrays on the HDF5 file indicate that a property could not be calculated for a molecule because the job for it crashed or failed in some other way.
+This is not a problem as long as it happens only rarely, but the ``NaN`` values need to be excluded from the analysis.
 
 
-.. [#ref1] D.E.\ Coupry, M.A. Addicoat, and T. Heine, *An Extension of the Universal Force Field for Metal-Organic Frameworks*, `J. Chem. Theory Comput. 12, 5215-5225 (2016) <https://doi.org/10.1021/acs.jctc.6b00664>`__
+Parallelization
+^^^^^^^^^^^^^^^
+
+As you can imagine, the properties workflow is computationally quite expensive. After all, we are doing hundreds of (TD-)DFT calculations on relatively large molecules.
+Luckily all the calculations on the different molecules are independent from each other, and can therefore run in parallel.
+The workflow scripts supports different methods of parallelization through the ``JobRunner`` keyword.
+
+.. scmautodoc:: oled-properties JobRunner
+   :nosummary:
+
+Local job execution
+~~~~~~~~~~~~~~~~~~~
+
+The simplest option (``local``) is to run the job on the machine that also executes the workflow script itself.
+This is a good option if you have access to a powerful machine with many CPU cores, on which you can run jobs directly (i.e. not through a batch system).
+By default 4 cores will be used for the execution of each job, and enough jobs will be run in parallel to saturate the entire machine::
+
+   JobRunner local:*,4
+
+See above for a detailed description of the ``local`` option.
+
+Job submission to a batch system
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you have access to a cluster through a batch system, it is also an option to run the workflow scripts and the actual jobs on different machines.
+The workflow script then **submits** the individual jobs to the batch system and waits for them to finish.
+(Under the hood, this is based on the `PLAMS GridRunner <../../plams/components/runners.html#remote-job-runner>`__.)
+The workflow script itself can then either run under a `terminal multiplexer <https://en.wikipedia.org/wiki/Terminal_multiplexer>`__ (e.g. `GNU screen <https://en.wikipedia.org/wiki/GNU_Screen>`__) on the login node of the cluster, or be submitted as a simple 1 core job to the batch system.
+Note that it is *essential* that the workflow script keeps running until all jobs have finished, as the summary of the results into the :ref:`HDF5 file <OLEDPropertiesHDF5>` only happens when all jobs have finished.
+You will have to specify used batch systems, as well as the command used for the job submission with the ``JobRunner`` keyword.
+This gives you a lot of flexibility and allows to efficiently use the computational resources at hand.
+The following example will submit 4 core, single node jobs to either the ``mars``, ``jupiter`` or ``saturn`` queue of a cluster, requesting 2 gigabytes of memory per used CPU core, with a maximum wall-time of 4 hours per job::
+
+   JobRunner slurm:sbatch -p mars,jupiter,saturn -N 1 -n 4 --mem-per-cpu=2G --time=04:00:00
+
+The downside of this approach is that **each** job for an individual molecule might be waiting in the batch system's queue before starting.
+
+Note that it is currently not possible to submit the workflow script and molecule jobs together as a single, large job to a batch system. In other words it is *not* possible to request a large allocation from the batch system once, and then run the workflow script and all jobs within that allocation. (Support for this needs to be added to the `PLAMS library <../../plams/index.html>`__, which will happen in the future.)
+
+
+.. _OLEDPropertiesInput:
+
+Additional settings
+^^^^^^^^^^^^^^^^^^^
+
+The OLED properties workflow script has a few options that determine what properties will be calculated and/or written to the :ref:`HDF5 file <OLEDPropertiesHDF5>` file::
+
+   NumAdditionalEnergies integer
+   NumExcitations integer
+   TransferIntegrals
+      Cutoff float
+      Metric [CoM | Atoms | Atoms_noH]
+      Type [None | DFTB]
+   End
+
+.. scmautodoc:: oled-properties NumAdditionalEnergies
+   :nosummary:
+.. scmautodoc:: oled-properties NumExcitations
+   :nosummary:
+.. scmautodoc:: oled-properties TransferIntegrals
+   :nosummary:
+
+There are also a few options to tweak some aspects of the workflow.
+We have not properly tested their effect on the results.
+When changing these options, verify your results against calculations using all default settings.
+
+::
+
+   Embedding
+      Charges [DFTB | DFT]
+      Cutoff float
+      Metric [CoM | Atoms | Atoms_noH]
+      Type [None | DRF]
+   End
+   Relax [None | Neutral | All]
+   OccupationSmearing [None | Ions | All]
+
+.. scmautodoc:: oled-properties Embedding
+   :nosummary:
+.. scmautodoc:: oled-properties Relax
+   :nosummary:
+.. scmautodoc:: oled-properties OccupationSmearing
+   :nosummary:
+
+The ``oled-properties`` workflow supports both the ``-r/--restart`` command line flag and the ``RestartWorkdir`` keyword. They work exactly the same way as for the ``oled-deposition`` workflow, see :ref:`above <OLEDDepositionRestart>`.
+
+.. scmautodoc:: oled-properties RestartWorkdir
+   :nosummary:

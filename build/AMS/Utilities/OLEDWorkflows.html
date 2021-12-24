@@ -540,7 +540,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#properties">Properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Basic input</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#oledpropertiesoutput">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parallelization">Parallelization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-settings">Additional settings</a></li>
 </ul>
 </li>
 </ul>
@@ -705,7 +708,7 @@ Each molecule’s environment is taken into account in a polarizable QM/MM schem
 </li>
 </ul>
 <p>The output of the <a class="reference internal" href="#oledproperties"><span class="std std-ref">Properties</span></a> workflow is an <a class="reference internal" href="#oledpropertiesoutput"><span class="std std-ref">HDF5 file</span></a> containing a summary of the results for a material.
-This file can be opened in AMSview for a visualization of the results, but also directly imported into Simbeyond’s <a class="reference external" href="https://simbeyond.com/bumblebee">Bumblebee code</a> to use it in simulations at the device level.</p>
+This file can be opened in <a class="reference external" href="../../GUI/AMSview.html">AMSview</a> for a visualization of the results, but also directly imported into Simbeyond’s <a class="reference external" href="https://simbeyond.com/bumblebee">Bumblebee code</a> to use it in simulations at the device level.</p>
 <p>This manual page describes the technical details and options of the OLED workflow scripts.
 For a more hands-on introduction, you may want to start with the GUI tutorial, that will guide you through the entire workflow using the hole transport material alpha-NPD as an example</p>
 <div class="admonition seealso">
@@ -720,7 +723,7 @@ For a more hands-on introduction, you may want to start with the GUI tutorial, t
 <span id="oleddeposition"></span><h2>Deposition<a class="headerlink" href="#deposition" title="Permalink to this headline">¶</a></h2>
 <p>The deposition workflow implements a series of mixed <a class="reference internal" href="../Tasks/Molecular_Dynamics.html#moleculardynamics"><span class="std std-ref">molecular dynamics</span></a> and <a class="reference internal" href="../Tasks/Molecular_Dynamics.html#fbmc"><span class="std std-ref">force-bias Monte Carlo</span></a> calculations to simulate the growth of a thin film with physical vapor deposition.</p>
 <div class="figure align-right" style="width: 45%">
-   <video width="320" height="540" muted="true" controls src="https://nextcloud.scm.com/index.php/s/EfqQRLE5ZgxfDty/download"></video>
+   <video width="100%" muted controls src="https://nextcloud.scm.com/index.php/s/EfqQRLE5ZgxfDty/download"></video>
    <center>Deposition of <a class="reference external" href="https://pubchem.ncbi.nlm.nih.gov/compound/1_3-Bis_N-carbazolyl_benzene">mCP</a></center>
 </div><p>Basically the <a class="reference internal" href="../Tasks/Molecular_Dynamics.html#mdaddmolecules"><span class="std std-ref">molecule gun</span></a> in the is used to shoot molecules at the substrate. Upon reaching the surface, the <a class="reference internal" href="../Tasks/Molecular_Dynamics.html#fbmc"><span class="std std-ref">force-bias Monte Carlo</span></a> method is used to accelerate the search for favorable adsorption sites. This process is repeated until a thin film of a user defined thickness has grown on the substrate.</p>
 <p>To make this process computationally more efficient, the deposition happens in so called “cycles”. At the end of each deposition cycle, the bulk material at the bottom of the growing film is “trimmed off” and stored. Only the two top layers (each about 10 Å thick) are transfered to the next deposition cycle, where the lower of the two layers is frozen. This ensures that the trimmed off parts of the system fit perfectly together when the system is reassembled in the end of the simulation. By depositing in cycles we avoid simulating a lot of bulk material and are able to make the total computational cost linear in the thickness of the deposited film.</p>
@@ -792,7 +795,7 @@ For a more hands-on introduction, you may want to start with the GUI tutorial, t
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Non-standard block</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Defined bond orders. May by used by MM engines.</td>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Defined bond orders. May be used by MM engines and for defining constraints.</td>
 </tr>
 </tbody>
 </table>
@@ -802,7 +805,7 @@ For a more hands-on introduction, you may want to start with the GUI tutorial, t
 </dl>
 <p>Just like in the AMS driver, as an alternative to the <code class="docutils literal notranslate"><span class="pre">System</span></code> block, you an also use the <code class="docutils literal notranslate"><span class="pre">LoadSystem</span></code> block to <a class="reference internal" href="../System.html#loadsystem"><span class="std std-ref">load a system</span></a> directly from a <code class="docutils literal notranslate"><span class="pre">.rkf</span></code> file of a previous calculation.</p>
 <p id="oledsystemblock">The deposition workflow uses the <a class="reference external" href="../../ForceField/index.html">ForceField</a> engine for the <a class="reference internal" href="../Tasks/Molecular_Dynamics.html#moleculardynamics"><span class="std std-ref">molecular dynamics</span></a> simulation of the physical vapor deposition.
-In order to also support the deposition of metal containing compounds, we use the UFF force field with the <code class="docutils literal notranslate"><span class="pre">UFF4MOF-II</span></code> parametrization <a class="footnote-reference" href="#ref1" id="id1">[1]</a> for the deposition.
+In order to also support the deposition of metal containing compounds, we use the UFF force field with the <a class="reference external" href="https://doi.org/10.1021/acs.jctc.6b00664">UFF4MOF-II</a> parametrization for the deposition.
 As with any calculation with the <a class="reference external" href="../../ForceField/index.html">ForceField</a> engine you may manually provide (UFF4MOF-II) atom-types, atomic charges and bond orders in the input file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span>
   <span class="n">Atoms</span>
@@ -1271,110 +1274,240 @@ EOF
 </div>
 <div class="section" id="properties">
 <span id="oledproperties"></span><h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none notranslate" id="oled-properties-key-embedding"><div class="highlight"><pre><span></span>Embedding
-   Charges [FFInput | DFTB | DFT]
-   Cutoff float
-   Metric [CoM | Atoms | Atoms_noH]
-   Type [None | DRF]
-End
-</pre></div>
-</div>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">Embedding</span></code></dt>
-<dd><table class="first docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures details of how the environment is taken into account.</td>
-</tr>
-</tbody>
-</table>
-<dl class="last docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">Charges</span></code></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">DFT</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[FFInput, DFTB, DFT]</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Which atomic charges to use for the DRF embedding. 
-
-• FFInput: Use the ForceField.Charge atomic properties from the system in the input as the DRF charges. 
-
-• DFTB: Use the self-consistent Mulliken charges from a quick DFTB calculation with the GFN1-xTB model.
-
-• DFT: Use the MDC-D charges from a relatively quick DFT calculation using LDA and a DZP basis set.</td>
-</tr>
-</tbody>
-</table>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Cutoff</span></code></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">15.0</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The cutoff distance determining which molecules will be considered the environment of the central molecule. The maximum possible cutoff distance is half the length of the smallest lattice vector. The distance can be measured using different metrics, see the <code class="docutils literal notranslate"><span class="pre">Metric</span></code> keyword.</td>
-</tr>
-</tbody>
-</table>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Metric</span></code></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Atoms</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[CoM, Atoms, Atoms_noH]</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The metric used to calculate the distance between two molecules.
-
-• CoM: use the distance between the centers of mass of the two molecules.
-
-• Atoms: Use the distance between the two closest atoms of two molecules. 
-
-• Atoms_noH: Use the distance between the closest non-hydrogen atoms of the two molecules.</td>
-</tr>
-</tbody>
-</table>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Type</span></code></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">DRF</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[None, DRF]</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The type of embedding used to simulate the molecular environment.</td>
-</tr>
-</tbody>
-</table>
+<p>The properties workflow is used to obtain distributions (and possibly spatial correlations) of molecular properties such as ionization potential, electron affinity and exciton energies from the morphology.
+To accomplish this, it will perform DFT calculations on all individual molecules from the morphology, taking their environment into account in QM/MM calculation.</p>
+<p><strong>The exact workflow (with all default settings) is as follows:</strong></p>
+<ol class="arabic simple">
+<li>For each molecule in the box, do a quick DFT calculation with <a class="reference external" href="../../ADF/Input/Density_Functional.html#lda">LDA</a> and a <a class="reference external" href="../../ADF/Input/Basis_sets_and_atomic_fragments.html">DZP basis</a> and use the <a class="reference external" href="../../ADF/Input/Results_Output.html#multipole-derived-charges">MDC-D charge model</a> to determine atomic charges. These charges will be used for the electrostatic part of the embedding potential in the next step.</li>
+</ol>
+<div class="figure align-right" style="width: 55%">
+   <video width="100%" muted loop controls src="https://nextcloud.scm.com/index.php/s/SzxtRSGqmfmzBMz/download"></video><br>
+   <center><a class="reference external" href="https://pubchem.ncbi.nlm.nih.gov/compound/1_3-Bis_N-carbazolyl_benzene">mCP</a> in 15 Å environment</center>
+</div><ol class="arabic simple" start="2">
+<li>For each molecule in the box:<ul>
+<li>Determine which other molecules to consider as the environment. By default all molecules within 15 Å (atom-atom distance) are considered.</li>
+<li><dl class="first docutils">
+<dt>Individually, for neutral molecule, cation, and anion:</dt>
+<dd><ul class="first last">
+<li>Optimize geometry of central QM molecule in frozen MM environment using <a class="reference external" href="../../DFTB/DFTB_Model_Hamiltonian.html#extended-tight-binding-xtb">GFN1-xTB</a> and UFF4MOF-II with <a class="reference external" href="../../Hybrid/EngineOptions.html#qm-mm">electrostatic embedding</a> in the <a class="reference external" href="../../Hybrid/index.html">Hybrid engine</a>.</li>
+<li>Do a DFT single point on the optimized geometry using <a class="reference external" href="../../ADF/Input/Density_Functional.html#gga">PBE</a> and an all-electron <a class="reference external" href="../../ADF/Input/Basis_sets_and_atomic_fragments.html">TZ2P basis</a>. The environment is taked into account using a polarizable <a class="reference external" href="../../ADF/Input/DIM-QM.html">DRF embedding</a>. (For the neutral systems <a class="reference external" href="../../ADF/Input/Excitation_energies.html">exciton energies</a> and transition dipole moments are also computed with <a class="reference external" href="../../ADF/Input/Time-dependent_DFT.html">TD-DFT</a>.)</li>
+</ul>
 </dd>
 </dl>
-</dd>
-</dl>
-<div class="highlight-none notranslate" id="oled-properties-key-jobrunner"><div class="highlight"><pre><span></span>JobRunner string
+</li>
+<li>Calculate the (approximately) adiabatic ionization potential and electron affinity from the differences in total energy with respect to the neutral system.</li>
+</ul>
+</li>
+<li>For all pairs of neighboring molecules (within 4 Å atom-atom distance of each other) calculate the electron and hole <a class="reference external" href="../../DFTB/Charge_transfer_integrals.html#transferintegrals">charge transfer integrals with GFN1-xTB</a>.</li>
+</ol>
+<p>What is described above is the workflow with all default settings.
+Various aspects of this (such as the ranges) can be tweaked from the input, see the <a class="reference internal" href="#oledpropertiesinput"><span class="std std-ref">Settings section</span></a> below.</p>
+<div class="section" id="id1">
+<h3>Basic input<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The simplest possible input for the <code class="docutils literal notranslate"><span class="pre">oled-properties</span></code> workflow script is just a single <code class="docutils literal notranslate"><span class="pre">System</span></code> block.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">$AMSBIN</span>/oled-properties <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">System</span>
+<span class="s">   Atoms</span>
+<span class="s">      ...</span>
+<span class="s">   End</span>
+<span class="s">   Lattice</span>
+<span class="s">      ...</span>
+<span class="s">   End</span>
+<span class="s">  [BondOrders</span>
+<span class="s">      ...</span>
+<span class="s">   End]</span>
+<span class="s">End</span>
+
+<span class="s">EOF</span>
 </pre></div>
 </div>
+<p>Obviously, the <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> and <code class="docutils literal notranslate"><span class="pre">Lattice</span></code> blocks are required, while the <code class="docutils literal notranslate"><span class="pre">BondOrders</span></code> block is optional.
+If the bond orders are present, they will be used to determine which parts of the system are connected, which ultimately determines which sets of atoms are considered distinct molecules.
+If the <code class="docutils literal notranslate"><span class="pre">BondOrders</span></code> block is not present, the bonds will be guessed.
+Since we only care about which atoms are bonded at all, and not on details such as the bond order, this should work quite reliably.</p>
+<p>Nevertheless, if the morphology was obtained with the AMS <a class="reference internal" href="#oleddeposition"><span class="std std-ref">deposition workflow</span></a>, we can use the fact that it writes out the morphology as a <code class="docutils literal notranslate"><span class="pre">.in</span></code> file containing exactly the <code class="docutils literal notranslate"><span class="pre">System</span></code> block we need.
+Basically, we use the <code class="docutils literal notranslate"><span class="pre">System</span></code> block from e.g. the <code class="docutils literal notranslate"><span class="pre">opt_box.in</span></code> output file of the deposition as the input for the properties script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">$AMSBIN</span>/oled-deposition <span class="s">&lt;&lt; EOF</span>
+<span class="s">   ... see oled-deposition manual page ...</span>
+<span class="s">EOF</span>
+
+<span class="nv">$AMSBIN</span>/oled-properties &lt; deposition.workdir/opt_box.in
+</pre></div>
+</div>
+<p>This has the advantage that the bonds are guaranteed to be transferred without change between the two workflows.</p>
+</div>
+<div class="section" id="oledpropertiesoutput">
+<span id="id2"></span><h3>Output<a class="headerlink" href="#oledpropertiesoutput" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="working-directory">
+<h4>Working directory<a class="headerlink" href="#working-directory" title="Permalink to this headline">¶</a></h4>
+<p>Running the <code class="docutils literal notranslate"><span class="pre">oled-properties</span></code> workflow script creates a single directory in which you can find all results of the calculation.
+By default this directory is named <code class="docutils literal notranslate"><span class="pre">properties.workdir</span></code>, but in order to avoid name clashes, that location can be changed with the <code class="docutils literal notranslate"><span class="pre">PROPERTIES_WORKDIR</span></code> environment variable, similar to <code class="docutils literal notranslate"><span class="pre">AMS_JOBNAME</span></code> for the AMS driver. The example below will collect all results in the directory <code class="docutils literal notranslate"><span class="pre">myMaterial.workdir</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">PROPERTIES_WORKDIR</span><span class="o">=</span>myMaterial <span class="nv">$AMSBIN</span>/oled-properties <span class="s">&lt;&lt; EOF</span>
+<span class="s">...</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>This will create the <code class="docutils literal notranslate"><span class="pre">myMaterial.workdir</span></code> directory with roughly the following internal structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>myMaterial.workdir/
+├── logfile
+├── atomic_charges
+│   ├── 0/
+│   │   ├── adf.rkf
+│   │   ├── ams.log
+│   │   └── ...
+│   ├── 1/
+│   │   ├── adf.rkf
+│   │   ├── ams.log
+│   │   └── ...
+│   └── .../
+└── properties/
+    ├── relax_0/
+    │   ├── ams.rkf
+    │   ├── ams.log
+    │   └── ...
+    ├── 0/
+    │   ├── adf.rkf
+    │   ├── ams.log
+    │   └── ...
+    ├── relax_0_-1/
+    │   ├── ams.rkf
+    │   ├── ams.log
+    │   └── ...
+    ├── 0_-1/
+    │   ├── adf.rkf
+    │   ├── ams.log
+    │   └── ...
+    ├── relax_0_1/
+    │   ├── ams.rkf
+    │   └── ...
+    ├── 0_1/
+    │   ├── adf.rkf
+    │   ├── ams.log
+    │   └── ...
+    ├── .../
+    └── summary.hdf5
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">atomic_charges</span></code> directory contains the results from the intial pass over all molecules, in which the atomic charges are determined with a quick DFT calculations.
+These charges are later be used for the electrostatic part of the embedding.
+The directory will be missing if you did not use <code class="docutils literal notranslate"><span class="pre">DFT</span></code> as the setting for the <code class="docutils literal notranslate"><span class="pre">Embedding%Charges</span></code> keyword.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">properties</span></code> directory contains the results from the second pass over all molecules.
+The first number in the name of the subdirectories is again the ID of the molecule (starting from zero).
+This is followed by the total charge for the calculations on the ions.
+The QM/MM geometry optimizations used to obtain approximate equilibrium structures follow the same naming scheme, with the added <code class="docutils literal notranslate"><span class="pre">relax_</span></code> prefix.
+If you choose not to relax (ion) geometries by setting the <code class="docutils literal notranslate"><span class="pre">Relax</span></code> keyword to <code class="docutils literal notranslate"><span class="pre">None</span></code> (or <code class="docutils literal notranslate"><span class="pre">Neutral</span></code>), the <code class="docutils literal notranslate"><span class="pre">relax_*</span></code> folders (or at least some of them) may be missing.</p>
+</div>
+<div class="section" id="data-on-the-hdf5-file">
+<span id="oledpropertieshdf5"></span><h4>Data on the HDF5 file<a class="headerlink" href="#data-on-the-hdf5-file" title="Permalink to this headline">¶</a></h4>
+<p>I addition to the full output of all individual calculations, you will also get a small <a class="reference external" href="https://en.wikipedia.org/wiki/Hierarchical_Data_Format">HDF5 file</a> called <code class="docutils literal notranslate"><span class="pre">summary.hdf5</span></code> containing a summary of the results of your calculations.
+These are generally just the results that are usually interesting for the design of OLED materials, such as site energies, exciton energies, (transition) dipole moments, etc.
+This file can be imported into Simbeyond’s <a class="reference external" href="https://simbeyond.com/bumblebee">Bumblebee code</a> to use your calculated material in a device level kinetic Monte Carlo simulation.
+The following groups and datasets can be found on the HDF5 file.
+Note that all arrays on the HDF5 file are indexes starting from zero.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">species</span></code> group contains information about the different molecular species making up the morphology.
+There are two arrays in the <code class="docutils literal notranslate"><span class="pre">species</span></code> group whose size is equal to the number of different species (<code class="docutils literal notranslate"><span class="pre">numSpecies</span></code>):</p>
 <dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">species.name</span></code></dt>
+<dd>An array of human readable names identifying the molecular species making up the morphology. Currently this is just the molecular formula in <a class="reference external" href="https://en.wikipedia.org/wiki/Chemical_formula#Hill_system">Hill notation</a>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">species.smiles</span></code></dt>
+<dd>An array of <a class="reference external" href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">SMILES</a> strings for the different molecular species. May contain a dummy value in case the determination of the SMILES string from the 3D structure fails for a species.</dd>
+</dl>
+<p>The <code class="docutils literal notranslate"><span class="pre">molecules</span></code> group contains the complete geometrical description of the morphology.
+It contains a number of arrays, (almost) all of which have the total number of molecules (<code class="docutils literal notranslate"><span class="pre">numMolecules</span></code>) as their size:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">molecules.species</span></code></dt>
+<dd>An array of integers containing the species a molecule in for of an index into the arrays in the <code class="docutils literal notranslate"><span class="pre">species</span></code> group.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">molecules.lattice</span></code></dt>
+<dd>(3 x 3) array containing the lattice vectors in Ångstrom.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">molecules.position</span></code></dt>
+<dd>(<code class="docutils literal notranslate"><span class="pre">numMolecules</span></code> x 3) array containing the center of mass positions of all molecules in Ångstrom. Note that all center of mass poisitions are within the parallelepiped spanned by the lattice vectors, i.e. all fractional coordinates are in the [0,1] range.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">molecules.atoms</span></code></dt>
+<dd>This is an <code class="docutils literal notranslate"><span class="pre">numMolecules</span></code> sized 1D array, where each element itself is an array of <code class="docutils literal notranslate"><span class="pre">string,float,float,float</span></code> tuples representing <code class="docutils literal notranslate"><span class="pre">symbol,x,y,z</span></code>. The x, y and z coordinates are given in Ångstrom.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">molecules.bonds</span></code></dt>
+<dd>This is an <code class="docutils literal notranslate"><span class="pre">numMolecules</span></code> sized 1D array, where each element itself is an array of <code class="docutils literal notranslate"><span class="pre">int,int,float</span></code> tuples representing <code class="docutils literal notranslate"><span class="pre">atom1,atom2,bondOrder</span></code>. Here <code class="docutils literal notranslate"><span class="pre">atom1</span></code> and <code class="docutils literal notranslate"><span class="pre">atom2</span></code> are indices into the corresponding element of the <code class="docutils literal notranslate"><span class="pre">molecules.atoms</span></code> array. The <code class="docutils literal notranslate"><span class="pre">bondOrder</span></code> is a floating point number, where the value of <code class="docutils literal notranslate"><span class="pre">1.5</span></code> is used to represent an aromatic bond.</dd>
+</dl>
+<p>The site energies are contained in the <code class="docutils literal notranslate"><span class="pre">energies</span></code> group on the HDF5 file:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">energies.IP</span></code></dt>
+<dd>A <code class="docutils literal notranslate"><span class="pre">numMolecules</span></code> sized array containing the first ionization potential for each molecule in eV.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">energies.EA</span></code></dt>
+<dd>A <code class="docutils literal notranslate"><span class="pre">numMolecules</span></code> sized array containing the first electron affinity for each molecule in eV.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">energies.HOMO</span></code></dt>
+<dd>A <code class="docutils literal notranslate"><span class="pre">numMolecules</span></code> sized array containing the Kohn-Sham orbital energy of the highest occupied orbital in eV. If requested via the <code class="docutils literal notranslate"><span class="pre">NumAdditionalEnergies</span></code> keyword in the <a class="reference internal" href="#oledpropertiesinput"><span class="std std-ref">input</span></a> of the properties workflow, more arrays of this type (<code class="docutils literal notranslate"><span class="pre">HOMO-1</span></code>, <code class="docutils literal notranslate"><span class="pre">HOMO-2</span></code>, …) may exist and contain the orbital energies of lower lying occupied orbitals.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">energies.LUMO</span></code></dt>
+<dd>A <code class="docutils literal notranslate"><span class="pre">numMolecules</span></code> sized array containing the Kohn-Sham orbital energy of the lowest unoccupied orbital in eV. If requested via the <code class="docutils literal notranslate"><span class="pre">NumAdditionalEnergies</span></code> keyword in the <a class="reference internal" href="#oledpropertiesinput"><span class="std std-ref">input</span></a> of the properties workflow, more arrays of this type (<code class="docutils literal notranslate"><span class="pre">LUMO+1</span></code>, <code class="docutils literal notranslate"><span class="pre">LUMO+2</span></code>, …) may exist and contain the orbital energies of higher lying virtual orbitals.</dd>
+</dl>
+<p>Similarly the exciton energies (in eV) can be found in the <code class="docutils literal notranslate"><span class="pre">exciton_energies</span></code> group. If the calculation of exciton energies was disabled by setting <code class="docutils literal notranslate"><span class="pre">NumExcitations</span></code> to <code class="docutils literal notranslate"><span class="pre">0</span></code> in the <a class="reference internal" href="#oledpropertiesinput"><span class="std std-ref">input</span></a>, this information is not present.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">exciton_energies.S1</span></code></dt>
+<dd>Energies of the first excited singlet state (S1) with respect to the ground state. Higher singlet excitation energies may be found in more arrays of this type (<code class="docutils literal notranslate"><span class="pre">S2</span></code>, <code class="docutils literal notranslate"><span class="pre">S3</span></code>, …) if their calculation was requested by setting <code class="docutils literal notranslate"><span class="pre">NumExcitations</span></code> to a value larger <code class="docutils literal notranslate"><span class="pre">1</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">exciton_energies.T1</span></code></dt>
+<dd>Energies of the first excited triplet state (T1) with respect to the ground state. Higher triplet excitation energies may be found in more arrays of this type (<code class="docutils literal notranslate"><span class="pre">T2</span></code>, <code class="docutils literal notranslate"><span class="pre">T3</span></code>, …) if their calculation was requested by setting <code class="docutils literal notranslate"><span class="pre">NumExcitations</span></code> to a value larger <code class="docutils literal notranslate"><span class="pre">1</span></code>.</dd>
+</dl>
+<p>Static dipole moments and transition dipole moments (in Debye) can be found in their respective groups:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">static_multipole_moments.dipole_moment</span></code></dt>
+<dd>(<code class="docutils literal notranslate"><span class="pre">numMolecules</span></code> x 3) array containing the dipole moment vectors for each molecule.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">transition_dipole_moments.S1_S0</span></code></dt>
+<dd>(<code class="docutils literal notranslate"><span class="pre">numMolecules</span></code> x 3) array containing the transition dipole moment vectors for the S0 → S1 transition for each molecule. Transition dipole moments for higher singlet excitations may be found in more arrays of this type (<code class="docutils literal notranslate"><span class="pre">S2_S0</span></code>, <code class="docutils literal notranslate"><span class="pre">S3_S0</span></code>, …) if their calculation was requested by setting <code class="docutils literal notranslate"><span class="pre">NumExcitations</span></code> to a value larger <code class="docutils literal notranslate"><span class="pre">1</span></code>.</dd>
+</dl>
+<p>If the calculation of transfer integrals is requested with the <code class="docutils literal notranslate"><span class="pre">TransferIntegrals%Type</span></code> key in the <a class="reference internal" href="#oledpropertiesinput"><span class="std std-ref">input</span></a>, the <code class="docutils literal notranslate"><span class="pre">pairs</span></code> and <code class="docutils literal notranslate"><span class="pre">transfer_integrals</span></code> groups will also be available on the HDF5 file, containing the following datasets:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">pairs.indices</span></code></dt>
+<dd>A (<code class="docutils literal notranslate"><span class="pre">numPairs</span></code> x 2) array of integers containing the molecule indices for all pairs of molecules that were considered close enough to trigger the calculation of transfer integrals between them.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">transfer_integrals.electron</span></code></dt>
+<dd>A <code class="docutils literal notranslate"><span class="pre">numPairs</span></code> sized array containing the transfer integral (in eV) for electrons between each pair.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">transfer_integrals.hole</span></code></dt>
+<dd>A <code class="docutils literal notranslate"><span class="pre">numPairs</span></code> sized array containing the transfer integral (in eV) for holes between each pair.</dd>
+</dl>
+</div>
+<div class="section" id="accessing-the-hdf5-file">
+<h4>Accessing the HDF5 file<a class="headerlink" href="#accessing-the-hdf5-file" title="Permalink to this headline">¶</a></h4>
+<p>The easiest way to view the data from the HDF5 file is to open it in the GUI using the <a class="reference external" href="../../GUI/AMSview.html">AMSview</a> module.
+There you can easily plot histograms of all the calculated properties, but also visualize the spacial distribution of the properties.</p>
+<p>For more custom built analysis, the HDF5 file can easily be opened from Python using the <a class="reference external" href="https://www.h5py.org/">h5py</a> library, which is included in the <a class="reference external" href="../../Scripting/Python_Stack/Python_Stack.html">AMS Python Stack</a>.
+The following code snippet shows how to calculate the mean and standard deviation of the ionization potential:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span>
+
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;summary.hdf5&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">IPs</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;energies&#39;</span><span class="p">][</span><span class="s1">&#39;IP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IP = &quot;</span><span class="p">,</span> <span class="n">IPs</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="s2">&quot;±&quot;</span> <span class="p">,</span> <span class="n">IPs</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The above snippet is only suitable for calculations of pure compounds, as we are calculating the mean and standard deviation over <em>all</em> molecules, not taking their species into account.
+For <a class="reference internal" href="#oledmixturedeposition"><span class="std std-ref">mixtures</span></a> calculating these properties <em>per species</em> would be much more useful.
+This can easily be accomplished by using an appropriate mask on the <code class="docutils literal notranslate"><span class="pre">IPs</span></code> array for the calculation of mean and standard deviation:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;summary.hdf5&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">IPs</span>        <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;energies&#39;</span><span class="p">][</span><span class="s1">&#39;IP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+   <span class="n">speciesIDs</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;molecules&#39;</span><span class="p">][</span><span class="s1">&#39;species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+   <span class="k">for</span> <span class="n">specID</span><span class="p">,</span> <span class="n">specName</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]):</span>
+         <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">speciesIDs</span><span class="o">==</span><span class="n">specID</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">IPs</span><span class="p">))</span>
+         <span class="nb">print</span><span class="p">(</span><span class="n">specName</span><span class="p">)</span>
+         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IP = &quot;</span><span class="p">,</span> <span class="n">IPs</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="s2">&quot;±&quot;</span> <span class="p">,</span> <span class="n">IPs</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Note how we also use the mask to exclude all <code class="docutils literal notranslate"><span class="pre">NaN</span></code> elements in the array from the calculation of the mean and standard deviation.
+Occasional <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values in the arrays on the HDF5 file indicate that a property could not be calculated for a molecule because the job for it crashed or failed in some other way.
+This is not a problem as long as it happens only rarely, but the <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values need to be excluded from the analysis.</p>
+</div>
+</div>
+<div class="section" id="parallelization">
+<h3>Parallelization<a class="headerlink" href="#parallelization" title="Permalink to this headline">¶</a></h3>
+<p>As you can imagine, the properties workflow is computationally quite expensive. After all, we are doing hundreds of (TD-)DFT calculations on relatively large molecules.
+Luckily all the calculations on the different molecules are independent from each other, and can therefore run in parallel.
+The workflow scripts supports different methods of parallelization through the <code class="docutils literal notranslate"><span class="pre">JobRunner</span></code> keyword.</p>
+<dl class="docutils" id="oled-properties-key-jobrunner">
 <dt><code class="docutils literal notranslate"><span class="pre">JobRunner</span></code></dt>
 <dd><table class="first last docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1386,7 +1519,7 @@ End
 </tr>
 <tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Configures how the jobs will be executed.
 
-• <code class="docutils literal notranslate"><span class="pre">local:N,M</span></code>: Run the jobs locally. Here <code class="docutils literal notranslate"><span class="pre">N</span></code> is the number of jobs to run in parallel, and <code class="docutils literal notranslate"><span class="pre">M</span></code> is the number of CPU cores used by each job. The total number of CPU cores used will be the product of <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">N</span></code> or <code class="docutils literal notranslate"><span class="pre">M</span></code> can be replaced by the <code class="docutils literal notranslate"><span class="pre">\*</span></code> wildcard. In that case the missing number will be automatically determined such that in total <code class="docutils literal notranslate"><span class="pre">$NSCM</span></code> CPU cores will be utilized. If <code class="docutils literal notranslate"><span class="pre">$NSCM</span></code> is not set, the entire machine will be utilized.
+• <code class="docutils literal notranslate"><span class="pre">local:N,M</span></code>: Run the jobs locally. Here <code class="docutils literal notranslate"><span class="pre">N</span></code> is the number of jobs to run in parallel, and <code class="docutils literal notranslate"><span class="pre">M</span></code> is the number of CPU cores used by each job. The total number of CPU cores used will be the product of <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">N</span></code> or <code class="docutils literal notranslate"><span class="pre">M</span></code> can be replaced by the asterisk as a wildcard. In that case the missing number will be automatically determined such that in total <code class="docutils literal notranslate"><span class="pre">$NSCM</span></code> CPU cores will be utilized. If <code class="docutils literal notranslate"><span class="pre">$NSCM</span></code> is not set, the entire machine will be utilized.
 
 • <code class="docutils literal notranslate"><span class="pre">batch_system:submit_cmd</span></code>: Submit the individual jobs to a batch system. Example: <code class="docutils literal notranslate"><span class="pre">slurm:sbatch</span> <span class="pre">-p</span> <span class="pre">mars</span> <span class="pre">-N</span> <span class="pre">1</span> <span class="pre">-n</span> <span class="pre">4</span></code> will submit each job with 4 tasks/cores on 1 node to the <code class="docutils literal notranslate"><span class="pre">mars</span></code> partition of a SLURM batch system. Please refer to the PLAMS GridRunner documentation for a list of supported batch systems.</td>
 </tr>
@@ -1394,48 +1527,46 @@ End
 </table>
 </dd>
 </dl>
-<div class="highlight-none notranslate" id="oled-properties-key-logprogressevery"><div class="highlight"><pre><span></span>LogProgressEvery float
+<div class="section" id="local-job-execution">
+<h4>Local job execution<a class="headerlink" href="#local-job-execution" title="Permalink to this headline">¶</a></h4>
+<p>The simplest option (<code class="docutils literal notranslate"><span class="pre">local</span></code>) is to run the job on the machine that also executes the workflow script itself.
+This is a good option if you have access to a powerful machine with many CPU cores, on which you can run jobs directly (i.e. not through a batch system).
+By default 4 cores will be used for the execution of each job, and enough jobs will be run in parallel to saturate the entire machine:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">JobRunner</span> <span class="n">local</span><span class="p">:</span><span class="o">*</span><span class="p">,</span><span class="mi">4</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">LogProgressEvery</span></code></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">60.0</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Seconds</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">How often to print progress information to the logfile.</td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-<div class="highlight-none notranslate" id="oled-properties-key-restartworkdir"><div class="highlight"><pre><span></span>RestartWorkdir string
+<p>See above for a detailed description of the <code class="docutils literal notranslate"><span class="pre">local</span></code> option.</p>
+</div>
+<div class="section" id="job-submission-to-a-batch-system">
+<h4>Job submission to a batch system<a class="headerlink" href="#job-submission-to-a-batch-system" title="Permalink to this headline">¶</a></h4>
+<p>If you have access to a cluster through a batch system, it is also an option to run the workflow scripts and the actual jobs on different machines.
+The workflow script then <strong>submits</strong> the individual jobs to the batch system and waits for them to finish.
+(Under the hood, this is based on the <a class="reference external" href="../../plams/components/runners.html#remote-job-runner">PLAMS GridRunner</a>.)
+The workflow script itself can then either run under a <a class="reference external" href="https://en.wikipedia.org/wiki/Terminal_multiplexer">terminal multiplexer</a> (e.g. <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Screen">GNU screen</a>) on the login node of the cluster, or be submitted as a simple 1 core job to the batch system.
+Note that it is <em>essential</em> that the workflow script keeps running until all jobs have finished, as the summary of the results into the <a class="reference internal" href="#oledpropertieshdf5"><span class="std std-ref">HDF5 file</span></a> only happens when all jobs have finished.
+You will have to specify used batch systems, as well as the command used for the job submission with the <code class="docutils literal notranslate"><span class="pre">JobRunner</span></code> keyword.
+This gives you a lot of flexibility and allows to efficiently use the computational resources at hand.
+The following example will submit 4 core, single node jobs to either the <code class="docutils literal notranslate"><span class="pre">mars</span></code>, <code class="docutils literal notranslate"><span class="pre">jupiter</span></code> or <code class="docutils literal notranslate"><span class="pre">saturn</span></code> queue of a cluster, requesting 2 gigabytes of memory per used CPU core, with a maximum wall-time of 4 hours per job:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">JobRunner</span> <span class="n">slurm</span><span class="p">:</span><span class="n">sbatch</span> <span class="o">-</span><span class="n">p</span> <span class="n">mars</span><span class="p">,</span><span class="n">jupiter</span><span class="p">,</span><span class="n">saturn</span> <span class="o">-</span><span class="n">N</span> <span class="mi">1</span> <span class="o">-</span><span class="n">n</span> <span class="mi">4</span> <span class="o">--</span><span class="n">mem</span><span class="o">-</span><span class="n">per</span><span class="o">-</span><span class="n">cpu</span><span class="o">=</span><span class="mi">2</span><span class="n">G</span> <span class="o">--</span><span class="n">time</span><span class="o">=</span><span class="mi">04</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">RestartWorkdir</span></code></dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Uses the data from the working directory of a previously run properties workflow for restarting. Under the hood this uses the normal rerun-prevention available in PLAMS: it may reuse results from old jobs instead of running them again.</td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-<div class="highlight-none notranslate" id="oled-properties-key-numadditionalenergies"><div class="highlight"><pre><span></span>NumAdditionalEnergies integer
+<p>The downside of this approach is that <strong>each</strong> job for an individual molecule might be waiting in the batch system’s queue before starting.</p>
+<p>Note that it is currently not possible to submit the workflow script and molecule jobs together as a single, large job to a batch system. In other words it is <em>not</em> possible to request a large allocation from the batch system once, and then run the workflow script and all jobs within that allocation. (Support for this needs to be added to the <a class="reference external" href="../../plams/index.html">PLAMS library</a>, which will happen in the future.)</p>
+</div>
+</div>
+<div class="section" id="additional-settings">
+<span id="oledpropertiesinput"></span><h3>Additional settings<a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h3>
+<p>The OLED properties workflow script has a few options that determine what properties will be calculated and/or written to the <a class="reference internal" href="#oledpropertieshdf5"><span class="std std-ref">HDF5 file</span></a> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NumAdditionalEnergies</span> <span class="n">integer</span>
+<span class="n">NumExcitations</span> <span class="n">integer</span>
+<span class="n">TransferIntegrals</span>
+   <span class="n">Cutoff</span> <span class="nb">float</span>
+   <span class="n">Metric</span> <span class="p">[</span><span class="n">CoM</span> <span class="o">|</span> <span class="n">Atoms</span> <span class="o">|</span> <span class="n">Atoms_noH</span><span class="p">]</span>
+   <span class="n">Type</span> <span class="p">[</span><span class="kc">None</span> <span class="o">|</span> <span class="n">DFTB</span><span class="p">]</span>
+<span class="n">End</span>
 </pre></div>
 </div>
-<dl class="docutils">
+<dl class="docutils" id="oled-properties-key-numadditionalenergies">
 <dt><code class="docutils literal notranslate"><span class="pre">NumAdditionalEnergies</span></code></dt>
 <dd><table class="first last docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1451,10 +1582,7 @@ End
 </table>
 </dd>
 </dl>
-<div class="highlight-none notranslate" id="oled-properties-key-numexcitations"><div class="highlight"><pre><span></span>NumExcitations integer
-</pre></div>
-</div>
-<dl class="docutils">
+<dl class="docutils" id="oled-properties-key-numexcitations">
 <dt><code class="docutils literal notranslate"><span class="pre">NumExcitations</span></code></dt>
 <dd><table class="first last docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1470,14 +1598,7 @@ End
 </table>
 </dd>
 </dl>
-<div class="highlight-none notranslate" id="oled-properties-key-transferintegrals"><div class="highlight"><pre><span></span>TransferIntegrals
-   Cutoff float
-   Metric [CoM | Atoms | Atoms_noH]
-   Type [None | DFTB]
-End
-</pre></div>
-</div>
-<dl class="docutils">
+<dl class="docutils" id="oled-properties-key-transferintegrals">
 <dt><code class="docutils literal notranslate"><span class="pre">TransferIntegrals</span></code></dt>
 <dd><table class="first docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1547,31 +1668,110 @@ End
 </dl>
 </dd>
 </dl>
-<div class="highlight-none notranslate" id="oled-properties-key-occupationsmearing"><div class="highlight"><pre><span></span>OccupationSmearing [None | Ions | All]
+<p>There are also a few options to tweak some aspects of the workflow.
+We have not properly tested their effect on the results.
+When changing these options, verify your results against calculations using all default settings.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Embedding</span>
+   <span class="n">Charges</span> <span class="p">[</span><span class="n">DFTB</span> <span class="o">|</span> <span class="n">DFT</span><span class="p">]</span>
+   <span class="n">Cutoff</span> <span class="nb">float</span>
+   <span class="n">Metric</span> <span class="p">[</span><span class="n">CoM</span> <span class="o">|</span> <span class="n">Atoms</span> <span class="o">|</span> <span class="n">Atoms_noH</span><span class="p">]</span>
+   <span class="n">Type</span> <span class="p">[</span><span class="kc">None</span> <span class="o">|</span> <span class="n">DRF</span><span class="p">]</span>
+<span class="n">End</span>
+<span class="n">Relax</span> <span class="p">[</span><span class="kc">None</span> <span class="o">|</span> <span class="n">Neutral</span> <span class="o">|</span> <span class="n">All</span><span class="p">]</span>
+<span class="n">OccupationSmearing</span> <span class="p">[</span><span class="kc">None</span> <span class="o">|</span> <span class="n">Ions</span> <span class="o">|</span> <span class="n">All</span><span class="p">]</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">OccupationSmearing</span></code></dt>
+<dl class="docutils" id="oled-properties-key-embedding">
+<dt><code class="docutils literal notranslate"><span class="pre">Embedding</span></code></dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Block</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Configures details of how the environment is taken into account.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Charges</span></code></dt>
 <dd><table class="first last docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Ions</td>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">DFT</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[None, Ions, All]</td>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[DFTB, DFT]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Determines for which systems the electron smearing feature in ADF will be used. If enabled, the molecular orbital occupations will be smeared out with a 300K Fermi-Dirac distribution. This makes SCF convergence easier, as the occupation of energetically close orbitals does not jump when their energetic order flips. See the ADF manual for details. It is recommended to keep this option enabled for the ionic systems, which are more likely to suffer from difficult SCF convergence.</td>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Which atomic charges to use for the DRF embedding. 
+
+• DFTB: Use the self-consistent Mulliken charges from a quick DFTB calculation with the GFN1-xTB model.
+
+• DFT: Use the MDC-D charges from a relatively quick DFT calculation using LDA and a DZP basis set.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Cutoff</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">15.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Unit:</th><td class="field-body">Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The cutoff distance determining which molecules will be considered the environment of the central molecule. The maximum possible cutoff distance is half the length of the smallest lattice vector. The distance can be measured using different metrics, see the <code class="docutils literal notranslate"><span class="pre">Metric</span></code> keyword.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Metric</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Atoms</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[CoM, Atoms, Atoms_noH]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The metric used to calculate the distance between two molecules.
+
+• CoM: use the distance between the centers of mass of the two molecules.
+
+• Atoms: Use the distance between the two closest atoms of two molecules. 
+
+• Atoms_noH: Use the distance between the closest non-hydrogen atoms of the two molecules.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Type</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">DRF</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[None, DRF]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The type of embedding used to simulate the molecular environment.</td>
 </tr>
 </tbody>
 </table>
 </dd>
 </dl>
-<div class="highlight-none notranslate" id="oled-properties-key-relax"><div class="highlight"><pre><span></span>Relax [None | Neutral | All]
-</pre></div>
-</div>
-<dl class="docutils">
+</dd>
+</dl>
+<dl class="docutils" id="oled-properties-key-relax">
 <dt><code class="docutils literal notranslate"><span class="pre">Relax</span></code></dt>
 <dd><table class="first last docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1595,15 +1795,39 @@ End
 </table>
 </dd>
 </dl>
-<div class="section" id="oledpropertiesoutput">
-<span id="id2"></span><h3>Output<a class="headerlink" href="#oledpropertiesoutput" title="Permalink to this headline">¶</a></h3>
-<p>TODO: Describe relevant section on the HDF5 file.</p>
-<table class="docutils footnote" frame="void" id="ref1" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
+<dl class="docutils" id="oled-properties-key-occupationsmearing">
+<dt><code class="docutils literal notranslate"><span class="pre">OccupationSmearing</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>D.E.Coupry, M.A. Addicoat, and T. Heine, <em>An Extension of the Universal Force Field for Metal-Organic Frameworks</em>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.6b00664">J. Chem. Theory Comput. 12, 5215-5225 (2016)</a></td></tr>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Multiple Choice</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">Ions</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Options:</th><td class="field-body">[None, Ions, All]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Determines for which systems the electron smearing feature in ADF will be used. If enabled, the molecular orbital occupations will be smeared out with a 300K Fermi-Dirac distribution. This makes SCF convergence easier, as the occupation of energetically close orbitals does not jump when their energetic order flips. See the ADF manual for details. It is recommended to keep this option enabled for the ionic systems, which are more likely to suffer from difficult SCF convergence.</td>
+</tr>
 </tbody>
 </table>
+</dd>
+</dl>
+<p>The <code class="docutils literal notranslate"><span class="pre">oled-properties</span></code> workflow supports both the <code class="docutils literal notranslate"><span class="pre">-r/--restart</span></code> command line flag and the <code class="docutils literal notranslate"><span class="pre">RestartWorkdir</span></code> keyword. They work exactly the same way as for the <code class="docutils literal notranslate"><span class="pre">oled-deposition</span></code> workflow, see <a class="reference internal" href="#oleddepositionrestart"><span class="std std-ref">above</span></a>.</p>
+<dl class="docutils" id="oled-properties-key-restartworkdir">
+<dt><code class="docutils literal notranslate"><span class="pre">RestartWorkdir</span></code></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">String</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Uses the data from the working directory of a previously run properties workflow for restarting. Under the hood this uses the normal rerun-prevention available in PLAMS: it may reuse results from old jobs instead of running them again.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
 </div>
 </div>
 </div>

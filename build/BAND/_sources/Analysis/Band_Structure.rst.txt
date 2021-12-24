@@ -80,3 +80,12 @@ The band gap (if any) is printed in the output. Here is an example for the NaCl 
   .. rubric:: References
 
 .. [#ref1] W.\  Setyawan and S. Curtarolo, *High-throughput electronic band structure calculations: Challenges and tools*, `Computational Materials Science 49 (2010) 299–312 <https://doi.org/10.1016/j.commatsci.2010.05.010>`__.
+
+.. index:: Fermi Surface
+
+Calculation of the Fermi Surface
+--------------------------------
+
+If the system has no band gap it is a metal, and that means that the Fermi surface is a complex shape in the Brillouin zone. As multiple bands may be crossing the fermi energy there may be multiple surfaces. In case of a spin unrestricted calculation both spins have a fermi surfrace of their own. For 2D systems the "surface" consists of one or more lines. The result can be viewed with the GUI module amsbands.
+
+.. scmautodoc:: band FermiSurface

@@ -6,7 +6,7 @@ Utilities
 *********
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    ChemTraYzer
    ChemTraYzer2

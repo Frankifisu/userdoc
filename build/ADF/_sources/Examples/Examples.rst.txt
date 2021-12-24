@@ -194,6 +194,7 @@ QM/FQ(Fμ): Quantum Mechanics / Fluctuating Charges (and Fluctuating Dipoles)
    FQQM_aoresponse
    FQQM_response
    FQQM_td
+   FQQM_FDE
 
 
 .. _STRUCTURE: 
@@ -717,6 +718,11 @@ List of Examples
    * :ref:`FQQM_response<example FQQM_response>`
    * :ref:`FQQM_scf<example FQQM_scf>`
    * :ref:`FQQM_td<example FQQM_td>`
+   * :ref:`FQQM_FQFMU_aoresponse<example FQQM_aoresponse>`
+   * :ref:`FQQM_FQFMU_response<example FQQM_response>`
+   * :ref:`FQQM_FQFMU_scf<example FQQM_scf>`
+   * :ref:`FQQM_FQFMU_td<example FQQM_td>`
+   * :ref:`FQQM_FDE<example FQQM_FDE>`
    * :ref:`Frags_NiCO4<example Frags_NiCO4>`
    * :ref:`Frags_PtCl4H2<example Frags_PtCl4H2>`
    * :ref:`FranckCondon_NO2<example FranckCondon_NO2>`
